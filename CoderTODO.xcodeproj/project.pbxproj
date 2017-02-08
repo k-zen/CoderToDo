@@ -51,6 +51,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		492405E61E4BB13100987EE5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		492F28241E4B6B6B0020608B /* CoderTODO */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,16 +122,9 @@
 		492F282F1E4B6B6B0020608B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				492F28301E4B6B6B0020608B /* Library */,
+				492405E61E4BB13100987EE5 /* Model */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		492F28301E4B6B6B0020608B /* Library */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Library;
 			sourceTree = "<group>";
 		};
 		492F28311E4B6B6B0020608B /* Supporting Files */ = {
