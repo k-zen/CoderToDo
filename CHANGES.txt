@@ -1,0 +1,6 @@
+=================== Release 1.0 2017-XX-XX =====================
+Description
+    * First version of the App.
+Changes
+    * Version 1.0 Build 01 (2017/XX/XX)
+        * Something... (2017/XX/XX)
