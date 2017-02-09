@@ -13,6 +13,9 @@
 		493FA5681E4C9ABF004FB771 /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA5651E4C9ABF004FB771 /* AKAppDelegate.swift */; };
 		493FA5691E4C9ABF004FB771 /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493FA5661E4C9ABF004FB771 /* AKLaunchScreen.storyboard */; };
 		493FA56A1E4C9ABF004FB771 /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493FA5671E4C9ABF004FB771 /* AKMain.storyboard */; };
+		493FA56D1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 493FA56B1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld */; };
+		493FA56F1E4CA8CE004FB771 /* AKDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA56E1E4CA8CE004FB771 /* AKDataController.swift */; };
+		493FA5711E4CAFA0004FB771 /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */; };
 		E339F11FDEFDE107D484EC9D /* Pods_CoderTODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +27,9 @@
 		493FA5651E4C9ABF004FB771 /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
 		493FA5661E4C9ABF004FB771 /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
 		493FA5671E4C9ABF004FB771 /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
+		493FA56C1E4C9CEA004FB771 /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
+		493FA56E1E4CA8CE004FB771 /* AKDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataController.swift; sourceTree = "<group>"; };
+		493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMasterReference.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA59DB284A4C0F99DA628780 /* Pods-CoderTODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.release.xcconfig"; sourceTree = "<group>"; };
 		CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderTODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +60,8 @@
 		492405E61E4BB13100987EE5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				493FA56E1E4CA8CE004FB771 /* AKDataController.swift */,
+				493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				492F28321E4B6B6B0020608B /* Info.plist */,
+				493FA56B1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,6 +298,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493FA56F1E4CA8CE004FB771 /* AKDataController.swift in Sources */,
+				493FA5711E4CAFA0004FB771 /* AKMasterReference.swift in Sources */,
+				493FA56D1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld in Sources */,
 				493FA5681E4C9ABF004FB771 /* AKAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +412,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.apkc.projects.ios.CoderTODO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -414,6 +427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.apkc.projects.ios.CoderTODO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -439,6 +453,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		493FA56B1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				493FA56C1E4C9CEA004FB771 /* MainDataModel.xcdatamodel */,
+			);
+			currentVersion = 493FA56C1E4C9CEA004FB771 /* MainDataModel.xcdatamodel */;
+			path = MainDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4956B8211E4B697D0032B2F8 /* Project object */;
 }

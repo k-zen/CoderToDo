@@ -3,4 +3,4 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/XX/XX)
-        * Something... (2017/XX/XX)
+        * Added a very basic support for handling the CoreData model that underlies the application. (2017/02/09)

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="AKCategoryMO" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="days" inverseEntity="Project" syncable="YES"/>
+        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="day" inverseEntity="Task" syncable="YES"/>
+        <fetchedProperty name="getTasks" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Task"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Project" representedClassName="AKProjectMO" syncable="YES" codeGenerationType="class">
+        <attribute name="closingTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
+        <attribute name="osr" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="project" inverseEntity="Day" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="project" inverseEntity="User" syncable="YES"/>
+        <fetchedProperty name="getDays" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Day"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Task" representedClassName="AKTaskMO" syncable="YES" codeGenerationType="class">
+        <attribute name="completionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" minValueString="0" maxValueString="140" syncable="YES"/>
+        <attribute name="state" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="task" inverseEntity="Day" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
+        <attribute name="closingTimeTolerance" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="generalClosingTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="maxCategories" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maxTasks" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="notifyClosingTime" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
+        <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
+        <fetchedProperty name="getProjects" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Project"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="User" positionX="-837" positionY="-504" width="128" height="191"/>
+        <element name="Project" positionX="-1062" positionY="-729" width="128" height="161"/>
+        <element name="Day" positionX="-837" positionY="-756" width="128" height="116"/>
+        <element name="Task" positionX="-641" positionY="-751" width="128" height="118"/>
+        <element name="Category" positionX="-641" positionY="-568" width="128" height="73"/>
+    </elements>
+</model>

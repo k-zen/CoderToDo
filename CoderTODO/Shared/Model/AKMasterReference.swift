@@ -1,0 +1,71 @@
+import CoreData
+import Foundation
+
+class AKMasterReference: NSObject
+{
+    // MARK: Properties
+    /// The managed object context needed to handle the data.
+    let moc: NSManagedObjectContext
+    /// This is the entry point to all data. Everything starts with the user data structure.
+    var user: AKUserMO? = nil
+    
+    // MARK: Initializers
+    override init()
+    {
+        self.moc = AKDataController().getMOC()
+        super.init()
+        do {
+            if let users = try self.moc.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "User")) as? [AKUserMO] {
+                self.user = users.count > 0 ? users.first! : AKUserMO(context: self.moc)
+            }
+        }
+        catch {
+            fatalError("=> ERROR: \(error)")
+        }
+    }
+    
+    // MARK: Utilities
+    ///
+    /// This function loads the data into memory from persistence.
+    ///
+    /// - Returns: A reference file to the data.
+    ///
+    static func loadData() -> AKMasterReference
+    {
+        return AKMasterReference().dump()
+    }
+    
+    ///
+    /// This function saves the data from memory into persistance.
+    ///
+    /// - Parameter instance: The instance containing the data.
+    ///
+    static func saveData(instance: AKMasterReference?) -> Void
+    {
+        do {
+            try instance?.dump().moc.save()
+        }
+        catch {
+            fatalError("=> ERROR: \(error)")
+        }
+    }
+    
+    ///
+    /// This function dumps the data to the console for debugging purposes.
+    ///
+    /// - Returns: The self instance. Useful for concatenating calls.
+    ///
+    func dump() -> AKMasterReference
+    {
+        NSLog("=> COREDATA DUMP ######")
+        NSLog("=>   USERNAME: %@", self.user?.username ?? "N\\A")
+        NSLog("=>   PROJECTS:")
+        let projects = (self.user?.project)!
+        for case let project as AKProjectMO in projects {
+            NSLog("=>       NAME: %@", project.name ?? "N\\A")
+        }
+        NSLog("=> COREDATA DUMP ######")
+        
+        return self
+    }
+}
