@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		492F28331E4B6B6B0020608B /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F28271E4B6B6B0020608B /* AKAppDelegate.swift */; };
-		492F28341E4B6B6B0020608B /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492F28281E4B6B6B0020608B /* AKLaunchScreen.storyboard */; };
-		492F28351E4B6B6B0020608B /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492F28291E4B6B6B0020608B /* AKMain.storyboard */; };
 		492F28361E4B6B6B0020608B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 492F282D1E4B6B6B0020608B /* Assets.xcassets */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
+		493FA5681E4C9ABF004FB771 /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA5651E4C9ABF004FB771 /* AKAppDelegate.swift */; };
+		493FA5691E4C9ABF004FB771 /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493FA5661E4C9ABF004FB771 /* AKLaunchScreen.storyboard */; };
+		493FA56A1E4C9ABF004FB771 /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493FA5671E4C9ABF004FB771 /* AKMain.storyboard */; };
 		E339F11FDEFDE107D484EC9D /* Pods_CoderTODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		492F28271E4B6B6B0020608B /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
-		492F28281E4B6B6B0020608B /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
-		492F28291E4B6B6B0020608B /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
 		492F282D1E4B6B6B0020608B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		492F28321E4B6B6B0020608B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		493FA5651E4C9ABF004FB771 /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
+		493FA5661E4C9ABF004FB771 /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
+		493FA5671E4C9ABF004FB771 /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA59DB284A4C0F99DA628780 /* Pods-CoderTODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.release.xcconfig"; sourceTree = "<group>"; };
 		CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderTODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +61,7 @@
 		492F28241E4B6B6B0020608B /* CoderTODO */ = {
 			isa = PBXGroup;
 			children = (
+				493FA5641E4C9ABF004FB771 /* Application */,
 				492F28251E4B6B6B0020608B /* iPhone */,
 				492F282C1E4B6B6B0020608B /* Resources */,
 				492F282F1E4B6B6B0020608B /* Shared */,
@@ -72,21 +73,10 @@
 		492F28251E4B6B6B0020608B /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				492F28261E4B6B6B0020608B /* Application */,
 				492F282A1E4B6B6B0020608B /* Controllers */,
 				492F282B1E4B6B6B0020608B /* Views */,
 			);
 			path = iPhone;
-			sourceTree = "<group>";
-		};
-		492F28261E4B6B6B0020608B /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				492F28271E4B6B6B0020608B /* AKAppDelegate.swift */,
-				492F28281E4B6B6B0020608B /* AKLaunchScreen.storyboard */,
-				492F28291E4B6B6B0020608B /* AKMain.storyboard */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		492F282A1E4B6B6B0020608B /* Controllers */ = {
@@ -133,6 +123,16 @@
 				492F28321E4B6B6B0020608B /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		493FA5641E4C9ABF004FB771 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				493FA5651E4C9ABF004FB771 /* AKAppDelegate.swift */,
+				493FA5661E4C9ABF004FB771 /* AKLaunchScreen.storyboard */,
+				493FA5671E4C9ABF004FB771 /* AKMain.storyboard */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		4956B8201E4B697D0032B2F8 = {
@@ -227,10 +227,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
-				492F28341E4B6B6B0020608B /* AKLaunchScreen.storyboard in Resources */,
 				492F28361E4B6B6B0020608B /* Assets.xcassets in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
-				492F28351E4B6B6B0020608B /* AKMain.storyboard in Resources */,
+				493FA5691E4C9ABF004FB771 /* AKLaunchScreen.storyboard in Resources */,
+				493FA56A1E4C9ABF004FB771 /* AKMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				492F28331E4B6B6B0020608B /* AKAppDelegate.swift in Sources */,
+				493FA5681E4C9ABF004FB771 /* AKAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
