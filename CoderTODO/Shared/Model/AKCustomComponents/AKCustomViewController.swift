@@ -182,7 +182,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let controller = AKUsernameInputViewController(nibName: "AKUsernameInputView", bundle: nil)
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
         controller.view.backgroundColor = UIColor.clear
-        controller.modalTransitionStyle = .flipHorizontal
+        controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
         controller.modalPresentationStyle = .overFullScreen
         
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))

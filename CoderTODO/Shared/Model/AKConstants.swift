@@ -92,6 +92,7 @@ struct GlobalConstants {
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.5
+    static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
