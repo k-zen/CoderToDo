@@ -1,9 +1,9 @@
 platform :ios, '9.0'
 use_frameworks!
 
-workspace 'CoderTODO'
+workspace '9-5TODO'
 
-target "CoderTODO" do
+target "9-5TODO" do
     # pod 'DeviceKit'
     # pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
 end

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4956B8281E4B697D0032B2F8"
-               BuildableName = "CoderTODO.app"
-               BlueprintName = "CoderTODO"
-               ReferencedContainer = "container:CoderTODO.xcodeproj">
+               BuildableName = "9-5TODO.app"
+               BlueprintName = "9-5TODO"
+               ReferencedContainer = "container:9-5TODO.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4956B8281E4B697D0032B2F8"
-            BuildableName = "CoderTODO.app"
-            BlueprintName = "CoderTODO"
-            ReferencedContainer = "container:CoderTODO.xcodeproj">
+            BuildableName = "9-5TODO.app"
+            BlueprintName = "9-5TODO"
+            ReferencedContainer = "container:9-5TODO.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,21 +56,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4956B8281E4B697D0032B2F8"
-            BuildableName = "CoderTODO.app"
-            BlueprintName = "CoderTODO"
-            ReferencedContainer = "container:CoderTODO.xcodeproj">
+            BuildableName = "9-5TODO.app"
+            BlueprintName = "9-5TODO"
+            ReferencedContainer = "container:9-5TODO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 0"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.Logging.stderr 0"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -85,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4956B8281E4B697D0032B2F8"
-            BuildableName = "CoderTODO.app"
-            BlueprintName = "CoderTODO"
-            ReferencedContainer = "container:CoderTODO.xcodeproj">
+            BuildableName = "9-5TODO.app"
+            BlueprintName = "9-5TODO"
+            ReferencedContainer = "container:9-5TODO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
