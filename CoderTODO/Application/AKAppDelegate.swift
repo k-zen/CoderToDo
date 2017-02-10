@@ -1,7 +1,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate
+class AKAppDelegate: UIResponder, UIApplicationDelegate
 {
     // MARK: Properties
     var masterRef: AKMasterReference?
@@ -20,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
+        // ### Customize the App.
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 18),
+            NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+        ]
+        
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
         

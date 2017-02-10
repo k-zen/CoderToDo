@@ -16,6 +16,15 @@
 		493FA56D1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 493FA56B1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld */; };
 		493FA56F1E4CA8CE004FB771 /* AKDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA56E1E4CA8CE004FB771 /* AKDataController.swift */; };
 		493FA5711E4CAFA0004FB771 /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */; };
+		49CA03381E4DF363009E42C2 /* AKConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03301E4DF363009E42C2 /* AKConstants.swift */; };
+		49CA03391E4DF363009E42C2 /* AKCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03321E4DF363009E42C2 /* AKCustomView.swift */; };
+		49CA033A1E4DF363009E42C2 /* AKCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03331E4DF363009E42C2 /* AKCustomViewController.swift */; };
+		49CA033C1E4DF363009E42C2 /* AKInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03351E4DF363009E42C2 /* AKInputData.swift */; };
+		49CA033D1E4DF363009E42C2 /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03361E4DF363009E42C2 /* AKUsername.swift */; };
+		49CA033E1E4DF363009E42C2 /* AKWSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03371E4DF363009E42C2 /* AKWSUtils.swift */; };
+		49CA03401E4DF8C8009E42C2 /* AKUsernameInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CA033F1E4DF8C8009E42C2 /* AKUsernameInputView.xib */; };
+		49CA03421E4DFA47009E42C2 /* AKUsernameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03411E4DFA47009E42C2 /* AKUsernameInputViewController.swift */; };
+		49CA03441E4DFCCC009E42C2 /* AKListProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA03431E4DFCCC009E42C2 /* AKListProjectsViewController.swift */; };
 		E339F11FDEFDE107D484EC9D /* Pods_CoderTODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +40,15 @@
 		493FA56E1E4CA8CE004FB771 /* AKDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataController.swift; sourceTree = "<group>"; };
 		493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMasterReference.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49CA03301E4DF363009E42C2 /* AKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConstants.swift; sourceTree = "<group>"; };
+		49CA03321E4DF363009E42C2 /* AKCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomView.swift; sourceTree = "<group>"; };
+		49CA03331E4DF363009E42C2 /* AKCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomViewController.swift; sourceTree = "<group>"; };
+		49CA03351E4DF363009E42C2 /* AKInputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKInputData.swift; sourceTree = "<group>"; };
+		49CA03361E4DF363009E42C2 /* AKUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsername.swift; sourceTree = "<group>"; };
+		49CA03371E4DF363009E42C2 /* AKWSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWSUtils.swift; sourceTree = "<group>"; };
+		49CA033F1E4DF8C8009E42C2 /* AKUsernameInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKUsernameInputView.xib; sourceTree = "<group>"; };
+		49CA03411E4DFA47009E42C2 /* AKUsernameInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsernameInputViewController.swift; sourceTree = "<group>"; };
+		49CA03431E4DFCCC009E42C2 /* AKListProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKListProjectsViewController.swift; sourceTree = "<group>"; };
 		AA59DB284A4C0F99DA628780 /* Pods-CoderTODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.release.xcconfig"; sourceTree = "<group>"; };
 		CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderTODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51B2D1F0AB5E573E1024B1B /* Pods-CoderTODO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,8 +78,13 @@
 		492405E61E4BB13100987EE5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49CA03301E4DF363009E42C2 /* AKConstants.swift */,
 				493FA56E1E4CA8CE004FB771 /* AKDataController.swift */,
+				49CA03351E4DF363009E42C2 /* AKInputData.swift */,
 				493FA5701E4CAFA0004FB771 /* AKMasterReference.swift */,
+				49CA03361E4DF363009E42C2 /* AKUsername.swift */,
+				49CA03371E4DF363009E42C2 /* AKWSUtils.swift */,
+				49CA03311E4DF363009E42C2 /* AKCustomComponents */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -90,6 +113,8 @@
 		492F282A1E4B6B6B0020608B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				49CA03431E4DFCCC009E42C2 /* AKListProjectsViewController.swift */,
+				49CA03411E4DFA47009E42C2 /* AKUsernameInputViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -97,6 +122,7 @@
 		492F282B1E4B6B6B0020608B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49CA033F1E4DF8C8009E42C2 /* AKUsernameInputView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +188,15 @@
 				4956B8291E4B697D0032B2F8 /* CoderTODO.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		49CA03311E4DF363009E42C2 /* AKCustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				49CA03321E4DF363009E42C2 /* AKCustomView.swift */,
+				49CA03331E4DF363009E42C2 /* AKCustomViewController.swift */,
+			);
+			path = AKCustomComponents;
 			sourceTree = "<group>";
 		};
 		AFA3CC6BEA5EDB65F5109664 /* Frameworks */ = {
@@ -238,6 +273,7 @@
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
 				492F28361E4B6B6B0020608B /* Assets.xcassets in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
+				49CA03401E4DF8C8009E42C2 /* AKUsernameInputView.xib in Resources */,
 				493FA5691E4C9ABF004FB771 /* AKLaunchScreen.storyboard in Resources */,
 				493FA56A1E4C9ABF004FB771 /* AKMain.storyboard in Resources */,
 			);
@@ -299,9 +335,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				493FA56F1E4CA8CE004FB771 /* AKDataController.swift in Sources */,
+				49CA033A1E4DF363009E42C2 /* AKCustomViewController.swift in Sources */,
+				49CA033D1E4DF363009E42C2 /* AKUsername.swift in Sources */,
 				493FA5711E4CAFA0004FB771 /* AKMasterReference.swift in Sources */,
 				493FA56D1E4C9CEA004FB771 /* MainDataModel.xcdatamodeld in Sources */,
+				49CA033E1E4DF363009E42C2 /* AKWSUtils.swift in Sources */,
+				49CA03441E4DFCCC009E42C2 /* AKListProjectsViewController.swift in Sources */,
+				49CA03421E4DFA47009E42C2 /* AKUsernameInputViewController.swift in Sources */,
+				49CA03391E4DF363009E42C2 /* AKCustomView.swift in Sources */,
 				493FA5681E4C9ABF004FB771 /* AKAppDelegate.swift in Sources */,
+				49CA03381E4DF363009E42C2 /* AKConstants.swift in Sources */,
+				49CA033C1E4DF363009E42C2 /* AKInputData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

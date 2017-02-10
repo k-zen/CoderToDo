@@ -3,4 +3,5 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/XX/XX)
+        * Added support for username input screen. (2017/02/10)
         * Added a very basic support for handling the CoreData model that underlies the application. (2017/02/09)
