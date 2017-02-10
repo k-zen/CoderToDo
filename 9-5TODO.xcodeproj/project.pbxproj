@@ -24,7 +24,6 @@
 		49EAEDFB1E4E521800ADC839 /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAEDE81E4E521700ADC839 /* AKMasterReference.swift */; };
 		49EAEDFC1E4E521800ADC839 /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAEDE91E4E521700ADC839 /* AKUsername.swift */; };
 		49EAEDFD1E4E521800ADC839 /* AKWSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAEDEA1E4E521700ADC839 /* AKWSUtils.swift */; };
-		49EAEDFE1E4E521800ADC839 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49EAEDEC1E4E521700ADC839 /* Info.plist */; };
 		49EAEDFF1E4E521800ADC839 /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49EAEDED1E4E521700ADC839 /* MainDataModel.xcdatamodeld */; };
 		E339F11FDEFDE107D484EC9D /* Pods_CoderTODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */; };
 /* End PBXBuildFile section */
@@ -277,7 +276,6 @@
 				49EAEDF41E4E521700ADC839 /* AKUsernameInputView.xib in Resources */,
 				49EAEDF51E4E521700ADC839 /* Assets.xcassets in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
-				49EAEDFE1E4E521800ADC839 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
