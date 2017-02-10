@@ -73,25 +73,27 @@ struct GlobalConstants {
     static let AKUserMOEntityName = "User"
     static let AKProjectMOEntityName = "Project"
     // L&F
-    static let AKDefaultFont = "HelveticaNeue-Thin"
-    static let AKRedColor_1 = GlobalFunctions.instance(false).AKHexColor(0xDF3732)
-    static let AKDefaultBg = GlobalFunctions.instance(false).AKHexColor(0x29282D)
-    static let AKDefaultFg = GlobalFunctions.instance(false).AKHexColor(0xFFFFFF)
+    static let AKDefaultFont = "MarkerFelt-Thin"
+    static let AKRedColor_1 = GlobalFunctions.instance(false).AKHexColor(0xcc241d)
+    static let AKRedColor_2 = GlobalFunctions.instance(false).AKHexColor(0xfb4934)
+    static let AKDefaultBg = GlobalFunctions.instance(false).AKHexColor(0x282828)
+    static let AKDefaultFg = GlobalFunctions.instance(false).AKHexColor(0xebdbb2)
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
-    static let AKTabBarTintNormal = GlobalFunctions.instance(false).AKHexColor(0xFFFFFF)
+    static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
     static let AKTabBarTintSelected = GlobalFunctions.instance(false).AKHexColor(0x0088CC)
     static let AKDefaultTextfieldBorderBg = GlobalFunctions.instance(false).AKHexColor(0x999999)
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = GlobalFunctions.instance(false).AKHexColor(0x000000)
+    static let AKDefaultViewBorderBg = GlobalFunctions.instance(false).AKHexColor(0x458588)
     static let AKDefaultFloatingViewBorderBg = UIColor.black
     static let AKDisabledButtonBg = GlobalFunctions.instance(false).AKHexColor(0x999999)
     static let AKEnabledButtonBg = GlobalConstants.AKRedColor_1
     static let AKTableHeaderCellBg = UIColor.black
-    static let AKTableHeaderLeftBorderBg = GlobalFunctions.instance(false).AKHexColor(0xEBDBB2)
+    static let AKTableHeaderLeftBorderBg = GlobalFunctions.instance(false).AKHexColor(0xd79921)
     static let AKTableCellBg = GlobalConstants.AKDefaultBg
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.5
+    static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
     // Validations
     static let AKMaxUsernameLength = 12
