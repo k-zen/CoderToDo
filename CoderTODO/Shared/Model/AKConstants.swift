@@ -7,7 +7,9 @@ typealias ViewBlock = (_ view : UIView) -> Bool
 typealias JSONObject = [String : Any]
 typealias JSONObjectArray = [Any]
 typealias JSONObjectStringArray = [String]
+typealias DataController = AKDataController
 typealias User = AKUserMO
+typealias Project = AKProjectMO
 
 // MARK: Extensions
 extension Int
@@ -65,8 +67,12 @@ extension UIView
 // MARK: Structures
 struct GlobalConstants {
     static let AKDebug = true
+    // CoreData
     static let AKDataModelName = "MainDataModel"
     static let AKDbaseFileName = "MainDataModel.sqlite"
+    static let AKUserMOEntityName = "User"
+    static let AKProjectMOEntityName = "Project"
+    // L&F
     static let AKDefaultFont = "HelveticaNeue-Thin"
     static let AKRedColor_1 = GlobalFunctions.instance(false).AKHexColor(0xDF3732)
     static let AKDefaultBg = GlobalFunctions.instance(false).AKHexColor(0x29282D)
@@ -86,6 +92,7 @@ struct GlobalConstants {
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.5
+    // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
 }

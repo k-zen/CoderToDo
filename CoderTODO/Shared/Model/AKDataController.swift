@@ -9,7 +9,7 @@ class AKDataController: NSObject
     // MARK: Initializers
     override init()
     {
-        guard let modelURL = Bundle.main.url(forResource: "MainDataModel", withExtension:"momd") else {
+        guard let modelURL = Bundle.main.url(forResource: GlobalConstants.AKDataModelName, withExtension:"momd") else {
             fatalError("=> ERROR: LOADING COREDATA MODEL FROM BUNDLE!")
         }
         
@@ -27,7 +27,7 @@ class AKDataController: NSObject
                                                       appropriateFor: nil,
                                                       create: true
             )
-            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent("MainDataModel.sqlite").relativePath, isDirectory: false)
+            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent(GlobalConstants.AKDbaseFileName).relativePath, isDirectory: false)
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
         }
         catch {

@@ -7,16 +7,16 @@ class AKMasterReference: NSObject
     /// The managed object context needed to handle the data.
     let moc: NSManagedObjectContext
     /// This is the entry point to all data. Everything starts with the user data structure.
-    var user: AKUserMO? = nil
+    var user: User? = nil
     
     // MARK: Initializers
     override init()
     {
-        self.moc = AKDataController().getMOC()
+        self.moc = DataController().getMOC()
         super.init()
         do {
-            if let users = try self.moc.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "User")) as? [AKUserMO] {
-                self.user = users.count > 0 ? users.first! : AKUserMO(context: self.moc)
+            if let users = try self.moc.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: GlobalConstants.AKUserMOEntityName)) as? [User] {
+                self.user = users.count > 0 ? users.first! : User(context: self.moc)
             }
         }
         catch {
@@ -61,7 +61,7 @@ class AKMasterReference: NSObject
         NSLog("=>   USERNAME: %@", self.user?.username ?? "N\\A")
         NSLog("=>   PROJECTS:")
         let projects = (self.user?.project)!
-        for case let project as AKProjectMO in projects {
+        for case let project as Project in projects {
             NSLog("=>       NAME: %@", project.name ?? "N\\A")
         }
         NSLog("=> COREDATA DUMP ######")
