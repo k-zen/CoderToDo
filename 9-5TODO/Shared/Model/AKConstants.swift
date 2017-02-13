@@ -8,8 +8,12 @@ typealias JSONObject = [String : Any]
 typealias JSONObjectArray = [Any]
 typealias JSONObjectStringArray = [String]
 typealias DataController = AKDataController
+typealias DataInterface = AKDataInterface
 typealias User = AKUserMO
 typealias Project = AKProjectMO
+
+// MARK: Aliases
+let Func = GlobalFunctions.instance(GlobalConstants.AKDebug)
 
 // MARK: Extensions
 extension Int
@@ -73,31 +77,34 @@ struct GlobalConstants {
     static let AKUserMOEntityName = "User"
     static let AKProjectMOEntityName = "Project"
     // L&F
-    static let AKDefaultFont = "MarkerFelt-Thin"
-    static let AKRedColor_1 = GlobalFunctions.instance(false).AKHexColor(0xcc241d)
-    static let AKRedColor_2 = GlobalFunctions.instance(false).AKHexColor(0xfb4934)
-    static let AKDefaultBg = GlobalFunctions.instance(false).AKHexColor(0x282828)
-    static let AKDefaultFg = GlobalFunctions.instance(false).AKHexColor(0xebdbb2)
+    static let AKDefaultFont = "HelveticaNeue-Thin"
+    static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
+    static let AKRedColor_1 = Func.AKHexColor(0xcc241d)
+    static let AKRedColor_2 = Func.AKHexColor(0xfb4934)
+    static let AKDefaultBg = Func.AKHexColor(0x282828)
+    static let AKDefaultFg = Func.AKHexColor(0xffffff)
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
-    static let AKTabBarTintSelected = GlobalFunctions.instance(false).AKHexColor(0x0088CC)
-    static let AKDefaultTextfieldBorderBg = GlobalFunctions.instance(false).AKHexColor(0x999999)
+    static let AKTabBarTintSelected = Func.AKHexColor(0x0088CC)
+    static let AKDefaultTextfieldBorderBg = Func.AKHexColor(0x999999)
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = GlobalFunctions.instance(false).AKHexColor(0x458588)
+    static let AKDefaultViewBorderBg = Func.AKHexColor(0x458588)
     static let AKDefaultFloatingViewBorderBg = UIColor.black
-    static let AKDisabledButtonBg = GlobalFunctions.instance(false).AKHexColor(0x999999)
+    static let AKDisabledButtonBg = Func.AKHexColor(0x999999)
     static let AKEnabledButtonBg = GlobalConstants.AKRedColor_1
-    static let AKTableHeaderCellBg = UIColor.black
-    static let AKTableHeaderLeftBorderBg = GlobalFunctions.instance(false).AKHexColor(0xd79921)
+    static let AKTableHeaderCellBg = Func.AKHexColor(0x181818)
+    static let AKTableHeaderLeftBorderBg = Func.AKHexColor(0xd79921)
     static let AKTableCellBg = GlobalConstants.AKDefaultBg
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
     static let AKButtonCornerRadius: CGFloat = 4.0
-    static let AKDefaultBorderThickness = 1.5
+    static let AKDefaultBorderThickness = 1.4
     static let AKDefaultTextfieldBorderThickness = 2.0
-    static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
+    static let AKDefaultTransitionStyle = UIModalTransitionStyle.coverVertical
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
+    static let AKMaxProjectNameLength = 100
+    static let AKMinProjectNameLength = 3
 }
 
 // MARK: Global Enumerations
@@ -126,6 +133,13 @@ enum CustomBorderDecorationPosition: Int {
     case right = 1
     case bottom = 2
     case left = 3
+}
+
+enum ProjectSorting: Int {
+    case closingTime = 1
+    case creationDate = 2
+    case name = 3
+    case osr = 4
 }
 
 // MARK: Global Functions
@@ -295,17 +309,7 @@ class GlobalFunctions {
     ///
     func AKObtainMasterReference() -> AKMasterReference?
     {
-        return GlobalFunctions.instance(self.showDebugInformation).AKDelegate().masterRef
-    }
-    
-    ///
-    /// Returns the user data structure.
-    ///
-    /// - Returns: The user data structure.
-    ///
-    func AKGetUser() -> User?
-    {
-        return GlobalFunctions.instance(self.showDebugInformation).AKObtainMasterReference()?.user
+        return Func.AKDelegate().masterRef
     }
     
     func AKPresentMessageFromError(message: String!)
@@ -331,7 +335,7 @@ class GlobalFunctions {
     
     func AKPresentMessage(message: String!)
     {
-        GlobalFunctions.instance(false).AKExecuteInMainThread {}
+        Func.AKExecuteInMainThread {}
     }
     
     ///

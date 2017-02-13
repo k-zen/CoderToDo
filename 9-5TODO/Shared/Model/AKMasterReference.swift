@@ -24,6 +24,9 @@ class AKMasterReference: NSObject
         }
     }
     
+    // MARK: Accessors
+    func getMOC() -> NSManagedObjectContext { return self.moc }
+    
     // MARK: Utilities
     ///
     /// This function loads the data into memory from persistence.

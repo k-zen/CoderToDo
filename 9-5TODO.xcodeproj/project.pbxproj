@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490EB7CB1E51E61900597929 /* AKDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490EB7CA1E51E61900597929 /* AKDataInterface.swift */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
+		49C6B9891E4E803E005F627B /* AKProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6B9881E4E803E005F627B /* AKProjectsTableViewCell.swift */; };
+		49C6B98B1E4E805F005F627B /* AKProjectsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6B98A1E4E805F005F627B /* AKProjectsTableViewCell.xib */; };
+		49C6B98D1E4E8916005F627B /* AKNewProjectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6B98C1E4E8916005F627B /* AKNewProjectView.xib */; };
+		49C6B98F1E4E89D5005F627B /* AKNewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6B98E1E4E89D5005F627B /* AKNewProjectViewController.swift */; };
+		49C6B9911E4E8AEF005F627B /* AKProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6B9901E4E8AEF005F627B /* AKProjectName.swift */; };
 		49EAEDEF1E4E521700ADC839 /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAEDD41E4E521700ADC839 /* AKAppDelegate.swift */; };
 		49EAEDF01E4E521700ADC839 /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EAEDD51E4E521700ADC839 /* AKLaunchScreen.storyboard */; };
 		49EAEDF11E4E521700ADC839 /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EAEDD61E4E521700ADC839 /* AKMain.storyboard */; };
@@ -29,9 +35,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490EB7CA1E51E61900597929 /* AKDataInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataInterface.swift; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* 9-5TODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "9-5TODO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C6B9881E4E803E005F627B /* AKProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectsTableViewCell.swift; sourceTree = "<group>"; };
+		49C6B98A1E4E805F005F627B /* AKProjectsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKProjectsTableViewCell.xib; sourceTree = "<group>"; };
+		49C6B98C1E4E8916005F627B /* AKNewProjectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKNewProjectView.xib; sourceTree = "<group>"; };
+		49C6B98E1E4E89D5005F627B /* AKNewProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNewProjectViewController.swift; sourceTree = "<group>"; };
+		49C6B9901E4E8AEF005F627B /* AKProjectName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectName.swift; sourceTree = "<group>"; };
 		49EAEDD41E4E521700ADC839 /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
 		49EAEDD51E4E521700ADC839 /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
 		49EAEDD61E4E521700ADC839 /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
@@ -95,6 +107,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		49C6B9871E4E803E005F627B /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				49C6B9881E4E803E005F627B /* AKProjectsTableViewCell.swift */,
+			);
+			path = TableCells;
+			sourceTree = "<group>";
+		};
 		49EAEDD21E4E521700ADC839 /* 9-5TODO */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				49EAEDD91E4E521700ADC839 /* AKListProjectsViewController.swift */,
+				49C6B98E1E4E89D5005F627B /* AKNewProjectViewController.swift */,
 				49EAEDDA1E4E521700ADC839 /* AKUsernameInputViewController.swift */,
 			);
 			path = Controllers;
@@ -138,6 +159,8 @@
 		49EAEDDB1E4E521700ADC839 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49C6B98C1E4E8916005F627B /* AKNewProjectView.xib */,
+				49C6B98A1E4E805F005F627B /* AKProjectsTableViewCell.xib */,
 				49EAEDDC1E4E521700ADC839 /* AKUsernameInputView.xib */,
 			);
 			path = Views;
@@ -171,12 +194,14 @@
 			isa = PBXGroup;
 			children = (
 				49EAEDE21E4E521700ADC839 /* AKConstants.swift */,
-				49EAEDE31E4E521700ADC839 /* AKCustomComponents */,
 				49EAEDE61E4E521700ADC839 /* AKDataController.swift */,
+				490EB7CA1E51E61900597929 /* AKDataInterface.swift */,
 				49EAEDE71E4E521700ADC839 /* AKInputData.swift */,
 				49EAEDE81E4E521700ADC839 /* AKMasterReference.swift */,
+				49C6B9901E4E8AEF005F627B /* AKProjectName.swift */,
 				49EAEDE91E4E521700ADC839 /* AKUsername.swift */,
 				49EAEDEA1E4E521700ADC839 /* AKWSUtils.swift */,
+				49EAEDE31E4E521700ADC839 /* AKCustomComponents */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,6 +211,7 @@
 			children = (
 				49EAEDE41E4E521700ADC839 /* AKCustomView.swift */,
 				49EAEDE51E4E521700ADC839 /* AKCustomViewController.swift */,
+				49C6B9871E4E803E005F627B /* TableCells */,
 			);
 			path = AKCustomComponents;
 			sourceTree = "<group>";
@@ -271,9 +297,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
+				49C6B98B1E4E805F005F627B /* AKProjectsTableViewCell.xib in Resources */,
 				49EAEDF11E4E521700ADC839 /* AKMain.storyboard in Resources */,
 				49EAEDF01E4E521700ADC839 /* AKLaunchScreen.storyboard in Resources */,
 				49EAEDF41E4E521700ADC839 /* AKUsernameInputView.xib in Resources */,
+				49C6B98D1E4E8916005F627B /* AKNewProjectView.xib in Resources */,
 				49EAEDF51E4E521700ADC839 /* Assets.xcassets in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
 			);
@@ -339,10 +367,14 @@
 				49EAEDFF1E4E521800ADC839 /* MainDataModel.xcdatamodeld in Sources */,
 				49EAEDFA1E4E521800ADC839 /* AKInputData.swift in Sources */,
 				49EAEDFC1E4E521800ADC839 /* AKUsername.swift in Sources */,
+				49C6B9911E4E8AEF005F627B /* AKProjectName.swift in Sources */,
 				49EAEDF61E4E521800ADC839 /* AKConstants.swift in Sources */,
+				490EB7CB1E51E61900597929 /* AKDataInterface.swift in Sources */,
 				49EAEDF21E4E521700ADC839 /* AKListProjectsViewController.swift in Sources */,
 				49EAEDFD1E4E521800ADC839 /* AKWSUtils.swift in Sources */,
 				49EAEDF71E4E521800ADC839 /* AKCustomView.swift in Sources */,
+				49C6B9891E4E803E005F627B /* AKProjectsTableViewCell.swift in Sources */,
+				49C6B98F1E4E89D5005F627B /* AKNewProjectViewController.swift in Sources */,
 				49EAEDEF1E4E521700ADC839 /* AKAppDelegate.swift in Sources */,
 				49EAEDFB1E4E521800ADC839 /* AKMasterReference.swift in Sources */,
 				49EAEDF81E4E521800ADC839 /* AKCustomViewController.swift in Sources */,

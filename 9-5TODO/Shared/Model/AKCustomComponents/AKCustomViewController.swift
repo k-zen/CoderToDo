@@ -90,7 +90,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
         }
         // Checks
-        if self.shouldCheckUsernameSet {
+        if self.shouldCheckUsernameSet && DataInterface.getUser()?.username == nil {
             self.presentUsernameInputView(dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                 NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
             })
@@ -180,6 +180,24 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func presentUsernameInputView(dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
     {
         let controller = AKUsernameInputViewController(nibName: "AKUsernameInputView", bundle: nil)
+        controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
+        controller.view.backgroundColor = UIColor.clear
+        controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
+        controller.modalPresentationStyle = .overFullScreen
+        
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.translatesAutoresizingMaskIntoConstraints = true
+        blurView.frame = controller.view.bounds
+        
+        controller.view.insertSubview(blurView, at: 0)
+        
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func presentNewProjectView(dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
+    {
+        let controller = AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil)
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
         controller.view.backgroundColor = UIColor.clear
         controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle

@@ -1,35 +1,45 @@
 import UIKit
 
-class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
+class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate
 {
     // MARK: Local Enums
     enum LocalTextField: Int {
-        case username = 1
+        case projectName = 1
     }
     
     // MARK: Outlets
     @IBOutlet weak var controlsContainer: UIView!
-    @IBOutlet weak var mainTitle: UILabel!
-    @IBOutlet weak var usernameValue: UITextField!
-    @IBOutlet weak var done: UIButton!
+    @IBOutlet weak var projectNameValue: UITextField!
+    @IBOutlet weak var save: UIButton!
+    @IBOutlet weak var close: UIButton!
     
     // MARK: Actions
-    @IBAction func done(_ sender: Any)
+    @IBAction func save(_ sender: Any)
     {
         Func.AKDelay(0.0, isMain: false, task: { Void -> Void in
-            let username = AKUsername(inputData: self.usernameValue.text!)
+            let projectName = AKProjectName(inputData: self.projectNameValue.text!)
             do {
-                try username.validate()
-                try username.process()
+                try projectName.validate()
+                try projectName.process()
             }
             catch {
                 Func.AKPresentMessageFromError(message: "\(error)")
                 return
             }
             
-            DataInterface.getUser()?.username = username.outputData
-            self.dismissView(executeDismissTask: true)
+            if let mr = Func.AKObtainMasterReference() {
+                let project = Project(context: mr.getMOC())
+                project.name = projectName.outputData
+                
+                DataInterface.getUser()?.addToProject(project)
+                self.dismissView(executeDismissTask: true)
+            }
         })
+    }
+    
+    @IBAction func close(_ sender: Any)
+    {
+        self.dismissView(executeDismissTask: true)
     }
     
     // MARK: AKCustomViewController Overriding
@@ -54,10 +64,10 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         let newLen = (textField.text?.characters.count)! + string.characters.count - range.length
         
         switch textField.tag {
-        case LocalTextField.username.rawValue:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+        case LocalTextField.projectName.rawValue:
+            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
         }
     }
     
@@ -77,12 +87,13 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         super.setup()
         
         // Set Delegator.
-        self.usernameValue.delegate = self
-        self.usernameValue.tag = LocalTextField.username.rawValue
+        self.projectNameValue.delegate = self
+        self.projectNameValue.tag = LocalTextField.projectName.rawValue
         
         // Custom L&F.
         self.controlsContainer.backgroundColor = UIColor.clear
-        self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.projectNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }
