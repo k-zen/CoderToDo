@@ -224,6 +224,11 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         // Custom L&F.
         self.controlsContainer.backgroundColor = UIColor.clear
         self.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.maxCategories.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.maxTasks.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
