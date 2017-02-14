@@ -65,7 +65,15 @@ class AKMasterReference: NSObject
         NSLog("=>   PROJECTS:")
         let projects = (self.user?.project)!
         for case let project as Project in projects {
+            NSLog("=>       CLOSING TIME: %@", project.closingTime?.description ?? "N\\A")
+            NSLog("=>       CLOSING TIME TOLERANCE: %i", project.closingTimeTolerance)
+            NSLog("=>       CREATION DATE: %@", project.creationDate?.description ?? "N\\A")
+            NSLog("=>       MAX. CATEGORIES: %i", project.maxCategories)
+            NSLog("=>       MAX. TASKS: %i", project.maxTasks)
             NSLog("=>       NAME: %@", project.name ?? "N\\A")
+            NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
+            NSLog("=>       OSR: %.2f", project.osr)
+            NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
         }
         NSLog("=> COREDATA DUMP ######")
         

@@ -13,7 +13,7 @@ typealias User = AKUserMO
 typealias Project = AKProjectMO
 
 // MARK: Aliases
-let Func = GlobalFunctions.instance(GlobalConstants.AKDebug)
+let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
 
 // MARK: Extensions
 extension Int
@@ -50,7 +50,7 @@ extension UIImage
 
 extension String
 {
-    func splitOnNewLine () -> [String]
+    func splitOnNewLine() -> [String]
     {
         return self.components(separatedBy: CharacterSet.newlines)
     }
@@ -96,6 +96,7 @@ struct GlobalConstants {
     static let AKTableHeaderLeftBorderBg = Func.AKHexColor(0xd79921)
     static let AKTableCellBg = GlobalConstants.AKDefaultBg
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
+    static let AKPickerViewFg = Func.AKHexColor(0xfe8019)
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.4
     static let AKDefaultTextfieldBorderThickness = 2.0
@@ -105,6 +106,8 @@ struct GlobalConstants {
     static let AKMinUsernameLength = 3
     static let AKMaxProjectNameLength = 100
     static let AKMinProjectNameLength = 3
+    // Dates
+    static let AKWorkingDayTimeDateFormat = "HH:mm"
 }
 
 // MARK: Global Enumerations
@@ -120,6 +123,7 @@ enum Exceptions: Error {
     case invalidLength(String)
     case notValid(String)
     case invalidJSON(String)
+    case invalidDate(String)
 }
 
 enum UnitOfTime: Int {
@@ -142,17 +146,18 @@ enum ProjectSorting: Int {
     case osr = 4
 }
 
-// MARK: Global Functions
-class GlobalFunctions {
+// MARK: Utility Functions
+class UtilityFunctions
+{
     private var showDebugInformation = false
     
     ///
     /// Creates and configures a new instance of the class. Use this method for
     /// calling all other functions.
     ///
-    static func instance(_ showDebugInformation: Bool) -> GlobalFunctions
+    static func instance(_ showDebugInformation: Bool) -> UtilityFunctions
     {
-        let instance = GlobalFunctions()
+        let instance = UtilityFunctions()
         instance.showDebugInformation = showDebugInformation
         
         return instance
@@ -329,13 +334,13 @@ class GlobalFunctions {
             }
         }
         catch {
-            NSLog("=> Generic Error ==> %@", "\(error)")
+            NSLog("=> ERROR: \(error)")
         }
     }
     
     func AKPresentMessage(message: String!)
     {
-        Func.AKExecuteInMainThread {}
+        Func.AKExecuteInMainThread { NSLog("=> MESSAGE: \(message)") }
     }
     
     ///
@@ -350,6 +355,20 @@ class GlobalFunctions {
         operation()
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
         NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
+    }
+    
+    func AKProcessDate(dateAsString: String, format: String) throws -> NSDate
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = TimeZone(identifier: "GMT")
+        
+        if let date = formatter.date(from: dateAsString) {
+            return date as NSDate
+        }
+        else {
+            throw Exceptions.invalidDate("The date to be parsed was invalid.")
+        }
     }
     
     func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>?

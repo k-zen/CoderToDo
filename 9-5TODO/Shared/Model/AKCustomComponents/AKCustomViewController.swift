@@ -73,6 +73,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var screenEdgePanGesture: UIScreenEdgePanGestureRecognizer?
     var longPressGesture: UILongPressGestureRecognizer?
     var dismissViewCompletionTask: (Void) -> Void = {}
+    var localizableDictionary: NSDictionary?
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -155,6 +156,19 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Miscellaneous
         self.definesPresentationContext = true
+    }
+    
+    func loadLocalizedText()
+    {
+        self.localizableDictionary = {
+            if let path = Bundle.main.path(forResource: "\(type(of: self))", ofType: "plist") {
+                NSLog("=> INFO: READING LOCALIZATION FILE *\(type(of: self)).plist*...")
+                
+                return NSDictionary(contentsOfFile: path)
+            }
+            
+            return nil
+        }()
     }
     
     func setupMenu(_ title: String!, message: String!, type: UIAlertControllerStyle!)
@@ -274,5 +288,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+    func localize(key: String) -> Any?
+    {
+        var response: Any?
+        if let val = self.localizableDictionary?.value(forKey: key) {
+            response = val
+        }
+        else {
+            assertionFailure("=> ERROR: MISSING TRANSLATION FOR: \(key)")
+        }
+        
+        return response
     }
 }

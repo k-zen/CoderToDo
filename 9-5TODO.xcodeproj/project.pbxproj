@@ -10,6 +10,7 @@
 		490EB7CB1E51E61900597929 /* AKDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490EB7CA1E51E61900597929 /* AKDataInterface.swift */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
+		492F910A1E534BDA00484036 /* AKNewProjectViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 492F910C1E534BDA00484036 /* AKNewProjectViewController.plist */; };
 		49C6B9891E4E803E005F627B /* AKProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6B9881E4E803E005F627B /* AKProjectsTableViewCell.swift */; };
 		49C6B98B1E4E805F005F627B /* AKProjectsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6B98A1E4E805F005F627B /* AKProjectsTableViewCell.xib */; };
 		49C6B98D1E4E8916005F627B /* AKNewProjectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6B98C1E4E8916005F627B /* AKNewProjectView.xib */; };
@@ -38,6 +39,7 @@
 		490EB7CA1E51E61900597929 /* AKDataInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataInterface.swift; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		492F910B1E534BDA00484036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AKNewProjectViewController.plist; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* 9-5TODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "9-5TODO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C6B9881E4E803E005F627B /* AKProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectsTableViewCell.swift; sourceTree = "<group>"; };
 		49C6B98A1E4E805F005F627B /* AKProjectsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKProjectsTableViewCell.xib; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 				AA59DB284A4C0F99DA628780 /* Pods-CoderTODO.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		492F91011E5346B400484036 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				492F910C1E534BDA00484036 /* AKNewProjectViewController.plist */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		4956B8201E4B697D0032B2F8 = {
@@ -171,6 +181,7 @@
 			children = (
 				49EAEDDE1E4E521700ADC839 /* Assets.xcassets */,
 				49EAEDDF1E4E521700ADC839 /* Images */,
+				492F91011E5346B400484036 /* Localization */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -298,6 +309,7 @@
 			files = (
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
 				49C6B98B1E4E805F005F627B /* AKProjectsTableViewCell.xib in Resources */,
+				492F910A1E534BDA00484036 /* AKNewProjectViewController.plist in Resources */,
 				49EAEDF11E4E521700ADC839 /* AKMain.storyboard in Resources */,
 				49EAEDF01E4E521700ADC839 /* AKLaunchScreen.storyboard in Resources */,
 				49EAEDF41E4E521700ADC839 /* AKUsernameInputView.xib in Resources */,
@@ -382,6 +394,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		492F910C1E534BDA00484036 /* AKNewProjectViewController.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				492F910B1E534BDA00484036 /* Base */,
+			);
+			name = AKNewProjectViewController.plist;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4956B8391E4B697D0032B2F8 /* Debug */ = {
