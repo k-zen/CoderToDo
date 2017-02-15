@@ -8,19 +8,35 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         static let AKRowHeight: CGFloat = 86
     }
     
+    var sortProjectsBy: ProjectSorting = ProjectSorting.creationDateDescending
+    
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
     
     // MARK: Actions
+    @IBAction func organizeProjects(_ sender: Any)
+    {
+        self.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
+                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                            
+                            if let controller1 = presenterController as? AKListProjectsViewController, let controller2 = presentedController as? AKSortProjectSelectorViewController {
+                                controller1.sortProjectsBy = controller2.filtersData[controller2.filters.selectedRow(inComponent: 0)]
+                                controller1.projectsTable.reloadData()
+                            } }
+        )
+    }
+    
     @IBAction func addNewProject(_ sender: Any)
     {
-        self.presentNewProjectView(dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-            
-            if let controller = presenterController as? AKListProjectsViewController {
-                controller.projectsTable.reloadData()
-            }
-        })
+        self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
+                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                            
+                            if let controller = presenterController as? AKListProjectsViewController {
+                                controller.projectsTable.reloadData()
+                            } }
+        )
     }
     
     // MARK: AKCustomViewController Overriding
@@ -33,17 +49,39 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
+        // Checks
+        if DataInterface.getUser()?.username == nil {
+            self.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
+                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
+            )
+            return
+        }
     }
     
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let _ = DataInterface.getProjects(sortBy: .name)[(indexPath as NSIndexPath).row]
+        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-        cell.osrValue.text = "90.00"
-        cell.runningDaysValue.text = String(format: "%i running days", 15)
+        // OSR
+        cell.osrValue.text = String(format: "%.2f", element.osr)
+        // Running Days
+        cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(element: element))
+        // Add Tomorrow Task
+        if DataInterface.getProjectStatus(element: element) == ProjectStatus.ACEPTING_TASKS {
+            cell.addTomorrowTask.isEnabled = true
+            cell.addTomorrowTask.backgroundColor = GlobalConstants.AKEnabledButtonBg
+        }
+        else {
+            cell.addTomorrowTask.isEnabled = false
+            cell.addTomorrowTask.backgroundColor = GlobalConstants.AKDisabledButtonBg
+        }
+        // Project State
+        cell.statusValue.text = DataInterface.getProjectStatus(element: element).rawValue
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -58,7 +96,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let element = DataInterface.getProjects(sortBy: .name)[section]
+        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[section]
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
@@ -100,7 +138,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         runningDaysBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
         runningDaysBadge.textColor = GlobalConstants.AKDefaultFg
         runningDaysBadge.backgroundColor = GlobalConstants.AKRedColor_1
-        runningDaysBadge.text = "15"
+        runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(element: element))
         runningDaysBadge.textAlignment = .center
         runningDaysBadge.layer.cornerRadius = badgeSize / 2.0
         runningDaysBadge.layer.masksToBounds = true
@@ -134,7 +172,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let element = DataInterface.getProjects(sortBy: .name)[(indexPath as NSIndexPath).row]
+            let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[(indexPath as NSIndexPath).row]
             
             DataInterface.getUser()?.removeFromProject(element)
             self.projectsTable.reloadData()
@@ -155,7 +193,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.shouldCheckUsernameSet = true
         super.setup()
         
         // Custom Components

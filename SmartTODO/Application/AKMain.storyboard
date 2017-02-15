@@ -12,7 +12,7 @@
         <!--List Projects-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="List Projects" id="BYZ-38-t0r" customClass="AKListProjectsViewController" customModule="__5TODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="List Projects" id="BYZ-38-t0r" customClass="AKListProjectsViewController" customModule="SmartTODO" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -35,6 +35,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="List Projects" id="ytb-TK-suW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="024-Wo-aBY">
+                            <color key="tintColor" red="0.80000000000000004" green="0.14117647059999999" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="organizeProjects:" destination="BYZ-38-t0r" id="VpN-kI-QgJ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gNK-dI-7DM">
                             <color key="tintColor" red="0.80000000000000004" green="0.14117647059999999" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

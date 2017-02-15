@@ -25,8 +25,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
 {
     
     // MARK: Flags
-    /// Flag to check if a user is logged in/out of the App.
-    var shouldCheckUsernameSet: Bool = false
+    /// Flag to add a BlurView in the background.
+    var shouldAddBlurView: Bool = false
     /// Flag to inhibit only the **Tap** gesture.
     var inhibitTapGesture: Bool = false
     /// Flag to inhibit only the **Pinch** gesture.
@@ -90,13 +90,6 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         if GlobalConstants.AKDebug {
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
         }
-        // Checks
-        if self.shouldCheckUsernameSet && DataInterface.getUser()?.username == nil {
-            self.presentUsernameInputView(dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-            })
-            return
-        }
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
@@ -156,6 +149,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Miscellaneous
         self.definesPresentationContext = true
+        
+        // Add BlurView.
+        if self.shouldAddBlurView {
+            // Insert BlurView.
+            let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            blurView.translatesAutoresizingMaskIntoConstraints = true
+            blurView.frame = self.view.bounds
+            
+            self.view.insertSubview(blurView, at: 0)
+        }
     }
     
     func loadLocalizedText()
@@ -191,38 +195,12 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
     }
     
-    func presentUsernameInputView(dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
+    func presentView(controller: AKCustomViewController,
+                     dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
     {
-        let controller = AKUsernameInputViewController(nibName: "AKUsernameInputView", bundle: nil)
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
-        controller.view.backgroundColor = UIColor.clear
         controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
         controller.modalPresentationStyle = .overFullScreen
-        
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurView.translatesAutoresizingMaskIntoConstraints = true
-        blurView.frame = controller.view.bounds
-        
-        controller.view.insertSubview(blurView, at: 0)
-        
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    func presentNewProjectView(dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
-    {
-        let controller = AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil)
-        controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
-        controller.view.backgroundColor = UIColor.clear
-        controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
-        controller.modalPresentationStyle = .overFullScreen
-        
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurView.translatesAutoresizingMaskIntoConstraints = true
-        blurView.frame = controller.view.bounds
-        
-        controller.view.insertSubview(blurView, at: 0)
         
         self.present(controller, animated: true, completion: nil)
     }

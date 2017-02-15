@@ -13,9 +13,9 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     }
     
     // MARK: Properties
-    var toleranceData: [Int] = []
-    var limitsData: [Int] = []
-    var workingDayTimeData: [String] = []
+    var toleranceData = [Int]()
+    var limitsData = [Int]()
+    var workingDayTimeData = [String]()
     
     // MARK: Outlets
     @IBOutlet weak var scrollContainer: UIScrollView!
@@ -199,7 +199,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
+        super.shouldAddBlurView = true
         super.setup()
         
         // Set Delegator.

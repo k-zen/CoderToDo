@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>TaskStates</key>
+	<dict>
+		<key>DONE</key>
+		<integer>1000</integer>
+		<key>NOT DONE</key>
+		<integer>1001</integer>
+		<key>NOT APPLICABLE</key>
+		<integer>1002</integer>
+		<key>DILATE</key>
+		<integer>1003</integer>
+		<key>PENDING</key>
+		<integer>1004</integer>
+		<key>VERIFY</key>
+		<integer>1005</integer>
+		<key>VERIFIED</key>
+		<integer>1006</integer>
+		<key>NOT VERIFIED</key>
+		<integer>1007</integer>
+	</dict>
 	<key>Limits</key>
 	<array>
 		<integer>-1</integer>

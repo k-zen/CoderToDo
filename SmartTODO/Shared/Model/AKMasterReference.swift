@@ -74,6 +74,7 @@ class AKMasterReference: NSObject
             NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
+            NSLog("=>       ------")
         }
         NSLog("=> COREDATA DUMP ######")
         

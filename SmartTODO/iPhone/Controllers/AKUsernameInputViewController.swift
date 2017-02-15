@@ -2,6 +2,9 @@ import UIKit
 
 class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
 {
+    // MARK: Properties
+    var presenterController: AKCustomViewController?
+    
     // MARK: Local Enums
     enum LocalTextField: Int {
         case username = 1
@@ -16,20 +19,18 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Actions
     @IBAction func done(_ sender: Any)
     {
-        Func.AKDelay(0.0, isMain: false, task: { Void -> Void in
-            let username = AKUsername(inputData: self.usernameValue.text!)
-            do {
-                try username.validate()
-                try username.process()
-            }
-            catch {
-                Func.AKPresentMessageFromError(message: "\(error)")
-                return
-            }
-            
-            DataInterface.getUser()?.username = username.outputData
-            self.dismissView(executeDismissTask: true)
-        })
+        let username = AKUsername(inputData: self.usernameValue.text!)
+        do {
+            try username.validate()
+            try username.process()
+        }
+        catch {
+            Func.AKPresentMessageFromError(message: "\(error)")
+            return
+        }
+        
+        DataInterface.getUser()?.username = username.outputData
+        presenterController?.dismissView(executeDismissTask: true)
     }
     
     // MARK: AKCustomViewController Overriding
@@ -74,6 +75,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
+        super.shouldAddBlurView = true
         super.setup()
         
         // Set Delegator.

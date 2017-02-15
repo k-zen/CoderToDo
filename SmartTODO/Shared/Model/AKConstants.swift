@@ -11,6 +11,8 @@ typealias DataController = AKDataController
 typealias DataInterface = AKDataInterface
 typealias User = AKUserMO
 typealias Project = AKProjectMO
+typealias Day = AKDayMO
+typealias Task = AKTaskMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
@@ -139,11 +141,32 @@ enum CustomBorderDecorationPosition: Int {
     case left = 3
 }
 
-enum ProjectSorting: Int {
-    case closingTime = 1
-    case creationDate = 2
-    case name = 3
-    case osr = 4
+enum ProjectStatus: String {
+    case OPEN = "OPEN: You can mark tasks with a status."
+    case ACEPTING_TASKS = "ACCEPTING TASKS FOR NEXT DAY"
+    case CLOSED = "CLOSED FOR THE DAY"
+}
+
+enum ProjectSorting: String {
+    case closingTimeDescending = "Closing Time : Descending"
+    case closingTimeAscending = "Closing Time : Ascending"
+    case creationDateDescending = "Creation Date : Descending"
+    case creationDateAscending = "Creation Date : Ascending"
+    case nameDescending = "Name : Descending"
+    case nameAscending = "Name : Ascending"
+    case osrDescending = "Overall Success Rate : Descending"
+    case osrAscending = "Overall Success Rate : Ascending"
+}
+
+enum TaskStates: Int16 {
+    case DONE = 1
+    case NOT_DONE = 2
+    case NOT_APPLICABLE = 3
+    case DILATE = 4
+    case PENDING = 5
+    case VERIFY = 6
+    case VERIFIED = 7
+    case NOT_VERIFIED = 8
 }
 
 // MARK: Utility Functions
@@ -305,6 +328,17 @@ class UtilityFunctions
         let blue = CGFloat((hex) & 0xFF) / 255.0
         
         return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    func AKIterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T>
+    {
+        var i = 0
+        return AnyIterator {
+            let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
+            if next.hashValue != i { return nil }
+            i += 1
+            return next
+        }
     }
     
     ///
