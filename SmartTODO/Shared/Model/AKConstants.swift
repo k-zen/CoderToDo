@@ -110,7 +110,7 @@ struct GlobalConstants {
     static let AKMinProjectNameLength = 3
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
-    static let AKAcceptingTasksDefaultTime = 60
+    static let AKAcceptingTasksDefaultTime = 59
 }
 
 // MARK: Global Enumerations
