@@ -5,15 +5,18 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
     // MARK: Local Enums
     enum LocalEnums: Int {
         case filters = 1
+        case order = 2
     }
     
     // MARK: Properties
     var filtersData = [ProjectSorting]()
+    var orderData = [SortingOrder]()
     
     // MARK: Outlets
     @IBOutlet weak var controlsContainer: UIView!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var filters: UIPickerView!
+    @IBOutlet weak var order: UIPickerView!
     @IBOutlet weak var sort: UIButton!
     
     // MARK: Actions
@@ -35,7 +38,8 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         super.viewDidAppear(animated)
         
         // Set default values.
-        self.filters.selectRow(0, inComponent: 0, animated: true)
+        self.filters.selectRow(2, inComponent: 0, animated: true)
+        self.order.selectRow(0, inComponent: 0, animated: true)
     }
     
     override func loadLocalizedText() {
@@ -45,6 +49,9 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         for filter in Func.AKIterateEnum(ProjectSorting.self) {
             self.filtersData.append(filter)
         }
+        for order in Func.AKIterateEnum(SortingOrder.self) {
+            self.orderData.append(order)
+        }
     }
     
     // MARK: UIPickerViewDelegate Implementation
@@ -53,6 +60,8 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
             return self.filtersData[row].rawValue
+        case LocalEnums.order.rawValue:
+            return self.orderData[row].rawValue
         default:
             return ""
         }
@@ -66,11 +75,13 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
             pickerLabel.text = self.filtersData[row].rawValue
+        case LocalEnums.order.rawValue:
+            pickerLabel.text = self.orderData[row].rawValue
         default:
             pickerLabel.text = ""
         }
         
-        pickerLabel.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 18)
+        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
@@ -82,6 +93,8 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
             return self.filtersData.count
+        case LocalEnums.order.rawValue:
+            return self.orderData.count
         default:
             return 0
         }
@@ -92,17 +105,21 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.shouldAddBlurView = true
+        super.additionalOperationsWhenTaped = { (gesture) -> Void in self.dismissView(executeDismissTask: false) }
         super.setup()
         
         // Set Delegator.
         self.filters.delegate = self
         self.filters.dataSource = self
         self.filters.tag = LocalEnums.filters.rawValue
+        self.order.delegate = self
+        self.order.dataSource = self
+        self.order.tag = LocalEnums.order.rawValue
         
         // Custom L&F.
-        self.controlsContainer.backgroundColor = UIColor.clear
+        self.controlsContainer.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.filters.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.order.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.sort.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }

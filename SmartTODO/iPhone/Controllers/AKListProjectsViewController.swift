@@ -8,7 +8,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         static let AKRowHeight: CGFloat = 86
     }
     
-    var sortProjectsBy: ProjectSorting = ProjectSorting.creationDateDescending
+    var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
+    var order: SortingOrder = SortingOrder.descending
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
@@ -22,6 +23,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                             
                             if let controller1 = presenterController as? AKListProjectsViewController, let controller2 = presentedController as? AKSortProjectSelectorViewController {
                                 controller1.sortProjectsBy = controller2.filtersData[controller2.filters.selectedRow(inComponent: 0)]
+                                controller1.order = controller2.orderData[controller2.order.selectedRow(inComponent: 0)]
                                 controller1.projectsTable.reloadData()
                             } }
         )
@@ -63,7 +65,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[(indexPath as NSIndexPath).section]
+        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
@@ -85,18 +87,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.osrValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        cell.osrValue.layer.masksToBounds = true
-        cell.stateContainer.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        cell.stateContainer.layer.masksToBounds = true
-        cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        // cell.osrValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        // cell.osrValue.layer.masksToBounds = true
+        // cell.stateContainer.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        // cell.stateContainer.layer.masksToBounds = true
+        // cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[section]
+        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[section]
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
@@ -137,7 +139,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         )
         runningDaysBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
         runningDaysBadge.textColor = GlobalConstants.AKDefaultFg
-        runningDaysBadge.backgroundColor = GlobalConstants.AKRedColor_1
+        runningDaysBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
         runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(element: element))
         runningDaysBadge.textAlignment = .center
         runningDaysBadge.layer.cornerRadius = badgeSize / 2.0
@@ -172,17 +174,14 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let element = DataInterface.getProjects(sortBy: self.sortProjectsBy)[(indexPath as NSIndexPath).row]
+            let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).row]
             
             DataInterface.getUser()?.removeFromProject(element)
             self.projectsTable.reloadData()
         }
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
-    {
-        return UITableViewCellEditingStyle.delete
-    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return LocalConstants.AKRowHeight }
     
@@ -190,9 +189,17 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+        
+        self.performSegue(withIdentifier: "ViewProjectSegue", sender: element)
+    }
+    
     // MARK: Miscellaneous
     func customSetup()
     {
+        super.inhibitTapGesture = true
         super.setup()
         
         // Custom Components

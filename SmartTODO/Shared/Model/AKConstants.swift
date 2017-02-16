@@ -93,12 +93,12 @@ struct GlobalConstants {
     static let AKDefaultViewBorderBg = Func.AKHexColor(0x458588)
     static let AKDefaultFloatingViewBorderBg = UIColor.black
     static let AKDisabledButtonBg = Func.AKHexColor(0x999999)
-    static let AKEnabledButtonBg = GlobalConstants.AKRedColor_1
+    static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
     static let AKTableHeaderCellBg = Func.AKHexColor(0x181818)
     static let AKTableHeaderLeftBorderBg = Func.AKHexColor(0xd79921)
     static let AKTableCellBg = GlobalConstants.AKDefaultBg
     static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
-    static let AKPickerViewFg = Func.AKHexColor(0xfe8019)
+    static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.4
     static let AKDefaultTextfieldBorderThickness = 2.0
@@ -110,6 +110,7 @@ struct GlobalConstants {
     static let AKMinProjectNameLength = 3
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
+    static let AKAcceptingTasksDefaultTime = 60
 }
 
 // MARK: Global Enumerations
@@ -142,20 +143,21 @@ enum CustomBorderDecorationPosition: Int {
 }
 
 enum ProjectStatus: String {
-    case OPEN = "OPEN: You can mark tasks with a status."
-    case ACEPTING_TASKS = "ACCEPTING TASKS FOR NEXT DAY"
-    case CLOSED = "CLOSED FOR THE DAY"
+    case OPEN = "Open: You can mark tasks with a status."
+    case ACEPTING_TASKS = "Accepting tasks for next day."
+    case CLOSED = "Closed for the day."
 }
 
 enum ProjectSorting: String {
-    case closingTimeDescending = "Closing Time : Descending"
-    case closingTimeAscending = "Closing Time : Ascending"
-    case creationDateDescending = "Creation Date : Descending"
-    case creationDateAscending = "Creation Date : Ascending"
-    case nameDescending = "Name : Descending"
-    case nameAscending = "Name : Ascending"
-    case osrDescending = "Overall Success Rate : Descending"
-    case osrAscending = "Overall Success Rate : Ascending"
+    case closingTime = "Closing Time"
+    case creationDate = "Creation Date"
+    case name = "Name"
+    case osr = "Overall Success Rate"
+}
+
+enum SortingOrder: String {
+    case ascending = "Ascending"
+    case descending = "Descending"
 }
 
 enum TaskStates: Int16 {

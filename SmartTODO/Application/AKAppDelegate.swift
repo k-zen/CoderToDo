@@ -25,6 +25,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
             NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 18),
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
+        UINavigationBar.appearance().tintColor = GlobalConstants.AKTabBarTintSelected
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
