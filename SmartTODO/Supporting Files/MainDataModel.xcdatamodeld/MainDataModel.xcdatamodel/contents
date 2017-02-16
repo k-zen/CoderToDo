@@ -6,8 +6,9 @@
     </entity>
     <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sr" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="days" inverseEntity="Project" syncable="YES"/>
-        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="day" inverseEntity="Task" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="day" inverseEntity="Task" syncable="YES"/>
         <fetchedProperty name="getTasks" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="Task"/>
         </fetchedProperty>
@@ -29,11 +30,13 @@
         </fetchedProperty>
     </entity>
     <entity name="Task" representedClassName="AKTaskMO" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="completionPercentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" minValueString="0" maxValueString="140" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="task" inverseEntity="Day" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="tasks" inverseEntity="Day" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
         <attribute name="closingTimeTolerance" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -50,9 +53,9 @@
     </entity>
     <elements>
         <element name="Category" positionX="-641" positionY="-568" width="128" height="75"/>
-        <element name="Day" positionX="-837" positionY="-756" width="128" height="119"/>
+        <element name="Day" positionX="-837" positionY="-756" width="128" height="131"/>
         <element name="Project" positionX="-1062" positionY="-729" width="128" height="239"/>
-        <element name="Task" positionX="-641" positionY="-751" width="128" height="120"/>
+        <element name="Task" positionX="-641" positionY="-751" width="128" height="148"/>
         <element name="User" positionX="-837" positionY="-504" width="128" height="191"/>
     </elements>
 </model>

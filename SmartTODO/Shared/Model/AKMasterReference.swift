@@ -74,6 +74,22 @@ class AKMasterReference: NSObject
             NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
+            NSLog("=>       DAYS: (%i)", DataInterface.countDays(project: project))
+            for day in DataInterface.getDays(project: project) {
+                NSLog("=>           DATE: %@", day.date?.description ?? "N\\A")
+                NSLog("=>           SR: %.2f", day.sr)
+                NSLog("=>           TASKS: (%i)", DataInterface.countTasks(day: day))
+                for task in DataInterface.getTasks(day: day) {
+                    NSLog("=>               CATEGORY: %i", task.category)
+                    NSLog("=>               COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
+                    NSLog("=>               CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
+                    NSLog("=>               NAME: %@", task.name ?? "N\\A")
+                    NSLog("=>               NOTE: %@", task.note ?? "N\\A")
+                    NSLog("=>               STATE: %i", task.state)
+                    NSLog("=>               ------")
+                }
+                NSLog("=>           ------")
+            }
             NSLog("=>       ------")
         }
         NSLog("=> COREDATA DUMP ######")

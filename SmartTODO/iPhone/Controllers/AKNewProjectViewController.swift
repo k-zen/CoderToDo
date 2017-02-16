@@ -46,6 +46,11 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             try projectName.process()
             
             if let mr = Func.AKObtainMasterReference() {
+                let now = NSDate()
+                
+                // let day = Day(context: mr.getMOC())
+                // day.date = now
+                
                 let project = Project(context: mr.getMOC())
                 
                 project.notifyClosingTime = notifyClosingTime
@@ -55,7 +60,8 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.closingTimeTolerance = Int16(tolerance)
                 project.maxCategories = Int16(maxCategories)
                 project.maxTasks = Int16(maxTasks)
-                project.creationDate = NSDate()
+                project.creationDate = now
+                // project.addToDays(day)
                 
                 DataInterface.getUser()?.addToProject(project)
                 self.dismissView(executeDismissTask: true)

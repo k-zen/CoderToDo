@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/XX/XX)
+        * Added base support for *ViewProject* view. (2017/02/16)
         * Several very important modifications, too many to list. (2017/02/16)
         * Improved support for listing projects, like sorting, show project info accurately, and managing dates and statuses. Added support for an Introductory view. (2017/02/15)
         * Renamed project to *SmartTODO*. (2017/02/14)

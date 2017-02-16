@@ -55,9 +55,8 @@ class AKDataInterface
                 }
             }
         }
-        else {
-            return []
-        }
+        
+        return []
     }
     
     static func countProjects() -> Int { return DataInterface.getUser()?.project?.allObjects.count ?? 0 }
@@ -68,7 +67,7 @@ class AKDataInterface
         
         if let days = element.days?.allObjects as? [Day] {
             for day in days {
-                if let tasks = day.task?.allObjects as? [Task] {
+                if let tasks = day.tasks?.allObjects as? [Task] {
                     for task in tasks {
                         if task.state == TaskStates.PENDING.rawValue {
                             counter += 1
@@ -136,17 +135,75 @@ class AKDataInterface
     static func getProjectRunningDays(element: Project) -> Int
     {
         if let creationDate = element.creationDate as? Date {
-            let interval = Date().timeIntervalSince(creationDate)
-            let runningDays = (((interval / 60.0) / 60.0) / 24.0)
+            let now = Date()
+            
+            var gmtCalendar = Calendar.current
+            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
+            
+            let runningDays = gmtCalendar.dateComponents([.day], from: now, to: creationDate).day ?? 0
             
             if GlobalConstants.AKDebug {
-                NSLog("=> INFO: PROJECT RUNNING DAYS: %.3f", runningDays)
+                NSLog("=> INFO: PROJECT RUNNING DAYS: %i", runningDays)
             }
             
-            return Int(runningDays)
+            return runningDays
         }
         
         return 0
     }
     // ########## PROJECT'S FUNCTIONS ########## //
+    // ########## DAY'S FUNCTIONS ########## //
+    static func getDays(project: Project) -> [Day]
+    {
+        if let days = project.days?.allObjects as? [Day] {
+            return days.sorted {
+                let now = Date()
+                
+                let n1 = $0.date as? Date ?? now
+                let n2 = $1.date as? Date ?? now
+                
+                return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
+            }
+        }
+        
+        return []
+    }
+    
+    static func countDays(project: Project) -> Int { return project.days?.allObjects.count ?? 0 }
+    
+    static func getDayTitle(day: Day) -> String
+    {
+        if let date = day.date as? Date {
+            var gmtCalendar = Calendar.current
+            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
+            
+            let d = gmtCalendar.dateComponents([.day], from: date).day ?? 0
+            let m = gmtCalendar.dateComponents([.month], from: date).month ?? 0
+            let y = gmtCalendar.dateComponents([.year], from: date).year ?? 0
+            
+            return String(format: "%.2i/%.2i/%.4i", m, d, y)
+        }
+        
+        return "N\\A"
+    }
+    // ########## DAY'S FUNCTIONS ########## //
+    // ########## TASK'S FUNCTIONS ########## //
+    static func getTasks(day: Day) -> [Task]
+    {
+        if let tasks = day.tasks?.allObjects as? [Task] {
+            return tasks.sorted {
+                let now = Date()
+                
+                let n1 = $0.creationDate as? Date ?? now
+                let n2 = $1.creationDate as? Date ?? now
+                
+                return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
+            }
+        }
+        
+        return []
+    }
+    
+    static func countTasks(day: Day) -> Int { return day.tasks?.allObjects.count ?? 0 }
+    // ########## TASK'S FUNCTIONS ########## //
 }

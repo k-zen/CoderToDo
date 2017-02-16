@@ -62,6 +62,33 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case GlobalConstants.AKViewProjectSegue:
+                if let destination = segue.destination as? AKViewProjectViewController {
+                    if let project = sender as? Project {
+                        destination.project = project
+                    }
+                }
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
+    {
+        switch identifier {
+        case GlobalConstants.AKViewProjectSegue:
+            return true
+        default:
+            return false
+        }
+    }
+    
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -192,8 +219,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
-        
-        self.performSegue(withIdentifier: "ViewProjectSegue", sender: element)
+        self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: element)
     }
     
     // MARK: Miscellaneous

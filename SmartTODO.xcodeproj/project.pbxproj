@@ -36,6 +36,13 @@
 		49CB40831E54BCEE0031D9D0 /* AKIntroductoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB40821E54BCEE0031D9D0 /* AKIntroductoryViewController.swift */; };
 		49CB40851E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB40841E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib */; };
 		49CB40871E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB40861E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift */; };
+		49FC71F11E5604CE00EDCABC /* AKViewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FC71F01E5604CE00EDCABC /* AKViewProjectViewController.swift */; };
+		49FC71F31E56123D00EDCABC /* AKTasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FC71F21E56123D00EDCABC /* AKTasksTableViewCell.swift */; };
+		49FC71F51E5612B800EDCABC /* AKTasksTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FC71F41E5612B800EDCABC /* AKTasksTableViewCell.xib */; };
+		49FC71F71E56174700EDCABC /* AKDaysTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FC71F61E56174700EDCABC /* AKDaysTableViewCell.xib */; };
+		49FC71F91E56176700EDCABC /* AKDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FC71F81E56176700EDCABC /* AKDaysTableViewCell.swift */; };
+		49FC71FB1E5628B500EDCABC /* AKTasksTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FC71FA1E5628B500EDCABC /* AKTasksTableView.xib */; };
+		49FC71FE1E56299200EDCABC /* AKTasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FC71FD1E56299200EDCABC /* AKTasksTableView.swift */; };
 		E339F11FDEFDE107D484EC9D /* Pods_CoderTODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +78,13 @@
 		49CB40821E54BCEE0031D9D0 /* AKIntroductoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKIntroductoryViewController.swift; sourceTree = "<group>"; };
 		49CB40841E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSortProjectSelectorView.xib; sourceTree = "<group>"; };
 		49CB40861E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortProjectSelectorViewController.swift; sourceTree = "<group>"; };
+		49FC71F01E5604CE00EDCABC /* AKViewProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKViewProjectViewController.swift; sourceTree = "<group>"; };
+		49FC71F21E56123D00EDCABC /* AKTasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableViewCell.swift; sourceTree = "<group>"; };
+		49FC71F41E5612B800EDCABC /* AKTasksTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTasksTableViewCell.xib; sourceTree = "<group>"; };
+		49FC71F61E56174700EDCABC /* AKDaysTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKDaysTableViewCell.xib; sourceTree = "<group>"; };
+		49FC71F81E56176700EDCABC /* AKDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDaysTableViewCell.swift; sourceTree = "<group>"; };
+		49FC71FA1E5628B500EDCABC /* AKTasksTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTasksTableView.xib; sourceTree = "<group>"; };
+		49FC71FD1E56299200EDCABC /* AKTasksTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableView.swift; sourceTree = "<group>"; };
 		AA59DB284A4C0F99DA628780 /* Pods-CoderTODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.release.xcconfig"; sourceTree = "<group>"; };
 		CA6EABC05D56318386608D95 /* Pods_CoderTODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderTODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51B2D1F0AB5E573E1024B1B /* Pods-CoderTODO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderTODO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderTODO/Pods-CoderTODO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +170,7 @@
 				49A7A9AF1E53C7450054033D /* AKNewProjectViewController.swift */,
 				49CB40861E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift */,
 				49A7A9B01E53C7450054033D /* AKUsernameInputViewController.swift */,
+				49FC71F01E5604CE00EDCABC /* AKViewProjectViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -163,10 +178,13 @@
 		49A7A9B11E53C7450054033D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49FC71F61E56174700EDCABC /* AKDaysTableViewCell.xib */,
 				49CB40801E54BC6D0031D9D0 /* AKIntroductoryView.xib */,
 				49A7A9B21E53C7450054033D /* AKNewProjectView.xib */,
 				49A7A9B31E53C7450054033D /* AKProjectsTableViewCell.xib */,
 				49CB40841E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib */,
+				49FC71FA1E5628B500EDCABC /* AKTasksTableView.xib */,
+				49FC71F41E5612B800EDCABC /* AKTasksTableViewCell.xib */,
 				49A7A9B41E53C7450054033D /* AKUsernameInputView.xib */,
 			);
 			path = Views;
@@ -226,6 +244,7 @@
 			children = (
 				49A7A9BF1E53C7450054033D /* AKCustomView.swift */,
 				49A7A9C01E53C7450054033D /* AKCustomViewController.swift */,
+				49FC71FC1E56296900EDCABC /* CustomViews */,
 				49A7A9C11E53C7450054033D /* TableCells */,
 			);
 			path = AKCustomComponents;
@@ -234,7 +253,9 @@
 		49A7A9C11E53C7450054033D /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				49FC71F81E56176700EDCABC /* AKDaysTableViewCell.swift */,
 				49A7A9C21E53C7450054033D /* AKProjectsTableViewCell.swift */,
+				49FC71F21E56123D00EDCABC /* AKTasksTableViewCell.swift */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -246,6 +267,14 @@
 				49A7A9CC1E53C7450054033D /* MainDataModel.xcdatamodeld */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49FC71FC1E56296900EDCABC /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				49FC71FD1E56299200EDCABC /* AKTasksTableView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		AFA3CC6BEA5EDB65F5109664 /* Frameworks */ = {
@@ -323,12 +352,15 @@
 				49A7A9D61E53C7450054033D /* AKUsernameInputView.xib in Resources */,
 				49CB40851E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib in Resources */,
 				49A7A9D51E53C7450054033D /* AKProjectsTableViewCell.xib in Resources */,
+				49FC71F51E5612B800EDCABC /* AKTasksTableViewCell.xib in Resources */,
 				49A7A9D41E53C7450054033D /* AKNewProjectView.xib in Resources */,
 				49A7A9D01E53C7450054033D /* AKMain.storyboard in Resources */,
 				49A7A9D81E53C7450054033D /* AKNewProjectViewController.plist in Resources */,
 				49A7A9CF1E53C7450054033D /* AKLaunchScreen.storyboard in Resources */,
+				49FC71F71E56174700EDCABC /* AKDaysTableViewCell.xib in Resources */,
 				49A7A9D71E53C7450054033D /* Assets.xcassets in Resources */,
 				49CB40811E54BC6D0031D9D0 /* AKIntroductoryView.xib in Resources */,
+				49FC71FB1E5628B500EDCABC /* AKTasksTableView.xib in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,18 +422,22 @@
 			files = (
 				49A7A9DF1E53C7450054033D /* AKInputData.swift in Sources */,
 				49A7A9E01E53C7450054033D /* AKMasterReference.swift in Sources */,
+				49FC71FE1E56299200EDCABC /* AKTasksTableView.swift in Sources */,
 				49CB40831E54BCEE0031D9D0 /* AKIntroductoryViewController.swift in Sources */,
 				49A7A9E51E53C7450054033D /* MainDataModel.xcdatamodeld in Sources */,
 				49A7A9D21E53C7450054033D /* AKNewProjectViewController.swift in Sources */,
+				49FC71F11E5604CE00EDCABC /* AKViewProjectViewController.swift in Sources */,
 				49A7A9DE1E53C7450054033D /* AKDataInterface.swift in Sources */,
 				49A7A9DC1E53C7450054033D /* AKProjectsTableViewCell.swift in Sources */,
 				49A7A9DB1E53C7450054033D /* AKCustomViewController.swift in Sources */,
 				49A7A9E31E53C7450054033D /* AKWSUtils.swift in Sources */,
 				49A7A9D31E53C7450054033D /* AKUsernameInputViewController.swift in Sources */,
 				49A7A9D11E53C7450054033D /* AKListProjectsViewController.swift in Sources */,
+				49FC71F31E56123D00EDCABC /* AKTasksTableViewCell.swift in Sources */,
 				49A7A9DA1E53C7450054033D /* AKCustomView.swift in Sources */,
 				49A7A9E21E53C7450054033D /* AKUsername.swift in Sources */,
 				49A7A9DD1E53C7450054033D /* AKDataController.swift in Sources */,
+				49FC71F91E56176700EDCABC /* AKDaysTableViewCell.swift in Sources */,
 				49A7A9CE1E53C7450054033D /* AKAppDelegate.swift in Sources */,
 				49CB40871E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift in Sources */,
 				49A7A9D91E53C7450054033D /* AKConstants.swift in Sources */,

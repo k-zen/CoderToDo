@@ -13,6 +13,7 @@ typealias User = AKUserMO
 typealias Project = AKProjectMO
 typealias Day = AKDayMO
 typealias Task = AKTaskMO
+typealias Category = AKCategoryMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
@@ -83,7 +84,7 @@ struct GlobalConstants {
     static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
     static let AKRedColor_1 = Func.AKHexColor(0xcc241d)
     static let AKRedColor_2 = Func.AKHexColor(0xfb4934)
-    static let AKDefaultBg = Func.AKHexColor(0x282828)
+    static let AKDefaultBg = Func.AKHexColor(0x181818)
     static let AKDefaultFg = Func.AKHexColor(0xffffff)
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
@@ -96,8 +97,8 @@ struct GlobalConstants {
     static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
     static let AKTableHeaderCellBg = Func.AKHexColor(0x181818)
     static let AKTableHeaderLeftBorderBg = Func.AKHexColor(0xd79921)
-    static let AKTableCellBg = GlobalConstants.AKDefaultBg
-    static let AKTableCellLeftBorderBg = GlobalConstants.AKTableHeaderLeftBorderBg
+    static let AKTableCellBg = Func.AKHexColor(0x222222)
+    static let AKTableCellLeftBorderBg = Func.AKHexColor(0x0088CC)
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.4
@@ -111,6 +112,8 @@ struct GlobalConstants {
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKAcceptingTasksDefaultTime = 59
+    // Segues
+    static let AKViewProjectSegue = "ViewProjectSegue"
 }
 
 // MARK: Global Enumerations

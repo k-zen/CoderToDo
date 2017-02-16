@@ -67,14 +67,13 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="5vQ-Wb-6lU"/>
                         <constraint firstAttribute="height" constant="224" id="fCp-8O-Ye9"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="pOu-BN-v9o" firstAttribute="centerY" secondItem="1ZA-QT-LR0" secondAttribute="centerY" constant="-90" id="Y9P-ON-MeY"/>
                 <constraint firstItem="pOu-BN-v9o" firstAttribute="centerX" secondItem="1ZA-QT-LR0" secondAttribute="centerX" id="eCC-nw-Zmo"/>
