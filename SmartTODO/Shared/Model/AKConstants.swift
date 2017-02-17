@@ -91,7 +91,7 @@ struct GlobalConstants {
     static let AKTabBarTintSelected = Func.AKHexColor(0x0088CC)
     static let AKDefaultTextfieldBorderBg = Func.AKHexColor(0x999999)
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = Func.AKHexColor(0x458588)
+    static let AKDefaultViewBorderBg = Func.AKHexColor(0x999999)
     static let AKDefaultFloatingViewBorderBg = UIColor.black
     static let AKDisabledButtonBg = Func.AKHexColor(0x999999)
     static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
@@ -111,7 +111,7 @@ struct GlobalConstants {
     static let AKMinProjectNameLength = 3
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
-    static let AKAcceptingTasksDefaultTime = 59
+    static let AKAcceptingTasksDefaultTime = 2359
     // Segues
     static let AKViewProjectSegue = "ViewProjectSegue"
 }
