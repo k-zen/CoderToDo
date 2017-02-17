@@ -152,13 +152,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Add BlurView.
         if self.shouldAddBlurView {
-            // Insert BlurView.
-            let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            blurView.translatesAutoresizingMaskIntoConstraints = true
-            blurView.frame = self.view.bounds
-            
-            self.view.insertSubview(blurView, at: 0)
+            Func.AKAddBlurView(view: self.view, effect: UIBlurEffectStyle.dark)
         }
     }
     

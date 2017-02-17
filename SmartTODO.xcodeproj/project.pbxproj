@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4923A6481E577DEF00E5B716 /* AKViewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923A6471E577DEF00E5B716 /* AKViewTaskViewController.swift */; };
+		4923A64A1E57838200E5B716 /* AKAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4923A6491E57838200E5B716 /* AKAddView.xib */; };
+		4923A64C1E5783AF00E5B716 /* AKAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923A64B1E5783AF00E5B716 /* AKAddViewController.swift */; };
+		4923A64E1E5785B300E5B716 /* 0001-128px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A64D1E5785B300E5B716 /* 0001-128px.png */; };
+		4923A6531E5787B400E5B716 /* 0001-032px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A64F1E5787B400E5B716 /* 0001-032px.png */; };
+		4923A6541E5787B400E5B716 /* 0001-048px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A6501E5787B400E5B716 /* 0001-048px.png */; };
+		4923A6551E5787B400E5B716 /* 0001-064px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A6511E5787B400E5B716 /* 0001-064px.png */; };
+		4923A6561E5787B400E5B716 /* 0001-096px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A6521E5787B400E5B716 /* 0001-096px.png */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
 		49A7A9CE1E53C7450054033D /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7A9A91E53C7450054033D /* AKAppDelegate.swift */; };
@@ -49,6 +56,13 @@
 
 /* Begin PBXFileReference section */
 		4923A6471E577DEF00E5B716 /* AKViewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKViewTaskViewController.swift; sourceTree = "<group>"; };
+		4923A6491E57838200E5B716 /* AKAddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddView.xib; sourceTree = "<group>"; };
+		4923A64B1E5783AF00E5B716 /* AKAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddViewController.swift; sourceTree = "<group>"; };
+		4923A64D1E5785B300E5B716 /* 0001-128px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-128px.png"; sourceTree = "<group>"; };
+		4923A64F1E5787B400E5B716 /* 0001-032px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-032px.png"; sourceTree = "<group>"; };
+		4923A6501E5787B400E5B716 /* 0001-048px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-048px.png"; sourceTree = "<group>"; };
+		4923A6511E5787B400E5B716 /* 0001-064px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-064px.png"; sourceTree = "<group>"; };
+		4923A6521E5787B400E5B716 /* 0001-096px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-096px.png"; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* SmartTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +181,7 @@
 		49A7A9AD1E53C7450054033D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4923A64B1E5783AF00E5B716 /* AKAddViewController.swift */,
 				49CB40821E54BCEE0031D9D0 /* AKIntroductoryViewController.swift */,
 				49A7A9AE1E53C7450054033D /* AKListProjectsViewController.swift */,
 				49A7A9AF1E53C7450054033D /* AKNewProjectViewController.swift */,
@@ -181,6 +196,7 @@
 		49A7A9B11E53C7450054033D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4923A6491E57838200E5B716 /* AKAddView.xib */,
 				49FC71F61E56174700EDCABC /* AKDaysTableViewCell.xib */,
 				49CB40801E54BC6D0031D9D0 /* AKIntroductoryView.xib */,
 				49A7A9B21E53C7450054033D /* AKNewProjectView.xib */,
@@ -206,6 +222,11 @@
 		49A7A9B71E53C7450054033D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4923A64F1E5787B400E5B716 /* 0001-032px.png */,
+				4923A6501E5787B400E5B716 /* 0001-048px.png */,
+				4923A6511E5787B400E5B716 /* 0001-064px.png */,
+				4923A6521E5787B400E5B716 /* 0001-096px.png */,
+				4923A64D1E5785B300E5B716 /* 0001-128px.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -351,13 +372,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4923A6551E5787B400E5B716 /* 0001-064px.png in Resources */,
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
 				49A7A9D61E53C7450054033D /* AKUsernameInputView.xib in Resources */,
+				4923A64E1E5785B300E5B716 /* 0001-128px.png in Resources */,
+				4923A6541E5787B400E5B716 /* 0001-048px.png in Resources */,
 				49CB40851E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib in Resources */,
+				4923A6561E5787B400E5B716 /* 0001-096px.png in Resources */,
+				4923A6531E5787B400E5B716 /* 0001-032px.png in Resources */,
 				49A7A9D51E53C7450054033D /* AKProjectsTableViewCell.xib in Resources */,
 				49FC71F51E5612B800EDCABC /* AKTasksTableViewCell.xib in Resources */,
 				49A7A9D41E53C7450054033D /* AKNewProjectView.xib in Resources */,
 				49A7A9D01E53C7450054033D /* AKMain.storyboard in Resources */,
+				4923A64A1E57838200E5B716 /* AKAddView.xib in Resources */,
 				49A7A9D81E53C7450054033D /* AKNewProjectViewController.plist in Resources */,
 				49A7A9CF1E53C7450054033D /* AKLaunchScreen.storyboard in Resources */,
 				49FC71F71E56174700EDCABC /* AKDaysTableViewCell.xib in Resources */,
@@ -439,6 +466,7 @@
 				49A7A9D11E53C7450054033D /* AKListProjectsViewController.swift in Sources */,
 				49FC71F31E56123D00EDCABC /* AKTasksTableViewCell.swift in Sources */,
 				49A7A9DA1E53C7450054033D /* AKCustomView.swift in Sources */,
+				4923A64C1E5783AF00E5B716 /* AKAddViewController.swift in Sources */,
 				49A7A9E21E53C7450054033D /* AKUsername.swift in Sources */,
 				49A7A9DD1E53C7450054033D /* AKDataController.swift in Sources */,
 				49FC71F91E56176700EDCABC /* AKDaysTableViewCell.swift in Sources */,

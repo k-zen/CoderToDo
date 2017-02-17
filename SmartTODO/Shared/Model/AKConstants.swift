@@ -97,13 +97,16 @@ struct GlobalConstants {
     static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
     static let AKTableHeaderCellBg = Func.AKHexColor(0x181818)
     static let AKTableHeaderLeftBorderBg = Func.AKHexColor(0xd79921)
-    static let AKTableCellBg = Func.AKHexColor(0x222222)
+    static let AKTableCellBg = Func.AKHexColor(0x333333)
     static let AKTableCellLeftBorderBg = Func.AKHexColor(0x0088CC)
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
+    static let AKViewCornerRadius: CGFloat = 8.0
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 1.4
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.coverVertical
+    static let AKBadgeColorBg = Func.AKHexColor(0x458588)
+    static let AKBadgeColorFg = Func.AKHexColor(0xCCCCCC)
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
@@ -147,9 +150,9 @@ enum CustomBorderDecorationPosition: Int {
 }
 
 enum ProjectStatus: String {
-    case OPEN = "Open: You can mark tasks with a status."
-    case ACEPTING_TASKS = "Accepting tasks for next day."
-    case CLOSED = "Closed for the day."
+    case OPEN = "Open"
+    case ACEPTING_TASKS = "Accepting Tasks"
+    case CLOSED = "Closed"
 }
 
 enum ProjectSorting: String {
@@ -190,6 +193,20 @@ class UtilityFunctions
         instance.showDebugInformation = showDebugInformation
         
         return instance
+    }
+    
+    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false)
+    {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effect))
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.translatesAutoresizingMaskIntoConstraints = true
+        blurView.frame = view.bounds
+        
+        if addClearColorBgToView {
+            view.backgroundColor = UIColor.clear
+        }
+        
+        view.insertSubview(blurView, at: 0)
     }
     
     ///

@@ -88,7 +88,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lcp-ln-DzJ">
                             <color key="tintColor" red="0.0" green="0.53333333329999999" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="addTask:" destination="Y2b-YV-saU" id="t2O-eH-UMy"/>
+                                <action selector="add:" destination="Y2b-YV-saU" id="SmK-bb-wl7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -4,8 +4,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 40
-        static let AKRowHeight: CGFloat = 86
+        static let AKHeaderHeight: CGFloat = 34
+        static let AKRowHeight: CGFloat = 52
     }
     
     var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
@@ -102,23 +102,16 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(project: project))
         // Add Tomorrow Task
         if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS {
-            cell.addTomorrowTask.isEnabled = true
-            cell.addTomorrowTask.backgroundColor = GlobalConstants.AKEnabledButtonBg
+            cell.addTomorrowTask.isHidden = false
         }
         else {
-            cell.addTomorrowTask.isEnabled = false
-            cell.addTomorrowTask.backgroundColor = GlobalConstants.AKDisabledButtonBg
+            cell.addTomorrowTask.isHidden = true
         }
         // Project State
         cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        // cell.osrValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        // cell.osrValue.layer.masksToBounds = true
-        // cell.stateContainer.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        // cell.stateContainer.layer.masksToBounds = true
-        // cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         
         return cell
     }
@@ -129,8 +122,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
-        let badgeSizeWidth = CGFloat(40.0)
-        let badgeSizeHeight = CGFloat(31.0)
+        let badgeSizeWidth = CGFloat(110.0)
+        let badgeSizeHeight = CGFloat(21.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -141,7 +134,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 20.0)
+        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = project.name ?? "N/A"
         title.textAlignment = .left
@@ -149,37 +142,37 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // title.layer.borderColor = UIColor.white.cgColor
         // title.layer.borderWidth = 1.0
         
-        let runningDaysBadgeContainer = UIView(frame: CGRect(
+        let pendingTasksBadgeContainer = UIView(frame: CGRect(
             x: tableWidth - padding - badgeSizeWidth,
             y: 0,
             width: badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         // ### DEBUG
-        // runningDaysBadgeContainer.layer.borderColor = UIColor.white.cgColor
-        // runningDaysBadgeContainer.layer.borderWidth = 1.0
+        // pendingTasksBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // pendingTasksBadgeContainer.layer.borderWidth = 1.0
         
-        let runningDaysBadge = UILabel(frame: CGRect(
-            x: runningDaysBadgeContainer.frame.width - badgeSizeWidth,
+        let pendingTasksBadge = UILabel(frame: CGRect(
+            x: pendingTasksBadgeContainer.frame.width - badgeSizeWidth,
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)
         )
-        runningDaysBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
-        runningDaysBadge.textColor = GlobalConstants.AKDefaultFg
-        runningDaysBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
-        runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(project: project))
-        runningDaysBadge.textAlignment = .center
-        runningDaysBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        runningDaysBadge.layer.masksToBounds = true
+        pendingTasksBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
+        pendingTasksBadge.textColor = GlobalConstants.AKBadgeColorFg
+        pendingTasksBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        pendingTasksBadge.text = String(format: "Pending Tasks: %i", DataInterface.countProjectPendingTasks(project: project))
+        pendingTasksBadge.textAlignment = .center
+        pendingTasksBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        pendingTasksBadge.layer.masksToBounds = true
         // ### DEBUG
-        // runningDaysBadge.layer.borderColor = UIColor.white.cgColor
-        // runningDaysBadge.layer.borderWidth = 1.0
+        // pendingTasksBadge.layer.borderColor = UIColor.white.cgColor
+        // pendingTasksBadge.layer.borderWidth = 1.0
         
-        runningDaysBadgeContainer.addSubview(runningDaysBadge)
+        pendingTasksBadgeContainer.addSubview(pendingTasksBadge)
         
         headerCell.addSubview(title)
-        headerCell.addSubview(runningDaysBadgeContainer)
+        headerCell.addSubview(pendingTasksBadgeContainer)
         
         return headerCell
     }

@@ -4,7 +4,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 40
+        static let AKHeaderHeight: CGFloat = 34
         static let AKEmptyRowHeight: CGFloat = 40
     }
     
@@ -17,9 +17,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBOutlet weak var daysTable: UITableView!
     
     // MARK: Actions
-    @IBAction func addTask(_ sender: Any)
+    @IBAction func add(_ sender: Any)
     {
-        NSLog("=> INFO: NEW TASK BUTTON PRESSED!")
+        self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
+                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
+        )
     }
     
     // MARK: AKCustomViewController Overriding
@@ -82,7 +85,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
         let badgeSizeWidth = CGFloat(60.0)
-        let badgeSizeHeight = CGFloat(31.0)
+        let badgeSizeHeight = CGFloat(21.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -93,7 +96,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 20.0)
+        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = DataInterface.getDayTitle(day: day)
         title.textAlignment = .left
@@ -118,8 +121,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             height: badgeSizeHeight)
         )
         srBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
-        srBadge.textColor = GlobalConstants.AKDefaultFg
-        srBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
+        srBadge.textColor = GlobalConstants.AKBadgeColorFg
+        srBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
         srBadge.text = String(format: "SR %.2f%%", day.sr)
         srBadge.textAlignment = .center
         srBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
