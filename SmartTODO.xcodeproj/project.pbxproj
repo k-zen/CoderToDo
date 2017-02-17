@@ -17,6 +17,24 @@
 		4923A6561E5787B400E5B716 /* 0001-096px.png in Resources */ = {isa = PBXBuildFile; fileRef = 4923A6521E5787B400E5B716 /* 0001-096px.png */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
+		49A2E7551E57C12B00B2D436 /* AppIcon-20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7511E57C12B00B2D436 /* AppIcon-20@1x.png */; };
+		49A2E7561E57C12B00B2D436 /* AppIcon-20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7521E57C12B00B2D436 /* AppIcon-20@2x.png */; };
+		49A2E7571E57C12B00B2D436 /* AppIcon-20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7531E57C12B00B2D436 /* AppIcon-20@3x.png */; };
+		49A2E7581E57C12B00B2D436 /* AppIcon-512@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7541E57C12B00B2D436 /* AppIcon-512@1x.png */; };
+		49A2E7671E57C2E700B2D436 /* AppIcon-29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7591E57C2E700B2D436 /* AppIcon-29@1x.png */; };
+		49A2E7681E57C2E700B2D436 /* AppIcon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75A1E57C2E700B2D436 /* AppIcon-29@2x.png */; };
+		49A2E7691E57C2E700B2D436 /* AppIcon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75B1E57C2E700B2D436 /* AppIcon-29@3x.png */; };
+		49A2E76A1E57C2E700B2D436 /* AppIcon-40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75C1E57C2E700B2D436 /* AppIcon-40@1x.png */; };
+		49A2E76B1E57C2E700B2D436 /* AppIcon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75D1E57C2E700B2D436 /* AppIcon-40@2x.png */; };
+		49A2E76C1E57C2E700B2D436 /* AppIcon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75E1E57C2E700B2D436 /* AppIcon-40@3x.png */; };
+		49A2E76D1E57C2E700B2D436 /* AppIcon-60@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E75F1E57C2E700B2D436 /* AppIcon-60@1x.png */; };
+		49A2E76E1E57C2E700B2D436 /* AppIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7601E57C2E700B2D436 /* AppIcon-60@2x.png */; };
+		49A2E76F1E57C2E700B2D436 /* AppIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7611E57C2E700B2D436 /* AppIcon-60@3x.png */; };
+		49A2E7701E57C2E700B2D436 /* AppIcon-76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7621E57C2E700B2D436 /* AppIcon-76@1x.png */; };
+		49A2E7711E57C2E700B2D436 /* AppIcon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7631E57C2E700B2D436 /* AppIcon-76@2x.png */; };
+		49A2E7721E57C2E700B2D436 /* AppIcon-76@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7641E57C2E700B2D436 /* AppIcon-76@3x.png */; };
+		49A2E7731E57C2E700B2D436 /* AppIcon-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7651E57C2E700B2D436 /* AppIcon-83.5@2x.png */; };
+		49A2E7741E57C2E700B2D436 /* AppIcon-1024@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2E7661E57C2E700B2D436 /* AppIcon-1024@1x.png */; };
 		49A7A9CE1E53C7450054033D /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7A9A91E53C7450054033D /* AKAppDelegate.swift */; };
 		49A7A9CF1E53C7450054033D /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A7A9AA1E53C7450054033D /* AKLaunchScreen.storyboard */; };
 		49A7A9D01E53C7450054033D /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A7A9AB1E53C7450054033D /* AKMain.storyboard */; };
@@ -66,6 +84,24 @@
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* SmartTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49A2E7511E57C12B00B2D436 /* AppIcon-20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-20@1x.png"; sourceTree = "<group>"; };
+		49A2E7521E57C12B00B2D436 /* AppIcon-20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-20@2x.png"; sourceTree = "<group>"; };
+		49A2E7531E57C12B00B2D436 /* AppIcon-20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-20@3x.png"; sourceTree = "<group>"; };
+		49A2E7541E57C12B00B2D436 /* AppIcon-512@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-512@1x.png"; sourceTree = "<group>"; };
+		49A2E7591E57C2E700B2D436 /* AppIcon-29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-29@1x.png"; sourceTree = "<group>"; };
+		49A2E75A1E57C2E700B2D436 /* AppIcon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-29@2x.png"; sourceTree = "<group>"; };
+		49A2E75B1E57C2E700B2D436 /* AppIcon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-29@3x.png"; sourceTree = "<group>"; };
+		49A2E75C1E57C2E700B2D436 /* AppIcon-40@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-40@1x.png"; sourceTree = "<group>"; };
+		49A2E75D1E57C2E700B2D436 /* AppIcon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-40@2x.png"; sourceTree = "<group>"; };
+		49A2E75E1E57C2E700B2D436 /* AppIcon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-40@3x.png"; sourceTree = "<group>"; };
+		49A2E75F1E57C2E700B2D436 /* AppIcon-60@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-60@1x.png"; sourceTree = "<group>"; };
+		49A2E7601E57C2E700B2D436 /* AppIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-60@2x.png"; sourceTree = "<group>"; };
+		49A2E7611E57C2E700B2D436 /* AppIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-60@3x.png"; sourceTree = "<group>"; };
+		49A2E7621E57C2E700B2D436 /* AppIcon-76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-76@1x.png"; sourceTree = "<group>"; };
+		49A2E7631E57C2E700B2D436 /* AppIcon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-76@2x.png"; sourceTree = "<group>"; };
+		49A2E7641E57C2E700B2D436 /* AppIcon-76@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-76@3x.png"; sourceTree = "<group>"; };
+		49A2E7651E57C2E700B2D436 /* AppIcon-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-83.5@2x.png"; sourceTree = "<group>"; };
+		49A2E7661E57C2E700B2D436 /* AppIcon-1024@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-1024@1x.png"; sourceTree = "<group>"; };
 		49A7A9A91E53C7450054033D /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
 		49A7A9AA1E53C7450054033D /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
 		49A7A9AB1E53C7450054033D /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
@@ -227,6 +263,24 @@
 				4923A6511E5787B400E5B716 /* 0001-064px.png */,
 				4923A6521E5787B400E5B716 /* 0001-096px.png */,
 				4923A64D1E5785B300E5B716 /* 0001-128px.png */,
+				49A2E7511E57C12B00B2D436 /* AppIcon-20@1x.png */,
+				49A2E7521E57C12B00B2D436 /* AppIcon-20@2x.png */,
+				49A2E7531E57C12B00B2D436 /* AppIcon-20@3x.png */,
+				49A2E7591E57C2E700B2D436 /* AppIcon-29@1x.png */,
+				49A2E75A1E57C2E700B2D436 /* AppIcon-29@2x.png */,
+				49A2E75B1E57C2E700B2D436 /* AppIcon-29@3x.png */,
+				49A2E75C1E57C2E700B2D436 /* AppIcon-40@1x.png */,
+				49A2E75D1E57C2E700B2D436 /* AppIcon-40@2x.png */,
+				49A2E75E1E57C2E700B2D436 /* AppIcon-40@3x.png */,
+				49A2E75F1E57C2E700B2D436 /* AppIcon-60@1x.png */,
+				49A2E7601E57C2E700B2D436 /* AppIcon-60@2x.png */,
+				49A2E7611E57C2E700B2D436 /* AppIcon-60@3x.png */,
+				49A2E7621E57C2E700B2D436 /* AppIcon-76@1x.png */,
+				49A2E7631E57C2E700B2D436 /* AppIcon-76@2x.png */,
+				49A2E7641E57C2E700B2D436 /* AppIcon-76@3x.png */,
+				49A2E7651E57C2E700B2D436 /* AppIcon-83.5@2x.png */,
+				49A2E7541E57C12B00B2D436 /* AppIcon-512@1x.png */,
+				49A2E7661E57C2E700B2D436 /* AppIcon-1024@1x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -372,24 +426,42 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A2E7711E57C2E700B2D436 /* AppIcon-76@2x.png in Resources */,
+				49A2E7551E57C12B00B2D436 /* AppIcon-20@1x.png in Resources */,
 				4923A6551E5787B400E5B716 /* 0001-064px.png in Resources */,
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
+				49A2E7561E57C12B00B2D436 /* AppIcon-20@2x.png in Resources */,
+				49A2E76A1E57C2E700B2D436 /* AppIcon-40@1x.png in Resources */,
 				49A7A9D61E53C7450054033D /* AKUsernameInputView.xib in Resources */,
+				49A2E7721E57C2E700B2D436 /* AppIcon-76@3x.png in Resources */,
+				49A2E76C1E57C2E700B2D436 /* AppIcon-40@3x.png in Resources */,
+				49A2E7581E57C12B00B2D436 /* AppIcon-512@1x.png in Resources */,
 				4923A64E1E5785B300E5B716 /* 0001-128px.png in Resources */,
 				4923A6541E5787B400E5B716 /* 0001-048px.png in Resources */,
 				49CB40851E54EC8F0031D9D0 /* AKSortProjectSelectorView.xib in Resources */,
+				49A2E7741E57C2E700B2D436 /* AppIcon-1024@1x.png in Resources */,
+				49A2E76E1E57C2E700B2D436 /* AppIcon-60@2x.png in Resources */,
+				49A2E76F1E57C2E700B2D436 /* AppIcon-60@3x.png in Resources */,
 				4923A6561E5787B400E5B716 /* 0001-096px.png in Resources */,
 				4923A6531E5787B400E5B716 /* 0001-032px.png in Resources */,
+				49A2E7691E57C2E700B2D436 /* AppIcon-29@3x.png in Resources */,
 				49A7A9D51E53C7450054033D /* AKProjectsTableViewCell.xib in Resources */,
 				49FC71F51E5612B800EDCABC /* AKTasksTableViewCell.xib in Resources */,
 				49A7A9D41E53C7450054033D /* AKNewProjectView.xib in Resources */,
+				49A2E76D1E57C2E700B2D436 /* AppIcon-60@1x.png in Resources */,
+				49A2E7681E57C2E700B2D436 /* AppIcon-29@2x.png in Resources */,
+				49A2E76B1E57C2E700B2D436 /* AppIcon-40@2x.png in Resources */,
 				49A7A9D01E53C7450054033D /* AKMain.storyboard in Resources */,
 				4923A64A1E57838200E5B716 /* AKAddView.xib in Resources */,
+				49A2E7571E57C12B00B2D436 /* AppIcon-20@3x.png in Resources */,
 				49A7A9D81E53C7450054033D /* AKNewProjectViewController.plist in Resources */,
+				49A2E7671E57C2E700B2D436 /* AppIcon-29@1x.png in Resources */,
 				49A7A9CF1E53C7450054033D /* AKLaunchScreen.storyboard in Resources */,
 				49FC71F71E56174700EDCABC /* AKDaysTableViewCell.xib in Resources */,
+				49A2E7701E57C2E700B2D436 /* AppIcon-76@1x.png in Resources */,
 				49A7A9D71E53C7450054033D /* Assets.xcassets in Resources */,
 				49CB40811E54BC6D0031D9D0 /* AKIntroductoryView.xib in Resources */,
+				49A2E7731E57C2E700B2D436 /* AppIcon-83.5@2x.png in Resources */,
 				49FC71FB1E5628B500EDCABC /* AKTasksTableView.xib in Resources */,
 				492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */,
 			);
