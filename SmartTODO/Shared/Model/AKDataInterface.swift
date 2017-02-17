@@ -61,11 +61,11 @@ class AKDataInterface
     
     static func countProjects() -> Int { return DataInterface.getUser()?.project?.allObjects.count ?? 0 }
     
-    static func countProjectPendingTasks(element: Project) -> Int
+    static func countProjectPendingTasks(project: Project) -> Int
     {
         var counter = 0
         
-        if let days = element.days?.allObjects as? [Day] {
+        if let days = project.days?.allObjects as? [Day] {
             for day in days {
                 if let tasks = day.tasks?.allObjects as? [Task] {
                     for task in tasks {
@@ -80,14 +80,14 @@ class AKDataInterface
         return counter
     }
     
-    static func isProjectWithinWorkingDay(element: Project) -> Bool
+    static func isProjectWithinWorkingDay(project: Project) -> Bool
     {
-        return DataInterface.getProjectStatus(element: element) == ProjectStatus.OPEN ? true : false
+        return DataInterface.getProjectStatus(project: project) == ProjectStatus.OPEN ? true : false
     }
     
-    static func getProjectStatus(element: Project) -> ProjectStatus
+    static func getProjectStatus(project: Project) -> ProjectStatus
     {
-        if let startingTime = element.startingTime as? Date, let closingTime = element.closingTime as? Date {
+        if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
             let now = Date()
             
             var gmtCalendar = Calendar.current
@@ -107,7 +107,7 @@ class AKDataInterface
                 
                 return ProjectStatus.ACEPTING_TASKS
             }
-            else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(element.closingTimeTolerance) {
+            else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
                 if GlobalConstants.AKDebug {
                     NSLog("=> INFO: WORKING DAY OPEN.")
                     NSLog("=> INFO: NOW HOUR: %i", nowHour)
@@ -132,9 +132,9 @@ class AKDataInterface
         return ProjectStatus.CLOSED
     }
     
-    static func getProjectRunningDays(element: Project) -> Int
+    static func getProjectRunningDays(project: Project) -> Int
     {
-        if let creationDate = element.creationDate as? Date {
+        if let creationDate = project.creationDate as? Date {
             let now = Date()
             
             var gmtCalendar = Calendar.current

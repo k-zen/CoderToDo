@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4923A6481E577DEF00E5B716 /* AKViewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923A6471E577DEF00E5B716 /* AKViewTaskViewController.swift */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
 		49A7A9CE1E53C7450054033D /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7A9A91E53C7450054033D /* AKAppDelegate.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4923A6471E577DEF00E5B716 /* AKViewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKViewTaskViewController.swift; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* SmartTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				49CB40861E54EDDD0031D9D0 /* AKSortProjectSelectorViewController.swift */,
 				49A7A9B01E53C7450054033D /* AKUsernameInputViewController.swift */,
 				49FC71F01E5604CE00EDCABC /* AKViewProjectViewController.swift */,
+				4923A6471E577DEF00E5B716 /* AKViewTaskViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				49A7A9DC1E53C7450054033D /* AKProjectsTableViewCell.swift in Sources */,
 				49A7A9DB1E53C7450054033D /* AKCustomViewController.swift in Sources */,
 				49A7A9E31E53C7450054033D /* AKWSUtils.swift in Sources */,
+				4923A6481E577DEF00E5B716 /* AKViewTaskViewController.swift in Sources */,
 				49A7A9D31E53C7450054033D /* AKUsernameInputViewController.swift in Sources */,
 				49A7A9D11E53C7450054033D /* AKListProjectsViewController.swift in Sources */,
 				49FC71F31E56123D00EDCABC /* AKTasksTableViewCell.swift in Sources */,

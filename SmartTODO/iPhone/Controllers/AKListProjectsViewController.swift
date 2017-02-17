@@ -92,16 +92,16 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
         // OSR
-        cell.osrValue.text = String(format: "%.2f", element.osr)
+        cell.osrValue.text = String(format: "%.2f", project.osr)
         // Running Days
-        cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(element: element))
+        cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(project: project))
         // Add Tomorrow Task
-        if DataInterface.getProjectStatus(element: element) == ProjectStatus.ACEPTING_TASKS {
+        if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS {
             cell.addTomorrowTask.isEnabled = true
             cell.addTomorrowTask.backgroundColor = GlobalConstants.AKEnabledButtonBg
         }
@@ -110,7 +110,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             cell.addTomorrowTask.backgroundColor = GlobalConstants.AKDisabledButtonBg
         }
         // Project State
-        cell.statusValue.text = DataInterface.getProjectStatus(element: element).rawValue
+        cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -125,7 +125,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[section]
+        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[section]
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
@@ -143,7 +143,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         )
         title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 20.0)
         title.textColor = GlobalConstants.AKDefaultFg
-        title.text = element.name ?? "N/A"
+        title.text = project.name ?? "N/A"
         title.textAlignment = .left
         // ### DEBUG
         // title.layer.borderColor = UIColor.white.cgColor
@@ -168,7 +168,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         runningDaysBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
         runningDaysBadge.textColor = GlobalConstants.AKDefaultFg
         runningDaysBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
-        runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(element: element))
+        runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(project: project))
         runningDaysBadge.textAlignment = .center
         runningDaysBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         runningDaysBadge.layer.masksToBounds = true
@@ -202,9 +202,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).row]
+            let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).row]
             
-            DataInterface.getUser()?.removeFromProject(element)
+            DataInterface.getUser()?.removeFromProject(project)
             self.projectsTable.reloadData()
         }
     }
@@ -219,8 +219,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let element = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
-        self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: element)
+        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+        self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     
     // MARK: Miscellaneous

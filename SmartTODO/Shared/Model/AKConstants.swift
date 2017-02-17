@@ -114,6 +114,7 @@ struct GlobalConstants {
     static let AKAcceptingTasksDefaultTime = 2359
     // Segues
     static let AKViewProjectSegue = "ViewProjectSegue"
+    static let AKViewTaskSegue = "ViewTaskSegue"
 }
 
 // MARK: Global Enumerations

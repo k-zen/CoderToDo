@@ -100,7 +100,8 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        NSLog("=> INFO: SELECTED ROW!")
+        let task = DataInterface.getTasks(day: self.day)[(indexPath as NSIndexPath).row]
+        controller?.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
     }
     
     // MARK: Miscellaneous

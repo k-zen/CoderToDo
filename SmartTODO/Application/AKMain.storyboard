@@ -94,11 +94,33 @@
                     </navigationItem>
                     <connections>
                         <outlet property="daysTable" destination="8Ob-MD-Lba" id="6kR-Te-hW8"/>
+                        <segue destination="Wgu-dV-xNF" kind="show" identifier="ViewTaskSegue" id="7kt-Mo-nOB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ca-hT-Cz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1846" y="136"/>
+        </scene>
+        <!--View Task-->
+        <scene sceneID="Vpq-j2-jhE">
+            <objects>
+                <viewController title="View Task" id="Wgu-dV-xNF" customClass="AKViewTaskViewController" customModule="SmartTODO" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dw4-aV-vep"/>
+                        <viewControllerLayoutGuide type="bottom" id="MHa-Ts-qCv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fYK-zf-GVk">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="View Task" id="BlV-PQ-9wz">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="N1F-Il-nt1"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IDC-jP-uic" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2644" y="136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bNp-Eu-dK4">
