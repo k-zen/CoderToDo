@@ -14,12 +14,12 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="40" id="yNf-ef-y1T" userLabel="Days_Table_View_Cell" customClass="AKDaysTableViewCell" customModule="SmartTODO" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yNf-ef-y1T" id="u1C-c1-V70" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yNf-ef-y1T" id="u1C-c1-V70" userLabel="Main_Container">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no tasks set up for this day." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="023-90-pND" userLabel="Title">
-                        <rect key="frame" x="8" y="0.0" width="304" height="39"/>
+                        <rect key="frame" x="20" y="0.0" width="280" height="40"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -27,14 +27,15 @@
                 </subviews>
                 <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="023-90-pND" secondAttribute="trailing" constant="8" id="Pze-wa-iRC"/>
-                    <constraint firstItem="023-90-pND" firstAttribute="top" secondItem="u1C-c1-V70" secondAttribute="top" id="b3E-re-Ro5"/>
-                    <constraint firstItem="023-90-pND" firstAttribute="leading" secondItem="u1C-c1-V70" secondAttribute="leading" constant="8" id="fAH-79-JBd"/>
-                    <constraint firstAttribute="bottom" secondItem="023-90-pND" secondAttribute="bottom" id="lRy-xR-Mzr"/>
+                    <constraint firstAttribute="bottom" secondItem="023-90-pND" secondAttribute="bottom" id="J5Q-Xa-hJq"/>
+                    <constraint firstItem="023-90-pND" firstAttribute="top" secondItem="u1C-c1-V70" secondAttribute="top" id="OXu-9Z-FJL"/>
+                    <constraint firstAttribute="trailing" secondItem="023-90-pND" secondAttribute="trailing" constant="20" id="fCI-4a-lY3"/>
+                    <constraint firstItem="023-90-pND" firstAttribute="leading" secondItem="u1C-c1-V70" secondAttribute="leading" constant="20" id="v7U-45-xkn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="mainContainer" destination="u1C-c1-V70" id="mNH-gV-Nqx"/>
+                <outlet property="title" destination="023-90-pND" id="27T-qV-XEF"/>
             </connections>
             <point key="canvasLocation" x="479" y="288"/>
         </tableViewCell>

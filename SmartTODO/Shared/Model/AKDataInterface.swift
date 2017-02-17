@@ -97,7 +97,7 @@ class AKDataInterface
             let startingTimeHour = 100 * (gmtCalendar.dateComponents([.hour], from: startingTime).hour ?? 0) + (gmtCalendar.dateComponents([.minute], from: startingTime).minute ?? 0)
             let closingTimeHour = 100 * (gmtCalendar.dateComponents([.hour], from: closingTime).hour ?? 0) + (gmtCalendar.dateComponents([.minute], from: closingTime).minute ?? 0)
             
-            if nowHour >= closingTimeHour && nowHour <= closingTimeHour + GlobalConstants.AKAcceptingTasksDefaultTime {
+            if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
                 if GlobalConstants.AKDebug {
                     NSLog("=> INFO: WORKING DAY FINISHED.")
                     NSLog("=> INFO: NOW HOUR: %i", nowHour)
@@ -150,6 +150,53 @@ class AKDataInterface
         }
         
         return 0
+    }
+    
+    static func addToday(project: Project)
+    {
+        if let mr = Func.AKObtainMasterReference() {
+            let now = Date()
+            let nowDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+            let d1 = nowDateComponents.day ?? 0
+            let m1 = nowDateComponents.month ?? 0
+            let y1 = nowDateComponents.year ?? 0
+            
+            // Check if the project already contains today.
+            var alreadyContainsDate = false
+            if let days = project.days?.allObjects as? [Day] {
+                for day in days {
+                    if let date = day.date as? Date {
+                        let dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
+                        let d2 = dateComponents.day ?? 0
+                        let m2 = dateComponents.month ?? 0
+                        let y2 = dateComponents.year ?? 0
+                        
+                        if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+                            alreadyContainsDate = true
+                            break
+                        }
+                    }
+                }
+            }
+            
+            if !alreadyContainsDate {
+                let day = Day(context: mr.getMOC())
+                day.date = now as NSDate
+                
+                // ### For debug only!
+                // for k in 1...10 {
+                //     let task = Task(context: mr.getMOC())
+                //     task.name = String(format: "Testing tasks #%i.", k)
+                //     task.creationDate = now as NSDate
+                //
+                //     day.addToTasks(task)
+                // }
+                
+                project.addToDays(day)
+                
+                NSLog("=> INFO: ADDING TODAY!")
+            }
+        }
     }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //

@@ -11,18 +11,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="40" id="Hco-tp-AE1" userLabel="Tasks_Table_View_Cell" customClass="AKTasksTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="Hco-tp-AE1" userLabel="Tasks_Table_View_Cell" customClass="AKTasksTableViewCell" customModule="SmartTODO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hco-tp-AE1" id="YJo-LI-y7A" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hco-tp-AE1" id="YJo-LI-y7A" userLabel="Main_Container">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT1-Ym-jX5" userLabel="Info_Container">
-                        <rect key="frame" x="0.0" y="0.0" width="196" height="40"/>
+                        <rect key="frame" x="0.0" y="2" width="196" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
-                                <rect key="frame" x="4" y="0.0" width="192" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="196" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -31,12 +31,12 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="TpA-BJ-sXN" secondAttribute="bottom" id="6gg-Lw-Rwj"/>
                             <constraint firstAttribute="trailing" secondItem="TpA-BJ-sXN" secondAttribute="trailing" id="WSM-qt-72Y"/>
-                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" constant="4" id="WrL-s2-QW0"/>
+                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" id="WrL-s2-QW0"/>
                             <constraint firstItem="TpA-BJ-sXN" firstAttribute="top" secondItem="pT1-Ym-jX5" secondAttribute="top" id="wwB-YJ-oLv"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGm-s5-C8L" userLabel="State_Container">
-                        <rect key="frame" x="196" y="0.0" width="124" height="40"/>
+                        <rect key="frame" x="196" y="2" width="124" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PENDING" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVH-t7-7XJ" userLabel="State_Value">
                                 <rect key="frame" x="0.0" y="0.0" width="124" height="20"/>
@@ -56,29 +56,29 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="width" constant="124" id="NhO-B1-mnc"/>
-                            <constraint firstAttribute="height" constant="40" id="Vom-vo-8zc"/>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" id="OSS-ce-iPR"/>
+                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" constant="2" id="OSS-ce-iPR"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="trailing" id="PxY-Km-l2i"/>
-                    <constraint firstItem="aGm-s5-C8L" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" id="QfH-mK-qbA"/>
+                    <constraint firstItem="aGm-s5-C8L" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" constant="2" id="QfH-mK-qbA"/>
                     <constraint firstItem="pT1-Ym-jX5" firstAttribute="leading" secondItem="YJo-LI-y7A" secondAttribute="leading" id="aqP-ks-jGK"/>
-                    <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" id="cD4-ue-f1I"/>
-                    <constraint firstItem="pT1-Ym-jX5" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" id="d1t-lB-SUp"/>
+                    <constraint firstItem="pT1-Ym-jX5" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" constant="2" id="d1t-lB-SUp"/>
                     <constraint firstAttribute="trailing" secondItem="aGm-s5-C8L" secondAttribute="trailing" id="f7Q-QG-6ZE"/>
+                    <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" constant="2" id="fcr-Qp-rKr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="infoContainer" destination="pT1-Ym-jX5" id="97J-cW-oK4"/>
+                <outlet property="leadingPadding" destination="aqP-ks-jGK" id="PV3-lp-QAJ"/>
                 <outlet property="mainContainer" destination="YJo-LI-y7A" id="e2U-Ug-h44"/>
                 <outlet property="stateContainer" destination="aGm-s5-C8L" id="BIZ-it-3Sv"/>
-                <outlet property="statusValue" destination="tVH-t7-7XJ" id="rM1-jw-PjZ"/>
                 <outlet property="taskCompletionPercentageValue" destination="UjZ-au-JKT" id="Ndc-6X-Mzh"/>
                 <outlet property="taskNameValue" destination="TpA-BJ-sXN" id="Z4n-yg-3rI"/>
                 <outlet property="taskStateValue" destination="tVH-t7-7XJ" id="hov-7h-JME"/>
+                <outlet property="trailingPadding" destination="f7Q-QG-6ZE" id="UTD-P6-1fg"/>
             </connections>
             <point key="canvasLocation" x="479" y="288"/>
         </tableViewCell>

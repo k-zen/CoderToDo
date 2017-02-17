@@ -4,6 +4,7 @@ class AKDaysTableViewCell: UITableViewCell
 {
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
+    @IBOutlet weak var title: UILabel!
     
     // MARK: UITableViewCell Overriding
     override func awakeFromNib()

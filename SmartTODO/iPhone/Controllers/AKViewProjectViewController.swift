@@ -5,9 +5,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: Constants
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 40
+        static let AKEmptyRowHeight: CGFloat = 40
     }
     
     // MARK: Properties
+    let customCell = AKTasksTableView()
+    var customCellView: UIView!
     var project: Project!
     
     // MARK: Outlets
@@ -34,39 +37,52 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        var element: Day!
-        if (indexPath as NSIndexPath).section > 0 {
-            element = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
+        let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
+        if DataInterface.countTasks(day: day) > 0 {
+            // Calculate given the number of tasks. Each task has a cell of ~44 points height.
+            let cellHeight = 40 + (CGFloat(DataInterface.countTasks(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight)
+            
+            let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            cell.title.removeFromSuperview()
+            
+            customCellView = customCell.customView
+            customCell.controller = self
+            customCell.day = day
+            customCellView.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: tableView.bounds.width,
+                height: cellHeight
+            )
+            customCellView.translatesAutoresizingMaskIntoConstraints = true
+            customCellView.clipsToBounds = true
+            cell.mainContainer.addSubview(customCellView)
+            
+            // Custom L&F.
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            
+            return cell
         }
-        
-        let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
-        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-        
-        // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        
-        return cell
+        else {
+            let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            
+            // Custom L&F.
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        var element: Day!
-        if section <= 0 {
-            if let mr = Func.AKObtainMasterReference() {
-                let now = NSDate()
-                
-                element = Day(context: mr.getMOC())
-                element.date = now
-            }
-            
-        }
-        else {
-            element = DataInterface.getDays(project: self.project)[section]
-        }
+        let day = DataInterface.getDays(project: self.project)[section]
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
-        let badgeSize = CGFloat(31.0)
+        let badgeSizeWidth = CGFloat(60.0)
+        let badgeSizeHeight = CGFloat(31.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -74,43 +90,43 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let title = UILabel(frame: CGRect(
             x: padding,
             y: 0,
-            width: tableWidth - (padding * 3) - badgeSize,
+            width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 20.0)
         title.textColor = GlobalConstants.AKDefaultFg
-        title.text = DataInterface.getDayTitle(day: element)
+        title.text = DataInterface.getDayTitle(day: day)
         title.textAlignment = .left
         // ### DEBUG
         // title.layer.borderColor = UIColor.white.cgColor
         // title.layer.borderWidth = 1.0
         
         let srBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - (badgeSize * 2.0),
+            x: tableWidth - padding - (badgeSizeWidth),
             y: 0,
-            width: badgeSize * 2.0,
+            width: badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         // ### DEBUG
-        // runningDaysBadgeContainer.layer.borderColor = UIColor.white.cgColor
-        // runningDaysBadgeContainer.layer.borderWidth = 1.0
+        // srBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // srBadgeContainer.layer.borderWidth = 1.0
         
         let srBadge = UILabel(frame: CGRect(
-            x: srBadgeContainer.frame.width - (badgeSize * 2.0),
-            y: (LocalConstants.AKHeaderHeight - badgeSize) / 2.0,
-            width: badgeSize * 2.0,
-            height: badgeSize)
+            x: srBadgeContainer.frame.width - (badgeSizeWidth),
+            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
+            width: badgeSizeWidth,
+            height: badgeSizeHeight)
         )
         srBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
         srBadge.textColor = GlobalConstants.AKDefaultFg
         srBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
-        srBadge.text = String(format: "SR %.2f%%", element.sr)
+        srBadge.text = String(format: "SR %.2f%%", day.sr)
         srBadge.textAlignment = .center
         srBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         srBadge.layer.masksToBounds = true
         // ### DEBUG
-        // runningDaysBadge.layer.borderColor = UIColor.white.cgColor
-        // runningDaysBadge.layer.borderWidth = 1.0
+        // srBadge.layer.borderColor = UIColor.white.cgColor
+        // srBadge.layer.borderWidth = 1.0
         
         srBadgeContainer.addSubview(srBadge)
         
@@ -120,7 +136,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int { return 1 + DataInterface.countDays(project: self.project) }
+    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.countDays(project: self.project) }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -129,11 +145,13 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: UITableViewDelegate Implementation
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        if (indexPath as NSIndexPath).section <= 0 {
-            return 40
+        let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
+        if DataInterface.countTasks(day: day) <= 0 {
+            return LocalConstants.AKEmptyRowHeight
         }
         else {
-            return 140
+            // Calculate given the number of tasks. Each task has a cell of ~44 points height.
+            return 40 + (CGFloat(DataInterface.countTasks(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight)
         }
     }
     
@@ -141,17 +159,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        // let element = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
-        // self.performSegue(withIdentifier: "ViewTaskSegue", sender: element)
-    }
-    
     // MARK: Miscellaneous
     func customSetup()
     {
         super.inhibitTapGesture = true
         super.setup()
+        
+        // Allways add today to the table.
+        DataInterface.addToday(project: self.project)
         
         // Custom Components
         self.daysTable.register(UINib(nibName: "AKDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "DaysTableCell")
