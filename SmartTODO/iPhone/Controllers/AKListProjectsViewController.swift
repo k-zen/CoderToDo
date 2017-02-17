@@ -129,7 +129,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
-        let badgeSize = CGFloat(31.0)
+        let badgeSizeWidth = CGFloat(40.0)
+        let badgeSizeHeight = CGFloat(31.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -137,7 +138,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let title = UILabel(frame: CGRect(
             x: padding,
             y: 0,
-            width: tableWidth - (padding * 3) - badgeSize,
+            width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 20.0)
@@ -149,9 +150,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // title.layer.borderWidth = 1.0
         
         let runningDaysBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - badgeSize,
+            x: tableWidth - padding - badgeSizeWidth,
             y: 0,
-            width: badgeSize,
+            width: badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         // ### DEBUG
@@ -159,17 +160,17 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // runningDaysBadgeContainer.layer.borderWidth = 1.0
         
         let runningDaysBadge = UILabel(frame: CGRect(
-            x: runningDaysBadgeContainer.frame.width - badgeSize,
-            y: (LocalConstants.AKHeaderHeight - badgeSize) / 2.0,
-            width: badgeSize,
-            height: badgeSize)
+            x: runningDaysBadgeContainer.frame.width - badgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
+            width: badgeSizeWidth,
+            height: badgeSizeHeight)
         )
         runningDaysBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
         runningDaysBadge.textColor = GlobalConstants.AKDefaultFg
         runningDaysBadge.backgroundColor = GlobalConstants.AKEnabledButtonBg
         runningDaysBadge.text = String(format: "%i", DataInterface.countProjectPendingTasks(element: element))
         runningDaysBadge.textAlignment = .center
-        runningDaysBadge.layer.cornerRadius = badgeSize / 2.0
+        runningDaysBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         runningDaysBadge.layer.masksToBounds = true
         // ### DEBUG
         // runningDaysBadge.layer.borderColor = UIColor.white.cgColor
