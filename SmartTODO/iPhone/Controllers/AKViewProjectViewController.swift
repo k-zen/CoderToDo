@@ -14,6 +14,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     var project: Project!
     
     // MARK: Outlets
+    @IBOutlet weak var navController: UINavigationItem!
     @IBOutlet weak var daysTable: UITableView!
     
     // MARK: Actions

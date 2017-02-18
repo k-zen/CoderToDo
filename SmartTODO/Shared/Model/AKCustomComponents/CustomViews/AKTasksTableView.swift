@@ -42,8 +42,6 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         
         let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
         cell.taskNameValue.text = String(format: "• %@", task.name ?? "Some Name...")
-        cell.leadingPadding.constant = 12.0
-        cell.trailingPadding.constant = 12.0
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none

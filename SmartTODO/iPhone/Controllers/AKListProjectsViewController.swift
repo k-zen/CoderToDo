@@ -70,6 +70,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 if let destination = segue.destination as? AKViewProjectViewController {
                     if let project = sender as? Project {
                         destination.project = project
+                        destination.navController.title = project.name ?? "View Project"
                     }
                 }
                 break

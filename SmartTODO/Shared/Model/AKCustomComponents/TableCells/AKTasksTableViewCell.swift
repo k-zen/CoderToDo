@@ -9,8 +9,6 @@ class AKTasksTableViewCell: UITableViewCell
     @IBOutlet weak var taskNameValue: UILabel!
     @IBOutlet weak var taskStateValue: UILabel!
     @IBOutlet weak var taskCompletionPercentageValue: UILabel!
-    @IBOutlet weak var leadingPadding: NSLayoutConstraint!
-    @IBOutlet weak var trailingPadding: NSLayoutConstraint!
     
     // MARK: UITableViewCell Overriding
     override func awakeFromNib()

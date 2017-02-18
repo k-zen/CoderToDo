@@ -94,6 +94,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="daysTable" destination="8Ob-MD-Lba" id="6kR-Te-hW8"/>
+                        <outlet property="navController" destination="2ag-ze-GqY" id="Xkm-Ov-3zU"/>
                         <segue destination="Wgu-dV-xNF" kind="show" identifier="ViewTaskSegue" id="7kt-Mo-nOB"/>
                     </connections>
                 </viewController>

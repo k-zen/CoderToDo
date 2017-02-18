@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no tasks set up for this day." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="023-90-pND" userLabel="Title">
-                        <rect key="frame" x="12" y="0.0" width="308" height="40"/>
+                        <rect key="frame" x="16" y="0.0" width="304" height="40"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                     <constraint firstAttribute="bottom" secondItem="023-90-pND" secondAttribute="bottom" id="J5Q-Xa-hJq"/>
                     <constraint firstItem="023-90-pND" firstAttribute="top" secondItem="u1C-c1-V70" secondAttribute="top" id="OXu-9Z-FJL"/>
                     <constraint firstAttribute="trailing" secondItem="023-90-pND" secondAttribute="trailing" id="fCI-4a-lY3"/>
-                    <constraint firstItem="023-90-pND" firstAttribute="leading" secondItem="u1C-c1-V70" secondAttribute="leading" constant="12" id="v7U-45-xkn"/>
+                    <constraint firstItem="023-90-pND" firstAttribute="leading" secondItem="u1C-c1-V70" secondAttribute="leading" constant="16" id="v7U-45-xkn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

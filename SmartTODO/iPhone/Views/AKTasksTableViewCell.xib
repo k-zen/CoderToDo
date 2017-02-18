@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="2" width="196" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
-                                <rect key="frame" x="0.0" y="0.0" width="196" height="40"/>
+                                <rect key="frame" x="16" y="0.0" width="180" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -31,7 +31,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="TpA-BJ-sXN" secondAttribute="bottom" id="6gg-Lw-Rwj"/>
                             <constraint firstAttribute="trailing" secondItem="TpA-BJ-sXN" secondAttribute="trailing" id="WSM-qt-72Y"/>
-                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" id="WrL-s2-QW0"/>
+                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" constant="16" id="WrL-s2-QW0"/>
                             <constraint firstItem="TpA-BJ-sXN" firstAttribute="top" secondItem="pT1-Ym-jX5" secondAttribute="top" id="wwB-YJ-oLv"/>
                         </constraints>
                     </view>
@@ -72,13 +72,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="infoContainer" destination="pT1-Ym-jX5" id="97J-cW-oK4"/>
-                <outlet property="leadingPadding" destination="aqP-ks-jGK" id="PV3-lp-QAJ"/>
                 <outlet property="mainContainer" destination="YJo-LI-y7A" id="e2U-Ug-h44"/>
                 <outlet property="stateContainer" destination="aGm-s5-C8L" id="BIZ-it-3Sv"/>
                 <outlet property="taskCompletionPercentageValue" destination="UjZ-au-JKT" id="Ndc-6X-Mzh"/>
                 <outlet property="taskNameValue" destination="TpA-BJ-sXN" id="Z4n-yg-3rI"/>
                 <outlet property="taskStateValue" destination="tVH-t7-7XJ" id="hov-7h-JME"/>
-                <outlet property="trailingPadding" destination="f7Q-QG-6ZE" id="UTD-P6-1fg"/>
             </connections>
             <point key="canvasLocation" x="479" y="288"/>
         </tableViewCell>

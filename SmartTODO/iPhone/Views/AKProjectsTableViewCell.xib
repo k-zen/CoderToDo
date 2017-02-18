@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LQ1-JN-uqn" id="fPE-SM-qRh" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptn-2q-xEM" userLabel="Info_Container">
@@ -86,7 +86,6 @@
                             <constraint firstItem="BBI-3e-PvK" firstAttribute="top" secondItem="WIv-Cl-9qK" secondAttribute="bottom" constant="2" id="5qj-lm-WNI"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="8fq-1h-48n"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="EgW-dE-g14"/>
-                            <constraint firstAttribute="height" constant="52" id="G28-qO-e7s"/>
                             <constraint firstAttribute="trailing" secondItem="WIv-Cl-9qK" secondAttribute="trailing" constant="16" id="KhX-ZB-Nds"/>
                             <constraint firstItem="5X0-Z5-c11" firstAttribute="leading" secondItem="J5T-DH-Qqy" secondAttribute="trailing" id="iRA-j9-iQD"/>
                             <constraint firstItem="Bp5-qo-7lw" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="tR7-bz-8sa"/>
