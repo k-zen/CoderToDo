@@ -21,6 +21,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
         // ### Customize the App.
+        UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 18),
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg

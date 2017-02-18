@@ -205,7 +205,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.shouldAddBlurView = true
         super.setup()
         
         // Set Delegator.
@@ -228,7 +227,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.closingTime.tag = LocalEnums.closingTime.rawValue
         
         // Custom L&F.
-        self.controlsContainer.backgroundColor = UIColor.clear
         self.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius

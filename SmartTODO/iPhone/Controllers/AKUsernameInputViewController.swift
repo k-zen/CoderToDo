@@ -83,7 +83,6 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         self.usernameValue.tag = LocalTextField.username.rawValue
         
         // Custom L&F.
-        self.controlsContainer.backgroundColor = UIColor.clear
         self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
