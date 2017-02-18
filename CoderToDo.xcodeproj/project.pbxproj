@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
+		4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */; };
+		4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */; };
+		4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE71E58D2740002C173 /* AKCategoryName.swift */; };
 		49A4A0E31E589E8600CEDA1B /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */; };
 		49A4A0E41E589E8600CEDA1B /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0991E589E8600CEDA1B /* AKLaunchScreen.storyboard */; };
 		49A4A0E51E589E8600CEDA1B /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A09A1E589E8600CEDA1B /* AKMain.storyboard */; };
@@ -76,6 +79,9 @@
 		2C25BC9DB450A698309C1AD7 /* Pods-CoderToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.debug.xcconfig"; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddCategoryView.xib; sourceTree = "<group>"; };
+		4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddCategoryViewController.swift; sourceTree = "<group>"; };
+		4931DAE71E58D2740002C173 /* AKCategoryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryName.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
 		49A4A0991E589E8600CEDA1B /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 		49A4A09C1E589E8600CEDA1B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */,
 				49A4A09D1E589E8600CEDA1B /* AKAddViewController.swift */,
 				49A4A09E1E589E8600CEDA1B /* AKIntroductoryViewController.swift */,
 				49A4A09F1E589E8600CEDA1B /* AKListProjectsViewController.swift */,
@@ -232,6 +239,7 @@
 		49A4A0A51E589E8600CEDA1B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */,
 				49A4A0A61E589E8600CEDA1B /* AKAddView.xib */,
 				49A4A0A71E589E8600CEDA1B /* AKDaysTableViewCell.xib */,
 				49A4A0A81E589E8600CEDA1B /* AKIntroductoryView.xib */,
@@ -304,6 +312,7 @@
 		49A4A0CD1E589E8600CEDA1B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4931DAE71E58D2740002C173 /* AKCategoryName.swift */,
 				49A4A0CE1E589E8600CEDA1B /* AKConstants.swift */,
 				49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */,
 				49A4A0D81E589E8600CEDA1B /* AKDataController.swift */,
@@ -444,6 +453,7 @@
 				49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */,
 				49A4A0FA1E589E8600CEDA1B /* 0001-064px.png in Resources */,
 				49A4A0EE1E589E8600CEDA1B /* AKAddView.xib in Resources */,
+				4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */,
 				49A4A0E41E589E8600CEDA1B /* AKLaunchScreen.storyboard in Resources */,
 				49A4A0F81E589E8600CEDA1B /* 0001-032px.png in Resources */,
 				49A4A0F01E589E8600CEDA1B /* AKIntroductoryView.xib in Resources */,
@@ -524,7 +534,9 @@
 			files = (
 				49A4A0EB1E589E8600CEDA1B /* AKUsernameInputViewController.swift in Sources */,
 				49A4A1171E589E8600CEDA1B /* AKDataController.swift in Sources */,
+				4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */,
 				49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */,
+				4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
 				49A4A1141E589E8600CEDA1B /* AKDaysTableViewCell.swift in Sources */,
 				49A4A0E61E589E8600CEDA1B /* AKAddViewController.swift in Sources */,

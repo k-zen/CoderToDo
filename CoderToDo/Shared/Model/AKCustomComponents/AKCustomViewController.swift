@@ -190,11 +190,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func presentView(controller: AKCustomViewController,
+                     taskBeforePresenting: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void,
                      dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
     {
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
         controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
         controller.modalPresentationStyle = .overFullScreen
+        
+        taskBeforePresenting(self, controller)
         
         self.present(controller, animated: true, completion: nil)
     }

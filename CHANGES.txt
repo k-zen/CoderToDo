@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for adding categories to a project. (2017/02/18)
         * Added support for showing start & close dates for each project listed. (2017/02/18)
         * Renamed the project to CoderToDo. (2017/02/18)
         * Corrected a bug when inserting the next working day. And removed support for adding tasks before the working day beguns. (2017/02/18)

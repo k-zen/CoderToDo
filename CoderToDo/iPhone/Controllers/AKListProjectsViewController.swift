@@ -18,6 +18,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBAction func organizeProjects(_ sender: Any)
     {
         self.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
+                         taskBeforePresenting: { (presenterController, presentedController) -> Void in },
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
                             
@@ -32,6 +33,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBAction func addNewProject(_ sender: Any)
     {
         self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
+                         taskBeforePresenting: { (presenterController, presentedController) -> Void in },
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
                             
@@ -55,6 +57,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Checks
         if DataInterface.getUser()?.username == nil {
             self.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
+                             taskBeforePresenting: { (presenterController, presentedController) -> Void in },
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                 NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
             )

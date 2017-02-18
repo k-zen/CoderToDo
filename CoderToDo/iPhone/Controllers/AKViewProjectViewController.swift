@@ -21,8 +21,17 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBAction func add(_ sender: Any)
     {
         self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
+                         taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                            if let controller1 = presenterController as? AKViewProjectViewController, let controller2 = presentedController as? AKAddViewController {
+                                controller2.project = controller1.project
+                            } },
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
+                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                            
+                            // Always reload the days table!
+                            if let controller1 = presenterController as? AKViewProjectViewController, let _ = presentedController as? AKAddViewController {
+                                controller1.daysTable.reloadData()
+                            } }
         )
     }
     

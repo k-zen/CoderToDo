@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="AKCategoryMO" syncable="YES" codeGenerationType="class">
-        <attribute name="identifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="categories" inverseEntity="Project" syncable="YES"/>
     </entity>
     <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -23,6 +23,7 @@
         <attribute name="notifyClosingTime" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="osr" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startingTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="project" inverseEntity="Category" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="project" inverseEntity="Day" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="project" inverseEntity="User" syncable="YES"/>
         <fetchedProperty name="getDays" optional="YES" syncable="YES">
@@ -52,10 +53,10 @@
         </fetchedProperty>
     </entity>
     <elements>
-        <element name="Category" positionX="-641" positionY="-568" width="128" height="75"/>
+        <element name="Category" positionX="-902" positionY="-847" width="128" height="73"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="131"/>
-        <element name="Project" positionX="-1062" positionY="-729" width="128" height="239"/>
+        <element name="Project" positionX="-1098" positionY="-720" width="128" height="251"/>
         <element name="Task" positionX="-641" positionY="-751" width="128" height="148"/>
-        <element name="User" positionX="-837" positionY="-504" width="128" height="191"/>
+        <element name="User" positionX="-839" positionY="-495" width="128" height="191"/>
     </elements>
 </model>

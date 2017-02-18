@@ -267,4 +267,21 @@ class AKDataInterface
     
     static func countTasks(day: Day) -> Int { return day.tasks?.allObjects.count ?? 0 }
     // ########## TASK'S FUNCTIONS ########## //
+    // ########## CATEGORY'S FUNCTIONS ########## //
+    static func getCategories(project: Project) -> [Category]
+    {
+        if let categories = project.categories?.allObjects as? [Category] {
+            return categories.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+            }
+        }
+        
+        return []
+    }
+    
+    static func countCategories(project: Project) -> Int { return project.categories?.allObjects.count ?? 0 }
+    // ########## CATEGORY'S FUNCTIONS ########## //
 }

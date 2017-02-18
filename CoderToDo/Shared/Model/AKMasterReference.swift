@@ -74,6 +74,11 @@ class AKMasterReference: NSObject
             NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
+            NSLog("=>       CATEGORIES: (%i)", DataInterface.countCategories(project: project))
+            for category in DataInterface.getCategories(project: project) {
+                NSLog("=>           NAME: %@", category.name ?? "N\\A")
+                NSLog("=>           ------")
+            }
             NSLog("=>       DAYS: (%i)", DataInterface.countDays(project: project))
             for day in DataInterface.getDays(project: project) {
                 NSLog("=>           DATE: %@", day.date?.description ?? "N\\A")
