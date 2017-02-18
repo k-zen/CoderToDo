@@ -113,7 +113,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Times
         if let startingTime = project.startingTime as? Date {
             cell.startValue.text = String(
-                format: "From: %.2i:%.2i",
+                format: "From: %.2i:%.2ih",
                 Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0,
                 Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0
             )
@@ -123,7 +123,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         if let closingTime = project.closingTime as? Date {
             cell.closeValue.text = String(
-                format: "To: %.2i:%.2i",
+                format: "To: %.2i:%.2ih",
                 Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0,
                 Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0
             )

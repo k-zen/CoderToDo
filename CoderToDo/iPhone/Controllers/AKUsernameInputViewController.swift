@@ -75,7 +75,6 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.shouldAddBlurView = true
         super.setup()
         
         // Set Delegator.

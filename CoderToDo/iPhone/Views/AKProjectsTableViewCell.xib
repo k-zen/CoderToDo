@@ -42,10 +42,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: 09:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azV-ZA-cfB" userLabel="Start_Value">
-                                <rect key="frame" x="120" y="4" width="80" height="20"/>
+                                <rect key="frame" x="120" y="4" width="90" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="B2M-2o-YE9"/>
-                                    <constraint firstAttribute="width" constant="80" id="LPf-VQ-uXt"/>
+                                    <constraint firstAttribute="width" constant="90" id="LPf-VQ-uXt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,10 +94,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: 17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTG-4c-VAa" userLabel="Close_Value">
-                                <rect key="frame" x="120" y="26" width="80" height="20"/>
+                                <rect key="frame" x="120" y="26" width="90" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="DX8-ea-CZk"/>
-                                    <constraint firstAttribute="width" constant="80" id="Yq0-0o-h89"/>
+                                    <constraint firstAttribute="width" constant="90" id="Yq0-0o-h89"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
