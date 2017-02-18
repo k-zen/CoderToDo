@@ -94,7 +94,7 @@ class AKDataInterface
             let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
             let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
             
-            if (nowHour <= startingTimeHour) || (nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour)) {
+            if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
                 if GlobalConstants.AKDebug {
                     NSLog("=> INFO: WORKING DAY FINISHED.")
                     NSLog("=> INFO: NOW HOUR: %i", nowHour)
@@ -150,12 +150,13 @@ class AKDataInterface
     {
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
-            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
+            let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
+            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
             let d1 = nowDateComponents.day ?? 0
             let m1 = nowDateComponents.month ?? 0
             let y1 = nowDateComponents.year ?? 0
             
-            // Check if the project already contains today.
+            // Check if the project already contains tomorrow.
             var alreadyContainsDate = false
             if let days = project.days?.allObjects as? [Day] {
                 for day in days {
@@ -164,6 +165,10 @@ class AKDataInterface
                         let d2 = dateComponents.day ?? 0
                         let m2 = dateComponents.month ?? 0
                         let y2 = dateComponents.year ?? 0
+                        
+                        if GlobalConstants.AKDebug {
+                            NSLog("=> INFO: NOW (%@), TOMORROW (%@), DATE (%@)", now.description, tomorrow.description, date.description)
+                        }
                         
                         if (d1 == d2) && (m1 == m2) && (y1 == y2) {
                             alreadyContainsDate = true
@@ -175,7 +180,7 @@ class AKDataInterface
             
             if !alreadyContainsDate {
                 // Add the next working day. That means:
-                // 1. If it's a new day, but the working day has not begun yet. i.e. 00:00Hs. and the working day for the project is 09:00Hs.
+                // 1. If it's a new day, but the working day has not begun yet. i.e. 00:00Hs. and the working day for the project is 09:00Hs. (DISCONTINUED)
                 // 2. If it's a new day, but the working day has begun, then add for tomorrow. i.e. 17:01Hs. and the working day lasted until 17:00Hs.
                 if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
                     let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
@@ -184,22 +189,8 @@ class AKDataInterface
                     
                     if nowHour <= startingTimeHour {
                         if GlobalConstants.AKDebug {
-                            NSLog("=> INFO: WORKING DAY NOT BEGUN YET. ADDING TODAY!")
+                            NSLog("=> INFO: WORKING DAY NOT BEGUN YET (CLOSED). DOING NOTHING!")
                         }
-                        
-                        let day = Day(context: mr.getMOC())
-                        day.date = now as NSDate
-                        
-                        // ### For debug only!
-                        // for k in 1...10 {
-                        //     let task = Task(context: mr.getMOC())
-                        //     task.name = String(format: "Testing tasks #%i.", k)
-                        //     task.creationDate = now as NSDate
-                        //
-                        //     day.addToTasks(task)
-                        // }
-                        
-                        project.addToDays(day)
                     }
                     else if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
                         if GlobalConstants.AKDebug {
