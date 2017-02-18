@@ -10,6 +10,8 @@ class AKProjectsTableViewCell: UITableViewCell
     @IBOutlet weak var runningDaysValue: UILabel!
     @IBOutlet weak var addTomorrowTask: UIButton!
     @IBOutlet weak var statusValue: UILabel!
+    @IBOutlet weak var startValue: UILabel!
+    @IBOutlet weak var closeValue: UILabel!
     
     // MARK: Actions
     @IBAction func addTomorrowTask(_ sender: Any)

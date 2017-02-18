@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="54" id="LQ1-JN-uqn" userLabel="Projects_Table_View_Cell" customClass="AKProjectsTableViewCell" customModule="SmartTODO" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="54" id="LQ1-JN-uqn" userLabel="Projects_Table_View_Cell" customClass="AKProjectsTableViewCell" customModule="CoderToDo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LQ1-JN-uqn" id="fPE-SM-qRh" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptn-2q-xEM" userLabel="Info_Container">
@@ -32,19 +32,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X0-Z5-c11" userLabel="OSR_Value">
-                                <rect key="frame" x="80" y="4" width="56" height="20"/>
+                                <rect key="frame" x="80" y="4" width="40" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Xvx-Iy-xMl"/>
-                                    <constraint firstAttribute="width" constant="56" id="ZcB-D3-xkL"/>
+                                    <constraint firstAttribute="width" constant="40" id="ZcB-D3-xkL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 running days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp5-qo-7lw" userLabel="Running_Days_Value">
-                                <rect key="frame" x="16" y="26" width="120" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: 09:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azV-ZA-cfB" userLabel="Start_Value">
+                                <rect key="frame" x="120" y="4" width="80" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="gGG-Fx-8Ay"/>
+                                    <constraint firstAttribute="height" constant="20" id="B2M-2o-YE9"/>
+                                    <constraint firstAttribute="width" constant="80" id="LPf-VQ-uXt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 running days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp5-qo-7lw" userLabel="Running_Days_Value">
+                                <rect key="frame" x="16" y="26" width="104" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="gGG-Fx-8Ay"/>
                                     <constraint firstAttribute="height" constant="20" id="wLP-JX-LbF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
@@ -52,19 +62,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIv-Cl-9qK" userLabel="State_Container">
-                                <rect key="frame" x="194" y="4" width="110" height="20"/>
+                                <rect key="frame" x="224" y="4" width="80" height="20"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2B-kI-QId" userLabel="State_Value">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2B-kI-QId" userLabel="State_Value">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="0MQ-9r-xwE"/>
+                                    <constraint firstAttribute="width" constant="80" id="0MQ-9r-xwE"/>
                                     <constraint firstAttribute="height" constant="20" id="1KY-TQ-12q"/>
+                                    <constraint firstItem="r2B-kI-QId" firstAttribute="leading" secondItem="WIv-Cl-9qK" secondAttribute="leading" id="4Xd-xp-pgD"/>
+                                    <constraint firstAttribute="trailing" secondItem="r2B-kI-QId" secondAttribute="trailing" id="ctX-PY-0Gm"/>
+                                    <constraint firstAttribute="bottom" secondItem="r2B-kI-QId" secondAttribute="bottom" id="ldU-LD-CIC"/>
+                                    <constraint firstItem="r2B-kI-QId" firstAttribute="top" secondItem="WIv-Cl-9qK" secondAttribute="top" id="pW4-Cy-LEd"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-3e-PvK" userLabel="Add_Tomorrow_Task">
@@ -80,13 +93,27 @@
                                     <action selector="addTomorrowTask:" destination="LQ1-JN-uqn" eventType="touchUpInside" id="WGb-AR-HGx"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: 17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTG-4c-VAa" userLabel="Close_Value">
+                                <rect key="frame" x="120" y="26" width="80" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="DX8-ea-CZk"/>
+                                    <constraint firstAttribute="width" constant="80" id="Yq0-0o-h89"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="5X0-Z5-c11" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="4DM-Ih-sec"/>
                             <constraint firstItem="BBI-3e-PvK" firstAttribute="top" secondItem="WIv-Cl-9qK" secondAttribute="bottom" constant="2" id="5qj-lm-WNI"/>
+                            <constraint firstItem="azV-ZA-cfB" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="6fl-xU-eeY"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="8fq-1h-48n"/>
+                            <constraint firstItem="azV-ZA-cfB" firstAttribute="leading" secondItem="5X0-Z5-c11" secondAttribute="trailing" id="BRX-jL-PPY"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="EgW-dE-g14"/>
                             <constraint firstAttribute="trailing" secondItem="WIv-Cl-9qK" secondAttribute="trailing" constant="16" id="KhX-ZB-Nds"/>
+                            <constraint firstItem="gTG-4c-VAa" firstAttribute="top" secondItem="azV-ZA-cfB" secondAttribute="bottom" constant="2" id="WZD-xK-jUY"/>
+                            <constraint firstItem="gTG-4c-VAa" firstAttribute="leading" secondItem="Bp5-qo-7lw" secondAttribute="trailing" id="dDT-qe-Wvx"/>
                             <constraint firstItem="5X0-Z5-c11" firstAttribute="leading" secondItem="J5T-DH-Qqy" secondAttribute="trailing" id="iRA-j9-iQD"/>
                             <constraint firstItem="Bp5-qo-7lw" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="tR7-bz-8sa"/>
                             <constraint firstItem="Bp5-qo-7lw" firstAttribute="top" secondItem="5X0-Z5-c11" secondAttribute="bottom" constant="2" id="uiy-PN-yLk"/>
@@ -105,10 +132,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addTomorrowTask" destination="BBI-3e-PvK" id="fzn-9l-lMK"/>
+                <outlet property="closeValue" destination="gTG-4c-VAa" id="a79-De-Vhs"/>
                 <outlet property="infoContainer" destination="Ptn-2q-xEM" id="dV1-Na-IJK"/>
                 <outlet property="mainContainer" destination="fPE-SM-qRh" id="7PE-cp-Iua"/>
                 <outlet property="osrValue" destination="5X0-Z5-c11" id="P92-wH-SGJ"/>
                 <outlet property="runningDaysValue" destination="Bp5-qo-7lw" id="eEm-0U-6tf"/>
+                <outlet property="startValue" destination="azV-ZA-cfB" id="U5W-vW-5ze"/>
                 <outlet property="stateContainer" destination="WIv-Cl-9qK" id="05h-sI-nAg"/>
                 <outlet property="statusValue" destination="r2B-kI-QId" id="xpf-jO-EB1"/>
             </connections>

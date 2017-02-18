@@ -98,7 +98,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
         // OSR
-        cell.osrValue.text = String(format: "%.2f", project.osr)
+        cell.osrValue.text = String(format: "%.1f", project.osr)
         // Running Days
         cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(project: project))
         // Add Tomorrow Task
@@ -110,6 +110,27 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         // Project State
         cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
+        // Times
+        if let startingTime = project.startingTime as? Date {
+            cell.startValue.text = String(
+                format: "From: %.2i:%.2i",
+                Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0,
+                Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0
+            )
+        }
+        else {
+            cell.startValue.isHidden = true
+        }
+        if let closingTime = project.closingTime as? Date {
+            cell.closeValue.text = String(
+                format: "To: %.2i:%.2i",
+                Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0,
+                Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0
+            )
+        }
+        else {
+            cell.closeValue.isHidden = true
+        }
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
