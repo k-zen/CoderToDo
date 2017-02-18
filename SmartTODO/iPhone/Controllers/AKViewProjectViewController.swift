@@ -170,7 +170,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         super.setup()
         
         // Allways add today to the table.
-        DataInterface.addToday(project: self.project)
+        DataInterface.addNewWorkingDay(project: self.project)
         
         // Custom Components
         self.daysTable.register(UINib(nibName: "AKDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "DaysTableCell")

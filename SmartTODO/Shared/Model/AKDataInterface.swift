@@ -90,14 +90,11 @@ class AKDataInterface
         if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
             let now = Date()
             
-            var gmtCalendar = Calendar.current
-            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
+            let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
+            let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
+            let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
             
-            let nowHour = 100 * (Calendar.current.dateComponents([.hour], from: now).hour ?? 0) + (Calendar.current.dateComponents([.minute], from: now).minute ?? 0)
-            let startingTimeHour = 100 * (gmtCalendar.dateComponents([.hour], from: startingTime).hour ?? 0) + (gmtCalendar.dateComponents([.minute], from: startingTime).minute ?? 0)
-            let closingTimeHour = 100 * (gmtCalendar.dateComponents([.hour], from: closingTime).hour ?? 0) + (gmtCalendar.dateComponents([.minute], from: closingTime).minute ?? 0)
-            
-            if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
+            if (nowHour <= startingTimeHour) || (nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour)) {
                 if GlobalConstants.AKDebug {
                     NSLog("=> INFO: WORKING DAY FINISHED.")
                     NSLog("=> INFO: NOW HOUR: %i", nowHour)
@@ -137,10 +134,7 @@ class AKDataInterface
         if let creationDate = project.creationDate as? Date {
             let now = Date()
             
-            var gmtCalendar = Calendar.current
-            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
-            
-            let runningDays = gmtCalendar.dateComponents([.day], from: now, to: creationDate).day ?? 0
+            let runningDays = Func.AKGetCalendarForLoading().dateComponents([.day], from: now, to: creationDate).day ?? 0
             
             if GlobalConstants.AKDebug {
                 NSLog("=> INFO: PROJECT RUNNING DAYS: %i", runningDays)
@@ -152,11 +146,11 @@ class AKDataInterface
         return 0
     }
     
-    static func addToday(project: Project)
+    static func addNewWorkingDay(project: Project)
     {
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
-            let nowDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
             let d1 = nowDateComponents.day ?? 0
             let m1 = nowDateComponents.month ?? 0
             let y1 = nowDateComponents.year ?? 0
@@ -166,7 +160,7 @@ class AKDataInterface
             if let days = project.days?.allObjects as? [Day] {
                 for day in days {
                     if let date = day.date as? Date {
-                        let dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
+                        let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
                         let d2 = dateComponents.day ?? 0
                         let m2 = dateComponents.month ?? 0
                         let y2 = dateComponents.year ?? 0
@@ -180,21 +174,53 @@ class AKDataInterface
             }
             
             if !alreadyContainsDate {
-                let day = Day(context: mr.getMOC())
-                day.date = now as NSDate
-                
-                // ### For debug only!
-                // for k in 1...10 {
-                //     let task = Task(context: mr.getMOC())
-                //     task.name = String(format: "Testing tasks #%i.", k)
-                //     task.creationDate = now as NSDate
-                //
-                //     day.addToTasks(task)
-                // }
-                
-                project.addToDays(day)
-                
-                NSLog("=> INFO: ADDING TODAY!")
+                // Add the next working day. That means:
+                // 1. If it's a new day, but the working day has not begun yet. i.e. 00:00Hs. and the working day for the project is 09:00Hs.
+                // 2. If it's a new day, but the working day has begun, then add for tomorrow. i.e. 17:01Hs. and the working day lasted until 17:00Hs.
+                if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
+                    let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
+                    let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
+                    let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
+                    
+                    if nowHour <= startingTimeHour {
+                        if GlobalConstants.AKDebug {
+                            NSLog("=> INFO: WORKING DAY NOT BEGUN YET. ADDING TODAY!")
+                        }
+                        
+                        let day = Day(context: mr.getMOC())
+                        day.date = now as NSDate
+                        
+                        // ### For debug only!
+                        // for k in 1...10 {
+                        //     let task = Task(context: mr.getMOC())
+                        //     task.name = String(format: "Testing tasks #%i.", k)
+                        //     task.creationDate = now as NSDate
+                        //
+                        //     day.addToTasks(task)
+                        // }
+                        
+                        project.addToDays(day)
+                    }
+                    else if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
+                        if GlobalConstants.AKDebug {
+                            NSLog("=> INFO: WORKING DAY ALREADY FINISHED. ADDING TOMORROW!")
+                        }
+                        
+                        let day = Day(context: mr.getMOC())
+                        day.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
+                        
+                        // ### For debug only!
+                        // for k in 1...10 {
+                        //     let task = Task(context: mr.getMOC())
+                        //     task.name = String(format: "Testing tasks #%i.", k)
+                        //     task.creationDate = now as NSDate
+                        //
+                        //     day.addToTasks(task)
+                        // }
+                        
+                        project.addToDays(day)
+                    }
+                }
             }
         }
     }
@@ -221,12 +247,9 @@ class AKDataInterface
     static func getDayTitle(day: Day) -> String
     {
         if let date = day.date as? Date {
-            var gmtCalendar = Calendar.current
-            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
-            
-            let d = gmtCalendar.dateComponents([.day], from: date).day ?? 0
-            let m = gmtCalendar.dateComponents([.month], from: date).month ?? 0
-            let y = gmtCalendar.dateComponents([.year], from: date).year ?? 0
+            let d = Func.AKGetCalendarForLoading().dateComponents([.day], from: date).day ?? 0
+            let m = Func.AKGetCalendarForLoading().dateComponents([.month], from: date).month ?? 0
+            let y = Func.AKGetCalendarForLoading().dateComponents([.year], from: date).year ?? 0
             
             return String(format: "%.2i/%.2i/%.4i", m, d, y)
         }

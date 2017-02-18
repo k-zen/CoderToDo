@@ -236,6 +236,39 @@ class UtilityFunctions
     }
     
     ///
+    /// Adds a toolbar to the keyboard with a single button to close it down.
+    ///
+    /// - Parameter textControl: The control where to add the keyboard.
+    /// - Parameter controller: The view controller that owns the control.
+    ///
+    func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController) {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.bounds.width, height: 30)
+        keyboardToolbar.barTintColor = UIColor.black
+        
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let doneBarButton = UIBarButtonItem(title: "Close Keyboard", style: .done, target: controller, action: #selector(AKCustomViewController.tap(_:)))
+        doneBarButton.setTitleTextAttributes(
+            [
+                NSFontAttributeName : UIFont(name: GlobalConstants.AKDefaultFont, size: 16.0)!,
+                NSForegroundColorAttributeName: UIColor.white
+            ], for: UIControlState.normal
+        )
+        
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        
+        if textControl is UITextField {
+            let textControlTmp = textControl as! UITextField
+            textControlTmp.inputAccessoryView = keyboardToolbar
+        }
+        else if textControl is UITextView {
+            let textControlTmp = textControl as! UITextView
+            textControlTmp.inputAccessoryView = keyboardToolbar
+        }
+    }
+    
+    ///
     /// Computes the App's build version.
     ///
     /// - Returns: The App's build version.
@@ -290,39 +323,6 @@ class UtilityFunctions
     func AKDelegate() -> AKAppDelegate { return UIApplication.shared.delegate as! AKAppDelegate }
     
     ///
-    /// Adds a toolbar to the keyboard with a single button to close it down.
-    ///
-    /// - Parameter textControl: The control where to add the keyboard.
-    /// - Parameter controller: The view controller that owns the control.
-    ///
-    func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController) {
-        let keyboardToolbar = UIToolbar()
-        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.bounds.width, height: 30)
-        keyboardToolbar.barTintColor = UIColor.black
-        
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        let doneBarButton = UIBarButtonItem(title: "Close Keyboard", style: .done, target: controller, action: #selector(AKCustomViewController.tap(_:)))
-        doneBarButton.setTitleTextAttributes(
-            [
-                NSFontAttributeName : UIFont(name: GlobalConstants.AKDefaultFont, size: 16.0)!,
-                NSForegroundColorAttributeName: UIColor.white
-            ], for: UIControlState.normal
-        )
-        
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
-        
-        if textControl is UITextField {
-            let textControlTmp = textControl as! UITextField
-            textControlTmp.inputAccessoryView = keyboardToolbar
-        }
-        else if textControl is UITextView {
-            let textControlTmp = textControl as! UITextView
-            textControlTmp.inputAccessoryView = keyboardToolbar
-        }
-    }
-    
-    ///
     /// Executes some code inside a closure but in the main thread.
     ///
     /// - Parameter code: The code to be executed in the main thread.
@@ -330,6 +330,19 @@ class UtilityFunctions
     func AKExecuteInMainThread(code: @escaping (Void) -> Void)
     {
         OperationQueue.main.addOperation({ () -> Void in code() })
+    }
+    
+    func AKGetCalendarForSaving() -> Calendar
+    {
+        var gmtCalendar = Calendar.current
+        gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
+        
+        return gmtCalendar
+    }
+    
+    func AKGetCalendarForLoading() -> Calendar
+    {
+        return Calendar.current
     }
     
     ///
@@ -414,7 +427,7 @@ class UtilityFunctions
     {
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone(identifier: "GMT")
+        formatter.timeZone = TimeZone.current // The timezone of the date we are processing!!!
         
         if let date = formatter.date(from: dateAsString) {
             return date as NSDate
