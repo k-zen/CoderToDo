@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ma-GL-Slu" userLabel="Controls_Container">
-                    <rect key="frame" x="38" y="86" width="300" height="316"/>
+                    <rect key="frame" x="38" y="175.5" width="300" height="316"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wg6-8v-3fe" userLabel="Dummy_1">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -179,7 +179,7 @@
             </subviews>
             <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="9Ma-GL-Slu" firstAttribute="centerY" secondItem="eQE-g5-Cl0" secondAttribute="centerY" constant="-90" id="RuC-s1-b1X"/>
+                <constraint firstItem="9Ma-GL-Slu" firstAttribute="centerY" secondItem="eQE-g5-Cl0" secondAttribute="centerY" id="RuC-s1-b1X"/>
                 <constraint firstItem="9Ma-GL-Slu" firstAttribute="centerX" secondItem="eQE-g5-Cl0" secondAttribute="centerX" id="iNt-Ci-gcI"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

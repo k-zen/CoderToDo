@@ -249,7 +249,6 @@ class UtilityFunctions
         keyboardToolbar.barTintColor = UIColor.black
         
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
         let doneBarButton = UIBarButtonItem(title: "Close Keyboard", style: .done, target: controller, action: #selector(AKCustomViewController.tap(_:)))
         doneBarButton.setTitleTextAttributes(
             [

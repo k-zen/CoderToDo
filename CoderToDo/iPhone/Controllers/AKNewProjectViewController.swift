@@ -6,15 +6,12 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     enum LocalEnums: Int {
         case projectName = 1
         case tolerance = 2
-        case maxCategories = 3
-        case maxTasks = 4
-        case startingTime = 5
-        case closingTime = 6
+        case startingTime = 3
+        case closingTime = 4
     }
     
     // MARK: Properties
     var toleranceData = [Int]()
-    var limitsData = [Int]()
     var workingDayTimeData = [String]()
     
     // MARK: Outlets
@@ -25,8 +22,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     @IBOutlet weak var startingTime: UIPickerView!
     @IBOutlet weak var closingTime: UIPickerView!
     @IBOutlet weak var tolerance: UIPickerView!
-    @IBOutlet weak var maxCategories: UIPickerView!
-    @IBOutlet weak var maxTasks: UIPickerView!
     @IBOutlet weak var save: UIButton!
     @IBOutlet weak var close: UIButton!
     
@@ -39,8 +34,8 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             let startingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
             let closingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
             let tolerance = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
-            let maxCategories = self.limitsData[self.maxCategories.selectedRow(inComponent: 0)]
-            let maxTasks = self.limitsData[self.maxTasks.selectedRow(inComponent: 0)]
+            let maxCategories = -1
+            let maxTasks = -1
             
             try projectName.validate()
             try projectName.process()
@@ -48,11 +43,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             if let mr = Func.AKObtainMasterReference() {
                 let now = NSDate()
                 
-                // let day = Day(context: mr.getMOC())
-                // day.date = now
-                
                 let project = Project(context: mr.getMOC())
-                
                 project.notifyClosingTime = notifyClosingTime
                 project.name = projectName.outputData
                 project.startingTime = startingTime
@@ -61,7 +52,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.maxCategories = Int16(maxCategories)
                 project.maxTasks = Int16(maxTasks)
                 project.creationDate = now
-                // project.addToDays(day)
                 
                 DataInterface.getUser()?.addToProject(project)
                 self.dismissView(executeDismissTask: true)
@@ -91,8 +81,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         
         // Set default values.
         self.tolerance.selectRow(1, inComponent: 0, animated: true)
-        self.maxCategories.selectRow(0, inComponent: 0, animated: true)
-        self.maxTasks.selectRow(0, inComponent: 0, animated: true)
         self.startingTime.selectRow(8, inComponent: 0, animated: true)
         self.closingTime.selectRow(16, inComponent: 0, animated: true)
     }
@@ -104,12 +92,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         if let data = self.localize(key: "Tolerance") as? [NSNumber] {
             for case let element as Int in data {
                 self.toleranceData.append(element)
-            }
-        }
-        
-        if let data = self.localize(key: "Limits") as? [NSNumber] {
-            for case let element as Int in data {
-                self.limitsData.append(element)
             }
         }
         
@@ -154,8 +136,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return String(format: "%i minutes", self.toleranceData[row])
-        case LocalEnums.maxCategories.rawValue, LocalEnums.maxTasks.rawValue:
-            return self.limitsData[row] == -1 ? "No Limit" : String(format: "%i", self.limitsData[row])
         case LocalEnums.startingTime.rawValue, LocalEnums.closingTime.rawValue:
             return self.workingDayTimeData[row]
         default:
@@ -171,8 +151,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             pickerLabel.text = String(format: "%i minutes", self.toleranceData[row])
-        case LocalEnums.maxCategories.rawValue, LocalEnums.maxTasks.rawValue:
-            pickerLabel.text = self.limitsData[row] == -1 ? "No Limit" : String(format: "%i", self.limitsData[row])
         case LocalEnums.startingTime.rawValue, LocalEnums.closingTime.rawValue:
             pickerLabel.text = self.workingDayTimeData[row]
         default:
@@ -191,8 +169,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return self.toleranceData.count
-        case LocalEnums.maxCategories.rawValue, LocalEnums.maxTasks.rawValue:
-            return self.limitsData.count
         case LocalEnums.startingTime.rawValue, LocalEnums.closingTime.rawValue:
             return self.workingDayTimeData.count
         default:
@@ -213,12 +189,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.tolerance.delegate = self
         self.tolerance.dataSource = self
         self.tolerance.tag = LocalEnums.tolerance.rawValue
-        self.maxCategories.delegate = self
-        self.maxCategories.dataSource = self
-        self.maxCategories.tag = LocalEnums.maxCategories.rawValue
-        self.maxTasks.delegate = self
-        self.maxTasks.dataSource = self
-        self.maxTasks.tag = LocalEnums.maxTasks.rawValue
         self.startingTime.delegate = self
         self.startingTime.dataSource = self
         self.startingTime.tag = LocalEnums.startingTime.rawValue
@@ -231,8 +201,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.maxCategories.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.maxTasks.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

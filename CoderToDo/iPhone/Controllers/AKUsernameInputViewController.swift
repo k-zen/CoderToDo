@@ -12,7 +12,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     
     // MARK: Outlets
     @IBOutlet weak var controlsContainer: UIView!
-    @IBOutlet weak var mainTitle: UILabel!
+    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var usernameValue: UITextField!
     @IBOutlet weak var done: UIButton!
     
