@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for having a color for each task state. (2017/02/20)
         * Added support for adding tasks. (2017/02/20)
         * New L&F. (2017/02/19)
         * Removed support to define the amount of categories and tasks, this must be done depending on the version of the App. And some aesthetic modifications too. (2017/02/19)

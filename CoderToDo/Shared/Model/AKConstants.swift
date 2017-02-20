@@ -195,6 +195,16 @@ enum TaskStates: String {
     case NOT_VERIFIED = "Not Verified"
 }
 
+enum TaskStateColor: UInt {
+    case DONE = 0xB8BB26
+    case NOT_DONE = 0xFB4934
+    case NOT_APPLICABLE = 0x83A598
+    case DILATE = 0xFE8019
+    case PENDING = 0xFABD2F
+    case VERIFY = 0xD3869B
+    case VERIFIED, NOT_VERIFIED = 0x8EC07C
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -363,6 +373,30 @@ class UtilityFunctions
     func AKGetCalendarForLoading() -> Calendar
     {
         return Calendar.current
+    }
+    
+    func AKGetColorForTaskState(taskState: String) -> UIColor
+    {
+        switch taskState {
+        case TaskStates.DILATE.rawValue:
+            return Func.AKHexColor(TaskStateColor.DILATE.rawValue)
+        case TaskStates.DONE.rawValue:
+            return Func.AKHexColor(TaskStateColor.DONE.rawValue)
+        case TaskStates.NOT_APPLICABLE.rawValue:
+            return Func.AKHexColor(TaskStateColor.NOT_APPLICABLE.rawValue)
+        case TaskStates.NOT_DONE.rawValue:
+            return Func.AKHexColor(TaskStateColor.NOT_DONE.rawValue)
+        case TaskStates.NOT_VERIFIED.rawValue:
+            return Func.AKHexColor(TaskStateColor.NOT_VERIFIED.rawValue)
+        case TaskStates.PENDING.rawValue:
+            return Func.AKHexColor(TaskStateColor.PENDING.rawValue)
+        case TaskStates.VERIFIED.rawValue:
+            return Func.AKHexColor(TaskStateColor.VERIFIED.rawValue)
+        case TaskStates.VERIFY.rawValue:
+            return Func.AKHexColor(TaskStateColor.VERIFY.rawValue)
+        default:
+            return UIColor.clear
+        }
     }
     
     ///

@@ -62,6 +62,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         }
         // Status
         cell.taskStateValue.text = task.state ?? TaskStates.PENDING.rawValue
+        cell.taskStateValue.backgroundColor = Func.AKGetColorForTaskState(taskState: task.state ?? "")
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
