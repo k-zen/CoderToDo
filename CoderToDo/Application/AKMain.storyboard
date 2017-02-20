@@ -115,7 +115,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="View Task" id="BlV-PQ-9wz">
                         <barButtonItem key="backBarButtonItem" title="Back" id="N1F-Il-nt1"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="iuz-ck-nZT">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navController" destination="BlV-PQ-9wz" id="Ba6-Sw-rns"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IDC-jP-uic" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

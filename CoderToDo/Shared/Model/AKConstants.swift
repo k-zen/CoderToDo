@@ -11,9 +11,10 @@ typealias DataController = AKDataController
 typealias DataInterface = AKDataInterface
 typealias User = AKUserMO
 typealias Project = AKProjectMO
+typealias ProjectCategory = AKProjectCategoryMO
 typealias Day = AKDayMO
-typealias Task = AKTaskMO
 typealias Category = AKCategoryMO
+typealias Task = AKTaskMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
@@ -80,6 +81,22 @@ struct GlobalConstants {
     static let AKUserMOEntityName = "User"
     static let AKProjectMOEntityName = "Project"
     // L&F
+    // ### Gruvbox Colors:
+    // For white foreground:
+    static let AKRedForWhiteFg = Func.AKHexColor(0xCC241D)
+    static let AKGreenForWhiteFg = Func.AKHexColor(0x98971A)
+    static let AKYellowForWhiteFg = Func.AKHexColor(0xD79921)
+    static let AKBlueForWhiteFg = Func.AKHexColor(0x458588)
+    static let AKPurpleForWhiteFg = Func.AKHexColor(0xB16286)
+    static let AKAquaForWhiteFg = Func.AKHexColor(0x689D6A)
+    // For black foreground:
+    static let AKRedForBlackFg = Func.AKHexColor(0xFB4934)
+    static let AKGreenForBlackFg = Func.AKHexColor(0xB8BB26)
+    static let AKYellowForBlackFg = Func.AKHexColor(0xFABD2F)
+    static let AKBlueForBlackFg = Func.AKHexColor(0x83A598)
+    static let AKPurpleForBlackFg = Func.AKHexColor(0xD3869B)
+    static let AKAquaForBlackFg = Func.AKHexColor(0x8EC07C)
+    // ### Gruvbox Colors:
     static let AKDefaultFont = "HelveticaNeue-Thin"
     static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
     static let AKDefaultBg = Func.AKHexColor(0x202328)
@@ -110,6 +127,8 @@ struct GlobalConstants {
     static let AKMinProjectNameLength = 3
     static let AKMaxCategoryNameLength = 40
     static let AKMinCategoryNameLength = 3
+    static let AKMaxTaskNameLength = 140
+    static let AKMinTaskNameLength = 3
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKAcceptingTasksDefaultTime = 2359
@@ -165,15 +184,15 @@ enum SortingOrder: String {
     case descending = "Descending"
 }
 
-enum TaskStates: Int16 {
-    case DONE = 1
-    case NOT_DONE = 2
-    case NOT_APPLICABLE = 3
-    case DILATE = 4
-    case PENDING = 5
-    case VERIFY = 6
-    case VERIFIED = 7
-    case NOT_VERIFIED = 8
+enum TaskStates: String {
+    case DONE = "Done"
+    case NOT_DONE = "Not Done"
+    case NOT_APPLICABLE = "Not Aplicable"
+    case DILATE = "Dilate"
+    case PENDING = "Pending"
+    case VERIFY = "Verify"
+    case VERIFIED = "Verified"
+    case NOT_VERIFIED = "Not Verified"
 }
 
 // MARK: Utility Functions

@@ -6,7 +6,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     var presenterController: AKCustomViewController?
     
     // MARK: Local Enums
-    enum LocalTextField: Int {
+    enum LocalEnums: Int {
         case username = 1
     }
     
@@ -55,7 +55,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         let newLen = (textField.text?.characters.count)! + string.characters.count - range.length
         
         switch textField.tag {
-        case LocalTextField.username.rawValue:
+        case LocalEnums.username.rawValue:
             return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
         default:
             return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
@@ -79,7 +79,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         
         // Set Delegator.
         self.usernameValue.delegate = self
-        self.usernameValue.tag = LocalTextField.username.rawValue
+        self.usernameValue.tag = LocalEnums.username.rawValue
         
         // Custom L&F.
         self.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0

@@ -8,6 +8,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         static let AKRowHeight: CGFloat = 52
     }
     
+    // MARK: Properties
     var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
     var order: SortingOrder = SortingOrder.descending
     
@@ -22,10 +23,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
                             
-                            if let controller1 = presenterController as? AKListProjectsViewController, let controller2 = presentedController as? AKSortProjectSelectorViewController {
-                                controller1.sortProjectsBy = controller2.filtersData[controller2.filters.selectedRow(inComponent: 0)]
-                                controller1.order = controller2.orderData[controller2.order.selectedRow(inComponent: 0)]
-                                controller1.projectsTable.reloadData()
+                            if let presenterController = presenterController as? AKListProjectsViewController, let presentedController = presentedController as? AKSortProjectSelectorViewController {
+                                presenterController.sortProjectsBy = presentedController.filtersData[presentedController.filters.selectedRow(inComponent: 0)]
+                                presenterController.order = presentedController.orderData[presentedController.order.selectedRow(inComponent: 0)]
+                                presenterController.projectsTable.reloadData()
                             } }
         )
     }
@@ -37,8 +38,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
                             
-                            if let controller = presenterController as? AKListProjectsViewController {
-                                controller.projectsTable.reloadData()
+                            if let presenterController = presenterController as? AKListProjectsViewController {
+                                presenterController.projectsTable.reloadData()
                             } }
         )
     }
@@ -99,7 +100,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
-        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+        cell.controller = self
+        cell.project = project
         // OSR
         cell.osrValue.text = String(format: "%.1f", project.osr)
         // Running Days
@@ -137,6 +139,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
         
         return cell
     }

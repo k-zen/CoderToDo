@@ -15,7 +15,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     var workingDayTimeData = [String]()
     
     // MARK: Outlets
-    @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlsContainer: UIView!
     @IBOutlet weak var notifyClosingTime: UISwitch!
     @IBOutlet weak var projectName: UITextField!

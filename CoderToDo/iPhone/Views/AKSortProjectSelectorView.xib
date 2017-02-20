@@ -28,14 +28,14 @@
                     <subviews>
                         <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
                             <rect key="frame" x="8" y="39" width="231" height="55"/>
-                            <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="tqV-qc-NoB"/>
                             </constraints>
                         </pickerView>
                         <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Filters_Value">
                             <rect key="frame" x="247" y="39" width="120" height="55"/>
-                            <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="NQP-WA-mGp"/>
                                 <constraint firstAttribute="width" constant="120" id="Tvj-AC-M7x"/>

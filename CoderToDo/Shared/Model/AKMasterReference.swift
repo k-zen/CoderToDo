@@ -74,23 +74,23 @@ class AKMasterReference: NSObject
             NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
-            NSLog("=>       CATEGORIES: (%i)", DataInterface.countCategories(project: project))
-            for category in DataInterface.getCategories(project: project) {
-                NSLog("=>           NAME: %@", category.name ?? "N\\A")
-                NSLog("=>           ------")
-            }
+            NSLog("=>       PROJECT CATEGORIES: (%i)", project.projectCategories?.count ?? 0)
             NSLog("=>       DAYS: (%i)", DataInterface.countDays(project: project))
             for day in DataInterface.getDays(project: project) {
                 NSLog("=>           DATE: %@", day.date?.description ?? "N\\A")
                 NSLog("=>           SR: %.2f", day.sr)
-                NSLog("=>           TASKS: (%i)", DataInterface.countTasks(day: day))
-                for task in DataInterface.getTasks(day: day) {
-                    NSLog("=>               CATEGORY: %i", task.category)
-                    NSLog("=>               COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
-                    NSLog("=>               CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
-                    NSLog("=>               NAME: %@", task.name ?? "N\\A")
-                    NSLog("=>               NOTE: %@", task.note ?? "N\\A")
-                    NSLog("=>               STATE: %i", task.state)
+                NSLog("=>           CATEGORIES: (%i)", DataInterface.countCategories(day: day))
+                for category in DataInterface.getCategories(day: day) {
+                    NSLog("=>               NAME: %@", category.name ?? "N\\A")
+                    NSLog("=>               TASKS: (%i)", DataInterface.countTasks(category: category))
+                    for task in DataInterface.getTasks(category: category) {
+                        NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
+                        NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
+                        NSLog("=>                   NAME: %@", task.name ?? "N\\A")
+                        NSLog("=>                   NOTE: %@", task.note ?? "N\\A")
+                        NSLog("=>                   STATE: %@", task.state ?? "N\\A")
+                        NSLog("=>                   ------")
+                    }
                     NSLog("=>               ------")
                 }
                 NSLog("=>           ------")

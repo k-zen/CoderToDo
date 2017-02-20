@@ -20,7 +20,6 @@ class AKDataInterface
             case ProjectSorting.closingTime:
                 return projects.sorted {
                     let now = Date()
-                    
                     let n1 = $0.closingTime as? Date ?? now
                     let n2 = $1.closingTime as? Date ?? now
                     
@@ -31,7 +30,6 @@ class AKDataInterface
             case ProjectSorting.creationDate:
                 return projects.sorted {
                     let now = Date()
-                    
                     let n1 = $0.creationDate as? Date ?? now
                     let n2 = $1.creationDate as? Date ?? now
                     
@@ -66,11 +64,15 @@ class AKDataInterface
         var counter = 0
         
         if let days = project.days?.allObjects as? [Day] {
-            for day in days {
-                if let tasks = day.tasks?.allObjects as? [Task] {
-                    for task in tasks {
-                        if task.state == TaskStates.PENDING.rawValue {
-                            counter += 1
+            for day in days { // Iterate all days.
+                if let categories = day.categories?.allObjects as? [Category] {
+                    for category in categories { // Foreach day iterate categories.
+                        if let tasks = category.tasks?.allObjects as? [Task] {
+                            for task in tasks { // Count pending tasks in each category.
+                                if task.state == TaskStates.PENDING.rawValue {
+                                    counter += 1
+                                }
+                            }
                         }
                     }
                 }
@@ -89,7 +91,6 @@ class AKDataInterface
     {
         if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
             let now = Date()
-            
             let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
             let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
             let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
@@ -133,20 +134,19 @@ class AKDataInterface
     {
         if let creationDate = project.creationDate as? Date {
             let now = Date()
-            
             let runningDays = Func.AKGetCalendarForLoading().dateComponents([.day], from: now, to: creationDate).day ?? 0
             
             if GlobalConstants.AKDebug {
                 NSLog("=> INFO: PROJECT RUNNING DAYS: %i", runningDays)
             }
             
-            return runningDays
+            return abs(runningDays)
         }
         
         return 0
     }
     
-    static func addNewWorkingDay(project: Project)
+    static func addNewWorkingDay(project: Project) -> Day?
     {
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
@@ -158,6 +158,7 @@ class AKDataInterface
             
             // Check if the project already contains tomorrow.
             var alreadyContainsDate = false
+            var foundDay: Day?
             if let days = project.days?.allObjects as? [Day] {
                 for day in days {
                     if let date = day.date as? Date {
@@ -172,6 +173,7 @@ class AKDataInterface
                         
                         if (d1 == d2) && (m1 == m2) && (y1 == y2) {
                             alreadyContainsDate = true
+                            foundDay = day
                             break
                         }
                     }
@@ -199,21 +201,60 @@ class AKDataInterface
                         
                         let day = Day(context: mr.getMOC())
                         day.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
-                        
-                        // ### For debug only!
-                        // for k in 1...10 {
-                        //     let task = Task(context: mr.getMOC())
-                        //     task.name = String(format: "Testing tasks #%i.", k)
-                        //     task.creationDate = now as NSDate
-                        //
-                        //     day.addToTasks(task)
-                        // }
-                        
                         project.addToDays(day)
+                        
+                        return day
                     }
                 }
             }
+            else {
+                return foundDay!
+            }
         }
+        
+        return nil
+    }
+    
+    static func updateDay(project: Project, updatedDay: Day) -> Bool
+    {
+        if let dayToLook = updatedDay.date as? Date {
+            let dayToLookDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: dayToLook)
+            let d1 = dayToLookDateComponents.day ?? 0
+            let m1 = dayToLookDateComponents.month ?? 0
+            let y1 = dayToLookDateComponents.year ?? 0
+            
+            var alreadyContainsDate = false
+            var foundDay: Day?
+            if let days = project.days?.allObjects as? [Day] {
+                for day in days {
+                    if let date = day.date as? Date {
+                        let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
+                        let d2 = dateComponents.day ?? 0
+                        let m2 = dateComponents.month ?? 0
+                        let y2 = dateComponents.year ?? 0
+                        
+                        if GlobalConstants.AKDebug {
+                            NSLog("=> INFO: DAYTOLOOK (%@), DATE (%@)", dayToLook.description, date.description)
+                        }
+                        
+                        if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+                            alreadyContainsDate = true
+                            foundDay = day
+                            break
+                        }
+                    }
+                }
+            }
+            
+            if alreadyContainsDate {
+                project.removeFromDays(foundDay!)
+                project.addToDays(updatedDay)
+                
+                return true
+            }
+        }
+        
+        return false
     }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
@@ -222,7 +263,6 @@ class AKDataInterface
         if let days = project.days?.allObjects as? [Day] {
             return days.sorted {
                 let now = Date()
-                
                 let n1 = $0.date as? Date ?? now
                 let n2 = $1.date as? Date ?? now
                 
@@ -248,10 +288,54 @@ class AKDataInterface
         return "N\\A"
     }
     // ########## DAY'S FUNCTIONS ########## //
-    // ########## TASK'S FUNCTIONS ########## //
-    static func getTasks(day: Day) -> [Task]
+    // ########## CATEGORY'S FUNCTIONS ########## //
+    static func listCategoriesInProject(project: Project) -> [String]
     {
-        if let tasks = day.tasks?.allObjects as? [Task] {
+        if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
+            return projectCategories.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+                }.map({ $0.name! })
+        }
+        
+        return []
+    }
+    
+    static func getCategories(day: Day) -> [Category]
+    {
+        if let categories = day.categories?.allObjects as? [Category] {
+            return categories.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+            }
+        }
+        
+        return []
+    }
+    
+    static func getCategoryByName(day: Day, name: String) -> Category?
+    {
+        if let categories = day.categories?.allObjects as? [Category] {
+            for category in categories {
+                if name.caseInsensitiveCompare(category.name!) == ComparisonResult.orderedSame {
+                    return category
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    static func countCategories(day: Day) -> Int { return day.categories?.allObjects.count ?? 0 }
+    // ########## CATEGORY'S FUNCTIONS ########## //
+    // ########## TASK'S FUNCTIONS ########## //
+    static func getTasks(category: Category) -> [Task]
+    {
+        if let tasks = category.tasks?.allObjects as? [Task] {
             return tasks.sorted {
                 let now = Date()
                 
@@ -265,23 +349,21 @@ class AKDataInterface
         return []
     }
     
-    static func countTasks(day: Day) -> Int { return day.tasks?.allObjects.count ?? 0 }
-    // ########## TASK'S FUNCTIONS ########## //
-    // ########## CATEGORY'S FUNCTIONS ########## //
-    static func getCategories(project: Project) -> [Category]
+    static func countTasks(category: Category) -> Int { return category.tasks?.allObjects.count ?? 0 }
+    
+    static func countAllTasksInDay(day: Day) -> Int
     {
-        if let categories = project.categories?.allObjects as? [Category] {
-            return categories.sorted {
-                let n1 = $0.name ?? ""
-                let n2 = $1.name ?? ""
-                
-                return n1 < n2
+        var counter = 0
+        
+        if let categories = day.categories?.allObjects as? [Category] {
+            for category in categories {
+                if let tasks = category.tasks?.allObjects as? [Task] {
+                    counter += tasks.count
+                }
             }
         }
         
-        return []
+        return counter
     }
-    
-    static func countCategories(project: Project) -> Int { return project.categories?.allObjects.count ?? 0 }
-    // ########## CATEGORY'S FUNCTIONS ########## //
+    // ########## TASK'S FUNCTIONS ########## //
 }

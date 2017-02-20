@@ -2,6 +2,10 @@ import UIKit
 
 class AKProjectsTableViewCell: UITableViewCell
 {
+    // MARK: Properties
+    var controller: AKCustomViewController?
+    var project: Project?
+    
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet weak var infoContainer: UIView!
@@ -16,7 +20,18 @@ class AKProjectsTableViewCell: UITableViewCell
     // MARK: Actions
     @IBAction func addTomorrowTask(_ sender: Any)
     {
-        NSLog("=> INFO: PRESSED BUTTON TO ADD TASK FOR TOMORROW!")
+        if let presenterController = self.controller as? AKListProjectsViewController {
+            presenterController.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
+                                            taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                                                if let presentedController = presentedController as? AKAddTaskViewController {
+                                                    presentedController.project = self.project
+                                                } },
+                                            dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                
+                                                presenterController.dismissView(executeDismissTask: true) }
+            )
+        }
     }
     
     // MARK: UITableViewCell Overriding

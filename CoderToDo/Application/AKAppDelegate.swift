@@ -23,10 +23,15 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
         // ### Customize the App.
         UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 18),
+            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 22),
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
         UINavigationBar.appearance().tintColor = GlobalConstants.AKTabBarTintSelected
+        UIBarButtonItem.appearance().setTitleTextAttributes([
+            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18),
+            NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+            ], for: .normal
+        )
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()

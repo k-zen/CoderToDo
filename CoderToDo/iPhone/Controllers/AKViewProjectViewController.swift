@@ -22,15 +22,16 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     {
         self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
                          taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                            if let controller1 = presenterController as? AKViewProjectViewController, let controller2 = presentedController as? AKAddViewController {
-                                controller2.project = controller1.project
+                            if let presenterController = presenterController as? AKViewProjectViewController, let presentedController = presentedController as? AKAddViewController {
+                                presentedController.project = presenterController.project
                             } },
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
                             
                             // Always reload the days table!
-                            if let controller1 = presenterController as? AKViewProjectViewController, let _ = presentedController as? AKAddViewController {
-                                controller1.daysTable.reloadData()
+                            if let presenterController = presenterController as? AKViewProjectViewController {
+                                presenterController.daysTable.reloadData()
+                                presenterController.customCell.tasksTable?.reloadData()
                             } }
         )
     }
@@ -47,17 +48,47 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         super.viewDidAppear(animated)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case GlobalConstants.AKViewTaskSegue:
+                if let destination = segue.destination as? AKViewTaskViewController {
+                    if let task = sender as? Task {
+                        // destination.project = project
+                        destination.navController.title = task.name ?? "View Task"
+                    }
+                }
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
+    {
+        switch identifier {
+        case GlobalConstants.AKViewTaskSegue:
+            return true
+        default:
+            return false
+        }
+    }
+    
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        // First we check which section we are. That means which day we are referencing.
         let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
-        if DataInterface.countTasks(day: day) > 0 {
-            // Calculate given the number of tasks. Each task has a cell of ~44 points height.
-            let cellHeight = 40 + (CGFloat(DataInterface.countTasks(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight)
+        
+        // If the count of categories is bigger than 0, it means there are tasks. Else show empty day cell.
+        if DataInterface.countCategories(day: day) > 0 {
+            // Calculate cell height.
+            let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight) + (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            cell.title.removeFromSuperview()
+            cell.title.isHidden = true
             
             customCellView = customCell.customView
             customCell.controller = self
@@ -74,15 +105,16 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
             
             return cell
         }
         else {
             let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
             
             return cell
         }
@@ -159,12 +191,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
-        if DataInterface.countTasks(day: day) <= 0 {
+        if DataInterface.countCategories(day: day) <= 0 {
             return LocalConstants.AKEmptyRowHeight
         }
         else {
-            // Calculate given the number of tasks. Each task has a cell of ~44 points height.
-            return 40 + (CGFloat(DataInterface.countTasks(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight)
+            return (CGFloat(DataInterface.countCategories(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight) + (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
     
@@ -177,9 +208,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     {
         super.inhibitTapGesture = true
         super.setup()
-        
-        // Allways add today to the table.
-        DataInterface.addNewWorkingDay(project: self.project)
         
         // Custom Components
         self.daysTable.register(UINib(nibName: "AKDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "DaysTableCell")

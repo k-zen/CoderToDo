@@ -6,7 +6,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     var project: Project!
     
     // MARK: Local Enums
-    enum LocalTextField: Int {
+    enum LocalEnums: Int {
         case category = 1
     }
     
@@ -27,11 +27,12 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
             try categoryName.process()
             
             if let mr = Func.AKObtainMasterReference() {
-                let category = Category(context: mr.getMOC())
+                // TODO: Check if the category doesn't exists!!!
                 
-                category.name = categoryName.outputData
+                let projectCategory = ProjectCategory(context: mr.getMOC())
+                projectCategory.name = categoryName.outputData
+                self.project.addToProjectCategories(projectCategory)
                 
-                self.project.addToCategories(category)
                 self.dismissView(executeDismissTask: true)
             }
         }
@@ -67,7 +68,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
         let newLen = (textField.text?.characters.count)! + string.characters.count - range.length
         
         switch textField.tag {
-        case LocalTextField.category.rawValue:
+        case LocalEnums.category.rawValue:
             return newLen > GlobalConstants.AKMaxCategoryNameLength ? false : true
         default:
             return newLen > GlobalConstants.AKMaxCategoryNameLength ? false : true
@@ -91,7 +92,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
         
         // Set Delegator.
         self.categoryValue.delegate = self
-        self.categoryValue.tag = LocalTextField.category.rawValue
+        self.categoryValue.tag = LocalEnums.category.rawValue
         
         // Custom L&F.
         self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius

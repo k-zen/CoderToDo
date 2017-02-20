@@ -15,8 +15,8 @@ class AKAddViewController: AKCustomViewController
     {
         self.presentView(controller: AKAddCategoryViewController(nibName: "AKAddCategoryView", bundle: nil),
                          taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                            if let controller1 = presenterController as? AKAddViewController, let controller2 = presentedController as? AKAddCategoryViewController {
-                                controller2.project = controller1.project
+                            if let presenterController = presenterController as? AKAddViewController, let presentedController = presentedController as? AKAddCategoryViewController {
+                                presentedController.project = presenterController.project
                             } },
                          dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                             NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
@@ -27,7 +27,23 @@ class AKAddViewController: AKCustomViewController
     
     @IBAction func addTask(_ sender: Any)
     {
-        NSLog("=> INFO: ADDING TASK!")
+        switch DataInterface.getProjectStatus(project: self.project) {
+        case ProjectStatus.ACEPTING_TASKS:
+            self.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
+                             taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                                if let presenterController = presenterController as? AKAddViewController, let presentedController = presentedController as? AKAddTaskViewController {
+                                    presentedController.project = presenterController.project
+                                } },
+                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                
+                                presenterController.dismissView(executeDismissTask: true) }
+            )
+            break
+        default:
+            NSLog("=> ERROR: YOU ARE NOT ALLOWED TO ADD NEW TASKS!")
+            break
+        }
     }
     
     // MARK: AKCustomViewController Overriding
