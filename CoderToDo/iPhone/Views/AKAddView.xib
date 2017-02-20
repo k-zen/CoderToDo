@@ -9,8 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKAddViewController" customModule="SmartTODO" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKAddViewController" customModule="CoderToDo" customModuleProvider="target">
             <connections>
+                <outlet property="addCategory" destination="iyg-M7-jhH" id="syW-v3-ICb"/>
+                <outlet property="addTask" destination="Fec-zA-Oe7" id="J5q-AX-hv3"/>
                 <outlet property="controlsContainer" destination="pwr-A2-Ltf" id="qTL-mE-uZQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kAg-e6-Bsv"/>
             </connections>
@@ -21,55 +23,53 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwr-A2-Ltf" userLabel="Controls_Container">
-                    <rect key="frame" x="37" y="417" width="300" height="230"/>
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyg-M7-jhH">
-                            <rect key="frame" x="99" y="20" width="102" height="64"/>
+                            <rect key="frame" x="63" y="10" width="120" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="102" id="6LD-IH-Ig0"/>
-                                <constraint firstAttribute="height" constant="64" id="pLz-Xg-9kd"/>
+                                <constraint firstAttribute="width" constant="120" id="FPm-8h-Rs0"/>
+                                <constraint firstAttribute="height" constant="40" id="PAw-Ur-242"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
-                            <inset key="titleEdgeInsets" minX="-66" minY="0.0" maxX="0.0" maxY="-88"/>
-                            <inset key="imageEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Add Category" image="0001-064px.png">
-                                <color key="titleColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Add Category">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="addCategory:" destination="-1" eventType="touchUpInside" id="xaO-3V-Bg8"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-zA-Oe7">
-                            <rect key="frame" x="99" y="120" width="102" height="64"/>
+                            <rect key="frame" x="191" y="10" width="120" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="102" id="Oik-2Q-yQU"/>
-                                <constraint firstAttribute="height" constant="64" id="WiX-xb-pJ8"/>
+                                <constraint firstAttribute="height" constant="40" id="Qbu-Gt-aUE"/>
+                                <constraint firstAttribute="width" constant="120" id="ddK-aW-hBC"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
-                            <inset key="titleEdgeInsets" minX="-66" minY="0.0" maxX="0.0" maxY="-88"/>
-                            <inset key="imageEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Add Task" image="0001-064px.png">
-                                <color key="titleColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Add Task">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="addTask:" destination="-1" eventType="touchUpInside" id="jl8-x8-2Kg"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="centerX" secondItem="pwr-A2-Ltf" secondAttribute="centerX" id="BEy-Z7-Vo5"/>
-                        <constraint firstAttribute="width" constant="300" id="EFG-Rp-msr"/>
-                        <constraint firstAttribute="height" constant="230" id="H42-FZ-laX"/>
-                        <constraint firstItem="iyg-M7-jhH" firstAttribute="centerX" secondItem="pwr-A2-Ltf" secondAttribute="centerX" id="S7t-oe-AEv"/>
-                        <constraint firstItem="iyg-M7-jhH" firstAttribute="top" secondItem="pwr-A2-Ltf" secondAttribute="top" constant="20" id="fxM-yB-poC"/>
-                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="top" secondItem="iyg-M7-jhH" secondAttribute="bottom" constant="36" id="je9-sA-z1p"/>
+                        <constraint firstItem="iyg-M7-jhH" firstAttribute="centerY" secondItem="pwr-A2-Ltf" secondAttribute="centerY" id="36H-kk-9ri"/>
+                        <constraint firstItem="iyg-M7-jhH" firstAttribute="centerX" secondItem="pwr-A2-Ltf" secondAttribute="centerX" constant="-64.5" id="6ix-Oo-5ZQ"/>
+                        <constraint firstAttribute="height" constant="60" id="H42-FZ-laX"/>
+                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="leading" secondItem="iyg-M7-jhH" secondAttribute="trailing" constant="8" id="RVB-nc-mNv"/>
+                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="centerY" secondItem="pwr-A2-Ltf" secondAttribute="centerY" id="lQ1-ei-9wW"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="pwr-A2-Ltf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Kv1-pA-3Gq"/>
-                <constraint firstAttribute="bottom" secondItem="pwr-A2-Ltf" secondAttribute="bottom" constant="20" id="MbB-wv-vLn"/>
+                <constraint firstAttribute="bottom" secondItem="pwr-A2-Ltf" secondAttribute="bottom" id="MbB-wv-vLn"/>
+                <constraint firstItem="pwr-A2-Ltf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lvk-Vx-9pD"/>
+                <constraint firstAttribute="trailing" secondItem="pwr-A2-Ltf" secondAttribute="trailing" id="psP-N9-Oeg"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -77,7 +77,4 @@
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="0001-064px.png" width="64" height="64"/>
-    </resources>
 </document>

@@ -82,6 +82,8 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         self.usernameValue.tag = LocalTextField.username.rawValue
         
         // Custom L&F.
+        self.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
+        self.icon.layer.masksToBounds = true
         self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

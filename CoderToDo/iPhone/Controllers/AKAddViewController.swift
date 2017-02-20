@@ -7,6 +7,8 @@ class AKAddViewController: AKCustomViewController
     
     // MARK: Outlets
     @IBOutlet weak var controlsContainer: UIView!
+    @IBOutlet weak var addCategory: UIButton!
+    @IBOutlet weak var addTask: UIButton!
     
     // MARK: Actions
     @IBAction func addCategory(_ sender: Any)
@@ -52,8 +54,16 @@ class AKAddViewController: AKCustomViewController
         super.setup()
         
         // Custom L&F.
-        self.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.controlsContainer.layer.masksToBounds = true
         Func.AKAddBlurView(view: self.controlsContainer, effect: UIBlurEffectStyle.dark, addClearColorBgToView: true)
+        
+        self.addCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.addTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        
+        Func.AKAddBorderDeco(
+            self.controlsContainer,
+            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness,
+            position: .top
+        )
     }
 }

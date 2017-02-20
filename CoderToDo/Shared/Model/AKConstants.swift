@@ -82,14 +82,14 @@ struct GlobalConstants {
     // L&F
     static let AKDefaultFont = "HelveticaNeue-Thin"
     static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
-    static let AKDefaultBg = Func.AKHexColor(0x373B44)
-    static let AKDefaultFg = Func.AKHexColor(0xffffff)
+    static let AKDefaultBg = Func.AKHexColor(0x202328)
+    static let AKDefaultFg = Func.AKHexColor(0xFFFFFF)
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
-    static let AKTabBarTintSelected = Func.AKHexColor(0xE1B866)
+    static let AKTabBarTintSelected = Func.AKHexColor(0x007AFF)
     static let AKDefaultTextfieldBorderBg = Func.AKHexColor(0x999999)
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = Func.AKHexColor(0x999999)
+    static let AKDefaultViewBorderBg = Func.AKHexColor(0x373B44)
     static let AKDefaultFloatingViewBorderBg = UIColor.black
     static let AKDisabledButtonBg = Func.AKHexColor(0x999999)
     static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
@@ -98,10 +98,10 @@ struct GlobalConstants {
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKViewCornerRadius: CGFloat = 8.0
     static let AKButtonCornerRadius: CGFloat = 4.0
-    static let AKDefaultBorderThickness = 1.4
+    static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
-    static let AKBadgeColorBg = Func.AKHexColor(0xBD5532)
+    static let AKBadgeColorBg = Func.AKHexColor(0x458588)
     static let AKBadgeColorFg = Func.AKHexColor(0xFFFFFF)
     // Validations
     static let AKMaxUsernameLength = 12
@@ -149,7 +149,7 @@ enum CustomBorderDecorationPosition: Int {
 
 enum ProjectStatus: String {
     case OPEN = "Open"
-    case ACEPTING_TASKS = "Accepting Tasks"
+    case ACEPTING_TASKS = "Accepting"
     case CLOSED = "Closed"
 }
 

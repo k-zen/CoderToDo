@@ -125,7 +125,7 @@
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iI-7W-YsQ">
                             <rect key="frame" x="8" y="268" width="138" height="40"/>
-                            <color key="backgroundColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="6RU-m6-sSM"/>
                                 <constraint firstAttribute="width" constant="138" id="YHp-a8-vZZ"/>
@@ -140,7 +140,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YED-Nt-cwK">
                             <rect key="frame" x="154" y="268" width="138" height="40"/>
-                            <color key="backgroundColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="138" id="dOf-qd-MYm"/>
                                 <constraint firstAttribute="height" constant="40" id="w9D-eR-dwJ"/>
@@ -177,7 +177,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9Ma-GL-Slu" firstAttribute="centerY" secondItem="eQE-g5-Cl0" secondAttribute="centerY" id="RuC-s1-b1X"/>
                 <constraint firstItem="9Ma-GL-Slu" firstAttribute="centerX" secondItem="eQE-g5-Cl0" secondAttribute="centerX" id="iNt-Ci-gcI"/>

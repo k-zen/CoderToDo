@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKSortProjectSelectorViewController" customModule="SmartTODO" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKSortProjectSelectorViewController" customModule="CoderToDo" customModuleProvider="target">
             <connections>
                 <outlet property="controlsContainer" destination="Hxh-dk-0eJ" id="BbG-p5-FZ3"/>
                 <outlet property="filters" destination="7By-Os-b7j" id="Y7a-OF-5be"/>
@@ -24,36 +24,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxh-dk-0eJ" userLabel="Controls_Container">
-                    <rect key="frame" x="37" y="367" width="300" height="280"/>
+                    <rect key="frame" x="0.0" y="517" width="375" height="150"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BA7-5r-djP" userLabel="Message">
-                            <rect key="frame" x="8" y="8" width="284" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-21-jfX" userLabel="Message">
-                            <rect key="frame" x="8" y="129" width="284" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
-                            <rect key="frame" x="8" y="46" width="284" height="75"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
+                            <rect key="frame" x="8" y="39" width="231" height="55"/>
+                            <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="tqV-qc-NoB"/>
+                            </constraints>
                         </pickerView>
-                        <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Filters_Value">
-                            <rect key="frame" x="8" y="167" width="284" height="55"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Filters_Value">
+                            <rect key="frame" x="247" y="39" width="120" height="55"/>
+                            <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="NQP-WA-mGp"/>
+                                <constraint firstAttribute="width" constant="120" id="Tvj-AC-M7x"/>
+                            </constraints>
                         </pickerView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVI-yQ-7Aa">
-                            <rect key="frame" x="8" y="230" width="284" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVI-yQ-7Aa">
+                            <rect key="frame" x="8" y="102" width="359" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="e7V-vj-EyH"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                             <state key="normal" title="Sort">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,18 +55,44 @@
                                 <action selector="sort:" destination="-1" eventType="touchUpInside" id="rKZ-22-4bY"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort projects using the following options:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tx-Vh-6Ja">
+                            <rect key="frame" x="8" y="8" width="359" height="23"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="23" id="rLp-4n-anG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="280" id="b5Z-fv-JI8"/>
-                        <constraint firstAttribute="width" constant="300" id="mSm-2p-4At"/>
+                        <constraint firstAttribute="bottom" secondItem="aVI-yQ-7Aa" secondAttribute="bottom" constant="8" id="3xe-p1-ZhW"/>
+                        <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="811-Wh-5zp"/>
+                        <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="8Ts-MA-842"/>
+                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="A9c-qd-67E"/>
+                        <constraint firstAttribute="trailing" secondItem="4tx-Vh-6Ja" secondAttribute="trailing" constant="8" id="EQB-Wt-fib"/>
+                        <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="Gib-GS-oy4"/>
+                        <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="7By-Os-b7j" secondAttribute="trailing" constant="8" id="Naq-vZ-z5c"/>
+                        <constraint firstItem="4tx-Vh-6Ja" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="RZH-0i-tWj"/>
+                        <constraint firstAttribute="trailing" secondItem="cyz-aO-vdB" secondAttribute="trailing" constant="8" id="Tyz-HF-I82"/>
+                        <constraint firstItem="7By-Os-b7j" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="VDh-q2-1UY"/>
+                        <constraint firstItem="4tx-Vh-6Ja" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" constant="8" id="Zpq-TP-iWk"/>
+                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="cyz-aO-vdB" secondAttribute="bottom" constant="8" id="aWG-Qk-VLD"/>
+                        <constraint firstAttribute="height" constant="150" id="b5Z-fv-JI8"/>
+                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="7By-Os-b7j" secondAttribute="bottom" constant="8" id="dXS-mW-RjQ"/>
+                        <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="7By-Os-b7j" secondAttribute="trailing" constant="8" id="lfz-c2-F4o"/>
+                        <constraint firstAttribute="trailing" secondItem="aVI-yQ-7Aa" secondAttribute="trailing" constant="8" id="olI-R0-LSs"/>
+                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="cyz-aO-vdB" secondAttribute="bottom" constant="8" id="tJA-be-hs0"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="Hxh-dk-0eJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="B23-vw-A3s"/>
-                <constraint firstAttribute="bottom" secondItem="Hxh-dk-0eJ" secondAttribute="bottom" constant="20" id="dSN-jR-Avm"/>
+                <constraint firstAttribute="trailing" secondItem="Hxh-dk-0eJ" secondAttribute="trailing" id="BDB-eG-EX0"/>
+                <constraint firstAttribute="bottom" secondItem="Hxh-dk-0eJ" secondAttribute="bottom" id="dSN-jR-Avm"/>
+                <constraint firstItem="Hxh-dk-0eJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dXV-Uq-vcZ"/>
             </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
 </document>

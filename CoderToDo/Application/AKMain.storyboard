@@ -12,7 +12,7 @@
         <!--List Projects-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="List Projects" id="BYZ-38-t0r" customClass="AKListProjectsViewController" customModule="SmartTODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="List Projects" id="BYZ-38-t0r" customClass="AKListProjectsViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,10 +23,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KdT-aq-IQ9" userLabel="Projects_Table">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KdT-aq-IQ9" secondAttribute="bottom" id="1zi-3g-WqC"/>
                             <constraint firstAttribute="trailing" secondItem="KdT-aq-IQ9" secondAttribute="trailing" id="IEH-nh-9bn"/>
@@ -37,13 +36,13 @@
                     <navigationItem key="navigationItem" title="List Projects" id="ytb-TK-suW">
                         <barButtonItem key="backBarButtonItem" title="Back" id="RER-sZ-GJo"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="024-Wo-aBY">
-                            <color key="tintColor" red="0.88235294117647056" green="0.72156862745098038" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="organizeProjects:" destination="BYZ-38-t0r" id="VpN-kI-QgJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gNK-dI-7DM">
-                            <color key="tintColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addNewProject:" destination="BYZ-38-t0r" id="h7C-Ra-gVh"/>
                             </connections>
@@ -61,7 +60,7 @@
         <!--View Project-->
         <scene sceneID="quL-MJ-eSs">
             <objects>
-                <viewController title="View Project" id="Y2b-YV-saU" customClass="AKViewProjectViewController" customModule="SmartTODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="View Project" id="Y2b-YV-saU" customClass="AKViewProjectViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4dG-bT-DrE"/>
                         <viewControllerLayoutGuide type="bottom" id="ghj-GA-ocL"/>
@@ -72,10 +71,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8Ob-MD-Lba" userLabel="Days_Table">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8Ob-MD-Lba" firstAttribute="top" secondItem="4dG-bT-DrE" secondAttribute="bottom" id="Htt-1y-yEP"/>
                             <constraint firstItem="8Ob-MD-Lba" firstAttribute="leading" secondItem="z1J-mq-Crb" secondAttribute="leading" id="Vlk-xj-4Ad"/>
@@ -86,7 +84,7 @@
                     <navigationItem key="navigationItem" title="View Project" id="2ag-ze-GqY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="m0Y-rh-Bc1"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lcp-ln-DzJ">
-                            <color key="tintColor" red="0.88235294119999996" green="0.72156862749999995" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="add:" destination="Y2b-YV-saU" id="SmK-bb-wl7"/>
                             </connections>
@@ -105,7 +103,7 @@
         <!--View Task-->
         <scene sceneID="Vpq-j2-jhE">
             <objects>
-                <viewController title="View Task" id="Wgu-dV-xNF" customClass="AKViewTaskViewController" customModule="SmartTODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="View Task" id="Wgu-dV-xNF" customClass="AKViewTaskViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dw4-aV-vep"/>
                         <viewControllerLayoutGuide type="bottom" id="MHa-Ts-qCv"/>
@@ -113,7 +111,7 @@
                     <view key="view" contentMode="scaleToFill" id="fYK-zf-GVk">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="View Task" id="BlV-PQ-9wz">
                         <barButtonItem key="backBarButtonItem" title="Back" id="N1F-Il-nt1"/>
@@ -131,7 +129,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BEv-eG-PMF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

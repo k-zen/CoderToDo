@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * New L&F. (2017/02/19)
         * Removed support to define the amount of categories and tasks, this must be done depending on the version of the App. And some aesthetic modifications too. (2017/02/19)
         * Added support for adding categories to a project. (2017/02/18)
         * Added support for showing start & close dates for each project listed. (2017/02/18)
