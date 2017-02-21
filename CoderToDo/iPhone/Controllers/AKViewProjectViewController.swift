@@ -109,12 +109,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            Func.AKAddBorderDeco(
-                cell.mainContainer,
-                color: GlobalConstants.AKTableCellBorderBg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-                position: .left
-            )
+            // Func.AKAddBorderDeco(
+            //     cell.mainContainer,
+            //     color: GlobalConstants.AKTableCellBorderBg.cgColor,
+            //     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            //     position: .left
+            // )
             
             return cell
         }
