@@ -33,11 +33,6 @@
 		49A4A0F51E589E8600CEDA1B /* AKTasksTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0AD1E589E8600CEDA1B /* AKTasksTableViewCell.xib */; };
 		49A4A0F61E589E8600CEDA1B /* AKUsernameInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0AE1E589E8600CEDA1B /* AKUsernameInputView.xib */; };
 		49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B01E589E8600CEDA1B /* Assets.xcassets */; };
-		49A4A0F81E589E8600CEDA1B /* 0001-032px.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B21E589E8600CEDA1B /* 0001-032px.png */; };
-		49A4A0F91E589E8600CEDA1B /* 0001-048px.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B31E589E8600CEDA1B /* 0001-048px.png */; };
-		49A4A0FA1E589E8600CEDA1B /* 0001-064px.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B41E589E8600CEDA1B /* 0001-064px.png */; };
-		49A4A0FB1E589E8600CEDA1B /* 0001-096px.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B51E589E8600CEDA1B /* 0001-096px.png */; };
-		49A4A0FC1E589E8600CEDA1B /* 0001-128px.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B61E589E8600CEDA1B /* 0001-128px.png */; };
 		49A4A0FD1E589E8600CEDA1B /* AppIcon-1024@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B71E589E8600CEDA1B /* AppIcon-1024@1x.png */; };
 		49A4A0FE1E589E8600CEDA1B /* AppIcon-20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B81E589E8600CEDA1B /* AppIcon-20@1x.png */; };
 		49A4A0FF1E589E8600CEDA1B /* AppIcon-20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B91E589E8600CEDA1B /* AppIcon-20@2x.png */; };
@@ -107,11 +102,6 @@
 		49A4A0AD1E589E8600CEDA1B /* AKTasksTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTasksTableViewCell.xib; sourceTree = "<group>"; };
 		49A4A0AE1E589E8600CEDA1B /* AKUsernameInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKUsernameInputView.xib; sourceTree = "<group>"; };
 		49A4A0B01E589E8600CEDA1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		49A4A0B21E589E8600CEDA1B /* 0001-032px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-032px.png"; sourceTree = "<group>"; };
-		49A4A0B31E589E8600CEDA1B /* 0001-048px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-048px.png"; sourceTree = "<group>"; };
-		49A4A0B41E589E8600CEDA1B /* 0001-064px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-064px.png"; sourceTree = "<group>"; };
-		49A4A0B51E589E8600CEDA1B /* 0001-096px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-096px.png"; sourceTree = "<group>"; };
-		49A4A0B61E589E8600CEDA1B /* 0001-128px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0001-128px.png"; sourceTree = "<group>"; };
 		49A4A0B71E589E8600CEDA1B /* AppIcon-1024@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-1024@1x.png"; sourceTree = "<group>"; };
 		49A4A0B81E589E8600CEDA1B /* AppIcon-20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-20@1x.png"; sourceTree = "<group>"; };
 		49A4A0B91E589E8600CEDA1B /* AppIcon-20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-20@2x.png"; sourceTree = "<group>"; };
@@ -274,11 +264,6 @@
 		49A4A0B11E589E8600CEDA1B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				49A4A0B21E589E8600CEDA1B /* 0001-032px.png */,
-				49A4A0B31E589E8600CEDA1B /* 0001-048px.png */,
-				49A4A0B41E589E8600CEDA1B /* 0001-064px.png */,
-				49A4A0B51E589E8600CEDA1B /* 0001-096px.png */,
-				49A4A0B61E589E8600CEDA1B /* 0001-128px.png */,
 				49A4A0B81E589E8600CEDA1B /* AppIcon-20@1x.png */,
 				49A4A0B91E589E8600CEDA1B /* AppIcon-20@2x.png */,
 				49A4A0BA1E589E8600CEDA1B /* AppIcon-20@3x.png */,
@@ -448,24 +433,19 @@
 				49A4A1041E589E8600CEDA1B /* AppIcon-40@1x.png in Resources */,
 				49A4A0FE1E589E8600CEDA1B /* AppIcon-20@1x.png in Resources */,
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
-				49A4A0FC1E589E8600CEDA1B /* 0001-128px.png in Resources */,
 				49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */,
 				49A4A0FF1E589E8600CEDA1B /* AppIcon-20@2x.png in Resources */,
 				49A4A0F41E589E8600CEDA1B /* AKTasksTableView.xib in Resources */,
 				49A4A10D1E589E8600CEDA1B /* AppIcon-76@3x.png in Resources */,
 				49A4A0F51E589E8600CEDA1B /* AKTasksTableViewCell.xib in Resources */,
-				49A4A0F91E589E8600CEDA1B /* 0001-048px.png in Resources */,
-				49A4A0FB1E589E8600CEDA1B /* 0001-096px.png in Resources */,
 				49A4A1061E589E8600CEDA1B /* AppIcon-40@3x.png in Resources */,
 				49A4A0E51E589E8600CEDA1B /* AKMain.storyboard in Resources */,
 				49A4A1091E589E8600CEDA1B /* AppIcon-60@2x.png in Resources */,
 				49A4A10A1E589E8600CEDA1B /* AppIcon-60@3x.png in Resources */,
 				49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */,
-				49A4A0FA1E589E8600CEDA1B /* 0001-064px.png in Resources */,
 				49A4A0EE1E589E8600CEDA1B /* AKAddView.xib in Resources */,
 				4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */,
 				49A4A0E41E589E8600CEDA1B /* AKLaunchScreen.storyboard in Resources */,
-				49A4A0F81E589E8600CEDA1B /* 0001-032px.png in Resources */,
 				49A4A0F01E589E8600CEDA1B /* AKIntroductoryView.xib in Resources */,
 				49A4A1081E589E8600CEDA1B /* AppIcon-60@1x.png in Resources */,
 				49A4A1071E589E8600CEDA1B /* AppIcon-512@1x.png in Resources */,
