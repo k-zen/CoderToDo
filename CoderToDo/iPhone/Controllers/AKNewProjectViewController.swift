@@ -156,7 +156,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             pickerLabel.text = ""
         }
         
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18)
+        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel

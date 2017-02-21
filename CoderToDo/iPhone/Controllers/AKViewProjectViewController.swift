@@ -109,6 +109,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            Func.AKAddBorderDeco(
+                cell.mainContainer,
+                color: GlobalConstants.AKTableCellBorderBg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
             
             return cell
         }
@@ -118,6 +124,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            Func.AKAddBorderDeco(
+                cell.mainContainer,
+                color: GlobalConstants.AKTableCellBorderBg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
             
             return cell
         }
@@ -134,9 +146,15 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+        Func.AKAddBorderDeco(
+            headerCell,
+            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         
         let title = UILabel(frame: CGRect(
-            x: padding,
+            x: padding * 2,
             y: 0,
             width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)

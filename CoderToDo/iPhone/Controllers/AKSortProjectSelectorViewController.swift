@@ -81,7 +81,7 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
             pickerLabel.text = ""
         }
         
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16)
+        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel

@@ -101,35 +101,41 @@ struct GlobalConstants {
     // ### Gruvbox Colors:
     // ### Custom Color Palette:
     static let AKCoderToDoBlue = Func.AKHexColor(0x007AFF)
-    static let AKCoderToDoGray1 = Func.AKHexColor(0x202328)
-    static let AKCoderToDoGray2 = Func.AKHexColor(0x2e3239)
-    static let AKCoderToDoGray3 = Func.AKHexColor(0x373B44)
-    static let AKCoderToDoGray4 = Func.AKHexColor(0x999999)
-    static let AKCoderToDoWhite = Func.AKHexColor(0xFFFFFF)
+    static let AKCoderToDoGray1 = Func.AKHexColor(0x222222)
+    static let AKCoderToDoGray2 = Func.AKHexColor(0x333333)
+    static let AKCoderToDoGray3 = Func.AKHexColor(0x444444)
+    static let AKCoderToDoGray4 = Func.AKHexColor(0x555555)
+    static let AKCoderToDoWhite1 = Func.AKHexColor(0xFFFFFF)
+    static let AKCoderToDoWhite2 = Func.AKHexColor(0xD9D9D6)
+    static let AKCoderToDoWhite3 = Func.AKHexColor(0xC9C9C6)
+    static let AKCoderToDoWhite4 = Func.AKHexColor(0xA9A9A6)
     // ### Custom Color Palette:
     static let AKDefaultFont = "HelveticaNeue-Thin"
     static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
     static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
-    static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite
+    static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite2
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
-    static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
-    static let AKTabBarTintSelected = GlobalConstants.AKCoderToDoBlue
+    static let AKTabBarTintNormal = GlobalConstants.AKCoderToDoWhite4
+    static let AKTabBarTintSelected = GlobalConstants.AKCoderToDoWhite1
     static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKDefaultFloatingViewBorderBg = UIColor.black
     static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoGray4
     static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoBlue
-    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray1
-    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray3
+    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray2
+    static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoWhite2
+    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray1
+    static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoWhite4
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
+    static let AKPickerFontSize: CGFloat = 16.0
     static let AKViewCornerRadius: CGFloat = 8.0
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
     static let AKBadgeColorBg = UIColor.clear
-    static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite
+    static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3

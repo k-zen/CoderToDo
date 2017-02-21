@@ -120,19 +120,28 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
         switch DataInterface.getProjectStatus(project: project) {
         case ProjectStatus.ACEPTING_TASKS:
-            cell.statusValue.backgroundColor = GlobalConstants.AKBlueForWhiteFg
-            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-            cell.statusValue.layer.masksToBounds = true
+            Func.AKAddBorderDeco(
+                cell.statusValue,
+                color: GlobalConstants.AKBlueForWhiteFg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness,
+                position: .bottom
+            )
             break
         case ProjectStatus.OPEN:
-            cell.statusValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
-            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-            cell.statusValue.layer.masksToBounds = true
+            Func.AKAddBorderDeco(
+                cell.statusValue,
+                color: GlobalConstants.AKGreenForWhiteFg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness,
+                position: .bottom
+            )
             break
         case ProjectStatus.CLOSED:
-            cell.statusValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
-            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-            cell.statusValue.layer.masksToBounds = true
+            Func.AKAddBorderDeco(
+                cell.statusValue,
+                color: GlobalConstants.AKRedForWhiteFg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness,
+                position: .bottom
+            )
             break
         }
         // Times
@@ -163,7 +172,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         Func.AKAddBorderDeco(
             cell.infoContainer,
-            color: GlobalConstants.AKCoderToDoBlue.cgColor,
+            color: GlobalConstants.AKTableCellBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )
@@ -184,7 +193,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
         Func.AKAddBorderDeco(
             headerCell,
-            color: GlobalConstants.AKOrangeForBlackFg.cgColor,
+            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )

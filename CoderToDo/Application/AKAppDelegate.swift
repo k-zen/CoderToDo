@@ -38,10 +38,10 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
             NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 22),
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
-        UINavigationBar.appearance().tintColor = GlobalConstants.AKTabBarTintSelected
+        UINavigationBar.appearance().tintColor = GlobalConstants.AKDefaultFg
         UIBarButtonItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18),
-            NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+            NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
             ], for: .normal
         )
         

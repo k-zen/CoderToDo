@@ -15,14 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hco-tp-AE1" id="YJo-LI-y7A" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT1-Ym-jX5" userLabel="Info_Container">
                         <rect key="frame" x="0.0" y="0.0" width="188" height="40.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
-                                <rect key="frame" x="12" y="0.0" width="168" height="40"/>
+                                <rect key="frame" x="16" y="0.0" width="164" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -31,7 +31,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="TpA-BJ-sXN" secondAttribute="bottom" id="6gg-Lw-Rwj"/>
                             <constraint firstAttribute="trailing" secondItem="TpA-BJ-sXN" secondAttribute="trailing" constant="8" id="WSM-qt-72Y"/>
-                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" constant="12" id="WrL-s2-QW0"/>
+                            <constraint firstItem="TpA-BJ-sXN" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="leading" constant="16" id="WrL-s2-QW0"/>
                             <constraint firstItem="TpA-BJ-sXN" firstAttribute="top" secondItem="pT1-Ym-jX5" secondAttribute="top" id="wwB-YJ-oLv"/>
                         </constraints>
                     </view>
@@ -40,12 +40,12 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVH-t7-7XJ" userLabel="State_Value">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="39.5"/>
-                                <color key="backgroundColor" red="0.98039215686274506" green="0.74117647058823533" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="Vwn-70-wtr"/>
                                     <constraint firstAttribute="width" constant="80" id="uCA-hN-IAb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjZ-au-JKT" userLabel="CP_Value">
@@ -70,7 +70,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" constant="1" id="OSS-ce-iPR"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="trailing" id="PxY-Km-l2i"/>

@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="40" id="yNf-ef-y1T" userLabel="Days_Table_View_Cell" customClass="AKDaysTableViewCell" customModule="SmartTODO" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="40" id="yNf-ef-y1T" userLabel="Days_Table_View_Cell" customClass="AKDaysTableViewCell" customModule="CoderToDo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yNf-ef-y1T" id="u1C-c1-V70" userLabel="Main_Container">
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.2156862745" green="0.23137254900000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="023-90-pND" secondAttribute="bottom" id="J5Q-Xa-hJq"/>
                     <constraint firstItem="023-90-pND" firstAttribute="top" secondItem="u1C-c1-V70" secondAttribute="top" id="OXu-9Z-FJL"/>
