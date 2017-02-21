@@ -50,7 +50,7 @@
         <attribute name="maxCategories" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxTasks" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notifyClosingTime" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="username" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
         <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
         <fetchedProperty name="getProjects" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="Project"/>
