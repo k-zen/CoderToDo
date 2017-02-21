@@ -151,10 +151,10 @@ class AKDataInterface
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
             let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
-            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
-            let d1 = nowDateComponents.day ?? 0
-            let m1 = nowDateComponents.month ?? 0
-            let y1 = nowDateComponents.year ?? 0
+            let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
+            let d1 = tomorrowDateComponents.day ?? 0
+            let m1 = tomorrowDateComponents.month ?? 0
+            let y1 = tomorrowDateComponents.year ?? 0
             
             // Check if the project already contains tomorrow.
             var alreadyContainsDate = false
@@ -278,11 +278,40 @@ class AKDataInterface
     static func getDayTitle(day: Day) -> String
     {
         if let date = day.date as? Date {
+            let now = Date()
+            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
+            let d1 = nowDateComponents.day ?? 0
+            let m1 = nowDateComponents.month ?? 0
+            let y1 = nowDateComponents.year ?? 0
+            
+            let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
+            let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
+            let d2 = tomorrowDateComponents.day ?? 0
+            let m2 = tomorrowDateComponents.month ?? 0
+            let y2 = tomorrowDateComponents.year ?? 0
+            
+            let yesterday = Func.AKGetCalendarForLoading().date(byAdding: .day, value: -1, to: now)!
+            let yesterdayDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: yesterday)
+            let d3 = yesterdayDateComponents.day ?? 0
+            let m3 = yesterdayDateComponents.month ?? 0
+            let y3 = yesterdayDateComponents.year ?? 0
+            
             let d = Func.AKGetCalendarForLoading().dateComponents([.day], from: date).day ?? 0
             let m = Func.AKGetCalendarForLoading().dateComponents([.month], from: date).month ?? 0
             let y = Func.AKGetCalendarForLoading().dateComponents([.year], from: date).year ?? 0
             
-            return String(format: "%.2i/%.2i/%.4i", m, d, y)
+            if d == d1 && m == m1 && y == y1 {
+                return "Today"
+            }
+            else if d == d2 && m == m2 && y == y2 {
+                return "Tomorrow"
+            }
+            else if d == d3 && m == m3 && y == y3 {
+                return "Yesterday"
+            }
+            else {
+                return String(format: "%.2i/%.2i/%.4i", m, d, y)
+            }
         }
         
         return "N\\A"
