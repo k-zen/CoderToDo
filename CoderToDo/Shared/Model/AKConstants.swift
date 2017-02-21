@@ -146,6 +146,8 @@ struct GlobalConstants {
     static let AKMinCategoryNameLength = 3
     static let AKMaxTaskNameLength = 140
     static let AKMinTaskNameLength = 3
+    static let AKMaxTaskNoteLength = 140
+    static let AKMinTaskNoteLength = 3
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKAcceptingTasksDefaultTime = 2359

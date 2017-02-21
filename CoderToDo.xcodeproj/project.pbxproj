@@ -67,6 +67,7 @@
 		49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */; };
 		49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */; };
 		49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */; };
+		49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */; };
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCE1E5B176200DACF53 /* AKTaskName.swift */; };
@@ -137,6 +138,7 @@
 		49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWSUtils.swift; sourceTree = "<group>"; };
 		49A4A0E01E589E8600CEDA1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
+		49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNotesTextField.swift; sourceTree = "<group>"; };
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
 		49D57DCE1E5B176200DACF53 /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				49A4A0D01E589E8600CEDA1B /* AKCustomView.swift */,
 				49A4A0D11E589E8600CEDA1B /* AKCustomViewController.swift */,
 				49A4A0D21E589E8600CEDA1B /* CustomViews */,
+				49A77B3F1E5CCD5D009732A4 /* SmallComponents */,
 				49A4A0D41E589E8600CEDA1B /* TableCells */,
 			);
 			path = AKCustomComponents;
@@ -356,6 +359,14 @@
 				49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49A77B3F1E5CCD5D009732A4 /* SmallComponents */ = {
+			isa = PBXGroup;
+			children = (
+				49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */,
+			);
+			path = SmallComponents;
 			sourceTree = "<group>";
 		};
 		AFA3CC6BEA5EDB65F5109664 /* Frameworks */ = {
@@ -550,6 +561,7 @@
 				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,
 				49A4A1131E589E8600CEDA1B /* AKTasksTableView.swift in Sources */,
 				49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */,
+				49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,6 +49,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         // Always reload the table!
         self.daysTable?.reloadData()
+        self.customCell.tasksTable?.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -58,7 +59,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             case GlobalConstants.AKViewTaskSegue:
                 if let destination = segue.destination as? AKViewTaskViewController {
                     if let task = sender as? Task {
-                        // destination.project = project
+                        destination.task = task
                         destination.navController.title = task.name ?? "View Task"
                     }
                 }
