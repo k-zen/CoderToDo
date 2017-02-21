@@ -110,8 +110,9 @@ struct GlobalConstants {
     static let AKCoderToDoWhite3 = Func.AKHexColor(0xC9C9C6)
     static let AKCoderToDoWhite4 = Func.AKHexColor(0xA9A9A6)
     // ### Custom Color Palette:
-    static let AKDefaultFont = "HelveticaNeue-Thin"
-    static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
+    static let AKDefaultFont = "AvenirNextCondensed-Regular"
+    static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
+    static let AKTertiaryFont = "AvenirNextCondensed-Bold"
     static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
     static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite2
     static let AKTabBarBg = GlobalConstants.AKDefaultBg

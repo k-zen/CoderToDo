@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Changed the font to *Avenir Next Condensed*. (2017/02/21)
         * Some modifications to the L&F. (2017/02/21)
         * Some modifications to the L&F. Added support for a tab bar. (2017/02/21)
         * Added support for displaying if it's today, tomorrow or yesterday in dates. (2017/02/21)

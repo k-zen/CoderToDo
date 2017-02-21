@@ -204,7 +204,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0)
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = project.name ?? "N/A"
         title.textAlignment = .left
