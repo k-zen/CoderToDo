@@ -21,29 +21,30 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
         // ### Customize the App.
-        UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
         UITabBarItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
                 NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintNormal
-            ], for: UIControlState.normal
+            ], for: .normal
         )
         UITabBarItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
                 NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
-            ], for: UIControlState.selected
+            ], for: .selected
+        )
+        UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
+                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+            ], for: .normal
         )
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 22.0) ?? UIFont.systemFont(ofSize: 22),
+            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
         UINavigationBar.appearance().tintColor = GlobalConstants.AKDefaultFg
-        UIBarButtonItem.appearance().setTitleTextAttributes([
-            NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18),
-            NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
-            ], for: .normal
-        )
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()

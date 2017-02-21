@@ -14,6 +14,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
+    @IBOutlet weak var sort: UIBarButtonItem!
+    @IBOutlet weak var add: UIBarButtonItem!
     
     // MARK: Actions
     @IBAction func organizeProjects(_ sender: Any)
@@ -298,5 +300,19 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Add UITableView's DataSource & Delegate.
         self.projectsTable?.dataSource = self
         self.projectsTable?.delegate = self
+        
+        // Custom L&F.
+        self.sort.setTitleTextAttributes(
+            [
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
+                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+            ], for: .normal
+        )
+        self.add.setTitleTextAttributes(
+            [
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
+                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+            ], for: .normal
+        )
     }
 }

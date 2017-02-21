@@ -117,7 +117,7 @@ class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewD
         self.order.tag = LocalEnums.order.rawValue
         
         // Custom L&F.
-        Func.AKAddBlurView(view: self.controlsContainer, effect: UIBlurEffectStyle.dark, addClearColorBgToView: true)
+        // Func.AKAddBlurView(view: self.controlsContainer, effect: UIBlurEffectStyle.dark, addClearColorBgToView: true)
         
         self.filters.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.order.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
