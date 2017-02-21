@@ -64,6 +64,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             )
             return
         }
+        
+        // Always reload the table!
+        self.projectsTable?.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -115,6 +118,23 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         // Project State
         cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
+        switch DataInterface.getProjectStatus(project: project) {
+        case ProjectStatus.ACEPTING_TASKS:
+            cell.statusValue.backgroundColor = GlobalConstants.AKBlueForWhiteFg
+            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            cell.statusValue.layer.masksToBounds = true
+            break
+        case ProjectStatus.OPEN:
+            cell.statusValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
+            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            cell.statusValue.layer.masksToBounds = true
+            break
+        case ProjectStatus.CLOSED:
+            cell.statusValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
+            cell.statusValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            cell.statusValue.layer.masksToBounds = true
+            break
+        }
         // Times
         if let startingTime = project.startingTime as? Date {
             cell.startValue.text = String(
@@ -140,6 +160,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+        cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        Func.AKAddBorderDeco(
+            cell.infoContainer,
+            color: GlobalConstants.AKCoderToDoBlue.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         
         return cell
     }
@@ -150,14 +177,20 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
-        let badgeSizeWidth = CGFloat(110.0)
+        let badgeSizeWidth = CGFloat(130.0)
         let badgeSizeHeight = CGFloat(21.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+        Func.AKAddBorderDeco(
+            headerCell,
+            color: GlobalConstants.AKOrangeForBlackFg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         
         let title = UILabel(frame: CGRect(
-            x: padding,
+            x: padding * 2,
             y: 0,
             width: tableWidth - (padding * 3) - badgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
@@ -186,11 +219,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: badgeSizeWidth,
             height: badgeSizeHeight)
         )
-        pendingTasksBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
+        pendingTasksBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 14.0)
         pendingTasksBadge.textColor = GlobalConstants.AKBadgeColorFg
         pendingTasksBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
         pendingTasksBadge.text = String(format: "Pending Tasks: %i", DataInterface.countProjectPendingTasks(project: project))
-        pendingTasksBadge.textAlignment = .center
+        pendingTasksBadge.textAlignment = .right
         pendingTasksBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         pendingTasksBadge.layer.masksToBounds = true
         // ### DEBUG

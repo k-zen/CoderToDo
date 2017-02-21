@@ -46,6 +46,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
+        // Always reload the table!
+        self.daysTable?.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

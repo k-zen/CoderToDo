@@ -89,6 +89,7 @@ struct GlobalConstants {
     static let AKBlueForWhiteFg = Func.AKHexColor(0x458588)
     static let AKPurpleForWhiteFg = Func.AKHexColor(0xB16286)
     static let AKAquaForWhiteFg = Func.AKHexColor(0x689D6A)
+    static let AKOrangeForWhiteFg = Func.AKHexColor(0xD65D0E)
     // For black foreground:
     static let AKRedForBlackFg = Func.AKHexColor(0xFB4934)
     static let AKGreenForBlackFg = Func.AKHexColor(0xB8BB26)
@@ -96,30 +97,39 @@ struct GlobalConstants {
     static let AKBlueForBlackFg = Func.AKHexColor(0x83A598)
     static let AKPurpleForBlackFg = Func.AKHexColor(0xD3869B)
     static let AKAquaForBlackFg = Func.AKHexColor(0x8EC07C)
+    static let AKOrangeForBlackFg = Func.AKHexColor(0xFE8019)
     // ### Gruvbox Colors:
+    // ### Custom Color Palette:
+    static let AKCoderToDoBlue = Func.AKHexColor(0x007AFF)
+    static let AKCoderToDoGray1 = Func.AKHexColor(0x202328)
+    static let AKCoderToDoGray2 = Func.AKHexColor(0x2e3239)
+    static let AKCoderToDoGray3 = Func.AKHexColor(0x373B44)
+    static let AKCoderToDoGray4 = Func.AKHexColor(0x999999)
+    static let AKCoderToDoWhite = Func.AKHexColor(0xFFFFFF)
+    // ### Custom Color Palette:
     static let AKDefaultFont = "HelveticaNeue-Thin"
     static let AKSecondaryFont = "HelveticaNeue-CondensedBold"
-    static let AKDefaultBg = Func.AKHexColor(0x202328)
-    static let AKDefaultFg = Func.AKHexColor(0xFFFFFF)
+    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
+    static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite
     static let AKTabBarBg = GlobalConstants.AKDefaultBg
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
-    static let AKTabBarTintSelected = Func.AKHexColor(0x007AFF)
-    static let AKDefaultTextfieldBorderBg = Func.AKHexColor(0x999999)
+    static let AKTabBarTintSelected = GlobalConstants.AKCoderToDoBlue
+    static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = Func.AKHexColor(0x373B44)
+    static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKDefaultFloatingViewBorderBg = UIColor.black
-    static let AKDisabledButtonBg = Func.AKHexColor(0x999999)
-    static let AKEnabledButtonBg = Func.AKHexColor(0x0088CC)
-    static let AKTableHeaderCellBg = Func.AKHexColor(0x2e3239)
-    static let AKTableCellBg = Func.AKHexColor(0x373B44)
+    static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoGray4
+    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoBlue
+    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray1
+    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray3
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKViewCornerRadius: CGFloat = 8.0
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
-    static let AKBadgeColorBg = Func.AKHexColor(0x458588)
-    static let AKBadgeColorFg = Func.AKHexColor(0xFFFFFF)
+    static let AKBadgeColorBg = UIColor.clear
+    static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
