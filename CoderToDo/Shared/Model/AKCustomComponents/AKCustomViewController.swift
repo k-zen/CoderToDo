@@ -23,7 +23,6 @@ import UIKit
 /// - Date: Jan 5, 2017
 class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
 {
-    
     // MARK: Flags
     /// Flag to add a BlurView in the background.
     var shouldAddBlurView: Bool = false
@@ -48,6 +47,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let defaultOperationsWhenGesture: (AKCustomViewController, UIGestureRecognizer?) -> Void = { (controller, gesture) -> Void in
         // Always close the keyboard if open.
         controller.view.endEditing(true)
+        // Always collapse the message view.
+        controller.hideMessage()
     }
     /// Operations to perform when a **Tap** gesture is detected.
     var additionalOperationsWhenTaped: (UIGestureRecognizer?) -> Void = { (gesture) -> Void in }
@@ -74,6 +75,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var longPressGesture: UILongPressGestureRecognizer?
     var dismissViewCompletionTask: (Void) -> Void = {}
     var localizableDictionary: NSDictionary?
+    // Overlay Controllers
+    let messageOverlayController = AKMessageView()
+    var messageOverlayView: UIView!
+    let continueMessageOverlayController = AKContinueMessageView()
+    var continueMessageOverlayView: UIView!
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -93,6 +99,44 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Persist to disk data each time a view controller appears.
         AKMasterReference.saveData(instance: Func.AKObtainMasterReference())
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        // Setup the overlays.
+        var origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.messageOverlayView = self.messageOverlayController.customView
+        self.messageOverlayController.controller = self
+        self.messageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKMessageView.LocalConstants.AKViewWidth,
+            height: 0.0
+        )
+        self.messageOverlayView.translatesAutoresizingMaskIntoConstraints = true
+        self.messageOverlayView.clipsToBounds = true
+        self.messageOverlayView.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.messageOverlayView.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.messageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+        self.view.addSubview(self.messageOverlayView)
+        
+        origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.continueMessageOverlayView = self.continueMessageOverlayController.customView
+        self.continueMessageOverlayController.controller = self
+        self.continueMessageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKContinueMessageView.LocalConstants.AKViewWidth,
+            height: 0.0
+        )
+        self.continueMessageOverlayView.translatesAutoresizingMaskIntoConstraints = true
+        self.continueMessageOverlayView.clipsToBounds = true
+        self.continueMessageOverlayView.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.continueMessageOverlayView.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.continueMessageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+        self.view.addSubview(self.continueMessageOverlayView)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
@@ -203,6 +247,66 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         taskBeforePresenting(self, controller)
         
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    func showMessage(message: String)
+    {
+        self.messageOverlayController.message.text = message
+        
+        UIView.beginAnimations(AKMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
+        let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.messageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKMessageView.LocalConstants.AKViewWidth,
+            height: AKMessageView.LocalConstants.AKViewHeight
+        )
+        UIView.commitAnimations()
+    }
+    
+    func showContinueMessage(message: String,
+                             yesAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
+                             noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void)
+    {
+        self.continueMessageOverlayController.message.text = message
+        self.continueMessageOverlayController.yesAction = yesAction
+        self.continueMessageOverlayController.noAction = noAction
+        
+        UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
+        let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.continueMessageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKContinueMessageView.LocalConstants.AKViewWidth,
+            height: AKContinueMessageView.LocalConstants.AKViewHeight
+        )
+        UIView.commitAnimations()
+    }
+    
+    func hideMessage()
+    {
+        UIView.beginAnimations(AKMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+        let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.messageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKMessageView.LocalConstants.AKViewWidth,
+            height: 0.0
+        )
+        UIView.commitAnimations()
+    }
+    
+    func hideContinueMessage()
+    {
+        UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+        let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
+        self.continueMessageOverlayView.frame = CGRect(
+            x: origin,
+            y: 40.0,
+            width: AKContinueMessageView.LocalConstants.AKViewWidth,
+            height: 0.0
+        )
+        UIView.commitAnimations()
     }
     
     // MARK: Gesture Handling

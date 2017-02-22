@@ -21,18 +21,28 @@ class AKSelectTaskStateView: AKCustomView
     @IBAction func done(_ sender: Any)
     {
         if let controller = controller as? AKViewTaskViewController {
-            // TODO: Implement message here that this action can't be undone.
-            
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.DONE.rawValue, for: .normal)
-            controller.changeCP.value = 100.0
-            controller.changeCP.isEnabled = false
-            controller.cpValue.text = String(format: "%.1f%%", controller.changeCP.value)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.DONE.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
+            controller.showContinueMessage(
+                message: "This action can't be undone.",
+                yesAction: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKViewTaskViewController {
+                        // Change caller button.
+                        presenterController.statusValue.setTitle(TaskStates.DONE.rawValue, for: .normal)
+                        presenterController.changeCP.value = 100.0
+                        presenterController.changeCP.isEnabled = false
+                        presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
+                        Func.AKAddBorderDeco(
+                            presenterController.statusValue,
+                            color: Func.AKGetColorForTaskState(taskState: TaskStates.DONE.rawValue).cgColor,
+                            thickness: GlobalConstants.AKDefaultBorderThickness,
+                            position: .bottom
+                        )
+                        // Toggle to not editable mode.
+                        presenterController.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+                    }
+                    
+                    presenterController?.hideContinueMessage() },
+                noAction: { (presenterController) -> Void in
+                    presenterController?.hideContinueMessage() }
             )
             
             // Collapse this view.

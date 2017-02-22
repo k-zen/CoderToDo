@@ -224,6 +224,11 @@ enum TaskStateColor: UInt {
     case VERIFIED, NOT_VERIFIED = 0x8EC07C
 }
 
+enum TaskMode: UInt {
+    case EDITABLE = 1
+    case NOT_EDITABLE = 2
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {

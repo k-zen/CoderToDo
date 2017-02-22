@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for two types of floating message views. (2017/02/22)
         * Added support for overlay used to change the status of a task. (2017/02/22)
         * Added checks to edit a task only when the day is marked as open. (2017/02/22)
         * Added support for *ViewTask* view. (2017/02/21)
