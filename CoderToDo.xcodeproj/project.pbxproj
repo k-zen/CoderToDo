@@ -71,6 +71,8 @@
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCE1E5B176200DACF53 /* AKTaskName.swift */; };
+		49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */; };
+		49DF7ED21E5DD7720017BEC6 /* AKSelectTaskStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */; };
 		9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 851AFF731111790123E2943F /* Pods_CoderToDo.framework */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +144,8 @@
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
 		49D57DCE1E5B176200DACF53 /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
+		49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectTaskStateView.xib; sourceTree = "<group>"; };
+		49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectTaskStateView.swift; sourceTree = "<group>"; };
 		851AFF731111790123E2943F /* Pods_CoderToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A4BA6BF07F6744527AF0B9 /* Pods-CoderToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +249,7 @@
 				49A4A0A81E589E8600CEDA1B /* AKIntroductoryView.xib */,
 				49A4A0A91E589E8600CEDA1B /* AKNewProjectView.xib */,
 				49A4A0AA1E589E8600CEDA1B /* AKProjectsTableViewCell.xib */,
+				49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */,
 				49A4A0AB1E589E8600CEDA1B /* AKSortProjectSelectorView.xib */,
 				49A4A0AC1E589E8600CEDA1B /* AKTasksTableView.xib */,
 				49A4A0AD1E589E8600CEDA1B /* AKTasksTableViewCell.xib */,
@@ -337,6 +342,7 @@
 		49A4A0D21E589E8600CEDA1B /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */,
 				49A4A0D31E589E8600CEDA1B /* AKTasksTableView.swift */,
 			);
 			path = CustomViews;
@@ -450,6 +456,7 @@
 				49A4A10D1E589E8600CEDA1B /* AppIcon-76@3x.png in Resources */,
 				49A4A0F51E589E8600CEDA1B /* AKTasksTableViewCell.xib in Resources */,
 				49A4A1061E589E8600CEDA1B /* AppIcon-40@3x.png in Resources */,
+				49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */,
 				49A4A0E51E589E8600CEDA1B /* AKMain.storyboard in Resources */,
 				49A4A1091E589E8600CEDA1B /* AppIcon-60@2x.png in Resources */,
 				49A4A10A1E589E8600CEDA1B /* AppIcon-60@3x.png in Resources */,
@@ -560,6 +567,7 @@
 				49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */,
 				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,
 				49A4A1131E589E8600CEDA1B /* AKTasksTableView.swift in Sources */,
+				49DF7ED21E5DD7720017BEC6 /* AKSelectTaskStateView.swift in Sources */,
 				49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */,
 				49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */,
 			);

@@ -8,6 +8,9 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     }
     
     // MARK: Properties
+    // Overlay Controllers
+    let selectTaskStateOverlayController = AKSelectTaskStateView()
+    var selectTaskStateOverlayView: UIView!
     var task: Task!
     
     // MARK: Outlets
@@ -22,7 +25,18 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var stat2Value: UILabel!
     
     // MARK: Actions
-    @IBAction func changeStatus(_ sender: Any) {}
+    @IBAction func changeStatus(_ sender: Any)
+    {
+        UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
+        let coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        self.selectTaskStateOverlayView.frame = CGRect(
+            x: coordinates.origin.x,
+            y: coordinates.origin.y + self.statusValue.bounds.height,
+            width: self.selectTaskStateOverlayView.bounds.width,
+            height: AKSelectTaskStateView.LocalConstants.AKViewHeight
+        )
+        UIView.commitAnimations()
+    }
     
     @IBAction func changeCP(_ sender: Any)
     {
@@ -53,7 +67,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.cpValue.text = String(format: "%.1f%%", self.task.completionPercentage)
         
         // Enable editing only if day is open.
-        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
+        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) || self.task.state == TaskStates.DONE.rawValue {
             // TODO: Show message to user and disable.
             // Disable:
             // 1. State Change
@@ -61,18 +75,44 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             // 3. Notes
             self.statusValue.isEnabled = false
             self.changeCP.isEnabled = false
-            self.notesValue.isEditable = false
         }
         else {
             self.statusValue.isEnabled = true
             self.changeCP.isEnabled = true
-            self.notesValue.isEditable = true
         }
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        // Setup the overlays.
+        let coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        self.selectTaskStateOverlayView = self.selectTaskStateOverlayController.customView
+        self.selectTaskStateOverlayController.controller = self
+        self.selectTaskStateOverlayView.frame = CGRect(
+            x: coordinates.origin.x,
+            y: coordinates.origin.y + self.statusValue.bounds.height,
+            width: self.selectTaskStateOverlayView.bounds.width,
+            height: 0
+        )
+        self.selectTaskStateOverlayView.translatesAutoresizingMaskIntoConstraints = true
+        self.selectTaskStateOverlayView.clipsToBounds = true
+        self.view.addSubview(self.selectTaskStateOverlayView)
+        
+        // Custom L&F.
+        self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        Func.AKAddBorderDeco(
+            self.notesValue,
+            color: GlobalConstants.AKCoderToDoWhite2.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 2.0,
+            position: .left
+        )
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -116,20 +156,21 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
+        super.additionalOperationsWhenTaped = { (gesture) -> Void in
+            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+            let coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+            self.selectTaskStateOverlayView.frame = CGRect(
+                x: coordinates.origin.x,
+                y: coordinates.origin.y + self.statusValue.bounds.height,
+                width: self.selectTaskStateOverlayView.bounds.width,
+                height: 0.0
+            )
+            UIView.commitAnimations()
+        }
         super.setup()
         
         // Set Delegator.
         self.notesValue.delegate = self
         self.notesValue.tag = LocalEnums.notes.rawValue
-        
-        // Custom L&F.
-        // self.notesValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        Func.AKAddBorderDeco(
-            self.notesValue,
-            color: GlobalConstants.AKCoderToDoWhite2.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 2.0,
-            position: .left
-        )
     }
 }
