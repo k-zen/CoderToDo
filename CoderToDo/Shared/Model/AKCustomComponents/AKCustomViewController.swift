@@ -90,6 +90,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         if GlobalConstants.AKDebug {
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
         }
+        
+        // Persist to disk data each time a view controller appears.
+        AKMasterReference.saveData(instance: Func.AKObtainMasterReference())
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
