@@ -46,7 +46,12 @@ class AKMasterReference: NSObject
     static func saveData(instance: AKMasterReference?) -> Void
     {
         do {
-            try instance?.dump().moc.save()
+            if (instance?.moc.hasChanges)! {
+                try instance?.dump().moc.save()
+            }
+            else {
+                NSLog("=> INFO: THERE ARE NO CHANGES TO SAVE!")
+            }
         }
         catch {
             fatalError("=> ERROR: \(error)")
