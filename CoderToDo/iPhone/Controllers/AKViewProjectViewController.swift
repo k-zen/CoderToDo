@@ -60,7 +60,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 if let destination = segue.destination as? AKViewTaskViewController {
                     if let task = sender as? Task {
                         destination.task = task
-                        destination.navController.title = task.name ?? "View Task"
+                        destination.navController.title = "Task Visualization"
                     }
                 }
                 break

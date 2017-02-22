@@ -51,6 +51,23 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         // Completion Percentage.
         self.changeCP.value = Double(self.task.completionPercentage)
         self.cpValue.text = String(format: "%.1f%%", self.task.completionPercentage)
+        
+        // Enable editing only if day is open.
+        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
+            // TODO: Show message to user and disable.
+            // Disable:
+            // 1. State Change
+            // 2. Completion Percentage
+            // 3. Notes
+            self.statusValue.isEnabled = false
+            self.changeCP.isEnabled = false
+            self.notesValue.isEditable = false
+        }
+        else {
+            self.statusValue.isEnabled = true
+            self.changeCP.isEnabled = true
+            self.notesValue.isEditable = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

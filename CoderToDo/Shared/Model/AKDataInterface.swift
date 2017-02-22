@@ -82,9 +82,25 @@ class AKDataInterface
         return counter
     }
     
-    static func isProjectWithinWorkingDay(project: Project) -> Bool
+    ///
+    /// This function will check if a given project is open or closed.
+    ///
+    /// - Parameter project: The project to check.
+    ///
+    /// - Returns: TRUE if the project is "OPEN" (check for documentation to see when a project can be open), FALSE otherwise.
+    ///
+    static func isProjectOpen(project: Project) -> Bool
     {
-        return DataInterface.getProjectStatus(project: project) == ProjectStatus.OPEN ? true : false
+        if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
+            let now = Date()
+            let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
+            let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
+            let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
+            
+            return nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance)
+        }
+        
+        return false
     }
     
     static func getProjectStatus(project: Project) -> ProjectStatus
