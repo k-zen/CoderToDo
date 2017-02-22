@@ -6,6 +6,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34
         static let AKRowHeight: CGFloat = 40
+        static let AKFooterHeight: CGFloat = 6
     }
     
     // MARK: Properties
@@ -132,6 +133,14 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         return headerCell
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
+    {
+        let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: LocalConstants.AKFooterHeight))
+        footerCell.backgroundColor = UIColor.clear
+        
+        return footerCell
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int
     {
         if let day = self.day {
@@ -161,7 +170,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return LocalConstants.AKHeaderHeight }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

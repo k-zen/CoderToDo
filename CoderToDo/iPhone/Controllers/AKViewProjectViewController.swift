@@ -9,8 +9,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     // MARK: Properties
-    let customCell = AKTasksTableView()
-    var customCellView: UIView!
+    var customCellArray = [AKTasksTableView]()
     var project: Project!
     
     // MARK: Outlets
@@ -31,7 +30,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                             // Always reload the days table!
                             if let presenterController = presenterController as? AKViewProjectViewController {
                                 presenterController.daysTable.reloadData()
-                                presenterController.customCell.tasksTable?.reloadData()
+                                for customCell in presenterController.customCellArray {
+                                    customCell.tasksTable?.reloadData()
+                                }
                             } }
         )
     }
@@ -49,7 +50,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         // Always reload the table!
         self.daysTable?.reloadData()
-        self.customCell.tasksTable?.reloadData()
+        for customCell in self.customCellArray {
+            customCell.tasksTable?.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -89,23 +92,24 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // If the count of categories is bigger than 0, it means there are tasks. Else show empty day cell.
         if DataInterface.countCategories(day: day) > 0 {
             // Calculate cell height.
-            let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight) + (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
+            let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+                (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
             cell.title.isHidden = true
             
-            customCellView = customCell.customView
+            let customCell = AKTasksTableView()
             customCell.controller = self
             customCell.day = day
-            customCellView.frame = CGRect(
+            customCell.customView.frame = CGRect(
                 x: 0,
                 y: 0,
                 width: tableView.bounds.width,
                 height: cellHeight
             )
-            customCellView.translatesAutoresizingMaskIntoConstraints = true
-            customCellView.clipsToBounds = true
-            cell.mainContainer.addSubview(customCellView)
+            customCell.customView.translatesAutoresizingMaskIntoConstraints = true
+            customCell.customView.clipsToBounds = true
+            cell.mainContainer.addSubview(customCell.customView)
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -116,6 +120,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             //     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             //     position: .left
             // )
+            
+            self.customCellArray.insert(customCell, at: (indexPath as NSIndexPath).section)
             
             return cell
         }
@@ -217,7 +223,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             return LocalConstants.AKEmptyRowHeight
         }
         else {
-            return (CGFloat(DataInterface.countCategories(day: day)) * AKTasksTableView.LocalConstants.AKHeaderHeight) + (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
+            return (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+                (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
     
