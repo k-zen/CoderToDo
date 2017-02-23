@@ -13,6 +13,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     var project: Project!
     
     // MARK: Outlets
+    @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlsContainer: UIView!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var taskNameValue: UITextField!
@@ -118,7 +119,41 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         
         switch textField.tag {
+        case LocalEnums.taskName.rawValue:
+            var offset = textField.convert(textField.frame, to: self.scrollContainer).origin
+            offset.x = 0
+            
+            var keyboardHeight = GlobalConstants.AKKeyboardHeight
+            if textField.spellCheckingType == UITextSpellCheckingType.yes || textField.spellCheckingType == UITextSpellCheckingType.default {
+                keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
+            }
+            
+            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.view, component: self.add)
+            if keyboardHeight > height {
+                offset.y = abs(keyboardHeight - height)
+            }
+            else {
+                offset.y = 0
+            }
+            
+            self.scrollContainer.setContentOffset(offset, animated: true)
+            
+            return true
         default:
+            return true
+        }
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        switch textField.tag {
+        default:
+            var offset = textField.convert(textField.frame, to: self.scrollContainer).origin
+            offset.x = 0
+            offset.y = 0
+            
+            self.scrollContainer.setContentOffset(offset, animated: true)
+            
             return true
         }
     }

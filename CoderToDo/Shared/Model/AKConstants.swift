@@ -139,6 +139,9 @@ struct GlobalConstants {
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
     static let AKBadgeColorBg = UIColor.clear
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
+    static let AKCloseKeyboardToolbarHeight: CGFloat = 30
+    static let AKSpellCheckerToolbarHeight: CGFloat = 40
+    static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
@@ -313,7 +316,7 @@ class UtilityFunctions
     ///
     func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController) {
         let keyboardToolbar = UIToolbar()
-        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.bounds.width, height: 30)
+        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.bounds.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
         keyboardToolbar.barTintColor = UIColor.black
         
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -399,6 +402,15 @@ class UtilityFunctions
     func AKExecuteInMainThread(code: @escaping (Void) -> Void)
     {
         OperationQueue.main.addOperation({ () -> Void in code() })
+    }
+    
+    func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView) -> CGFloat
+    {
+        var height: CGFloat = container.frame.height
+        height -= container.convert(component.frame, to: container).origin.y
+        height -= component.frame.height
+        
+        return abs(height)
     }
     
     func AKGetCalendarForSaving() -> Calendar
