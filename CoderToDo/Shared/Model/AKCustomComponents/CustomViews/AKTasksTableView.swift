@@ -44,7 +44,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         let task = DataInterface.getTasks(category: category)[(indexPath as NSIndexPath).row]
         
         let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
-        cell.taskNameValue.text = String(format: "+ %@", task.name ?? "Some Name...")
+        cell.taskNameValue.text = String(format: "• %@", task.name ?? "Some Name...")
         // Completion Percentage.
         cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
         switch task.completionPercentage {

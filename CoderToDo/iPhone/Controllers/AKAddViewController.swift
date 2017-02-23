@@ -41,7 +41,7 @@ class AKAddViewController: AKCustomViewController
             )
             break
         default:
-            NSLog("=> ERROR: YOU ARE NOT ALLOWED TO ADD NEW TASKS!")
+            self.showMessage(message: "You are not allowed to add new tasks now. Wait for the working day to finish.")
             break
         }
     }
