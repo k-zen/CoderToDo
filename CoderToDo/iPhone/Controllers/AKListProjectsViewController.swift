@@ -225,7 +225,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // pendingTasksBadgeContainer.layer.borderWidth = 1.0
         
         let pendingTasksBadge = UILabel(frame: CGRect(
-            x: pendingTasksBadgeContainer.frame.width - badgeSizeWidth,
+            x: pendingTasksBadgeContainer.bounds.width - badgeSizeWidth,
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)

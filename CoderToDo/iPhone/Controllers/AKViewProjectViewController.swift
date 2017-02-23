@@ -185,12 +185,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // srBadgeContainer.layer.borderWidth = 1.0
         
         let srBadge = UILabel(frame: CGRect(
-            x: srBadgeContainer.frame.width - (badgeSizeWidth),
+            x: srBadgeContainer.bounds.width - (badgeSizeWidth),
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)
         )
-        srBadge.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12.0)
+        srBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         srBadge.textColor = GlobalConstants.AKBadgeColorFg
         srBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
         srBadge.text = String(format: "SR %.2f%%", day.sr)

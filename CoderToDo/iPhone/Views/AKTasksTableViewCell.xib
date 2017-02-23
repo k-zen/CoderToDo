@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hco-tp-AE1" id="YJo-LI-y7A" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT1-Ym-jX5" userLabel="Info_Container">
-                        <rect key="frame" x="0.0" y="0.0" width="178" height="40.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="178" height="39.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
-                                <rect key="frame" x="16" y="0.0" width="154" height="40"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
+                                <rect key="frame" x="16" y="0.0" width="154" height="39"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -39,19 +39,20 @@
                         <rect key="frame" x="178" y="0.0" width="130" height="39.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVH-t7-7XJ" userLabel="State_Value">
-                                <rect key="frame" x="0.0" y="0.0" width="80" height="39.5"/>
+                                <rect key="frame" x="0.0" y="5" width="80" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Vwn-70-wtr"/>
-                                    <constraint firstAttribute="width" constant="80" id="uCA-hN-IAb"/>
+                                    <constraint firstAttribute="width" constant="80" id="2jC-PV-JgS"/>
+                                    <constraint firstAttribute="height" constant="28" id="QeV-Zf-9qp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBoldItalic" family="Avenir Next Condensed" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjZ-au-JKT" userLabel="CP_Value">
-                                <rect key="frame" x="80" y="0.0" width="50" height="39.5"/>
+                                <rect key="frame" x="80" y="5" width="50" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Cb5-pe-Prg"/>
+                                    <constraint firstAttribute="height" constant="28" id="DVj-E2-lXd"/>
+                                    <constraint firstAttribute="width" constant="50" id="fDz-WX-Xh4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,20 +60,18 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="UjZ-au-JKT" secondAttribute="bottom" id="B9u-W4-hOd"/>
-                            <constraint firstAttribute="bottom" secondItem="tVH-t7-7XJ" secondAttribute="bottom" id="EQY-v5-enR"/>
+                            <constraint firstItem="tVH-t7-7XJ" firstAttribute="leading" secondItem="aGm-s5-C8L" secondAttribute="leading" id="7QQ-h8-y7p"/>
+                            <constraint firstItem="tVH-t7-7XJ" firstAttribute="centerY" secondItem="aGm-s5-C8L" secondAttribute="centerY" id="Cc0-5y-83Q"/>
+                            <constraint firstItem="UjZ-au-JKT" firstAttribute="leading" secondItem="tVH-t7-7XJ" secondAttribute="trailing" id="JM2-S8-6WB"/>
                             <constraint firstAttribute="width" constant="130" id="NhO-B1-mnc"/>
-                            <constraint firstItem="tVH-t7-7XJ" firstAttribute="top" secondItem="aGm-s5-C8L" secondAttribute="top" id="XNk-ZZ-Rc1"/>
-                            <constraint firstItem="UjZ-au-JKT" firstAttribute="top" secondItem="aGm-s5-C8L" secondAttribute="top" id="dEx-7m-3U7"/>
-                            <constraint firstItem="UjZ-au-JKT" firstAttribute="leading" secondItem="tVH-t7-7XJ" secondAttribute="trailing" id="koC-hd-jDf"/>
-                            <constraint firstAttribute="trailing" secondItem="UjZ-au-JKT" secondAttribute="trailing" id="pwl-uL-lGS"/>
-                            <constraint firstItem="tVH-t7-7XJ" firstAttribute="leading" secondItem="aGm-s5-C8L" secondAttribute="leading" id="qcg-P3-DEu"/>
+                            <constraint firstItem="UjZ-au-JKT" firstAttribute="centerY" secondItem="aGm-s5-C8L" secondAttribute="centerY" id="lKf-Bk-ioR"/>
+                            <constraint firstAttribute="trailing" secondItem="UjZ-au-JKT" secondAttribute="trailing" id="qWy-wf-m31"/>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" constant="1" id="OSS-ce-iPR"/>
+                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" id="OSS-ce-iPR"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="trailing" id="PxY-Km-l2i"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" id="QfH-mK-qbA"/>
                     <constraint firstItem="pT1-Ym-jX5" firstAttribute="leading" secondItem="YJo-LI-y7A" secondAttribute="leading" id="aqP-ks-jGK"/>

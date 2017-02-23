@@ -4,9 +4,9 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 34
+        static let AKHeaderHeight: CGFloat = 30
         static let AKRowHeight: CGFloat = 40
-        static let AKFooterHeight: CGFloat = 6
+        static let AKFooterHeight: CGFloat = 4
     }
     
     // MARK: Properties
@@ -103,6 +103,8 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         
         let tableWidth = tableView.bounds.width
         let padding = CGFloat(8.0)
+        let badgeSizeWidth = CGFloat(60.0)
+        let badgeSizeHeight = CGFloat(21.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKDefaultBg
@@ -110,10 +112,10 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         let title = UILabel(frame: CGRect(
             x: padding * 2,
             y: 0,
-            width: tableWidth - (padding * 2),
-            height: LocalConstants.AKHeaderHeight - 4.0)
+            width: tableWidth - (padding * 2), // Overlap badge!
+            height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16.0)
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = category.name ?? "N\\A"
         title.textAlignment = .left
@@ -125,10 +127,40 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             title,
             color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness,
-            position: .bottom
+            position: .through
         )
         
+        let tasksCountBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - (badgeSizeWidth),
+            y: 0,
+            width: badgeSizeWidth,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        // ### DEBUG
+        // tasksCountBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // tasksCountBadgeContainer.layer.borderWidth = 1.0
+        
+        let tasksCountBadge = UILabel(frame: CGRect(
+            x: tasksCountBadgeContainer.bounds.width - (badgeSizeWidth),
+            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
+            width: badgeSizeWidth,
+            height: badgeSizeHeight)
+        )
+        tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+        tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
+        tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray3
+        tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.countTasks(category: category))
+        tasksCountBadge.textAlignment = .center
+        tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        tasksCountBadge.layer.masksToBounds = true
+        // ### DEBUG
+        // tasksCountBadge.layer.borderColor = UIColor.white.cgColor
+        // tasksCountBadge.layer.borderWidth = 1.0
+        
+        tasksCountBadgeContainer.addSubview(tasksCountBadge)
+        
         headerCell.addSubview(title)
+        headerCell.addSubview(tasksCountBadgeContainer)
         
         return headerCell
     }

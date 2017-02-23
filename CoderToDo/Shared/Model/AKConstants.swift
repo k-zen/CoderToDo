@@ -122,8 +122,10 @@ struct GlobalConstants {
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKDefaultFloatingViewBorderBg = UIColor.black
+    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray2
+    static let AKEnabledButtonFg = GlobalConstants.AKRedForWhiteFg
     static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoGray4
-    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoBlue
+    static let AKDisabledButtonFg = GlobalConstants.AKCoderToDoWhite4
     static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray2
     static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoWhite2
     static let AKTableCellBg = GlobalConstants.AKCoderToDoGray1
@@ -141,13 +143,13 @@ struct GlobalConstants {
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
     static let AKMaxProjectNameLength = 100
-    static let AKMinProjectNameLength = 3
+    static let AKMinProjectNameLength = 1
     static let AKMaxCategoryNameLength = 40
-    static let AKMinCategoryNameLength = 3
+    static let AKMinCategoryNameLength = 1
     static let AKMaxTaskNameLength = 140
-    static let AKMinTaskNameLength = 3
+    static let AKMinTaskNameLength = 1
     static let AKMaxTaskNoteLength = 140
-    static let AKMinTaskNoteLength = 3
+    static let AKMinTaskNoteLength = 1
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKAcceptingTasksDefaultTime = 2359
@@ -183,6 +185,7 @@ enum CustomBorderDecorationPosition: Int {
     case right = 1
     case bottom = 2
     case left = 3
+    case through = 4
 }
 
 enum ProjectStatus: String {
@@ -284,6 +287,18 @@ class UtilityFunctions
             break
         case .left:
             border.frame = CGRect(x: 0, y: 0, width: CGFloat(thickness), height: component.frame.height)
+            break
+        case .through:
+            var startPositionX: CGFloat = 0.0
+            var startPositionY: CGFloat = component.frame.height / 2.0
+            if component.isKind(of: UILabel.self) {
+                if let label = component as? UILabel {
+                    startPositionX = label.intrinsicContentSize.width + 4.0
+                    startPositionY = startPositionY + 2.0
+                }
+            }
+            
+            border.frame = CGRect(x: startPositionX, y: (startPositionY - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
             break
         }
         
