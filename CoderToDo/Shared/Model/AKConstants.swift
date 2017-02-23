@@ -191,6 +191,11 @@ enum CustomBorderDecorationPosition: Int {
     case through = 4
 }
 
+enum SortingOrder: String {
+    case ascending = "Ascending"
+    case descending = "Descending"
+}
+
 enum ProjectStatus: String {
     case OPEN = "Open"
     case ACEPTING_TASKS = "Accepting"
@@ -204,9 +209,9 @@ enum ProjectSorting: String {
     case osr = "Overall Success Rate"
 }
 
-enum SortingOrder: String {
-    case ascending = "Ascending"
-    case descending = "Descending"
+enum DayStatus: String {
+    case current = "Current"
+    case notCurrent = "Not Current"
 }
 
 enum TaskStates: String {

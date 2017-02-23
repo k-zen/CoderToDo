@@ -71,13 +71,19 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     {
         super.viewDidAppear(animated)
         
-        // Enable editing only if day is open.
-        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) || self.task.state == TaskStates.DONE.rawValue {
-            self.showMessage(message: "You can't edit this task because this day is mark as closed. But you can add notes though..!")
-            self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+        // Enable editing only if day is open and current.
+        if DataInterface.getDayStatus(day: self.task.category?.day) == DayStatus.current {
+            if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) || self.task.state == TaskStates.DONE.rawValue {
+                self.showMessage(message: "You can't edit this task because this day is mark as closed. But you can add notes though..!")
+                self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+            }
+            else {
+                self.toggleEditMode(mode: TaskMode.EDITABLE)
+            }
         }
         else {
-            self.toggleEditMode(mode: TaskMode.EDITABLE)
+            self.showMessage(message: "You can't edit this task because this day is not current. But you can add notes though..!")
+            self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
         }
     }
     

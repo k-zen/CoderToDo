@@ -332,6 +332,28 @@ class AKDataInterface
         
         return "N\\A"
     }
+    
+    static func getDayStatus(day: Day?) -> DayStatus
+    {
+        let now = Date()
+        let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
+        let d1 = nowDateComponents.day ?? 0
+        let m1 = nowDateComponents.month ?? 0
+        let y1 = nowDateComponents.year ?? 0
+        
+        if let date = day?.date as? Date {
+            let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
+            let d2 = dateComponents.day ?? 0
+            let m2 = dateComponents.month ?? 0
+            let y2 = dateComponents.year ?? 0
+            
+            if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+                return .current
+            }
+        }
+        
+        return .notCurrent
+    }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
     static func listCategoriesInProject(project: Project) -> [String]
