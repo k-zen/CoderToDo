@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LQ1-JN-uqn" id="fPE-SM-qRh" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptn-2q-xEM" userLabel="Info_Container">
@@ -82,14 +82,14 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-3e-PvK" userLabel="Add_Tomorrow_Task">
                                 <rect key="frame" x="232" y="26" width="80" height="20"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="qT4-r5-5p5"/>
                                     <constraint firstAttribute="height" constant="20" id="uHF-iL-Y7o"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="12"/>
                                 <state key="normal" title="Add Task">
-                                    <color key="titleColor" red="0.80000000000000004" green="0.14117647059999999" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="addTomorrowTask:" destination="LQ1-JN-uqn" eventType="touchUpInside" id="WGb-AR-HGx"/>
@@ -124,7 +124,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.1137254902" green="0.12549019610000001" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="Ptn-2q-xEM" firstAttribute="top" secondItem="fPE-SM-qRh" secondAttribute="top" id="La1-Gn-Xke"/>
                     <constraint firstItem="Ptn-2q-xEM" firstAttribute="leading" secondItem="fPE-SM-qRh" secondAttribute="leading" id="Uk0-Gd-T7X"/>

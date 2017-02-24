@@ -102,10 +102,10 @@ struct GlobalConstants {
     // ### Gruvbox Colors:
     // ### Custom Color Palette:
     static let AKCoderToDoBlue = Func.AKHexColor(0x007AFF)
-    static let AKCoderToDoGray1 = Func.AKHexColor(0x222222)
-    static let AKCoderToDoGray2 = Func.AKHexColor(0x333333)
-    static let AKCoderToDoGray3 = Func.AKHexColor(0x444444)
-    static let AKCoderToDoGray4 = Func.AKHexColor(0x555555)
+    static let AKCoderToDoGray1 = Func.AKHexColor(0x1D2021)
+    static let AKCoderToDoGray2 = Func.AKHexColor(0x292D2F)
+    static let AKCoderToDoGray3 = Func.AKHexColor(0x353A3C)
+    static let AKCoderToDoGray4 = Func.AKHexColor(0x41474A)
     static let AKCoderToDoWhite1 = Func.AKHexColor(0xFFFFFF)
     static let AKCoderToDoWhite2 = Func.AKHexColor(0xD9D9D6)
     static let AKCoderToDoWhite3 = Func.AKHexColor(0xC9C9C6)
@@ -123,7 +123,7 @@ struct GlobalConstants {
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKDefaultFloatingViewBorderBg = UIColor.black
-    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray2
+    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray3
     static let AKEnabledButtonFg = GlobalConstants.AKRedForWhiteFg
     static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoGray4
     static let AKDisabledButtonFg = GlobalConstants.AKCoderToDoWhite4
