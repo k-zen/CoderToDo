@@ -15,7 +15,9 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     
     // MARK: Outlets
     @IBOutlet weak var navController: UINavigationItem!
+    @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlContainer: UIView!
+    @IBOutlet weak var taskState: UILabel!
     @IBOutlet weak var taskNameValue: UILabel!
     @IBOutlet weak var statusValue: UIButton!
     @IBOutlet weak var cpValue: UILabel!
@@ -67,26 +69,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.cpValue.text = String(format: "%.1f%%", self.task.completionPercentage)
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Enable editing only if day is open and current.
-        if DataInterface.getDayStatus(day: self.task.category?.day) == DayStatus.current {
-            if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) || self.task.state == TaskStates.DONE.rawValue {
-                self.showMessage(message: "You can't edit this task because this day is mark as closed. But you can add notes though..!")
-                self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
-            }
-            else {
-                self.toggleEditMode(mode: TaskMode.EDITABLE)
-            }
-        }
-        else {
-            self.showMessage(message: "You can't edit this task because this day is not current. But you can add notes though..!")
-            self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
-        }
-    }
-    
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
@@ -106,6 +88,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.view.addSubview(self.selectTaskStateOverlayView)
         
         // Custom L&F.
+        self.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.taskState.layer.masksToBounds = true
         self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         Func.AKAddBorderDeco(
             self.notesValue,
@@ -115,13 +99,38 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         )
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        // Checks:
+        // Close Task if:
+        //  day is not current.
+        if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
+            self.closeTask()
+        }
+        //  project not open.
+        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
+            self.closeTask()
+        }
+        //  task marked as done.
+        if self.task.state == TaskStates.DONE.rawValue {
+            self.closeTask()
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
         
         // Save the modifications.
-        // If the CP is 100.0% then mark the task as completed no matter what.
-        self.task.state = self.changeCP.value >= 100.0 ? TaskStates.DONE.rawValue : self.statusValue.titleLabel?.text
+        // If the CP is 100.0% then mark the task as completed only if it's not VERIFY.
+        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.VERIFY.rawValue {
+            self.task.state = TaskStates.DONE.rawValue
+        }
+        else {
+            self.task.state = self.statusValue.titleLabel?.text
+        }
         self.task.completionPercentage = Float(self.changeCP.value)
         self.task.note = self.notesValue.text
     }
@@ -148,7 +157,41 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         Func.AKAddDoneButtonKeyboard(textView, controller: self)
         
         switch textView.tag {
+        case LocalEnums.notes.rawValue:
+            var offset = textView.convert(textView.frame, to: self.scrollContainer).origin
+            offset.x = 0
+            
+            var keyboardHeight = GlobalConstants.AKKeyboardHeight
+            if textView.spellCheckingType == UITextSpellCheckingType.yes || textView.spellCheckingType == UITextSpellCheckingType.default {
+                keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
+            }
+            
+            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.view, component: self.notesValue)
+            if keyboardHeight > height {
+                offset.y = abs(keyboardHeight - height)
+            }
+            else {
+                offset.y = 0
+            }
+            
+            self.scrollContainer.setContentOffset(offset, animated: true)
+            
+            return true
         default:
+            return true
+        }
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool
+    {
+        switch textView.tag {
+        default:
+            var offset = textView.convert(textView.frame, to: self.scrollContainer).origin
+            offset.x = 0
+            offset.y = 0
+            
+            self.scrollContainer.setContentOffset(offset, animated: true)
+            
             return true
         }
     }
@@ -186,5 +229,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.changeCP.isEnabled = false
             break
         }
+    }
+    
+    func closeTask()
+    {
+        self.taskState.text = "Closed"
+        self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
     }
 }
