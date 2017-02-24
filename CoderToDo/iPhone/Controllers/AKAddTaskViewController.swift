@@ -34,6 +34,18 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             if let mr = Func.AKObtainMasterReference() {
                 // Allways add today to the table if not present, if present return the last day.
                 if let currentDay = DataInterface.addNewWorkingDay(project: self.project) {
+                    // Add task from PendingQueue.
+                    if let tasks = self.project.pendingQueue?.pendingQueue?.allObjects as? [Task] {
+                        for task in tasks {
+                            if let categoryName = task.category?.name {
+                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                                    category.addToTasks(task)
+                                    currentDay.addToCategories(category)
+                                }
+                            }
+                        }
+                    }
+                    
                     let now = NSDate()
                     let task = Task(context: mr.getMOC())
                     task.creationDate = now

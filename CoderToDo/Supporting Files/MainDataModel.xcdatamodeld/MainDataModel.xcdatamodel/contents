@@ -14,6 +14,10 @@
             <fetchRequest name="fetchedPropertyFetchRequest" entity="Task"/>
         </fetchedProperty>
     </entity>
+    <entity name="PendingTasksQueue" representedClassName="AKPendingTasksQueueMO" syncable="YES" codeGenerationType="class">
+        <relationship name="pendingQueue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="pendingQueue" inverseEntity="Task" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="pendingQueue" inverseEntity="Project" syncable="YES"/>
+    </entity>
     <entity name="Project" representedClassName="AKProjectMO" syncable="YES" codeGenerationType="class">
         <attribute name="closingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="closingTimeTolerance" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -25,6 +29,7 @@
         <attribute name="osr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="project" inverseEntity="Day" syncable="YES"/>
+        <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="project" inverseEntity="PendingTasksQueue" syncable="YES"/>
         <relationship name="projectCategories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProjectCategory" inverseName="project" inverseEntity="ProjectCategory" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="project" inverseEntity="User" syncable="YES"/>
         <fetchedProperty name="getDays" optional="YES" syncable="YES">
@@ -38,10 +43,12 @@
     <entity name="Task" representedClassName="AKTaskMO" syncable="YES" codeGenerationType="class">
         <attribute name="completionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initialCompletionPercentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" minValueString="0" maxValueString="140" syncable="YES"/>
         <attribute name="state" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
+        <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="pendingQueue" inverseEntity="PendingTasksQueue" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
         <attribute name="closingTimeTolerance" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -59,9 +66,10 @@
     <elements>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
-        <element name="Project" positionX="-1098" positionY="-747" width="128" height="254"/>
+        <element name="Project" positionX="-1098" positionY="-747" width="128" height="266"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
-        <element name="Task" positionX="-596" positionY="-756" width="128" height="135"/>
+        <element name="Task" positionX="-596" positionY="-751" width="128" height="163"/>
         <element name="User" positionX="-839" positionY="-495" width="128" height="194"/>
+        <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
     </elements>
 </model>

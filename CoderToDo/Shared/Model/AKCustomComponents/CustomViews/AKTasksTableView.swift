@@ -82,10 +82,38 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             break
         }
         // Status
-        cell.taskStateValue.text = task.state ?? TaskStates.PENDING.rawValue
+        // Sanity checks:
+        // 1. Mark the task as NOT_DONE.
+        //  If the project is closed and day is not tomorrow AND
+        //      a. the state is PENDING
+        //      b. the CP is == 0.0% OR
+        //      c. the ICP is == CP
+        // 2. Add the task to PendingQueue.
+        //  If the project is closed and day is not tomorrow AND
+        //      a. the state is PENDING
+        //      b. the CP has been incremented in the day.
+        if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) {
+            if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
+                // Sanity check #1
+                if task.state == TaskStates.PENDING.rawValue {
+                    if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
+                        task.state = TaskStates.NOT_DONE.rawValue
+                    }
+                }
+                // Sanity check #2
+                if task.state == TaskStates.PENDING.rawValue && task.completionPercentage > task.initialCompletionPercentage {
+                    task.initialCompletionPercentage = task.completionPercentage
+                    if let pendingQueue = task.category?.day?.project?.pendingQueue {
+                        pendingQueue.addToPendingQueue(task)
+                    }
+                }
+            }
+        }
+        
+        cell.taskStateValue.text = task.state
         Func.AKAddBorderDeco(
             cell.taskStateValue,
-            color: Func.AKGetColorForTaskState(taskState: task.state ?? "").cgColor,
+            color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness,
             position: .bottom
         )

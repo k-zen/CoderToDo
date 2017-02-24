@@ -51,6 +51,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.maxCategories = Int16(maxCategories)
                 project.maxTasks = Int16(maxTasks)
                 project.creationDate = now
+                project.pendingQueue = PendingQueue(context: mr.getMOC())
                 
                 DataInterface.getUser()?.addToProject(project)
                 self.dismissView(executeDismissTask: true)

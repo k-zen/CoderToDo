@@ -333,7 +333,7 @@ class AKDataInterface
         return "N\\A"
     }
     
-    static func getDayStatus(day: Day?) -> DayStatus
+    static func getDayStatus(day: Day) -> DayStatus
     {
         let now = Date()
         let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
@@ -341,7 +341,7 @@ class AKDataInterface
         let m1 = nowDateComponents.month ?? 0
         let y1 = nowDateComponents.year ?? 0
         
-        if let date = day?.date as? Date {
+        if let date = day.date as? Date {
             let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
             let d2 = dateComponents.day ?? 0
             let m2 = dateComponents.month ?? 0
@@ -353,6 +353,29 @@ class AKDataInterface
         }
         
         return .notCurrent
+    }
+    
+    static func isDayTomorrow(day: Day) -> Bool
+    {
+        let now = Date()
+        let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
+        let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
+        let d1 = tomorrowDateComponents.day ?? 0
+        let m1 = tomorrowDateComponents.month ?? 0
+        let y1 = tomorrowDateComponents.year ?? 0
+        
+        if let date = day.date as? Date {
+            let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
+            let d2 = dateComponents.day ?? 0
+            let m2 = dateComponents.month ?? 0
+            let y2 = dateComponents.year ?? 0
+            
+            if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+                return true
+            }
+        }
+        
+        return false
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //

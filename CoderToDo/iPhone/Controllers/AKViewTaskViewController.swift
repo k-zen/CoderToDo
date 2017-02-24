@@ -107,15 +107,15 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         // Close Task if:
         //  day is not current.
         if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
-            self.closeTask()
+            self.markTask(mode: TaskMode.NOT_EDITABLE)
         }
         //  project not open.
         if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
-            self.closeTask()
+            self.markTask(mode: TaskMode.NOT_EDITABLE)
         }
         //  task marked as done.
         if self.task.state == TaskStates.DONE.rawValue {
-            self.closeTask()
+            self.markTask(mode: TaskMode.NOT_EDITABLE)
         }
     }
     
@@ -231,10 +231,10 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
     }
     
-    func closeTask()
+    func markTask(mode: TaskMode)
     {
-        self.taskState.text = "Closed"
+        self.taskState.text = mode.rawValue
         self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
-        self.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+        self.toggleEditMode(mode: mode)
     }
 }

@@ -80,6 +80,21 @@ class AKMasterReference: NSObject
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
             NSLog("=>       PROJECT CATEGORIES: (%i)", project.projectCategories?.count ?? 0)
+            for projectCategory in DataInterface.listCategoriesInProject(project: project) {
+                NSLog("=>           NAME: %@", projectCategory)
+            }
+            NSLog("=>       PENDING QUEUE: (%i)", project.pendingQueue?.pendingQueue?.count ?? 0)
+            if let tasksInQueue = project.pendingQueue?.pendingQueue?.allObjects as? [Task] {
+                for taskInQueue in tasksInQueue {
+                    NSLog("=>           COMPLETION PERCENTAGE: %.2f", taskInQueue.completionPercentage)
+                    NSLog("=>           INITIAL COMPLETION PERCENTAGE: %.2f", taskInQueue.initialCompletionPercentage)
+                    NSLog("=>           CREATION DATE: %@", taskInQueue.creationDate?.description ?? "N\\A")
+                    NSLog("=>           NAME: %@", taskInQueue.name ?? "N\\A")
+                    NSLog("=>           NOTE: %@", taskInQueue.note ?? "N\\A")
+                    NSLog("=>           STATE: %@", taskInQueue.state ?? "N\\A")
+                    NSLog("=>           ------")
+                }
+            }
             NSLog("=>       DAYS: (%i)", DataInterface.countDays(project: project))
             for day in DataInterface.getDays(project: project) {
                 NSLog("=>           DATE: %@", day.date?.description ?? "N\\A")
@@ -90,6 +105,7 @@ class AKMasterReference: NSObject
                     NSLog("=>               TASKS: (%i)", DataInterface.countTasks(category: category))
                     for task in DataInterface.getTasks(category: category) {
                         NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
+                        NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
                         NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
                         NSLog("=>                   NAME: %@", task.name ?? "N\\A")
                         NSLog("=>                   NOTE: %@", task.note ?? "N\\A")

@@ -15,6 +15,7 @@ typealias ProjectCategory = AKProjectCategoryMO
 typealias Day = AKDayMO
 typealias Category = AKCategoryMO
 typealias Task = AKTaskMO
+typealias PendingQueue = AKPendingTasksQueueMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
@@ -236,9 +237,9 @@ enum TaskStateColor: UInt {
     case NOT_VERIFIED = 0xEBDBB2
 }
 
-enum TaskMode: UInt {
-    case EDITABLE = 1
-    case NOT_EDITABLE = 2
+enum TaskMode: String {
+    case EDITABLE = "Editable"
+    case NOT_EDITABLE = "Not Editable"
 }
 
 // MARK: Utility Functions
