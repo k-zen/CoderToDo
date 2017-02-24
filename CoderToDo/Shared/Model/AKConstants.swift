@@ -232,7 +232,8 @@ enum TaskStateColor: UInt {
     case DILATE = 0xFE8019
     case PENDING = 0xFABD2F
     case VERIFY = 0xD3869B
-    case VERIFIED, NOT_VERIFIED = 0x8EC07C
+    case VERIFIED = 0x8EC07C
+    case NOT_VERIFIED = 0xEBDBB2
 }
 
 enum TaskMode: UInt {
