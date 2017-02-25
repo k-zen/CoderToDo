@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
 {
@@ -52,8 +53,49 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.maxTasks = Int16(maxTasks)
                 project.creationDate = now
                 project.pendingQueue = PendingQueue(context: mr.getMOC())
-                
                 DataInterface.getUser()?.addToProject(project)
+                
+                // Schedule local notifications.
+                if notifyClosingTime {
+                    let startingTimeContent = UNMutableNotificationContent()
+                    startingTimeContent.title = String(format: "Project: %@", projectName.outputData)
+                    startingTimeContent.body = String(format: "Hey %@, starting time is up for your project.", DataInterface.getUser()!)
+                    startingTimeContent.sound = UNNotificationSound.default()
+                    Func.AKGetNotificationCenter().add(
+                        UNNotificationRequest(
+                            identifier: String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, projectName.outputData),
+                            content: startingTimeContent,
+                            trigger: UNCalendarNotificationTrigger(
+                                dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: startingTime as Date),
+                                repeats: true
+                            )
+                        ),
+                        withCompletionHandler: { (error) in
+                            if let _ = error {
+                                self.showMessage(message: "Error setting up starting time notification.")
+                            } }
+                    )
+                    
+                    let closingTimeContent = UNMutableNotificationContent()
+                    closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
+                    closingTimeContent.body = String(format: "Hey %@, closing time is due for your project.", DataInterface.getUser()!)
+                    closingTimeContent.sound = UNNotificationSound.default()
+                    Func.AKGetNotificationCenter().add(
+                        UNNotificationRequest(
+                            identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, projectName.outputData),
+                            content: closingTimeContent,
+                            trigger: UNCalendarNotificationTrigger(
+                                dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: closingTime as Date),
+                                repeats: true
+                            )
+                        ),
+                        withCompletionHandler: { (error) in
+                            if let _ = error {
+                                self.showMessage(message: "Error setting up closing time notification.")
+                            } }
+                    )
+                }
+                
                 self.dismissView(executeDismissTask: true)
             }
         }
