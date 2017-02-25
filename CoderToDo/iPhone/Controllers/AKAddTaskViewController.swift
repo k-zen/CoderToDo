@@ -39,8 +39,12 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                                    task.creationDate = NSDate()
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
+                                    
+                                    // Remove from queue.
+                                    self.project.pendingQueue?.removeFromPendingQueue(task)
                                 }
                             }
                         }
