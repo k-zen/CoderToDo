@@ -82,17 +82,19 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             break
         }
         // Status
-        // Sanity checks:
+        // Sanity checks: IF ALL CODE IS CORRECT, THE SANITY CHECKS SHOULD ONLY EXECUTE AT THE END OF THE CURRENT DAY.
         // 1. Mark the task as NOT_DONE.
-        //  If the project is closed and day is not tomorrow AND
-        //      a. the state is PENDING
-        //      b. the CP is == 0.0% OR
-        //      c. the ICP is == CP
+        //  If the project is closed and is NOT today before working day AND
+        //      day is not tomorrow AND
+        //          a. the state is PENDING
+        //          b. the CP is == 0.0% OR
+        //          c. the ICP is == CP
         // 2. Add the task to PendingQueue.
-        //  If the project is closed and day is not tomorrow AND
-        //      a. the state is PENDING
-        //      b. the CP has been incremented in the day.
-        if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) {
+        //  If the project is closed and is NOT today before working day AND
+        //      day is not tomorrow AND
+        //          a. the state is PENDING
+        //          b. the CP has been incremented in the day.
+        if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) && !DataInterface.isBeforeOpen(project: (task.category?.day?.project)!) {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
                 if task.state == TaskStates.PENDING.rawValue {

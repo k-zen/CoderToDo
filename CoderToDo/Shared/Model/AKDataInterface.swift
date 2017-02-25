@@ -103,6 +103,19 @@ class AKDataInterface
         return false
     }
     
+    static func isBeforeOpen(project: Project) -> Bool
+    {
+        if let startingTime = project.startingTime as? Date {
+            let now = Date()
+            let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
+            let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
+            
+            return nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < startingTimeHour
+        }
+        
+        return false
+    }
+    
     static func getProjectStatus(project: Project) -> ProjectStatus
     {
         if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
