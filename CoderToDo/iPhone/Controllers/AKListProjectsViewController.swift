@@ -269,7 +269,16 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         if editingStyle == UITableViewCellEditingStyle.delete {
             let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).row]
             
+            // Remove data structure.
             DataInterface.getUser()?.removeFromProject(project)
+            // Invalidate notifications.
+            Func.AKGetNotificationCenter().removePendingNotificationRequests(withIdentifiers:
+                [
+                    String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, project.name!),
+                    String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!)
+                ]
+            )
+            
             self.projectsTable.reloadData()
         }
     }
