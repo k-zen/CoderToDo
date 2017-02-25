@@ -40,9 +40,9 @@ class AKSelectTaskStateView: AKCustomView
                         presenterController.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
                     }
                     
-                    presenterController?.hideContinueMessage() },
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
                 noAction: { (presenterController) -> Void in
-                    presenterController?.hideContinueMessage() }
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) }
             )
             
             // Collapse this view.

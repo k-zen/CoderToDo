@@ -1,9 +1,11 @@
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AKAppDelegate: UIResponder, UIApplicationDelegate
 {
     // MARK: Properties
+    let notificationCenter = UNUserNotificationCenter.current()
     var masterRef: AKMasterReference?
     var window: UIWindow?
     

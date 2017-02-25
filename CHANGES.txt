@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added base support for local notifications. (2017/02/25)
         * Corrected bug where tasks where being marked as NOT DONE before the working day begins. (2017/02/25)
         * Added support for PendingQueues in each project. Also added support for sanity checks when loading tasks. (2017/02/24)
         * Added support for checking if the day is current or not, and allow editing based on that. (2017/02/23)

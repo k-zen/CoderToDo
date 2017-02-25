@@ -1,6 +1,7 @@
 import Foundation
 import MapKit
 import UIKit
+import UserNotifications
 
 // MARK: Typealias
 typealias ViewBlock = (_ view : UIView) -> Bool
@@ -456,6 +457,11 @@ class UtilityFunctions
         default:
             return UIColor.clear
         }
+    }
+    
+    func AKGetNotificationCenter() -> UNUserNotificationCenter
+    {
+        return Func.AKDelegate().notificationCenter
     }
     
     ///

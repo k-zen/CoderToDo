@@ -291,6 +291,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Miscellaneous
     func customSetup()
     {
+        super.inhibitLocalNotificationMessage = false
         super.inhibitTapGesture = true
         super.setup()
         

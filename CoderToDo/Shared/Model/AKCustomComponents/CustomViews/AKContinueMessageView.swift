@@ -20,6 +20,8 @@ class AKContinueMessageView: AKCustomView
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var yes: UIButton!
+    @IBOutlet weak var no: UIButton!
     
     // MARK: Actions
     @IBAction func yes(_ sender: Any) { self.controller?.hideMessage(); self.yesAction(self.controller) }
@@ -64,5 +66,9 @@ class AKContinueMessageView: AKCustomView
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
         self.customView.layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
+        
+        // Custom L&F.
+        self.yes.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.no.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }

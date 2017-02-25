@@ -4,6 +4,7 @@ use_frameworks!
 workspace 'CoderToDo'
 
 target "CoderToDo" do
+    # pod 'Crashlytics'
     # pod 'DeviceKit'
-    # pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
+    # pod 'Fabric'
 end

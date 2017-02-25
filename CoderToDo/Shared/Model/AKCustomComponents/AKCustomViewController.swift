@@ -24,6 +24,9 @@ import UIKit
 class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
 {
     // MARK: Flags
+    /// Flag to make local notification's check on each ViewController.
+    /// Default value is **true**, each ViewController must explicitly enable the check.
+    var inhibitLocalNotificationMessage: Bool = true
     /// Flag to add a BlurView in the background.
     var shouldAddBlurView: Bool = false
     /// Flag to inhibit only the **Tap** gesture.
@@ -95,6 +98,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewDidAppear(animated)
         if GlobalConstants.AKDebug {
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
+        }
+        
+        // Checks
+        if !self.inhibitLocalNotificationMessage {
+            self.manageGrantToLocalNotifications()
         }
         
         // Persist to disk data each time a view controller appears.
@@ -265,10 +273,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showContinueMessage(message: String,
+                             yesButtonTitle: String = "Yes",
+                             noButtonTitle: String = "No",
                              yesAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
                              noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void)
     {
         self.continueMessageOverlayController.message.text = message
+        self.continueMessageOverlayController.yes.setTitle(yesButtonTitle, for: .normal)
+        self.continueMessageOverlayController.no.setTitle(noButtonTitle, for: .normal)
         self.continueMessageOverlayController.yesAction = yesAction
         self.continueMessageOverlayController.noAction = noAction
         
@@ -296,7 +308,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         UIView.commitAnimations()
     }
     
-    func hideContinueMessage()
+    func hideContinueMessage(completionTask: @escaping (_ presenterController: AKCustomViewController?) -> Void)
     {
         UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
         let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
@@ -306,6 +318,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
+        CATransaction.setCompletionBlock {
+            completionTask(self)
+        }
         UIView.commitAnimations()
     }
     
@@ -360,6 +375,35 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Utility functions
+    func manageGrantToLocalNotifications()
+    {
+        Func.AKGetNotificationCenter().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if !granted {
+                Func.AKExecuteInMainThread {
+                    self.showContinueMessage(
+                        message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to \"Settings\" to enable it.",
+                        yesButtonTitle: "Open Settings",
+                        noButtonTitle: "No",
+                        yesAction: { (presenterController) -> Void in
+                            presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in
+                                if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                                    Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                                }
+                            }) },
+                        noAction: { (presenterController) -> Void in
+                            presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in
+                                // TODO: Make this setting persistent.
+                                presenterController?.inhibitLocalNotificationMessage = true
+                            }) }
+                    )
+                }
+            }
+            else {
+                NSLog("=> INFO: USER HAS AUTHORIZED LOCAL NOTIFICATIONS.")
+            }
+        }
+    }
+    
     func dismissView(executeDismissTask: Bool)
     {
         OperationQueue.main.addOperation {
