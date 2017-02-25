@@ -59,7 +59,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 if notifyClosingTime {
                     let startingTimeContent = UNMutableNotificationContent()
                     startingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    startingTimeContent.body = String(format: "Hey %@, starting time is up for your project.", DataInterface.getUser()!)
+                    startingTimeContent.body = String(format: "Hey %@, starting time is up for your project.", (DataInterface.getUser()?.username)!)
                     startingTimeContent.sound = UNNotificationSound.default()
                     Func.AKGetNotificationCenter().add(
                         UNNotificationRequest(
@@ -78,7 +78,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                     
                     let closingTimeContent = UNMutableNotificationContent()
                     closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    closingTimeContent.body = String(format: "Hey %@, closing time is due for your project.", DataInterface.getUser()!)
+                    closingTimeContent.body = String(format: "Hey %@, closing time is due for your project.", (DataInterface.getUser()?.username)!)
                     closingTimeContent.sound = UNNotificationSound.default()
                     Func.AKGetNotificationCenter().add(
                         UNNotificationRequest(
