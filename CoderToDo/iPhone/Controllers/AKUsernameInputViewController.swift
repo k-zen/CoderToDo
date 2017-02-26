@@ -26,7 +26,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
             try username.process()
         }
         catch {
-            Func.AKPresentMessageFromError(message: "\(error)")
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
             return
         }
         

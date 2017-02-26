@@ -100,7 +100,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             }
         }
         catch {
-            Func.AKPresentMessageFromError(message: "\(error)")
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
         }
     }
     

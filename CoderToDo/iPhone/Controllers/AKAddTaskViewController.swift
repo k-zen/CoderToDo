@@ -79,7 +79,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             }
         }
         catch {
-            Func.AKPresentMessageFromError(message: "\(error)")
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
         }
     }
     

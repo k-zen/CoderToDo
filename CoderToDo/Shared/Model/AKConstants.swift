@@ -103,7 +103,7 @@ struct GlobalConstants {
     // ### Gruvbox Colors:
     // ### Custom Color Palette:
     static let AKCoderToDoBlue = Func.AKHexColor(0x007AFF)
-    static let AKCoderToDoGray1 = Func.AKHexColor(0x1D2021)
+    static let AKCoderToDoGray1 = Func.AKHexColor(0x1B1E1F)
     static let AKCoderToDoGray2 = Func.AKHexColor(0x292D2F)
     static let AKCoderToDoGray3 = Func.AKHexColor(0x353A3C)
     static let AKCoderToDoGray4 = Func.AKHexColor(0x41474A)
@@ -143,7 +143,7 @@ struct GlobalConstants {
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
     static let AKSpellCheckerToolbarHeight: CGFloat = 40
-    static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
+    static let AKKeyboardHeight: CGFloat = 216 + 20 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 3
@@ -505,7 +505,7 @@ class UtilityFunctions
         return Func.AKDelegate().masterRef
     }
     
-    func AKPresentMessageFromError(message: String!)
+    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!)
     {
         do {
             if let input = message {
@@ -516,7 +516,7 @@ class UtilityFunctions
                     let range = match.rangeAt(1)
                     if let swiftRange = AKRangeFromNSRange(range, forString: input) {
                         let msg = input.substring(with: swiftRange)
-                        AKPresentMessage(message: msg)
+                        AKPresentMessage(controller: controller, message: msg)
                     }
                 }
             }
@@ -526,9 +526,9 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessage(message: String!)
+    func AKPresentMessage(controller: AKCustomViewController, message: String!)
     {
-        Func.AKExecuteInMainThread { NSLog("=> MESSAGE: \(message)") }
+        Func.AKExecuteInMainThread { controller.showMessage(message: message) }
     }
     
     ///

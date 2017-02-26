@@ -38,7 +38,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
             }
         }
         catch {
-            Func.AKPresentMessageFromError(message: "\(error)")
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
         }
     }
     
