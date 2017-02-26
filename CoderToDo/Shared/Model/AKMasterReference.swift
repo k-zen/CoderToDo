@@ -47,7 +47,8 @@ class AKMasterReference: NSObject
     {
         do {
             if (instance?.moc.hasChanges)! {
-                try instance?.dump().moc.save()
+                try instance?.moc.save()
+                NSLog("=> INFO: SAVED CORE DATA.")
             }
             else {
                 NSLog("=> INFO: THERE ARE NO CHANGES TO SAVE!")
