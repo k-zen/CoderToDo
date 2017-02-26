@@ -82,7 +82,8 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             break
         }
         // Status
-        // Sanity checks: IF ALL CODE IS CORRECT, THE SANITY CHECKS SHOULD ONLY EXECUTE AT THE END OF THE CURRENT DAY.
+        // Sanity checks: IF ALL CODE IS CORRECT, THE SANITY CHECKS SHOULD ONLY EXECUTE AT THE END OF THE CURRENT DAY
+        // AND PERFORMS CLOSING OF TASKS (SANITY CHECKS IN GENERAL).
         // 1. Mark the task as NOT_DONE.
         //  If the project is closed and is NOT today before working day AND
         //      day is not tomorrow AND
@@ -103,7 +104,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
                     }
                 }
                 // Sanity check #2
-                if task.state == TaskStates.PENDING.rawValue && task.completionPercentage > task.initialCompletionPercentage {
+                if task.state == TaskStates.PENDING.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                     task.initialCompletionPercentage = task.completionPercentage
                     if let pendingQueue = task.category?.day?.project?.pendingQueue {
                         pendingQueue.addToPendingQueue(task)

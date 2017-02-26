@@ -24,7 +24,7 @@
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="maxCategories" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxTasks" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="notifyClosingTime" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="osr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -44,8 +44,8 @@
         <attribute name="completionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="initialCompletionPercentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" attributeType="String" minValueString="3" maxValueString="100" syncable="YES"/>
-        <attribute name="note" optional="YES" attributeType="String" minValueString="0" maxValueString="140" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
         <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="pendingQueue" inverseEntity="PendingTasksQueue" syncable="YES"/>
@@ -57,7 +57,7 @@
         <attribute name="maxCategories" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxTasks" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notifyClosingTime" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="username" optional="YES" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
         <fetchedProperty name="getProjects" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="Project"/>
@@ -66,10 +66,10 @@
     <elements>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
-        <element name="Project" positionX="-1098" positionY="-747" width="128" height="266"/>
-        <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
-        <element name="Task" positionX="-596" positionY="-751" width="128" height="163"/>
-        <element name="User" positionX="-839" positionY="-495" width="128" height="194"/>
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
+        <element name="Project" positionX="-1098" positionY="-747" width="128" height="269"/>
+        <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
+        <element name="Task" positionX="-596" positionY="-751" width="128" height="165"/>
+        <element name="User" positionX="-839" positionY="-495" width="128" height="194"/>
     </elements>
 </model>

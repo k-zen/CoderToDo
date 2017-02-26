@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Removed size limitations to core data. (2017/02/26)
         * Added support for adding local notifications to each project for starting & closing times. (2017/02/25)
         * Added base support for local notifications. (2017/02/25)
         * Corrected bug where tasks where being marked as NOT DONE before the working day begins. (2017/02/25)
