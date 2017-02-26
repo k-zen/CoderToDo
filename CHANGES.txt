@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Modified sizes of inputs for core data. (2017/02/26)
         * Removed size limitations to core data. (2017/02/26)
         * Added support for adding local notifications to each project for starting & closing times. (2017/02/25)
         * Added base support for local notifications. (2017/02/25)
