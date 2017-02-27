@@ -226,9 +226,6 @@ enum TaskStates: String {
     case NOT_APPLICABLE = "Not Aplicable"
     case DILATE = "Dilate"
     case PENDING = "Pending"
-    case VERIFY = "Verify"
-    case VERIFIED = "Verified"
-    case NOT_VERIFIED = "Not Verified"
 }
 
 enum TaskStateColor: UInt {
@@ -237,9 +234,6 @@ enum TaskStateColor: UInt {
     case NOT_APPLICABLE = 0x83A598
     case DILATE = 0xFE8019
     case PENDING = 0xFABD2F
-    case VERIFY = 0xD3869B
-    case VERIFIED = 0x8EC07C
-    case NOT_VERIFIED = 0xEBDBB2
 }
 
 enum TaskMode: String {
@@ -449,14 +443,8 @@ class UtilityFunctions
             return Func.AKHexColor(TaskStateColor.NOT_APPLICABLE.rawValue)
         case TaskStates.NOT_DONE.rawValue:
             return Func.AKHexColor(TaskStateColor.NOT_DONE.rawValue)
-        case TaskStates.NOT_VERIFIED.rawValue:
-            return Func.AKHexColor(TaskStateColor.NOT_VERIFIED.rawValue)
         case TaskStates.PENDING.rawValue:
             return Func.AKHexColor(TaskStateColor.PENDING.rawValue)
-        case TaskStates.VERIFIED.rawValue:
-            return Func.AKHexColor(TaskStateColor.VERIFIED.rawValue)
-        case TaskStates.VERIFY.rawValue:
-            return Func.AKHexColor(TaskStateColor.VERIFY.rawValue)
         default:
             return UIColor.clear
         }

@@ -124,8 +124,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillDisappear(animated)
         
         // Save the modifications.
-        // If the CP is 100.0% then mark the task as completed only if it's not VERIFY.
-        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.VERIFY.rawValue {
+        // If the CP is 100.0% then mark the task as completed.
+        if self.changeCP.value >= 100.0 {
             self.task.state = TaskStates.DONE.rawValue
         }
         else {

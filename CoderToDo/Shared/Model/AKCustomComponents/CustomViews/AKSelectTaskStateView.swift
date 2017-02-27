@@ -4,7 +4,7 @@ class AKSelectTaskStateView: AKCustomView
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKViewHeight: CGFloat = 287.0
+        static let AKViewHeight: CGFloat = 179.0
         static let AKExpandHeightAnimation = "expandHeight"
         static let AKCollapseHeightAnimation = "collapseHeight"
     }
@@ -109,57 +109,6 @@ class AKSelectTaskStateView: AKCustomView
             Func.AKAddBorderDeco(
                 controller.statusValue,
                 color: Func.AKGetColorForTaskState(taskState: TaskStates.PENDING.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
-        }
-    }
-    
-    @IBAction func verify(_ sender: Any)
-    {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.VERIFY.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.VERIFY.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
-        }
-    }
-    
-    @IBAction func verified(_ sender: Any)
-    {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.VERIFIED.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.VERIFIED.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
-        }
-    }
-    
-    @IBAction func notVerified(_ sender: Any)
-    {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.NOT_VERIFIED.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.NOT_VERIFIED.rawValue).cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )
