@@ -108,7 +108,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         cell.controller = self
         cell.project = project
         // OSR
-        cell.osrValue.text = String(format: "%.1f", project.osr)
+        cell.osrValue.text = String(format: "%.2f", DataInterface.computeOSR(project: project))
         // Running Days
         cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(project: project))
         // Add Tomorrow Task

@@ -193,7 +193,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         srBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         srBadge.textColor = GlobalConstants.AKBadgeColorFg
         srBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
-        srBadge.text = String(format: "SR %.2f%%", day.sr)
+        srBadge.text = String(format: "SR: %.2f%%", DataInterface.computeSRForDay(day: day))
         srBadge.textAlignment = .center
         srBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         srBadge.layer.masksToBounds = true

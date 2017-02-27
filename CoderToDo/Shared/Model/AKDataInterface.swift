@@ -285,6 +285,23 @@ class AKDataInterface
         
         return false
     }
+    
+    static func computeOSR(project: Project) -> Float
+    {
+        var osr: Float = 0.0
+        var counter: Float = 0.0
+        
+        if let days = project.days?.allObjects as? [Day] {
+            for day in days {
+                osr += (DataInterface.computeSRForDay(day: day) / 100.0)
+                counter += 1
+            }
+        }
+        
+        project.osr = (osr / counter) * 100
+        
+        return project.osr
+    }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
     static func getDays(project: Project) -> [Day]
@@ -389,6 +406,27 @@ class AKDataInterface
         }
         
         return false
+    }
+    
+    static func computeSRForDay(day: Day) -> Float
+    {
+        var sr: Float = 0.0
+        var counter: Float = 0.0
+        
+        if let categories = day.categories?.allObjects as? [Category] {
+            for category in categories {
+                if let tasks = category.tasks?.allObjects as? [Task] {
+                    for task in tasks {
+                        sr += (task.completionPercentage / 100.0)
+                        counter += 1
+                    }
+                }
+            }
+        }
+        
+        day.sr = (sr / counter) * 100
+        
+        return day.sr
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
