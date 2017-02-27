@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Improved support for tasks marked as "NOT APPLICABLE". (2017/02/27)
         * Changed "1 running days" for "1 running day". (2017/02/27)
         * Added support for OSR & SR. (2017/02/27)
         * Removed support for this 3 task states: VERIFY, VERIFIED, NOT VERIFIED. (2017/02/27)

@@ -23,8 +23,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var cpValue: UILabel!
     @IBOutlet weak var changeCP: UIStepper!
     @IBOutlet weak var notesValue: UITextView!
-    @IBOutlet weak var stat1Value: UILabel!
-    @IBOutlet weak var stat2Value: UILabel!
     
     // MARK: Actions
     @IBAction func changeStatus(_ sender: Any)
@@ -113,8 +111,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
             self.markTask(mode: TaskMode.NOT_EDITABLE)
         }
-        //  task marked as done.
+        //  task marked as "DONE".
         if self.task.state == TaskStates.DONE.rawValue {
+            self.markTask(mode: TaskMode.NOT_EDITABLE)
+        }
+        //  task marked as "NOT APPLICABLE".
+        if self.task.state == TaskStates.NOT_APPLICABLE.rawValue {
             self.markTask(mode: TaskMode.NOT_EDITABLE)
         }
     }
@@ -124,8 +126,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillDisappear(animated)
         
         // Save the modifications.
-        // If the CP is 100.0% then mark the task as completed.
-        if self.changeCP.value >= 100.0 {
+        // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
+        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.NOT_APPLICABLE.rawValue {
             self.task.state = TaskStates.DONE.rawValue
         }
         else {

@@ -22,7 +22,7 @@ class AKSelectTaskStateView: AKCustomView
     {
         if let controller = controller as? AKViewTaskViewController {
             controller.showContinueMessage(
-                message: "This action can't be undone.",
+                message: "This action can't be undone. Continue...?",
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKViewTaskViewController {
                         // Change caller button.
@@ -67,16 +67,31 @@ class AKSelectTaskStateView: AKCustomView
         }
     }
     
-    @IBAction func notAplicable(_ sender: Any)
+    @IBAction func notApplicable(_ sender: Any)
     {
         if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.NOT_APPLICABLE.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.NOT_APPLICABLE.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
+            controller.showContinueMessage(
+                message: "This action can't be undone. Continue...?",
+                yesAction: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKViewTaskViewController {
+                        // Change caller button.
+                        presenterController.statusValue.setTitle(TaskStates.NOT_APPLICABLE.rawValue, for: .normal)
+                        presenterController.changeCP.value = 100.0
+                        presenterController.changeCP.isEnabled = false
+                        presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
+                        Func.AKAddBorderDeco(
+                            presenterController.statusValue,
+                            color: Func.AKGetColorForTaskState(taskState: TaskStates.NOT_APPLICABLE.rawValue).cgColor,
+                            thickness: GlobalConstants.AKDefaultBorderThickness,
+                            position: .bottom
+                        )
+                        // Toggle to not editable mode.
+                        presenterController.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+                    }
+                    
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
+                noAction: { (presenterController) -> Void in
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) }
             )
             
             // Collapse this view.

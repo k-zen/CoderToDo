@@ -223,7 +223,7 @@ enum DayStatus: String {
 enum TaskStates: String {
     case DONE = "Done"
     case NOT_DONE = "Not Done"
-    case NOT_APPLICABLE = "Not Aplicable"
+    case NOT_APPLICABLE = "Not Applicable"
     case DILATE = "Dilate"
     case PENDING = "Pending"
 }
