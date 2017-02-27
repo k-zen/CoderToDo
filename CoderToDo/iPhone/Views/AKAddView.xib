@@ -23,15 +23,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwr-A2-Ltf" userLabel="Controls_Container">
-                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <rect key="frame" x="37" y="303" width="300" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyg-M7-jhH">
-                            <rect key="frame" x="63" y="10" width="120" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyg-M7-jhH">
+                            <rect key="frame" x="8" y="10" width="138" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="120" id="FPm-8h-Rs0"/>
-                                <constraint firstAttribute="height" constant="40" id="PAw-Ur-242"/>
-                            </constraints>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                             <state key="normal" title="Add Category">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,13 +37,10 @@
                                 <action selector="addCategory:" destination="-1" eventType="touchUpInside" id="xaO-3V-Bg8"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-zA-Oe7">
-                            <rect key="frame" x="191" y="10" width="120" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-zA-Oe7">
+                            <rect key="frame" x="154" y="10" width="138" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Qbu-Gt-aUE"/>
-                                <constraint firstAttribute="width" constant="120" id="ddK-aW-hBC"/>
-                            </constraints>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                             <state key="normal" title="Add Task">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,20 +50,16 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="iyg-M7-jhH" firstAttribute="centerY" secondItem="pwr-A2-Ltf" secondAttribute="centerY" id="36H-kk-9ri"/>
-                        <constraint firstItem="iyg-M7-jhH" firstAttribute="centerX" secondItem="pwr-A2-Ltf" secondAttribute="centerX" constant="-64.5" id="6ix-Oo-5ZQ"/>
-                        <constraint firstAttribute="height" constant="60" id="H42-FZ-laX"/>
-                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="leading" secondItem="iyg-M7-jhH" secondAttribute="trailing" constant="8" id="RVB-nc-mNv"/>
-                        <constraint firstItem="Fec-zA-Oe7" firstAttribute="centerY" secondItem="pwr-A2-Ltf" secondAttribute="centerY" id="lQ1-ei-9wW"/>
+                        <constraint firstAttribute="height" constant="60" id="kKL-19-dNH"/>
+                        <constraint firstAttribute="width" constant="300" id="ld1-aT-KKR"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="pwr-A2-Ltf" secondAttribute="bottom" id="MbB-wv-vLn"/>
-                <constraint firstItem="pwr-A2-Ltf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lvk-Vx-9pD"/>
-                <constraint firstAttribute="trailing" secondItem="pwr-A2-Ltf" secondAttribute="trailing" id="psP-N9-Oeg"/>
+                <constraint firstItem="pwr-A2-Ltf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0Ie-kH-Xyp"/>
+                <constraint firstItem="pwr-A2-Ltf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OoR-OB-Qdq"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

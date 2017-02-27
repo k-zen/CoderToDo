@@ -77,7 +77,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
                 keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
             }
             
-            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.view, component: self.done)
+            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlsContainer, component: self.done)
             if keyboardHeight > height {
                 offset.y = abs(keyboardHeight - height)
             }

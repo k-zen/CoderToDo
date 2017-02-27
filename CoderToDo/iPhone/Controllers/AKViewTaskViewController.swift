@@ -168,7 +168,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                 keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
             }
             
-            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.view, component: self.notesValue)
+            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlContainer, component: self.notesValue)
             if keyboardHeight > height {
                 offset.y = abs(keyboardHeight - height)
             }

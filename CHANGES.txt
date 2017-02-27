@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Made sorting & adding views floating. Also minor modification to the system for computing height of a component from the bottom. (2017/02/27)
         * Added support for a displayable floating menu for each view that contains a table or tables. (2017/02/27)
         * Improved support for tasks marked as "NOT APPLICABLE". (2017/02/27)
         * Changed "1 running days" for "1 running day". (2017/02/27)

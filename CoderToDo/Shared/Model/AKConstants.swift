@@ -198,8 +198,8 @@ enum CustomBorderDecorationPosition: Int {
 }
 
 enum SortingOrder: String {
-    case ascending = "Ascending"
-    case descending = "Descending"
+    case ascending = "↑"
+    case descending = "↓"
 }
 
 enum ProjectStatus: String {
@@ -412,9 +412,8 @@ class UtilityFunctions
     
     func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView) -> CGFloat
     {
-        var height: CGFloat = container.frame.height
-        height -= container.convert(component.frame, to: container).origin.y
-        height -= component.frame.height
+        var height: CGFloat = (UIScreen.main.bounds.height - container.frame.height) / 2.0
+        height += component.frame.height
         
         return abs(height)
     }

@@ -24,29 +24,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxh-dk-0eJ" userLabel="Controls_Container">
-                    <rect key="frame" x="0.0" y="517" width="375" height="150"/>
+                    <rect key="frame" x="37" y="258" width="300" height="150"/>
                     <subviews>
-                        <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
-                            <rect key="frame" x="8" y="39" width="231" height="55"/>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
+                            <rect key="frame" x="8" y="39" width="216" height="55"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="55" id="tqV-qc-NoB"/>
-                            </constraints>
                         </pickerView>
-                        <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Filters_Value">
-                            <rect key="frame" x="247" y="39" width="120" height="55"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="55" id="NQP-WA-mGp"/>
-                                <constraint firstAttribute="width" constant="120" id="Tvj-AC-M7x"/>
-                            </constraints>
-                        </pickerView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVI-yQ-7Aa">
-                            <rect key="frame" x="8" y="102" width="359" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVI-yQ-7Aa">
+                            <rect key="frame" x="8" y="102" width="284" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="e7V-vj-EyH"/>
-                            </constraints>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                             <state key="normal" title="Sort">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,42 +43,29 @@
                                 <action selector="sort:" destination="-1" eventType="touchUpInside" id="rKZ-22-4bY"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort projects using the following options:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tx-Vh-6Ja">
-                            <rect key="frame" x="8" y="8" width="359" height="23"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="23" id="rLp-4n-anG"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sort projects using the following options:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tx-Vh-6Ja">
+                            <rect key="frame" x="8" y="8" width="284" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Filters_Value">
+                            <rect key="frame" x="232" y="39" width="60" height="55"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </pickerView>
                     </subviews>
-                    <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="aVI-yQ-7Aa" secondAttribute="bottom" constant="8" id="3xe-p1-ZhW"/>
-                        <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="811-Wh-5zp"/>
-                        <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="8Ts-MA-842"/>
-                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="A9c-qd-67E"/>
-                        <constraint firstAttribute="trailing" secondItem="4tx-Vh-6Ja" secondAttribute="trailing" constant="8" id="EQB-Wt-fib"/>
-                        <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="4tx-Vh-6Ja" secondAttribute="bottom" constant="8" id="Gib-GS-oy4"/>
-                        <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="7By-Os-b7j" secondAttribute="trailing" constant="8" id="Naq-vZ-z5c"/>
-                        <constraint firstItem="4tx-Vh-6Ja" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="RZH-0i-tWj"/>
-                        <constraint firstAttribute="trailing" secondItem="cyz-aO-vdB" secondAttribute="trailing" constant="8" id="Tyz-HF-I82"/>
-                        <constraint firstItem="7By-Os-b7j" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" constant="8" id="VDh-q2-1UY"/>
-                        <constraint firstItem="4tx-Vh-6Ja" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" constant="8" id="Zpq-TP-iWk"/>
-                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="cyz-aO-vdB" secondAttribute="bottom" constant="8" id="aWG-Qk-VLD"/>
-                        <constraint firstAttribute="height" constant="150" id="b5Z-fv-JI8"/>
-                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="7By-Os-b7j" secondAttribute="bottom" constant="8" id="dXS-mW-RjQ"/>
-                        <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="7By-Os-b7j" secondAttribute="trailing" constant="8" id="lfz-c2-F4o"/>
-                        <constraint firstAttribute="trailing" secondItem="aVI-yQ-7Aa" secondAttribute="trailing" constant="8" id="olI-R0-LSs"/>
-                        <constraint firstItem="aVI-yQ-7Aa" firstAttribute="top" secondItem="cyz-aO-vdB" secondAttribute="bottom" constant="8" id="tJA-be-hs0"/>
+                        <constraint firstAttribute="height" constant="150" id="7zg-cn-xDq"/>
+                        <constraint firstAttribute="width" constant="300" id="Yne-aU-zEm"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Hxh-dk-0eJ" secondAttribute="trailing" id="BDB-eG-EX0"/>
-                <constraint firstAttribute="bottom" secondItem="Hxh-dk-0eJ" secondAttribute="bottom" id="dSN-jR-Avm"/>
-                <constraint firstItem="Hxh-dk-0eJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dXV-Uq-vcZ"/>
+                <constraint firstItem="Hxh-dk-0eJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4vR-I3-zgR"/>
+                <constraint firstItem="Hxh-dk-0eJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8OE-ig-svh"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

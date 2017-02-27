@@ -70,16 +70,10 @@ class AKAddViewController: AKCustomViewController
         super.setup()
         
         // Custom L&F.
-        // Func.AKAddBlurView(view: self.controlsContainer, effect: UIBlurEffectStyle.dark, addClearColorBgToView: true)
-        
+        self.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.controlsContainer.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.controlsContainer.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
         self.addCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.addTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        
-        Func.AKAddBorderDeco(
-            self.controlsContainer,
-            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness,
-            position: .top
-        )
     }
 }

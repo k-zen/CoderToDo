@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saa-74-54w" userLabel="Scroll_Container">
-                    <rect key="frame" x="37.5" y="20" width="300" height="431"/>
+                    <rect key="frame" x="37.5" y="118" width="300" height="431"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gq1-12-czo" userLabel="Controls_Container">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="431"/>
@@ -216,7 +216,7 @@
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="saa-74-54w" firstAttribute="centerX" secondItem="5j8-j8-jx9" secondAttribute="centerX" id="Upj-PO-bXH"/>
-                <constraint firstItem="saa-74-54w" firstAttribute="top" secondItem="5j8-j8-jx9" secondAttribute="top" constant="20" id="W1B-Ya-fl5"/>
+                <constraint firstItem="saa-74-54w" firstAttribute="centerY" secondItem="5j8-j8-jx9" secondAttribute="centerY" id="eeh-fN-lXQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
