@@ -298,7 +298,7 @@ class AKDataInterface
             }
         }
         
-        project.osr = (osr / counter) * 100
+        project.osr = counter > 0 ? (osr / counter) * 100 : 0.0
         
         return project.osr
     }
@@ -424,7 +424,7 @@ class AKDataInterface
             }
         }
         
-        day.sr = (sr / counter) * 100
+        day.sr = counter > 0 ? (sr / counter) * 100 : 0.0
         
         return day.sr
     }
