@@ -110,7 +110,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // OSR
         cell.osrValue.text = String(format: "%.2f", DataInterface.computeOSR(project: project))
         // Running Days
-        cell.runningDaysValue.text = String(format: "%i running days", DataInterface.getProjectRunningDays(project: project))
+        let runningDays = DataInterface.getProjectRunningDays(project: project)
+        cell.runningDaysValue.text = String(format: "%i running %@", runningDays, runningDays > 1 ? "days" : "day")
         // Add Tomorrow Task
         if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS {
             cell.addTomorrowTask.isHidden = false
