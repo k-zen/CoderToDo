@@ -6,9 +6,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34
         static let AKEmptyRowHeight: CGFloat = 40
+        static let AKDisplaceDownAnimation = "displaceDown"
+        static let AKDisplaceUpAnimation = "displaceUp"
+        static let AKDisplaceHeight: CGFloat = 40.0
     }
     
     // MARK: Properties
+    let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
+    let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     var customCellArray = [AKTasksTableView]()
     var project: Project!
     
@@ -17,24 +22,32 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBOutlet weak var daysTable: UITableView!
     
     // MARK: Actions
-    @IBAction func add(_ sender: Any)
+    @IBAction func toggleMenu(_ sender: Any)
     {
-        self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
-                         taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                            if let presenterController = presenterController as? AKViewProjectViewController, let presentedController = presentedController as? AKAddViewController {
-                                presentedController.project = presenterController.project
-                            } },
-                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-                            
-                            // Always reload the days table!
-                            if let presenterController = presenterController as? AKViewProjectViewController {
-                                presenterController.daysTable.reloadData()
-                                for customCell in presenterController.customCellArray {
-                                    customCell.tasksTable?.reloadData()
-                                }
-                            } }
-        )
+        if self.daysTable.frame.origin.y == 0.0 {
+            self.showTopMenu()
+            
+            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
+            self.daysTable.frame = CGRect(
+                x: self.daysTable.frame.origin.x,
+                y: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
+                width: self.daysTable.frame.width,
+                height: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight
+            )
+            UIView.commitAnimations()
+        }
+        else {
+            self.hideTopMenu()
+            
+            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+            self.daysTable.frame = CGRect(
+                x: self.daysTable.frame.origin.x,
+                y: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
+                width: self.daysTable.frame.width,
+                height: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight
+            )
+            UIView.commitAnimations()
+        }
     }
     
     // MARK: AKCustomViewController Overriding
@@ -244,5 +257,42 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // Add UITableView's DataSource & Delegate.
         self.daysTable?.dataSource = self
         self.daysTable?.delegate = self
+        
+        // Animations
+        self.displaceDownProjectsTable.fromValue = 0.0
+        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
+        self.displaceDownProjectsTable.duration = 1.0
+        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        
+        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
+        self.displaceUpProjectsTable.toValue = 0.0
+        self.displaceUpProjectsTable.duration = 1.0
+        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        
+        // Custom Actions
+        self.topMenuOverlayController.addAction = { (presenterController) -> Void in
+            if let presenterController = presenterController {
+                presenterController.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
+                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                                                    if let presenterController = presenterController as? AKViewProjectViewController, let presentedController = presentedController as? AKAddViewController {
+                                                        presentedController.project = presenterController.project
+                                                    } },
+                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                    
+                                                    // Always reload the days table!
+                                                    if let presenterController = presenterController as? AKViewProjectViewController {
+                                                        presenterController.daysTable.reloadData()
+                                                        for customCell in presenterController.customCellArray {
+                                                            customCell.tasksTable?.reloadData()
+                                                        }
+                                                    } }
+                )
+            }
+        }
     }
 }

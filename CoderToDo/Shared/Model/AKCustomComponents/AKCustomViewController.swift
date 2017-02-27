@@ -121,7 +121,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.messageOverlayController.controller = self
         self.messageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
@@ -137,7 +137,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.continueMessageOverlayController.controller = self
         self.continueMessageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
@@ -279,7 +279,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
         self.messageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKMessageView.LocalConstants.AKViewWidth,
             height: AKMessageView.LocalConstants.AKViewHeight
         )
@@ -302,7 +302,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
         self.continueMessageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: AKContinueMessageView.LocalConstants.AKViewHeight
         )
@@ -327,7 +327,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
         self.messageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
@@ -340,7 +340,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
         self.continueMessageOverlayView.frame = CGRect(
             x: origin,
-            y: 40.0,
+            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
