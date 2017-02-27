@@ -83,6 +83,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var messageOverlayView: UIView!
     let continueMessageOverlayController = AKContinueMessageView()
     var continueMessageOverlayView: UIView!
+    let topMenuOverlayController = AKTopMenuView()
+    var topMenuOverlayView: UIView!
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -114,7 +116,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewDidLayoutSubviews()
         
         // Setup the overlays.
-        var origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
+        var origin = self.view.frame.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
         self.messageOverlayView = self.messageOverlayController.customView
         self.messageOverlayController.controller = self
         self.messageOverlayView.frame = CGRect(
@@ -130,7 +132,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.messageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
         self.view.addSubview(self.messageOverlayView)
         
-        origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
+        origin = self.view.frame.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
         self.continueMessageOverlayView = self.continueMessageOverlayController.customView
         self.continueMessageOverlayController.controller = self
         self.continueMessageOverlayView.frame = CGRect(
@@ -145,6 +147,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.continueMessageOverlayView.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
         self.continueMessageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
         self.view.addSubview(self.continueMessageOverlayView)
+        
+        self.topMenuOverlayView = self.topMenuOverlayController.customView
+        self.topMenuOverlayController.controller = self
+        self.topMenuOverlayView.frame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.view.frame.width,
+            height: 0.0
+        )
+        self.topMenuOverlayView.translatesAutoresizingMaskIntoConstraints = true
+        self.topMenuOverlayView.clipsToBounds = true
+        self.view.addSubview(self.topMenuOverlayView)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
@@ -224,12 +238,12 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }()
     }
     
-    func setupMenu(_ title: String!, message: String!, type: UIAlertControllerStyle!)
+    func setupBottomMenu(_ title: String!, message: String!, type: UIAlertControllerStyle!)
     {
         self.bottomMenu = UIAlertController(title: title, message: message, preferredStyle: type)
     }
     
-    func addMenuAction(_ title: String!, style: UIAlertActionStyle, handler: ((UIAlertAction) -> Void)?)
+    func addBottomMenuAction(_ title: String!, style: UIAlertActionStyle, handler: ((UIAlertAction) -> Void)?)
     {
         if let menu = self.bottomMenu {
             menu.addAction(UIAlertAction(title: title, style: style, handler: handler))
@@ -237,7 +251,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Presenters
-    func showMenu()
+    func showBottomMenu()
     {
         if let menu = self.bottomMenu {
             self.present(menu, animated: true, completion: nil)
@@ -295,6 +309,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         UIView.commitAnimations()
     }
     
+    func showTopMenu()
+    {
+        UIView.beginAnimations(AKTopMenuView.LocalConstants.AKExpandHeightAnimation, context: nil)
+        self.topMenuOverlayView.frame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.topMenuOverlayView.frame.width,
+            height: AKTopMenuView.LocalConstants.AKViewHeight
+        )
+        UIView.commitAnimations()
+    }
+    
     func hideMessage()
     {
         UIView.beginAnimations(AKMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
@@ -321,6 +347,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         CATransaction.setCompletionBlock {
             completionTask(self)
         }
+        UIView.commitAnimations()
+    }
+    
+    func hideTopMenu()
+    {
+        UIView.beginAnimations(AKTopMenuView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+        self.topMenuOverlayView.frame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: self.topMenuOverlayView.frame.width,
+            height: 0.0
+        )
         UIView.commitAnimations()
     }
     

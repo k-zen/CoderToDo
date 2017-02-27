@@ -35,23 +35,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="List Projects" id="ytb-TK-suW">
                         <barButtonItem key="backBarButtonItem" title="Back" id="RER-sZ-GJo"/>
-                        <barButtonItem key="leftBarButtonItem" tag="1" title="Sort" id="024-Wo-aBY">
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Menu" id="gNK-dI-7DM">
                             <color key="tintColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="organizeProjects:" destination="BYZ-38-t0r" id="VpN-kI-QgJ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="2" title="Add" id="gNK-dI-7DM">
-                            <color key="tintColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="addNewProject:" destination="BYZ-38-t0r" id="h7C-Ra-gVh"/>
+                                <action selector="toggleMenu:" destination="BYZ-38-t0r" id="1YC-3T-rlS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="add" destination="gNK-dI-7DM" id="ZLB-Lg-ALR"/>
+                        <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
-                        <outlet property="sort" destination="024-Wo-aBY" id="law-1D-Iqd"/>
                         <segue destination="Y2b-YV-saU" kind="show" identifier="ViewProjectSegue" id="90v-Nx-O3K"/>
                     </connections>
                 </viewController>
@@ -85,7 +78,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="View Project" id="2ag-ze-GqY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="m0Y-rh-Bc1"/>
-                        <barButtonItem key="rightBarButtonItem" tag="1" title="Add" id="Lcp-ln-DzJ">
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Menu" id="Lcp-ln-DzJ">
                             <color key="tintColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="add:" destination="Y2b-YV-saU" id="SmK-bb-wl7"/>

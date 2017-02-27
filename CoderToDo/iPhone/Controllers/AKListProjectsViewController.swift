@@ -4,46 +4,50 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 34
-        static let AKRowHeight: CGFloat = 52
+        static let AKHeaderHeight: CGFloat = 34.0
+        static let AKRowHeight: CGFloat = 52.0
+        static let AKDisplaceDownAnimation = "displaceDown"
+        static let AKDisplaceUpAnimation = "displaceUp"
+        static let AKDisplaceHeight: CGFloat = 40.0
     }
     
     // MARK: Properties
+    let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
+    let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
     var order: SortingOrder = SortingOrder.descending
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
-    @IBOutlet weak var sort: UIBarButtonItem!
-    @IBOutlet weak var add: UIBarButtonItem!
+    @IBOutlet weak var menu: UIBarButtonItem!
     
     // MARK: Actions
-    @IBAction func organizeProjects(_ sender: Any)
+    @IBAction func toggleMenu(_ sender: Any)
     {
-        self.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
-                         taskBeforePresenting: { (presenterController, presentedController) -> Void in },
-                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-                            
-                            if let presenterController = presenterController as? AKListProjectsViewController, let presentedController = presentedController as? AKSortProjectSelectorViewController {
-                                presenterController.sortProjectsBy = presentedController.filtersData[presentedController.filters.selectedRow(inComponent: 0)]
-                                presenterController.order = presentedController.orderData[presentedController.order.selectedRow(inComponent: 0)]
-                                presenterController.projectsTable.reloadData()
-                            } }
-        )
-    }
-    
-    @IBAction func addNewProject(_ sender: Any)
-    {
-        self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
-                         taskBeforePresenting: { (presenterController, presentedController) -> Void in },
-                         dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-                            
-                            if let presenterController = presenterController as? AKListProjectsViewController {
-                                presenterController.projectsTable.reloadData()
-                            } }
-        )
+        if self.projectsTable.frame.origin.y == 0.0 {
+            self.showTopMenu()
+            
+            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
+            self.projectsTable.frame = CGRect(
+                x: self.projectsTable.frame.origin.x,
+                y: self.projectsTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
+                width: self.projectsTable.frame.width,
+                height: self.projectsTable.frame.height - LocalConstants.AKDisplaceHeight
+            )
+            UIView.commitAnimations()
+        }
+        else {
+            self.hideTopMenu()
+            
+            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+            self.projectsTable.frame = CGRect(
+                x: self.projectsTable.frame.origin.x,
+                y: self.projectsTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
+                width: self.projectsTable.frame.width,
+                height: self.projectsTable.frame.height + LocalConstants.AKDisplaceHeight
+            )
+            UIView.commitAnimations()
+        }
     }
     
     // MARK: AKCustomViewController Overriding
@@ -312,14 +316,53 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.projectsTable?.dataSource = self
         self.projectsTable?.delegate = self
         
+        // Animations
+        self.displaceDownProjectsTable.fromValue = 0.0
+        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
+        self.displaceDownProjectsTable.duration = 1.0
+        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        
+        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
+        self.displaceUpProjectsTable.toValue = 0.0
+        self.displaceUpProjectsTable.duration = 1.0
+        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        
+        // Custom Actions
+        self.topMenuOverlayController.addAction = { (presenterController) -> Void in
+            if let presenterController = presenterController {
+                presenterController.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
+                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                    
+                                                    if let presenterController = presenterController as? AKListProjectsViewController {
+                                                        presenterController.projectsTable.reloadData()
+                                                    } }
+                )
+            }
+        }
+        self.topMenuOverlayController.sortAction = { (presenterController) -> Void in
+            if let presenterController = presenterController {
+                presenterController.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
+                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                    
+                                                    if let presenterController = presenterController as? AKListProjectsViewController, let presentedController = presentedController as? AKSortProjectSelectorViewController {
+                                                        presenterController.sortProjectsBy = presentedController.filtersData[presentedController.filters.selectedRow(inComponent: 0)]
+                                                        presenterController.order = presentedController.orderData[presentedController.order.selectedRow(inComponent: 0)]
+                                                        presenterController.projectsTable.reloadData()
+                                                    } }
+                )
+            }
+        }
+        
         // Custom L&F.
-        self.sort.setTitleTextAttributes(
-            [
-                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
-                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
-            ], for: .normal
-        )
-        self.add.setTitleTextAttributes(
+        self.menu.setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
                 NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
