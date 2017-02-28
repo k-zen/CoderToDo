@@ -87,6 +87,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.view.addSubview(self.selectTaskStateOverlayView)
         
         // Custom L&F.
+        Func.AKAddBorderDeco(
+            self.taskNameValue,
+            color: GlobalConstants.AKCoderToDoWhite2.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 2.0,
+            position: .left
+        )
         self.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.taskState.layer.masksToBounds = true
         self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
