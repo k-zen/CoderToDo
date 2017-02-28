@@ -440,8 +440,10 @@ class AKDataInterface
             for category in categories {
                 if let tasks = category.tasks?.allObjects as? [Task] {
                     for task in tasks {
-                        sr += (task.completionPercentage / 100.0)
-                        counter += 1
+                        if task.state != TaskStates.DILATE.rawValue {
+                            sr += (task.completionPercentage / 100.0)
+                            counter += 1
+                        }
                     }
                 }
             }

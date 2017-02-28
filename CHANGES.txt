@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Corrected minor bug in computation of SR for a day. (2017/02/28)
         * Added support for first day. (2017/02/28)
         * Added support for DilateQueues in each project. (2017/02/28)
         * Made sorting & adding views floating. Also minor modification to the system for computing height of a component from the bottom. (2017/02/27)
