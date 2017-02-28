@@ -115,6 +115,7 @@ struct GlobalConstants {
     // ### Custom Color Palette:
     static let AKDefaultFont = "AvenirNextCondensed-Regular"
     static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
+    static let AKSecondaryItalicFont = "AvenirNextCondensed-DemiBoldItalic"
     static let AKTertiaryFont = "AvenirNextCondensed-Bold"
     static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
     static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite2

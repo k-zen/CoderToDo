@@ -44,7 +44,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         let task = DataInterface.getTasks(category: category)[(indexPath as NSIndexPath).row]
         
         let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
-        cell.taskNameValue.text = String(format: "• %@", task.name ?? "Some Name...")
+        cell.taskNameValue.text = String(format: "%@", task.name ?? "Some Name...")
         // Completion Percentage.
         cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
         switch task.completionPercentage {
@@ -135,6 +135,12 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
+        Func.AKAddBorderDeco(
+            cell.infoContainer,
+            color: GlobalConstants.AKTableCellBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         
         return cell
     }
@@ -150,6 +156,12 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+        Func.AKAddBorderDeco(
+            headerCell,
+            color: GlobalConstants.AKCoderToDoBlue.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         
         let title = UILabel(frame: CGRect(
             x: padding * 2,
@@ -157,8 +169,8 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             width: tableWidth - (padding * 2), // Overlap badge!
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
-        title.textColor = GlobalConstants.AKDefaultFg
+        title.font = UIFont(name: GlobalConstants.AKSecondaryItalicFont, size: 17.0)
+        title.textColor = Func.AKHexColor(0xB8B8B8)
         title.text = category.name ?? "N\\A"
         title.textAlignment = .left
         // ### DEBUG
