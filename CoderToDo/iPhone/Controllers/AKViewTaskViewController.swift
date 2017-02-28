@@ -4,7 +4,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
 {
     // MARK: Local Enums
     enum LocalEnums: Int {
-        case notes = 1
+        case taskName = 1
+        case notes = 2
     }
     
     // MARK: Properties
@@ -18,7 +19,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlContainer: UIView!
     @IBOutlet weak var taskState: UILabel!
-    @IBOutlet weak var taskNameValue: UILabel!
+    @IBOutlet weak var taskNameValue: UITextView!
     @IBOutlet weak var statusValue: UIButton!
     @IBOutlet weak var cpValue: UILabel!
     @IBOutlet weak var changeCP: UIStepper!
@@ -126,6 +127,16 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillDisappear(animated)
         
         // Save the modifications.
+        do {
+            let taskName = AKTaskName(inputData: self.taskNameValue.text!)
+            try taskName.validate()
+            try taskName.process()
+            self.task.name = taskName.outputData
+        }
+        catch {
+            // Do nothing, just don't save the name.
+        }
+        
         // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
         if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.NOT_APPLICABLE.rawValue {
             self.task.state = TaskStates.DONE.rawValue
@@ -134,6 +145,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.task.state = self.statusValue.titleLabel?.text
         }
         self.task.completionPercentage = Float(self.changeCP.value)
+        
         self.task.note = self.notesValue.text
     }
     
@@ -147,10 +159,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         let newLen = (textView.text?.characters.count)! + text.characters.count - range.length
         
         switch textView.tag {
+        case LocalEnums.taskName.rawValue:
+            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
         case LocalEnums.notes.rawValue:
             return newLen > GlobalConstants.AKMaxTaskNoteLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxTaskNoteLength ? false : true
+            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
         }
     }
     
@@ -159,6 +173,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         Func.AKAddDoneButtonKeyboard(textView, controller: self)
         
         switch textView.tag {
+        case LocalEnums.taskName.rawValue:
+            return true
         case LocalEnums.notes.rawValue:
             var offset = textView.convert(textView.frame, to: self.scrollContainer).origin
             offset.x = 0
@@ -215,6 +231,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.setup()
         
         // Set Delegator.
+        self.taskNameValue.delegate = self
+        self.taskNameValue.tag = LocalEnums.notes.rawValue
         self.notesValue.delegate = self
         self.notesValue.tag = LocalEnums.notes.rawValue
     }
@@ -223,10 +241,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     {
         switch mode {
         case TaskMode.EDITABLE:
+            self.taskNameValue.isEditable = true
             self.statusValue.isEnabled = true
             self.changeCP.isEnabled = true
             break
         case TaskMode.NOT_EDITABLE:
+            self.taskNameValue.isEditable = false
             self.statusValue.isEnabled = false
             self.changeCP.isEnabled = false
             break

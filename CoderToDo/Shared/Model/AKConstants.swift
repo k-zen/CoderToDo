@@ -147,15 +147,15 @@ struct GlobalConstants {
     static let AKKeyboardHeight: CGFloat = 216 + 20 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 40
-    static let AKMinUsernameLength = 1
+    static let AKMinUsernameLength = 2
     static let AKMaxProjectNameLength = 40
-    static let AKMinProjectNameLength = 1
+    static let AKMinProjectNameLength = 2
     static let AKMaxCategoryNameLength = 40
-    static let AKMinCategoryNameLength = 1
+    static let AKMinCategoryNameLength = 2
     static let AKMaxTaskNameLength = 140
-    static let AKMinTaskNameLength = 1
+    static let AKMinTaskNameLength = 2
     static let AKMaxTaskNoteLength = 1000
-    static let AKMinTaskNoteLength = 1
+    static let AKMinTaskNoteLength = 2
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKWorkingDayStartTime = 0 // Military type of time: 00:00Hs.
