@@ -2,7 +2,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AKAppDelegate: UIResponder, UIApplicationDelegate
+class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate
 {
     // MARK: Properties
     let notificationCenter = UNUserNotificationCenter.current()
@@ -51,6 +51,18 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
         
+        // ### Delegates.
+        self.notificationCenter.delegate = self
+        
         return true
+    }
+    
+    // MARK: UNUserNotificationCenterDelegate Implementation
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert,.sound])
     }
 }
