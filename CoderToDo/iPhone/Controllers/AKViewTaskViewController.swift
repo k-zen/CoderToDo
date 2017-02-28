@@ -87,6 +87,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.view.addSubview(self.selectTaskStateOverlayView)
         
         // Custom L&F.
+        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         Func.AKAddBorderDeco(
             self.taskNameValue,
             color: GlobalConstants.AKCoderToDoWhite2.cgColor,
