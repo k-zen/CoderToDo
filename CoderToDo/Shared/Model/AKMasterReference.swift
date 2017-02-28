@@ -74,8 +74,6 @@ class AKMasterReference: NSObject
             NSLog("=>       CLOSING TIME: %@", project.closingTime?.description ?? "N\\A")
             NSLog("=>       CLOSING TIME TOLERANCE: %i", project.closingTimeTolerance)
             NSLog("=>       CREATION DATE: %@", project.creationDate?.description ?? "N\\A")
-            NSLog("=>       MAX. CATEGORIES: %i", project.maxCategories)
-            NSLog("=>       MAX. TASKS: %i", project.maxTasks)
             NSLog("=>       NAME: %@", project.name ?? "N\\A")
             NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
             NSLog("=>       OSR: %.2f", project.osr)

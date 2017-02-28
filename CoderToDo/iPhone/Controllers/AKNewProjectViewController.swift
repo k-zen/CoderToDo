@@ -34,8 +34,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             let startingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
             let closingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
             let tolerance = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
-            let maxCategories = -1
-            let maxTasks = -1
             
             try projectName.validate()
             try projectName.process()
@@ -49,8 +47,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.startingTime = startingTime
                 project.closingTime = closingTime
                 project.closingTimeTolerance = Int16(tolerance)
-                project.maxCategories = Int16(maxCategories)
-                project.maxTasks = Int16(maxTasks)
                 project.creationDate = now
                 project.pendingQueue = PendingQueue(context: mr.getMOC())
                 project.dilateQueue = DilateQueue(context: mr.getMOC())
