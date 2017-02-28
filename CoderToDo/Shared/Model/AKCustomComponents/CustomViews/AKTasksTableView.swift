@@ -137,7 +137,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
         Func.AKAddBorderDeco(
             cell.infoContainer,
-            color: GlobalConstants.AKTableCellBorderBg.cgColor,
+            color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )

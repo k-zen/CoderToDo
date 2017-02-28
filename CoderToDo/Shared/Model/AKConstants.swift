@@ -146,8 +146,8 @@ struct GlobalConstants {
     static let AKBadgeColorBg = UIColor.clear
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
-    static let AKSpellCheckerToolbarHeight: CGFloat = 60
-    static let AKKeyboardHeight: CGFloat = 216 + GlobalConstants.AKCloseKeyboardToolbarHeight
+    static let AKAutoCorrectionToolbarHeight: CGFloat = 60
+    static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 40
     static let AKMinUsernameLength = 2
@@ -415,9 +415,9 @@ class UtilityFunctions
         OperationQueue.main.addOperation({ () -> Void in code() })
     }
     
-    func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView) -> CGFloat
+    func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView, isCentered: Bool = true) -> CGFloat
     {
-        var height: CGFloat = (UIScreen.main.bounds.height - container.frame.height) / 2.0
+        var height: CGFloat = (UIScreen.main.bounds.height - container.frame.height) / (isCentered ? 2.0 : 1.0)
         height += component.frame.height
         
         return abs(height)

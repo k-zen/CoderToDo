@@ -26,6 +26,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var categoryValue: UILabel!
     @IBOutlet weak var changeCategory: UIButton!
     @IBOutlet weak var notesValue: UITextView!
+    @IBOutlet weak var dummyMarker: UILabel!
     
     // MARK: Actions
     @IBAction func changeStatus(_ sender: Any)
@@ -187,11 +188,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             offset.x = 0
             
             var keyboardHeight = GlobalConstants.AKKeyboardHeight
-            if textView.spellCheckingType == UITextSpellCheckingType.yes || textView.spellCheckingType == UITextSpellCheckingType.default {
-                keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
+            if textView.autocorrectionType == UITextAutocorrectionType.yes || textView.autocorrectionType == UITextAutocorrectionType.default {
+                keyboardHeight += GlobalConstants.AKAutoCorrectionToolbarHeight
             }
             
-            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlContainer, component: self.notesValue)
+            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlContainer, component: self.dummyMarker, isCentered: false)
             if keyboardHeight > height {
                 offset.y = abs(keyboardHeight - height)
             }

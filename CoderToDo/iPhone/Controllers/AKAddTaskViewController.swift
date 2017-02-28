@@ -156,8 +156,8 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             offset.x = 0
             
             var keyboardHeight = GlobalConstants.AKKeyboardHeight
-            if textField.spellCheckingType == UITextSpellCheckingType.yes || textField.spellCheckingType == UITextSpellCheckingType.default {
-                keyboardHeight += GlobalConstants.AKSpellCheckerToolbarHeight
+            if textField.autocorrectionType == UITextAutocorrectionType.yes || textField.autocorrectionType == UITextAutocorrectionType.default {
+                keyboardHeight += GlobalConstants.AKAutoCorrectionToolbarHeight
             }
             
             let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlsContainer, component: self.add)
