@@ -97,7 +97,7 @@ class AKDataInterface
             let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
             let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
             
-            return nowHour >= startingTimeHour && nowHour <= closingTimeHour
+            return nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance)
         }
         
         return false
