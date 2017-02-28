@@ -23,6 +23,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var statusValue: UIButton!
     @IBOutlet weak var cpValue: UILabel!
     @IBOutlet weak var changeCP: UIStepper!
+    @IBOutlet weak var categoryValue: UILabel!
+    @IBOutlet weak var changeCategory: UIButton!
     @IBOutlet weak var notesValue: UITextView!
     
     // MARK: Actions
@@ -44,6 +46,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.cpValue.text = String(format: "%.1f%%", self.changeCP.value)
     }
     
+    @IBAction func changeCategory(_ sender: Any)
+    {
+        
+    }
+    
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
     {
@@ -61,11 +68,13 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             thickness: GlobalConstants.AKDefaultBorderThickness,
             position: .bottom
         )
-        // Task note.
-        self.notesValue.text = self.task.note ?? ""
         // Completion Percentage.
         self.changeCP.value = Double(self.task.completionPercentage)
         self.cpValue.text = String(format: "%.1f%%", self.task.completionPercentage)
+        // Category
+        self.categoryValue.text = self.task.category?.name ?? "N\\A"
+        // Task note.
+        self.notesValue.text = self.task.note ?? ""
     }
     
     override func viewDidLayoutSubviews()
@@ -87,22 +96,13 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.view.addSubview(self.selectTaskStateOverlayView)
         
         // Custom L&F.
-        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        Func.AKAddBorderDeco(
-            self.taskNameValue,
-            color: GlobalConstants.AKCoderToDoWhite2.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 2.0,
-            position: .left
-        )
+        self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         self.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.taskState.layer.masksToBounds = true
+        self.changeCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.notesValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        Func.AKAddBorderDeco(
-            self.notesValue,
-            color: GlobalConstants.AKCoderToDoWhite2.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 2.0,
-            position: .left
-        )
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -239,7 +239,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         
         // Set Delegator.
         self.taskNameValue.delegate = self
-        self.taskNameValue.tag = LocalEnums.notes.rawValue
+        self.taskNameValue.tag = LocalEnums.taskName.rawValue
         self.notesValue.delegate = self
         self.notesValue.tag = LocalEnums.notes.rawValue
     }

@@ -372,7 +372,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Custom L&F.
         self.menu.setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0),
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
                 NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
             ], for: .normal
         )

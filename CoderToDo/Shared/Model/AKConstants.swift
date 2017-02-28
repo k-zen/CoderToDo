@@ -135,6 +135,8 @@ struct GlobalConstants {
     static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoWhite4
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKPickerFontSize: CGFloat = 16.0
+    static let AKNavBarFontSize: CGFloat = 18.0
+    static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
     static let AKViewCornerRadius: CGFloat = 8.0
     static let AKButtonCornerRadius: CGFloat = 4.0
     static let AKDefaultBorderThickness = 2.0
@@ -143,8 +145,8 @@ struct GlobalConstants {
     static let AKBadgeColorBg = UIColor.clear
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
-    static let AKSpellCheckerToolbarHeight: CGFloat = 40
-    static let AKKeyboardHeight: CGFloat = 216 + 20 + GlobalConstants.AKCloseKeyboardToolbarHeight
+    static let AKSpellCheckerToolbarHeight: CGFloat = 60
+    static let AKKeyboardHeight: CGFloat = 216 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 40
     static let AKMinUsernameLength = 2
