@@ -95,6 +95,10 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         //      day is not tomorrow AND
         //          a. the state is PENDING
         //          b. the CP has been incremented in the day.
+        // 3. Add the task to DilateQueue.
+        //  If the project is closed and is NOT today before working day AND
+        //      day is not tomorrow AND
+        //          a. the state is DILATE
         if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) && !DataInterface.isBeforeOpen(project: (task.category?.day?.project)!) {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
@@ -107,7 +111,14 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
                 if task.state == TaskStates.PENDING.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                     task.initialCompletionPercentage = task.completionPercentage
                     if let pendingQueue = task.category?.day?.project?.pendingQueue {
-                        pendingQueue.addToPendingQueue(task)
+                        pendingQueue.addToTasks(task)
+                    }
+                }
+                // Sanity check #3
+                if task.state == TaskStates.DILATE.rawValue {
+                    task.initialCompletionPercentage = task.completionPercentage
+                    if let dilateQueue = task.category?.day?.project?.dilateQueue {
+                        dilateQueue.addToTasks(task)
                     }
                 }
             }

@@ -35,7 +35,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                 // Allways add today to the table if not present, if present return the last day.
                 if let currentDay = DataInterface.addNewWorkingDay(project: self.project) {
                     // Add task from PendingQueue.
-                    if let tasks = self.project.pendingQueue?.pendingQueue?.allObjects as? [Task] {
+                    if let tasks = self.project.pendingQueue?.tasks?.allObjects as? [Task] {
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
@@ -44,7 +44,23 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                                     currentDay.addToCategories(category)
                                     
                                     // Remove from queue.
-                                    self.project.pendingQueue?.removeFromPendingQueue(task)
+                                    self.project.pendingQueue?.removeFromTasks(task)
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Add task from DilateQueue.
+                    if let tasks = self.project.dilateQueue?.tasks?.allObjects as? [Task] {
+                        for task in tasks {
+                            if let categoryName = task.category?.name {
+                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                                    task.creationDate = NSDate()
+                                    category.addToTasks(task)
+                                    currentDay.addToCategories(category)
+                                    
+                                    // Remove from queue.
+                                    self.project.dilateQueue?.removeFromTasks(task)
                                 }
                             }
                         }

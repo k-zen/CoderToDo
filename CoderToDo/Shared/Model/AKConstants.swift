@@ -17,6 +17,7 @@ typealias Day = AKDayMO
 typealias Category = AKCategoryMO
 typealias Task = AKTaskMO
 typealias PendingQueue = AKPendingTasksQueueMO
+typealias DilateQueue = AKDilateTaskQueueMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)

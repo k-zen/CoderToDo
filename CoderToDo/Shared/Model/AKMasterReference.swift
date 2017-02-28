@@ -84,8 +84,20 @@ class AKMasterReference: NSObject
             for projectCategory in DataInterface.listCategoriesInProject(project: project) {
                 NSLog("=>           NAME: %@", projectCategory)
             }
-            NSLog("=>       PENDING QUEUE: (%i)", project.pendingQueue?.pendingQueue?.count ?? 0)
-            if let tasksInQueue = project.pendingQueue?.pendingQueue?.allObjects as? [Task] {
+            NSLog("=>       PENDING QUEUE: (%i)", project.pendingQueue?.tasks?.count ?? 0)
+            if let tasksInQueue = project.pendingQueue?.tasks?.allObjects as? [Task] {
+                for taskInQueue in tasksInQueue {
+                    NSLog("=>           COMPLETION PERCENTAGE: %.2f", taskInQueue.completionPercentage)
+                    NSLog("=>           INITIAL COMPLETION PERCENTAGE: %.2f", taskInQueue.initialCompletionPercentage)
+                    NSLog("=>           CREATION DATE: %@", taskInQueue.creationDate?.description ?? "N\\A")
+                    NSLog("=>           NAME: %@", taskInQueue.name ?? "N\\A")
+                    NSLog("=>           NOTE: %@", taskInQueue.note ?? "N\\A")
+                    NSLog("=>           STATE: %@", taskInQueue.state ?? "N\\A")
+                    NSLog("=>           ------")
+                }
+            }
+            NSLog("=>       DILATE QUEUE: (%i)", project.dilateQueue?.tasks?.count ?? 0)
+            if let tasksInQueue = project.dilateQueue?.tasks?.allObjects as? [Task] {
                 for taskInQueue in tasksInQueue {
                     NSLog("=>           COMPLETION PERCENTAGE: %.2f", taskInQueue.completionPercentage)
                     NSLog("=>           INITIAL COMPLETION PERCENTAGE: %.2f", taskInQueue.initialCompletionPercentage)

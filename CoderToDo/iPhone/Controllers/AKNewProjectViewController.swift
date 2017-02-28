@@ -53,6 +53,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.maxTasks = Int16(maxTasks)
                 project.creationDate = now
                 project.pendingQueue = PendingQueue(context: mr.getMOC())
+                project.dilateQueue = DilateQueue(context: mr.getMOC())
                 DataInterface.getUser()?.addToProject(project)
                 
                 // Schedule local notifications.
