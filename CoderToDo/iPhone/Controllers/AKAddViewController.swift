@@ -28,7 +28,7 @@ class AKAddViewController: AKCustomViewController
     @IBAction func addTask(_ sender: Any)
     {
         switch DataInterface.getProjectStatus(project: self.project) {
-        case ProjectStatus.ACEPTING_TASKS:
+        case ProjectStatus.ACEPTING_TASKS, ProjectStatus.FIRST_DAY:
             self.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
                              taskBeforePresenting: { (presenterController, presentedController) -> Void in
                                 if let presenterController = presenterController as? AKAddViewController, let presentedController = presentedController as? AKAddTaskViewController {

@@ -207,6 +207,7 @@ enum ProjectStatus: String {
     case OPEN = "Open"
     case ACEPTING_TASKS = "Accepting"
     case CLOSED = "Closed"
+    case FIRST_DAY = "First Day"
 }
 
 enum ProjectSorting: String {

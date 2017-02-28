@@ -117,7 +117,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let runningDays = DataInterface.getProjectRunningDays(project: project)
         cell.runningDaysValue.text = String(format: "%i running %@", runningDays, runningDays > 1 ? "days" : "day")
         // Add Tomorrow Task
-        if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS {
+        if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS || DataInterface.getProjectStatus(project: project) == ProjectStatus.FIRST_DAY {
             cell.addTomorrowTask.isHidden = false
         }
         else {
@@ -146,6 +146,14 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             Func.AKAddBorderDeco(
                 cell.statusValue,
                 color: GlobalConstants.AKRedForWhiteFg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness,
+                position: .bottom
+            )
+            break
+        case ProjectStatus.FIRST_DAY:
+            Func.AKAddBorderDeco(
+                cell.statusValue,
+                color: GlobalConstants.AKOrangeForWhiteFg.cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )
