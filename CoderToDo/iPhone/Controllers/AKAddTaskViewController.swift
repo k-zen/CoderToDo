@@ -18,6 +18,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var taskNameValue: UITextField!
     @IBOutlet weak var categoryValue: UIPickerView!
+    @IBOutlet weak var initialStateValue: UISegmentedControl!
     @IBOutlet weak var add: UIButton!
     @IBOutlet weak var close: UIButton!
     
@@ -70,7 +71,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     let task = Task(context: mr.getMOC())
                     task.creationDate = now
                     task.name = taskName.outputData
-                    task.state = TaskStates.PENDING.rawValue
+                    task.state = self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)
                     
                     if let category = DataInterface.getCategoryByName(day: currentDay, name: selectedCategory) {
                         category.addToTasks(task)
@@ -118,6 +119,19 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         
         // Set default values.
         self.categoryValue.selectRow(0, inComponent: 0, animated: true)
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        // Custom L&F.
+        self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.PENDING.rawValue)
+        self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.DILATE.rawValue)
+        self.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     override func loadLocalizedText() {
@@ -243,11 +257,5 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         self.categoryValue.delegate = self
         self.categoryValue.dataSource = self
         self.categoryValue.tag = LocalEnums.category.rawValue
-        
-        // Custom L&F.
-        self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }

@@ -47,6 +47,18 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
         UINavigationBar.appearance().tintColor = GlobalConstants.AKDefaultFg
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
+                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+            ], for: .normal
+        )
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
+                NSForegroundColorAttributeName: UIColor.black
+            ], for: .selected
+        )
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
