@@ -6,7 +6,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 30
         static let AKRowHeight: CGFloat = 40
-        static let AKFooterHeight: CGFloat = 4
+        static let AKFooterHeight: CGFloat = 0.25
     }
     
     // MARK: Properties
@@ -156,12 +156,6 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKDefaultBg
-        Func.AKAddBorderDeco(
-            headerCell,
-            color: GlobalConstants.AKCoderToDoBlue.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
         
         let title = UILabel(frame: CGRect(
             x: padding * 2,
@@ -169,7 +163,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
             width: tableWidth - (padding * 2), // Overlap badge!
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryItalicFont, size: 17.0)
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 17.0)
         title.textColor = Func.AKHexColor(0xB8B8B8)
         title.text = category.name ?? "N\\A"
         title.textAlignment = .left
