@@ -40,7 +40,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    task.creationDate = NSDate()
+                                    task.creationDate = currentDay.date
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
                                     
@@ -56,7 +56,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    task.creationDate = NSDate()
+                                    task.creationDate = currentDay.date
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
                                     
