@@ -135,7 +135,7 @@ class AKDataInterface
             let m2 = creationDateComponents.month ?? 0
             let y2 = creationDateComponents.year ?? 0
             
-            if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+            if nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
                 return ProjectStatus.FIRST_DAY
             }
             // ###### FIRST DAY
