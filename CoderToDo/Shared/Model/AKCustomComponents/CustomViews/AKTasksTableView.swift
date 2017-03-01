@@ -111,14 +111,14 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
                 if task.state == TaskStates.PENDING.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                     task.initialCompletionPercentage = task.completionPercentage
                     if let pendingQueue = task.category?.day?.project?.pendingQueue {
-                        pendingQueue.addToTasks(task)
+                        pendingQueue.addToTasks(task.copy() as! Task)
                     }
                 }
                 // Sanity check #3
                 if task.state == TaskStates.DILATE.rawValue {
                     task.initialCompletionPercentage = task.completionPercentage
                     if let dilateQueue = task.category?.day?.project?.dilateQueue {
-                        dilateQueue.addToTasks(task)
+                        dilateQueue.addToTasks(task.copy() as! Task)
                     }
                 }
             }
