@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Removed support for overlapping OPEN and ACCEPTING project states. (2017/03/01)
         * Removed support for copying tasks before adding to queues. And corrected a bug with the dates from tasks from these queues. (2017/03/01)
         * Added support to set the initial state of a task. (2017/03/01)
         * Improved function of FIRST_DAY, where it only goes until the project's closing time. (2017/03/01)

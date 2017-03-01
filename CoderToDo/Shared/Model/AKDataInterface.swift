@@ -135,17 +135,17 @@ class AKDataInterface
             let m2 = creationDateComponents.month ?? 0
             let y2 = creationDateComponents.year ?? 0
             
-            if nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
+            if nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < closingTimeHour + Int(project.closingTimeTolerance) && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
                 return ProjectStatus.FIRST_DAY
             }
             // ###### FIRST DAY
             
             // ###### NORMAL DAY
-            if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
-                return ProjectStatus.ACEPTING_TASKS
-            }
-            else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
+            if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
                 return ProjectStatus.OPEN
+            }
+            else if nowHour >= closingTimeHour + Int(project.closingTimeTolerance) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
+                return ProjectStatus.ACEPTING_TASKS
             }
             else {
                 return ProjectStatus.CLOSED
@@ -246,7 +246,7 @@ class AKDataInterface
                             NSLog("=> INFO: WORKING DAY NOT BEGUN YET (CLOSED). DOING NOTHING!")
                         }
                     }
-                    else if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
+                    else if nowHour >= closingTimeHour + Int(project.closingTimeTolerance) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
                         if GlobalConstants.AKDebug {
                             NSLog("=> INFO: WORKING DAY ALREADY FINISHED. ADDING TOMORROW!")
                         }

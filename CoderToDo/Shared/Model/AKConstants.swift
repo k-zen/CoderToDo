@@ -162,7 +162,7 @@ struct GlobalConstants {
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
     static let AKWorkingDayStartTime = 0 // Military type of time: 00:00Hs.
-    static let AKAcceptingTasksDefaultTime = 2359 // Military type of time: 23:59Hs.
+    static let AKAcceptingTasksDefaultMaxTime = 2359 // Military type of time: 23:59Hs.
     // Segues
     static let AKViewProjectSegue = "ViewProjectSegue"
     static let AKViewTaskSegue = "ViewTaskSegue"
