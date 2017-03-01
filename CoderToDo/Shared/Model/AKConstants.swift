@@ -185,6 +185,8 @@ enum Exceptions: Error {
     case notValid(String)
     case invalidJSON(String)
     case invalidDate(String)
+    case invalidProjectStatus(String)
+    case noCategories(String)
 }
 
 enum UnitOfTime: Int {

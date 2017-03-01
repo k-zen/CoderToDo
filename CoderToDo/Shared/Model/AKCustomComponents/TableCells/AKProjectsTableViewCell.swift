@@ -20,17 +20,23 @@ class AKProjectsTableViewCell: UITableViewCell
     // MARK: Actions
     @IBAction func addTomorrowTask(_ sender: Any)
     {
-        if let presenterController = self.controller as? AKListProjectsViewController {
-            presenterController.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
-                                            taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                                                if let presentedController = presentedController as? AKAddTaskViewController {
-                                                    presentedController.project = self.project
-                                                } },
-                                            dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-                                                
-                                                presenterController.dismissView(executeDismissTask: true) }
-            )
+        if let project = self.project, let presenterController = self.controller as? AKListProjectsViewController {
+            do {
+                try AKChecks.canAddTask(project: project)
+                presenterController.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
+                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                                                    if let presentedController = presentedController as? AKAddTaskViewController {
+                                                        presentedController.project = project
+                                                    } },
+                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                    
+                                                    presenterController.dismissView(executeDismissTask: true) }
+                )
+            }
+            catch {
+                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)")
+            }
         }
     }
     

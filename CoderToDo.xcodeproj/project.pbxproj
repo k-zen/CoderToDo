@@ -70,6 +70,7 @@
 		49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */; };
 		49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */; };
 		49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */; };
+		49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6A93F1E675AB6007701AC /* AKChecks.swift */; };
 		49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */; };
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
@@ -150,6 +151,7 @@
 		49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWSUtils.swift; sourceTree = "<group>"; };
 		49A4A0E01E589E8600CEDA1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
+		49A6A93F1E675AB6007701AC /* AKChecks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKChecks.swift; sourceTree = "<group>"; };
 		49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNotesTextField.swift; sourceTree = "<group>"; };
 		49BE6DF91E65C69300E3F306 /* CoderToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderToDo.entitlements; sourceTree = "<group>"; };
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				4931DAE71E58D2740002C173 /* AKCategoryName.swift */,
+				49A6A93F1E675AB6007701AC /* AKChecks.swift */,
 				49A4A0CE1E589E8600CEDA1B /* AKConstants.swift */,
 				49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */,
 				49A4A0D81E589E8600CEDA1B /* AKDataController.swift */,
@@ -604,6 +607,7 @@
 				49A4A1111E589E8600CEDA1B /* AKCustomView.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
 				49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */,
+				49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */,
 				49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */,
 				49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */,
 				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,

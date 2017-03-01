@@ -27,8 +27,8 @@ class AKAddViewController: AKCustomViewController
     
     @IBAction func addTask(_ sender: Any)
     {
-        switch DataInterface.getProjectStatus(project: self.project) {
-        case ProjectStatus.ACEPTING_TASKS, ProjectStatus.FIRST_DAY:
+        do {
+            try AKChecks.canAddTask(project: self.project)
             self.presentView(controller: AKAddTaskViewController(nibName: "AKAddTaskView", bundle: nil),
                              taskBeforePresenting: { (presenterController, presentedController) -> Void in
                                 if let presenterController = presenterController as? AKAddViewController, let presentedController = presentedController as? AKAddTaskViewController {
@@ -39,15 +39,9 @@ class AKAddViewController: AKCustomViewController
                                 
                                 presenterController.dismissView(executeDismissTask: true) }
             )
-            break
-        default:
-            self.showMessage(
-                message: String(
-                    format: "Sorry %@, you are not allowed to add new tasks now. Go to the \"Help\" tab to check the rules.",
-                    DataInterface.getUsername()
-                )
-            )
-            break
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
         }
     }
     
