@@ -27,7 +27,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         if self.daysTable.frame.origin.y == 0.0 {
             self.showTopMenu()
             
-            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
+            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
             self.daysTable.frame = CGRect(
                 x: self.daysTable.frame.origin.x,
                 y: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
@@ -39,7 +39,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         else {
             self.hideTopMenu()
             
-            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
             self.daysTable.frame = CGRect(
                 x: self.daysTable.frame.origin.x,
                 y: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight,

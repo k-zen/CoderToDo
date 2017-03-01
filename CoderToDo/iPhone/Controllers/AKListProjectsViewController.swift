@@ -28,7 +28,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         if self.projectsTable.frame.origin.y == 0.0 {
             self.showTopMenu()
             
-            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
+            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
             self.projectsTable.frame = CGRect(
                 x: self.projectsTable.frame.origin.x,
                 y: self.projectsTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
@@ -40,7 +40,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         else {
             self.hideTopMenu()
             
-            UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
             self.projectsTable.frame = CGRect(
                 x: self.projectsTable.frame.origin.x,
                 y: self.projectsTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
