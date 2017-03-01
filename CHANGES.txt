@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Excluded tasks marked as NOT APPLICABLE from SR. (2017/03/01)
         * Added support for copy the objects we add to each queue. (2017/02/28)
         * Added support for editing a task's name. (2017/02/28)
         * Added support for receiving notifications while the App is in the foreground. (2017/02/28)
