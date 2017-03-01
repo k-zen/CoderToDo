@@ -26,28 +26,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBAction func toggleMenu(_ sender: Any)
     {
         if self.projectsTable.frame.origin.y == 0.0 {
-            self.showTopMenu()
-            
-            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-            self.projectsTable.frame = CGRect(
-                x: self.projectsTable.frame.origin.x,
-                y: self.projectsTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
-                width: self.projectsTable.frame.width,
-                height: self.projectsTable.frame.height - LocalConstants.AKDisplaceHeight
-            )
-            UIView.commitAnimations()
+            self.displaceDownTable()
         }
         else {
-            self.hideTopMenu()
-            
-            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-            self.projectsTable.frame = CGRect(
-                x: self.projectsTable.frame.origin.x,
-                y: self.projectsTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
-                width: self.projectsTable.frame.width,
-                height: self.projectsTable.frame.height + LocalConstants.AKDisplaceHeight
-            )
-            UIView.commitAnimations()
+            self.displaceUpTable()
         }
     }
     
@@ -358,6 +340,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                     
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
                                                         presenterController.projectsTable.reloadData()
+                                                        presenterController.displaceUpTable()
                                                     } }
                 )
             }
@@ -373,6 +356,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                         presenterController.sortProjectsBy = presentedController.filtersData[presentedController.filters.selectedRow(inComponent: 0)]
                                                         presenterController.order = presentedController.orderData[presentedController.order.selectedRow(inComponent: 0)]
                                                         presenterController.projectsTable.reloadData()
+                                                        presenterController.displaceUpTable()
                                                     } }
                 )
             }
@@ -385,5 +369,34 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
             ], for: .normal
         )
+    }
+    
+    // MARK: Animations
+    func displaceDownTable()
+    {
+        self.showTopMenu()
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+        self.projectsTable.frame = CGRect(
+            x: self.projectsTable.frame.origin.x,
+            y: self.projectsTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
+            width: self.projectsTable.frame.width,
+            height: self.projectsTable.frame.height - LocalConstants.AKDisplaceHeight
+        )
+        UIView.commitAnimations()
+    }
+    
+    func displaceUpTable()
+    {
+        self.hideTopMenu()
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+        self.projectsTable.frame = CGRect(
+            x: self.projectsTable.frame.origin.x,
+            y: self.projectsTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
+            width: self.projectsTable.frame.width,
+            height: self.projectsTable.frame.height + LocalConstants.AKDisplaceHeight
+        )
+        UIView.commitAnimations()
     }
 }

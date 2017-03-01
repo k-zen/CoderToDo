@@ -25,28 +25,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBAction func toggleMenu(_ sender: Any)
     {
         if self.daysTable.frame.origin.y == 0.0 {
-            self.showTopMenu()
-            
-            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-            self.daysTable.frame = CGRect(
-                x: self.daysTable.frame.origin.x,
-                y: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
-                width: self.daysTable.frame.width,
-                height: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight
-            )
-            UIView.commitAnimations()
+            self.displaceDownTable()
         }
         else {
-            self.hideTopMenu()
-            
-            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-            self.daysTable.frame = CGRect(
-                x: self.daysTable.frame.origin.x,
-                y: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
-                width: self.daysTable.frame.width,
-                height: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight
-            )
-            UIView.commitAnimations()
+            self.displaceUpTable()
         }
     }
     
@@ -290,9 +272,39 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                                                         for customCell in presenterController.customCellArray {
                                                             customCell.tasksTable?.reloadData()
                                                         }
+                                                        presenterController.displaceUpTable()
                                                     } }
                 )
             }
         }
+    }
+    
+    // MARK: Animations
+    func displaceDownTable()
+    {
+        self.showTopMenu()
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+        self.daysTable.frame = CGRect(
+            x: self.daysTable.frame.origin.x,
+            y: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
+            width: self.daysTable.frame.width,
+            height: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight
+        )
+        UIView.commitAnimations()
+    }
+    
+    func displaceUpTable()
+    {
+        self.hideTopMenu()
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+        self.daysTable.frame = CGRect(
+            x: self.daysTable.frame.origin.x,
+            y: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
+            width: self.daysTable.frame.width,
+            height: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight
+        )
+        UIView.commitAnimations()
     }
 }
