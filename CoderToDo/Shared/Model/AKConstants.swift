@@ -268,7 +268,7 @@ class UtilityFunctions
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effect))
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.translatesAutoresizingMaskIntoConstraints = true
-        blurView.frame = view.bounds
+        blurView.frame = view.frame
         
         if addClearColorBgToView {
             view.backgroundColor = UIColor.clear
@@ -327,7 +327,7 @@ class UtilityFunctions
     ///
     func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController) {
         let keyboardToolbar = UIToolbar()
-        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.bounds.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
+        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
         keyboardToolbar.barTintColor = UIColor.black
         
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -379,6 +379,19 @@ class UtilityFunctions
         else {
             return "0"
         }
+    }
+    
+    func AKCenterScreenCoordinate(_ container: UIView, _ width: CGFloat, _ height: CGFloat) -> CGPoint
+    {
+        let offsetX: CGFloat = (container.frame.width / 2.0) - (width / 2.0)
+        let offsetY: CGFloat = (container.frame.height / 2.0) - (height / 2.0)
+        
+        return container.convert(CGPoint(x: offsetX, y: offsetY), to: container)
+    }
+    
+    func AKChangeComponentHeight(component: UIView, newHeight: CGFloat)
+    {
+        component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: component.frame.width, height: newHeight))
     }
     
     ///

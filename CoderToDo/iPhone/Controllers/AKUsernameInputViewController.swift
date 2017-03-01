@@ -6,7 +6,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     var presenterController: AKCustomViewController?
     
     // MARK: Local Enums
-    enum LocalEnums: Int {
+    private enum LocalEnums: Int {
         case username = 1
     }
     

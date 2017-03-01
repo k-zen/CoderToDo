@@ -79,12 +79,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var dismissViewCompletionTask: (Void) -> Void = {}
     var localizableDictionary: NSDictionary?
     // Overlay Controllers
-    let messageOverlayController = AKMessageView()
-    var messageOverlayView: UIView!
-    let continueMessageOverlayController = AKContinueMessageView()
-    var continueMessageOverlayView: UIView!
-    let topMenuOverlayController = AKTopMenuView()
-    var topMenuOverlayView: UIView!
+    let messageOverlay = AKMessageView()
+    let continueMessageOverlay = AKContinueMessageView()
+    let topMenuOverlay = AKTopMenuView()
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -116,49 +113,44 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewDidLayoutSubviews()
         
         // Setup the overlays.
-        var origin = self.view.frame.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.messageOverlayView = self.messageOverlayController.customView
-        self.messageOverlayController.controller = self
-        self.messageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
+        self.messageOverlay.controller = self
+        self.messageOverlay.getView().frame = CGRect(
+            x: Func.AKCenterScreenCoordinate(self.view, AKMessageView.LocalConstants.AKViewWidth, AKMessageView.LocalConstants.AKViewHeight).x,
+            y: Func.AKCenterScreenCoordinate(self.view, AKMessageView.LocalConstants.AKViewWidth, AKMessageView.LocalConstants.AKViewHeight).y,
             width: AKMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
-        self.messageOverlayView.translatesAutoresizingMaskIntoConstraints = true
-        self.messageOverlayView.clipsToBounds = true
-        self.messageOverlayView.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.messageOverlayView.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.messageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
-        self.view.addSubview(self.messageOverlayView)
+        self.messageOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.messageOverlay.getView().clipsToBounds = true
+        self.messageOverlay.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.messageOverlay.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.messageOverlay.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+        self.view.addSubview(self.messageOverlay.getView())
         
-        origin = self.view.frame.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.continueMessageOverlayView = self.continueMessageOverlayController.customView
-        self.continueMessageOverlayController.controller = self
-        self.continueMessageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
+        self.continueMessageOverlay.controller = self
+        self.continueMessageOverlay.getView().frame = CGRect(
+            x: Func.AKCenterScreenCoordinate(self.view, AKContinueMessageView.LocalConstants.AKViewWidth, AKContinueMessageView.LocalConstants.AKViewHeight).x,
+            y: Func.AKCenterScreenCoordinate(self.view, AKContinueMessageView.LocalConstants.AKViewWidth, AKContinueMessageView.LocalConstants.AKViewHeight).y,
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: 0.0
         )
-        self.continueMessageOverlayView.translatesAutoresizingMaskIntoConstraints = true
-        self.continueMessageOverlayView.clipsToBounds = true
-        self.continueMessageOverlayView.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.continueMessageOverlayView.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.continueMessageOverlayView.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
-        self.view.addSubview(self.continueMessageOverlayView)
+        self.continueMessageOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.continueMessageOverlay.getView().clipsToBounds = true
+        self.continueMessageOverlay.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.continueMessageOverlay.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.continueMessageOverlay.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+        self.view.addSubview(self.continueMessageOverlay.getView())
         
-        self.topMenuOverlayView = self.topMenuOverlayController.customView
-        self.topMenuOverlayController.controller = self
-        self.topMenuOverlayView.frame = CGRect(
+        self.topMenuOverlay.controller = self
+        self.topMenuOverlay.getView().frame = CGRect(
             x: 0.0,
             y: 0.0,
             width: self.view.frame.width,
             height: 0.0
         )
-        self.topMenuOverlayView.translatesAutoresizingMaskIntoConstraints = true
-        self.topMenuOverlayView.clipsToBounds = true
-        self.view.addSubview(self.topMenuOverlayView)
+        self.topMenuOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.topMenuOverlay.getView().clipsToBounds = true
+        self.view.addSubview(self.topMenuOverlay.getView())
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
@@ -273,16 +265,10 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     
     func showMessage(message: String)
     {
-        self.messageOverlayController.message.text = message
+        self.messageOverlay.message.text = message
         
         UIView.beginAnimations(AKMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.messageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
-            width: AKMessageView.LocalConstants.AKViewWidth,
-            height: AKMessageView.LocalConstants.AKViewHeight
-        )
+        Func.AKChangeComponentHeight(component: self.messageOverlay.getView(), newHeight: AKMessageView.LocalConstants.AKViewHeight)
         UIView.commitAnimations()
     }
     
@@ -292,58 +278,35 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                              yesAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
                              noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void)
     {
-        self.continueMessageOverlayController.message.text = message
-        self.continueMessageOverlayController.yes.setTitle(yesButtonTitle, for: .normal)
-        self.continueMessageOverlayController.no.setTitle(noButtonTitle, for: .normal)
-        self.continueMessageOverlayController.yesAction = yesAction
-        self.continueMessageOverlayController.noAction = noAction
+        self.continueMessageOverlay.message.text = message
+        self.continueMessageOverlay.yes.setTitle(yesButtonTitle, for: .normal)
+        self.continueMessageOverlay.no.setTitle(noButtonTitle, for: .normal)
+        self.continueMessageOverlay.yesAction = yesAction
+        self.continueMessageOverlay.noAction = noAction
         
         UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.continueMessageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
-            width: AKContinueMessageView.LocalConstants.AKViewWidth,
-            height: AKContinueMessageView.LocalConstants.AKViewHeight
-        )
+        Func.AKChangeComponentHeight(component: self.continueMessageOverlay.getView(), newHeight: AKContinueMessageView.LocalConstants.AKViewHeight)
         UIView.commitAnimations()
     }
     
     func showTopMenu()
     {
         UIView.beginAnimations(AKTopMenuView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        self.topMenuOverlayView.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.topMenuOverlayView.frame.width,
-            height: AKTopMenuView.LocalConstants.AKViewHeight
-        )
+        Func.AKChangeComponentHeight(component: self.topMenuOverlay.getView(), newHeight: AKTopMenuView.LocalConstants.AKViewHeight)
         UIView.commitAnimations()
     }
     
     func hideMessage()
     {
         UIView.beginAnimations(AKMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        let origin = self.view.bounds.width / 2.0 - (AKMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.messageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
-            width: AKMessageView.LocalConstants.AKViewWidth,
-            height: 0.0
-        )
+        Func.AKChangeComponentHeight(component: self.messageOverlay.getView(), newHeight: 0.0)
         UIView.commitAnimations()
     }
     
     func hideContinueMessage(completionTask: @escaping (_ presenterController: AKCustomViewController?) -> Void)
     {
         UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        let origin = self.view.bounds.width / 2.0 - (AKContinueMessageView.LocalConstants.AKViewWidth / 2.0)
-        self.continueMessageOverlayView.frame = CGRect(
-            x: origin,
-            y: (UIScreen.main.bounds.height / 2.0) - (AKMessageView.LocalConstants.AKViewHeight / 2.0),
-            width: AKContinueMessageView.LocalConstants.AKViewWidth,
-            height: 0.0
-        )
+        Func.AKChangeComponentHeight(component: self.continueMessageOverlay.getView(), newHeight: 0.0)
         CATransaction.setCompletionBlock {
             completionTask(self)
         }
@@ -353,12 +316,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func hideTopMenu()
     {
         UIView.beginAnimations(AKTopMenuView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        self.topMenuOverlayView.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.topMenuOverlayView.frame.width,
-            height: 0.0
-        )
+        Func.AKChangeComponentHeight(component: self.topMenuOverlay.getView(), newHeight: 0.0)
         UIView.commitAnimations()
     }
     

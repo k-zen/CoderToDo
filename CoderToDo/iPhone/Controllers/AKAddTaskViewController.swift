@@ -3,7 +3,7 @@ import UIKit
 class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
 {
     // MARK: Local Enums
-    enum LocalEnums: Int {
+    private enum LocalEnums: Int {
         case taskName = 1
         case category = 2
     }

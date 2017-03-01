@@ -41,7 +41,12 @@ class AKAddViewController: AKCustomViewController
             )
             break
         default:
-            self.showMessage(message: "You are not allowed to add new tasks now. Wait for the working day to finish.")
+            self.showMessage(
+                message: String(
+                    format: "Sorry %@, you are not allowed to add new tasks now. Go to the \"Help\" tab to check the rules.",
+                    DataInterface.getUsername()
+                )
+            )
             break
         }
     }

@@ -6,7 +6,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     var project: Project!
     
     // MARK: Local Enums
-    enum LocalEnums: Int {
+    private enum LocalEnums: Int {
         case category = 1
     }
     

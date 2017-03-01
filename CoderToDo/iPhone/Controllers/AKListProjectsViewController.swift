@@ -4,7 +4,7 @@ import UserNotifications
 class AKListProjectsViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: Constants
-    struct LocalConstants {
+    private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 52.0
         static let AKDisplaceDownAnimation = "displaceDown"
@@ -190,7 +190,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[section]
         
-        let tableWidth = tableView.bounds.width
+        let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
         let badgeSizeWidth = CGFloat(130.0)
         let badgeSizeHeight = CGFloat(21.0)
@@ -229,7 +229,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // pendingTasksBadgeContainer.layer.borderWidth = 1.0
         
         let pendingTasksBadge = UILabel(frame: CGRect(
-            x: pendingTasksBadgeContainer.bounds.width - badgeSizeWidth,
+            x: pendingTasksBadgeContainer.frame.width - badgeSizeWidth,
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)
@@ -331,7 +331,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
         
         // Custom Actions
-        self.topMenuOverlayController.addAction = { (presenterController) -> Void in
+        self.topMenuOverlay.addAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
                                                 taskBeforePresenting: { (presenterController, presentedController) -> Void in },
@@ -345,7 +345,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 )
             }
         }
-        self.topMenuOverlayController.sortAction = { (presenterController) -> Void in
+        self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
                                                 taskBeforePresenting: { (presenterController, presentedController) -> Void in },

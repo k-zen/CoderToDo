@@ -3,7 +3,7 @@ import UIKit
 class AKSortProjectSelectorViewController: AKCustomViewController, UIPickerViewDataSource, UIPickerViewDelegate
 {
     // MARK: Local Enums
-    enum LocalEnums: Int {
+    private enum LocalEnums: Int {
         case filters = 1
         case order = 2
     }

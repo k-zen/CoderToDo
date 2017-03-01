@@ -7,10 +7,9 @@ class AKDataInterface
     ///
     /// - Returns: The user data structure.
     ///
-    static func getUser() -> User?
-    {
-        return Func.AKObtainMasterReference()?.user
-    }
+    static func getUser() -> User? { return Func.AKObtainMasterReference()?.user }
+    
+    static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
     
     // ########## PROJECT'S FUNCTIONS ########## //
     static func getProjects(sortBy: ProjectSorting, order: SortingOrder) -> [Project]
@@ -124,33 +123,34 @@ class AKDataInterface
             let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
             let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
             
+            // ###### FIRST DAY
+            // Special case when the user opens the App for the first time. This is called *First Day*.
             let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
             let d1 = nowDateComponents.day ?? 0
             let m1 = nowDateComponents.month ?? 0
             let y1 = nowDateComponents.year ?? 0
             
+            let creationDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: creationTime)
+            let d2 = creationDateComponents.day ?? 0
+            let m2 = creationDateComponents.month ?? 0
+            let y2 = creationDateComponents.year ?? 0
+            
+            if (d1 == d2) && (m1 == m2) && (y1 == y2) {
+                return ProjectStatus.FIRST_DAY
+            }
+            // ###### FIRST DAY
+            
+            // ###### NORMAL DAY
             if nowHour >= closingTimeHour && nowHour <= closingTimeHour + (GlobalConstants.AKAcceptingTasksDefaultTime - closingTimeHour) {
                 return ProjectStatus.ACEPTING_TASKS
             }
             else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
-                // Special case when the user opens the App for the first day.
-                let creationTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: creationTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: creationTime).minute ?? 0)
-                
-                let creationDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: creationTime)
-                let d2 = creationDateComponents.day ?? 0
-                let m2 = creationDateComponents.month ?? 0
-                let y2 = creationDateComponents.year ?? 0
-                
-                if creationTimeHour >= startingTimeHour && creationTimeHour <= closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
-                    return ProjectStatus.FIRST_DAY
-                }
-                else {
-                    return ProjectStatus.OPEN
-                }
+                return ProjectStatus.OPEN
             }
             else {
                 return ProjectStatus.CLOSED
             }
+            // ###### NORMAL DAY
         }
         
         return ProjectStatus.CLOSED

@@ -163,13 +163,13 @@ class AKSelectTaskStateView: AKCustomView
         self.expandHeight.duration = 1.0
         self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.expandHeight.autoreverses = false
-        self.customView.layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
+        self.getView().layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
         
         self.collapseHeight.fromValue = LocalConstants.AKViewHeight
         self.collapseHeight.toValue = 0.0
         self.collapseHeight.duration = 1.0
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
-        self.customView.layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
+        self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
     }
 }

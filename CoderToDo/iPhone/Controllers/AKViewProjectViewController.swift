@@ -3,7 +3,7 @@ import UIKit
 class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: Constants
-    struct LocalConstants {
+    private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34
         static let AKEmptyRowHeight: CGFloat = 40
         static let AKDisplaceDownAnimation = "displaceDown"
@@ -96,15 +96,15 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             let customCell = AKTasksTableView()
             customCell.controller = self
             customCell.day = day
-            customCell.customView.frame = CGRect(
+            customCell.getView().frame = CGRect(
                 x: 0,
                 y: 0,
-                width: tableView.bounds.width,
+                width: tableView.frame.width,
                 height: cellHeight
             )
-            customCell.customView.translatesAutoresizingMaskIntoConstraints = true
-            customCell.customView.clipsToBounds = true
-            cell.mainContainer.addSubview(customCell.customView)
+            customCell.getView().translatesAutoresizingMaskIntoConstraints = true
+            customCell.getView().clipsToBounds = true
+            cell.mainContainer.addSubview(customCell.getView())
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -141,7 +141,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     {
         let day = DataInterface.getDays(project: self.project)[section]
         
-        let tableWidth = tableView.bounds.width
+        let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
         let badgeSizeWidth = CGFloat(60.0)
         let badgeSizeHeight = CGFloat(21.0)
@@ -180,7 +180,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // srBadgeContainer.layer.borderWidth = 1.0
         
         let srBadge = UILabel(frame: CGRect(
-            x: srBadgeContainer.bounds.width - (badgeSizeWidth),
+            x: srBadgeContainer.frame.width - (badgeSizeWidth),
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)
@@ -256,7 +256,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
         
         // Custom Actions
-        self.topMenuOverlayController.addAction = { (presenterController) -> Void in
+        self.topMenuOverlay.addAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
                                                 taskBeforePresenting: { (presenterController, presentedController) -> Void in

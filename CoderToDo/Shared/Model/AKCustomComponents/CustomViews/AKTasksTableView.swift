@@ -149,7 +149,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     {
         let category = DataInterface.getCategories(day: self.day!)[section]
         
-        let tableWidth = tableView.bounds.width
+        let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
         let badgeSizeWidth = CGFloat(60.0)
         let badgeSizeHeight = CGFloat(21.0)
@@ -189,7 +189,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
         // tasksCountBadgeContainer.layer.borderWidth = 1.0
         
         let tasksCountBadge = UILabel(frame: CGRect(
-            x: tasksCountBadgeContainer.bounds.width - (badgeSizeWidth),
+            x: tasksCountBadgeContainer.frame.width - (badgeSizeWidth),
             y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
             width: badgeSizeWidth,
             height: badgeSizeHeight)
@@ -215,7 +215,7 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
     {
-        let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: LocalConstants.AKFooterHeight))
+        let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
         footerCell.backgroundColor = UIColor.clear
         
         return footerCell
@@ -283,11 +283,11 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     
     func startAnimation()
     {
-        self.customView.layer.add(animation, forKey: "opacity")
+        self.getView().layer.add(animation, forKey: "opacity")
     }
     
     func stopAnimation()
     {
-        self.customView.layer.removeAllAnimations()
+        self.getView().layer.removeAllAnimations()
     }
 }

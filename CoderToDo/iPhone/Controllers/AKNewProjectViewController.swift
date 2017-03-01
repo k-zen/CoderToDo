@@ -4,7 +4,7 @@ import UserNotifications
 class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
 {
     // MARK: Local Enums
-    enum LocalEnums: Int {
+    private enum LocalEnums: Int {
         case projectName = 1
         case tolerance = 2
         case startingTime = 3
@@ -56,7 +56,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 if notifyClosingTime {
                     let startingTimeContent = UNMutableNotificationContent()
                     startingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    startingTimeContent.body = String(format: "Hey %@, starting time is up for your project.", (DataInterface.getUser()?.username)!)
+                    startingTimeContent.body = String(format: "Hey %@, starting time is up for your project.", DataInterface.getUsername())
                     startingTimeContent.sound = UNNotificationSound.default()
                     Func.AKGetNotificationCenter().add(
                         UNNotificationRequest(
@@ -75,7 +75,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                     
                     let closingTimeContent = UNMutableNotificationContent()
                     closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    closingTimeContent.body = String(format: "Hey %@, closing time is due for your project.", (DataInterface.getUser()?.username)!)
+                    closingTimeContent.body = String(format: "Hey %@, closing time is due for your project.", DataInterface.getUsername())
                     closingTimeContent.sound = UNNotificationSound.default()
                     Func.AKGetNotificationCenter().add(
                         UNNotificationRequest(

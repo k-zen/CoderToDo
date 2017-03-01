@@ -39,4 +39,7 @@ class AKCustomView: UIView
             NSLog("=> ERROR: FAILED TO INITIALIZE CUSTOM CLASS *\(type(of: self))* VIA init(coder:)...")
         }
     }
+    
+    // MARK: Accessors
+    func getView() -> UIView { return self.customView }
 }
