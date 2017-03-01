@@ -169,6 +169,8 @@ struct GlobalConstants {
     // Notifications
     static let AKStartingTimeNotificationName = "StartingTimeNotification"
     static let AKClosingTimeNotificationName = "ClosingTimeNotification"
+    // Messages
+    static let AKAutoDismissMessageTime = 2.0
 }
 
 // MARK: Global Enumerations
@@ -512,7 +514,7 @@ class UtilityFunctions
         return Func.AKDelegate().masterRef
     }
     
-    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!)
+    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
     {
         do {
             if let input = message {
@@ -523,7 +525,7 @@ class UtilityFunctions
                     let range = match.rangeAt(1)
                     if let swiftRange = AKRangeFromNSRange(range, forString: input) {
                         let msg = input.substring(with: swiftRange)
-                        AKPresentMessage(controller: controller, message: msg)
+                        AKPresentMessage(controller: controller, message: msg, autoDismiss: autoDismiss)
                     }
                 }
             }
@@ -533,9 +535,9 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessage(controller: AKCustomViewController, message: String!)
+    func AKPresentMessage(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
     {
-        Func.AKExecuteInMainThread { controller.showMessage(message: message) }
+        Func.AKExecuteInMainThread { controller.showMessage(message: message, autoDismiss: autoDismiss) }
     }
     
     ///

@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for auto-dismiss messages. (2017/03/01)
         * Standarized checks before adding a task. (2017/03/01)
         * Excluded tasks marked as NOT APPLICABLE from SR. (2017/03/01)
         * Added support for copy the objects we add to each queue. (2017/02/28)

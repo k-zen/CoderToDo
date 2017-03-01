@@ -263,13 +263,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.present(controller, animated: true, completion: nil)
     }
     
-    func showMessage(message: String)
+    func showMessage(message: String, autoDismiss: Bool = false)
     {
         self.messageOverlay.message.text = message
         
         UIView.beginAnimations(AKMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.messageOverlay.getView(), newHeight: AKMessageView.LocalConstants.AKViewHeight)
         UIView.commitAnimations()
+        
+        if autoDismiss {
+            Func.AKDelay(GlobalConstants.AKAutoDismissMessageTime, isMain: true, task: { self.hideMessage() })
+        }
     }
     
     func showContinueMessage(message: String,

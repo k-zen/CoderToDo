@@ -35,7 +35,7 @@ class AKProjectsTableViewCell: UITableViewCell
                 )
             }
             catch {
-                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)")
+                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)", autoDismiss: true)
             }
         }
     }
