@@ -154,7 +154,6 @@
                                         <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="add:" destination="-1" eventType="touchUpInside" id="FNu-uQ-X6O"/>
                                         <action selector="close:" destination="-1" eventType="touchUpInside" id="kaV-uV-YNH"/>
                                     </connections>
                                 </button>
