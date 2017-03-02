@@ -316,7 +316,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         super.inhibitLongPressGesture = false
         super.additionalOperationsWhenLongPressed = { (gesture) -> Void in
             self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
-                             taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                             taskBeforePresenting: { _,_ in },
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                 if let presenterController = presenterController as? AKListProjectsViewController {
                                     presenterController.projectsTable.reloadData()
@@ -351,7 +351,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
-                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                                                taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
                                                         presenterController.projectsTable.reloadData()
@@ -362,7 +362,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
-                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                                                taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if
                                                         let presenterController = presenterController as? AKListProjectsViewController,

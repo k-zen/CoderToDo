@@ -35,8 +35,17 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             let closingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
             let tolerance = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
             
+            // Check name.
             try projectName.validate()
             try projectName.process()
+            
+            // Check times.
+            // 1. Closing time must be later than starting time.
+            let dateComparison = closingTime.compare(startingTime as Date)
+            if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
+                self.showMessage(message: "The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".")
+                return
+            }
             
             if let mr = Func.AKObtainMasterReference() {
                 let now = NSDate()
@@ -122,6 +131,19 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.tolerance.selectRow(1, inComponent: 0, animated: true)
         self.startingTime.selectRow(8, inComponent: 0, animated: true)
         self.closingTime.selectRow(16, inComponent: 0, animated: true)
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        // Custom L&F.
+        self.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     override func loadLocalizedText() {
@@ -234,13 +256,5 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.closingTime.delegate = self
         self.closingTime.dataSource = self
         self.closingTime.tag = LocalEnums.closingTime.rawValue
-        
-        // Custom L&F.
-        self.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }
