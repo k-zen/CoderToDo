@@ -91,6 +91,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     }
                 }
                 break
+            case GlobalConstants.AKProjectConfigurationsSegue:
+                if let destination = segue.destination as? AKProjectConfigurationsViewController {
+                    if let project = sender as? Project {
+                        destination.project = project
+                    }
+                }
+                break
             default:
                 break
             }
@@ -101,6 +108,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         switch identifier {
         case GlobalConstants.AKViewProjectSegue:
+            return true
+        case GlobalConstants.AKProjectConfigurationsSegue:
             return true
         default:
             return false
@@ -273,25 +282,48 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? { return "Delete" }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).row]
-            
-            // Remove data structure.
-            DataInterface.getUser()?.removeFromProject(project)
-            // Invalidate notifications.
-            Func.AKGetNotificationCenter().removePendingNotificationRequests(withIdentifiers:
-                [
-                    String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, project.name!),
-                    String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!)
-                ]
+        // Edit Action
+        let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
+            let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+            self.performSegue(withIdentifier: GlobalConstants.AKProjectConfigurationsSegue, sender: project)
+        })
+        edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
+        
+        // Delete Action
+        let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
+            self.showContinueMessage(
+                message: "This action can't be undone. Continue...?",
+                yesAction: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKListProjectsViewController {
+                        let project = DataInterface.getProjects(sortBy: presenterController.sortProjectsBy, order: presenterController.order)[(indexPath as NSIndexPath).row]
+                        
+                        // Remove data structure.
+                        DataInterface.getUser()?.removeFromProject(project)
+                        // Invalidate notifications.
+                        Func.AKGetNotificationCenter().removePendingNotificationRequests(withIdentifiers:
+                            [
+                                String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, project.name!),
+                                String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!)
+                            ]
+                        )
+                        
+                        presenterController.projectsTable.reloadData()
+                    }
+                    
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
+                noAction: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKListProjectsViewController {
+                        presenterController.projectsTable.reloadData()
+                    }
+                    
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) }
             )
-            
-            self.projectsTable.reloadData()
-        }
+        })
+        delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        
+        return [delete, edit];
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
