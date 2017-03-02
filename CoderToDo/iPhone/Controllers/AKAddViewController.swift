@@ -53,14 +53,19 @@ class AKAddViewController: AKCustomViewController
         self.loadLocalizedText()
     }
     
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        // Custom L&F.
+        self.controlsContainer.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.controlsContainer.layer.borderColor = UIColor.black.cgColor
+    }
+    
     // MARK: Miscellaneous
     func customSetup()
     {
         super.additionalOperationsWhenTaped = { (gesture) -> Void in self.dismissView(executeDismissTask: true) }
         super.setup()
-        
-        // Custom L&F.
-        self.controlsContainer.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.controlsContainer.layer.borderColor = UIColor.black.cgColor
     }
 }
