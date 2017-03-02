@@ -231,6 +231,25 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func customSetup()
     {
         super.inhibitTapGesture = true
+        super.inhibitLongPressGesture = false
+        super.additionalOperationsWhenLongPressed = { (gesture) -> Void in
+            self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
+                             taskBeforePresenting: { (presenterController, presentedController) -> Void in
+                                if
+                                    let presenterController = presenterController as? AKViewProjectViewController,
+                                    let presentedController = presentedController as? AKAddViewController {
+                                    presentedController.project = presenterController.project
+                                } },
+                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                // Always reload the days table!
+                                if let presenterController = presenterController as? AKViewProjectViewController {
+                                    presenterController.daysTable.reloadData()
+                                    for customCell in presenterController.customCellArray {
+                                        customCell.tasksTable?.reloadData()
+                                    }
+                                } }
+            )
+        }
         super.setup()
         
         // Custom Components
@@ -260,19 +279,18 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
                                                 taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                                                    if let presenterController = presenterController as? AKViewProjectViewController, let presentedController = presentedController as? AKAddViewController {
+                                                    if
+                                                        let presenterController = presenterController as? AKViewProjectViewController,
+                                                        let presentedController = presentedController as? AKAddViewController {
                                                         presentedController.project = presenterController.project
                                                     } },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
-                                                    
                                                     // Always reload the days table!
                                                     if let presenterController = presenterController as? AKViewProjectViewController {
                                                         presenterController.daysTable.reloadData()
                                                         for customCell in presenterController.customCellArray {
                                                             customCell.tasksTable?.reloadData()
                                                         }
-                                                        presenterController.displaceUpTable()
                                                     } }
                 )
             }
@@ -285,12 +303,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.showTopMenu()
         
         UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-        self.daysTable.frame = CGRect(
-            x: self.daysTable.frame.origin.x,
-            y: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight,
-            width: self.daysTable.frame.width,
-            height: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight
-        )
+        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight)
         UIView.commitAnimations()
     }
     
@@ -299,12 +313,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.hideTopMenu()
         
         UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-        self.daysTable.frame = CGRect(
-            x: self.daysTable.frame.origin.x,
-            y: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight,
-            width: self.daysTable.frame.width,
-            height: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight
-        )
+        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight)
         UIView.commitAnimations()
     }
 }
