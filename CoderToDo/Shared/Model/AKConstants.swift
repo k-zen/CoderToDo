@@ -398,6 +398,11 @@ class UtilityFunctions
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: component.frame.width, height: newHeight))
     }
     
+    func AKChangeComponentYPosition(component: UIView, newY: CGFloat)
+    {
+        component.frame = CGRect(origin: CGPoint(x: component.frame.origin.x, y: newY), size: CGSize(width: component.frame.width, height: component.frame.height))
+    }
+    
     ///
     /// Executes a function with a delay.
     ///
