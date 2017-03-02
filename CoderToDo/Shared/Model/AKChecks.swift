@@ -35,14 +35,12 @@ class AKChecks
                 }
                 // Sanity check #2
                 if task.state == TaskStates.PENDING.rawValue && task.completionPercentage != task.initialCompletionPercentage {
-                    task.initialCompletionPercentage = task.completionPercentage
                     if let pendingQueue = task.category?.day?.project?.pendingQueue {
                         pendingQueue.addToTasks(task)
                     }
                 }
                 // Sanity check #3
                 if task.state == TaskStates.DILATE.rawValue {
-                    task.initialCompletionPercentage = task.completionPercentage
                     if let dilateQueue = task.category?.day?.project?.dilateQueue {
                         dilateQueue.addToTasks(task)
                     }
