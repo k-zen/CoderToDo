@@ -35,17 +35,22 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             if let mr = Func.AKObtainMasterReference() {
                 // Allways add today to the table if not present, if present return the last day.
                 if let currentDay = DataInterface.addNewWorkingDay(project: self.project) {
+                    let migratedPendingDay = (self.project.pendingQueue?.tasks?.allObjects.first as? Task)?.category?.day
+                    let migratedDilateDay = (self.project.dilateQueue?.tasks?.allObjects.first as? Task)?.category?.day
+                    
                     // Add task from PendingQueue.
                     if let tasks = self.project.pendingQueue?.tasks?.allObjects as? [Task] {
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    task.creationDate = currentDay.date
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
                                     
                                     // Remove from queue.
                                     self.project.pendingQueue?.removeFromTasks(task)
+                                    
+                                    task.creationDate = currentDay.date
+                                    task.initialCompletionPercentage = task.completionPercentage
                                 }
                             }
                         }
@@ -56,17 +61,32 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                         for task in tasks {
                             if let categoryName = task.category?.name {
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    task.creationDate = currentDay.date
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
                                     
                                     // Remove from queue.
                                     self.project.dilateQueue?.removeFromTasks(task)
+                                    
+                                    task.creationDate = currentDay.date
+                                    task.initialCompletionPercentage = task.completionPercentage
                                 }
                             }
                         }
                     }
                     
+                    // To avoid having an empty day, because all tasks from one day have been moved, then check the day
+                    // from which the pending or dilate tasks come from and if they are empty remove those days from the
+                    // project.
+                    if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
+                        // Count the task in both days.
+                        let leftTasks = DataInterface.countAllTasksInDay(day: day1) + DataInterface.countAllTasksInDay(day: day2)
+                        if leftTasks == 0 {
+                            self.project.removeFromDays(day1)
+                            self.project.removeFromDays(day2)
+                        }
+                    }
+                    
+                    // Add the new task.
                     let now = NSDate()
                     let task = Task(context: mr.getMOC())
                     task.creationDate = now
@@ -88,11 +108,6 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                         self.dismissView(executeDismissTask: true)
                     }
                 }
-                else {
-                    NSLog("=> ERROR: NO CURRENT DAY!")
-                    // TODO: Add error handling here and dismiss view!
-                    self.dismissView(executeDismissTask: true)
-                }
             }
         }
         catch {
@@ -100,10 +115,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
     }
     
-    @IBAction func close(_ sender: Any)
-    {
-        self.dismissView(executeDismissTask: true)
-    }
+    @IBAction func close(_ sender: Any) { self.dismissView(executeDismissTask: true) }
     
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
