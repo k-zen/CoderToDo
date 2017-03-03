@@ -1,18 +1,18 @@
 import UIKit
 
-class AKMessageView: AKCustomView
+class AKMessageView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKViewHeight: CGFloat = 100.0
         static let AKViewWidth: CGFloat = 300.0
+        static let AKViewHeight: CGFloat = 100.0
         static let AKExpandHeightAnimation = "expandHeight"
         static let AKCollapseHeightAnimation = "collapseHeight"
     }
     
     // MARK: Properties
-    let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
-    let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
+    private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
+    private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     var controller: AKCustomViewController?
     
     // MARK: Outlets
@@ -30,7 +30,6 @@ class AKMessageView: AKCustomView
     {
         NSLog("=> FRAME init()")
         super.init(frame: frame)
-        setup()
     }
     
     required init(coder aDecoder: NSCoder)
@@ -44,6 +43,25 @@ class AKMessageView: AKCustomView
     {
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
+        self.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.getView().clipsToBounds = true
+        
+        self.loadComponents()
+        self.applyLookAndFeel()
+        self.addAnimations()
+    }
+    
+    func loadComponents() {}
+    
+    func applyLookAndFeel()
+    {
+        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
+        self.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+    }
+    
+    func addAnimations()
+    {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = LocalConstants.AKViewHeight
         self.expandHeight.duration = 1.0
@@ -57,5 +75,16 @@ class AKMessageView: AKCustomView
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
+    }
+    
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
+    {
+        self.getView().frame = CGRect(
+            x: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).x,
+            y: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).y,
+            width: LocalConstants.AKViewWidth,
+            height: size.height
+        )
+        container.addSubview(self.getView())
     }
 }

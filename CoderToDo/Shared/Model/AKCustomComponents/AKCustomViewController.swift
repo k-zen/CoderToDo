@@ -114,43 +114,28 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Setup the overlays.
         self.messageOverlay.controller = self
-        self.messageOverlay.getView().frame = CGRect(
-            x: Func.AKCenterScreenCoordinate(self.view, AKMessageView.LocalConstants.AKViewWidth, AKMessageView.LocalConstants.AKViewHeight).x,
-            y: Func.AKCenterScreenCoordinate(self.view, AKMessageView.LocalConstants.AKViewWidth, AKMessageView.LocalConstants.AKViewHeight).y,
-            width: AKMessageView.LocalConstants.AKViewWidth,
-            height: 0.0
+        self.messageOverlay.setup()
+        self.messageOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize.zero
         )
-        self.messageOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
-        self.messageOverlay.getView().clipsToBounds = true
-        self.messageOverlay.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.messageOverlay.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.messageOverlay.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
-        self.view.addSubview(self.messageOverlay.getView())
         
         self.continueMessageOverlay.controller = self
-        self.continueMessageOverlay.getView().frame = CGRect(
-            x: Func.AKCenterScreenCoordinate(self.view, AKContinueMessageView.LocalConstants.AKViewWidth, AKContinueMessageView.LocalConstants.AKViewHeight).x,
-            y: Func.AKCenterScreenCoordinate(self.view, AKContinueMessageView.LocalConstants.AKViewWidth, AKContinueMessageView.LocalConstants.AKViewHeight).y,
-            width: AKContinueMessageView.LocalConstants.AKViewWidth,
-            height: 0.0
+        self.continueMessageOverlay.setup()
+        self.continueMessageOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize.zero
         )
-        self.continueMessageOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
-        self.continueMessageOverlay.getView().clipsToBounds = true
-        self.continueMessageOverlay.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.continueMessageOverlay.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.continueMessageOverlay.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
-        self.view.addSubview(self.continueMessageOverlay.getView())
         
         self.topMenuOverlay.controller = self
-        self.topMenuOverlay.getView().frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.width,
-            height: 0.0
+        self.topMenuOverlay.setup()
+        self.topMenuOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize(width: self.view.frame.width, height: 0.0)
         )
-        self.topMenuOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
-        self.topMenuOverlay.getView().clipsToBounds = true
-        self.view.addSubview(self.topMenuOverlay.getView())
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation

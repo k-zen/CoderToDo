@@ -96,25 +96,16 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             let customCell = AKTasksTableView()
             customCell.controller = self
             customCell.day = day
-            customCell.getView().frame = CGRect(
-                x: 0,
-                y: 0,
-                width: tableView.frame.width,
-                height: cellHeight
+            customCell.setup()
+            customCell.draw(
+                container: cell.mainContainer,
+                coordinates: CGPoint.zero,
+                size: CGSize(width: tableView.frame.width, height: cellHeight)
             )
-            customCell.getView().translatesAutoresizingMaskIntoConstraints = true
-            customCell.getView().clipsToBounds = true
-            cell.mainContainer.addSubview(customCell.getView())
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            // Func.AKAddBorderDeco(
-            //     cell.mainContainer,
-            //     color: GlobalConstants.AKTableCellBorderBg.cgColor,
-            //     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            //     position: .left
-            // )
             
             self.customCellArray.insert(customCell, at: (indexPath as NSIndexPath).section)
             

@@ -11,6 +11,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Properties
     // Overlay Controllers
     let selectTaskStateOverlay = AKSelectTaskStateView()
+    let selectCategoryOverlay = AKSelectCategoryView()
     var task: Task!
     
     // MARK: Outlets
@@ -35,10 +36,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.cpValue.text = String(format: "%.1f%%", self.changeCP.value)
     }
     
-    @IBAction func changeCategory(_ sender: Any)
-    {
-        NSLog("=> INFO: CHANGE CATEGORY BUTTON PRESSED!")
-    }
+    @IBAction func changeCategory(_ sender: Any) { self.expandCategorySelector() }
     
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
@@ -71,17 +69,23 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewDidLayoutSubviews()
         
         // Setup the overlays.
-        let coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        var coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        coordinates.origin.y += self.statusValue.frame.height
         self.selectTaskStateOverlay.controller = self
-        self.selectTaskStateOverlay.getView().frame = CGRect(
-            x: coordinates.origin.x,
-            y: coordinates.origin.y + self.statusValue.frame.height,
-            width: self.selectTaskStateOverlay.getView().frame.width,
-            height: 0
+        self.selectTaskStateOverlay.setup()
+        self.selectTaskStateOverlay.draw(
+            container: self.view,
+            coordinates: coordinates.origin,
+            size: CGSize.zero
         )
-        self.selectTaskStateOverlay.getView().translatesAutoresizingMaskIntoConstraints = true
-        self.selectTaskStateOverlay.getView().clipsToBounds = true
-        self.view.addSubview(self.selectTaskStateOverlay.getView())
+        
+        self.selectCategoryOverlay.controller = self
+        self.selectCategoryOverlay.setup()
+        self.selectCategoryOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize.zero
+        )
         
         // Custom L&F.
         self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
@@ -212,7 +216,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.additionalOperationsWhenTaped = { (gesture) -> Void in self.collapseTaskStateSelector() }
+        super.additionalOperationsWhenTaped = { (gesture) -> Void in self.collapseTaskStateSelector(); self.collapseCategorySelector() }
         super.setup()
         
         // Set Delegator.
@@ -222,18 +226,20 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.notesValue.tag = LocalEnums.notes.rawValue
     }
     
-    func toggleEditMode(mode: TaskMode)
+    private func toggleEditMode(mode: TaskMode)
     {
         switch mode {
         case TaskMode.EDITABLE:
             self.taskNameValue.isEditable = true
             self.statusValue.isEnabled = true
             self.changeCP.isEnabled = true
+            self.changeCategory.isEnabled = true
             break
         case TaskMode.NOT_EDITABLE:
             self.taskNameValue.isEditable = false
             self.statusValue.isEnabled = false
             self.changeCP.isEnabled = false
+            self.changeCategory.isEnabled = false
             break
         }
     }
@@ -253,10 +259,24 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         UIView.commitAnimations()
     }
     
+    func expandCategorySelector()
+    {
+        UIView.beginAnimations(AKSelectCategoryView.LocalConstants.AKExpandHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.selectCategoryOverlay.getView(), newHeight: AKSelectCategoryView.LocalConstants.AKViewHeight)
+        UIView.commitAnimations()
+    }
+    
     func collapseTaskStateSelector()
     {
         UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.selectTaskStateOverlay.getView(), newHeight: 0.0)
+        UIView.commitAnimations()
+    }
+    
+    func collapseCategorySelector()
+    {
+        UIView.beginAnimations(AKSelectCategoryView.LocalConstants.AKCollapseHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.selectCategoryOverlay.getView(), newHeight: 0.0)
         UIView.commitAnimations()
     }
 }

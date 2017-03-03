@@ -1,9 +1,10 @@
 import UIKit
 
-class AKSelectTaskStateView: AKCustomView
+class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
     struct LocalConstants {
+        static let AKViewWidth: CGFloat = 104.0
         static let AKViewHeight: CGFloat = 179.0
         static let AKExpandHeightAnimation = "expandHeight"
         static let AKCollapseHeightAnimation = "collapseHeight"
@@ -37,7 +38,7 @@ class AKSelectTaskStateView: AKCustomView
                             position: .bottom
                         )
                         // Toggle to not editable mode.
-                        presenterController.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+                        presenterController.markTask(mode: TaskMode.NOT_EDITABLE)
                     }
                     
                     presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
@@ -86,7 +87,7 @@ class AKSelectTaskStateView: AKCustomView
                             position: .bottom
                         )
                         // Toggle to not editable mode.
-                        presenterController.toggleEditMode(mode: TaskMode.NOT_EDITABLE)
+                        presenterController.markTask(mode: TaskMode.NOT_EDITABLE)
                     }
                     
                     presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
@@ -144,7 +145,6 @@ class AKSelectTaskStateView: AKCustomView
     {
         NSLog("=> FRAME init()")
         super.init(frame: frame)
-        setup()
     }
     
     required init(coder aDecoder: NSCoder)
@@ -158,6 +158,20 @@ class AKSelectTaskStateView: AKCustomView
     {
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
+        self.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.getView().clipsToBounds = true
+        
+        self.loadComponents()
+        self.applyLookAndFeel()
+        self.addAnimations()
+    }
+    
+    func loadComponents() {}
+    
+    func applyLookAndFeel() {}
+    
+    func addAnimations()
+    {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = LocalConstants.AKViewHeight
         self.expandHeight.duration = 1.0
@@ -171,5 +185,16 @@ class AKSelectTaskStateView: AKCustomView
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
+    }
+    
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
+    {
+        self.getView().frame = CGRect(
+            x: coordinates.x,
+            y: coordinates.y,
+            width: LocalConstants.AKViewWidth,
+            height: size.height
+        )
+        container.addSubview(self.getView())
     }
 }

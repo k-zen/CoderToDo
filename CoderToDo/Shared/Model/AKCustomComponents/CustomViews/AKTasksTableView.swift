@@ -1,6 +1,6 @@
 import UIKit
 
-class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
+class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: Constants
     struct LocalConstants {
@@ -10,7 +10,6 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     }
     
     // MARK: Properties
-    let animation: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
     var controller: AKCustomViewController?
     var day: Day?
     
@@ -28,7 +27,6 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     {
         NSLog("=> FRAME init()")
         super.init(frame: frame)
-        setup()
     }
     
     required init(coder aDecoder: NSCoder)
@@ -231,28 +229,35 @@ class AKTasksTableView: AKCustomView, UITableViewDataSource, UITableViewDelegate
     {
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
-        self.animation.fromValue = 0.85
-        self.animation.toValue = 0.65
-        self.animation.duration = 2.0
-        self.animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.animation.autoreverses = true
-        self.animation.repeatCount = 20000
-        
-        // Custom Components
-        self.tasksTable.register(UINib(nibName: "AKTasksTableViewCell", bundle: nil), forCellReuseIdentifier: "TasksTableCell")
-        
-        // Add UITableView's DataSource & Delegate.
+        // Delegate & DataSource
         self.tasksTable?.dataSource = self
         self.tasksTable?.delegate = self
+        
+        self.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.getView().clipsToBounds = true
+        
+        self.loadComponents()
+        self.applyLookAndFeel()
+        self.addAnimations()
     }
     
-    func startAnimation()
+    func loadComponents()
     {
-        self.getView().layer.add(animation, forKey: "opacity")
+        self.tasksTable.register(UINib(nibName: "AKTasksTableViewCell", bundle: nil), forCellReuseIdentifier: "TasksTableCell")
     }
     
-    func stopAnimation()
+    func applyLookAndFeel() {}
+    
+    func addAnimations() {}
+    
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
-        self.getView().layer.removeAllAnimations()
+        self.getView().frame = CGRect(
+            x: coordinates.x,
+            y: coordinates.y,
+            width: size.width,
+            height: size.height
+        )
+        container.addSubview(self.getView())
     }
 }

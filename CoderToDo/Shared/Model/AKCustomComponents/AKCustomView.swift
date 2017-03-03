@@ -3,7 +3,7 @@ import UIKit
 class AKCustomView: UIView
 {
     // MARK: Properties
-    var customView: UIView = UIView()
+    private var customView: UIView = UIView()
     
     // MARK: UIView Overriding
     override init(frame: CGRect)
@@ -41,5 +41,5 @@ class AKCustomView: UIView
     }
     
     // MARK: Accessors
-    func getView() -> UIView { return self.customView }
+    internal func getView() -> UIView { return self.customView }
 }

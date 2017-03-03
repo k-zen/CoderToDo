@@ -1,6 +1,6 @@
 import UIKit
 
-class AKTopMenuView: AKCustomView
+class AKTopMenuView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
     struct LocalConstants {
@@ -10,8 +10,8 @@ class AKTopMenuView: AKCustomView
     }
     
     // MARK: Properties
-    let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
-    let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
+    private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
+    private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     var controller: AKCustomViewController?
     var addAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: ADD HAS BEEN PRESSED!") }
     var sortAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: SORT HAS BEEN PRESSED!") }
@@ -45,7 +45,6 @@ class AKTopMenuView: AKCustomView
     {
         NSLog("=> FRAME init()")
         super.init(frame: frame)
-        setup()
     }
     
     required init(coder aDecoder: NSCoder)
@@ -59,6 +58,20 @@ class AKTopMenuView: AKCustomView
     {
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
+        self.getView().translatesAutoresizingMaskIntoConstraints = true
+        self.getView().clipsToBounds = true
+        
+        self.loadComponents()
+        self.applyLookAndFeel()
+        self.addAnimations()
+    }
+    
+    func loadComponents() {}
+    
+    func applyLookAndFeel() {}
+    
+    func addAnimations()
+    {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = LocalConstants.AKViewHeight
         self.expandHeight.duration = 1.0
@@ -72,5 +85,16 @@ class AKTopMenuView: AKCustomView
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
+    }
+    
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
+    {
+        self.getView().frame = CGRect(
+            x: coordinates.x,
+            y: coordinates.y,
+            width: size.width,
+            height: size.height
+        )
+        container.addSubview(self.getView())
     }
 }
