@@ -182,7 +182,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         super.loadLocalizedText()
         
         // Load pickers.
-        for categoryName in DataInterface.listCategoriesInProject(project: self.project) {
+        for categoryName in DataInterface.listProjectCategories(project: self.project) {
             self.categoryData.append(categoryName)
         }
     }

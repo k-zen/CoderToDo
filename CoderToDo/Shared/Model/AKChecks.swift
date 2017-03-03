@@ -58,7 +58,7 @@ class AKChecks
         }
         
         // Check if there is at least 1 category.
-        if project.projectCategories?.count == 0 {
+        if DataInterface.countProjectCategories(project: project) == 0 {
             throw Exceptions.noCategories(String(format: "%@ please add at least 1 category first.", DataInterface.getUsername()))
         }
     }

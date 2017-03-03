@@ -455,20 +455,6 @@ class AKDataInterface
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
-    static func listCategoriesInProject(project: Project) -> [String]
-    {
-        if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
-            return projectCategories.sorted {
-                let n1 = $0.name ?? ""
-                let n2 = $1.name ?? ""
-                
-                return n1 < n2
-                }.map({ $0.name! })
-        }
-        
-        return []
-    }
-    
     static func getCategories(day: Day) -> [Category]
     {
         if let categories = day.categories?.allObjects as? [Category] {
@@ -532,4 +518,68 @@ class AKDataInterface
         return counter
     }
     // ########## TASK'S FUNCTIONS ########## //
+    // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
+    static func listProjectCategories(project: Project) -> [String]
+    {
+        if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
+            return projectCategories.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+                }.map({ $0.name! })
+        }
+        
+        return []
+    }
+    
+    static func countProjectCategories(project: Project) -> Int
+    {
+        return project.projectCategories?.allObjects.count ?? 0
+    }
+    
+    static func getProjectCategoryByName(project: Project, name: String) -> ProjectCategory?
+    {
+        if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
+            for projectCategory in projectCategories {
+                if name.caseInsensitiveCompare(projectCategory.name!) == ComparisonResult.orderedSame {
+                    return projectCategory
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    ///
+    /// Function to remove a project category from a given project. The only constraint
+    /// is that the category doesnt' hold a task.
+    ///
+    /// - Parameter project: The project where the category belongs.
+    /// - Parameter name: The name of the category
+    ///
+    /// - Throws: categoryHasTasks exception if we cannot remove the category because it has tasks.
+    ///
+    static func removeProjectCategory(project: Project, name: String) throws
+    {
+        var hasTasks: Bool = false
+        for day in DataInterface.getDays(project: project) {
+            if let category = DataInterface.getCategoryByName(day: day, name: name) {
+                if DataInterface.countTasks(category: category) > 0 {
+                    hasTasks = true
+                    break
+                }
+            }
+        }
+        
+        if !hasTasks {
+            if let projectCategory = DataInterface.getProjectCategoryByName(project: project, name: name) {
+                project.removeFromProjectCategories(projectCategory)
+            }
+        }
+        else {
+            throw Exceptions.categoryHasTasks(String(format: "%@ we cannot remove this category because it contains tasks. Sorry.", DataInterface.getUsername()))
+        }
+    }
+    // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
 }

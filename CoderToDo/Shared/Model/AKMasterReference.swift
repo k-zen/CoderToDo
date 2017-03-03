@@ -79,7 +79,7 @@ class AKMasterReference: NSObject
             NSLog("=>       OSR: %.2f", project.osr)
             NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
             NSLog("=>       PROJECT CATEGORIES: (%i)", project.projectCategories?.count ?? 0)
-            for projectCategory in DataInterface.listCategoriesInProject(project: project) {
+            for projectCategory in DataInterface.listProjectCategories(project: project) {
                 NSLog("=>           NAME: %@", projectCategory)
             }
             NSLog("=>       PENDING QUEUE: (%i)", project.pendingQueue?.tasks?.count ?? 0)

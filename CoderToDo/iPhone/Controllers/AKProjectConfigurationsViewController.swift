@@ -27,7 +27,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = self.configurationsTable.dequeueReusableCell(withIdentifier: "ConfigurationsTableCell") as! AKConfigurationsTableViewCell
-        cell.title.text = DataInterface.listCategoriesInProject(project: self.project)[(indexPath as NSIndexPath).row]
+        cell.title.text = DataInterface.listProjectCategories(project: self.project)[(indexPath as NSIndexPath).row]
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -80,7 +80,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     {
         switch section {
         case 0:
-            return DataInterface.listCategoriesInProject(project: self.project).count
+            return DataInterface.listProjectCategories(project: self.project).count
         default:
             return 0
         }
@@ -93,7 +93,13 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     {
         // Delete Action
         let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
-            NSLog("=> INFO: REMOVED ROW!")
+            do {
+                try DataInterface.removeProjectCategory(project: self.project, name: DataInterface.listProjectCategories(project: self.project)[(indexPath as NSIndexPath).row])
+            }
+            catch {
+                Func.AKPresentMessageFromError(controller: self, message: "\(error)", autoDismiss: true)
+            }
+            
             self.configurationsTable.reloadData()
         })
         delete.backgroundColor = GlobalConstants.AKRedForWhiteFg

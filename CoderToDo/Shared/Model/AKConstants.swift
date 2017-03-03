@@ -190,6 +190,7 @@ enum Exceptions: Error {
     case invalidDate(String)
     case invalidProjectStatus(String)
     case noCategories(String)
+    case categoryHasTasks(String)
 }
 
 enum UnitOfTime: Int {
