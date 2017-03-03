@@ -42,9 +42,25 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     if let tasks = self.project.pendingQueue?.tasks?.allObjects as? [Task] {
                         for task in tasks {
                             if let categoryName = task.category?.name {
+                                // Here is the problem where tasks in queues where not added to the next day. If the next day
+                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
+                                // this block of code.
+                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
+                                    
+                                    // Remove from queue.
+                                    self.project.pendingQueue?.removeFromTasks(task)
+                                    
+                                    task.creationDate = currentDay.date
+                                    task.initialCompletionPercentage = task.completionPercentage
+                                }
+                                else {
+                                    let newCategory = Category(context: mr.getMOC())
+                                    newCategory.name = categoryName
+                                    newCategory.addToTasks(task)
+                                    currentDay.addToCategories(newCategory)
                                     
                                     // Remove from queue.
                                     self.project.pendingQueue?.removeFromTasks(task)
@@ -60,9 +76,25 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     if let tasks = self.project.dilateQueue?.tasks?.allObjects as? [Task] {
                         for task in tasks {
                             if let categoryName = task.category?.name {
+                                // Here is the problem where tasks in queues where not added to the next day. If the next day
+                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
+                                // this block of code.
+                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
                                 if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
                                     category.addToTasks(task)
                                     currentDay.addToCategories(category)
+                                    
+                                    // Remove from queue.
+                                    self.project.dilateQueue?.removeFromTasks(task)
+                                    
+                                    task.creationDate = currentDay.date
+                                    task.initialCompletionPercentage = task.completionPercentage
+                                }
+                                else {
+                                    let newCategory = Category(context: mr.getMOC())
+                                    newCategory.name = categoryName
+                                    newCategory.addToTasks(task)
+                                    currentDay.addToCategories(newCategory)
                                     
                                     // Remove from queue.
                                     self.project.dilateQueue?.removeFromTasks(task)
