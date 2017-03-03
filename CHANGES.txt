@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for more amicable notification messages. (2017/03/03)
         * Added support to remove project categories. (2017/03/03)
         * Removed tolerance from the calculation of FIRST_DAY. (2017/03/03)
         * Finally corrected bug with both queues, where tasks where not being migrated to the next day. (2017/03/03)
