@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Removed tolerance from the calculation of FIRST_DAY. (2017/03/03)
         * Finally corrected bug with both queues, where tasks where not being migrated to the next day. (2017/03/03)
         * Added support for ProjectConfigurations view and also added support to ask the user before deleting a project. (2017/03/02)
         * Finally corrected bug with pending & dilate queues. Now it migrates tasks correctly to the next day. (2017/03/02)
