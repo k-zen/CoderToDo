@@ -395,6 +395,11 @@ class UtilityFunctions
         return container.convert(CGPoint(x: offsetX, y: offsetY), to: container)
     }
     
+    func AKChangeComponentWidth(component: UIView, newWidth: CGFloat)
+    {
+        component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: newWidth, height: component.frame.height))
+    }
+    
     func AKChangeComponentHeight(component: UIView, newHeight: CGFloat)
     {
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: component.frame.width, height: newHeight))

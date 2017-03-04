@@ -18,7 +18,7 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     var filterAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: FILTER HAS BEEN PRESSED!") }
     var searchAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: SEARCH HAS BEEN PRESSED!") }
     
-    // MARK: Properties
+    // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     @IBOutlet weak var add: UIButton!
     @IBOutlet weak var sort: UIButton!
