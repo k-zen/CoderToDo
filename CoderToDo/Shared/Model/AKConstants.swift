@@ -135,7 +135,7 @@ struct GlobalConstants {
     static let AKTableCellBg = GlobalConstants.AKCoderToDoGray1
     static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoWhite4
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
-    static let AKPickerFontSize: CGFloat = 16.0
+    static let AKPickerFontSize: CGFloat = 18.0
     static let AKNavBarFontSize: CGFloat = 18.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
     static let AKViewCornerRadius: CGFloat = 8.0
@@ -252,6 +252,19 @@ enum TaskMode: String {
     case NOT_EDITABLE = "Not Editable"
 }
 
+enum MenuItems: Int {
+    case add
+    case sort
+    case filter
+    case search
+    case none
+}
+
+enum Displacement: Int {
+    case up
+    case down
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -293,36 +306,38 @@ class UtilityFunctions
     ///
     func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition)
     {
-        let border = CALayer()
-        border.backgroundColor = color
-        switch position {
-        case .top:
-            border.frame = CGRect(x: 0, y: 0, width: component.frame.width, height: CGFloat(thickness))
-            break
-        case .right:
-            border.frame = CGRect(x: (component.frame.width - CGFloat(thickness)), y: 0, width: CGFloat(thickness), height: component.frame.height)
-            break
-        case .bottom:
-            border.frame = CGRect(x: 0, y: (component.frame.height - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
-            break
-        case .left:
-            border.frame = CGRect(x: 0, y: 0, width: CGFloat(thickness), height: component.frame.height)
-            break
-        case .through:
-            var startPositionX: CGFloat = 0.0
-            var startPositionY: CGFloat = component.frame.height / 2.0
-            if component.isKind(of: UILabel.self) {
-                if let label = component as? UILabel {
-                    startPositionX = label.intrinsicContentSize.width + 4.0
-                    startPositionY = startPositionY + 2.0
+        Func.AKExecuteInMainThread {
+            let border = CALayer()
+            border.backgroundColor = color
+            switch position {
+            case .top:
+                border.frame = CGRect(x: 0, y: 0, width: component.frame.width, height: CGFloat(thickness))
+                break
+            case .right:
+                border.frame = CGRect(x: (component.frame.width - CGFloat(thickness)), y: 0, width: CGFloat(thickness), height: component.frame.height)
+                break
+            case .bottom:
+                border.frame = CGRect(x: 0, y: (component.frame.height - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
+                break
+            case .left:
+                border.frame = CGRect(x: 0, y: 0, width: CGFloat(thickness), height: component.frame.height)
+                break
+            case .through:
+                var startPositionX: CGFloat = 0.0
+                var startPositionY: CGFloat = component.frame.height / 2.0
+                if component.isKind(of: UILabel.self) {
+                    if let label = component as? UILabel {
+                        startPositionX = label.intrinsicContentSize.width + 4.0
+                        startPositionY = startPositionY + 2.0
+                    }
                 }
+                
+                border.frame = CGRect(x: startPositionX, y: (startPositionY - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
+                break
             }
             
-            border.frame = CGRect(x: startPositionX, y: (startPositionY - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
-            break
+            component.layer.addSublayer(border)
         }
-        
-        component.layer.addSublayer(border)
     }
     
     ///
