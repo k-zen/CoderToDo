@@ -10,4 +10,8 @@ protocol AKCustomViewProtocol
     func addAnimations() -> Void
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize) -> Void
+    
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) -> Void
+    
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) -> Void
 }
