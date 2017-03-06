@@ -114,7 +114,7 @@ class AKMasterReference: NSObject
                 for category in DataInterface.getCategories(day: day) {
                     NSLog("=>               NAME: %@", category.name ?? "N\\A")
                     NSLog("=>               TASKS: (%i)", DataInterface.countTasks(category: category))
-                    for task in DataInterface.getTasks(category: category) {
+                    for task in DataInterface.getTasks(category: category, sortBy: TaskSorting.creationDate, order: SortingOrder.descending) {
                         NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
                         NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
                         NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
