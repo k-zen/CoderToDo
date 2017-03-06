@@ -18,11 +18,6 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
         self.customSetup()
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: UIPageViewControllerDataSource Implementation
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
     {

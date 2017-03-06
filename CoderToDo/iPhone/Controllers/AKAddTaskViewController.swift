@@ -276,8 +276,11 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             pickerLabel.text = self.categoryData[row]
+            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            break
         default:
             pickerLabel.text = ""
+            break
         }
         
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
@@ -304,7 +307,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     {
         super.setup()
         
-        // Set Delegator.
+        // Delegate & DataSource
         self.taskNameValue.delegate = self
         self.taskNameValue.tag = LocalEnums.taskName.rawValue
         self.categoryValue.delegate = self

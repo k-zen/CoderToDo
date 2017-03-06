@@ -2,13 +2,13 @@ import UIKit
 
 class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
 {
-    // MARK: Properties
-    var project: Project!
-    
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case category = 1
     }
+    
+    // MARK: Properties
+    var project: Project!
     
     // MARK: Outlets
     @IBOutlet weak var scrollContainer: UIScrollView!
@@ -42,21 +42,13 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
         }
     }
     
-    @IBAction func close(_ sender: Any)
-    {
-        self.dismissView(executeDismissTask: true)
-    }
+    @IBAction func close(_ sender: Any) { self.dismissView(executeDismissTask: true) }
     
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.customSetup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
     }
     
     override func viewDidLayoutSubviews()
@@ -135,7 +127,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     {
         super.setup()
         
-        // Set Delegator.
+        // Delegate & DataSource
         self.categoryValue.delegate = self
         self.categoryValue.tag = LocalEnums.category.rawValue
     }
