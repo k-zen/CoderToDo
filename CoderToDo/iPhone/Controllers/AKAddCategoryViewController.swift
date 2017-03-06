@@ -88,8 +88,8 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
             offset.x = 0
             
             var keyboardHeight = GlobalConstants.AKKeyboardHeight
-            if textField.autocorrectionType == UITextAutocorrectionType.yes || textField.autocorrectionType == UITextAutocorrectionType.default {
-                keyboardHeight += GlobalConstants.AKAutoCorrectionToolbarHeight
+            if textField.autocorrectionType == UITextAutocorrectionType.no {
+                keyboardHeight -= GlobalConstants.AKAutoCorrectionToolbarHeight
             }
             
             let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlsContainer, component: self.add)

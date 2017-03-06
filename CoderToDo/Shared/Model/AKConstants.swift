@@ -146,7 +146,7 @@ struct GlobalConstants {
     static let AKBadgeColorBg = UIColor.clear
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite1
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
-    static let AKAutoCorrectionToolbarHeight: CGFloat = 60
+    static let AKAutoCorrectionToolbarHeight: CGFloat = 42
     static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 40
