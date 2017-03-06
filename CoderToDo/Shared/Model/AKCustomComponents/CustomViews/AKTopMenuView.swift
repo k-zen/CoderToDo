@@ -35,23 +35,7 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     @IBAction func search(_ sender: Any) { self.controller?.hideMessage(); self.searchAction(self.controller) }
     
     // MARK: UIView Overriding
-    convenience init()
-    {
-        NSLog("=> DEFAULT init()")
-        self.init(frame: CGRect.zero)
-    }
-    
-    override init(frame: CGRect)
-    {
-        NSLog("=> FRAME init()")
-        super.init(frame: frame)
-    }
-    
-    required init(coder aDecoder: NSCoder)
-    {
-        NSLog("=> CODER init()")
-        super.init(coder: aDecoder)!
-    }
+    convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
     func setup()
@@ -68,7 +52,13 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     
     func loadComponents() {}
     
-    func applyLookAndFeel() {}
+    func applyLookAndFeel()
+    {
+        Func.AKAddBorderDeco(self.add.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
+        Func.AKAddBorderDeco(self.sort.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
+        Func.AKAddBorderDeco(self.filter.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
+        Func.AKAddBorderDeco(self.search.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
+    }
     
     func addAnimations()
     {
@@ -96,5 +86,29 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
             height: size.height
         )
         container.addSubview(self.getView())
+    }
+    
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
+        CATransaction.setCompletionBlock {
+            if completionTask != nil {
+                completionTask!(self.controller)
+            }
+        }
+        UIView.commitAnimations()
+    }
+    
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
+        CATransaction.setCompletionBlock {
+            if completionTask != nil {
+                completionTask!(self.controller)
+            }
+        }
+        UIView.commitAnimations()
     }
 }

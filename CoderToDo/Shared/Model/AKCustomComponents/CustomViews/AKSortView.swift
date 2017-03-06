@@ -1,57 +1,31 @@
 import UIKit
 
-class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
+class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
 {
     // MARK: Constants
-    private struct LocalConstants {
-        static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 166.0
+    struct LocalConstants {
+        static let AKViewHeight: CGFloat = 70.0
         static let AKExpandHeightAnimation = "expandHeight"
         static let AKCollapseHeightAnimation = "collapseHeight"
     }
     
     // MARK: Local Enums
     private enum LocalEnums: Int {
-        case category = 1
+        case filters = 1
+        case order = 2
     }
     
     // MARK: Properties
-    private var categoryData = [String]()
+    private var filtersData = [String]()
+    private var orderData = [SortingOrder]()
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     var controller: AKCustomViewController?
     
     // MARK: Outlets
-    @IBOutlet var mainContainer: UIView!
-    @IBOutlet weak var categoryValue: UIPickerView!
-    @IBOutlet weak var change: UIButton!
-    
-    // MARK: Actions
-    @IBAction func change(_ sender: Any)
-    {
-        if let controller = controller as? AKViewTaskViewController {
-            let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
-            
-            if let day = controller.task.category?.day {
-                if let category = DataInterface.getCategoryByName(day: day, name: selectedCategory) {
-                    category.addToTasks(controller.task)
-                }
-                else {
-                    if let mr = Func.AKObtainMasterReference() {
-                        let newCategory = Category(context: mr.getMOC())
-                        newCategory.name = selectedCategory
-                        newCategory.addToTasks(controller.task)
-                        day.addToCategories(newCategory)
-                    }
-                }
-            }
-            
-            // Collapse this view.
-            controller.tap(nil)
-            // Reload the view.
-            controller.categoryValue.text = selectedCategory
-        }
-    }
+    @IBOutlet weak var mainContainer: UIView!
+    @IBOutlet weak var filters: UIPickerView!
+    @IBOutlet weak var order: UIPickerView!
     
     // MARK: UIView Overriding
     convenience init() { self.init(frame: CGRect.zero) }
@@ -60,8 +34,10 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         switch pickerView.tag {
-        case LocalEnums.category.rawValue:
-            return self.categoryData[row]
+        case LocalEnums.filters.rawValue:
+            return self.filtersData[row]
+        case LocalEnums.order.rawValue:
+            return self.orderData[row].rawValue
         default:
             return ""
         }
@@ -73,28 +49,51 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
         switch pickerView.tag {
-        case LocalEnums.category.rawValue:
-            pickerLabel.text = self.categoryData[row]
+        case LocalEnums.filters.rawValue:
+            pickerLabel.text = self.filtersData[row]
+            pickerLabel.textAlignment = .center
+            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            break
+        case LocalEnums.order.rawValue:
+            pickerLabel.text = self.orderData[row].rawValue
+            pickerLabel.textAlignment = .center
             pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         default:
             pickerLabel.text = ""
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         }
         
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
-        pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if let controller = self.controller as? AKListProjectsViewController {
+            controller.sortProjectsBy = ProjectSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
+            controller.order = self.orderData[self.order.selectedRow(inComponent: 0)]
+            controller.projectsTable.reloadData()
+        }
+        else if let controller = self.controller as? AKViewProjectViewController {
+            controller.sortTasksBy = TaskSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
+            controller.order = self.orderData[self.order.selectedRow(inComponent: 0)]
+            controller.daysTable.reloadData()
+            for customCell in controller.customCellArray {
+                customCell.tasksTable?.reloadData()
+            }
+        }
     }
     
     // MARK: UIPickerViewDataSource Implementation
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         switch pickerView.tag {
-        case LocalEnums.category.rawValue:
-            return self.categoryData.count
+        case LocalEnums.filters.rawValue:
+            return self.filtersData.count
+        case LocalEnums.order.rawValue:
+            return self.orderData.count
         default:
             return 0
         }
@@ -108,9 +107,12 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
-        self.categoryValue.delegate = self
-        self.categoryValue.dataSource = self
-        self.categoryValue.tag = LocalEnums.category.rawValue
+        self.filters.delegate = self
+        self.filters.dataSource = self
+        self.filters.tag = LocalEnums.filters.rawValue
+        self.order.delegate = self
+        self.order.dataSource = self
+        self.order.tag = LocalEnums.order.rawValue
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -122,26 +124,32 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     
     func loadComponents()
     {
-        self.categoryData.removeAll()
-        if let controller = controller as? AKViewTaskViewController {
-            if let project = controller.task.category?.day?.project {
-                for categoryName in DataInterface.listProjectCategories(project: project) {
-                    self.categoryData.append(categoryName)
-                }
+        self.filtersData.removeAll()
+        if let _ = self.controller as? AKListProjectsViewController {
+            for filter in Func.AKIterateEnum(ProjectSorting.self) {
+                self.filtersData.append(filter.rawValue)
             }
+            self.orderData.removeAll()
+            for order in Func.AKIterateEnum(SortingOrder.self) {
+                self.orderData.append(order)
+            }
+            
+            self.filters.selectRow(2, inComponent: 0, animated: true)
         }
-        
-        // Set default values.
-        self.categoryValue.selectRow(0, inComponent: 0, animated: true)
+        else if let _ = self.controller as? AKViewProjectViewController {
+            for filter in Func.AKIterateEnum(TaskSorting.self) {
+                self.filtersData.append(filter.rawValue)
+            }
+            self.orderData.removeAll()
+            for order in Func.AKIterateEnum(SortingOrder.self) {
+                self.orderData.append(order)
+            }
+            
+            self.filters.selectRow(0, inComponent: 0, animated: true)
+        }
     }
     
-    func applyLookAndFeel()
-    {
-        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
-        self.change.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-    }
+    func applyLookAndFeel() {}
     
     func addAnimations()
     {
@@ -163,9 +171,9 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
         self.getView().frame = CGRect(
-            x: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).x,
-            y: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).y,
-            width: LocalConstants.AKViewWidth,
+            x: coordinates.x,
+            y: coordinates.y,
+            width: size.width,
             height: size.height
         )
         container.addSubview(self.getView())

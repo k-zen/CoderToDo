@@ -3,7 +3,7 @@ import UIKit
 class AKMessageView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
-    struct LocalConstants {
+    private struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
         static let AKViewHeight: CGFloat = 100.0
         static let AKExpandHeightAnimation = "expandHeight"
@@ -20,23 +20,7 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     @IBOutlet weak var message: UILabel!
     
     // MARK: UIView Overriding
-    convenience init()
-    {
-        NSLog("=> DEFAULT init()")
-        self.init(frame: CGRect.zero)
-    }
-    
-    override init(frame: CGRect)
-    {
-        NSLog("=> FRAME init()")
-        super.init(frame: frame)
-    }
-    
-    required init(coder aDecoder: NSCoder)
-    {
-        NSLog("=> CODER init()")
-        super.init(coder: aDecoder)!
-    }
+    convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
     func setup()
@@ -86,5 +70,29 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
             height: size.height
         )
         container.addSubview(self.getView())
+    }
+    
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
+        CATransaction.setCompletionBlock {
+            if completionTask != nil {
+                completionTask!(self.controller)
+            }
+        }
+        UIView.commitAnimations()
+    }
+    
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
+        Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
+        CATransaction.setCompletionBlock {
+            if completionTask != nil {
+                completionTask!(self.controller)
+            }
+        }
+        UIView.commitAnimations()
     }
 }
