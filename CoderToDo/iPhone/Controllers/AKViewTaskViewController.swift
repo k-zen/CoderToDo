@@ -9,7 +9,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     }
     
     // MARK: Properties
-    // Overlay Controllers
     let selectTaskStateOverlay = AKSelectTaskStateView()
     let selectCategoryOverlay = AKSelectCategoryView()
     var task: Task!
@@ -31,10 +30,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Actions
     @IBAction func changeStatus(_ sender: Any) { self.expandTaskStateSelector() }
     
-    @IBAction func changeCP(_ sender: Any)
-    {
-        self.cpValue.text = String(format: "%.1f%%", self.changeCP.value)
-    }
+    @IBAction func changeCP(_ sender: Any) { self.cpValue.text = String(format: "%.1f%%", self.changeCP.value) }
     
     @IBAction func changeCategory(_ sender: Any) { self.expandCategorySelector() }
     
@@ -219,7 +215,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.additionalOperationsWhenTaped = { (gesture) -> Void in self.collapseTaskStateSelector(); self.collapseCategorySelector() }
         super.setup()
         
-        // Set Delegator.
+        // Delegate & DataSource
         self.taskNameValue.delegate = self
         self.taskNameValue.tag = LocalEnums.taskName.rawValue
         self.notesValue.delegate = self
@@ -252,31 +248,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     }
     
     // MARK: Animations
-    func expandTaskStateSelector()
-    {
-        UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.selectTaskStateOverlay.getView(), newHeight: AKSelectTaskStateView.LocalConstants.AKViewHeight)
-        UIView.commitAnimations()
-    }
+    func expandTaskStateSelector() { self.selectTaskStateOverlay.expand(completionTask: nil) }
     
-    func expandCategorySelector()
-    {
-        UIView.beginAnimations(AKSelectCategoryView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.selectCategoryOverlay.getView(), newHeight: AKSelectCategoryView.LocalConstants.AKViewHeight)
-        UIView.commitAnimations()
-    }
+    func expandCategorySelector() { self.selectCategoryOverlay.expand(completionTask: nil) }
     
-    func collapseTaskStateSelector()
-    {
-        UIView.beginAnimations(AKSelectTaskStateView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.selectTaskStateOverlay.getView(), newHeight: 0.0)
-        UIView.commitAnimations()
-    }
+    func collapseTaskStateSelector() { self.selectTaskStateOverlay.collapse(completionTask: nil) }
     
-    func collapseCategorySelector()
-    {
-        UIView.beginAnimations(AKSelectCategoryView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.selectCategoryOverlay.getView(), newHeight: 0.0)
-        UIView.commitAnimations()
-    }
+    func collapseCategorySelector() { self.selectCategoryOverlay.collapse(completionTask: nil) }
 }
