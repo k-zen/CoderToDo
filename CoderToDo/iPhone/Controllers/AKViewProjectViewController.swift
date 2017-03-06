@@ -16,6 +16,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     var customCellArray = [AKTasksTableView]()
     var project: Project!
+    var sortTasksBy: TaskSorting = TaskSorting.creationDate
+    var order: SortingOrder = SortingOrder.descending
+    var selectedMenuItem: MenuItems = .none
+    var isMenuVisible: Bool = false
+    var isMenuItemVisible: Bool = false
     
     // MARK: Outlets
     @IBOutlet weak var navController: UINavigationItem!
@@ -24,11 +29,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: Actions
     @IBAction func toggleMenu(_ sender: Any)
     {
-        if self.daysTable.frame.origin.y == 0.0 {
-            self.displaceDownTable()
+        if !self.isMenuVisible {
+            self.displaceDownTable(offset: LocalConstants.AKDisplaceHeight)
         }
         else {
-            self.displaceUpTable()
+            self.displaceUpTable(offset: LocalConstants.AKDisplaceHeight)
         }
     }
     
@@ -90,42 +95,50 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
                 (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
-            let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
-            cell.title.isHidden = true
-            
-            let customCell = AKTasksTableView()
-            customCell.controller = self
-            customCell.day = day
-            customCell.setup()
-            customCell.draw(
-                container: cell.mainContainer,
-                coordinates: CGPoint.zero,
-                size: CGSize(width: tableView.frame.width, height: cellHeight)
-            )
-            
-            // Custom L&F.
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            
-            self.customCellArray.insert(customCell, at: (indexPath as NSIndexPath).section)
-            
-            return cell
+            if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
+                cell.title.isHidden = false
+                
+                let customCell = AKTasksTableView()
+                customCell.controller = self
+                customCell.day = day
+                customCell.setup()
+                customCell.draw(
+                    container: cell.mainContainer,
+                    coordinates: CGPoint.zero,
+                    size: CGSize(width: tableView.frame.width, height: cellHeight)
+                )
+                
+                // Custom L&F.
+                cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                
+                self.customCellArray.insert(customCell, at: (indexPath as NSIndexPath).section)
+                
+                return cell
+            }
         }
         else {
-            let cell = self.daysTable.dequeueReusableCell(withIdentifier: "DaysTableCell") as! AKDaysTableViewCell
-            
-            // Custom L&F.
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            Func.AKAddBorderDeco(
-                cell.mainContainer,
-                color: GlobalConstants.AKTableCellBorderBg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-                position: .left
-            )
-            
-            return cell
+            if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
+                
+                // Custom L&F.
+                cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                Func.AKAddBorderDeco(
+                    cell.mainContainer,
+                    color: GlobalConstants.AKTableCellBorderBg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    position: .left
+                )
+                
+                return cell
+            }
         }
+        
+        // For all else return empty cell.
+        let defaultCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        defaultCell.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        return defaultCell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -243,10 +256,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
         super.setup()
         
-        // Custom Components
-        self.daysTable.register(UINib(nibName: "AKDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "DaysTableCell")
-        
-        // Add UITableView's DataSource & Delegate.
+        // Delegate & DataSource
         self.daysTable?.dataSource = self
         self.daysTable?.delegate = self
         
@@ -286,26 +296,82 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 )
             }
         }
+        self.topMenuOverlay.sortAction = { (presenterController) -> Void in
+            if let presenterController = presenterController as? AKViewProjectViewController {
+                presenterController.toggleMenuItem(menuItem: .sort)
+            }
+        }
     }
     
     // MARK: Animations
-    func displaceDownTable()
+    func displaceDownTable(offset: CGFloat)
     {
+        self.isMenuVisible = true
         self.showTopMenu()
         
         UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y + LocalConstants.AKDisplaceHeight)
-        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height - LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y + offset)
+        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height - offset)
         UIView.commitAnimations()
     }
     
-    func displaceUpTable()
+    func displaceUpTable(offset: CGFloat)
     {
+        self.isMenuVisible = false
         self.hideTopMenu()
         
+        var newOffset = offset
+        if self.isMenuItemVisible {
+            switch self.selectedMenuItem {
+            case .sort:
+                newOffset += AKSortView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem()
+                break
+            default:
+                break
+            }
+        }
+        
         UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y - LocalConstants.AKDisplaceHeight)
-        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height + LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y - newOffset)
+        Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height + newOffset)
         UIView.commitAnimations()
+    }
+    
+    func toggleMenuItem(menuItem: MenuItems)
+    {
+        var offset: CGFloat = 0.0
+        let direction: Displacement = !self.isMenuItemVisible ? .down : .up
+        
+        switch menuItem {
+        case .sort:
+            self.selectedMenuItem = .sort
+            offset += AKSortView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSortMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem()
+            }
+            break
+        default:
+            break
+        }
+        
+        if direction == Displacement.down {
+            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y + offset)
+            Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height - offset)
+            UIView.commitAnimations()
+        }
+        else {
+            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: self.daysTable, newY: self.daysTable.frame.origin.y - offset)
+            Func.AKChangeComponentHeight(component: self.daysTable, newHeight: self.daysTable.frame.height + offset)
+            UIView.commitAnimations()
+        }
     }
 }
