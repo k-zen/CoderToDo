@@ -1,3 +1,4 @@
+import CloudKit
 import Foundation
 import MapKit
 import UIKit
@@ -501,6 +502,8 @@ class UtilityFunctions
     {
         return Calendar.current
     }
+    
+    func AKGetCloudKitContainer() -> CKContainer { return Func.AKDelegate().cloudKitContainer }
     
     func AKGetColorForTaskState(taskState: String) -> UIColor
     {

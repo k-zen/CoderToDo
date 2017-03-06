@@ -1,3 +1,4 @@
+import CloudKit
 import UIKit
 import UserNotifications
 
@@ -6,6 +7,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
 {
     // MARK: Properties
     let notificationCenter = UNUserNotificationCenter.current()
+    let cloudKitContainer = CKContainer.default()
     var masterRef: AKMasterReference?
     var window: UIWindow?
     

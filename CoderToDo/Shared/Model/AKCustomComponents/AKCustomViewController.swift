@@ -27,6 +27,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     /// Flag to make local notification's check on each ViewController.
     /// Default value is **true**, each ViewController must explicitly enable the check.
     var inhibitLocalNotificationMessage: Bool = true
+    /// Flag to make iCloud's check on each ViewController.
+    /// Default value is **true**, each ViewController must explicitly enable the check.
+    var inhibitiCloudMessage: Bool = true
     /// Flag to add a BlurView in the background.
     var shouldAddBlurView: Bool = false
     /// Flag to inhibit only the **Tap** gesture.
@@ -104,6 +107,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         // Checks
         if !self.inhibitLocalNotificationMessage {
             self.manageGrantToLocalNotifications()
+        }
+        if !self.inhibitiCloudMessage {
+            self.manageGrantToiCloud()
         }
         
         // Persist to disk data each time a view controller appears.
@@ -298,7 +304,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     
     func hideMessage() { self.messageOverlay.collapse(completionTask: nil) }
     
-    func hideContinueMessage(completionTask: @escaping (_ presenterController: AKCustomViewController?) -> Void) { self.continueMessageOverlay.collapse(completionTask: completionTask) }
+    func hideContinueMessage(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.continueMessageOverlay.collapse(completionTask: completionTask) }
     
     func hideTopMenu() { self.topMenuOverlay.collapse(completionTask: nil) }
     
@@ -368,7 +374,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
                             presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in
-                                if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
                                     Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
                                 }
                             }) },
@@ -384,6 +390,36 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 NSLog("=> INFO: USER HAS AUTHORIZED LOCAL NOTIFICATIONS.")
             }
         }
+    }
+    
+    func manageGrantToiCloud()
+    {
+        Func.AKGetCloudKitContainer().accountStatus(completionHandler: { (accountStatus, error) -> Void in
+            guard error == nil else {
+                // TODO: Show error message and disable function.
+                return
+            }
+            
+            switch accountStatus {
+            case .available:
+                // TODO: Enable function.
+                break
+            default:
+                self.showContinueMessage(
+                    message: "CoderToDo needs access to your iCloud account to perform the backup task. Go to \"Settings\" to enable it.",
+                    yesButtonTitle: "Open Settings",
+                    noButtonTitle: "No",
+                    yesAction: { (presenterController) -> Void in
+                        presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in
+                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                            }
+                        }) },
+                    noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(completionTask: nil) }
+                )
+                break
+            }
+        })
     }
     
     func dismissView(executeDismissTask: Bool)
