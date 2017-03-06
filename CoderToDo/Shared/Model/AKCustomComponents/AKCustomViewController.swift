@@ -82,6 +82,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let messageOverlay = AKMessageView()
     let continueMessageOverlay = AKContinueMessageView()
     let topMenuOverlay = AKTopMenuView()
+    let sortMenuItemOverlay = AKSortView()
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -134,6 +135,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.topMenuOverlay.draw(
             container: self.view,
             coordinates: CGPoint.zero,
+            size: CGSize(width: self.view.frame.width, height: 0.0)
+        )
+        
+        self.sortMenuItemOverlay.controller = self
+        self.sortMenuItemOverlay.setup()
+        self.sortMenuItemOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
             size: CGSize(width: self.view.frame.width, height: 0.0)
         )
     }
@@ -251,10 +260,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func showMessage(message: String, autoDismiss: Bool = false)
     {
         self.messageOverlay.message.text = message
-        
-        UIView.beginAnimations(AKMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.messageOverlay.getView(), newHeight: AKMessageView.LocalConstants.AKViewHeight)
-        UIView.commitAnimations()
+        self.messageOverlay.expand(completionTask: nil)
         
         if autoDismiss {
             Func.AKDelay(GlobalConstants.AKAutoDismissMessageTime, isMain: true, task: { self.hideMessage() })
@@ -272,42 +278,20 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.continueMessageOverlay.no.setTitle(noButtonTitle, for: .normal)
         self.continueMessageOverlay.yesAction = yesAction
         self.continueMessageOverlay.noAction = noAction
-        
-        UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.continueMessageOverlay.getView(), newHeight: AKContinueMessageView.LocalConstants.AKViewHeight)
-        UIView.commitAnimations()
+        self.continueMessageOverlay.expand(completionTask: nil)
     }
     
-    func showTopMenu()
-    {
-        UIView.beginAnimations(AKTopMenuView.LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.topMenuOverlay.getView(), newHeight: AKTopMenuView.LocalConstants.AKViewHeight)
-        UIView.commitAnimations()
-    }
+    func showTopMenu() { self.topMenuOverlay.expand(completionTask: nil) }
     
-    func hideMessage()
-    {
-        UIView.beginAnimations(AKMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.messageOverlay.getView(), newHeight: 0.0)
-        UIView.commitAnimations()
-    }
+    func showSortMenuItem() { self.sortMenuItemOverlay.expand(completionTask: nil) }
     
-    func hideContinueMessage(completionTask: @escaping (_ presenterController: AKCustomViewController?) -> Void)
-    {
-        UIView.beginAnimations(AKContinueMessageView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.continueMessageOverlay.getView(), newHeight: 0.0)
-        CATransaction.setCompletionBlock {
-            completionTask(self)
-        }
-        UIView.commitAnimations()
-    }
+    func hideMessage() { self.messageOverlay.collapse(completionTask: nil) }
     
-    func hideTopMenu()
-    {
-        UIView.beginAnimations(AKTopMenuView.LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.topMenuOverlay.getView(), newHeight: 0.0)
-        UIView.commitAnimations()
-    }
+    func hideContinueMessage(completionTask: @escaping (_ presenterController: AKCustomViewController?) -> Void) { self.continueMessageOverlay.collapse(completionTask: completionTask) }
+    
+    func hideTopMenu() { self.topMenuOverlay.collapse(completionTask: nil) }
+    
+    func hideSortMenuItem() { self.sortMenuItemOverlay.collapse(completionTask: nil) }
     
     // MARK: Gesture Handling
     @objc internal func tap(_ gesture: UIGestureRecognizer?)
