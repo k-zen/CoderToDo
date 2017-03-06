@@ -2,13 +2,13 @@ import UIKit
 
 class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
 {
-    // MARK: Properties
-    var presenterController: AKCustomViewController?
-    
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case username = 1
     }
+    
+    // MARK: Properties
+    var presenterController: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet weak var scrollContainer: UIScrollView!
@@ -41,9 +41,15 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         self.customSetup()
     }
     
-    override func viewDidAppear(_ animated: Bool)
+    override func viewDidLayoutSubviews()
     {
-        super.viewDidAppear(animated)
+        super.viewDidLayoutSubviews()
+        
+        // Custom L&F.
+        self.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
+        self.icon.layer.masksToBounds = true
+        self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: UITextFieldDelegate Implementation
@@ -112,14 +118,8 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     {
         super.setup()
         
-        // Set Delegator.
+        // Delegate & DataSource
         self.usernameValue.delegate = self
         self.usernameValue.tag = LocalEnums.username.rawValue
-        
-        // Custom L&F.
-        self.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
-        self.icon.layer.masksToBounds = true
-        self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }

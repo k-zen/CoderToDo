@@ -122,7 +122,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
         // Custom Components
         self.configurationsTable.register(UINib(nibName: "AKConfigurationsTableViewCell", bundle: nil), forCellReuseIdentifier: "ConfigurationsTableCell")
         
-        // Add UITableView's DataSource & Delegate.
+        // Delegate & DataSource
         self.configurationsTable?.dataSource = self
         self.configurationsTable?.delegate = self
     }
