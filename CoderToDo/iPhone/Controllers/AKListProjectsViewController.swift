@@ -17,6 +17,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
     var order: SortingOrder = SortingOrder.descending
+    var selectedMenuItem: MenuItems = .none
+    var isMenuVisible: Bool = false
+    var isMenuItemVisible: Bool = false
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
@@ -25,11 +28,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Actions
     @IBAction func toggleMenu(_ sender: Any)
     {
-        if self.projectsTable.frame.origin.y == 0.0 {
-            self.displaceDownTable()
+        if !self.isMenuVisible {
+            self.displaceDownTable(offset: LocalConstants.AKDisplaceHeight)
         }
         else {
-            self.displaceUpTable()
+            self.displaceUpTable(offset: LocalConstants.AKDisplaceHeight)
         }
     }
     
@@ -360,7 +363,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Custom Components
         self.projectsTable.register(UINib(nibName: "AKProjectsTableViewCell", bundle: nil), forCellReuseIdentifier: "ProjectsTableCell")
         
-        // Add UITableView's DataSource & Delegate.
+        // Delegate & DataSource
         self.projectsTable?.dataSource = self
         self.projectsTable?.delegate = self
         
@@ -392,40 +395,81 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             }
         }
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
-            if let presenterController = presenterController {
-                presenterController.presentView(controller: AKSortProjectSelectorViewController(nibName: "AKSortProjectSelectorView", bundle: nil),
-                                                taskBeforePresenting: { _,_ in },
-                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                                    if
-                                                        let presenterController = presenterController as? AKListProjectsViewController,
-                                                        let presentedController = presentedController as? AKSortProjectSelectorViewController {
-                                                        presenterController.sortProjectsBy = presentedController.filtersData[presentedController.filters.selectedRow(inComponent: 0)]
-                                                        presenterController.order = presentedController.orderData[presentedController.order.selectedRow(inComponent: 0)]
-                                                        presenterController.projectsTable.reloadData()
-                                                    } }
-                )
+            if let presenterController = presenterController as? AKListProjectsViewController {
+                presenterController.toggleMenuItem(menuItem: .sort)
             }
         }
     }
     
     // MARK: Animations
-    func displaceDownTable()
+    func displaceDownTable(offset: CGFloat)
     {
+        self.isMenuVisible = true
         self.showTopMenu()
         
         UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y + LocalConstants.AKDisplaceHeight)
-        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height - LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y + offset)
+        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height - offset)
         UIView.commitAnimations()
     }
     
-    func displaceUpTable()
+    func displaceUpTable(offset: CGFloat)
     {
+        self.isMenuVisible = false
         self.hideTopMenu()
         
+        var newOffset = offset
+        if self.isMenuItemVisible {
+            switch self.selectedMenuItem {
+            case .sort:
+                newOffset += AKSortView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem()
+                break
+            default:
+                break
+            }
+        }
+        
         UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y - LocalConstants.AKDisplaceHeight)
-        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height + LocalConstants.AKDisplaceHeight)
+        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y - newOffset)
+        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height + newOffset)
         UIView.commitAnimations()
+    }
+    
+    func toggleMenuItem(menuItem: MenuItems)
+    {
+        var offset: CGFloat = 0.0
+        let direction: Displacement = !self.isMenuItemVisible ? .down : .up
+        
+        switch menuItem {
+        case .sort:
+            self.selectedMenuItem = .sort
+            offset += AKSortView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSortMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem()
+            }
+            break
+        default:
+            break
+        }
+        
+        if direction == Displacement.down {
+            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y + offset)
+            Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height - offset)
+            UIView.commitAnimations()
+        }
+        else {
+            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y - offset)
+            Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height + offset)
+            UIView.commitAnimations()
+        }
     }
 }
