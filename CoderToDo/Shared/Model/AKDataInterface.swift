@@ -162,10 +162,6 @@ class AKDataInterface
             let now = Date()
             let runningDays = Func.AKGetCalendarForLoading().dateComponents([.day], from: now, to: creationDate).day ?? 0
             
-            if GlobalConstants.AKDebug {
-                NSLog("=> INFO: PROJECT RUNNING DAYS: %i", runningDays)
-            }
-            
             return abs(runningDays)
         }
         
@@ -485,16 +481,41 @@ class AKDataInterface
     static func countCategories(day: Day) -> Int { return day.categories?.allObjects.count ?? 0 }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func getTasks(category: Category) -> [Task]
+    static func getTasks(category: Category, sortBy: TaskSorting, order: SortingOrder) -> [Task]
     {
         if let tasks = category.tasks?.allObjects as? [Task] {
-            return tasks.sorted {
-                let now = Date()
-                
-                let n1 = $0.creationDate as? Date ?? now
-                let n2 = $1.creationDate as? Date ?? now
-                
-                return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
+            switch sortBy {
+            case TaskSorting.completionPercentage:
+                return tasks.sorted {
+                    let n1 = $0.completionPercentage
+                    let n2 = $1.completionPercentage
+                    
+                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                }
+            case TaskSorting.creationDate:
+                return tasks.sorted {
+                    let now = Date()
+                    let n1 = $0.creationDate as? Date ?? now
+                    let n2 = $1.creationDate as? Date ?? now
+                    
+                    return order == SortingOrder.descending ?
+                        (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
+                        (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                }
+            case TaskSorting.name:
+                return tasks.sorted {
+                    let n1 = $0.name ?? ""
+                    let n2 = $1.name ?? ""
+                    
+                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                }
+            case TaskSorting.state:
+                return tasks.sorted {
+                    let n1 = $0.state ?? ""
+                    let n2 = $1.state ?? ""
+                    
+                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                }
             }
         }
         
