@@ -17,95 +17,90 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     @IBOutlet var tasksTable: UITableView!
     
     // MARK: UIView Overriding
-    convenience init()
-    {
-        NSLog("=> DEFAULT init()")
-        self.init(frame: CGRect.zero)
-    }
-    
-    override init(frame: CGRect)
-    {
-        NSLog("=> FRAME init()")
-        super.init(frame: frame)
-    }
-    
-    required init(coder aDecoder: NSCoder)
-    {
-        NSLog("=> CODER init()")
-        super.init(coder: aDecoder)!
-    }
+    convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let category = DataInterface.getCategories(day: self.day!)[(indexPath as NSIndexPath).section]
-        let task = DataInterface.getTasks(category: category)[(indexPath as NSIndexPath).row]
-        
-        // Sanity Checks
-        AKChecks.workingDayCloseSanityChecks(task: task)
-        
-        let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
-        
-        // Task Name
-        cell.taskNameValue.text = String(format: "%@", task.name ?? "Some Name...")
-        
-        // Task Completion Percentage
-        cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
-        switch task.completionPercentage {
-        case 1.0 ..< 33.0:
+        if let controller = self.controller as? AKViewProjectViewController {
+            let category = DataInterface.getCategories(day: self.day!)[(indexPath as NSIndexPath).section]
+            let task = DataInterface.getTasks(category: category, sortBy: controller.sortTasksBy, order: controller.order)[(indexPath as NSIndexPath).row]
+            
+            // Sanity Checks
+            AKChecks.workingDayCloseSanityChecks(task: task)
+            
+            let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
+            
+            // Task Name
+            cell.taskNameValue.text = String(format: "%@", task.name ?? "Some Name...")
+            
+            // Task Completion Percentage
+            cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
+            switch task.completionPercentage {
+            case 1.0 ..< 33.0:
+                Func.AKAddBorderDeco(
+                    cell.taskCompletionPercentageValue,
+                    color: GlobalConstants.AKRedForWhiteFg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                break
+            case 33.0 ..< 66.0:
+                Func.AKAddBorderDeco(
+                    cell.taskCompletionPercentageValue,
+                    color: GlobalConstants.AKYellowForWhiteFg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                break
+            case 66.0 ..< 100.1:
+                Func.AKAddBorderDeco(
+                    cell.taskCompletionPercentageValue,
+                    color: GlobalConstants.AKGreenForWhiteFg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                break
+            default:
+                Func.AKAddBorderDeco(
+                    cell.taskCompletionPercentageValue,
+                    color: GlobalConstants.AKRedForWhiteFg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                break
+            }
+            
+            // Task State
+            cell.taskStateValue.text = task.state
             Func.AKAddBorderDeco(
-                cell.taskCompletionPercentageValue,
-                color: GlobalConstants.AKRedForWhiteFg.cgColor,
+                cell.taskStateValue,
+                color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )
-            break
-        case 33.0 ..< 66.0:
+            
+            // Custom L&F.
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
             Func.AKAddBorderDeco(
-                cell.taskCompletionPercentageValue,
-                color: GlobalConstants.AKYellowForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
+                cell.infoContainer,
+                color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
             )
-            break
-        case 66.0 ..< 100.1:
-            Func.AKAddBorderDeco(
-                cell.taskCompletionPercentageValue,
-                color: GlobalConstants.AKGreenForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
-        default:
-            Func.AKAddBorderDeco(
-                cell.taskCompletionPercentageValue,
-                color: GlobalConstants.AKRedForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
+            
+            return cell
         }
-        
-        // Task State
-        cell.taskStateValue.text = task.state
-        Func.AKAddBorderDeco(
-            cell.taskStateValue,
-            color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness,
-            position: .bottom
-        )
-        
-        // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
-        Func.AKAddBorderDeco(
-            cell.infoContainer,
-            color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
-        
-        return cell
+        else {
+            let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
+            
+            // Custom L&F.
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -217,10 +212,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if let day = self.day {
+        if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day)[(indexPath as NSIndexPath).section]
-            let task = DataInterface.getTasks(category: category)[(indexPath as NSIndexPath).row]
-            controller?.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
+            let task = DataInterface.getTasks(category: category, sortBy: controller.sortTasksBy, order: controller.order)[(indexPath as NSIndexPath).row]
+            controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
         }
     }
     
@@ -260,4 +255,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         )
         container.addSubview(self.getView())
     }
+    
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
+    
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
 }
