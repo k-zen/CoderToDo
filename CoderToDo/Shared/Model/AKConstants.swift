@@ -232,8 +232,10 @@ enum DayStatus: String {
 }
 
 enum TaskSorting: String {
+    case completionPercentage = "Completion Percentage"
     case creationDate = "Creation Date"
     case name = "Name"
+    case state = "State"
 }
 
 enum TaskStates: String {
