@@ -231,6 +231,11 @@ enum DayStatus: String {
     case notCurrent = "Not Current"
 }
 
+enum TaskSorting: String {
+    case creationDate = "Creation Date"
+    case name = "Name"
+}
+
 enum TaskStates: String {
     case DONE = "Done"
     case NOT_DONE = "Not Done"
