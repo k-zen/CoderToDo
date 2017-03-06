@@ -191,6 +191,9 @@ enum Exceptions: Error {
     case invalidProjectStatus(String)
     case noCategories(String)
     case categoryHasTasks(String)
+    case notSerializableObject(String)
+    case fileCreationError(String)
+    case fileWriteError(String)
 }
 
 enum UnitOfTime: Int {
@@ -558,6 +561,38 @@ class UtilityFunctions
     func AKObtainMasterReference() -> AKMasterReference?
     {
         return Func.AKDelegate().masterRef
+    }
+    
+    ///
+    /// This method checks if a file archive exists and if it does then return its URL.
+    ///
+    /// - Parameter fileName: The name of the file archive.
+    /// - Parameter location: The location in the OS file system where to find the file. i.e. NSApplicationSupportDirectory
+    /// - Parameter shouldCreate: If the file does not exists then create it.
+    ///
+    /// - Returns: The URL of the file archive.
+    ///
+    func AKOpenFileArchive(fileName: String, location: FileManager.SearchPathDirectory, shouldCreate: Bool) throws -> URL?
+    {
+        let fm = FileManager()
+        let directory = try fm.url(for: location, in: FileManager.SearchPathDomainMask.userDomainMask, appropriateFor: nil, create: true)
+        
+        if fm.fileExists(atPath: directory.appendingPathComponent(fileName).path) {
+            return directory.appendingPathComponent(fileName)
+        }
+        else {
+            if shouldCreate {
+                if GlobalConstants.AKDebug { NSLog("=> FILE *%@* DOES NOT EXISTS! CREATING...", fileName) }
+                guard fm.createFile(atPath: directory.appendingPathComponent(fileName).path, contents: nil, attributes: nil) else {
+                    throw Exceptions.fileCreationError("File cannot be created.")
+                }
+                
+                return directory.appendingPathComponent(fileName)
+            }
+            else {
+                throw Exceptions.fileCreationError("No file to open.")
+            }
+        }
     }
     
     func AKPresentMessageFromError(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)

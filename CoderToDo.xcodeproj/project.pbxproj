@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		490670261E6D90CF0046298C /* AKFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490670251E6D90CF0046298C /* AKFilterView.xib */; };
 		490670281E6D91AF0046298C /* AKFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490670271E6D91AF0046298C /* AKFilterView.swift */; };
+		4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */; };
 		490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490C223D1E65CBBE006A39F8 /* CloudKit.framework */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
@@ -73,7 +74,6 @@
 		49A4A11A1E589E8600CEDA1B /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */; };
 		49A4A11B1E589E8600CEDA1B /* AKProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */; };
 		49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */; };
-		49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */; };
 		49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */; };
 		49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6A93F1E675AB6007701AC /* AKChecks.swift */; };
 		49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */; };
@@ -96,6 +96,7 @@
 		2C25BC9DB450A698309C1AD7 /* Pods-CoderToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.debug.xcconfig"; sourceTree = "<group>"; };
 		490670251E6D90CF0046298C /* AKFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKFilterView.xib; sourceTree = "<group>"; };
 		490670271E6D91AF0046298C /* AKFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKFilterView.swift; sourceTree = "<group>"; };
+		4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExportCloudKit.swift; sourceTree = "<group>"; };
 		490C223D1E65CBBE006A39F8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -161,7 +162,6 @@
 		49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMasterReference.swift; sourceTree = "<group>"; };
 		49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectName.swift; sourceTree = "<group>"; };
 		49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsername.swift; sourceTree = "<group>"; };
-		49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWSUtils.swift; sourceTree = "<group>"; };
 		49A4A0E01E589E8600CEDA1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
 		49A6A93F1E675AB6007701AC /* AKChecks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKChecks.swift; sourceTree = "<group>"; };
@@ -358,12 +358,12 @@
 				49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */,
 				49A4A0D81E589E8600CEDA1B /* AKDataController.swift */,
 				49A4A0D91E589E8600CEDA1B /* AKDataInterface.swift */,
+				4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */,
 				49A4A0DA1E589E8600CEDA1B /* AKInputData.swift */,
 				49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */,
 				49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */,
 				49D57DCE1E5B176200DACF53 /* AKTaskName.swift */,
 				49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */,
-				49A4A0DE1E589E8600CEDA1B /* AKWSUtils.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -473,10 +473,10 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Siri = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.iCloud = {
 								enabled = 1;
@@ -637,10 +637,10 @@
 				49A4A1111E589E8600CEDA1B /* AKCustomView.swift in Sources */,
 				49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
+				4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */,
 				490670281E6D91AF0046298C /* AKFilterView.swift in Sources */,
 				49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */,
 				49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */,
-				49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */,
 				49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */,
 				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,
 				49A4A1131E589E8600CEDA1B /* AKTasksTableView.swift in Sources */,
