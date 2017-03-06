@@ -84,7 +84,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                     
                     let closingTimeContent = UNMutableNotificationContent()
                     closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    closingTimeContent.body = String(format: "Hi %@, it's me again... closing time is due for your project. Happy hour is a few minutes away 😉", DataInterface.getUsername())
+                    closingTimeContent.body = String(format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before close.", DataInterface.getUsername(), tolerance)
                     closingTimeContent.sound = UNNotificationSound.default()
                     Func.AKGetNotificationCenter().add(
                         UNNotificationRequest(
@@ -110,10 +110,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         }
     }
     
-    @IBAction func close(_ sender: Any)
-    {
-        self.dismissView(executeDismissTask: true)
-    }
+    @IBAction func close(_ sender: Any) { self.dismissView(executeDismissTask: true) }
     
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
@@ -212,10 +209,16 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             pickerLabel.text = String(format: "%i minutes", self.toleranceData[row])
+            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            break
         case LocalEnums.startingTime.rawValue, LocalEnums.closingTime.rawValue:
             pickerLabel.text = self.workingDayTimeData[row]
+            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            break
         default:
             pickerLabel.text = ""
+            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            break
         }
         
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
@@ -244,7 +247,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     {
         super.setup()
         
-        // Set Delegator.
+        // Delegate & DataSource
         self.projectName.delegate = self
         self.projectName.tag = LocalEnums.projectName.rawValue
         self.tolerance.delegate = self
