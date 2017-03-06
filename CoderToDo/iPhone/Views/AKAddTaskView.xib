@@ -120,6 +120,7 @@
                                         <segment title="Pending"/>
                                         <segment title="Dilate"/>
                                     </segments>
+                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </segmentedControl>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sQ-PU-kAY">
                                     <rect key="frame" x="8" y="446" width="138" height="40"/>

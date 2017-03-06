@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKSortView" customModule="CoderToDo" customModuleProvider="target">
+            <connections>
+                <outlet property="filters" destination="7By-Os-b7j" id="Y7a-OF-5be"/>
+                <outlet property="mainContainer" destination="Hxh-dk-0eJ" id="dO8-T0-OZp"/>
+                <outlet property="order" destination="cyz-aO-vdB" id="VzO-v1-7Uc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxh-dk-0eJ" userLabel="Main_Container">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="70"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6au-lr-Gaa" userLabel="Title">
+                    <rect key="frame" x="40" y="0.0" width="60" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="a2t-kH-yiM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                    <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Order_Value">
+                    <rect key="frame" x="108" y="0.0" width="44" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="a6e-O5-0hg"/>
+                    </constraints>
+                </pickerView>
+                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
+                    <rect key="frame" x="160" y="0.0" width="140" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="gzQ-pl-Y7v"/>
+                    </constraints>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="0qf-2h-y08"/>
+                <constraint firstItem="6au-lr-Gaa" firstAttribute="centerX" secondItem="Hxh-dk-0eJ" secondAttribute="centerX" constant="-100" id="850-2Y-HDm"/>
+                <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="QML-ix-d9K"/>
+                <constraint firstItem="7By-Os-b7j" firstAttribute="centerX" secondItem="Hxh-dk-0eJ" secondAttribute="centerX" constant="60" id="X6B-b6-Kfk"/>
+                <constraint firstItem="6au-lr-Gaa" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="Xdw-CX-J0z"/>
+                <constraint firstItem="cyz-aO-vdB" firstAttribute="centerX" secondItem="Hxh-dk-0eJ" secondAttribute="centerX" constant="-40" id="cG2-if-AKJ"/>
+                <constraint firstAttribute="bottom" secondItem="cyz-aO-vdB" secondAttribute="bottom" id="f7M-hn-XSf"/>
+                <constraint firstAttribute="bottom" secondItem="7By-Os-b7j" secondAttribute="bottom" id="pdr-Pv-eBD"/>
+                <constraint firstAttribute="bottom" secondItem="6au-lr-Gaa" secondAttribute="bottom" id="tex-JU-lCJ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-300" y="451"/>
+        </view>
+    </objects>
+</document>
