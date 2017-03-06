@@ -12,51 +12,77 @@ class AKDataInterface
     static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
     
     // ########## PROJECT'S FUNCTIONS ########## //
-    static func getProjects(sortBy: ProjectSorting, order: SortingOrder) -> [Project]
+    static func getProjects(sortBy: ProjectSorting, order: SortingOrder, filterType: ProjectFilter, filterValue: String) -> [Project]
     {
         if let projects = DataInterface.getUser()?.project?.allObjects as? [Project] {
             switch sortBy {
             case ProjectSorting.closingTime:
-                return projects.sorted {
-                    let now = Date()
-                    let n1 = $0.closingTime as? Date ?? now
-                    let n2 = $1.closingTime as? Date ?? now
-                    
-                    return order == SortingOrder.descending ?
-                        (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
-                        (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                switch filterType {
+                case ProjectFilter.status:
+                    return projects.filter({ (project) -> Bool in
+                        let value = ProjectFilterStatus(rawValue: filterValue)!
+                        
+                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                    }).sorted {
+                        let now = Date()
+                        let n1 = $0.closingTime as? Date ?? now
+                        let n2 = $1.closingTime as? Date ?? now
+                        
+                        return order == SortingOrder.descending ?
+                            (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
+                            (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                    }
                 }
             case ProjectSorting.creationDate:
-                return projects.sorted {
-                    let now = Date()
-                    let n1 = $0.creationDate as? Date ?? now
-                    let n2 = $1.creationDate as? Date ?? now
-                    
-                    return order == SortingOrder.descending ?
-                        (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
-                        (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                switch filterType {
+                case ProjectFilter.status:
+                    return projects.filter({ (project) -> Bool in
+                        let value = ProjectFilterStatus(rawValue: filterValue)!
+                        
+                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                    }).sorted {
+                        let now = Date()
+                        let n1 = $0.creationDate as? Date ?? now
+                        let n2 = $1.creationDate as? Date ?? now
+                        
+                        return order == SortingOrder.descending ?
+                            (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
+                            (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                    }
                 }
             case ProjectSorting.name:
-                return projects.sorted {
-                    let n1 = $0.name ?? ""
-                    let n2 = $1.name ?? ""
-                    
-                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                switch filterType {
+                case ProjectFilter.status:
+                    return projects.filter({ (project) -> Bool in
+                        let value = ProjectFilterStatus(rawValue: filterValue)!
+                        
+                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                    }).sorted {
+                        let n1 = $0.name ?? ""
+                        let n2 = $1.name ?? ""
+                        
+                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                    }
                 }
             case ProjectSorting.osr:
-                return projects.sorted {
-                    let n1 = $0.osr
-                    let n2 = $1.osr
-                    
-                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                switch filterType {
+                case ProjectFilter.status:
+                    return projects.filter({ (project) -> Bool in
+                        let value = ProjectFilterStatus(rawValue: filterValue)!
+                        
+                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                    }).sorted {
+                        let n1 = $0.osr
+                        let n2 = $1.osr
+                        
+                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                    }
                 }
             }
         }
         
         return []
     }
-    
-    static func countProjects() -> Int { return DataInterface.getUser()?.project?.allObjects.count ?? 0 }
     
     static func countProjectPendingTasks(project: Project) -> Int
     {

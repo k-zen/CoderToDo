@@ -1,6 +1,6 @@
 import UIKit
 
-class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
+class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
 {
     // MARK: Constants
     struct LocalConstants {
@@ -11,21 +11,21 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     // MARK: Local Enums
     private enum LocalEnums: Int {
-        case filters = 1
-        case order = 2
+        case type = 1
+        case filters = 2
     }
     
     // MARK: Properties
+    private var typeData = [String]()
     private var filtersData = [String]()
-    private var orderData = [SortingOrder]()
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     var controller: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
+    @IBOutlet weak var type: UIPickerView!
     @IBOutlet weak var filters: UIPickerView!
-    @IBOutlet weak var order: UIPickerView!
     
     // MARK: UIView Overriding
     convenience init() { self.init(frame: CGRect.zero) }
@@ -34,10 +34,10 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         switch pickerView.tag {
+        case LocalEnums.type.rawValue:
+            return self.typeData[row]
         case LocalEnums.filters.rawValue:
             return self.filtersData[row]
-        case LocalEnums.order.rawValue:
-            return self.orderData[row].rawValue
         default:
             return ""
         }
@@ -49,13 +49,13 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
         switch pickerView.tag {
-        case LocalEnums.filters.rawValue:
-            pickerLabel.text = self.filtersData[row]
+        case LocalEnums.type.rawValue:
+            pickerLabel.text = self.typeData[row]
             pickerLabel.textAlignment = .center
             pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
-        case LocalEnums.order.rawValue:
-            pickerLabel.text = self.orderData[row].rawValue
+        case LocalEnums.filters.rawValue:
+            pickerLabel.text = self.filtersData[row]
             pickerLabel.textAlignment = .center
             pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
@@ -72,13 +72,19 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            controller.sortType = ProjectSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
-            controller.sortOrder = self.orderData[self.order.selectedRow(inComponent: 0)]
+            let filterType = self.typeData[self.type.selectedRow(inComponent: 0)]
+            let filterValue = self.filtersData[self.filters.selectedRow(inComponent: 0)]
+            
+            controller.filterType = ProjectFilter(rawValue: filterType)!
+            switch controller.filterType {
+            case ProjectFilter.status:
+                controller.filterValue = ProjectFilterStatus(rawValue: filterValue)!.rawValue
+                break
+            }
             controller.projectsTable.reloadData()
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            controller.sortTasksBy = TaskSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
-            controller.order = self.orderData[self.order.selectedRow(inComponent: 0)]
+            // controller.sortTasksBy = TaskSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
             controller.daysTable.reloadData()
             for customCell in controller.customCellArray {
                 customCell.tasksTable?.reloadData()
@@ -90,10 +96,10 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         switch pickerView.tag {
+        case LocalEnums.type.rawValue:
+            return self.typeData.count
         case LocalEnums.filters.rawValue:
             return self.filtersData.count
-        case LocalEnums.order.rawValue:
-            return self.orderData.count
         default:
             return 0
         }
@@ -107,12 +113,12 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
+        self.type.delegate = self
+        self.type.dataSource = self
+        self.type.tag = LocalEnums.type.rawValue
         self.filters.delegate = self
         self.filters.dataSource = self
         self.filters.tag = LocalEnums.filters.rawValue
-        self.order.delegate = self
-        self.order.dataSource = self
-        self.order.tag = LocalEnums.order.rawValue
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -124,27 +130,22 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func loadComponents()
     {
+        self.typeData.removeAll()
         self.filtersData.removeAll()
-        self.orderData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
-            for filter in Func.AKIterateEnum(ProjectSorting.self) {
-                self.filtersData.append(filter.rawValue)
-            }
-            for order in Func.AKIterateEnum(SortingOrder.self) {
-                self.orderData.append(order)
-            }
-            
-            self.filters.selectRow(2, inComponent: 0, animated: true)
-        }
-        else if let _ = self.controller as? AKViewProjectViewController {
-            for filter in Func.AKIterateEnum(TaskSorting.self) {
-                self.filtersData.append(filter.rawValue)
-            }
-            for order in Func.AKIterateEnum(SortingOrder.self) {
-                self.orderData.append(order)
+            for type in Func.AKIterateEnum(ProjectFilter.self) {
+                self.typeData.append(type.rawValue)
+                if type == ProjectFilter.status {
+                    for filter in Func.AKIterateEnum(ProjectFilterStatus.self) {
+                        self.filtersData.append(filter.rawValue)
+                    }
+                }
             }
             
             self.filters.selectRow(0, inComponent: 0, animated: true)
+        }
+        else if let _ = self.controller as? AKViewProjectViewController {
+            // TODO
         }
     }
     

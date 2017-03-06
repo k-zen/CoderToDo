@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490670261E6D90CF0046298C /* AKFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490670251E6D90CF0046298C /* AKFilterView.xib */; };
+		490670281E6D91AF0046298C /* AKFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490670271E6D91AF0046298C /* AKFilterView.swift */; };
 		490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490C223D1E65CBBE006A39F8 /* CloudKit.framework */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
@@ -92,6 +94,8 @@
 
 /* Begin PBXFileReference section */
 		2C25BC9DB450A698309C1AD7 /* Pods-CoderToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.debug.xcconfig"; sourceTree = "<group>"; };
+		490670251E6D90CF0046298C /* AKFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKFilterView.xib; sourceTree = "<group>"; };
+		490670271E6D91AF0046298C /* AKFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKFilterView.swift; sourceTree = "<group>"; };
 		490C223D1E65CBBE006A39F8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -278,6 +282,7 @@
 				49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */,
 				49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */,
 				49A4A0A71E589E8600CEDA1B /* AKDaysTableViewCell.xib */,
+				490670251E6D90CF0046298C /* AKFilterView.xib */,
 				49A4A0A81E589E8600CEDA1B /* AKIntroductoryView.xib */,
 				49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */,
 				49A4A0A91E589E8600CEDA1B /* AKNewProjectView.xib */,
@@ -380,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				49DF7EDF1E5E27ED0017BEC6 /* AKContinueMessageView.swift */,
+				490670271E6D91AF0046298C /* AKFilterView.swift */,
 				49DF7EDB1E5E1D2A0017BEC6 /* AKMessageView.swift */,
 				497F9C591E69D1C500C78ECD /* AKSelectCategoryView.swift */,
 				49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */,
@@ -518,6 +524,7 @@
 				49A4A0E51E589E8600CEDA1B /* AKMain.storyboard in Resources */,
 				49A4A1091E589E8600CEDA1B /* AppIcon-60@2x.png in Resources */,
 				49A4A10A1E589E8600CEDA1B /* AppIcon-60@3x.png in Resources */,
+				490670261E6D90CF0046298C /* AKFilterView.xib in Resources */,
 				49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */,
 				49A4A0EE1E589E8600CEDA1B /* AKAddView.xib in Resources */,
 				4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */,
@@ -630,6 +637,7 @@
 				49A4A1111E589E8600CEDA1B /* AKCustomView.swift in Sources */,
 				49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
+				490670281E6D91AF0046298C /* AKFilterView.swift in Sources */,
 				49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */,
 				49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */,
 				49A4A11D1E589E8600CEDA1B /* AKWSUtils.swift in Sources */,

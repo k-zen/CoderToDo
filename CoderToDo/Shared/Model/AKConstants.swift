@@ -223,7 +223,19 @@ enum ProjectSorting: String {
     case closingTime = "Closing Time"
     case creationDate = "Creation Date"
     case name = "Name"
-    case osr = "Overall Success Rate"
+    case osr = "Overall Success Ratio"
+}
+
+enum ProjectFilter: String {
+    case status = "Status"
+}
+
+enum ProjectFilterStatus: String {
+    case none = "None"
+    case open = "Open"
+    case acceptingTasks = "Accepting"
+    case closed = "Closed"
+    case firstDay = "First Day"
 }
 
 enum DayStatus: String {

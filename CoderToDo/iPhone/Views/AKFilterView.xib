@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKFilterView" customModule="CoderToDo" customModuleProvider="target">
+            <connections>
+                <outlet property="filters" destination="AX8-Um-kmS" id="nkv-9g-zkP"/>
+                <outlet property="mainContainer" destination="VfY-aO-5H5" id="4yp-Jj-U31"/>
+                <outlet property="type" destination="sM3-L1-WpR" id="Ldy-Bh-7pT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="VfY-aO-5H5" userLabel="Main_Container">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a6-BE-AqV" userLabel="Title">
+                    <rect key="frame" x="12" y="0.0" width="60" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="ISL-bh-gMI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                    <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM3-L1-WpR" userLabel="Type_Value">
+                    <rect key="frame" x="80" y="0.0" width="70" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="lxb-Zn-S4f"/>
+                    </constraints>
+                </pickerView>
+                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AX8-Um-kmS" userLabel="Filters_Value">
+                    <rect key="frame" x="158" y="0.0" width="170" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="170" id="cOv-Ve-ll3"/>
+                    </constraints>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1a6-BE-AqV" firstAttribute="centerX" secondItem="VfY-aO-5H5" secondAttribute="centerX" constant="-128" id="CgD-I6-p8V"/>
+                <constraint firstAttribute="bottom" secondItem="sM3-L1-WpR" secondAttribute="bottom" id="EZR-vI-cLC"/>
+                <constraint firstAttribute="bottom" secondItem="1a6-BE-AqV" secondAttribute="bottom" id="GHc-zV-fok"/>
+                <constraint firstItem="1a6-BE-AqV" firstAttribute="top" secondItem="VfY-aO-5H5" secondAttribute="top" id="LZi-uR-Ewb"/>
+                <constraint firstItem="sM3-L1-WpR" firstAttribute="leading" secondItem="1a6-BE-AqV" secondAttribute="trailing" constant="8" id="Sp8-vY-sUg"/>
+                <constraint firstItem="sM3-L1-WpR" firstAttribute="top" secondItem="VfY-aO-5H5" secondAttribute="top" id="cmu-XF-EDe"/>
+                <constraint firstItem="AX8-Um-kmS" firstAttribute="top" secondItem="VfY-aO-5H5" secondAttribute="top" id="hcu-Bw-pgB"/>
+                <constraint firstAttribute="bottom" secondItem="AX8-Um-kmS" secondAttribute="bottom" id="mKb-mN-fvS"/>
+                <constraint firstItem="AX8-Um-kmS" firstAttribute="leading" secondItem="sM3-L1-WpR" secondAttribute="trailing" constant="8" id="oxe-nj-fYX"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-300" y="451"/>
+        </view>
+    </objects>
+</document>

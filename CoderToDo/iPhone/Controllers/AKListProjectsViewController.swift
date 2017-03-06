@@ -15,8 +15,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Properties
     let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
     let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
-    var sortProjectsBy: ProjectSorting = ProjectSorting.creationDate
-    var order: SortingOrder = SortingOrder.descending
+    var sortType: ProjectSorting = ProjectSorting.creationDate
+    var sortOrder: SortingOrder = SortingOrder.descending
+    var filterType: ProjectFilter = ProjectFilter.status
+    var filterValue: String = ProjectFilterStatus.none.rawValue
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
     var isMenuItemVisible: Bool = false
@@ -122,7 +124,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(
+            sortBy: self.sortType,
+            order: self.sortOrder,
+            filterType: self.filterType,
+            filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.controller = self
@@ -213,7 +219,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[section]
+        let project = DataInterface.getProjects(
+            sortBy: self.sortType,
+            order: self.sortOrder,
+            filterType: self.filterType,
+            filterValue: self.filterValue)[section]
         
         let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
@@ -278,7 +288,14 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.countProjects() }
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return DataInterface.getProjects(
+            sortBy: self.sortType,
+            order: self.sortOrder,
+            filterType: self.filterType,
+            filterValue: self.filterValue).count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -289,7 +306,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         // Edit Action
         let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
-            let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+            let project = DataInterface.getProjects(
+                sortBy: self.sortType,
+                order: self.sortOrder,
+                filterType: self.filterType,
+                filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
             self.performSegue(withIdentifier: GlobalConstants.AKProjectConfigurationsSegue, sender: project)
         })
         edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
@@ -300,7 +321,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 message: "This action can't be undone. Continue...?",
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
-                        let project = DataInterface.getProjects(sortBy: presenterController.sortProjectsBy, order: presenterController.order)[(indexPath as NSIndexPath).row]
+                        let project = DataInterface.getProjects(
+                            sortBy: presenterController.sortType,
+                            order: presenterController.sortOrder,
+                            filterType: presenterController.filterType,
+                            filterValue: presenterController.filterValue)[(indexPath as NSIndexPath).row]
                         
                         // Remove data structure.
                         DataInterface.getUser()?.removeFromProject(project)
@@ -339,7 +364,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let project = DataInterface.getProjects(sortBy: self.sortProjectsBy, order: self.order)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(
+            sortBy: self.sortType,
+            order: self.sortOrder,
+            filterType: self.filterType,
+            filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
         self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     
@@ -399,6 +428,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 presenterController.toggleMenuItem(menuItem: .sort)
             }
         }
+        self.topMenuOverlay.filterAction = { (presenterController) -> Void in
+            if let presenterController = presenterController as? AKListProjectsViewController {
+                presenterController.toggleMenuItem(menuItem: .filter)
+            }
+        }
     }
     
     // MARK: Animations
@@ -425,6 +459,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 newOffset += AKSortView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
                 self.hideSortMenuItem()
+                break
+            case .filter:
+                newOffset += AKFilterView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem()
                 break
             default:
                 break
@@ -453,6 +492,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             else {
                 self.isMenuItemVisible = false
                 self.hideSortMenuItem()
+            }
+            break
+        case .filter:
+            self.selectedMenuItem = .filter
+            offset += AKFilterView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showFilterMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem()
             }
             break
         default:
