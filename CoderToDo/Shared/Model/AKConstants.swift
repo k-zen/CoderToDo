@@ -247,6 +247,14 @@ enum DayStatus: String {
     case notCurrent = "Not Current"
 }
 
+enum TaskStates: String {
+    case DONE = "Done"
+    case NOT_DONE = "Not Done"
+    case NOT_APPLICABLE = "Not Applicable"
+    case DILATE = "Dilate"
+    case PENDING = "Pending"
+}
+
 enum TaskSorting: String {
     case completionPercentage = "Completion Percentage"
     case creationDate = "Creation Date"
@@ -254,12 +262,17 @@ enum TaskSorting: String {
     case state = "State"
 }
 
-enum TaskStates: String {
-    case DONE = "Done"
-    case NOT_DONE = "Not Done"
-    case NOT_APPLICABLE = "Not Applicable"
-    case DILATE = "Dilate"
-    case PENDING = "Pending"
+enum TaskFilter: String {
+    case state = "Task State"
+}
+
+enum TaskFilterStates: String {
+    case none = "None"
+    case done = "Done"
+    case notDone = "Not Done"
+    case notApplicable = "Not Applicable"
+    case dilate = "Dilate"
+    case pending = "Pending"
 }
 
 enum TaskStateColor: UInt {

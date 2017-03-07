@@ -16,8 +16,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     var customCellArray = [AKTasksTableView]()
     var project: Project!
-    var sortTasksBy: TaskSorting = TaskSorting.creationDate
-    var order: SortingOrder = SortingOrder.descending
+    var sortType: TaskSorting = TaskSorting.creationDate
+    var sortOrder: SortingOrder = SortingOrder.descending
+    var filterType: TaskFilter = TaskFilter.state
+    var filterValue: String = TaskFilterStates.none.rawValue
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
     var isMenuItemVisible: Bool = false
@@ -93,11 +95,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         if DataInterface.countCategories(day: day) > 0 {
             // Calculate cell height.
             let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                (CGFloat(DataInterface.countAllTasksInDay(
+                    day: day,
+                    sortBy: self.sortType,
+                    order: self.sortOrder,
+                    filterType: self.filterType,
+                    filterValue: self.filterValue)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
-                cell.title.isHidden = false
-                
                 let customCell = AKTasksTableView()
                 customCell.controller = self
                 customCell.day = day
@@ -223,7 +228,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
         else {
             return (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countAllTasksInDay(day: day)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                (CGFloat(DataInterface.countAllTasksInDay(
+                    day: day,
+                    sortBy: self.sortType,
+                    order: self.sortOrder,
+                    filterType: self.filterType,
+                    filterValue: self.filterValue)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
     
@@ -301,6 +311,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 presenterController.toggleMenuItem(menuItem: .sort)
             }
         }
+        self.topMenuOverlay.filterAction = { (presenterController) -> Void in
+            if let presenterController = presenterController as? AKViewProjectViewController {
+                presenterController.toggleMenuItem(menuItem: .filter)
+            }
+        }
     }
     
     // MARK: Animations
@@ -327,6 +342,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 newOffset += AKSortView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
                 self.hideSortMenuItem()
+                break
+            case .filter:
+                newOffset += AKFilterView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem()
                 break
             default:
                 break
@@ -355,6 +375,18 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             else {
                 self.isMenuItemVisible = false
                 self.hideSortMenuItem()
+            }
+            break
+        case .filter:
+            self.selectedMenuItem = .filter
+            offset += AKFilterView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showFilterMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem()
             }
             break
         default:

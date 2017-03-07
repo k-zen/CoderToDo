@@ -20,9 +20,7 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!
-                        
-                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let now = Date()
                         let n1 = $0.closingTime as? Date ?? now
@@ -37,9 +35,7 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!
-                        
-                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let now = Date()
                         let n1 = $0.creationDate as? Date ?? now
@@ -54,9 +50,7 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!
-                        
-                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let n1 = $0.name ?? ""
                         let n2 = $1.name ?? ""
@@ -68,9 +62,7 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!
-                        
-                        return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
+                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let n1 = $0.osr
                         let n2 = $1.osr
@@ -507,40 +499,60 @@ class AKDataInterface
     static func countCategories(day: Day) -> Int { return day.categories?.allObjects.count ?? 0 }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func getTasks(category: Category, sortBy: TaskSorting, order: SortingOrder) -> [Task]
+    static func getTasks(category: Category, sortBy: TaskSorting, order: SortingOrder, filterType: TaskFilter, filterValue: String) -> [Task]
     {
         if let tasks = category.tasks?.allObjects as? [Task] {
             switch sortBy {
             case TaskSorting.completionPercentage:
-                return tasks.sorted {
-                    let n1 = $0.completionPercentage
-                    let n2 = $1.completionPercentage
-                    
-                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                switch filterType {
+                case TaskFilter.state:
+                    return tasks.filter({ (task) -> Bool in
+                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
+                    }).sorted {
+                        let n1 = $0.completionPercentage
+                        let n2 = $1.completionPercentage
+                        
+                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                    }
                 }
             case TaskSorting.creationDate:
-                return tasks.sorted {
-                    let now = Date()
-                    let n1 = $0.creationDate as? Date ?? now
-                    let n2 = $1.creationDate as? Date ?? now
-                    
-                    return order == SortingOrder.descending ?
-                        (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
-                        (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                switch filterType {
+                case TaskFilter.state:
+                    return tasks.filter({ (task) -> Bool in
+                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
+                    }).sorted {
+                        let now = Date()
+                        let n1 = $0.creationDate as? Date ?? now
+                        let n2 = $1.creationDate as? Date ?? now
+                        
+                        return order == SortingOrder.descending ?
+                            (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
+                            (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
+                    }
                 }
             case TaskSorting.name:
-                return tasks.sorted {
-                    let n1 = $0.name ?? ""
-                    let n2 = $1.name ?? ""
-                    
-                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                switch filterType {
+                case TaskFilter.state:
+                    return tasks.filter({ (task) -> Bool in
+                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
+                    }).sorted {
+                        let n1 = $0.name ?? ""
+                        let n2 = $1.name ?? ""
+                        
+                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                    }
                 }
             case TaskSorting.state:
-                return tasks.sorted {
-                    let n1 = $0.state ?? ""
-                    let n2 = $1.state ?? ""
-                    
-                    return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                switch filterType {
+                case TaskFilter.state:
+                    return tasks.filter({ (task) -> Bool in
+                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
+                    }).sorted {
+                        let n1 = $0.state ?? ""
+                        let n2 = $1.state ?? ""
+                        
+                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                    }
                 }
             }
         }
@@ -548,17 +560,23 @@ class AKDataInterface
         return []
     }
     
-    static func countTasks(category: Category) -> Int { return category.tasks?.allObjects.count ?? 0 }
-    
-    static func countAllTasksInDay(day: Day) -> Int
+    static func countAllTasksInDay(
+        day: Day,
+        sortBy: TaskSorting = TaskSorting.creationDate,
+        order: SortingOrder = SortingOrder.descending,
+        filterType: TaskFilter = TaskFilter.state,
+        filterValue: String = TaskFilterStates.none.rawValue) -> Int
     {
         var counter = 0
         
         if let categories = day.categories?.allObjects as? [Category] {
             for category in categories {
-                if let tasks = category.tasks?.allObjects as? [Task] {
-                    counter += tasks.count
-                }
+                counter += DataInterface.getTasks(
+                    category: category,
+                    sortBy: sortBy,
+                    order: order,
+                    filterType: filterType,
+                    filterValue: filterValue).count
             }
         }
         
@@ -612,7 +630,7 @@ class AKDataInterface
         var hasTasks: Bool = false
         for day in DataInterface.getDays(project: project) {
             if let category = DataInterface.getCategoryByName(day: day, name: name) {
-                if DataInterface.countTasks(category: category) > 0 {
+                if (category.tasks?.count)! > 0 {
                     hasTasks = true
                     break
                 }

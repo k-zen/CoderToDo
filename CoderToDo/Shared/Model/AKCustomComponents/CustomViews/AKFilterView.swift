@@ -84,7 +84,15 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
             controller.projectsTable.reloadData()
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            // controller.sortTasksBy = TaskSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
+            let filterType = self.typeData[self.type.selectedRow(inComponent: 0)]
+            let filterValue = self.filtersData[self.filters.selectedRow(inComponent: 0)]
+            
+            controller.filterType = TaskFilter(rawValue: filterType)!
+            switch controller.filterType {
+            case TaskFilter.state:
+                controller.filterValue = TaskFilterStates(rawValue: filterValue)!.rawValue
+                break
+            }
             controller.daysTable.reloadData()
             for customCell in controller.customCellArray {
                 customCell.tasksTable?.reloadData()
@@ -145,7 +153,16 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
             self.filters.selectRow(0, inComponent: 0, animated: true)
         }
         else if let _ = self.controller as? AKViewProjectViewController {
-            // TODO
+            for type in Func.AKIterateEnum(TaskFilter.self) {
+                self.typeData.append(type.rawValue)
+                if type == TaskFilter.state {
+                    for filter in Func.AKIterateEnum(TaskFilterStates.self) {
+                        self.filtersData.append(filter.rawValue)
+                    }
+                }
+            }
+            
+            self.filters.selectRow(0, inComponent: 0, animated: true)
         }
     }
     

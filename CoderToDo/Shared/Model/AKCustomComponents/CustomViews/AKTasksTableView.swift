@@ -24,7 +24,12 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     {
         if let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: self.day!)[(indexPath as NSIndexPath).section]
-            let task = DataInterface.getTasks(category: category, sortBy: controller.sortTasksBy, order: controller.order)[(indexPath as NSIndexPath).row]
+            let task = DataInterface.getTasks(
+                category: category,
+                sortBy: controller.sortType,
+                order: controller.sortOrder,
+                filterType: controller.filterType,
+                filterValue: controller.filterValue)[(indexPath as NSIndexPath).row]
             
             // Sanity Checks
             AKChecks.workingDayCloseSanityChecks(task: task)
@@ -155,7 +160,17 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
         tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray3
-        tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.countTasks(category: category))
+        if let controller = self.controller as? AKViewProjectViewController {
+            tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(
+                category: category,
+                sortBy: controller.sortType,
+                order: controller.sortOrder,
+                filterType: controller.filterType,
+                filterValue: controller.filterValue).count)
+        }
+        else {
+            tasksCountBadge.text = String(format: "Tasks: %i", 0)
+        }
         tasksCountBadge.textAlignment = .center
         tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         tasksCountBadge.layer.masksToBounds = true
@@ -191,10 +206,15 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if let day = self.day {
+        if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day)[section]
             
-            return DataInterface.countTasks(category: category)
+            return DataInterface.getTasks(
+                category: category,
+                sortBy: controller.sortType,
+                order: controller.sortOrder,
+                filterType: controller.filterType,
+                filterValue: controller.filterValue).count
         }
         else {
             return 0
@@ -214,7 +234,12 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day)[(indexPath as NSIndexPath).section]
-            let task = DataInterface.getTasks(category: category, sortBy: controller.sortTasksBy, order: controller.order)[(indexPath as NSIndexPath).row]
+            let task = DataInterface.getTasks(
+                category: category,
+                sortBy: controller.sortType,
+                order: controller.sortOrder,
+                filterType: controller.filterType,
+                filterValue: controller.filterValue)[(indexPath as NSIndexPath).row]
             controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
         }
     }

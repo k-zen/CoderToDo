@@ -113,15 +113,20 @@ class AKMasterReference: NSObject
                 NSLog("=>           CATEGORIES: (%i)", DataInterface.countCategories(day: day))
                 for category in DataInterface.getCategories(day: day) {
                     NSLog("=>               NAME: %@", category.name ?? "N\\A")
-                    NSLog("=>               TASKS: (%i)", DataInterface.countTasks(category: category))
-                    for task in DataInterface.getTasks(category: category, sortBy: TaskSorting.creationDate, order: SortingOrder.descending) {
-                        NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
-                        NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
-                        NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
-                        NSLog("=>                   NAME: %@", task.name ?? "N\\A")
-                        NSLog("=>                   NOTE: %@", task.note ?? "N\\A")
-                        NSLog("=>                   STATE: %@", task.state ?? "N\\A")
-                        NSLog("=>                   ------")
+                    NSLog("=>               TASKS: (%i)", category.tasks?.count ?? 0)
+                    for task in DataInterface.getTasks(
+                        category: category,
+                        sortBy: TaskSorting.creationDate,
+                        order: SortingOrder.descending,
+                        filterType: TaskFilter.state,
+                        filterValue: TaskFilterStates.none.rawValue) {
+                            NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
+                            NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
+                            NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
+                            NSLog("=>                   NAME: %@", task.name ?? "N\\A")
+                            NSLog("=>                   NOTE: %@", task.note ?? "N\\A")
+                            NSLog("=>                   STATE: %@", task.state ?? "N\\A")
+                            NSLog("=>                   ------")
                     }
                     NSLog("=>               ------")
                 }
