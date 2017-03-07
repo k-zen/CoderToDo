@@ -1,11 +1,10 @@
 import UIKit
 
-class AKMessageView: AKCustomView, AKCustomViewProtocol
+class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
 {
     // MARK: Constants
-    private struct LocalConstants {
-        static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 100.0
+    struct LocalConstants {
+        static let AKViewHeight: CGFloat = 44.0
         static let AKExpandHeightAnimation = "expandHeight"
         static let AKCollapseHeightAnimation = "collapseHeight"
     }
@@ -14,20 +13,67 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
-    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
+    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in
+        if let view = view as? AKSearchView {
+            view.searchBarCancelButtonClicked(view.searchBar)
+        }
+    }
     var controller: AKCustomViewController?
     
     // MARK: Outlets
-    @IBOutlet var mainContainer: UIView!
-    @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var mainContainer: UIView!
+    @IBOutlet var searchBar: UISearchBar!
     
     // MARK: UIView Overriding
     convenience init() { self.init(frame: CGRect.zero) }
+    
+    // MARK: UISearchBarDelegate Implementation
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if let controller = self.controller as? AKListProjectsViewController {
+            controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
+            controller.projectsTable.reloadData()
+        }
+        else if let controller = self.controller as? AKViewProjectViewController {
+            controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
+            controller.daysTable?.reloadData()
+            for customCell in controller.customCellArray {
+                customCell.tasksTable?.reloadData()
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
+    {
+        if let controller = self.controller as? AKListProjectsViewController {
+            controller.searchTerm = Search.showAll.rawValue
+            controller.projectsTable.reloadData()
+        }
+        else if let controller = self.controller as? AKViewProjectViewController {
+            controller.searchTerm = Search.showAll.rawValue
+            controller.daysTable?.reloadData()
+            for customCell in controller.customCellArray {
+                customCell.tasksTable?.reloadData()
+            }
+        }
+        
+        // Always execute this.
+        controller?.tap(nil)
+        self.searchBar.text = ""
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        controller?.tap(nil)
+    }
     
     // MARK: Miscellaneous
     func setup()
     {
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
+        
+        // Delegate & DataSource
+        self.searchBar.delegate = self
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -41,9 +87,8 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     
     func applyLookAndFeel()
     {
-        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
+        self.searchBar.keyboardAppearance = .dark
+        self.searchBar.autocapitalizationType = .none
     }
     
     func addAnimations()
@@ -66,9 +111,9 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
         self.getView().frame = CGRect(
-            x: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).x,
-            y: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).y,
-            width: LocalConstants.AKViewWidth,
+            x: coordinates.x,
+            y: coordinates.y,
+            width: size.width,
             height: size.height
         )
         container.addSubview(self.getView())

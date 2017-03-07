@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for a search menu item. (2017/03/07)
         * Added support to filter the tasks table. (2017/03/06)
         * Added some very basic support for CloudKit. (2017/03/06)
         * Added support for a filter menu item. (2017/03/06)

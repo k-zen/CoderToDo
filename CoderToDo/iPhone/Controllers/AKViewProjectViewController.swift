@@ -20,6 +20,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     var sortOrder: SortingOrder = SortingOrder.descending
     var filterType: TaskFilter = TaskFilter.state
     var filterValue: String = TaskFilterStates.none.rawValue
+    var searchTerm: String = Search.showAll.rawValue
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
     var isMenuItemVisible: Bool = false
@@ -98,9 +99,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 (CGFloat(DataInterface.countAllTasksInDay(
                     day: day,
                     sortBy: self.sortType,
-                    order: self.sortOrder,
+                    sortOrder: self.sortOrder,
                     filterType: self.filterType,
-                    filterValue: self.filterValue)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                    filterValue: self.filterValue,
+                    searchTerm: self.searchTerm)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
                 let customCell = AKTasksTableView()
@@ -231,9 +233,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 (CGFloat(DataInterface.countAllTasksInDay(
                     day: day,
                     sortBy: self.sortType,
-                    order: self.sortOrder,
+                    sortOrder: self.sortOrder,
                     filterType: self.filterType,
-                    filterValue: self.filterValue)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                    filterValue: self.filterValue,
+                    searchTerm: self.searchTerm)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
     
@@ -316,6 +319,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 presenterController.toggleMenuItem(menuItem: .filter)
             }
         }
+        self.topMenuOverlay.searchAction = { (presenterController) -> Void in
+            if let presenterController = presenterController as? AKViewProjectViewController {
+                presenterController.toggleMenuItem(menuItem: .search)
+            }
+        }
     }
     
     // MARK: Animations
@@ -347,6 +355,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 newOffset += AKFilterView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
                 self.hideFilterMenuItem()
+                break
+            case .search:
+                newOffset += AKSearchView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem()
                 break
             default:
                 break
@@ -387,6 +400,18 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             else {
                 self.isMenuItemVisible = false
                 self.hideFilterMenuItem()
+            }
+            break
+        case .search:
+            self.selectedMenuItem = .search
+            offset += AKSearchView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSearchMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem()
             }
             break
         default:

@@ -117,9 +117,10 @@ class AKMasterReference: NSObject
                     for task in DataInterface.getTasks(
                         category: category,
                         sortBy: TaskSorting.creationDate,
-                        order: SortingOrder.descending,
+                        sortOrder: SortingOrder.descending,
                         filterType: TaskFilter.state,
-                        filterValue: TaskFilterStates.none.rawValue) {
+                        filterValue: TaskFilterStates.none.rawValue,
+                        searchTerm: Search.showAll.rawValue) {
                             NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
                             NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
                             NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")

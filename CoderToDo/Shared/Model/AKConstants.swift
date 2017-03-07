@@ -301,6 +301,11 @@ enum Displacement: Int {
     case down
 }
 
+enum Search: String {
+    case showAll = "All"
+    case showNone = "None"
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKSearchView" customModule="CoderToDo" customModuleProvider="target">
+            <connections>
+                <outlet property="mainContainer" destination="bxW-D9-Dn4" id="SZC-GJ-FKa"/>
+                <outlet property="searchBar" destination="Hp4-NF-BgV" id="l1J-mt-MlN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bxW-D9-Dn4" userLabel="Main_Container">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Enter your search..." showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp4-NF-BgV">
+                    <rect key="frame" x="0.0" y="0.0" width="340" height="44"/>
+                    <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                </searchBar>
+            </subviews>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Hp4-NF-BgV" firstAttribute="top" secondItem="bxW-D9-Dn4" secondAttribute="top" id="7LP-lA-pz3"/>
+                <constraint firstAttribute="trailing" secondItem="Hp4-NF-BgV" secondAttribute="trailing" id="NfY-D7-1Hk"/>
+                <constraint firstItem="Hp4-NF-BgV" firstAttribute="leading" secondItem="bxW-D9-Dn4" secondAttribute="leading" id="hGJ-pR-j6W"/>
+                <constraint firstAttribute="bottom" secondItem="Hp4-NF-BgV" secondAttribute="bottom" id="lnf-gE-rdt"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-300" y="438"/>
+        </view>
+    </objects>
+</document>

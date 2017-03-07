@@ -19,6 +19,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     var sortOrder: SortingOrder = SortingOrder.descending
     var filterType: ProjectFilter = ProjectFilter.status
     var filterValue: String = ProjectFilterStatus.none.rawValue
+    var searchTerm: String = Search.showAll.rawValue
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
     var isMenuItemVisible: Bool = false
@@ -126,9 +127,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let project = DataInterface.getProjects(
             sortBy: self.sortType,
-            order: self.sortOrder,
+            sortOrder: self.sortOrder,
             filterType: self.filterType,
-            filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
+            filterValue: self.filterValue,
+            searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.controller = self
@@ -221,9 +223,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let project = DataInterface.getProjects(
             sortBy: self.sortType,
-            order: self.sortOrder,
+            sortOrder: self.sortOrder,
             filterType: self.filterType,
-            filterValue: self.filterValue)[section]
+            filterValue: self.filterValue,
+            searchTerm: self.searchTerm)[section]
         
         let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
@@ -292,9 +295,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         return DataInterface.getProjects(
             sortBy: self.sortType,
-            order: self.sortOrder,
+            sortOrder: self.sortOrder,
             filterType: self.filterType,
-            filterValue: self.filterValue).count
+            filterValue: self.filterValue,
+            searchTerm: self.searchTerm).count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
@@ -308,9 +312,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
             let project = DataInterface.getProjects(
                 sortBy: self.sortType,
-                order: self.sortOrder,
+                sortOrder: self.sortOrder,
                 filterType: self.filterType,
-                filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
+                filterValue: self.filterValue,
+                searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
             self.performSegue(withIdentifier: GlobalConstants.AKProjectConfigurationsSegue, sender: project)
         })
         edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
@@ -323,9 +328,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     if let presenterController = presenterController as? AKListProjectsViewController {
                         let project = DataInterface.getProjects(
                             sortBy: presenterController.sortType,
-                            order: presenterController.sortOrder,
+                            sortOrder: presenterController.sortOrder,
                             filterType: presenterController.filterType,
-                            filterValue: presenterController.filterValue)[(indexPath as NSIndexPath).row]
+                            filterValue: presenterController.filterValue,
+                            searchTerm: presenterController.searchTerm)[(indexPath as NSIndexPath).row]
                         
                         // Remove data structure.
                         DataInterface.getUser()?.removeFromProject(project)
@@ -366,9 +372,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let project = DataInterface.getProjects(
             sortBy: self.sortType,
-            order: self.sortOrder,
+            sortOrder: self.sortOrder,
             filterType: self.filterType,
-            filterValue: self.filterValue)[(indexPath as NSIndexPath).section]
+            filterValue: self.filterValue,
+            searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
         self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     
@@ -433,6 +440,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 presenterController.toggleMenuItem(menuItem: .filter)
             }
         }
+        self.topMenuOverlay.searchAction = { (presenterController) -> Void in
+            if let presenterController = presenterController as? AKListProjectsViewController {
+                presenterController.toggleMenuItem(menuItem: .search)
+            }
+        }
     }
     
     // MARK: Animations
@@ -464,6 +476,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 newOffset += AKFilterView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
                 self.hideFilterMenuItem()
+                break
+            case .search:
+                newOffset += AKSearchView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem()
                 break
             default:
                 break
@@ -504,6 +521,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             else {
                 self.isMenuItemVisible = false
                 self.hideFilterMenuItem()
+            }
+            break
+        case .search:
+            self.selectedMenuItem = .search
+            offset += AKSearchView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSearchMenuItem()
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem()
             }
             break
         default:

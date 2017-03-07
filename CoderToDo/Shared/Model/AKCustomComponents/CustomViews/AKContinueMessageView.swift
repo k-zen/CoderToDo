@@ -13,6 +13,8 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     // MARK: Properties
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
+    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
+    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
     var controller: AKCustomViewController?
     var yesAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: YES HAS BEEN PRESSED!") }
     var noAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: NO HAS BEEN PRESSED!") }
@@ -85,6 +87,8 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     
     func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
+        self.defaultOperationsExpand(self)
+        
         UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
         CATransaction.setCompletionBlock {
@@ -97,6 +101,8 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     
     func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
+        self.defaultOperationsCollapse(self)
+        
         UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
         CATransaction.setCompletionBlock {

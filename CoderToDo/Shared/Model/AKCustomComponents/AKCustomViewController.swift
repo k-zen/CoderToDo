@@ -87,6 +87,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let topMenuOverlay = AKTopMenuView()
     let sortMenuItemOverlay = AKSortView()
     let filterMenuItemOverlay = AKFilterView()
+    let searchMenuItemOverlay = AKSearchView()
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -156,6 +157,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.filterMenuItemOverlay.controller = self
         self.filterMenuItemOverlay.setup()
         self.filterMenuItemOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
+            size: CGSize(width: self.view.frame.width, height: 0.0)
+        )
+        
+        self.searchMenuItemOverlay.controller = self
+        self.searchMenuItemOverlay.setup()
+        self.searchMenuItemOverlay.draw(
             container: self.view,
             coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
             size: CGSize(width: self.view.frame.width, height: 0.0)
@@ -302,6 +311,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     
     func showFilterMenuItem() { self.filterMenuItemOverlay.expand(completionTask: nil) }
     
+    func showSearchMenuItem() { self.searchMenuItemOverlay.expand(completionTask: nil) }
+    
     func hideMessage() { self.messageOverlay.collapse(completionTask: nil) }
     
     func hideContinueMessage(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.continueMessageOverlay.collapse(completionTask: completionTask) }
@@ -311,6 +322,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func hideSortMenuItem() { self.sortMenuItemOverlay.collapse(completionTask: nil) }
     
     func hideFilterMenuItem() { self.filterMenuItemOverlay.collapse(completionTask: nil) }
+    
+    func hideSearchMenuItem() { self.searchMenuItemOverlay.collapse(completionTask: nil) }
     
     // MARK: Gesture Handling
     @objc internal func tap(_ gesture: UIGestureRecognizer?)

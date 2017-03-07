@@ -12,7 +12,12 @@ class AKDataInterface
     static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
     
     // ########## PROJECT'S FUNCTIONS ########## //
-    static func getProjects(sortBy: ProjectSorting, order: SortingOrder, filterType: ProjectFilter, filterValue: String) -> [Project]
+    static func getProjects(
+        sortBy: ProjectSorting,
+        sortOrder: SortingOrder,
+        filterType: ProjectFilter,
+        filterValue: String,
+        searchTerm: String) -> [Project]
     {
         if let projects = DataInterface.getUser()?.project?.allObjects as? [Project] {
             switch sortBy {
@@ -20,13 +25,15 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
+                    }).filter({ (project) -> Bool in
                         let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let now = Date()
                         let n1 = $0.closingTime as? Date ?? now
                         let n2 = $1.closingTime as? Date ?? now
                         
-                        return order == SortingOrder.descending ?
+                        return sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
@@ -35,13 +42,15 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
+                    }).filter({ (project) -> Bool in
                         let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let now = Date()
                         let n1 = $0.creationDate as? Date ?? now
                         let n2 = $1.creationDate as? Date ?? now
                         
-                        return order == SortingOrder.descending ?
+                        return sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
@@ -50,24 +59,28 @@ class AKDataInterface
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
+                    }).filter({ (project) -> Bool in
                         let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let n1 = $0.name ?? ""
                         let n2 = $1.name ?? ""
                         
-                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                 }
             case ProjectSorting.osr:
                 switch filterType {
                 case ProjectFilter.status:
                     return projects.filter({ (project) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
+                    }).filter({ (project) -> Bool in
                         let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
                     }).sorted {
                         let n1 = $0.osr
                         let n2 = $1.osr
                         
-                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                 }
             }
@@ -499,7 +512,13 @@ class AKDataInterface
     static func countCategories(day: Day) -> Int { return day.categories?.allObjects.count ?? 0 }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func getTasks(category: Category, sortBy: TaskSorting, order: SortingOrder, filterType: TaskFilter, filterValue: String) -> [Task]
+    static func getTasks(
+        category: Category,
+        sortBy: TaskSorting,
+        sortOrder: SortingOrder,
+        filterType: TaskFilter,
+        filterValue: String,
+        searchTerm: String) -> [Task]
     {
         if let tasks = category.tasks?.allObjects as? [Task] {
             switch sortBy {
@@ -507,25 +526,33 @@ class AKDataInterface
                 switch filterType {
                 case TaskFilter.state:
                     return tasks.filter({ (task) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
+                            true :
+                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
+                    }).filter({ (task) -> Bool in
                         let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
                     }).sorted {
                         let n1 = $0.completionPercentage
                         let n2 = $1.completionPercentage
                         
-                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                 }
             case TaskSorting.creationDate:
                 switch filterType {
                 case TaskFilter.state:
                     return tasks.filter({ (task) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
+                            true :
+                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
+                    }).filter({ (task) -> Bool in
                         let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
                     }).sorted {
                         let now = Date()
                         let n1 = $0.creationDate as? Date ?? now
                         let n2 = $1.creationDate as? Date ?? now
                         
-                        return order == SortingOrder.descending ?
+                        return sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
@@ -534,24 +561,32 @@ class AKDataInterface
                 switch filterType {
                 case TaskFilter.state:
                     return tasks.filter({ (task) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
+                            true :
+                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
+                    }).filter({ (task) -> Bool in
                         let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
                     }).sorted {
                         let n1 = $0.name ?? ""
                         let n2 = $1.name ?? ""
                         
-                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                 }
             case TaskSorting.state:
                 switch filterType {
                 case TaskFilter.state:
                     return tasks.filter({ (task) -> Bool in
+                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
+                            true :
+                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
+                    }).filter({ (task) -> Bool in
                         let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
                     }).sorted {
                         let n1 = $0.state ?? ""
                         let n2 = $1.state ?? ""
                         
-                        return order == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                 }
             }
@@ -563,9 +598,10 @@ class AKDataInterface
     static func countAllTasksInDay(
         day: Day,
         sortBy: TaskSorting = TaskSorting.creationDate,
-        order: SortingOrder = SortingOrder.descending,
+        sortOrder: SortingOrder = SortingOrder.descending,
         filterType: TaskFilter = TaskFilter.state,
-        filterValue: String = TaskFilterStates.none.rawValue) -> Int
+        filterValue: String = TaskFilterStates.none.rawValue,
+        searchTerm: String = Search.showAll.rawValue) -> Int
     {
         var counter = 0
         
@@ -574,9 +610,10 @@ class AKDataInterface
                 counter += DataInterface.getTasks(
                     category: category,
                     sortBy: sortBy,
-                    order: order,
+                    sortOrder: sortOrder,
                     filterType: filterType,
-                    filterValue: filterValue).count
+                    filterValue: filterValue,
+                    searchTerm: searchTerm).count
             }
         }
         

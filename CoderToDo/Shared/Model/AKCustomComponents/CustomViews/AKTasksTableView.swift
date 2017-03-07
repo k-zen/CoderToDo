@@ -10,6 +10,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     // MARK: Properties
+    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
+    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
     var controller: AKCustomViewController?
     var day: Day?
     
@@ -27,9 +29,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let task = DataInterface.getTasks(
                 category: category,
                 sortBy: controller.sortType,
-                order: controller.sortOrder,
+                sortOrder: controller.sortOrder,
                 filterType: controller.filterType,
-                filterValue: controller.filterValue)[(indexPath as NSIndexPath).row]
+                filterValue: controller.filterValue,
+                searchTerm: controller.searchTerm)[(indexPath as NSIndexPath).row]
             
             // Sanity Checks
             AKChecks.workingDayCloseSanityChecks(task: task)
@@ -164,9 +167,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(
                 category: category,
                 sortBy: controller.sortType,
-                order: controller.sortOrder,
+                sortOrder: controller.sortOrder,
                 filterType: controller.filterType,
-                filterValue: controller.filterValue).count)
+                filterValue: controller.filterValue,
+                searchTerm: controller.searchTerm).count)
         }
         else {
             tasksCountBadge.text = String(format: "Tasks: %i", 0)
@@ -212,9 +216,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             return DataInterface.getTasks(
                 category: category,
                 sortBy: controller.sortType,
-                order: controller.sortOrder,
+                sortOrder: controller.sortOrder,
                 filterType: controller.filterType,
-                filterValue: controller.filterValue).count
+                filterValue: controller.filterValue,
+                searchTerm: controller.searchTerm).count
         }
         else {
             return 0
@@ -237,9 +242,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let task = DataInterface.getTasks(
                 category: category,
                 sortBy: controller.sortType,
-                order: controller.sortOrder,
+                sortOrder: controller.sortOrder,
                 filterType: controller.filterType,
-                filterValue: controller.filterValue)[(indexPath as NSIndexPath).row]
+                filterValue: controller.filterValue,
+                searchTerm: controller.searchTerm)[(indexPath as NSIndexPath).row]
             controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
         }
     }
@@ -281,7 +287,13 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         container.addSubview(self.getView())
     }
     
-    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.defaultOperationsExpand(self)
+    }
     
-    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.defaultOperationsCollapse(self)
+    }
 }

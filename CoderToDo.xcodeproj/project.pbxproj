@@ -17,6 +17,8 @@
 		4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */; };
 		4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE71E58D2740002C173 /* AKCategoryName.swift */; };
 		49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49576D4B1E6C4F9F0085C517 /* AKSortView.swift */; };
+		496674D51E6F276E00A60B64 /* AKSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496674D41E6F276E00A60B64 /* AKSearchView.xib */; };
+		496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496674D61E6F287B00A60B64 /* AKSearchView.swift */; };
 		49677F791E6476A100E1E675 /* AKTopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49677F781E6476A100E1E675 /* AKTopMenuView.xib */; };
 		49677F7B1E64781200E1E675 /* AKTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49677F7A1E64781200E1E675 /* AKTopMenuView.swift */; };
 		497F9C581E69D19000C78ECD /* AKSelectCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */; };
@@ -105,6 +107,8 @@
 		4931DAE71E58D2740002C173 /* AKCategoryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryName.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49576D4B1E6C4F9F0085C517 /* AKSortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortView.swift; sourceTree = "<group>"; };
+		496674D41E6F276E00A60B64 /* AKSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSearchView.xib; sourceTree = "<group>"; };
+		496674D61E6F287B00A60B64 /* AKSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSearchView.swift; sourceTree = "<group>"; };
 		49677F781E6476A100E1E675 /* AKTopMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTopMenuView.xib; sourceTree = "<group>"; };
 		49677F7A1E64781200E1E675 /* AKTopMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTopMenuView.swift; sourceTree = "<group>"; };
 		497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectCategoryView.xib; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */,
 				49A4A0A91E589E8600CEDA1B /* AKNewProjectView.xib */,
 				49A4A0AA1E589E8600CEDA1B /* AKProjectsTableViewCell.xib */,
+				496674D41E6F276E00A60B64 /* AKSearchView.xib */,
 				497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */,
 				49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */,
 				49A4A0AB1E589E8600CEDA1B /* AKSortView.xib */,
@@ -387,6 +392,7 @@
 				49DF7EDF1E5E27ED0017BEC6 /* AKContinueMessageView.swift */,
 				490670271E6D91AF0046298C /* AKFilterView.swift */,
 				49DF7EDB1E5E1D2A0017BEC6 /* AKMessageView.swift */,
+				496674D61E6F287B00A60B64 /* AKSearchView.swift */,
 				497F9C591E69D1C500C78ECD /* AKSelectCategoryView.swift */,
 				49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */,
 				49576D4B1E6C4F9F0085C517 /* AKSortView.swift */,
@@ -534,6 +540,7 @@
 				49A4A1081E589E8600CEDA1B /* AppIcon-60@1x.png in Resources */,
 				49A4A1071E589E8600CEDA1B /* AppIcon-512@1x.png in Resources */,
 				49A4A1001E589E8600CEDA1B /* AppIcon-20@3x.png in Resources */,
+				496674D51E6F276E00A60B64 /* AKSearchView.xib in Resources */,
 				49A4A1051E589E8600CEDA1B /* AppIcon-40@2x.png in Resources */,
 				49A4A0F61E589E8600CEDA1B /* AKUsernameInputView.xib in Resources */,
 				49A4A0F11E589E8600CEDA1B /* AKNewProjectView.xib in Resources */,
@@ -618,6 +625,7 @@
 				49DF7EE01E5E27ED0017BEC6 /* AKContinueMessageView.swift in Sources */,
 				49A4A0E61E589E8600CEDA1B /* AKAddViewController.swift in Sources */,
 				49A4A11A1E589E8600CEDA1B /* AKMasterReference.swift in Sources */,
+				496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */,
 				49A4A1181E589E8600CEDA1B /* AKDataInterface.swift in Sources */,
 				49A4A0EC1E589E8600CEDA1B /* AKViewProjectViewController.swift in Sources */,
 				49A4A0E31E589E8600CEDA1B /* AKAppDelegate.swift in Sources */,
