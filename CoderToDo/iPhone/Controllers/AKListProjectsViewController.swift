@@ -430,7 +430,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                if presenterController.isMenuItemVisible {
+                if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .sort {
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
@@ -455,7 +455,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         self.topMenuOverlay.filterAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                if presenterController.isMenuItemVisible {
+                if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .filter {
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
@@ -480,7 +480,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         self.topMenuOverlay.searchAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                if presenterController.isMenuItemVisible {
+                if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .search {
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
