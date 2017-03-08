@@ -5,8 +5,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 70.0
-        static let AKExpandHeightAnimation = "expandHeight"
-        static let AKCollapseHeightAnimation = "collapseHeight"
     }
     
     // MARK: Local Enums
@@ -16,8 +14,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     }
     
     // MARK: Properties
-    private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
-    private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
     private var sortOrderData = [SortingOrder]()
     private var sortFilterData = [String]()
     var controller: AKCustomViewController?
@@ -117,7 +113,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         
         self.loadComponents()
         self.applyLookAndFeel()
-        self.addAnimations()
+        self.addAnimations(expandCollapseHeight: LocalConstants.AKViewHeight)
     }
     
     func loadComponents()
@@ -144,23 +140,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func applyLookAndFeel() {}
     
-    func addAnimations()
-    {
-        self.expandHeight.fromValue = 0.0
-        self.expandHeight.toValue = LocalConstants.AKViewHeight
-        self.expandHeight.duration = 1.0
-        self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.expandHeight.autoreverses = false
-        self.getView().layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
-        
-        self.collapseHeight.fromValue = LocalConstants.AKViewHeight
-        self.collapseHeight.toValue = 0.0
-        self.collapseHeight.duration = 1.0
-        self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.collapseHeight.autoreverses = false
-        self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
-    }
-    
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
         self.getView().frame = CGRect(
@@ -170,29 +149,5 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
             height: size.height
         )
         container.addSubview(self.getView())
-    }
-    
-    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
-        UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
-        CATransaction.setCompletionBlock {
-            if completionTask != nil {
-                completionTask!(self.controller)
-            }
-        }
-        UIView.commitAnimations()
-    }
-    
-    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
-        UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
-        Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
-        CATransaction.setCompletionBlock {
-            if completionTask != nil {
-                completionTask!(self.controller)
-            }
-        }
-        UIView.commitAnimations()
     }
 }

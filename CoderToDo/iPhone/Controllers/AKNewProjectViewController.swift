@@ -43,7 +43,11 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             // 1. Closing time must be later than starting time.
             let dateComparison = closingTime.compare(startingTime as Date)
             if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
-                self.showMessage(message: "The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".", completionTask: nil)
+                self.showMessage(
+                    message: "The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".",
+                    animate: true,
+                    completionTask: nil
+                )
                 return
             }
             
@@ -78,7 +82,11 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                         ),
                         withCompletionHandler: { (error) in
                             if let _ = error {
-                                self.showMessage(message: "Error setting up starting time notification.", completionTask: nil)
+                                self.showMessage(
+                                    message: "Error setting up starting time notification.",
+                                    animate: true,
+                                    completionTask: nil
+                                )
                             } }
                     )
                     
@@ -97,7 +105,11 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                         ),
                         withCompletionHandler: { (error) in
                             if let _ = error {
-                                self.showMessage(message: "Error setting up closing time notification.", completionTask: nil)
+                                self.showMessage(
+                                    message: "Error setting up closing time notification.",
+                                    animate: true,
+                                    completionTask: nil
+                                )
                             } }
                     )
                 }

@@ -248,11 +248,41 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     }
     
     // MARK: Animations
-    func expandTaskStateSelector() { self.selectTaskStateOverlay.expand(completionTask: nil) }
+    func expandTaskStateSelector()
+    {
+        self.selectTaskStateOverlay.expand(
+            controller: self,
+            expandHeight: AKSelectTaskStateView.LocalConstants.AKViewHeight,
+            animate: true,
+            completionTask: nil
+        )
+    }
     
-    func expandCategorySelector() { self.selectCategoryOverlay.expand(completionTask: nil) }
+    func expandCategorySelector()
+    {
+        self.selectCategoryOverlay.expand(
+            controller: self,
+            expandHeight: AKSelectCategoryView.LocalConstants.AKViewHeight,
+            animate: true,
+            completionTask: nil
+        )
+    }
     
-    func collapseTaskStateSelector() { self.selectTaskStateOverlay.collapse(completionTask: nil) }
+    func collapseTaskStateSelector()
+    {
+        self.selectTaskStateOverlay.collapse(
+            controller: self,
+            animate: true,
+            completionTask: nil
+        )
+    }
     
-    func collapseCategorySelector() { self.selectCategoryOverlay.collapse(completionTask: nil) }
+    func collapseCategorySelector()
+    {
+        self.selectCategoryOverlay.collapse(
+            controller: self,
+            animate: true,
+            completionTask: nil
+        )
+    }
 }

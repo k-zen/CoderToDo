@@ -25,19 +25,27 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBAction func toggleMenu(_ sender: Any)
     {
         if !self.isMenuVisible {
-            self.displaceDownTable(tableView: self.projectsTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
-                if let controller = controller as? AKListProjectsViewController {
-                    controller.resetFilters(controller: controller)
-                }
-            })
+            self.displaceDownTable(
+                tableView: self.projectsTable,
+                offset: LocalConstants.AKDisplaceHeight,
+                animate: true,
+                completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKListProjectsViewController {
+                        controller.resetFilters(controller: controller)
+                    } }
+            )
         }
         else {
-            self.displaceUpTable(tableView: self.projectsTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
-                if let controller = controller as? AKListProjectsViewController {
-                    controller.resetFilters(controller: controller)
-                    controller.projectsTable.reloadData()
-                }
-            })
+            self.displaceUpTable(
+                tableView: self.projectsTable,
+                offset: LocalConstants.AKDisplaceHeight,
+                animate: true,
+                completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKListProjectsViewController {
+                        controller.resetFilters(controller: controller)
+                        controller.projectsTable.reloadData()
+                    } }
+            )
         }
     }
     
@@ -348,13 +356,14 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         presenterController.projectsTable.reloadData()
                     }
                     
-                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
+                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
                         presenterController.projectsTable.reloadData()
                     }
                     
-                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
+                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                animate: true,
                 completionTask: nil
             )
         })
@@ -421,29 +430,77 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .sort, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKListProjectsViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.projectsTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKListProjectsViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.projectsTable,
+                    menuItem: .sort,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKListProjectsViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
         self.topMenuOverlay.filterAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .filter, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKListProjectsViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.projectsTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKListProjectsViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.projectsTable,
+                    menuItem: .filter,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKListProjectsViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
         self.topMenuOverlay.searchAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .search, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKListProjectsViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.projectsTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKListProjectsViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.projectsTable,
+                    menuItem: .search,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKListProjectsViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
     }

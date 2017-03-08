@@ -262,7 +262,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         
         self.loadComponents()
         self.applyLookAndFeel()
-        self.addAnimations()
+        self.addAnimations(expandCollapseHeight: 0.0)
     }
     
     func loadComponents()
@@ -271,8 +271,6 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     func applyLookAndFeel() {}
-    
-    func addAnimations() {}
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
@@ -284,8 +282,4 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         )
         container.addSubview(self.getView())
     }
-    
-    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
-    
-    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
 }

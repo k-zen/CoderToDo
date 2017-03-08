@@ -26,22 +26,30 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBAction func toggleMenu(_ sender: Any)
     {
         if !self.isMenuVisible {
-            self.displaceDownTable(tableView: self.daysTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
-                if let controller = controller as? AKViewProjectViewController {
-                    controller.resetFilters(controller: controller)
-                }
-            })
+            self.displaceDownTable(
+                tableView: self.daysTable,
+                offset: LocalConstants.AKDisplaceHeight,
+                animate: true,
+                completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKViewProjectViewController {
+                        controller.resetFilters(controller: controller)
+                    } }
+            )
         }
         else {
-            self.displaceUpTable(tableView: self.daysTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
-                if let controller = controller as? AKViewProjectViewController {
-                    controller.resetFilters(controller: controller)
-                    controller.daysTable.reloadData()
-                    for customCell in controller.customCellArray {
-                        customCell.tasksTable?.reloadData()
-                    }
-                }
-            })
+            self.displaceUpTable(
+                tableView: self.daysTable,
+                offset: LocalConstants.AKDisplaceHeight,
+                animate: true,
+                completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKViewProjectViewController {
+                        controller.resetFilters(controller: controller)
+                        controller.daysTable.reloadData()
+                        for customCell in controller.customCellArray {
+                            customCell.tasksTable?.reloadData()
+                        }
+                    } }
+            )
         }
     }
     
@@ -317,29 +325,77 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKViewProjectViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.daysTable, menuItem: .sort, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKViewProjectViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.daysTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKViewProjectViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.daysTable,
+                    menuItem: .sort,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKViewProjectViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
         self.topMenuOverlay.filterAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKViewProjectViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.daysTable, menuItem: .filter, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKViewProjectViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.daysTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKViewProjectViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.daysTable,
+                    menuItem: .filter,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKViewProjectViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
         self.topMenuOverlay.searchAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKViewProjectViewController {
-                presenterController.toggleMenuItem(tableView: presenterController.daysTable, menuItem: .search, completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKViewProjectViewController {
-                        controller.resetFilters(controller: controller)
-                    }
-                })
+                if presenterController.isMenuItemVisible {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.daysTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: { (controller) -> Void in
+                            if let controller = controller as? AKViewProjectViewController {
+                                controller.resetFilters(controller: controller)
+                            } }
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.daysTable,
+                    menuItem: .search,
+                    animate: true,
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKViewProjectViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
+                )
             }
         }
     }
