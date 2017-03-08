@@ -11,23 +11,21 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     // MARK: Local Enums
     private enum LocalEnums: Int {
-        case filters = 1
-        case order = 2
+        case order = 1
+        case filters = 2
     }
     
     // MARK: Properties
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
-    private var filtersData = [String]()
-    private var orderData = [SortingOrder]()
-    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
-    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
+    private var sortOrderData = [SortingOrder]()
+    private var sortFilterData = [String]()
     var controller: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
-    @IBOutlet weak var filters: UIPickerView!
     @IBOutlet weak var order: UIPickerView!
+    @IBOutlet weak var filters: UIPickerView!
     
     // MARK: UIView Overriding
     convenience init() { self.init(frame: CGRect.zero) }
@@ -37,9 +35,9 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     {
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
-            return self.filtersData[row]
+            return self.sortFilterData[row]
         case LocalEnums.order.rawValue:
-            return self.orderData[row].rawValue
+            return self.sortOrderData[row].rawValue
         default:
             return ""
         }
@@ -52,20 +50,18 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
-            pickerLabel.text = self.filtersData[row]
-            pickerLabel.textAlignment = .center
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            pickerLabel.text = self.sortFilterData[row]
             break
         case LocalEnums.order.rawValue:
-            pickerLabel.text = self.orderData[row].rawValue
-            pickerLabel.textAlignment = .center
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+            pickerLabel.text = self.sortOrderData[row].rawValue
             break
         default:
             pickerLabel.text = ""
             break
         }
         
+        pickerLabel.textAlignment = .center
+        pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         
         return pickerLabel
@@ -74,13 +70,13 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            controller.sortType = ProjectSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
-            controller.sortOrder = self.orderData[self.order.selectedRow(inComponent: 0)]
+            controller.sortType = ProjectSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
+            controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
             controller.projectsTable.reloadData()
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            controller.sortType = TaskSorting(rawValue: self.filtersData[self.filters.selectedRow(inComponent: 0)])!
-            controller.sortOrder = self.orderData[self.order.selectedRow(inComponent: 0)]
+            controller.sortType = TaskSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
+            controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
             controller.daysTable.reloadData()
             for customCell in controller.customCellArray {
                 customCell.tasksTable?.reloadData()
@@ -93,9 +89,9 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     {
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
-            return self.filtersData.count
+            return self.sortFilterData.count
         case LocalEnums.order.rawValue:
-            return self.orderData.count
+            return self.sortOrderData.count
         default:
             return 0
         }
@@ -126,27 +122,23 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func loadComponents()
     {
-        self.filtersData.removeAll()
-        self.orderData.removeAll()
+        self.sortFilterData.removeAll()
+        self.sortOrderData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
             for filter in Func.AKIterateEnum(ProjectSorting.self) {
-                self.filtersData.append(filter.rawValue)
+                self.sortFilterData.append(filter.rawValue)
             }
             for order in Func.AKIterateEnum(SortingOrder.self) {
-                self.orderData.append(order)
+                self.sortOrderData.append(order)
             }
-            
-            self.filters.selectRow(2, inComponent: 0, animated: true)
         }
         else if let _ = self.controller as? AKViewProjectViewController {
             for filter in Func.AKIterateEnum(TaskSorting.self) {
-                self.filtersData.append(filter.rawValue)
+                self.sortFilterData.append(filter.rawValue)
             }
             for order in Func.AKIterateEnum(SortingOrder.self) {
-                self.orderData.append(order)
+                self.sortOrderData.append(order)
             }
-            
-            self.filters.selectRow(0, inComponent: 0, animated: true)
         }
     }
     
@@ -182,8 +174,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsExpand(self)
-        
         UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
         CATransaction.setCompletionBlock {
@@ -196,8 +186,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsCollapse(self)
-        
         UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
         CATransaction.setCompletionBlock {

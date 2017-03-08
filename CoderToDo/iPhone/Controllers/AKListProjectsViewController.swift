@@ -7,22 +7,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 52.0
-        static let AKDisplaceDownAnimation = "displaceDown"
-        static let AKDisplaceUpAnimation = "displaceUp"
         static let AKDisplaceHeight: CGFloat = 40.0
     }
     
     // MARK: Properties
-    let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
-    let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
-    var sortType: ProjectSorting = ProjectSorting.creationDate
-    var sortOrder: SortingOrder = SortingOrder.descending
-    var filterType: ProjectFilter = ProjectFilter.status
-    var filterValue: String = ProjectFilterStatus.none.rawValue
-    var searchTerm: String = Search.showAll.rawValue
-    var selectedMenuItem: MenuItems = .none
-    var isMenuVisible: Bool = false
-    var isMenuItemVisible: Bool = false
+    var sortType = ProjectSorting.creationDate
+    var sortOrder = SortingOrder.descending
+    var filterType = ProjectFilter.status
+    var filterValue = ProjectFilterStatus.none.rawValue
+    var searchTerm = Search.showAll.rawValue
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
@@ -32,10 +25,19 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBAction func toggleMenu(_ sender: Any)
     {
         if !self.isMenuVisible {
-            self.displaceDownTable(offset: LocalConstants.AKDisplaceHeight)
+            self.displaceDownTable(tableView: self.projectsTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
+                if let controller = controller as? AKListProjectsViewController {
+                    controller.resetFilters(controller: controller)
+                }
+            })
         }
         else {
-            self.displaceUpTable(offset: LocalConstants.AKDisplaceHeight)
+            self.displaceUpTable(tableView: self.projectsTable, offset: LocalConstants.AKDisplaceHeight, completionTask: { (controller) -> Void in
+                if let controller = controller as? AKListProjectsViewController {
+                    controller.resetFilters(controller: controller)
+                    controller.projectsTable.reloadData()
+                }
+            })
         }
     }
     
@@ -352,7 +354,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         presenterController.projectsTable.reloadData()
                     }
                     
-                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) }
+                    presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in }) },
+                completionTask: nil
             )
         })
         delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
@@ -395,6 +398,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             )
         }
         super.setup()
+        super.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
         
         // Custom Components
         self.projectsTable.register(UINib(nibName: "AKProjectsTableViewCell", bundle: nil), forCellReuseIdentifier: "ProjectsTableCell")
@@ -402,21 +406,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Delegate & DataSource
         self.projectsTable?.dataSource = self
         self.projectsTable?.delegate = self
-        
-        // Animations
-        self.displaceDownProjectsTable.fromValue = 0.0
-        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
-        self.displaceDownProjectsTable.duration = 1.0
-        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceDownProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
-        
-        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
-        self.displaceUpProjectsTable.toValue = 0.0
-        self.displaceUpProjectsTable.duration = 1.0
-        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceUpProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
         
         // Custom Actions
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
@@ -432,124 +421,46 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         self.topMenuOverlay.sortAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(menuItem: .sort)
+                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .sort, completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKListProjectsViewController {
+                        controller.resetFilters(controller: controller)
+                    }
+                })
             }
         }
         self.topMenuOverlay.filterAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(menuItem: .filter)
+                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .filter, completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKListProjectsViewController {
+                        controller.resetFilters(controller: controller)
+                    }
+                })
             }
         }
         self.topMenuOverlay.searchAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKListProjectsViewController {
-                presenterController.toggleMenuItem(menuItem: .search)
+                presenterController.toggleMenuItem(tableView: presenterController.projectsTable, menuItem: .search, completionTask: { (controller) -> Void in
+                    if let controller = controller as? AKListProjectsViewController {
+                        controller.resetFilters(controller: controller)
+                    }
+                })
             }
         }
     }
     
-    // MARK: Animations
-    func displaceDownTable(offset: CGFloat)
-    {
-        self.isMenuVisible = true
-        self.showTopMenu()
+    func resetFilters(controller: AKCustomViewController) {
+        self.sortType = ProjectSorting.creationDate
+        self.sortOrder = SortingOrder.descending
+        self.filterType = ProjectFilter.status
+        self.filterValue = ProjectFilterStatus.none.rawValue
+        self.searchTerm = Search.showAll.rawValue
         
-        UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y + offset)
-        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height - offset)
-        UIView.commitAnimations()
-    }
-    
-    func displaceUpTable(offset: CGFloat)
-    {
-        self.isMenuVisible = false
-        self.hideTopMenu()
+        controller.sortMenuItemOverlay.order.selectRow(1, inComponent: 0, animated: true)
+        controller.sortMenuItemOverlay.filters.selectRow(1, inComponent: 0, animated: true)
         
-        var newOffset = offset
-        if self.isMenuItemVisible {
-            switch self.selectedMenuItem {
-            case .sort:
-                newOffset += AKSortView.LocalConstants.AKViewHeight
-                self.isMenuItemVisible = false
-                self.hideSortMenuItem()
-                break
-            case .filter:
-                newOffset += AKFilterView.LocalConstants.AKViewHeight
-                self.isMenuItemVisible = false
-                self.hideFilterMenuItem()
-                break
-            case .search:
-                newOffset += AKSearchView.LocalConstants.AKViewHeight
-                self.isMenuItemVisible = false
-                self.hideSearchMenuItem()
-                break
-            default:
-                break
-            }
-        }
+        controller.filterMenuItemOverlay.type.selectRow(0, inComponent: 0, animated: true)
+        controller.filterMenuItemOverlay.filters.selectRow(0, inComponent: 0, animated: true)
         
-        UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-        Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y - newOffset)
-        Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height + newOffset)
-        UIView.commitAnimations()
-    }
-    
-    func toggleMenuItem(menuItem: MenuItems)
-    {
-        var offset: CGFloat = 0.0
-        let direction: Displacement = !self.isMenuItemVisible ? .down : .up
-        
-        switch menuItem {
-        case .sort:
-            self.selectedMenuItem = .sort
-            offset += AKSortView.LocalConstants.AKViewHeight
-            if direction == Displacement.down {
-                self.isMenuItemVisible = true
-                self.showSortMenuItem()
-            }
-            else {
-                self.isMenuItemVisible = false
-                self.hideSortMenuItem()
-            }
-            break
-        case .filter:
-            self.selectedMenuItem = .filter
-            offset += AKFilterView.LocalConstants.AKViewHeight
-            if direction == Displacement.down {
-                self.isMenuItemVisible = true
-                self.showFilterMenuItem()
-            }
-            else {
-                self.isMenuItemVisible = false
-                self.hideFilterMenuItem()
-            }
-            break
-        case .search:
-            self.selectedMenuItem = .search
-            offset += AKSearchView.LocalConstants.AKViewHeight
-            if direction == Displacement.down {
-                self.isMenuItemVisible = true
-                self.showSearchMenuItem()
-            }
-            else {
-                self.isMenuItemVisible = false
-                self.hideSearchMenuItem()
-            }
-            break
-        default:
-            break
-        }
-        
-        if direction == Displacement.down {
-            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
-            Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y + offset)
-            Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height - offset)
-            UIView.commitAnimations()
-        }
-        else {
-            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
-            Func.AKChangeComponentYPosition(component: self.projectsTable, newY: self.projectsTable.frame.origin.y - offset)
-            Func.AKChangeComponentHeight(component: self.projectsTable, newHeight: self.projectsTable.frame.height + offset)
-            UIView.commitAnimations()
-        }
+        controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
     }
 }

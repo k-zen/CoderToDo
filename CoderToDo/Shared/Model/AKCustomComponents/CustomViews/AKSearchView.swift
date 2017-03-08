@@ -12,12 +12,6 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     // MARK: Properties
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
-    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
-    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in
-        if let view = view as? AKSearchView {
-            view.searchBarCancelButtonClicked(view.searchBar)
-        }
-    }
     var controller: AKCustomViewController?
     
     // MARK: Outlets
@@ -121,8 +115,6 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     
     func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsExpand(self)
-        
         UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
         CATransaction.setCompletionBlock {
@@ -135,8 +127,6 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     
     func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsCollapse(self)
-        
         UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
         CATransaction.setCompletionBlock {

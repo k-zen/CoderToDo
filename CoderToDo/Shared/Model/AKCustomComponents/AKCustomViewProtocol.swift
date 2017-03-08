@@ -3,9 +3,6 @@ import UIKit
 
 protocol AKCustomViewProtocol
 {
-    var defaultOperationsExpand: (AKCustomView) -> Void { get set }
-    var defaultOperationsCollapse: (AKCustomView) -> Void { get set }
-    
     func loadComponents() -> Void
     
     func applyLookAndFeel() -> Void

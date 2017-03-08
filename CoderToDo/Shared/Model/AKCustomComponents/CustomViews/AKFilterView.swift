@@ -11,17 +11,15 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     // MARK: Local Enums
     private enum LocalEnums: Int {
-        case type = 1
-        case filters = 2
+        case filterType = 1
+        case filterValue = 2
     }
     
     // MARK: Properties
     private let expandHeight = CABasicAnimation(keyPath: LocalConstants.AKExpandHeightAnimation)
     private let collapseHeight = CABasicAnimation(keyPath: LocalConstants.AKCollapseHeightAnimation)
-    private var typeData = [String]()
-    private var filtersData = [String]()
-    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
-    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
+    private var filterTypeData = [String]()
+    private var filterValueData = [String]()
     var controller: AKCustomViewController?
     
     // MARK: Outlets
@@ -36,10 +34,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         switch pickerView.tag {
-        case LocalEnums.type.rawValue:
-            return self.typeData[row]
-        case LocalEnums.filters.rawValue:
-            return self.filtersData[row]
+        case LocalEnums.filterType.rawValue:
+            return self.filterTypeData[row]
+        case LocalEnums.filterValue.rawValue:
+            return self.filterValueData[row]
         default:
             return ""
         }
@@ -51,21 +49,19 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
         switch pickerView.tag {
-        case LocalEnums.type.rawValue:
-            pickerLabel.text = self.typeData[row]
-            pickerLabel.textAlignment = .center
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+        case LocalEnums.filterType.rawValue:
+            pickerLabel.text = self.filterTypeData[row]
             break
-        case LocalEnums.filters.rawValue:
-            pickerLabel.text = self.filtersData[row]
-            pickerLabel.textAlignment = .center
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+        case LocalEnums.filterValue.rawValue:
+            pickerLabel.text = self.filterValueData[row]
             break
         default:
             pickerLabel.text = ""
             break
         }
         
+        pickerLabel.textAlignment = .center
+        pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         
         return pickerLabel
@@ -74,8 +70,8 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            let filterType = self.typeData[self.type.selectedRow(inComponent: 0)]
-            let filterValue = self.filtersData[self.filters.selectedRow(inComponent: 0)]
+            let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
+            let filterValue = self.filterValueData[self.filters.selectedRow(inComponent: 0)]
             
             controller.filterType = ProjectFilter(rawValue: filterType)!
             switch controller.filterType {
@@ -86,8 +82,8 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
             controller.projectsTable.reloadData()
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            let filterType = self.typeData[self.type.selectedRow(inComponent: 0)]
-            let filterValue = self.filtersData[self.filters.selectedRow(inComponent: 0)]
+            let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
+            let filterValue = self.filterValueData[self.filters.selectedRow(inComponent: 0)]
             
             controller.filterType = TaskFilter(rawValue: filterType)!
             switch controller.filterType {
@@ -106,10 +102,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         switch pickerView.tag {
-        case LocalEnums.type.rawValue:
-            return self.typeData.count
-        case LocalEnums.filters.rawValue:
-            return self.filtersData.count
+        case LocalEnums.filterType.rawValue:
+            return self.filterTypeData.count
+        case LocalEnums.filterValue.rawValue:
+            return self.filterValueData.count
         default:
             return 0
         }
@@ -125,10 +121,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         // Delegate & DataSource
         self.type.delegate = self
         self.type.dataSource = self
-        self.type.tag = LocalEnums.type.rawValue
+        self.type.tag = LocalEnums.filterType.rawValue
         self.filters.delegate = self
         self.filters.dataSource = self
-        self.filters.tag = LocalEnums.filters.rawValue
+        self.filters.tag = LocalEnums.filterValue.rawValue
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -140,31 +136,27 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     func loadComponents()
     {
-        self.typeData.removeAll()
-        self.filtersData.removeAll()
+        self.filterTypeData.removeAll()
+        self.filterValueData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
             for type in Func.AKIterateEnum(ProjectFilter.self) {
-                self.typeData.append(type.rawValue)
+                self.filterTypeData.append(type.rawValue)
                 if type == ProjectFilter.status {
                     for filter in Func.AKIterateEnum(ProjectFilterStatus.self) {
-                        self.filtersData.append(filter.rawValue)
+                        self.filterValueData.append(filter.rawValue)
                     }
                 }
             }
-            
-            self.filters.selectRow(0, inComponent: 0, animated: true)
         }
         else if let _ = self.controller as? AKViewProjectViewController {
             for type in Func.AKIterateEnum(TaskFilter.self) {
-                self.typeData.append(type.rawValue)
+                self.filterTypeData.append(type.rawValue)
                 if type == TaskFilter.state {
                     for filter in Func.AKIterateEnum(TaskFilterStates.self) {
-                        self.filtersData.append(filter.rawValue)
+                        self.filterValueData.append(filter.rawValue)
                     }
                 }
             }
-            
-            self.filters.selectRow(0, inComponent: 0, animated: true)
         }
     }
     
@@ -200,8 +192,6 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsExpand(self)
-        
         UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: LocalConstants.AKViewHeight)
         CATransaction.setCompletionBlock {
@@ -214,8 +204,6 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
-        self.defaultOperationsCollapse(self)
-        
         UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
         Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
         CATransaction.setCompletionBlock {

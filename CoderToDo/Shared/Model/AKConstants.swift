@@ -639,7 +639,7 @@ class UtilityFunctions
     
     func AKPresentMessage(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
     {
-        Func.AKExecuteInMainThread { controller.showMessage(message: message, autoDismiss: autoDismiss) }
+        Func.AKExecuteInMainThread { controller.showMessage(message: message, autoDismiss: autoDismiss, completionTask: nil) }
     }
     
     ///

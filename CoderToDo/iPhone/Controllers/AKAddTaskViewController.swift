@@ -169,7 +169,8 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                 message: String(
                     format: "%@, since this is your first day, we've made an exception to our basic rule, and all tasks you add now up to closing time are going to be added for today.",
                     DataInterface.getUsername()
-                )
+                ),
+                completionTask: nil
             )
         }
     }

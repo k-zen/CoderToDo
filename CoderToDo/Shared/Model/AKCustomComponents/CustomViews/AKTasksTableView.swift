@@ -10,8 +10,6 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     // MARK: Properties
-    var defaultOperationsExpand: (AKCustomView) -> Void = { (view) -> Void in }
-    var defaultOperationsCollapse: (AKCustomView) -> Void = { (view) -> Void in }
     var controller: AKCustomViewController?
     var day: Day?
     
@@ -287,13 +285,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         container.addSubview(self.getView())
     }
     
-    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
-        self.defaultOperationsExpand(self)
-    }
+    func expand(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
     
-    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
-        self.defaultOperationsCollapse(self)
-    }
+    func collapse(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {}
 }

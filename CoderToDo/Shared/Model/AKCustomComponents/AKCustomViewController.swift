@@ -23,6 +23,12 @@ import UIKit
 /// - Date: Jan 5, 2017
 class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
 {
+    // MARK: Constants
+    struct LocalConstants {
+        static let AKDisplaceDownAnimation = "displaceDown"
+        static let AKDisplaceUpAnimation = "displaceUp"
+    }
+    
     // MARK: Flags
     /// Flag to make local notification's check on each ViewController.
     /// Default value is **true**, each ViewController must explicitly enable the check.
@@ -54,7 +60,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         // Always close the keyboard if open.
         controller.view.endEditing(true)
         // Always collapse the message view.
-        controller.hideMessage()
+        controller.hideMessage(completionTask: nil)
     }
     /// Operations to perform when a **Tap** gesture is detected.
     var additionalOperationsWhenTaped: (UIGestureRecognizer?) -> Void = { (gesture) -> Void in }
@@ -88,6 +94,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let sortMenuItemOverlay = AKSortView()
     let filterMenuItemOverlay = AKFilterView()
     let searchMenuItemOverlay = AKSearchView()
+    // Menu
+    var selectedMenuItem: MenuItems = .none
+    var isMenuVisible: Bool = false
+    var isMenuItemVisible: Bool = false
+    
+    // MARK: Animations
+    let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
+    let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -281,13 +295,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.present(controller, animated: true, completion: nil)
     }
     
-    func showMessage(message: String, autoDismiss: Bool = false)
+    // MARK: Floating Views
+    func showMessage(message: String, autoDismiss: Bool = false, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.messageOverlay.message.text = message
-        self.messageOverlay.expand(completionTask: nil)
+        self.messageOverlay.expand(completionTask: completionTask)
         
         if autoDismiss {
-            Func.AKDelay(GlobalConstants.AKAutoDismissMessageTime, isMain: true, task: { self.hideMessage() })
+            Func.AKDelay(GlobalConstants.AKAutoDismissMessageTime, isMain: true, task: { self.hideMessage(completionTask: completionTask) })
         }
     }
     
@@ -295,35 +310,36 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                              yesButtonTitle: String = "Yes",
                              noButtonTitle: String = "No",
                              yesAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
-                             noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void)
+                             noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
+                             completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.continueMessageOverlay.message.text = message
         self.continueMessageOverlay.yes.setTitle(yesButtonTitle, for: .normal)
         self.continueMessageOverlay.no.setTitle(noButtonTitle, for: .normal)
         self.continueMessageOverlay.yesAction = yesAction
         self.continueMessageOverlay.noAction = noAction
-        self.continueMessageOverlay.expand(completionTask: nil)
+        self.continueMessageOverlay.expand(completionTask: completionTask)
     }
     
-    func showTopMenu() { self.topMenuOverlay.expand(completionTask: nil) }
+    func showTopMenu(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.topMenuOverlay.expand(completionTask: completionTask) }
     
-    func showSortMenuItem() { self.sortMenuItemOverlay.expand(completionTask: nil) }
+    func showSortMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.sortMenuItemOverlay.expand(completionTask: completionTask) }
     
-    func showFilterMenuItem() { self.filterMenuItemOverlay.expand(completionTask: nil) }
+    func showFilterMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.filterMenuItemOverlay.expand(completionTask: completionTask) }
     
-    func showSearchMenuItem() { self.searchMenuItemOverlay.expand(completionTask: nil) }
+    func showSearchMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.searchMenuItemOverlay.expand(completionTask: completionTask) }
     
-    func hideMessage() { self.messageOverlay.collapse(completionTask: nil) }
+    func hideMessage(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.messageOverlay.collapse(completionTask: completionTask) }
     
     func hideContinueMessage(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.continueMessageOverlay.collapse(completionTask: completionTask) }
     
-    func hideTopMenu() { self.topMenuOverlay.collapse(completionTask: nil) }
+    func hideTopMenu(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.topMenuOverlay.collapse(completionTask: completionTask) }
     
-    func hideSortMenuItem() { self.sortMenuItemOverlay.collapse(completionTask: nil) }
+    func hideSortMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.sortMenuItemOverlay.collapse(completionTask: completionTask) }
     
-    func hideFilterMenuItem() { self.filterMenuItemOverlay.collapse(completionTask: nil) }
+    func hideFilterMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.filterMenuItemOverlay.collapse(completionTask: completionTask) }
     
-    func hideSearchMenuItem() { self.searchMenuItemOverlay.collapse(completionTask: nil) }
+    func hideSearchMenuItem(completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) { self.searchMenuItemOverlay.collapse(completionTask: completionTask) }
     
     // MARK: Gesture Handling
     @objc internal func tap(_ gesture: UIGestureRecognizer?)
@@ -395,7 +411,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                             presenterController?.hideContinueMessage(completionTask: { (presenterController) -> Void in
                                 // TODO: Make this setting persistent.
                                 presenterController?.inhibitLocalNotificationMessage = true
-                            }) }
+                            }) },
+                        completionTask: nil
                     )
                 }
             }
@@ -428,7 +445,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                                 Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
                             }
                         }) },
-                    noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(completionTask: nil) }
+                    noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(completionTask: nil) },
+                    completionTask: nil
                 )
                 break
             }
@@ -458,5 +476,128 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
         
         return response
+    }
+    
+    // MARK: Animations
+    func configureAnimations(displacementHeight: CGFloat)
+    {
+        self.displaceDownProjectsTable.fromValue = 0.0
+        self.displaceDownProjectsTable.toValue = displacementHeight
+        self.displaceDownProjectsTable.duration = 1.0
+        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        
+        self.displaceUpProjectsTable.fromValue = displacementHeight
+        self.displaceUpProjectsTable.toValue = 0.0
+        self.displaceUpProjectsTable.duration = 1.0
+        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+    }
+    
+    func displaceDownTable(tableView: UITableView, offset: CGFloat, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.isMenuVisible = true
+        self.showTopMenu(completionTask: completionTask)
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+        Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
+        Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
+        UIView.commitAnimations()
+    }
+    
+    func displaceUpTable(tableView: UITableView, offset: CGFloat, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.isMenuVisible = false
+        self.hideTopMenu(completionTask: completionTask)
+        
+        var newOffset = offset
+        if self.isMenuItemVisible {
+            switch self.selectedMenuItem {
+            case .sort:
+                newOffset += AKSortView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem(completionTask: completionTask)
+                break
+            case .filter:
+                newOffset += AKFilterView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem(completionTask: completionTask)
+                break
+            case .search:
+                newOffset += AKSearchView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem(completionTask: completionTask)
+                break
+            default:
+                break
+            }
+        }
+        
+        UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+        Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - newOffset)
+        Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + newOffset)
+        UIView.commitAnimations()
+    }
+    
+    func toggleMenuItem(tableView: UITableView, menuItem: MenuItems, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        var offset: CGFloat = 0.0
+        let direction: Displacement = !self.isMenuItemVisible ? .down : .up
+        
+        switch menuItem {
+        case .sort:
+            self.selectedMenuItem = .sort
+            offset += AKSortView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSortMenuItem(completionTask: completionTask)
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSortMenuItem(completionTask: completionTask)
+            }
+            break
+        case .filter:
+            self.selectedMenuItem = .filter
+            offset += AKFilterView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showFilterMenuItem(completionTask: completionTask)
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideFilterMenuItem(completionTask: completionTask)
+            }
+            break
+        case .search:
+            self.selectedMenuItem = .search
+            offset += AKSearchView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showSearchMenuItem(completionTask: completionTask)
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideSearchMenuItem(completionTask: completionTask)
+            }
+            break
+        default:
+            break
+        }
+        
+        if direction == Displacement.down {
+            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
+            Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
+            UIView.commitAnimations()
+        }
+        else {
+            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+            Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - offset)
+            Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + offset)
+            UIView.commitAnimations()
+        }
     }
 }
