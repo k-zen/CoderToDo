@@ -48,13 +48,7 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     
     func loadComponents() {}
     
-    func applyLookAndFeel()
-    {
-        Func.AKAddBorderDeco(self.add.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
-        Func.AKAddBorderDeco(self.sort.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
-        Func.AKAddBorderDeco(self.filter.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
-        Func.AKAddBorderDeco(self.search.titleLabel!, color: GlobalConstants.AKCoderToDoBlue.cgColor, thickness: GlobalConstants.AKDefaultBorderThickness, position: .bottom)
-    }
+    func applyLookAndFeel() {}
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {

@@ -28,6 +28,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ev-sV-KI7">
                             <rect key="frame" x="0.0" y="0.0" width="74" height="40"/>
+                            <color key="backgroundColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="XJo-wR-H64"/>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="ZJO-X9-oLA"/>
@@ -42,6 +43,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbI-5v-MXh">
                             <rect key="frame" x="75" y="0.0" width="74" height="40"/>
+                            <color key="backgroundColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                             <state key="normal" title="Sort">
                                 <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,6 +54,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dh-ca-TVw">
                             <rect key="frame" x="150" y="0.0" width="74" height="40"/>
+                            <color key="backgroundColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                             <state key="normal" title="Filter">
                                 <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,6 +65,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAs-X3-Hxd">
                             <rect key="frame" x="225" y="0.0" width="74" height="40"/>
+                            <color key="backgroundColor" red="0.16078431372549018" green="0.1764705882352941" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                             <state key="normal" title="Search">
                                 <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,7 +97,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="DVl-zQ-TiC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Iaj-2h-Skh"/>
                 <constraint firstAttribute="trailing" secondItem="DVl-zQ-TiC" secondAttribute="trailing" id="SCG-w1-MVe"/>
