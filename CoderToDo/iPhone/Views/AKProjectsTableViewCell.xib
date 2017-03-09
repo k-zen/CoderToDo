@@ -61,40 +61,6 @@
                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIv-Cl-9qK" userLabel="State_Container">
-                                <rect key="frame" x="232" y="4" width="80" height="20"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2B-kI-QId" userLabel="State_Value">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBoldItalic" family="Avenir Next Condensed" pointSize="12"/>
-                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="0MQ-9r-xwE"/>
-                                    <constraint firstAttribute="height" constant="20" id="1KY-TQ-12q"/>
-                                    <constraint firstItem="r2B-kI-QId" firstAttribute="leading" secondItem="WIv-Cl-9qK" secondAttribute="leading" id="4Xd-xp-pgD"/>
-                                    <constraint firstAttribute="trailing" secondItem="r2B-kI-QId" secondAttribute="trailing" id="ctX-PY-0Gm"/>
-                                    <constraint firstAttribute="bottom" secondItem="r2B-kI-QId" secondAttribute="bottom" id="ldU-LD-CIC"/>
-                                    <constraint firstItem="r2B-kI-QId" firstAttribute="top" secondItem="WIv-Cl-9qK" secondAttribute="top" id="pW4-Cy-LEd"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-3e-PvK" userLabel="Add_Tomorrow_Task">
-                                <rect key="frame" x="232" y="26" width="80" height="20"/>
-                                <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="qT4-r5-5p5"/>
-                                    <constraint firstAttribute="height" constant="20" id="uHF-iL-Y7o"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="12"/>
-                                <state key="normal" title="Add Task">
-                                    <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="addTomorrowTask:" destination="LQ1-JN-uqn" eventType="touchUpInside" id="WGb-AR-HGx"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: 17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTG-4c-VAa" userLabel="Close_Value">
                                 <rect key="frame" x="120" y="26" width="90" height="20"/>
                                 <constraints>
@@ -105,21 +71,34 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-3e-PvK" userLabel="Add_Tomorrow_Task">
+                                <rect key="frame" x="232" y="8" width="80" height="36"/>
+                                <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="qT4-r5-5p5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="12"/>
+                                <state key="normal" title="Add Task">
+                                    <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTomorrowTask:" destination="LQ1-JN-uqn" eventType="touchUpInside" id="WGb-AR-HGx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="5X0-Z5-c11" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="4DM-Ih-sec"/>
-                            <constraint firstItem="BBI-3e-PvK" firstAttribute="top" secondItem="WIv-Cl-9qK" secondAttribute="bottom" constant="2" id="5qj-lm-WNI"/>
                             <constraint firstItem="azV-ZA-cfB" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="6fl-xU-eeY"/>
+                            <constraint firstItem="BBI-3e-PvK" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="8" id="7Gd-24-0Eq"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="8fq-1h-48n"/>
                             <constraint firstItem="azV-ZA-cfB" firstAttribute="leading" secondItem="5X0-Z5-c11" secondAttribute="trailing" id="BRX-jL-PPY"/>
+                            <constraint firstAttribute="bottom" secondItem="BBI-3e-PvK" secondAttribute="bottom" constant="8" id="EbU-eU-dos"/>
                             <constraint firstItem="J5T-DH-Qqy" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="EgW-dE-g14"/>
-                            <constraint firstAttribute="trailing" secondItem="WIv-Cl-9qK" secondAttribute="trailing" constant="8" id="KhX-ZB-Nds"/>
                             <constraint firstItem="gTG-4c-VAa" firstAttribute="top" secondItem="azV-ZA-cfB" secondAttribute="bottom" constant="2" id="WZD-xK-jUY"/>
                             <constraint firstItem="gTG-4c-VAa" firstAttribute="leading" secondItem="Bp5-qo-7lw" secondAttribute="trailing" id="dDT-qe-Wvx"/>
                             <constraint firstItem="5X0-Z5-c11" firstAttribute="leading" secondItem="J5T-DH-Qqy" secondAttribute="trailing" id="iRA-j9-iQD"/>
                             <constraint firstItem="Bp5-qo-7lw" firstAttribute="leading" secondItem="Ptn-2q-xEM" secondAttribute="leading" constant="16" id="tR7-bz-8sa"/>
                             <constraint firstItem="Bp5-qo-7lw" firstAttribute="top" secondItem="5X0-Z5-c11" secondAttribute="bottom" constant="2" id="uiy-PN-yLk"/>
-                            <constraint firstItem="WIv-Cl-9qK" firstAttribute="top" secondItem="Ptn-2q-xEM" secondAttribute="top" constant="4" id="xVX-7a-APR"/>
                             <constraint firstAttribute="trailing" secondItem="BBI-3e-PvK" secondAttribute="trailing" constant="8" id="zwI-in-PXP"/>
                         </constraints>
                     </view>
@@ -140,8 +119,6 @@
                 <outlet property="osrValue" destination="5X0-Z5-c11" id="P92-wH-SGJ"/>
                 <outlet property="runningDaysValue" destination="Bp5-qo-7lw" id="eEm-0U-6tf"/>
                 <outlet property="startValue" destination="azV-ZA-cfB" id="U5W-vW-5ze"/>
-                <outlet property="stateContainer" destination="WIv-Cl-9qK" id="05h-sI-nAg"/>
-                <outlet property="statusValue" destination="r2B-kI-QId" id="xpf-jO-EB1"/>
             </connections>
             <point key="canvasLocation" x="479" y="300"/>
         </tableViewCell>

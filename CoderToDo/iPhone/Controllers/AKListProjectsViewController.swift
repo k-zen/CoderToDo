@@ -161,14 +161,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         else {
             cell.addTomorrowTask.isHidden = true
         }
-        // Project State
-        cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
-        Func.AKAddBorderDeco(
-            cell.statusValue,
-            color: Func.AKGetColorForProjectStatus(projectStatus: DataInterface.getProjectStatus(project: project)).cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness,
-            position: .bottom
-        )
         // Times
         if let startingTime = project.startingTime as? Date {
             cell.startValue.text = String(
@@ -213,11 +205,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             filterType: self.filterType,
             filterValue: self.filterValue,
             searchTerm: self.searchTerm)[section]
+        let projectStatus = DataInterface.getProjectStatus(project: project)
         
         let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
-        let badgeSizeWidth = CGFloat(130.0)
-        let badgeSizeHeight = CGFloat(21.0)
+        let firstBadgeSizeWidth = CGFloat(100.0)
+        let firstBadgeSizeHeight = CGFloat(21.0)
+        let secondBadgeSizeWidth = CGFloat(60.0)
+        let secondBadgeSizeHeight = CGFloat(21.0)
+        let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -229,9 +225,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         )
         
         let title = UILabel(frame: CGRect(
-            x: padding * 2,
-            y: 0,
-            width: tableWidth - (padding * 3) - badgeSizeWidth,
+            x: padding * 2.0,
+            y: 0.0,
+            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
@@ -242,37 +238,67 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // title.layer.borderColor = UIColor.white.cgColor
         // title.layer.borderWidth = 1.0
         
-        let pendingTasksBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - badgeSizeWidth,
-            y: 0,
-            width: badgeSizeWidth,
+        let firstBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
+            y: 0.0,
+            width: firstBadgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         // ### DEBUG
-        // pendingTasksBadgeContainer.layer.borderColor = UIColor.white.cgColor
-        // pendingTasksBadgeContainer.layer.borderWidth = 1.0
+        // firstBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // firstBadgeContainer.layer.borderWidth = 1.0
         
-        let pendingTasksBadge = UILabel(frame: CGRect(
-            x: pendingTasksBadgeContainer.frame.width - badgeSizeWidth,
-            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
-            width: badgeSizeWidth,
-            height: badgeSizeHeight)
+        let firstBadge = UILabel(frame: CGRect(
+            x: firstBadgeContainer.frame.width - firstBadgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - firstBadgeSizeHeight) / 2.0,
+            width: firstBadgeSizeWidth,
+            height: firstBadgeSizeHeight)
         )
-        pendingTasksBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 14.0)
-        pendingTasksBadge.textColor = GlobalConstants.AKBadgeColorFg
-        pendingTasksBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
-        pendingTasksBadge.text = String(format: "Pending Tasks: %i", DataInterface.countProjectPendingTasks(project: project))
-        pendingTasksBadge.textAlignment = .right
-        pendingTasksBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        pendingTasksBadge.layer.masksToBounds = true
+        firstBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 14.0)
+        firstBadge.textColor = GlobalConstants.AKBadgeColorFg
+        firstBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        firstBadge.text = String(format: "Pending Tasks: %i", DataInterface.countProjectPendingTasks(project: project))
+        firstBadge.textAlignment = .center
+        firstBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        firstBadge.layer.masksToBounds = true
         // ### DEBUG
-        // pendingTasksBadge.layer.borderColor = UIColor.white.cgColor
-        // pendingTasksBadge.layer.borderWidth = 1.0
+        // firstBadge.layer.borderColor = UIColor.white.cgColor
+        // firstBadge.layer.borderWidth = 1.0
         
-        pendingTasksBadgeContainer.addSubview(pendingTasksBadge)
+        firstBadgeContainer.addSubview(firstBadge)
+        
+        let secondBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - secondBadgeSizeWidth,
+            y: 0.0,
+            width: secondBadgeSizeWidth,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        // ### DEBUG
+        // secondBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // secondBadgeContainer.layer.borderWidth = 1.0
+        
+        let secondBadge = UILabel(frame: CGRect(
+            x: secondBadgeContainer.frame.width - secondBadgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - secondBadgeSizeHeight) / 2.0,
+            width: secondBadgeSizeWidth,
+            height: secondBadgeSizeHeight)
+        )
+        secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+        secondBadge.textColor = GlobalConstants.AKBadgeColorFg
+        secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
+        secondBadge.text = String(format: "%@", projectStatus.rawValue)
+        secondBadge.textAlignment = .center
+        secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        secondBadge.layer.masksToBounds = true
+        // ### DEBUG
+        // secondBadge.layer.borderColor = UIColor.white.cgColor
+        // secondBadge.layer.borderWidth = 1.0
+        
+        secondBadgeContainer.addSubview(secondBadge)
         
         headerCell.addSubview(title)
-        headerCell.addSubview(pendingTasksBadgeContainer)
+        headerCell.addSubview(firstBadgeContainer)
+        headerCell.addSubview(secondBadgeContainer)
         
         return headerCell
     }
