@@ -523,6 +523,20 @@ class UtilityFunctions
     
     func AKGetCloudKitContainer() -> CKContainer { return Func.AKDelegate().cloudKitContainer }
     
+    func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor
+    {
+        switch projectStatus {
+        case .ACEPTING_TASKS:
+            return GlobalConstants.AKBlueForWhiteFg
+        case .OPEN:
+            return GlobalConstants.AKGreenForWhiteFg
+        case .CLOSED:
+            return GlobalConstants.AKRedForWhiteFg
+        case .FIRST_DAY:
+            return GlobalConstants.AKOrangeForWhiteFg
+        }
+    }
+    
     func AKGetColorForTaskState(taskState: String) -> UIColor
     {
         switch taskState {
@@ -541,10 +555,7 @@ class UtilityFunctions
         }
     }
     
-    func AKGetNotificationCenter() -> UNUserNotificationCenter
-    {
-        return Func.AKDelegate().notificationCenter
-    }
+    func AKGetNotificationCenter() -> UNUserNotificationCenter { return Func.AKDelegate().notificationCenter }
     
     ///
     /// Computes and generates a **UIColor** object based
@@ -579,10 +590,7 @@ class UtilityFunctions
     ///
     /// - Returns: The App's master file object.
     ///
-    func AKObtainMasterReference() -> AKMasterReference?
-    {
-        return Func.AKDelegate().masterRef
-    }
+    func AKObtainMasterReference() -> AKMasterReference? { return Func.AKDelegate().masterRef }
     
     ///
     /// This method checks if a file archive exists and if it does then return its URL.
@@ -691,16 +699,14 @@ class UtilityFunctions
     
     func AKReloadTableWithAnimation(tableView: UITableView)
     {
-        Func.AKExecuteInMainThread {
-            UIView.transition(
-                with: tableView,
-                duration: 0.75,
-                options: .transitionCrossDissolve,
-                animations: {
-                    tableView.reloadData() },
-                completion: nil
-            )
-        }
+        UIView.transition(
+            with: tableView,
+            duration: 0.75,
+            options: .transitionCrossDissolve,
+            animations: {
+                tableView.reloadData() },
+            completion: nil
+        )
     }
     
     ///

@@ -1,8 +1,9 @@
-=================== Release 1.0 2017-03-01 =====================
+=================== Release 1.0 2017-03-31 =====================
 Description
     * First version of the App.
 Changes
-    * Version 1.0 Build 01 (2017/03/01)
+    * Version 1.0 Build 01 (2017/03/31)
+        * Added support to show project state inside the project's view as a badge. (2017/03/09)
         * Added support for animating table changes. (2017/03/08)
         * Corrected bug where menu items where not collapsing on themselves. (2017/03/08)
         * Corrected bug where menu items overlap each other. (2017/03/08)

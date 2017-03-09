@@ -60,6 +60,16 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.customSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        Func.AKReloadTableWithAnimation(tableView: self.daysTable)
+        for customCell in self.customCellArray {
+            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let identifier = segue.identifier {
@@ -153,11 +163,16 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         let day = DataInterface.getDays(project: self.project)[section]
+        let isToday = DataInterface.isDayToday(day: day)
+        let projectStatus = DataInterface.getProjectStatus(project: day.project!)
         
         let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
-        let badgeSizeWidth = CGFloat(60.0)
-        let badgeSizeHeight = CGFloat(21.0)
+        let firstBadgeSizeWidth = CGFloat(60.0)
+        let firstBadgeSizeHeight = CGFloat(21.0)
+        let secondBadgeSizeWidth = CGFloat(60.0)
+        let secondBadgeSizeHeight = CGFloat(21.0)
+        let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
@@ -169,9 +184,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         )
         
         let title = UILabel(frame: CGRect(
-            x: padding * 2,
-            y: 0,
-            width: tableWidth - (padding * 3) - badgeSizeWidth,
+            x: padding * 2.0,
+            y: 0.0,
+            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - (isToday ? secondBadgeSizeWidth : 0.0) - (isToday ? paddingBetweenBadges : 0.0),
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
@@ -182,37 +197,69 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // title.layer.borderColor = UIColor.white.cgColor
         // title.layer.borderWidth = 1.0
         
-        let srBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - (badgeSizeWidth),
-            y: 0,
-            width: badgeSizeWidth,
+        let firstBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - firstBadgeSizeWidth - (isToday ? secondBadgeSizeWidth : 0.0) - (isToday ? paddingBetweenBadges : 0.0),
+            y: 0.0,
+            width: firstBadgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
         )
         // ### DEBUG
-        // srBadgeContainer.layer.borderColor = UIColor.white.cgColor
-        // srBadgeContainer.layer.borderWidth = 1.0
+        // firstBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // firstBadgeContainer.layer.borderWidth = 1.0
         
-        let srBadge = UILabel(frame: CGRect(
-            x: srBadgeContainer.frame.width - (badgeSizeWidth),
-            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
-            width: badgeSizeWidth,
-            height: badgeSizeHeight)
+        let firstBadge = UILabel(frame: CGRect(
+            x: firstBadgeContainer.frame.width - firstBadgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - firstBadgeSizeHeight) / 2.0,
+            width: firstBadgeSizeWidth,
+            height: firstBadgeSizeHeight)
         )
-        srBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        srBadge.textColor = GlobalConstants.AKBadgeColorFg
-        srBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
-        srBadge.text = String(format: "SR: %.2f%%", DataInterface.computeSRForDay(day: day))
-        srBadge.textAlignment = .center
-        srBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        srBadge.layer.masksToBounds = true
+        firstBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+        firstBadge.textColor = GlobalConstants.AKBadgeColorFg
+        firstBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        firstBadge.text = String(format: "SR: %.2f%%", DataInterface.computeSRForDay(day: day))
+        firstBadge.textAlignment = .center
+        firstBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        firstBadge.layer.masksToBounds = true
         // ### DEBUG
-        // srBadge.layer.borderColor = UIColor.white.cgColor
-        // srBadge.layer.borderWidth = 1.0
+        // firstBadge.layer.borderColor = UIColor.white.cgColor
+        // firstBadge.layer.borderWidth = 1.0
         
-        srBadgeContainer.addSubview(srBadge)
+        firstBadgeContainer.addSubview(firstBadge)
+        
+        let secondBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - secondBadgeSizeWidth,
+            y: 0.0,
+            width: secondBadgeSizeWidth,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        // ### DEBUG
+        // secondBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // secondBadgeContainer.layer.borderWidth = 1.0
+        
+        let secondBadge = UILabel(frame: CGRect(
+            x: secondBadgeContainer.frame.width - secondBadgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - secondBadgeSizeHeight) / 2.0,
+            width: secondBadgeSizeWidth,
+            height: secondBadgeSizeHeight)
+        )
+        secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+        secondBadge.textColor = GlobalConstants.AKBadgeColorFg
+        secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
+        secondBadge.text = String(format: "%@", projectStatus.rawValue)
+        secondBadge.textAlignment = .center
+        secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        secondBadge.layer.masksToBounds = true
+        // ### DEBUG
+        // secondBadge.layer.borderColor = UIColor.white.cgColor
+        // secondBadge.layer.borderWidth = 1.0
+        
+        secondBadgeContainer.addSubview(secondBadge)
         
         headerCell.addSubview(title)
-        headerCell.addSubview(srBadgeContainer)
+        headerCell.addSubview(firstBadgeContainer)
+        if isToday {
+            headerCell.addSubview(secondBadgeContainer)
+        }
         
         return headerCell
     }

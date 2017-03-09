@@ -56,6 +56,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.customSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        Func.AKReloadTableWithAnimation(tableView: self.projectsTable)
+    }
+    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -156,40 +163,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         // Project State
         cell.statusValue.text = DataInterface.getProjectStatus(project: project).rawValue
-        switch DataInterface.getProjectStatus(project: project) {
-        case ProjectStatus.ACEPTING_TASKS:
-            Func.AKAddBorderDeco(
-                cell.statusValue,
-                color: GlobalConstants.AKBlueForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
-        case ProjectStatus.OPEN:
-            Func.AKAddBorderDeco(
-                cell.statusValue,
-                color: GlobalConstants.AKGreenForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
-        case ProjectStatus.CLOSED:
-            Func.AKAddBorderDeco(
-                cell.statusValue,
-                color: GlobalConstants.AKRedForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
-        case ProjectStatus.FIRST_DAY:
-            Func.AKAddBorderDeco(
-                cell.statusValue,
-                color: GlobalConstants.AKOrangeForWhiteFg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            break
-        }
+        Func.AKAddBorderDeco(
+            cell.statusValue,
+            color: Func.AKGetColorForProjectStatus(projectStatus: DataInterface.getProjectStatus(project: project)).cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness,
+            position: .bottom
+        )
         // Times
         if let startingTime = project.startingTime as? Date {
             cell.startValue.text = String(
