@@ -43,7 +43,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKListProjectsViewController {
                         controller.resetFilters(controller: controller)
-                        controller.projectsTable.reloadData()
+                        Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
                     } }
             )
         }
@@ -77,9 +77,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             
             return
         }
-        
-        // Always reload the table!
-        self.projectsTable?.reloadData()
     }
     
     override func viewDidLayoutSubviews()
@@ -353,13 +350,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                             ]
                         )
                         
-                        presenterController.projectsTable.reloadData()
+                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
-                        presenterController.projectsTable.reloadData()
+                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
@@ -402,7 +399,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                              taskBeforePresenting: { _,_ in },
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                 if let presenterController = presenterController as? AKListProjectsViewController {
-                                    presenterController.projectsTable.reloadData()
+                                    Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                                 } }
             )
         }
@@ -423,7 +420,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                 taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
-                                                        presenterController.projectsTable.reloadData()
+                                                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                                                     } }
                 )
             }

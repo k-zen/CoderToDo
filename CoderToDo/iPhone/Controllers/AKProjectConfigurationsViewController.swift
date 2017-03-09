@@ -100,7 +100,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
                 Func.AKPresentMessageFromError(controller: self, message: "\(error)", autoDismiss: true)
             }
             
-            self.configurationsTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: self.configurationsTable)
         })
         delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
         

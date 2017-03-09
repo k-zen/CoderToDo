@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/01)
+        * Added support for animating table changes. (2017/03/08)
         * Corrected bug where menu items where not collapsing on themselves. (2017/03/08)
         * Corrected bug where menu items overlap each other. (2017/03/08)
         * Corrected bug where when a menu item is closed it should return the view to its initial state. (2017/03/08)

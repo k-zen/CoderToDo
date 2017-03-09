@@ -75,7 +75,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
                 controller.filterValue = ProjectFilterStatus(rawValue: filterValue)!.rawValue
                 break
             }
-            controller.projectsTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
@@ -87,9 +87,9 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
                 controller.filterValue = TaskFilterStates(rawValue: filterValue)!.rawValue
                 break
             }
-            controller.daysTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                customCell.tasksTable?.reloadData()
+                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
             }
         }
     }

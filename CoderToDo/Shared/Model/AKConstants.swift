@@ -689,6 +689,20 @@ class UtilityFunctions
         return nil
     }
     
+    func AKReloadTableWithAnimation(tableView: UITableView)
+    {
+        Func.AKExecuteInMainThread {
+            UIView.transition(
+                with: tableView,
+                duration: 0.75,
+                options: .transitionCrossDissolve,
+                animations: {
+                    tableView.reloadData() },
+                completion: nil
+            )
+        }
+    }
+    
     ///
     /// Create an image with the form of a square.
     ///

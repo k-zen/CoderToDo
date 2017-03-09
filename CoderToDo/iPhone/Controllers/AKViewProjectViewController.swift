@@ -44,9 +44,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKViewProjectViewController {
                         controller.resetFilters(controller: controller)
-                        controller.daysTable.reloadData()
+                        Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
                         for customCell in controller.customCellArray {
-                            customCell.tasksTable?.reloadData()
+                            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
                         }
                     } }
             )
@@ -58,17 +58,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     {
         super.viewDidLoad()
         self.customSetup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Always reload the table!
-        self.daysTable?.reloadData()
-        for customCell in self.customCellArray {
-            customCell.tasksTable?.reloadData()
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -273,9 +262,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                 // Always reload the days table!
                                 if let presenterController = presenterController as? AKViewProjectViewController {
-                                    presenterController.daysTable.reloadData()
+                                    Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
                                     for customCell in presenterController.customCellArray {
-                                        customCell.tasksTable?.reloadData()
+                                        Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
                                     }
                                 } }
             )
@@ -315,9 +304,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     // Always reload the days table!
                                                     if let presenterController = presenterController as? AKViewProjectViewController {
-                                                        presenterController.daysTable.reloadData()
+                                                        Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
                                                         for customCell in presenterController.customCellArray {
-                                                            customCell.tasksTable?.reloadData()
+                                                            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
                                                         }
                                                     } }
                 )

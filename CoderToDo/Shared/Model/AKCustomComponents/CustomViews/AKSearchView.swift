@@ -22,13 +22,13 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
-            controller.projectsTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
-            controller.daysTable?.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                customCell.tasksTable?.reloadData()
+                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
             }
         }
     }
@@ -37,13 +37,13 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.searchTerm = Search.showAll.rawValue
-            controller.projectsTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.searchTerm = Search.showAll.rawValue
-            controller.daysTable?.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                customCell.tasksTable?.reloadData()
+                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
             }
         }
         

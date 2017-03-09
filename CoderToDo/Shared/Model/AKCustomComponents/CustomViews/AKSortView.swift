@@ -68,14 +68,14 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         if let controller = self.controller as? AKListProjectsViewController {
             controller.sortType = ProjectSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
             controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
-            controller.projectsTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.sortType = TaskSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
             controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
-            controller.daysTable.reloadData()
+            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                customCell.tasksTable?.reloadData()
+                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
             }
         }
     }
