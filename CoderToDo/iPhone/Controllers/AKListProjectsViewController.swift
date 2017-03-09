@@ -155,7 +155,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let runningDays = DataInterface.getProjectRunningDays(project: project)
         cell.runningDaysValue.text = String(format: "%i running %@", runningDays, runningDays > 1 ? "days" : "day")
         // Add Tomorrow Task
-        if DataInterface.getProjectStatus(project: project) == ProjectStatus.ACEPTING_TASKS || DataInterface.getProjectStatus(project: project) == ProjectStatus.FIRST_DAY {
+        if DataInterface.getProjectStatus(project: project) == .accepting || DataInterface.getProjectStatus(project: project) == .firstDay {
             cell.addTomorrowTask.isHidden = false
         }
         else {

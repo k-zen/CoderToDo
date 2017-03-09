@@ -23,18 +23,18 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKViewTaskViewController {
                         // Change caller button.
-                        presenterController.statusValue.setTitle(TaskStates.DONE.rawValue, for: .normal)
+                        presenterController.statusValue.setTitle(TaskStates.done.rawValue, for: .normal)
                         presenterController.changeCP.value = 100.0
                         presenterController.changeCP.isEnabled = false
                         presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
                         Func.AKAddBorderDeco(
                             presenterController.statusValue,
-                            color: Func.AKGetColorForTaskState(taskState: TaskStates.DONE.rawValue).cgColor,
+                            color: Func.AKGetColorForTaskState(taskState: TaskStates.done.rawValue).cgColor,
                             thickness: GlobalConstants.AKDefaultBorderThickness,
                             position: .bottom
                         )
                         // Toggle to not editable mode.
-                        presenterController.markTask(mode: TaskMode.NOT_EDITABLE)
+                        presenterController.markTask(mode: .notEditable)
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
@@ -53,10 +53,10 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if let controller = controller as? AKViewTaskViewController {
             // Change caller button.
-            controller.statusValue.setTitle(TaskStates.NOT_DONE.rawValue, for: .normal)
+            controller.statusValue.setTitle(TaskStates.notDone.rawValue, for: .normal)
             Func.AKAddBorderDeco(
                 controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.NOT_DONE.rawValue).cgColor,
+                color: Func.AKGetColorForTaskState(taskState: TaskStates.notDone.rawValue).cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )
@@ -74,18 +74,18 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKViewTaskViewController {
                         // Change caller button.
-                        presenterController.statusValue.setTitle(TaskStates.NOT_APPLICABLE.rawValue, for: .normal)
+                        presenterController.statusValue.setTitle(TaskStates.notApplicable.rawValue, for: .normal)
                         presenterController.changeCP.value = 100.0
                         presenterController.changeCP.isEnabled = false
                         presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
                         Func.AKAddBorderDeco(
                             presenterController.statusValue,
-                            color: Func.AKGetColorForTaskState(taskState: TaskStates.NOT_APPLICABLE.rawValue).cgColor,
+                            color: Func.AKGetColorForTaskState(taskState: TaskStates.notApplicable.rawValue).cgColor,
                             thickness: GlobalConstants.AKDefaultBorderThickness,
                             position: .bottom
                         )
                         // Toggle to not editable mode.
-                        presenterController.markTask(mode: TaskMode.NOT_EDITABLE)
+                        presenterController.markTask(mode: .notEditable)
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
@@ -104,10 +104,10 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if let controller = controller as? AKViewTaskViewController {
             // Change caller button.
-            controller.statusValue.setTitle(TaskStates.DILATE.rawValue, for: .normal)
+            controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
             Func.AKAddBorderDeco(
                 controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.DILATE.rawValue).cgColor,
+                color: Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue).cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )
@@ -121,10 +121,10 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if let controller = controller as? AKViewTaskViewController {
             // Change caller button.
-            controller.statusValue.setTitle(TaskStates.PENDING.rawValue, for: .normal)
+            controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)
             Func.AKAddBorderDeco(
                 controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.PENDING.rawValue).cgColor,
+                color: Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue).cgColor,
                 thickness: GlobalConstants.AKDefaultBorderThickness,
                 position: .bottom
             )

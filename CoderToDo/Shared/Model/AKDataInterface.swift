@@ -99,7 +99,7 @@ class AKDataInterface
                     for category in categories { // Foreach day iterate categories.
                         if let tasks = category.tasks?.allObjects as? [Task] {
                             for task in tasks { // Count pending tasks in each category.
-                                if task.state == TaskStates.PENDING.rawValue {
+                                if task.state == TaskStates.pending.rawValue {
                                     counter += 1
                                 }
                             }
@@ -167,24 +167,24 @@ class AKDataInterface
             let y2 = creationDateComponents.year ?? 0
             
             if nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
-                return ProjectStatus.FIRST_DAY
+                return .firstDay
             }
             // ###### FIRST DAY
             
             // ###### NORMAL DAY
             if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
-                return ProjectStatus.OPEN
+                return .open
             }
             else if nowHour >= closingTimeHour + Int(project.closingTimeTolerance) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
-                return ProjectStatus.ACEPTING_TASKS
+                return .accepting
             }
             else {
-                return ProjectStatus.CLOSED
+                return .closed
             }
             // ###### NORMAL DAY
         }
         
-        return ProjectStatus.CLOSED
+        return .closed
     }
     
     static func getProjectRunningDays(project: Project) -> Int
@@ -208,7 +208,7 @@ class AKDataInterface
             // Only one time we must allow this to happen. This modification is to allow the user
             // to create tasks for the current day!
             let tomorrow: Date!
-            if DataInterface.getProjectStatus(project: project) == ProjectStatus.FIRST_DAY {
+            if DataInterface.getProjectStatus(project: project) == .firstDay {
                 tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 0, to: now)!
             }
             else {
@@ -256,7 +256,7 @@ class AKDataInterface
                     // ready to start adding days while the working day is OPEN, and it's called FIRST_DAY.
                     // Only one time we must allow this to happen. This modification is to allow the user
                     // to create tasks for the current day!
-                    if DataInterface.getProjectStatus(project: project) == ProjectStatus.FIRST_DAY {
+                    if DataInterface.getProjectStatus(project: project) == .firstDay {
                         if GlobalConstants.AKDebug {
                             NSLog("=> INFO: WORKING DAY IS FIRST DAY. ADDING TODAY!")
                         }
@@ -490,7 +490,7 @@ class AKDataInterface
             for category in categories {
                 if let tasks = category.tasks?.allObjects as? [Task] {
                     for task in tasks {
-                        if task.state != TaskStates.DILATE.rawValue && task.state != TaskStates.NOT_APPLICABLE.rawValue {
+                        if task.state != TaskStates.dilate.rawValue && task.state != TaskStates.notApplicable.rawValue {
                             sr += (task.completionPercentage / 100.0)
                             counter += 1
                         }

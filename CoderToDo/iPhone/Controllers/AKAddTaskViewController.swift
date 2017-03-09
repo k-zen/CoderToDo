@@ -164,7 +164,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         // Set default values.
         self.categoryValue.selectRow(0, inComponent: 0, animated: true)
         
-        if DataInterface.getProjectStatus(project: self.project) == ProjectStatus.FIRST_DAY {
+        if DataInterface.getProjectStatus(project: self.project) == .firstDay {
             self.showMessage(
                 message: String(
                     format: "%@, since this is your first day, we've made an exception to our basic rule, and all tasks you add now up to closing time are going to be added for today.",
@@ -183,8 +183,8 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         // Custom L&F.
         self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.PENDING.rawValue)
-        self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.DILATE.rawValue)
+        self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
+        self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
         self.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

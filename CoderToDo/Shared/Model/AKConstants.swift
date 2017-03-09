@@ -217,10 +217,10 @@ enum SortingOrder: String {
 }
 
 enum ProjectStatus: String {
-    case OPEN = "Open"
-    case ACEPTING_TASKS = "Accepting"
-    case CLOSED = "Closed"
-    case FIRST_DAY = "First Day"
+    case open = "Open"
+    case accepting = "Accepting"
+    case closed = "Closed"
+    case firstDay = "First Day"
 }
 
 enum ProjectSorting: String {
@@ -248,11 +248,11 @@ enum DayStatus: String {
 }
 
 enum TaskStates: String {
-    case DONE = "Done"
-    case NOT_DONE = "Not Done"
-    case NOT_APPLICABLE = "Not Applicable"
-    case DILATE = "Dilate"
-    case PENDING = "Pending"
+    case done = "Done"
+    case notDone = "Not Done"
+    case notApplicable = "Not Applicable"
+    case dilate = "Dilate"
+    case pending = "Pending"
 }
 
 enum TaskSorting: String {
@@ -263,7 +263,7 @@ enum TaskSorting: String {
 }
 
 enum TaskFilter: String {
-    case state = "Task State"
+    case state = "State"
 }
 
 enum TaskFilterStates: String {
@@ -276,16 +276,16 @@ enum TaskFilterStates: String {
 }
 
 enum TaskStateColor: UInt {
-    case DONE = 0xB8BB26
-    case NOT_DONE = 0xFB4934
-    case NOT_APPLICABLE = 0x83A598
-    case DILATE = 0xFE8019
-    case PENDING = 0xFABD2F
+    case done = 0xB8BB26
+    case notDone = 0xFB4934
+    case notApplicable = 0x83A598
+    case dilate = 0xFE8019
+    case pending = 0xFABD2F
 }
 
 enum TaskMode: String {
-    case EDITABLE = "Editable"
-    case NOT_EDITABLE = "Not Editable"
+    case editable = "Editable"
+    case notEditable = "Not Editable"
 }
 
 enum MenuItems: Int {
@@ -526,13 +526,13 @@ class UtilityFunctions
     func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor
     {
         switch projectStatus {
-        case .ACEPTING_TASKS:
+        case .accepting:
             return GlobalConstants.AKBlueForWhiteFg
-        case .OPEN:
+        case .open:
             return GlobalConstants.AKGreenForWhiteFg
-        case .CLOSED:
+        case .closed:
             return GlobalConstants.AKRedForWhiteFg
-        case .FIRST_DAY:
+        case .firstDay:
             return GlobalConstants.AKOrangeForWhiteFg
         }
     }
@@ -540,16 +540,16 @@ class UtilityFunctions
     func AKGetColorForTaskState(taskState: String) -> UIColor
     {
         switch taskState {
-        case TaskStates.DILATE.rawValue:
-            return Func.AKHexColor(TaskStateColor.DILATE.rawValue)
-        case TaskStates.DONE.rawValue:
-            return Func.AKHexColor(TaskStateColor.DONE.rawValue)
-        case TaskStates.NOT_APPLICABLE.rawValue:
-            return Func.AKHexColor(TaskStateColor.NOT_APPLICABLE.rawValue)
-        case TaskStates.NOT_DONE.rawValue:
-            return Func.AKHexColor(TaskStateColor.NOT_DONE.rawValue)
-        case TaskStates.PENDING.rawValue:
-            return Func.AKHexColor(TaskStateColor.PENDING.rawValue)
+        case TaskStates.dilate.rawValue:
+            return Func.AKHexColor(TaskStateColor.dilate.rawValue)
+        case TaskStates.done.rawValue:
+            return Func.AKHexColor(TaskStateColor.done.rawValue)
+        case TaskStates.notApplicable.rawValue:
+            return Func.AKHexColor(TaskStateColor.notApplicable.rawValue)
+        case TaskStates.notDone.rawValue:
+            return Func.AKHexColor(TaskStateColor.notDone.rawValue)
+        case TaskStates.pending.rawValue:
+            return Func.AKHexColor(TaskStateColor.pending.rawValue)
         default:
             return UIColor.clear
         }

@@ -44,7 +44,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         // Task name.
         self.taskNameValue.text = self.task.name ?? "N\\A"
         // Task Status.
-        self.statusValue.setTitle(self.task.state ?? TaskStates.PENDING.rawValue, for: .normal)
+        self.statusValue.setTitle(self.task.state ?? TaskStates.pending.rawValue, for: .normal)
         Func.AKAddBorderDeco(
             self.statusValue,
             color: Func.AKGetColorForTaskState(taskState: self.task.state ?? "").cgColor,
@@ -101,19 +101,19 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         // Close Task if:
         //  day is not current.
         if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
-            self.markTask(mode: TaskMode.NOT_EDITABLE)
+            self.markTask(mode: .notEditable)
         }
         //  project not open.
         if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
-            self.markTask(mode: TaskMode.NOT_EDITABLE)
+            self.markTask(mode: .notEditable)
         }
         //  task marked as "DONE".
-        if self.task.state == TaskStates.DONE.rawValue {
-            self.markTask(mode: TaskMode.NOT_EDITABLE)
+        if self.task.state == TaskStates.done.rawValue {
+            self.markTask(mode: .notEditable)
         }
         //  task marked as "NOT APPLICABLE".
-        if self.task.state == TaskStates.NOT_APPLICABLE.rawValue {
-            self.markTask(mode: TaskMode.NOT_EDITABLE)
+        if self.task.state == TaskStates.notApplicable.rawValue {
+            self.markTask(mode: .notEditable)
         }
     }
     
@@ -133,8 +133,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
         
         // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
-        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.NOT_APPLICABLE.rawValue {
-            self.task.state = TaskStates.DONE.rawValue
+        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.notApplicable.rawValue {
+            self.task.state = TaskStates.done.rawValue
         }
         else {
             self.task.state = self.statusValue.titleLabel?.text
@@ -225,13 +225,13 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     private func toggleEditMode(mode: TaskMode)
     {
         switch mode {
-        case TaskMode.EDITABLE:
+        case .editable:
             self.taskNameValue.isEditable = true
             self.statusValue.isEnabled = true
             self.changeCP.isEnabled = true
             self.changeCategory.isEnabled = true
             break
-        case TaskMode.NOT_EDITABLE:
+        case .notEditable:
             self.taskNameValue.isEditable = false
             self.statusValue.isEnabled = false
             self.changeCP.isEnabled = false

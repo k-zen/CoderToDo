@@ -28,19 +28,19 @@ class AKChecks
         if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) && !DataInterface.isBeforeOpen(project: (task.category?.day?.project)!) {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
-                if task.state == TaskStates.PENDING.rawValue {
+                if task.state == TaskStates.pending.rawValue {
                     if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
-                        task.state = TaskStates.NOT_DONE.rawValue
+                        task.state = TaskStates.notDone.rawValue
                     }
                 }
                 // Sanity check #2
-                if task.state == TaskStates.PENDING.rawValue && task.completionPercentage != task.initialCompletionPercentage {
+                if task.state == TaskStates.pending.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                     if let pendingQueue = task.category?.day?.project?.pendingQueue {
                         pendingQueue.addToTasks(task)
                     }
                 }
                 // Sanity check #3
-                if task.state == TaskStates.DILATE.rawValue {
+                if task.state == TaskStates.dilate.rawValue {
                     if let dilateQueue = task.category?.day?.project?.dilateQueue {
                         dilateQueue.addToTasks(task)
                     }
@@ -53,7 +53,7 @@ class AKChecks
     {
         // Check if it's outside Working Day or First Day.
         let projectStatus = DataInterface.getProjectStatus(project: project)
-        if projectStatus != ProjectStatus.ACEPTING_TASKS && projectStatus != ProjectStatus.FIRST_DAY {
+        if projectStatus != .accepting && projectStatus != .firstDay {
             throw Exceptions.invalidProjectStatus(String(format: "Cannot add task right now %@. Please check the rules in the Help tab.", DataInterface.getUsername()))
         }
         
