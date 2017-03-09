@@ -22,13 +22,29 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     @IBOutlet weak var search: UIButton!
     
     // MARK: Actions
-    @IBAction func add(_ sender: Any) { self.controller?.hideMessage(animate: true, completionTask: nil); self.addAction(self.controller) }
+    @IBAction func add(_ sender: Any)
+    {
+        self.controller?.hideMessage(animate: true, completionTask: nil)
+        self.addAction(self.controller)
+    }
     
-    @IBAction func sort(_ sender: Any) { self.controller?.hideMessage(animate: true, completionTask: nil); self.sortAction(self.controller) }
+    @IBAction func sort(_ sender: Any)
+    {
+        self.controller?.hideMessage(animate: true, completionTask: nil)
+        self.sortAction(self.controller)
+    }
     
-    @IBAction func filter(_ sender: Any) { self.controller?.hideMessage(animate: true, completionTask: nil); self.filterAction(self.controller) }
+    @IBAction func filter(_ sender: Any)
+    {
+        self.controller?.hideMessage(animate: true, completionTask: nil)
+        self.filterAction(self.controller)
+    }
     
-    @IBAction func search(_ sender: Any) { self.controller?.hideMessage(animate: true, completionTask: nil); self.searchAction(self.controller) }
+    @IBAction func search(_ sender: Any)
+    {
+        self.controller?.hideMessage(animate: true, completionTask: nil)
+        self.searchAction(self.controller)
+    }
     
     // MARK: UIView Overriding
     convenience init() { self.init(frame: CGRect.zero) }
