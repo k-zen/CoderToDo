@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Added support for a function to only migrate dilated tasks for the next day. (2017/03/09)
         * Added support to show project state inside the project's view as a badge. Also corrected flicker of tables. (2017/03/09)
         * Added support for animating table changes. (2017/03/08)
         * Corrected bug where menu items where not collapsing on themselves. (2017/03/08)

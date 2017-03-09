@@ -186,7 +186,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let title = UILabel(frame: CGRect(
             x: padding * 2.0,
             y: 0.0,
-            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - (isToday ? secondBadgeSizeWidth : 0.0) - (isToday ? paddingBetweenBadges : 0.0),
+            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
@@ -198,7 +198,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // title.layer.borderWidth = 1.0
         
         let firstBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - firstBadgeSizeWidth - (isToday ? secondBadgeSizeWidth : 0.0) - (isToday ? paddingBetweenBadges : 0.0),
+            x: tableWidth - padding - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             y: 0.0,
             width: firstBadgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
@@ -244,8 +244,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         )
         secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         secondBadge.textColor = GlobalConstants.AKBadgeColorFg
-        secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
-        secondBadge.text = String(format: "%@", projectStatus.rawValue)
+        if isToday {
+            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
+            secondBadge.text = String(format: "%@", projectStatus.rawValue)
+        }
+        else {
+            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .closed)
+            secondBadge.text = String(format: "%@", ProjectStatus.closed.rawValue)
+        }
         secondBadge.textAlignment = .center
         secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         secondBadge.layer.masksToBounds = true
@@ -257,9 +263,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         headerCell.addSubview(title)
         headerCell.addSubview(firstBadgeContainer)
-        if isToday {
-            headerCell.addSubview(secondBadgeContainer)
-        }
+        headerCell.addSubview(secondBadgeContainer)
         
         return headerCell
     }
