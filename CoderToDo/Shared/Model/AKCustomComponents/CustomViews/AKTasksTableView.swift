@@ -6,7 +6,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 30
         static let AKRowHeight: CGFloat = 40
-        static let AKFooterHeight: CGFloat = 0.25
+        static let AKFooterHeight: CGFloat = 1.0
     }
     
     // MARK: Properties
@@ -88,7 +88,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
             // Func.AKAddBorderDeco(
             //     cell.infoContainer,
             //     color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
@@ -103,7 +103,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKDefaultBg
+            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
             
             return cell
         }
@@ -128,7 +128,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 17.0)
-        title.textColor = Func.AKHexColor(0xB8B8B8)
+        title.textColor = GlobalConstants.AKCoderToDoGray1
         title.text = category.name ?? "N\\A"
         title.textAlignment = .left
         // ### DEBUG
@@ -138,7 +138,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         Func.AKAddBorderDeco(
             title,
             color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness,
+            thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
             position: .through
         )
         
@@ -159,8 +159,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             height: badgeSizeHeight)
         )
         tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
-        tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray3
+        tasksCountBadge.textColor = GlobalConstants.AKCoderToDoWhite2
+        tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray2
         if let controller = self.controller as? AKViewProjectViewController {
             tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(
                 category: category,

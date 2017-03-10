@@ -356,13 +356,13 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             pickerLabel.text = self.categoryData[row]
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         default:
             pickerLabel.text = ""
             break
         }
         
+        pickerLabel.backgroundColor = GlobalConstants.AKDefaultBg
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         

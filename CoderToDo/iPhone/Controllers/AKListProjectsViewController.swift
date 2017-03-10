@@ -7,6 +7,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 52.0
+        static let AKFooterHeight: CGFloat = 1.0
         static let AKDisplaceHeight: CGFloat = 40.0
     }
     
@@ -94,7 +95,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.menu.setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
-                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+                NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
             ], for: .normal
         )
     }
@@ -380,7 +381,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return LocalConstants.AKHeaderHeight }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

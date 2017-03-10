@@ -57,7 +57,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         }
         
         pickerLabel.textAlignment = .center
-        pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
+        pickerLabel.backgroundColor = GlobalConstants.AKDefaultBg
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         
         return pickerLabel

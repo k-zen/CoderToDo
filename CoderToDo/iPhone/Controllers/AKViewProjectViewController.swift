@@ -168,7 +168,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         let tableWidth = tableView.frame.width
         let padding = CGFloat(8.0)
-        let firstBadgeSizeWidth = CGFloat(60.0)
+        let firstBadgeSizeWidth = CGFloat(70.0)
         let firstBadgeSizeHeight = CGFloat(21.0)
         let secondBadgeSizeWidth = CGFloat(60.0)
         let secondBadgeSizeHeight = CGFloat(21.0)

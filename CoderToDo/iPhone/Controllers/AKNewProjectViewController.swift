@@ -221,18 +221,16 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             pickerLabel.text = String(format: "%i minutes", self.toleranceData[row])
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         case LocalEnums.startingTime.rawValue, LocalEnums.closingTime.rawValue:
             pickerLabel.text = self.workingDayTimeData[row]
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         default:
             pickerLabel.text = ""
-            pickerLabel.backgroundColor = GlobalConstants.AKCoderToDoGray3
             break
         }
         
+        pickerLabel.backgroundColor = GlobalConstants.AKDefaultBg
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         

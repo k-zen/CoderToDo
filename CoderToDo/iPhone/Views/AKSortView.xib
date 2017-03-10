@@ -26,7 +26,7 @@
                         <constraint firstAttribute="width" constant="60" id="a2t-kH-yiM"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
-                    <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Order_Value">
@@ -44,7 +44,7 @@
                     </constraints>
                 </pickerView>
             </subviews>
-            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="0qf-2h-y08"/>
                 <constraint firstItem="6au-lr-Gaa" firstAttribute="centerX" secondItem="Hxh-dk-0eJ" secondAttribute="centerX" constant="-115" id="850-2Y-HDm"/>
