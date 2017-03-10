@@ -172,11 +172,11 @@ class AKDataInterface
             // ###### FIRST DAY
             
             // ###### NORMAL DAY
-            if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
-                return .open
-            }
-            else if nowHour >= closingTimeHour + Int(project.closingTimeTolerance) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
+            if nowHour >= closingTimeHour && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
                 return .accepting
+            }
+            else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
+                return .open
             }
             else {
                 return .closed
