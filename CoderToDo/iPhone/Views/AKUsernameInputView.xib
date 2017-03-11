@@ -30,7 +30,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-BN-v9o" userLabel="Controls_Container">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="420"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon-83.5.png" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-Gm-I9g">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-Gm-I9g">
                                     <rect key="frame" x="108" y="7.5" width="84" height="84"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -103,6 +103,6 @@
         </view>
     </objects>
     <resources>
-        <image name="AppIcon-83.5.png" width="83" height="83"/>
+        <image name="Logo.png" width="167" height="167"/>
     </resources>
 </document>

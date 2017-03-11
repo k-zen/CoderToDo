@@ -46,6 +46,7 @@
 		49121BCE1E737480000B4D26 /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAB1E737480000B4D26 /* Icon-44@2x.png */; };
 		49121BCF1E737480000B4D26 /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAC1E737480000B4D26 /* Icon-86@2x.png */; };
 		49121BD01E737480000B4D26 /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAD1E737480000B4D26 /* Icon-98@2x.png */; };
+		49121BD21E73765D000B4D26 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BD11E73765D000B4D26 /* Logo.png */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
 		4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */; };
@@ -152,6 +153,7 @@
 		49121BAB1E737480000B4D26 /* Icon-44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-44@2x.png"; sourceTree = "<group>"; };
 		49121BAC1E737480000B4D26 /* Icon-86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-86@2x.png"; sourceTree = "<group>"; };
 		49121BAD1E737480000B4D26 /* Icon-98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-98@2x.png"; sourceTree = "<group>"; };
+		49121BD11E73765D000B4D26 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddCategoryView.xib; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				49121B881E737480000B4D26 /* AppIcon */,
+				49121BD11E73765D000B4D26 /* Logo.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				49121BC61E737480000B4D26 /* iTunesArtwork@1x.png in Resources */,
 				49121BCE1E737480000B4D26 /* Icon-44@2x.png in Resources */,
 				49121BC51E737480000B4D26 /* Icon-Small-50@2x.png in Resources */,
+				49121BD21E73765D000B4D26 /* Logo.png in Resources */,
 				49A4A0EE1E589E8600CEDA1B /* AKAddView.xib in Resources */,
 				49121BCA1E737480000B4D26 /* Icon-27.5@2x.png in Resources */,
 				4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */,

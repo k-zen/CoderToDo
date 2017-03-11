@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVA-jO-AB6" userLabel="Controls_Container">
                                 <rect key="frame" x="37" y="214" width="300" height="159"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon-83.5.png" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-Ul-Wjd">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-Ul-Wjd">
                                         <rect key="frame" x="108" y="7.5" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="CLk-2f-Oan"/>
@@ -83,6 +83,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AppIcon-83.5.png" width="83" height="83"/>
+        <image name="Logo.png" width="167" height="167"/>
     </resources>
 </document>
