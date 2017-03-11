@@ -59,7 +59,7 @@ class AKAddViewController: AKCustomViewController
         
         // Custom L&F.
         self.controlsContainer.layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.controlsContainer.layer.borderColor = UIColor.black.cgColor
+        self.controlsContainer.layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
     }
     
     // MARK: Miscellaneous
