@@ -35,7 +35,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         catch Exceptions.emptyData(let error) {
             if self.migrate.isOn {
                 self.showContinueMessage(
-                    message: "Would you like to \"only\" migrate dilated tasks...?",
+                    message: "Would you like to \"only\" migrate tasks...?",
                     yesButtonTitle: "Yes",
                     noButtonTitle: "No",
                     yesAction: { (presenterController) -> Void in
