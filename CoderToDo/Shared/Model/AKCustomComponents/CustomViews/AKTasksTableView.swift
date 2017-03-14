@@ -23,7 +23,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         if let controller = self.controller as? AKViewProjectViewController {
-            let category = DataInterface.getCategories(day: self.day!)[(indexPath as NSIndexPath).section]
+            let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[(indexPath as NSIndexPath).section]
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[(indexPath as NSIndexPath).row]
             
             // Sanity Checks
@@ -105,75 +105,85 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let category = DataInterface.getCategories(day: self.day!)[section]
-        
-        let tableWidth = tableView.frame.width
-        let padding = CGFloat(8.0)
-        let badgeSizeWidth = CGFloat(60.0)
-        let badgeSizeHeight = CGFloat(21.0)
-        
-        let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-        headerCell.backgroundColor = GlobalConstants.AKDefaultBg
-        
-        let title = UILabel(frame: CGRect(
-            x: padding * 2,
-            y: 0,
-            width: tableWidth - (padding * 2), // Overlap badge!
-            height: LocalConstants.AKHeaderHeight)
-        )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 17.0)
-        title.textColor = GlobalConstants.AKCoderToDoGray1
-        title.text = category.name ?? "N\\A"
-        title.textAlignment = .left
-        // ### DEBUG
-        // title.layer.borderColor = UIColor.white.cgColor
-        // title.layer.borderWidth = 1.0
-        
-        Func.AKAddBorderDeco(
-            title,
-            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
-            position: .through
-        )
-        
-        let tasksCountBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - (badgeSizeWidth),
-            y: 0,
-            width: badgeSizeWidth,
-            height: LocalConstants.AKHeaderHeight)
-        )
-        // ### DEBUG
-        // tasksCountBadgeContainer.layer.borderColor = UIColor.white.cgColor
-        // tasksCountBadgeContainer.layer.borderWidth = 1.0
-        
-        let tasksCountBadge = UILabel(frame: CGRect(
-            x: tasksCountBadgeContainer.frame.width - (badgeSizeWidth),
-            y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
-            width: badgeSizeWidth,
-            height: badgeSizeHeight)
-        )
-        tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        tasksCountBadge.textColor = GlobalConstants.AKCoderToDoWhite2
-        tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray2
         if let controller = self.controller as? AKViewProjectViewController {
-            tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(category: category, filter: controller.taskFilter).count)
+            let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[section]
+            
+            let tableWidth = tableView.frame.width
+            let padding = CGFloat(8.0)
+            let badgeSizeWidth = CGFloat(60.0)
+            let badgeSizeHeight = CGFloat(21.0)
+            
+            let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
+            headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+            
+            let title = UILabel(frame: CGRect(
+                x: padding * 2,
+                y: 0,
+                width: tableWidth - (padding * 2), // Overlap badge!
+                height: LocalConstants.AKHeaderHeight)
+            )
+            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 17.0)
+            title.textColor = GlobalConstants.AKCoderToDoGray1
+            title.text = category.name ?? "N\\A"
+            title.textAlignment = .left
+            // ### DEBUG
+            // title.layer.borderColor = UIColor.white.cgColor
+            // title.layer.borderWidth = 1.0
+            
+            Func.AKAddBorderDeco(
+                title,
+                color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
+                position: .through
+            )
+            
+            let tasksCountBadgeContainer = UIView(frame: CGRect(
+                x: tableWidth - padding - (badgeSizeWidth),
+                y: 0,
+                width: badgeSizeWidth,
+                height: LocalConstants.AKHeaderHeight)
+            )
+            // ### DEBUG
+            // tasksCountBadgeContainer.layer.borderColor = UIColor.white.cgColor
+            // tasksCountBadgeContainer.layer.borderWidth = 1.0
+            
+            let tasksCountBadge = UILabel(frame: CGRect(
+                x: tasksCountBadgeContainer.frame.width - (badgeSizeWidth),
+                y: (LocalConstants.AKHeaderHeight - badgeSizeHeight) / 2.0,
+                width: badgeSizeWidth,
+                height: badgeSizeHeight)
+            )
+            tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+            tasksCountBadge.textColor = GlobalConstants.AKCoderToDoWhite2
+            tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray2
+            if let controller = self.controller as? AKViewProjectViewController {
+                tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(category: category, filter: controller.taskFilter).count)
+            }
+            else {
+                tasksCountBadge.text = String(format: "Tasks: %i", 0)
+            }
+            tasksCountBadge.textAlignment = .center
+            tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            tasksCountBadge.layer.masksToBounds = true
+            // ### DEBUG
+            // tasksCountBadge.layer.borderColor = UIColor.white.cgColor
+            // tasksCountBadge.layer.borderWidth = 1.0
+            
+            tasksCountBadgeContainer.addSubview(tasksCountBadge)
+            
+            headerCell.addSubview(title)
+            headerCell.addSubview(tasksCountBadgeContainer)
+            
+            return headerCell
         }
         else {
-            tasksCountBadge.text = String(format: "Tasks: %i", 0)
+            let tableWidth = tableView.frame.width
+            
+            let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
+            headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+            
+            return headerCell
         }
-        tasksCountBadge.textAlignment = .center
-        tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        tasksCountBadge.layer.masksToBounds = true
-        // ### DEBUG
-        // tasksCountBadge.layer.borderColor = UIColor.white.cgColor
-        // tasksCountBadge.layer.borderWidth = 1.0
-        
-        tasksCountBadgeContainer.addSubview(tasksCountBadge)
-        
-        headerCell.addSubview(title)
-        headerCell.addSubview(tasksCountBadgeContainer)
-        
-        return headerCell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
@@ -187,7 +197,12 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int
     {
         if let day = self.day {
-            return DataInterface.getCategories(day: day).count
+            if let controller = self.controller as? AKViewProjectViewController {
+                return DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter).count
+            }
+            else {
+                return 0
+            }
         }
         else {
             return 0
@@ -197,7 +212,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
-            let category = DataInterface.getCategories(day: day)[section]
+            let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[section]
             
             return DataInterface.getTasks(category: category, filter: controller.taskFilter).count
         }
@@ -218,7 +233,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
-            let category = DataInterface.getCategories(day: day)[(indexPath as NSIndexPath).section]
+            let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[(indexPath as NSIndexPath).section]
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[(indexPath as NSIndexPath).row]
             controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
         }

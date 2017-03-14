@@ -370,7 +370,7 @@ class AKDataInterface
     }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
-    static func getDays(project: Project) -> [Day]
+    static func getDays(project: Project, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Day]
     {
         if let days = project.days?.allObjects as? [Day] {
             return days.sorted {
@@ -379,7 +379,14 @@ class AKDataInterface
                 let n2 = $1.date as? Date ?? now
                 
                 return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
-            }
+                }.filter({ (day) -> Bool in
+                    if filterEmpty {
+                        return DataInterface.countTasksInDay(day: day, filter: filter) > 0
+                    }
+                    else {
+                        return true
+                    }
+                })
         }
         
         return []
@@ -387,7 +394,10 @@ class AKDataInterface
     
     static func getDayOfTask(task: Task?) -> Day? { return task?.category?.day ?? nil }
     
-    static func countDays(project: Project) -> Int { return project.days?.count ?? 0 }
+    static func countDays(project: Project, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int
+    {
+        return DataInterface.getDays(project: project, filterEmpty: filterEmpty, filter: filter).count
+    }
     
     static func getDayTitle(day: Day) -> String
     {
@@ -537,7 +547,7 @@ class AKDataInterface
         }
     }
     
-    static func getCategories(day: Day) -> [Category]
+    static func getCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Category]
     {
         if let categories = day.categories?.allObjects as? [Category] {
             return categories.sorted {
@@ -545,7 +555,14 @@ class AKDataInterface
                 let n2 = $1.name ?? ""
                 
                 return n1 < n2
-            }
+                }.filter({ (category) -> Bool in
+                    if filterEmpty {
+                        return DataInterface.countTasksInCategory(category: category, filter: filter) > 0
+                    }
+                    else {
+                        return true
+                    }
+                })
         }
         
         return []
@@ -564,7 +581,10 @@ class AKDataInterface
         return nil
     }
     
-    static func countCategories(day: Day) -> Int { return day.categories?.count ?? 0 }
+    static func countCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int
+    {
+        return DataInterface.getCategories(day: day, filterEmpty: filterEmpty, filter: filter).count
+    }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
     static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) throws -> Bool
@@ -838,7 +858,7 @@ class AKDataInterface
         return []
     }
     
-    static func countPendingTasks(project: Project) -> Int { return project.pendingQueue?.tasks?.count ?? 0 }
+    static func countPendingTasks(project: Project) -> Int { return DataInterface.getPendingTasks(project: project).count }
     
     static func addDilateTask(task: Task) -> Bool
     {
@@ -865,7 +885,7 @@ class AKDataInterface
         return []
     }
     
-    static func countDilateTasks(project: Project) -> Int { return project.dilateQueue?.tasks?.count ?? 0 }
+    static func countDilateTasks(project: Project) -> Int { return DataInterface.getDilateTasks(project: project).count }
     // ########## TASK'S FUNCTIONS ########## //
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
     static func listProjectCategories(project: Project) -> [String]
@@ -882,7 +902,7 @@ class AKDataInterface
         return []
     }
     
-    static func countProjectCategories(project: Project) -> Int { return project.projectCategories?.count ?? 0 }
+    static func countProjectCategories(project: Project) -> Int { return DataInterface.listProjectCategories(project: project).count }
     
     ///
     /// Searches for a given project category inside a given project and returns it if it's found or

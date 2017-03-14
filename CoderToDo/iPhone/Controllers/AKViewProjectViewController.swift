@@ -98,12 +98,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         // First we check which section we are. That means which day we are referencing.
-        let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
+        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[(indexPath as NSIndexPath).section]
         
         // If the count of categories is bigger than 0, it means there are tasks. Else show empty day cell.
-        if DataInterface.countCategories(day: day) > 0 {
+        if DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter) > 0 {
             // Calculate cell height.
-            let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+            let cellHeight = (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
                 (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
@@ -152,7 +152,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let day = DataInterface.getDays(project: self.project)[section]
+        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[section]
         let isToday = DataInterface.isDayToday(day: day)
         let projectStatus = DataInterface.getProjectStatus(project: day.project!)
         
@@ -258,7 +258,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.countDays(project: self.project) }
+    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.countDays(project: self.project, filterEmpty: true, filter: self.taskFilter) }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -267,12 +267,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: UITableViewDelegate Implementation
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        let day = DataInterface.getDays(project: self.project)[(indexPath as NSIndexPath).section]
-        if DataInterface.countCategories(day: day) <= 0 {
+        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[(indexPath as NSIndexPath).section]
+        if DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter) <= 0 {
             return LocalConstants.AKEmptyRowHeight
         }
         else {
-            return (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+            return (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
                 (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
