@@ -3,6 +3,8 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Improved support for filters. Added base support for XML backups. The marshall function is ready, only the unmarshall one is missing. Added support to compute MD5 hash of the DB data and the XML export. Added support for only access to the DB via the Interface. (2017/03/14)
+        * Added external libraries for XML parsing. (2017/03/14)
         * Added support to migrate pending tasks too using migrate only check. (2017/03/10)
         * Mayor change to the L&F of the App. (2017/03/10)
         * Removed support to include tolerance in period of accepting tasks. (2017/03/10)

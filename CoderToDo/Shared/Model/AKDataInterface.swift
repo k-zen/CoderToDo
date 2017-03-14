@@ -7,82 +7,88 @@ class AKDataInterface
     ///
     /// - Returns: The user data structure.
     ///
-    static func getUser() -> User? { return Func.AKObtainMasterReference()?.user }
+    static func getUser() -> User? { return Func.AKObtainMasterReference()?.getUser() }
     
     static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
     
     // ########## PROJECT'S FUNCTIONS ########## //
-    static func getProjects(
-        sortBy: ProjectSorting,
-        sortOrder: SortingOrder,
-        filterType: ProjectFilter,
-        filterValue: String,
-        searchTerm: String) -> [Project]
+    ///
+    /// Computes the list of projects using filters passed in by the user, or default
+    /// filters if none had been set.
+    ///
+    /// - Parameter filter: The filter to be used in the list.
+    ///
+    /// - Returns: A list of projects.
+    ///
+    static func getProjects(filter: Filter) -> [Project]
     {
-        if let projects = DataInterface.getUser()?.project?.allObjects as? [Project] {
-            switch sortBy {
-            case ProjectSorting.closingTime:
-                switch filterType {
-                case ProjectFilter.status:
-                    return projects.filter({ (project) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
-                    }).filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
-                    }).sorted {
+        // Check the filter.
+        if let projectFilter = filter.projectFilter {
+            if let projects = DataInterface.getUser()?.project?.allObjects as? [Project] {
+                // The total projects.
+                var result = projects
+                
+                // Sort projects.
+                switch projectFilter.sortType {
+                case .closingTime:
+                    result = result.sorted {
                         let now = Date()
                         let n1 = $0.closingTime as? Date ?? now
                         let n2 = $1.closingTime as? Date ?? now
                         
-                        return sortOrder == SortingOrder.descending ?
+                        return projectFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
-                }
-            case ProjectSorting.creationDate:
-                switch filterType {
-                case ProjectFilter.status:
-                    return projects.filter({ (project) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
-                    }).filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
-                    }).sorted {
+                    break
+                case .creationDate:
+                    result = result.sorted {
                         let now = Date()
                         let n1 = $0.creationDate as? Date ?? now
                         let n2 = $1.creationDate as? Date ?? now
                         
-                        return sortOrder == SortingOrder.descending ?
+                        return projectFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
-                }
-            case ProjectSorting.name:
-                switch filterType {
-                case ProjectFilter.status:
-                    return projects.filter({ (project) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
-                    }).filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
-                    }).sorted {
+                    break
+                case .name:
+                    result = result.sorted {
                         let n1 = $0.name ?? ""
                         let n2 = $1.name ?? ""
                         
-                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return projectFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
-                }
-            case ProjectSorting.osr:
-                switch filterType {
-                case ProjectFilter.status:
-                    return projects.filter({ (project) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ? true : project.name?.lowercased().range(of: searchTerm.lowercased()) != nil
-                    }).filter({ (project) -> Bool in
-                        let value = ProjectFilterStatus(rawValue: filterValue)!; return value == ProjectFilterStatus.none ? true : DataInterface.getProjectStatus(project: project).rawValue == value.rawValue
-                    }).sorted {
+                    break
+                case .osr:
+                    result = result.sorted {
                         let n1 = $0.osr
                         let n2 = $1.osr
                         
-                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return projectFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
+                    break
                 }
+                
+                // Filter projects.
+                switch projectFilter.filterType {
+                case .status:
+                    result = result.filter({ (project) -> Bool in
+                        return projectFilter.filterValue == .none ? true : DataInterface.getProjectStatus(project: project).rawValue == projectFilter.filterValue.rawValue
+                    })
+                    break
+                }
+                
+                // Match a search term.
+                switch projectFilter.searchTerm {
+                default:
+                    result = result.filter({ (project) -> Bool in
+                        return projectFilter.searchTerm.match(otherTerms: [project.name])
+                    })
+                    break
+                }
+                
+                return result
             }
         }
         
@@ -369,7 +375,7 @@ class AKDataInterface
         return []
     }
     
-    static func countDays(project: Project) -> Int { return project.days?.allObjects.count ?? 0 }
+    static func countDays(project: Project) -> Int { return project.days?.count ?? 0 }
     
     static func getDayTitle(day: Day) -> String
     {
@@ -532,116 +538,151 @@ class AKDataInterface
         return nil
     }
     
-    static func countCategories(day: Day) -> Int { return day.categories?.allObjects.count ?? 0 }
+    static func countCategories(day: Day) -> Int { return day.categories?.count ?? 0 }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func getTasks(
-        category: Category,
-        sortBy: TaskSorting,
-        sortOrder: SortingOrder,
-        filterType: TaskFilter,
-        filterValue: String,
-        searchTerm: String) -> [Task]
+    ///
+    /// Computes the list of tasks using filters passed in by the user, or default
+    /// filters if none had been set.
+    ///
+    /// - Parameter filter: The filter to be used in the list.
+    ///
+    /// - Returns: A list of tasks.
+    ///
+    static func getTasks(category: Category, filter: Filter) -> [Task]
     {
-        if let tasks = category.tasks?.allObjects as? [Task] {
-            switch sortBy {
-            case TaskSorting.completionPercentage:
-                switch filterType {
-                case TaskFilter.state:
-                    return tasks.filter({ (task) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
-                            true :
-                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
-                    }).filter({ (task) -> Bool in
-                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
-                    }).sorted {
+        // Check the filter.
+        if let taskFilter = filter.taskFilter {
+            if let tasks = category.tasks?.allObjects as? [Task] {
+                var result = tasks
+                
+                // Sort tasks.
+                switch taskFilter.sortType {
+                case .completionPercentage:
+                    result = result.sorted {
                         let n1 = $0.completionPercentage
                         let n2 = $1.completionPercentage
                         
-                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return taskFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
-                }
-            case TaskSorting.creationDate:
-                switch filterType {
-                case TaskFilter.state:
-                    return tasks.filter({ (task) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
-                            true :
-                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
-                    }).filter({ (task) -> Bool in
-                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
-                    }).sorted {
+                    break
+                case .creationDate:
+                    result = result.sorted {
                         let now = Date()
                         let n1 = $0.creationDate as? Date ?? now
                         let n2 = $1.creationDate as? Date ?? now
                         
-                        return sortOrder == SortingOrder.descending ?
+                        return taskFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
                             (n1.compare(n2) == ComparisonResult.orderedAscending ? true : false)
                     }
-                }
-            case TaskSorting.name:
-                switch filterType {
-                case TaskFilter.state:
-                    return tasks.filter({ (task) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
-                            true :
-                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
-                    }).filter({ (task) -> Bool in
-                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
-                    }).sorted {
+                    break
+                case .name:
+                    result = result.sorted {
                         let n1 = $0.name ?? ""
                         let n2 = $1.name ?? ""
                         
-                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return taskFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
-                }
-            case TaskSorting.state:
-                switch filterType {
-                case TaskFilter.state:
-                    return tasks.filter({ (task) -> Bool in
-                        return searchTerm.compare(Search.showAll.rawValue) == .orderedSame ?
-                            true :
-                            (task.name?.lowercased().range(of: searchTerm.lowercased()) != nil || task.note?.lowercased().range(of: searchTerm.lowercased()) != nil)
-                    }).filter({ (task) -> Bool in
-                        let value = TaskFilterStates(rawValue: filterValue)!; return value == TaskFilterStates.none ? true : task.state?.caseInsensitiveCompare(value.rawValue) == .orderedSame
-                    }).sorted {
+                    break
+                case .state:
+                    result = result.sorted {
                         let n1 = $0.state ?? ""
                         let n2 = $1.state ?? ""
                         
-                        return sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
+                        return taskFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
+                    break
                 }
+                
+                switch taskFilter.filterType {
+                case .state:
+                    result = result.filter({ (task) -> Bool in
+                        return taskFilter.filterValue == .none ? true : task.state?.caseInsensitiveCompare(taskFilter.filterValue.rawValue) == .orderedSame
+                    })
+                    break
+                }
+                
+                switch taskFilter.searchTerm {
+                default:
+                    result = result.filter({ (task) -> Bool in
+                        return taskFilter.searchTerm.match(otherTerms: [task.name, task.note])
+                    })
+                    break
+                }
+                
+                return result
             }
         }
         
         return []
     }
     
-    static func countAllTasksInDay(
-        day: Day,
-        sortBy: TaskSorting = TaskSorting.creationDate,
-        sortOrder: SortingOrder = SortingOrder.descending,
-        filterType: TaskFilter = TaskFilter.state,
-        filterValue: String = TaskFilterStates.none.rawValue,
-        searchTerm: String = Search.showAll.rawValue) -> Int
+    ///
+    /// Counts all tasks in a given day. It respects the use of filters,
+    /// because sometimes we need to count tasks in a day which
+    /// had been filtered by the user.
+    ///
+    /// - Parameter day: The day where to count tasks.
+    /// - Parameter filter: The filter to be used in the list.
+    ///
+    /// - Returns: The task's count.
+    ///
+    static func countTasksInDay(day: Day, filter: Filter) -> Int
     {
         var counter = 0
-        
         if let categories = day.categories?.allObjects as? [Category] {
             for category in categories {
-                counter += DataInterface.getTasks(
-                    category: category,
-                    sortBy: sortBy,
-                    sortOrder: sortOrder,
-                    filterType: filterType,
-                    filterValue: filterValue,
-                    searchTerm: searchTerm).count
+                counter += DataInterface.getTasks(category: category, filter: filter).count
             }
         }
         
         return counter
     }
+    
+    ///
+    /// Counts all tasks in a given category. It respects the use of filters,
+    /// because sometimes we need to count tasks in a category which
+    /// had been filtered by the user.
+    ///
+    /// - Parameter category: The category where to count tasks.
+    /// - Parameter filter: The filter to be used in the list.
+    ///
+    /// - Returns: The task's count.
+    ///
+    static func countTasksInCategory(category: Category, filter: Filter) -> Int { return DataInterface.getTasks(category: category, filter: filter).count }
+    
+    static func getPendingTasks(project: Project) -> [Task]
+    {
+        if let tasks = project.pendingQueue?.tasks?.allObjects as? [Task] {
+            return tasks.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+            }
+        }
+        
+        return []
+    }
+    
+    static func countPendingTasks(project: Project) -> Int { return project.pendingQueue?.tasks?.count ?? 0 }
+    
+    static func getDilateTasks(project: Project) -> [Task]
+    {
+        if let tasks = project.dilateQueue?.tasks?.allObjects as? [Task] {
+            return tasks.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+            }
+        }
+        
+        return []
+    }
+    
+    static func countDilateTasks(project: Project) -> Int { return project.dilateQueue?.tasks?.count ?? 0 }
     // ########## TASK'S FUNCTIONS ########## //
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
     static func listProjectCategories(project: Project) -> [String]
@@ -658,10 +699,7 @@ class AKDataInterface
         return []
     }
     
-    static func countProjectCategories(project: Project) -> Int
-    {
-        return project.projectCategories?.allObjects.count ?? 0
-    }
+    static func countProjectCategories(project: Project) -> Int { return project.projectCategories?.count ?? 0 }
     
     static func getProjectCategoryByName(project: Project, name: String) -> ProjectCategory?
     {

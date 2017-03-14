@@ -12,11 +12,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: Properties
     var customCellArray = [AKTasksTableView]()
     var project: Project!
-    var sortType = TaskSorting.creationDate
-    var sortOrder = SortingOrder.descending
-    var filterType = TaskFilter.state
-    var filterValue = TaskFilterStates.none.rawValue
-    var searchTerm = Search.showAll.rawValue
+    var taskFilter = Filter(taskFilter: FilterTask())
     
     // MARK: Outlets
     @IBOutlet weak var navController: UINavigationItem!
@@ -108,13 +104,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         if DataInterface.countCategories(day: day) > 0 {
             // Calculate cell height.
             let cellHeight = (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countAllTasksInDay(
-                    day: day,
-                    sortBy: self.sortType,
-                    sortOrder: self.sortOrder,
-                    filterType: self.filterType,
-                    filterValue: self.filterValue,
-                    searchTerm: self.searchTerm)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
             
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
                 let customCell = AKTasksTableView()
@@ -283,13 +273,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
         else {
             return (CGFloat(DataInterface.countCategories(day: day)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countAllTasksInDay(
-                    day: day,
-                    sortBy: self.sortType,
-                    sortOrder: self.sortOrder,
-                    filterType: self.filterType,
-                    filterValue: self.filterValue,
-                    searchTerm: self.searchTerm)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
         }
     }
     
@@ -441,11 +425,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     func resetFilters(controller: AKCustomViewController) {
-        self.sortType = TaskSorting.creationDate
-        self.sortOrder = SortingOrder.descending
-        self.filterType  = TaskFilter.state
-        self.filterValue = TaskFilterStates.none.rawValue
-        self.searchTerm = Search.showAll.rawValue
+        self.taskFilter = Filter(taskFilter: FilterTask())
         
         controller.sortMenuItemOverlay.order.selectRow(1, inComponent: 0, animated: true)
         controller.sortMenuItemOverlay.filters.selectRow(1, inComponent: 0, animated: true)

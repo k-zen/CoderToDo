@@ -66,13 +66,13 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            controller.sortType = ProjectSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
-            controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
+            controller.projectFilter.projectFilter?.sortType = ProjectSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
+            controller.projectFilter.projectFilter?.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
             Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            controller.sortType = TaskSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
-            controller.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
+            controller.taskFilter.taskFilter?.sortType = TaskSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
+            controller.taskFilter.taskFilter?.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)

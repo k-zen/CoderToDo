@@ -69,10 +69,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
             let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
             let filterValue = self.filterValueData[self.filters.selectedRow(inComponent: 0)]
             
-            controller.filterType = ProjectFilter(rawValue: filterType)!
-            switch controller.filterType {
-            case ProjectFilter.status:
-                controller.filterValue = ProjectFilterStatus(rawValue: filterValue)!.rawValue
+            controller.projectFilter.projectFilter?.filterType = ProjectFilter(rawValue: filterType)!
+            switch (controller.projectFilter.projectFilter?.filterType)! {
+            case .status:
+                controller.projectFilter.projectFilter?.filterValue = ProjectFilterStatus(rawValue: filterValue)!
                 break
             }
             Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
@@ -81,10 +81,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
             let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
             let filterValue = self.filterValueData[self.filters.selectedRow(inComponent: 0)]
             
-            controller.filterType = TaskFilter(rawValue: filterType)!
-            switch controller.filterType {
-            case TaskFilter.state:
-                controller.filterValue = TaskFilterStates(rawValue: filterValue)!.rawValue
+            controller.taskFilter.taskFilter?.filterType = TaskFilter(rawValue: filterType)!
+            switch (controller.taskFilter.taskFilter?.filterType)! {
+            case .state:
+                controller.taskFilter.taskFilter?.filterValue = TaskFilterStates(rawValue: filterValue)!
                 break
             }
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)

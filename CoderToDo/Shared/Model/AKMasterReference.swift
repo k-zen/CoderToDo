@@ -5,9 +5,9 @@ class AKMasterReference: NSObject
 {
     // MARK: Properties
     /// The managed object context needed to handle the data.
-    let moc: NSManagedObjectContext
+    private let moc: NSManagedObjectContext
     /// This is the entry point to all data. Everything starts with the user data structure.
-    var user: User? = nil
+    private var user: User? = nil
     
     // MARK: Initializers
     override init()
@@ -27,23 +27,22 @@ class AKMasterReference: NSObject
     // MARK: Accessors
     func getMOC() -> NSManagedObjectContext { return self.moc }
     
+    func getUser() -> User? { return self.user }
+    
     // MARK: Utilities
     ///
     /// This function loads the data into memory from persistence.
     ///
     /// - Returns: A reference file to the data.
     ///
-    static func loadData() -> AKMasterReference
-    {
-        return AKMasterReference().dump()
-    }
+    static func loadData() -> AKMasterReference { return AKMasterReference() }
     
     ///
     /// This function saves the data from memory into persistance.
     ///
     /// - Parameter instance: The instance containing the data.
     ///
-    static func saveData(instance: AKMasterReference?) -> Void
+    static func saveData(instance: AKMasterReference?)
     {
         do {
             if (instance?.moc.hasChanges)! {
@@ -64,79 +63,72 @@ class AKMasterReference: NSObject
     ///
     /// - Returns: The self instance. Useful for concatenating calls.
     ///
-    func dump() -> AKMasterReference
+    func dump()
     {
-        NSLog("=> COREDATA DUMP ######")
-        NSLog("=>   USERNAME: %@", self.user?.username ?? "N\\A")
-        NSLog("=>   PROJECTS:")
-        let projects = (self.user?.project)!
-        for case let project as Project in projects {
-            NSLog("=>       CLOSING TIME: %@", project.closingTime?.description ?? "N\\A")
-            NSLog("=>       CLOSING TIME TOLERANCE: %i", project.closingTimeTolerance)
-            NSLog("=>       CREATION DATE: %@", project.creationDate?.description ?? "N\\A")
-            NSLog("=>       NAME: %@", project.name ?? "N\\A")
-            NSLog("=>       NOTIFY CLOSING TIME: %@", project.notifyClosingTime ? "YES" : "NO")
-            NSLog("=>       OSR: %.2f", project.osr)
-            NSLog("=>       STARTING TIME: %@", project.startingTime?.description ?? "N\\A")
-            NSLog("=>       PROJECT CATEGORIES: (%i)", project.projectCategories?.count ?? 0)
+        let data = NSMutableString()
+        data.appendFormat("=>   USERNAME: %@\n", DataInterface.getUsername())
+        data.appendFormat("=>   PROJECTS:\n")
+        for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
+            data.appendFormat("=>       CLOSING TIME: %@\n", project.closingTime?.description ?? "")
+            data.appendFormat("=>       CLOSING TIME TOLERANCE: %i\n", project.closingTimeTolerance)
+            data.appendFormat("=>       CREATION DATE: %@\n", project.creationDate?.description ?? "")
+            data.appendFormat("=>       NAME: %@\n", project.name ?? "")
+            data.appendFormat("=>       NOTIFY CLOSING TIME: %@\n", project.notifyClosingTime ? "YES" : "NO")
+            data.appendFormat("=>       OSR: %.2f\n", project.osr)
+            data.appendFormat("=>       STARTING TIME: %@\n", project.startingTime?.description ?? "")
+            data.appendFormat("=>       PROJECT CATEGORIES: (%i)\n", DataInterface.countProjectCategories(project: project))
             for projectCategory in DataInterface.listProjectCategories(project: project) {
-                NSLog("=>           NAME: %@", projectCategory)
+                data.appendFormat("=>           NAME: %@\n", projectCategory)
             }
-            NSLog("=>       PENDING QUEUE: (%i)", project.pendingQueue?.tasks?.count ?? 0)
-            if let tasksInQueue = project.pendingQueue?.tasks?.allObjects as? [Task] {
-                for taskInQueue in tasksInQueue {
-                    NSLog("=>           COMPLETION PERCENTAGE: %.2f", taskInQueue.completionPercentage)
-                    NSLog("=>           INITIAL COMPLETION PERCENTAGE: %.2f", taskInQueue.initialCompletionPercentage)
-                    NSLog("=>           CREATION DATE: %@", taskInQueue.creationDate?.description ?? "N\\A")
-                    NSLog("=>           NAME: %@", taskInQueue.name ?? "N\\A")
-                    NSLog("=>           NOTE: %@", taskInQueue.note ?? "N\\A")
-                    NSLog("=>           STATE: %@", taskInQueue.state ?? "N\\A")
-                    NSLog("=>           ------")
-                }
+            data.appendFormat("=>       PENDING QUEUE: (%i)\n", DataInterface.countPendingTasks(project: project))
+            for taskInQueue in DataInterface.getPendingTasks(project: project) {
+                data.appendFormat("=>           COMPLETION PERCENTAGE: %.2f\n", taskInQueue.completionPercentage)
+                data.appendFormat("=>           INITIAL COMPLETION PERCENTAGE: %.2f\n", taskInQueue.initialCompletionPercentage)
+                data.appendFormat("=>           CREATION DATE: %@\n", taskInQueue.creationDate?.description ?? "")
+                data.appendFormat("=>           NAME: %@\n", taskInQueue.name ?? "")
+                data.appendFormat("=>           NOTE: %@\n", taskInQueue.note ?? "")
+                data.appendFormat("=>           STATE: %@\n", taskInQueue.state ?? "")
+                data.appendFormat("=>           ------\n")
             }
-            NSLog("=>       DILATE QUEUE: (%i)", project.dilateQueue?.tasks?.count ?? 0)
-            if let tasksInQueue = project.dilateQueue?.tasks?.allObjects as? [Task] {
-                for taskInQueue in tasksInQueue {
-                    NSLog("=>           COMPLETION PERCENTAGE: %.2f", taskInQueue.completionPercentage)
-                    NSLog("=>           INITIAL COMPLETION PERCENTAGE: %.2f", taskInQueue.initialCompletionPercentage)
-                    NSLog("=>           CREATION DATE: %@", taskInQueue.creationDate?.description ?? "N\\A")
-                    NSLog("=>           NAME: %@", taskInQueue.name ?? "N\\A")
-                    NSLog("=>           NOTE: %@", taskInQueue.note ?? "N\\A")
-                    NSLog("=>           STATE: %@", taskInQueue.state ?? "N\\A")
-                    NSLog("=>           ------")
-                }
+            data.appendFormat("=>       DILATE QUEUE: (%i)\n", DataInterface.countDilateTasks(project: project))
+            for taskInQueue in DataInterface.getDilateTasks(project: project) {
+                data.appendFormat("=>           COMPLETION PERCENTAGE: %.2f\n", taskInQueue.completionPercentage)
+                data.appendFormat("=>           INITIAL COMPLETION PERCENTAGE: %.2f\n", taskInQueue.initialCompletionPercentage)
+                data.appendFormat("=>           CREATION DATE: %@\n", taskInQueue.creationDate?.description ?? "")
+                data.appendFormat("=>           NAME: %@\n", taskInQueue.name ?? "")
+                data.appendFormat("=>           NOTE: %@\n", taskInQueue.note ?? "")
+                data.appendFormat("=>           STATE: %@\n", taskInQueue.state ?? "")
+                data.appendFormat("=>           ------\n")
             }
-            NSLog("=>       DAYS: (%i)", DataInterface.countDays(project: project))
+            data.appendFormat("=>       DAYS: (%i)\n", DataInterface.countDays(project: project))
             for day in DataInterface.getDays(project: project) {
-                NSLog("=>           DATE: %@", day.date?.description ?? "N\\A")
-                NSLog("=>           SR: %.2f", day.sr)
-                NSLog("=>           CATEGORIES: (%i)", DataInterface.countCategories(day: day))
+                data.appendFormat("=>           DATE: %@\n", day.date?.description ?? "")
+                data.appendFormat("=>           SR: %.2f\n", day.sr)
+                data.appendFormat("=>           CATEGORIES: (%i)\n", DataInterface.countCategories(day: day))
                 for category in DataInterface.getCategories(day: day) {
-                    NSLog("=>               NAME: %@", category.name ?? "N\\A")
-                    NSLog("=>               TASKS: (%i)", category.tasks?.count ?? 0)
-                    for task in DataInterface.getTasks(
-                        category: category,
-                        sortBy: TaskSorting.creationDate,
-                        sortOrder: SortingOrder.descending,
-                        filterType: TaskFilter.state,
-                        filterValue: TaskFilterStates.none.rawValue,
-                        searchTerm: Search.showAll.rawValue) {
-                            NSLog("=>                   COMPLETION PERCENTAGE: %.2f", task.completionPercentage)
-                            NSLog("=>                   INITIAL COMPLETION PERCENTAGE: %.2f", task.initialCompletionPercentage)
-                            NSLog("=>                   CREATION DATE: %@", task.creationDate?.description ?? "N\\A")
-                            NSLog("=>                   NAME: %@", task.name ?? "N\\A")
-                            NSLog("=>                   NOTE: %@", task.note ?? "N\\A")
-                            NSLog("=>                   STATE: %@", task.state ?? "N\\A")
-                            NSLog("=>                   ------")
+                    var taskFilter = FilterTask()
+                    taskFilter.sortType = TaskSorting.name
+                    data.appendFormat("=>               NAME: %@\n", category.name ?? "")
+                    data.appendFormat("=>               TASKS: (%i)\n", DataInterface.countTasksInCategory(category: category, filter: Filter(taskFilter: taskFilter)))
+                    for task in DataInterface.getTasks(category: category, filter: Filter(taskFilter: taskFilter)) {
+                        data.appendFormat("=>                   COMPLETION PERCENTAGE: %.2f\n", task.completionPercentage)
+                        data.appendFormat("=>                   INITIAL COMPLETION PERCENTAGE: %.2f\n", task.initialCompletionPercentage)
+                        data.appendFormat("=>                   CREATION DATE: %@\n", task.creationDate?.description ?? "")
+                        data.appendFormat("=>                   NAME: %@\n", task.name ?? "")
+                        data.appendFormat("=>                   NOTE: %@\n", task.note ?? "")
+                        data.appendFormat("=>                   STATE: %@\n", task.state ?? "")
+                        data.appendFormat("=>                   ------\n")
                     }
-                    NSLog("=>               ------")
+                    data.appendFormat("=>               ------\n")
                 }
-                NSLog("=>           ------")
+                data.appendFormat("=>           ------\n")
             }
-            NSLog("=>       ------")
+            data.appendFormat("=>       ------\n")
         }
-        NSLog("=> COREDATA DUMP ######")
         
-        return self
+        NSLog("=> COREDATA DUMP ######")
+        NSLog("=> DATA HASH: %@", data.description.computeMD5() ?? "")
+        print(data.description)
+        NSLog("=> COREDATA DUMP ######")
     }
 }

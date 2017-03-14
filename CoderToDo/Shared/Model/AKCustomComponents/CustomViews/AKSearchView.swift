@@ -21,11 +21,11 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
+            controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
             Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            controller.searchTerm = searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText
+            controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
@@ -36,11 +36,11 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         if let controller = self.controller as? AKListProjectsViewController {
-            controller.searchTerm = Search.showAll.rawValue
+            controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
             Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
-            controller.searchTerm = Search.showAll.rawValue
+            controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)

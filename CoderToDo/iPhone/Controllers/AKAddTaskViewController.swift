@@ -119,7 +119,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                                     // project.
                                     if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
                                         // Count the task in both days.
-                                        let leftTasks = DataInterface.countAllTasksInDay(day: day1) + DataInterface.countAllTasksInDay(day: day2)
+                                        let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
                                         if leftTasks == 0 {
                                             presenterController.project.removeFromDays(day1)
                                             presenterController.project.removeFromDays(day2)
@@ -229,7 +229,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                 // project.
                 if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
                     // Count the task in both days.
-                    let leftTasks = DataInterface.countAllTasksInDay(day: day1) + DataInterface.countAllTasksInDay(day: day2)
+                    let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
                     if leftTasks == 0 {
                         self.project.removeFromDays(day1)
                         self.project.removeFromDays(day2)

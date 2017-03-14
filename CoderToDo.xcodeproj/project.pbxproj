@@ -10,6 +10,8 @@
 		490670261E6D90CF0046298C /* AKFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490670251E6D90CF0046298C /* AKFilterView.xib */; };
 		490670281E6D91AF0046298C /* AKFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490670271E6D91AF0046298C /* AKFilterView.swift */; };
 		4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */; };
+		490B4E271E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */; };
+		490B4E291E75CFC700378B74 /* libObjectiveCToolbox-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */; };
 		490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490C223D1E65CBBE006A39F8 /* CloudKit.framework */; };
 		49121BAE1E737480000B4D26 /* Icon-1024@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121B891E737480000B4D26 /* Icon-1024@1x.png */; };
 		49121BAF1E737480000B4D26 /* Icon-512@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121B8A1E737480000B4D26 /* Icon-512@1x.png */; };
@@ -52,6 +54,8 @@
 		4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */; };
 		4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */; };
 		4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE71E58D2740002C173 /* AKCategoryName.swift */; };
+		494A41BC1E743B6500EEE2A1 /* AKXMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */; };
+		494A41C11E7453F600EEE2A1 /* AKExportXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494A41C01E7453F600EEE2A1 /* AKExportXML.swift */; };
 		49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49576D4B1E6C4F9F0085C517 /* AKSortView.swift */; };
 		496674D51E6F276E00A60B64 /* AKSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496674D41E6F276E00A60B64 /* AKSearchView.xib */; };
 		496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496674D61E6F287B00A60B64 /* AKSearchView.swift */; };
@@ -117,6 +121,16 @@
 		490670251E6D90CF0046298C /* AKFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKFilterView.xib; sourceTree = "<group>"; };
 		490670271E6D91AF0046298C /* AKFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKFilterView.swift; sourceTree = "<group>"; };
 		4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExportCloudKit.swift; sourceTree = "<group>"; };
+		490B4E151E75B70200378B74 /* ESXPDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPDocument.h; sourceTree = "<group>"; };
+		490B4E161E75B70200378B74 /* ESXPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPElement.h; sourceTree = "<group>"; };
+		490B4E171E75B70200378B74 /* ESXPNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPNode.h; sourceTree = "<group>"; };
+		490B4E181E75B70200378B74 /* ESXPProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPProcessor.h; sourceTree = "<group>"; };
+		490B4E191E75B70200378B74 /* ESXPSAX2DOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPSAX2DOM.h; sourceTree = "<group>"; };
+		490B4E1A1E75B70200378B74 /* ESXPStackDOMWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPStackDOMWalker.h; sourceTree = "<group>"; };
+		490B4E1B1E75B70200378B74 /* ESXPText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPText.h; sourceTree = "<group>"; };
+		490B4E1F1E75B70C00378B74 /* AKDataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDataStructures.h; sourceTree = "<group>"; };
+		490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libESXP-ObjectiveC-Universal.a"; sourceTree = "<group>"; };
+		490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libObjectiveCToolbox-Universal.a"; sourceTree = "<group>"; };
 		490C223D1E65CBBE006A39F8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		49121B891E737480000B4D26 /* Icon-1024@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024@1x.png"; sourceTree = "<group>"; };
 		49121B8A1E737480000B4D26 /* Icon-512@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512@1x.png"; sourceTree = "<group>"; };
@@ -159,6 +173,9 @@
 		4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddCategoryView.xib; sourceTree = "<group>"; };
 		4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddCategoryViewController.swift; sourceTree = "<group>"; };
 		4931DAE71E58D2740002C173 /* AKCategoryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryName.swift; sourceTree = "<group>"; };
+		494A41B41E743ABB00EEE2A1 /* AKBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKBridgingHeader.h; sourceTree = "<group>"; };
+		494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKXMLBuilder.swift; sourceTree = "<group>"; };
+		494A41C01E7453F600EEE2A1 /* AKExportXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExportXML.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49576D4B1E6C4F9F0085C517 /* AKSortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortView.swift; sourceTree = "<group>"; };
 		496674D41E6F276E00A60B64 /* AKSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSearchView.xib; sourceTree = "<group>"; };
@@ -228,8 +245,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */,
 				490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */,
+				490B4E271E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a in Frameworks */,
+				490B4E291E75CFC700378B74 /* libObjectiveCToolbox-Universal.a in Frameworks */,
+				9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +262,30 @@
 				C0A4BA6BF07F6744527AF0B9 /* Pods-CoderToDo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		490B4E131E75B70200378B74 /* AKESXP-ObjectiveC */ = {
+			isa = PBXGroup;
+			children = (
+				490B4E151E75B70200378B74 /* ESXPDocument.h */,
+				490B4E161E75B70200378B74 /* ESXPElement.h */,
+				490B4E171E75B70200378B74 /* ESXPNode.h */,
+				490B4E181E75B70200378B74 /* ESXPProcessor.h */,
+				490B4E191E75B70200378B74 /* ESXPSAX2DOM.h */,
+				490B4E1A1E75B70200378B74 /* ESXPStackDOMWalker.h */,
+				490B4E1B1E75B70200378B74 /* ESXPText.h */,
+				490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */,
+			);
+			path = "AKESXP-ObjectiveC";
+			sourceTree = "<group>";
+		};
+		490B4E1E1E75B70C00378B74 /* AKObjectiveCToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				490B4E1F1E75B70C00378B74 /* AKDataStructures.h */,
+				490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */,
+			);
+			path = AKObjectiveCToolbox;
 			sourceTree = "<group>";
 		};
 		49121B881E737480000B4D26 /* AppIcon */ = {
@@ -339,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */,
+				494A41B41E743ABB00EEE2A1 /* AKBridgingHeader.h */,
 				49A4A0991E589E8600CEDA1B /* AKLaunchScreen.storyboard */,
 				49A4A09A1E589E8600CEDA1B /* AKMain.storyboard */,
 			);
@@ -441,12 +485,16 @@
 				49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */,
 				49A4A0D81E589E8600CEDA1B /* AKDataController.swift */,
 				49A4A0D91E589E8600CEDA1B /* AKDataInterface.swift */,
+				490B4E131E75B70200378B74 /* AKESXP-ObjectiveC */,
 				4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */,
+				494A41C01E7453F600EEE2A1 /* AKExportXML.swift */,
 				49A4A0DA1E589E8600CEDA1B /* AKInputData.swift */,
 				49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */,
+				490B4E1E1E75B70C00378B74 /* AKObjectiveCToolbox */,
 				49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */,
 				49D57DCE1E5B176200DACF53 /* AKTaskName.swift */,
 				49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */,
+				494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -716,9 +764,11 @@
 				4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */,
 				49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */,
 				4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */,
+				494A41BC1E743B6500EEE2A1 /* AKXMLBuilder.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
 				49A4A1141E589E8600CEDA1B /* AKDaysTableViewCell.swift in Sources */,
 				49DF7EE01E5E27ED0017BEC6 /* AKContinueMessageView.swift in Sources */,
+				494A41C11E7453F600EEE2A1 /* AKExportXML.swift in Sources */,
 				49A4A0E61E589E8600CEDA1B /* AKAddViewController.swift in Sources */,
 				49A4A11A1E589E8600CEDA1B /* AKMasterReference.swift in Sources */,
 				496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */,
@@ -870,8 +920,14 @@
 				DEVELOPMENT_TEAM = 8JQ7MFA6Q2;
 				INFOPLIST_FILE = "$(SRCROOT)/CoderToDo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CoderToDo/Shared/Model/AKESXP-ObjectiveC",
+					"$(PROJECT_DIR)/CoderToDo/Shared/Model/AKObjectiveCToolbox",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.apkc.projects.ios.CoderToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = CoderToDo/Application/AKBridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -886,8 +942,14 @@
 				DEVELOPMENT_TEAM = 8JQ7MFA6Q2;
 				INFOPLIST_FILE = "$(SRCROOT)/CoderToDo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CoderToDo/Shared/Model/AKESXP-ObjectiveC",
+					"$(PROJECT_DIR)/CoderToDo/Shared/Model/AKObjectiveCToolbox",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.apkc.projects.ios.CoderToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = CoderToDo/Application/AKBridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -5,6 +5,7 @@ import UIKit
 import UserNotifications
 
 // MARK: Typealias
+typealias Cons = GlobalConstants
 typealias ViewBlock = (_ view : UIView) -> Bool
 typealias JSONObject = [String : Any]
 typealias JSONObjectArray = [Any]
@@ -21,7 +22,7 @@ typealias PendingQueue = AKPendingTasksQueueMO
 typealias DilateQueue = AKDilateTaskQueueMO
 
 // MARK: Aliases
-let Func = UtilityFunctions.instance(GlobalConstants.AKDebug)
+let Func = UtilityFunctions.instance(Cons.AKDebug)
 
 // MARK: Extensions
 extension Int
@@ -58,6 +59,55 @@ extension UIImage
 
 extension String
 {
+    ///
+    /// This function computes the MD5 hash of the string.
+    ///
+    /// - Returns: The MD5 hash of the string.
+    ///
+    func computeMD5() -> String?
+    {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        var digest = [UInt8](repeating: 0, count: length)
+        if let d = self.data(using: String.Encoding.utf8) {
+            _ = d.withUnsafeBytes { (body: UnsafePointer<UInt8>) in
+                CC_MD5(body, CC_LONG(d.count), &digest)
+            }
+        }
+        
+        return (0..<length).reduce("") {
+            $0 + String(format: "%02x", digest[$1])
+        }
+    }
+    
+    ///
+    /// This function converts the string from Base64.
+    ///
+    /// - Returns: The original string.
+    ///
+    func fromBase64() -> String?
+    {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        
+        return String(data: data, encoding: .utf8)
+    }
+    
+    ///
+    /// This function converts the string to Base64 encoding.
+    ///
+    /// - Returns: A Base64 encoded string.
+    ///
+    func toBase64() -> String
+    {
+        return Data(self.utf8).base64EncodedString()
+    }
+    
+    ///
+    /// Splits the string by new lines.
+    ///
+    /// - Returns: An array of string lines.
+    ///
     func splitOnNewLine() -> [String]
     {
         return self.components(separatedBy: CharacterSet.newlines)
@@ -77,7 +127,8 @@ extension UIView
 }
 
 // MARK: Structures
-struct GlobalConstants {
+struct GlobalConstants
+{
     static let AKDebug = true
     // CoreData
     static let AKDataModelName = "MainDataModel"
@@ -169,16 +220,127 @@ struct GlobalConstants {
     static let AKClosingTimeNotificationName = "ClosingTimeNotification"
     // Messages
     static let AKAutoDismissMessageTime = 2.0
+    // Backup
+    // XML
+    static let AKBackupXMLMaxNodes: UInt = 100000000
+    // Default Values
+    static let AKDefaultProjectSortType = ProjectSorting.creationDate
+    static let AKDefaultProjectSortOrder = SortingOrder.descending
+    static let AKDefaultProjectFilterType = ProjectFilter.status
+    static let AKDefaultProjectFilterValue = ProjectFilterStatus.none
+    static let AKDefaultProjectSearchTerm = SearchTerm(term: Search.showAll.rawValue)
+    static let AKDefaultTaskSortType = TaskSorting.creationDate
+    static let AKDefaultTaskSortOrder = SortingOrder.descending
+    static let AKDefaultTaskFilterType = TaskFilter.state
+    static let AKDefaultTaskFilterValue = TaskFilterStates.none
+    static let AKDefaultTaskSearchTerm = SearchTerm(term: Search.showAll.rawValue)
+}
+
+struct Filter
+{
+    var projectFilter: FilterProject?
+    var taskFilter: FilterTask?
+    
+    init(projectFilter: FilterProject?)
+    {
+        self.projectFilter = projectFilter
+        self.taskFilter = nil
+    }
+    
+    init(taskFilter: FilterTask?)
+    {
+        self.projectFilter = nil
+        self.taskFilter = taskFilter
+    }
+}
+
+struct FilterProject
+{
+    var sortType: ProjectSorting
+    var sortOrder: SortingOrder
+    var filterType: ProjectFilter
+    var filterValue: ProjectFilterStatus
+    var searchTerm: SearchTerm
+    
+    init()
+    {
+        self.sortType = Cons.AKDefaultProjectSortType
+        self.sortOrder = Cons.AKDefaultProjectSortOrder
+        self.filterType = Cons.AKDefaultProjectFilterType
+        self.filterValue = Cons.AKDefaultProjectFilterValue
+        self.searchTerm = Cons.AKDefaultProjectSearchTerm
+    }
+    
+    init(sortType: ProjectSorting, sortOrder: SortingOrder, filterType: ProjectFilter, filterValue: ProjectFilterStatus, searchTerm: SearchTerm)
+    {
+        self.sortType = sortType
+        self.sortOrder = sortOrder
+        self.filterType = filterType
+        self.filterValue = filterValue
+        self.searchTerm = searchTerm
+    }
+}
+
+struct FilterTask
+{
+    var sortType: TaskSorting
+    var sortOrder: SortingOrder
+    var filterType: TaskFilter
+    var filterValue: TaskFilterStates
+    var searchTerm: SearchTerm
+    
+    init()
+    {
+        self.sortType = Cons.AKDefaultTaskSortType
+        self.sortOrder = Cons.AKDefaultTaskSortOrder
+        self.filterType = Cons.AKDefaultTaskFilterType
+        self.filterValue = Cons.AKDefaultTaskFilterValue
+        self.searchTerm = Cons.AKDefaultTaskSearchTerm
+    }
+    
+    init(sortType: TaskSorting, sortOrder: SortingOrder, filterType: TaskFilter, filterValue: TaskFilterStates, searchTerm: SearchTerm)
+    {
+        self.sortType = sortType
+        self.sortOrder = sortOrder
+        self.filterType = filterType
+        self.filterValue = filterValue
+        self.searchTerm = searchTerm
+    }
+}
+
+struct SearchTerm
+{
+    let term: String
+    
+    init(term: String) { self.term = term }
+    
+    func match(otherTerms: [String?]) -> Bool
+    {
+        for otherTerm in otherTerms {
+            if let otherTerm = otherTerm {
+                if term.caseInsensitiveCompare(Search.showAll.rawValue) == .orderedSame {
+                    return true
+                }
+                if otherTerm.lowercased().range(of: term.lowercased()) != nil {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
 }
 
 // MARK: Global Enumerations
-enum ErrorCodes: Int {
+enum ErrorCodes: Int
+{
     case ConnectionToBackEndError = -1000
     case InvalidMIMEType = -1001
     case JSONProcessingError = -1002
 }
 
-enum Exceptions: Error {
+enum Exceptions: Error
+{
     case notInitialized(String)
     case emptyData(String)
     case invalidLength(String)
@@ -191,15 +353,18 @@ enum Exceptions: Error {
     case notSerializableObject(String)
     case fileCreationError(String)
     case fileWriteError(String)
+    case invalidFilter(String)
 }
 
-enum UnitOfTime: Int {
+enum UnitOfTime: Int
+{
     case second = 1
     case minute = 2
     case hour = 3
 }
 
-enum CustomBorderDecorationPosition: Int {
+enum CustomBorderDecorationPosition: Int
+{
     case top = 0
     case right = 1
     case bottom = 2
@@ -207,30 +372,35 @@ enum CustomBorderDecorationPosition: Int {
     case through = 4
 }
 
-enum SortingOrder: String {
+enum SortingOrder: String
+{
     case ascending = "↑"
     case descending = "↓"
 }
 
-enum ProjectStatus: String {
+enum ProjectStatus: String
+{
     case open = "Open"
     case accepting = "Accepting"
     case closed = "Closed"
     case firstDay = "First Day"
 }
 
-enum ProjectSorting: String {
+enum ProjectSorting: String
+{
     case closingTime = "Closing Time"
     case creationDate = "Creation Date"
     case name = "Name"
     case osr = "Overall Success Ratio"
 }
 
-enum ProjectFilter: String {
+enum ProjectFilter: String
+{
     case status = "Status"
 }
 
-enum ProjectFilterStatus: String {
+enum ProjectFilterStatus: String
+{
     case none = "None"
     case open = "Open"
     case acceptingTasks = "Accepting"
@@ -238,12 +408,14 @@ enum ProjectFilterStatus: String {
     case firstDay = "First Day"
 }
 
-enum DayStatus: String {
+enum DayStatus: String
+{
     case current = "Current"
     case notCurrent = "Not Current"
 }
 
-enum TaskStates: String {
+enum TaskStates: String
+{
     case done = "Done"
     case notDone = "Not Done"
     case notApplicable = "Not Applicable"
@@ -251,18 +423,21 @@ enum TaskStates: String {
     case pending = "Pending"
 }
 
-enum TaskSorting: String {
+enum TaskSorting: String
+{
     case completionPercentage = "Completion Percentage"
     case creationDate = "Creation Date"
     case name = "Name"
     case state = "State"
 }
 
-enum TaskFilter: String {
+enum TaskFilter: String
+{
     case state = "State"
 }
 
-enum TaskFilterStates: String {
+enum TaskFilterStates: String
+{
     case none = "None"
     case done = "Done"
     case notDone = "Not Done"
@@ -271,7 +446,8 @@ enum TaskFilterStates: String {
     case pending = "Pending"
 }
 
-enum TaskStateColor: UInt {
+enum TaskStateColor: UInt
+{
     case done = 0xB8BB26
     case notDone = 0xFB4934
     case notApplicable = 0x83A598
@@ -279,12 +455,14 @@ enum TaskStateColor: UInt {
     case pending = 0xFABD2F
 }
 
-enum TaskMode: String {
+enum TaskMode: String
+{
     case editable = "Editable"
     case notEditable = "Not Editable"
 }
 
-enum MenuItems: Int {
+enum MenuItems: Int
+{
     case add
     case sort
     case filter
@@ -292,14 +470,15 @@ enum MenuItems: Int {
     case none
 }
 
-enum Displacement: Int {
+enum Displacement: Int
+{
     case up
     case down
 }
 
-enum Search: String {
-    case showAll = "All"
-    case showNone = "None"
+enum Search: String
+{
+    case showAll = "*"
 }
 
 // MARK: Utility Functions
@@ -383,7 +562,8 @@ class UtilityFunctions
     /// - Parameter textControl: The control where to add the keyboard.
     /// - Parameter controller: The view controller that owns the control.
     ///
-    func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController) {
+    func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController)
+    {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
         keyboardToolbar.barTintColor = UIColor.black

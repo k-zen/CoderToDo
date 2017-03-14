@@ -76,6 +76,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
+        self.masterRef?.dump()
         
         // ### Delegates.
         self.notificationCenter.delegate = self

@@ -12,11 +12,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     }
     
     // MARK: Properties
-    var sortType = ProjectSorting.creationDate
-    var sortOrder = SortingOrder.descending
-    var filterType = ProjectFilter.status
-    var filterValue = ProjectFilterStatus.none.rawValue
-    var searchTerm = Search.showAll.rawValue
+    var projectFilter = Filter(projectFilter: FilterProject())
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
@@ -140,12 +136,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let project = DataInterface.getProjects(
-            sortBy: self.sortType,
-            sortOrder: self.sortOrder,
-            filterType: self.filterType,
-            filterValue: self.filterValue,
-            searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.controller = self
@@ -200,12 +191,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let project = DataInterface.getProjects(
-            sortBy: self.sortType,
-            sortOrder: self.sortOrder,
-            filterType: self.filterType,
-            filterValue: self.filterValue,
-            searchTerm: self.searchTerm)[section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[section]
         let projectStatus = DataInterface.getProjectStatus(project: project)
         
         let tableWidth = tableView.frame.width
@@ -217,7 +203,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-        headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+        headerCell.backgroundColor = GlobalConstants.AKTableCellBg
         Func.AKAddBorderDeco(
             headerCell,
             color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
@@ -304,15 +290,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
-        return DataInterface.getProjects(
-            sortBy: self.sortType,
-            sortOrder: self.sortOrder,
-            filterType: self.filterType,
-            filterValue: self.filterValue,
-            searchTerm: self.searchTerm).count
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.getProjects(filter: self.projectFilter).count }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -323,12 +301,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         // Edit Action
         let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
-            let project = DataInterface.getProjects(
-                sortBy: self.sortType,
-                sortOrder: self.sortOrder,
-                filterType: self.filterType,
-                filterValue: self.filterValue,
-                searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
+            let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
             self.performSegue(withIdentifier: GlobalConstants.AKProjectConfigurationsSegue, sender: project)
         })
         edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
@@ -339,12 +312,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 message: "This action can't be undone. Continue...?",
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
-                        let project = DataInterface.getProjects(
-                            sortBy: presenterController.sortType,
-                            sortOrder: presenterController.sortOrder,
-                            filterType: presenterController.filterType,
-                            filterValue: presenterController.filterValue,
-                            searchTerm: presenterController.searchTerm)[(indexPath as NSIndexPath).row]
+                        let project = DataInterface.getProjects(filter: presenterController.projectFilter)[(indexPath as NSIndexPath).row]
                         
                         // Remove data structure.
                         DataInterface.getUser()?.removeFromProject(project)
@@ -385,12 +353,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let project = DataInterface.getProjects(
-            sortBy: self.sortType,
-            sortOrder: self.sortOrder,
-            filterType: self.filterType,
-            filterValue: self.filterValue,
-            searchTerm: self.searchTerm)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
         self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     
@@ -509,11 +472,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     }
     
     func resetFilters(controller: AKCustomViewController) {
-        self.sortType = ProjectSorting.creationDate
-        self.sortOrder = SortingOrder.descending
-        self.filterType = ProjectFilter.status
-        self.filterValue = ProjectFilterStatus.none.rawValue
-        self.searchTerm = Search.showAll.rawValue
+        self.projectFilter = Filter(projectFilter: FilterProject())
         
         controller.sortMenuItemOverlay.order.selectRow(1, inComponent: 0, animated: true)
         controller.sortMenuItemOverlay.filters.selectRow(1, inComponent: 0, animated: true)

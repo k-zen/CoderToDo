@@ -70,11 +70,11 @@
     <elements>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
+        <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
         <element name="Project" positionX="-1098" positionY="-747" width="128" height="251"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
         <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
         <element name="User" positionX="-839" positionY="-495" width="128" height="194"/>
-        <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
     </elements>
 </model>
