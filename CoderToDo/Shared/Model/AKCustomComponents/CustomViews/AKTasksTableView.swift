@@ -27,7 +27,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[(indexPath as NSIndexPath).row]
             
             // Sanity Checks
-            AKChecks.workingDayCloseSanityChecks(task: task)
+            AKChecks.workingDayCloseSanityChecks(controller: controller, task: task)
             
             let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
             

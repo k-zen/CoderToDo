@@ -12,6 +12,16 @@ class AKDataInterface
     static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
     
     // ########## PROJECT'S FUNCTIONS ########## //
+    static func addProject(project: Project) throws -> Bool
+    {
+        if let user = DataInterface.getUser() {
+            user.addToProject(project)
+            return true
+        }
+        
+        return false
+    }
+    
     ///
     /// Computes the list of projects using filters passed in by the user, or default
     /// filters if none had been set.
@@ -375,6 +385,8 @@ class AKDataInterface
         return []
     }
     
+    static func getDayOfTask(task: Task?) -> Day? { return task?.category?.day ?? nil }
+    
     static func countDays(project: Project) -> Int { return project.days?.count ?? 0 }
     
     static func getDayTitle(day: Day) -> String
@@ -511,6 +523,20 @@ class AKDataInterface
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
+    static func addCategory(toProject project: Project, categoryName: String) throws
+    {
+        if let mr = Func.AKObtainMasterReference() {
+            if let _ = DataInterface.getProjectCategoryByName(project: project, name: categoryName) {
+                throw Exceptions.categoryAlreadyExists("There is already a category with that name. Please choose another one.")
+            }
+            
+            let projectCategory = ProjectCategory(context: mr.getMOC())
+            projectCategory.name = categoryName
+            
+            project.addToProjectCategories(projectCategory)
+        }
+    }
+    
     static func getCategories(day: Day) -> [Category]
     {
         if let categories = day.categories?.allObjects as? [Category] {
@@ -541,6 +567,29 @@ class AKDataInterface
     static func countCategories(day: Day) -> Int { return day.categories?.count ?? 0 }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
+    static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) throws -> Bool
+    {
+        if let mr = Func.AKObtainMasterReference() {
+            // Allways add today to the table if not present, if present return the last day.
+            if let currentDay = DataInterface.addNewWorkingDay(project: project) {
+                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                    category.addToTasks(task)
+                    currentDay.addToCategories(category)
+                }
+                else {
+                    let newCategory = Category(context: mr.getMOC())
+                    newCategory.name = categoryName
+                    newCategory.addToTasks(task)
+                    currentDay.addToCategories(newCategory)
+                }
+                
+                return DataInterface.updateDay(project: project, updatedDay: currentDay)
+            }
+        }
+        
+        return false
+    }
+    
     ///
     /// Computes the list of tasks using filters passed in by the user, or default
     /// filters if none had been set.
@@ -652,6 +701,129 @@ class AKDataInterface
     ///
     static func countTasksInCategory(category: Category, filter: Filter) -> Int { return DataInterface.getTasks(category: category, filter: filter).count }
     
+    static func migrateTaskToCategory(toCategoryNamed categoryName: String, task: Task) throws -> Bool
+    {
+        if let day = task.category?.day {
+            if let category = DataInterface.getCategoryByName(day: day, name: categoryName) {
+                category.addToTasks(task)
+            }
+            else {
+                if let mr = Func.AKObtainMasterReference() {
+                    let newCategory = Category(context: mr.getMOC())
+                    newCategory.name = categoryName
+                    newCategory.addToTasks(task)
+                    day.addToCategories(newCategory)
+                }
+            }
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    static func migrateTasksFromQueues(toProject project: Project) throws -> Bool
+    {
+        if let mr = Func.AKObtainMasterReference() {
+            // Allways add today to the table if not present, if present return the last day.
+            if let currentDay = DataInterface.addNewWorkingDay(project: project) {
+                let migratedPendingDay = DataInterface.getDayOfTask(task: DataInterface.getPendingTasks(project: project).first)
+                let migratedDilateDay = DataInterface.getDayOfTask(task: DataInterface.getDilateTasks(project: project).first)
+                
+                // Add task from PendingQueue.
+                for task in DataInterface.getPendingTasks(project: project) {
+                    if let categoryName = task.category?.name {
+                        // Here is the problem where tasks in queues where not added to the next day. If the next day
+                        // doesn't have the category for which the task belongs, then it will return NIL and never execute
+                        // this block of code.
+                        // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
+                        if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                            category.addToTasks(task)
+                            currentDay.addToCategories(category)
+                            
+                            // Remove from queue.
+                            project.pendingQueue?.removeFromTasks(task)
+                            
+                            task.creationDate = currentDay.date
+                            task.initialCompletionPercentage = task.completionPercentage
+                        }
+                        else {
+                            let newCategory = Category(context: mr.getMOC())
+                            newCategory.name = categoryName
+                            newCategory.addToTasks(task)
+                            currentDay.addToCategories(newCategory)
+                            
+                            // Remove from queue.
+                            project.pendingQueue?.removeFromTasks(task)
+                            
+                            task.creationDate = currentDay.date
+                            task.initialCompletionPercentage = task.completionPercentage
+                        }
+                    }
+                }
+                
+                // Add task from DilateQueue.
+                for task in DataInterface.getDilateTasks(project: project) {
+                    if let categoryName = task.category?.name {
+                        // Here is the problem where tasks in queues where not added to the next day. If the next day
+                        // doesn't have the category for which the task belongs, then it will return NIL and never execute
+                        // this block of code.
+                        // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
+                        if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
+                            category.addToTasks(task)
+                            currentDay.addToCategories(category)
+                            
+                            // Remove from queue.
+                            project.dilateQueue?.removeFromTasks(task)
+                            
+                            task.creationDate = currentDay.date
+                            task.initialCompletionPercentage = task.completionPercentage
+                        }
+                        else {
+                            let newCategory = Category(context: mr.getMOC())
+                            newCategory.name = categoryName
+                            newCategory.addToTasks(task)
+                            currentDay.addToCategories(newCategory)
+                            
+                            // Remove from queue.
+                            project.dilateQueue?.removeFromTasks(task)
+                            
+                            task.creationDate = currentDay.date
+                            task.initialCompletionPercentage = task.completionPercentage
+                        }
+                    }
+                }
+                
+                // To avoid having an empty day, because all tasks from one day have been moved, then check the day
+                // from which the pending or dilate tasks come from and if they are empty remove those days from the
+                // project.
+                if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
+                    // Count the task in both days.
+                    let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
+                    if leftTasks == 0 {
+                        project.removeFromDays(day1)
+                        project.removeFromDays(day2)
+                    }
+                }
+                
+                return DataInterface.updateDay(project: project, updatedDay: currentDay)
+            }
+        }
+        
+        return false
+    }
+    
+    static func addPendingTask(task: Task) -> Bool
+    {
+        if let pendingQueue = task.category?.day?.project?.pendingQueue {
+            pendingQueue.addToTasks(task)
+            
+            return true
+        }
+        
+        return false
+    }
+    
     static func getPendingTasks(project: Project) -> [Task]
     {
         if let tasks = project.pendingQueue?.tasks?.allObjects as? [Task] {
@@ -667,6 +839,17 @@ class AKDataInterface
     }
     
     static func countPendingTasks(project: Project) -> Int { return project.pendingQueue?.tasks?.count ?? 0 }
+    
+    static func addDilateTask(task: Task) -> Bool
+    {
+        if let dilateQueue = task.category?.day?.project?.dilateQueue {
+            dilateQueue.addToTasks(task)
+            
+            return true
+        }
+        
+        return false
+    }
     
     static func getDilateTasks(project: Project) -> [Task]
     {
@@ -701,6 +884,15 @@ class AKDataInterface
     
     static func countProjectCategories(project: Project) -> Int { return project.projectCategories?.count ?? 0 }
     
+    ///
+    /// Searches for a given project category inside a given project and returns it if it's found or
+    /// NIL if not found.
+    ///
+    /// - Parameter project: The project where to look.
+    /// - Parameter name: The name of the category.
+    ///
+    /// - Returns: The project category or NIL if not found.
+    ///
     static func getProjectCategoryByName(project: Project, name: String) -> ProjectCategory?
     {
         if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {

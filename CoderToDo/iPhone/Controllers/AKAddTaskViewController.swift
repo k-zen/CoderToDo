@@ -40,96 +40,24 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     noButtonTitle: "No",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKAddTaskViewController {
-                            if let mr = Func.AKObtainMasterReference() {
-                                // Allways add today to the table if not present, if present return the last day.
-                                if let currentDay = DataInterface.addNewWorkingDay(project: presenterController.project) {
-                                    let migratedPendingDay = (presenterController.project.pendingQueue?.tasks?.allObjects.first as? Task)?.category?.day
-                                    let migratedDilateDay = (presenterController.project.dilateQueue?.tasks?.allObjects.first as? Task)?.category?.day
-                                    
-                                    // Add task from PendingQueue.
-                                    if let tasks = presenterController.project.pendingQueue?.tasks?.allObjects as? [Task] {
-                                        for task in tasks {
-                                            if let categoryName = task.category?.name {
-                                                // Here is the problem where tasks in queues where not added to the next day. If the next day
-                                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
-                                                // this block of code.
-                                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
-                                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                                    category.addToTasks(task)
-                                                    currentDay.addToCategories(category)
-                                                    
-                                                    // Remove from queue.
-                                                    presenterController.project.pendingQueue?.removeFromTasks(task)
-                                                    
-                                                    task.creationDate = currentDay.date
-                                                    task.initialCompletionPercentage = task.completionPercentage
-                                                }
-                                                else {
-                                                    let newCategory = Category(context: mr.getMOC())
-                                                    newCategory.name = categoryName
-                                                    newCategory.addToTasks(task)
-                                                    currentDay.addToCategories(newCategory)
-                                                    
-                                                    // Remove from queue.
-                                                    presenterController.project.pendingQueue?.removeFromTasks(task)
-                                                    
-                                                    task.creationDate = currentDay.date
-                                                    task.initialCompletionPercentage = task.completionPercentage
-                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    // Add task from DilateQueue.
-                                    if let tasks = presenterController.project.dilateQueue?.tasks?.allObjects as? [Task] {
-                                        for task in tasks {
-                                            if let categoryName = task.category?.name {
-                                                // Here is the problem where tasks in queues where not added to the next day. If the next day
-                                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
-                                                // this block of code.
-                                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
-                                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                                    category.addToTasks(task)
-                                                    currentDay.addToCategories(category)
-                                                    
-                                                    // Remove from queue.
-                                                    presenterController.project.dilateQueue?.removeFromTasks(task)
-                                                    
-                                                    task.creationDate = currentDay.date
-                                                    task.initialCompletionPercentage = task.completionPercentage
-                                                }
-                                                else {
-                                                    let newCategory = Category(context: mr.getMOC())
-                                                    newCategory.name = categoryName
-                                                    newCategory.addToTasks(task)
-                                                    currentDay.addToCategories(newCategory)
-                                                    
-                                                    // Remove from queue.
-                                                    presenterController.project.dilateQueue?.removeFromTasks(task)
-                                                    
-                                                    task.creationDate = currentDay.date
-                                                    task.initialCompletionPercentage = task.completionPercentage
-                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    // To avoid having an empty day, because all tasks from one day have been moved, then check the day
-                                    // from which the pending or dilate tasks come from and if they are empty remove those days from the
-                                    // project.
-                                    if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
-                                        // Count the task in both days.
-                                        let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
-                                        if leftTasks == 0 {
-                                            presenterController.project.removeFromDays(day1)
-                                            presenterController.project.removeFromDays(day2)
-                                        }
-                                    }
-                                    
-                                    if DataInterface.updateDay(project: presenterController.project, updatedDay: currentDay) {
-                                        presenterController.dismissView(executeDismissTask: true)
-                                    }
+                            do {
+                                if try DataInterface.migrateTasksFromQueues(toProject: presenterController.project) {
+                                    presenterController.dismissView(executeDismissTask: true)
                                 }
+                                else {
+                                    presenterController.showMessage(
+                                        message: String(
+                                            format: "%@, an error has occur while migrating the tasks.",
+                                            DataInterface.getUsername()
+                                        ),
+                                        animate: true,
+                                        completionTask: nil
+                                    )
+                                }
+                            }
+                            catch {
+                                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)")
+                                return
                             }
                         } },
                     noAction: { (presenterController) -> Void in
@@ -148,116 +76,54 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             return
         }
         
-        if let mr = Func.AKObtainMasterReference() {
-            // Allways add today to the table if not present, if present return the last day.
-            if let currentDay = DataInterface.addNewWorkingDay(project: self.project) {
-                let migratedPendingDay = (self.project.pendingQueue?.tasks?.allObjects.first as? Task)?.category?.day
-                let migratedDilateDay = (self.project.dilateQueue?.tasks?.allObjects.first as? Task)?.category?.day
-                
-                if self.migrate.isOn {
-                    // Add task from PendingQueue.
-                    if let tasks = self.project.pendingQueue?.tasks?.allObjects as? [Task] {
-                        for task in tasks {
-                            if let categoryName = task.category?.name {
-                                // Here is the problem where tasks in queues where not added to the next day. If the next day
-                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
-                                // this block of code.
-                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
-                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    category.addToTasks(task)
-                                    currentDay.addToCategories(category)
-                                    
-                                    // Remove from queue.
-                                    self.project.pendingQueue?.removeFromTasks(task)
-                                    
-                                    task.creationDate = currentDay.date
-                                    task.initialCompletionPercentage = task.completionPercentage
-                                }
-                                else {
-                                    let newCategory = Category(context: mr.getMOC())
-                                    newCategory.name = categoryName
-                                    newCategory.addToTasks(task)
-                                    currentDay.addToCategories(newCategory)
-                                    
-                                    // Remove from queue.
-                                    self.project.pendingQueue?.removeFromTasks(task)
-                                    
-                                    task.creationDate = currentDay.date
-                                    task.initialCompletionPercentage = task.completionPercentage
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Add task from DilateQueue.
-                    if let tasks = self.project.dilateQueue?.tasks?.allObjects as? [Task] {
-                        for task in tasks {
-                            if let categoryName = task.category?.name {
-                                // Here is the problem where tasks in queues where not added to the next day. If the next day
-                                // doesn't have the category for which the task belongs, then it will return NIL and never execute
-                                // this block of code.
-                                // SOLUTION: If the new day doesn't have the category, then create a new one with the same name.
-                                if let category = DataInterface.getCategoryByName(day: currentDay, name: categoryName) {
-                                    category.addToTasks(task)
-                                    currentDay.addToCategories(category)
-                                    
-                                    // Remove from queue.
-                                    self.project.dilateQueue?.removeFromTasks(task)
-                                    
-                                    task.creationDate = currentDay.date
-                                    task.initialCompletionPercentage = task.completionPercentage
-                                }
-                                else {
-                                    let newCategory = Category(context: mr.getMOC())
-                                    newCategory.name = categoryName
-                                    newCategory.addToTasks(task)
-                                    currentDay.addToCategories(newCategory)
-                                    
-                                    // Remove from queue.
-                                    self.project.dilateQueue?.removeFromTasks(task)
-                                    
-                                    task.creationDate = currentDay.date
-                                    task.initialCompletionPercentage = task.completionPercentage
-                                }
-                            }
-                        }
-                    }
+        if self.migrate.isOn {
+            do {
+                if try DataInterface.migrateTasksFromQueues(toProject: self.project) {
+                    self.dismissView(executeDismissTask: true)
                 }
-                
-                // To avoid having an empty day, because all tasks from one day have been moved, then check the day
-                // from which the pending or dilate tasks come from and if they are empty remove those days from the
-                // project.
-                if let day1 = migratedPendingDay, let day2 = migratedDilateDay {
-                    // Count the task in both days.
-                    let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
-                    if leftTasks == 0 {
-                        self.project.removeFromDays(day1)
-                        self.project.removeFromDays(day2)
-                    }
+                else {
+                    self.showMessage(
+                        message: String(
+                            format: "%@, an error has occur while migrating the tasks.",
+                            DataInterface.getUsername()
+                        ),
+                        animate: true,
+                        completionTask: nil
+                    )
                 }
-                
-                // Add the new task.
+            }
+            catch {
+                Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+                return
+            }
+        }
+        
+        // Add the new task.
+        do {
+            if let mr = Func.AKObtainMasterReference() {
                 let now = NSDate()
                 let task = Task(context: mr.getMOC())
                 task.creationDate = now
                 task.name = taskName.outputData
                 task.state = self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)
-                
-                if let category = DataInterface.getCategoryByName(day: currentDay, name: selectedCategory) {
-                    category.addToTasks(task)
-                    currentDay.addToCategories(category)
-                }
-                else {
-                    let newCategory = Category(context: mr.getMOC())
-                    newCategory.name = selectedCategory
-                    newCategory.addToTasks(task)
-                    currentDay.addToCategories(newCategory)
-                }
-                
-                if DataInterface.updateDay(project: self.project, updatedDay: currentDay) {
+                if try DataInterface.addTask(toProject: self.project, toCategoryNamed: selectedCategory, task: task) {
                     self.dismissView(executeDismissTask: true)
                 }
+                else {
+                    self.showMessage(
+                        message: String(
+                            format: "%@, an error has occur while creating the new task.",
+                            DataInterface.getUsername()
+                        ),
+                        animate: true,
+                        completionTask: nil
+                    )
+                }
             }
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            return
         }
     }
     

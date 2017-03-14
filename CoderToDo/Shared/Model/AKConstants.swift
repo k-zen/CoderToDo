@@ -350,6 +350,7 @@ enum Exceptions: Error
     case invalidProjectStatus(String)
     case noCategories(String)
     case categoryHasTasks(String)
+    case categoryAlreadyExists(String)
     case notSerializableObject(String)
     case fileCreationError(String)
     case fileWriteError(String)

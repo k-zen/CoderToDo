@@ -63,62 +63,55 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.creationDate = now
                 project.pendingQueue = PendingQueue(context: mr.getMOC())
                 project.dilateQueue = DilateQueue(context: mr.getMOC())
-                DataInterface.getUser()?.addToProject(project)
                 
-                // Schedule local notifications.
-                if notifyClosingTime {
-                    let startingTimeContent = UNMutableNotificationContent()
-                    startingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    startingTimeContent.body = String(format: "Hi %@, starting time is up for your project. Have a really nice and productive day 🙂", DataInterface.getUsername())
-                    startingTimeContent.sound = UNNotificationSound.default()
-                    Func.AKGetNotificationCenter().add(
-                        UNNotificationRequest(
-                            identifier: String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, projectName.outputData),
-                            content: startingTimeContent,
-                            trigger: UNCalendarNotificationTrigger(
-                                dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: startingTime as Date),
-                                repeats: true
-                            )
-                        ),
-                        withCompletionHandler: { (error) in
-                            if let _ = error {
-                                self.showMessage(
-                                    message: "Error setting up starting time notification.",
-                                    animate: true,
-                                    completionTask: nil
+                if try DataInterface.addProject(project: project) {
+                    // Schedule local notifications.
+                    if notifyClosingTime {
+                        let closingTimeContent = UNMutableNotificationContent()
+                        closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
+                        closingTimeContent.body = String(
+                            format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before this day is marked as closed.",
+                            DataInterface.getUsername(),
+                            tolerance
+                        )
+                        closingTimeContent.sound = UNNotificationSound.default()
+                        Func.AKGetNotificationCenter().add(
+                            UNNotificationRequest(
+                                identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, projectName.outputData),
+                                content: closingTimeContent,
+                                trigger: UNCalendarNotificationTrigger(
+                                    dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: closingTime as Date),
+                                    repeats: true
                                 )
-                            } }
-                    )
+                            ),
+                            withCompletionHandler: { (error) in
+                                if let _ = error {
+                                    self.showMessage(
+                                        message: "Error setting up closing time notification.",
+                                        animate: true,
+                                        completionTask: nil
+                                    )
+                                } }
+                        )
+                    }
                     
-                    let closingTimeContent = UNMutableNotificationContent()
-                    closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                    closingTimeContent.body = String(format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before close.", DataInterface.getUsername(), tolerance)
-                    closingTimeContent.sound = UNNotificationSound.default()
-                    Func.AKGetNotificationCenter().add(
-                        UNNotificationRequest(
-                            identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, projectName.outputData),
-                            content: closingTimeContent,
-                            trigger: UNCalendarNotificationTrigger(
-                                dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: closingTime as Date),
-                                repeats: true
-                            )
+                    self.dismissView(executeDismissTask: true)
+                }
+                else {
+                    self.showMessage(
+                        message: String(
+                            format: "%@, an error has occur while creating the new project.",
+                            DataInterface.getUsername()
                         ),
-                        withCompletionHandler: { (error) in
-                            if let _ = error {
-                                self.showMessage(
-                                    message: "Error setting up closing time notification.",
-                                    animate: true,
-                                    completionTask: nil
-                                )
-                            } }
+                        animate: true,
+                        completionTask: nil
                     )
                 }
-                
-                self.dismissView(executeDismissTask: true)
             }
         }
         catch {
             Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            return
         }
     }
     

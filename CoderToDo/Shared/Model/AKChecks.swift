@@ -23,7 +23,7 @@ class AKChecks
     ///
     /// - Parameter task: The task to process.
     ///
-    static func workingDayCloseSanityChecks(task: Task) -> Void
+    static func workingDayCloseSanityChecks(controller: AKCustomViewController, task: Task) -> Void
     {
         if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) && !DataInterface.isBeforeOpen(project: (task.category?.day?.project)!) {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
@@ -35,14 +35,14 @@ class AKChecks
                 }
                 // Sanity check #2
                 if task.state == TaskStates.pending.rawValue && task.completionPercentage != task.initialCompletionPercentage {
-                    if let pendingQueue = task.category?.day?.project?.pendingQueue {
-                        pendingQueue.addToTasks(task)
+                    if !DataInterface.addPendingTask(task: task) {
+                        NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
                     }
                 }
                 // Sanity check #3
                 if task.state == TaskStates.dilate.rawValue {
-                    if let dilateQueue = task.category?.day?.project?.dilateQueue {
-                        dilateQueue.addToTasks(task)
+                    if !DataInterface.addDilateTask(task: task) {
+                        NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
                     }
                 }
             }

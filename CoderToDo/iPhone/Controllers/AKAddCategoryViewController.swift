@@ -27,15 +27,12 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
             try categoryName.validate()
             try categoryName.process()
             
-            if let mr = Func.AKObtainMasterReference() {
-                // TODO: Check if the category doesn't exists!!!
-                
-                let projectCategory = ProjectCategory(context: mr.getMOC())
-                projectCategory.name = categoryName.outputData
-                self.project.addToProjectCategories(projectCategory)
-                
-                self.dismissView(executeDismissTask: true)
-            }
+            try DataInterface.addCategory(
+                toProject: self.project,
+                categoryName: categoryName.outputData
+            )
+            
+            self.dismissView(executeDismissTask: true)
         }
         catch {
             Func.AKPresentMessageFromError(controller: self, message: "\(error)")

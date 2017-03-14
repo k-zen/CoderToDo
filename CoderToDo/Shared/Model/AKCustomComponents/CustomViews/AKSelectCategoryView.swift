@@ -28,18 +28,24 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         if let controller = controller as? AKViewTaskViewController {
             let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
             
-            if let day = controller.task.category?.day {
-                if let category = DataInterface.getCategoryByName(day: day, name: selectedCategory) {
-                    category.addToTasks(controller.task)
+            do {
+                if try DataInterface.migrateTaskToCategory(toCategoryNamed: selectedCategory, task: controller.task) {
+                    controller.dismissView(executeDismissTask: true)
                 }
                 else {
-                    if let mr = Func.AKObtainMasterReference() {
-                        let newCategory = Category(context: mr.getMOC())
-                        newCategory.name = selectedCategory
-                        newCategory.addToTasks(controller.task)
-                        day.addToCategories(newCategory)
-                    }
+                    controller.showMessage(
+                        message: String(
+                            format: "%@, an error has occur while migrating the task.",
+                            DataInterface.getUsername()
+                        ),
+                        animate: true,
+                        completionTask: nil
+                    )
                 }
+            }
+            catch {
+                Func.AKPresentMessageFromError(controller: controller, message: "\(error)")
+                return
             }
             
             // Collapse this view.
