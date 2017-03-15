@@ -104,7 +104,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.markTask(mode: .notEditable)
         }
         //  project not open.
-        if !DataInterface.isProjectOpen(project: (self.task.category?.day?.project)!) {
+        if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) != .open {
             self.markTask(mode: .notEditable)
         }
         //  task marked as "DONE".
