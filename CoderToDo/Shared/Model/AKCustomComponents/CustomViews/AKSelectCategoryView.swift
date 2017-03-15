@@ -28,24 +28,11 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         if let controller = controller as? AKViewTaskViewController {
             let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
             
-            do {
-                if try DataInterface.migrateTaskToCategory(toCategoryNamed: selectedCategory, task: controller.task) {
-                    controller.dismissView(executeDismissTask: true)
-                }
-                else {
-                    controller.showMessage(
-                        message: String(
-                            format: "%@, an error has occur while migrating the task.",
-                            DataInterface.getUsername()
-                        ),
-                        animate: true,
-                        completionTask: nil
-                    )
-                }
+            if DataInterface.migrateTaskToCategory(toCategoryNamed: selectedCategory, task: controller.task) {
+                controller.dismissView(executeDismissTask: true)
             }
-            catch {
-                Func.AKPresentMessageFromError(controller: controller, message: "\(error)")
-                return
+            else {
+                // TODO: Do something.
             }
             
             // Collapse this view.

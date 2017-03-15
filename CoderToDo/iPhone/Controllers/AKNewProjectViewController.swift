@@ -64,7 +64,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 project.pendingQueue = PendingQueue(context: mr.getMOC())
                 project.dilateQueue = DilateQueue(context: mr.getMOC())
                 
-                if try DataInterface.addProject(project: project) {
+                if DataInterface.addProject(project: project) {
                     // Schedule local notifications.
                     if notifyClosingTime {
                         let closingTimeContent = UNMutableNotificationContent()
@@ -98,14 +98,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                     self.dismissView(executeDismissTask: true)
                 }
                 else {
-                    self.showMessage(
-                        message: String(
-                            format: "%@, an error has occur while creating the new project.",
-                            DataInterface.getUsername()
-                        ),
-                        animate: true,
-                        completionTask: nil
-                    )
+                    // TODO: Do something.
                 }
             }
         }
