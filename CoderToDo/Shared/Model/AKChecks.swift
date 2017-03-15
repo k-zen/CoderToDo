@@ -25,7 +25,7 @@ class AKChecks
     ///
     static func workingDayCloseSanityChecks(controller: AKCustomViewController, task: Task) -> Void
     {
-        if !DataInterface.isProjectOpen(project: (task.category?.day?.project)!) && !DataInterface.isBeforeOpen(project: (task.category?.day?.project)!) {
+        if DataInterface.getProjectStatus(project: (task.category?.day?.project)!) == .accepting {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
                 if task.state == TaskStates.pending.rawValue {
