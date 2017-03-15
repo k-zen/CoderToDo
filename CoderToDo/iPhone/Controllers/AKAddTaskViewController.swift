@@ -32,7 +32,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             try taskName.validate()
             try taskName.process()
         }
-        catch Exceptions.emptyData(let error) {
+        catch Exceptions.emptyData {
             if self.migrate.isOn {
                 self.showContinueMessage(
                     message: "Would you like to \"only\" migrate tasks...?",
@@ -40,24 +40,11 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     noButtonTitle: "No",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKAddTaskViewController {
-                            do {
-                                if try DataInterface.migrateTasksFromQueues(toProject: presenterController.project) {
-                                    presenterController.dismissView(executeDismissTask: true)
-                                }
-                                else {
-                                    presenterController.showMessage(
-                                        message: String(
-                                            format: "%@, an error has occur while migrating the tasks.",
-                                            DataInterface.getUsername()
-                                        ),
-                                        animate: true,
-                                        completionTask: nil
-                                    )
-                                }
+                            if DataInterface.migrateTasksFromQueues(toProject: presenterController.project) {
+                                presenterController.dismissView(executeDismissTask: true)
                             }
-                            catch {
-                                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)")
-                                return
+                            else {
+                                // TODO: Do something!
                             }
                         } },
                     noAction: { (presenterController) -> Void in
@@ -66,9 +53,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     completionTask: nil
                 )
             }
-            else {
-                Func.AKPresentMessage(controller: self, message: "\(error)")
-            }
+            
             return
         }
         catch {
@@ -77,53 +62,27 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
         
         if self.migrate.isOn {
-            do {
-                if try DataInterface.migrateTasksFromQueues(toProject: self.project) {
-                    self.dismissView(executeDismissTask: true)
-                }
-                else {
-                    self.showMessage(
-                        message: String(
-                            format: "%@, an error has occur while migrating the tasks.",
-                            DataInterface.getUsername()
-                        ),
-                        animate: true,
-                        completionTask: nil
-                    )
-                }
+            if DataInterface.migrateTasksFromQueues(toProject: self.project) {
+                self.dismissView(executeDismissTask: true)
             }
-            catch {
-                Func.AKPresentMessageFromError(controller: self, message: "\(error)")
-                return
+            else {
+                // TODO: Do something!
             }
         }
         
         // Add the new task.
-        do {
-            if let mr = Func.AKObtainMasterReference() {
-                let now = NSDate()
-                let task = Task(context: mr.getMOC())
-                task.creationDate = now
-                task.name = taskName.outputData
-                task.state = self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)
-                if try DataInterface.addTask(toProject: self.project, toCategoryNamed: selectedCategory, task: task) {
-                    self.dismissView(executeDismissTask: true)
-                }
-                else {
-                    self.showMessage(
-                        message: String(
-                            format: "%@, an error has occur while creating the new task.",
-                            DataInterface.getUsername()
-                        ),
-                        animate: true,
-                        completionTask: nil
-                    )
-                }
+        if let mr = Func.AKObtainMasterReference() {
+            let now = NSDate()
+            let task = Task(context: mr.getMOC())
+            task.creationDate = now
+            task.name = taskName.outputData
+            task.state = self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)
+            if DataInterface.addTask(toProject: self.project, toCategoryNamed: selectedCategory, task: task) {
+                self.dismissView(executeDismissTask: true)
             }
-        }
-        catch {
-            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
-            return
+            else {
+                // TODO: Do something!
+            }
         }
     }
     
