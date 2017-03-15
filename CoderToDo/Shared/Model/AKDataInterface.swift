@@ -9,10 +9,10 @@ class AKDataInterface
     ///
     static func getUser() -> User? { return Func.AKObtainMasterReference()?.getUser() }
     
-    static func getUsername() -> String { return (DataInterface.getUser()?.username)! }
+    static func getUsername() -> String { return DataInterface.getUser()?.username ?? "" }
     
     // ########## PROJECT'S FUNCTIONS ########## //
-    static func addProject(project: Project) throws -> Bool
+    static func addProject(project: Project) -> Bool
     {
         if let user = DataInterface.getUser() {
             user.addToProject(project)
@@ -128,40 +128,6 @@ class AKDataInterface
         return counter
     }
     
-    ///
-    /// This function will check if a given project is open or closed.
-    ///
-    /// - Parameter project: The project to check.
-    ///
-    /// - Returns: TRUE if the project is "OPEN" (check for documentation to see when a project can be open), FALSE otherwise.
-    ///
-    static func isProjectOpen(project: Project) -> Bool
-    {
-        if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
-            let now = Date()
-            let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
-            let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
-            let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
-            
-            return nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance)
-        }
-        
-        return false
-    }
-    
-    static func isBeforeOpen(project: Project) -> Bool
-    {
-        if let startingTime = project.startingTime as? Date {
-            let now = Date()
-            let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
-            let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
-            
-            return nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < startingTimeHour
-        }
-        
-        return false
-    }
-    
     static func getProjectStatus(project: Project) -> ProjectStatus
     {
         if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date, let creationTime = project.creationDate as? Date {
@@ -171,7 +137,10 @@ class AKDataInterface
             let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
             
             // ###### FIRST DAY
-            // Special case when the user opens the App for the first time. This is called *First Day*.
+            // This is a very special case where the user has just downloaded the application and is
+            // ready to start adding days while the working day is OPEN, and it's called FIRST_DAY.
+            // Only one time we must allow this to happen. This modification is to allow the user
+            // to create tasks for the current day!
             let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
             let d1 = nowDateComponents.day ?? 0
             let m1 = nowDateComponents.month ?? 0
@@ -219,13 +188,9 @@ class AKDataInterface
     {
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
-            // This is a very special case where the user has just downloaded the application and is
-            // ready to start adding days while the working day is OPEN, and it's called FIRST_DAY.
-            // Only one time we must allow this to happen. This modification is to allow the user
-            // to create tasks for the current day!
             let tomorrow: Date!
             if DataInterface.getProjectStatus(project: project) == .firstDay {
-                tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 0, to: now)!
+                tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 0, to: now)! // In this case tomorrow == today...!
             }
             else {
                 tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
@@ -260,46 +225,27 @@ class AKDataInterface
             }
             
             if !alreadyContainsDate {
-                // Add the next working day. That means:
-                // 1. If it's a new day, but the working day has not begun yet. i.e. 00:00Hs. and the working day for the project is 09:00Hs. (DISCONTINUED)
-                // 2. If it's a new day, but the working day has begun, then add for tomorrow. i.e. 17:01Hs. and the working day lasted until 17:00Hs.
-                if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date {
-                    let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
-                    let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
-                    let closingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0)
-                    
-                    // This is a very special case where the user has just downloaded the application and is
-                    // ready to start adding days while the working day is OPEN, and it's called FIRST_DAY.
-                    // Only one time we must allow this to happen. This modification is to allow the user
-                    // to create tasks for the current day!
-                    if DataInterface.getProjectStatus(project: project) == .firstDay {
-                        if GlobalConstants.AKDebug {
-                            NSLog("=> INFO: WORKING DAY IS FIRST DAY. ADDING TODAY!")
-                        }
-                        
-                        let day = Day(context: mr.getMOC())
-                        day.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 0, to: now)! as NSDate
-                        project.addToDays(day)
-                        
-                        return day
+                if DataInterface.getProjectStatus(project: project) == .firstDay {
+                    if GlobalConstants.AKDebug {
+                        NSLog("=> INFO: WORKING DAY IS FIRST DAY. ADDING TODAY!")
                     }
                     
-                    if nowHour <= startingTimeHour {
-                        if GlobalConstants.AKDebug {
-                            NSLog("=> INFO: WORKING DAY NOT BEGUN YET (CLOSED). DOING NOTHING!")
-                        }
+                    let today = Day(context: mr.getMOC())
+                    today.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 0, to: now)! as NSDate
+                    project.addToDays(today)
+                    
+                    return today
+                }
+                else if DataInterface.getProjectStatus(project: project) == .accepting {
+                    if GlobalConstants.AKDebug {
+                        NSLog("=> INFO: WORKING DAY ALREADY FINISHED. ADDING TOMORROW!")
                     }
-                    else if nowHour >= closingTimeHour + Int(project.closingTimeTolerance) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
-                        if GlobalConstants.AKDebug {
-                            NSLog("=> INFO: WORKING DAY ALREADY FINISHED. ADDING TOMORROW!")
-                        }
-                        
-                        let day = Day(context: mr.getMOC())
-                        day.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
-                        project.addToDays(day)
-                        
-                        return day
-                    }
+                    
+                    let tomorrow = Day(context: mr.getMOC())
+                    tomorrow.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
+                    project.addToDays(tomorrow)
+                    
+                    return tomorrow
                 }
             }
             else {
@@ -587,7 +533,7 @@ class AKDataInterface
     }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) throws -> Bool
+    static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) -> Bool
     {
         if let mr = Func.AKObtainMasterReference() {
             // Allways add today to the table if not present, if present return the last day.
@@ -721,7 +667,7 @@ class AKDataInterface
     ///
     static func countTasksInCategory(category: Category, filter: Filter) -> Int { return DataInterface.getTasks(category: category, filter: filter).count }
     
-    static func migrateTaskToCategory(toCategoryNamed categoryName: String, task: Task) throws -> Bool
+    static func migrateTaskToCategory(toCategoryNamed categoryName: String, task: Task) -> Bool
     {
         if let day = task.category?.day {
             if let category = DataInterface.getCategoryByName(day: day, name: categoryName) {
@@ -742,7 +688,7 @@ class AKDataInterface
         return false
     }
     
-    static func migrateTasksFromQueues(toProject project: Project) throws -> Bool
+    static func migrateTasksFromQueues(toProject project: Project) -> Bool
     {
         if let mr = Func.AKObtainMasterReference() {
             // Allways add today to the table if not present, if present return the last day.
