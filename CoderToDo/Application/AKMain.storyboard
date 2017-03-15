@@ -47,7 +47,7 @@
                         <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
                         <segue destination="Y2b-YV-saU" kind="show" identifier="ViewProjectSegue" id="90v-Nx-O3K"/>
-                        <segue destination="Cbz-Ki-1n5" kind="show" identifier="ProjectConfigurationsSegue" id="UU8-RZ-Tlj"/>
+                        <segue destination="Cbz-Ki-1n5" kind="show" identifier="ViewProjectConfigurationsSegue" id="UU8-RZ-Tlj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -351,10 +351,34 @@
                     <navigationItem key="navigationItem" title="BrainStorming Bucket" id="pI1-Ru-4xj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jjG-gs-u2y"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="h85-kF-1OL" kind="show" identifier="ViewProjectBucketSegue" id="bfH-sg-X1I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xi4-Bj-QLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2015" y="833"/>
+        </scene>
+        <!--Project Bucket-->
+        <scene sceneID="l6r-i6-uTE">
+            <objects>
+                <viewController title="Project Bucket" id="h85-kF-1OL" customClass="AKProjectBucketViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gAl-ZU-gfg"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q9z-x0-8Sy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dq4-cY-mLH" userLabel="Main_Container">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Project Bucket" id="LBk-wY-fbX">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="pnF-0L-vdL"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WMU-ht-ZKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097" y="833"/>
         </scene>
         <!--Configurations-->
         <scene sceneID="xHs-hQ-w3F">
@@ -381,11 +405,77 @@
                     </navigationItem>
                     <connections>
                         <outlet property="configurationsTable" destination="kMR-P9-Y7F" id="Q7x-hW-RcF"/>
+                        <segue destination="572-NZ-klK" kind="show" identifier="ViewBackupSegue" id="CCZ-GR-KmZ"/>
+                        <segue destination="uHm-Qk-vXf" kind="show" identifier="ViewUserConfigurationSegue" id="skm-0K-yAu"/>
+                        <segue destination="wOx-58-wxz" kind="show" identifier="ViewWorkingHoursAndDaysSegue" id="f21-SR-iek"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LzU-lH-otJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2014" y="1623"/>
+        </scene>
+        <!--Backup-->
+        <scene sceneID="UEr-4D-OSh">
+            <objects>
+                <viewController title="Backup" id="572-NZ-klK" customClass="AKBackupViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tmh-iM-0EJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="jDy-F6-FNC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1av-YW-XWx" userLabel="Main_Container">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Backup" id="dOn-0X-lpT">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="qpO-1V-NUK"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lCd-QU-hzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097" y="1623"/>
+        </scene>
+        <!--User Configuration-->
+        <scene sceneID="gBB-lQ-uMn">
+            <objects>
+                <viewController title="User Configuration" id="uHm-Qk-vXf" customClass="AKUserConfigurationViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PKg-Sl-umv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q68-od-XJ3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ygu-4t-aWW" userLabel="Main_Container">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="User Configuration" id="js8-SP-oZK">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="fR1-wb-T3h"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fCo-Rv-PyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097" y="2378"/>
+        </scene>
+        <!--Working Hours & Days-->
+        <scene sceneID="jNe-OG-HGA">
+            <objects>
+                <viewController title="Working Hours &amp; Days" id="wOx-58-wxz" customClass="AKWorkingHoursAndDaysViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fGR-L7-ipv"/>
+                        <viewControllerLayoutGuide type="bottom" id="0CN-qw-xGh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HbZ-Og-5eF" userLabel="Main_Container">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Working Hours &amp; Days" id="Iug-Ax-Idh">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="jSI-kZ-5wF"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JsL-TJ-lcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097" y="3109"/>
         </scene>
         <!--BrainStorming Bucket-->
         <scene sceneID="oPO-tY-OSv">

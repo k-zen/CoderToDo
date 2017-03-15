@@ -105,6 +105,10 @@
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCE1E5B176200DACF53 /* AKTaskName.swift */; };
 		49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */; };
+		49D93F921E798B9C0093C9D2 /* AKProjectBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F911E798B9C0093C9D2 /* AKProjectBucketViewController.swift */; };
+		49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */; };
+		49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */; };
+		49D93F981E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F971E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift */; };
 		49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */; };
 		49DF7ED21E5DD7720017BEC6 /* AKSelectTaskStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */; };
 		49DF7EDA1E5E1C450017BEC6 /* AKMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */; };
@@ -229,6 +233,10 @@
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
 		49D57DCE1E5B176200DACF53 /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
 		49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsViewController.swift; sourceTree = "<group>"; };
+		49D93F911E798B9C0093C9D2 /* AKProjectBucketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectBucketViewController.swift; sourceTree = "<group>"; };
+		49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKBackupViewController.swift; sourceTree = "<group>"; };
+		49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserConfigurationViewController.swift; sourceTree = "<group>"; };
+		49D93F971E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWorkingHoursAndDaysViewController.swift; sourceTree = "<group>"; };
 		49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectTaskStateView.xib; sourceTree = "<group>"; };
 		49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectTaskStateView.swift; sourceTree = "<group>"; };
 		49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKMessageView.xib; sourceTree = "<group>"; };
@@ -406,14 +414,18 @@
 				4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */,
 				49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */,
 				49A4A09D1E589E8600CEDA1B /* AKAddViewController.swift */,
+				49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */,
 				49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */,
 				49A4A09E1E589E8600CEDA1B /* AKIntroductoryViewController.swift */,
 				49A4A09F1E589E8600CEDA1B /* AKListProjectsViewController.swift */,
 				49A4A0A01E589E8600CEDA1B /* AKNewProjectViewController.swift */,
+				49D93F911E798B9C0093C9D2 /* AKProjectBucketViewController.swift */,
 				49FE561D1E68A80B00652187 /* AKProjectConfigurationsViewController.swift */,
+				49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */,
 				49A4A0A21E589E8600CEDA1B /* AKUsernameInputViewController.swift */,
 				49A4A0A31E589E8600CEDA1B /* AKViewProjectViewController.swift */,
 				49A4A0A41E589E8600CEDA1B /* AKViewTaskViewController.swift */,
+				49D93F971E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -768,6 +780,7 @@
 				49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */,
 				4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */,
 				494A41BC1E743B6500EEE2A1 /* AKXMLBuilder.swift in Sources */,
+				49D93F981E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
 				49A4A1141E589E8600CEDA1B /* AKDaysTableViewCell.swift in Sources */,
 				49DF7EE01E5E27ED0017BEC6 /* AKContinueMessageView.swift in Sources */,
@@ -788,6 +801,7 @@
 				49A4A1161E589E8600CEDA1B /* AKTasksTableViewCell.swift in Sources */,
 				49A4A1191E589E8600CEDA1B /* AKInputData.swift in Sources */,
 				497F9C5C1E69D95700C78ECD /* AKCustomViewProtocol.swift in Sources */,
+				49D93F921E798B9C0093C9D2 /* AKProjectBucketViewController.swift in Sources */,
 				49A4A0E71E589E8600CEDA1B /* AKIntroductoryViewController.swift in Sources */,
 				49A4A1101E589E8600CEDA1B /* AKConstants.swift in Sources */,
 				49FE56221E68ACE400652187 /* AKConfigurationsTableViewCell.swift in Sources */,
@@ -795,9 +809,11 @@
 				49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
 				4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */,
+				49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */,
 				490670281E6D91AF0046298C /* AKFilterView.swift in Sources */,
 				49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */,
 				49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */,
+				49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */,
 				49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */,
 				49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */,
 				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,

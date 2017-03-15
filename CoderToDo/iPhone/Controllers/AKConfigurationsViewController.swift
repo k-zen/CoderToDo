@@ -22,6 +22,20 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
         self.customSetup()
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
+    {
+        switch identifier {
+        case GlobalConstants.AKViewBackupSegue:
+            return true
+        case GlobalConstants.AKViewUserConfigurationSegue:
+            return true
+        case GlobalConstants.AKViewWorkingHoursAndDaysSegue:
+            return true
+        default:
+            return false
+        }
+    }
+    
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -32,7 +46,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKCoderToDoBlue.cgColor,
+            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )
@@ -71,7 +85,19 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        // TODO
+        switch (indexPath as NSIndexPath).section {
+        case 0:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewUserConfigurationSegue, sender: self)
+            break
+        case 1:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewWorkingHoursAndDaysSegue, sender: self)
+            break
+        case 2:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewBackupSegue, sender: self)
+            break
+        default:
+            break
+        }
     }
     
     // MARK: Miscellaneous

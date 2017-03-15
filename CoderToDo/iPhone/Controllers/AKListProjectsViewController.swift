@@ -108,7 +108,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     }
                 }
                 break
-            case GlobalConstants.AKProjectConfigurationsSegue:
+            case GlobalConstants.AKViewProjectConfigurationsSegue:
                 if let destination = segue.destination as? AKProjectConfigurationsViewController {
                     if let project = sender as? Project {
                         destination.project = project
@@ -126,7 +126,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         switch identifier {
         case GlobalConstants.AKViewProjectSegue:
             return true
-        case GlobalConstants.AKProjectConfigurationsSegue:
+        case GlobalConstants.AKViewProjectConfigurationsSegue:
             return true
         default:
             return false
@@ -302,7 +302,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Edit Action
         let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
             let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
-            self.performSegue(withIdentifier: GlobalConstants.AKProjectConfigurationsSegue, sender: project)
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectConfigurationsSegue, sender: project)
         })
         edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
         

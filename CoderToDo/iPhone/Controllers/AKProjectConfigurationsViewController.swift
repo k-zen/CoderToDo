@@ -33,7 +33,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKCoderToDoBlue.cgColor,
+            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )
