@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Minor thread modification. (2017/03/15)
         * Added support for not showing categories which are empty. (2017/03/14)
         * Finalized support for only access to the DB via the Interface. (2017/03/14)
         * Improved support for filters. Added base support for XML backups. The marshall function is ready, only the unmarshall one is missing.

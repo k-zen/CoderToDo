@@ -482,6 +482,11 @@ enum Search: String
     case showAll = "*"
 }
 
+enum ExecutionMode {
+    case sync
+    case async
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -523,7 +528,7 @@ class UtilityFunctions
     ///
     func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition)
     {
-        Func.AKExecuteInMainThread {
+        Func.AKExecuteInMainThread(mode: .async, code: {
             let border = CALayer()
             border.backgroundColor = color
             switch position {
@@ -554,7 +559,7 @@ class UtilityFunctions
             }
             
             component.layer.addSublayer(border)
-        }
+        })
     }
     
     ///
@@ -656,7 +661,7 @@ class UtilityFunctions
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: task)
         }
         else {
-            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: task)
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: task)
         }
     }
     
@@ -670,11 +675,37 @@ class UtilityFunctions
     ///
     /// Executes some code inside a closure but in the main thread.
     ///
+    /// - Parameter mode: The execution mode.
     /// - Parameter code: The code to be executed in the main thread.
     ///
-    func AKExecuteInMainThread(code: @escaping (Void) -> Void)
+    func AKExecuteInMainThread(mode: ExecutionMode, code: @escaping (Void) -> Void)
     {
-        OperationQueue.main.addOperation({ () -> Void in code() })
+        switch mode {
+        case .sync:
+            DispatchQueue.main.sync(execute: { code() })
+            break
+        case .async:
+            DispatchQueue.main.async(execute: { code() })
+            break
+        }
+    }
+    
+    ///
+    /// Executes some code inside a closure but in a background thread.
+    ///
+    /// - Parameter mode: The execution mode.
+    /// - Parameter code: The code to be executed in a background thread.
+    ///
+    func AKExecuteInBackgroundThread(mode: ExecutionMode, code: @escaping (Void) -> Void)
+    {
+        switch mode {
+        case .sync:
+            DispatchQueue.global(qos: .background).sync(execute: { code() })
+            break
+        case .async:
+            DispatchQueue.global(qos: .background).async(execute: { code() })
+            break
+        }
     }
     
     func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView, isCentered: Bool = true) -> CGFloat
@@ -824,14 +855,14 @@ class UtilityFunctions
     
     func AKPresentMessage(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
     {
-        Func.AKExecuteInMainThread {
+        Func.AKExecuteInMainThread(mode: .sync, code: {
             controller.showMessage(
                 message: message,
                 autoDismiss: autoDismiss,
                 animate: true,
                 completionTask: nil
             )
-        }
+        })
     }
     
     ///

@@ -512,7 +512,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     {
         Func.AKGetNotificationCenter().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if !granted {
-                Func.AKExecuteInMainThread {
+                Func.AKExecuteInMainThread(mode: .sync, code: {
                     self.showContinueMessage(
                         message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to \"Settings\" to enable it.",
                         yesButtonTitle: "Open Settings",
@@ -531,7 +531,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                         animate: true,
                         completionTask: nil
                     )
-                }
+                })
             }
             else {
                 NSLog("=> INFO: USER HAS AUTHORIZED LOCAL NOTIFICATIONS.")
@@ -552,20 +552,22 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 // TODO: Enable function.
                 break
             default:
-                self.showContinueMessage(
-                    message: "CoderToDo needs access to your iCloud account to perform the backup task. Go to \"Settings\" to enable it.",
-                    yesButtonTitle: "Open Settings",
-                    noButtonTitle: "No",
-                    yesAction: { (presenterController) -> Void in
-                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
-                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
-                            } }
-                        ) },
-                    noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
-                    animate: true,
-                    completionTask: nil
-                )
+                Func.AKExecuteInMainThread(mode: .sync, code: {
+                    self.showContinueMessage(
+                        message: "CoderToDo needs access to your iCloud account to perform the backup task. Go to \"Settings\" to enable it.",
+                        yesButtonTitle: "Open Settings",
+                        noButtonTitle: "No",
+                        yesAction: { (presenterController) -> Void in
+                            presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
+                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                    Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                                } }
+                            ) },
+                        noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                        animate: true,
+                        completionTask: nil
+                    )
+                })
                 break
             }
         })
