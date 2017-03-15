@@ -88,9 +88,10 @@ class AKXMLBuilder
         xmlWrapper.append("<?xml version=\"1.0\"?>")
         xmlWrapper.append(
             String(
-                format: "<data date=\"%@\" md5=\"%@\">%@</data>",
+                format: "<data date=\"%@\" md5=\"%@\" size=\"%ll\">%@</data>",
                 Date().description,
                 finalStr.computeMD5() ?? "",
+                finalStr.lengthOfBytes(using: .utf8),
                 finalStr
             )
         )

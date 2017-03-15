@@ -1,6 +1,6 @@
 import UIKit
 
-class AKProjectConfigurationsViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
+class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: Constants
     private struct LocalConstants {
@@ -10,8 +10,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     }
     
     // MARK: Properties
-    var configurationsTableHeaders = ["Name", "Times", "Notifications", "User Defined Categories", "Goodies"]
-    var project: Project!
+    var configurationsTableHeaders = ["User Configuration", "Working Hours & Days", "Backup"]
     
     // MARK: Outlets
     @IBOutlet weak var configurationsTable: UITableView!

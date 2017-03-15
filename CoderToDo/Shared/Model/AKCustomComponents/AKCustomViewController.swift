@@ -544,17 +544,19 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         Func.AKGetCloudKitContainer().accountStatus(completionHandler: { (accountStatus, error) -> Void in
             guard error == nil else {
                 // TODO: Show error message and disable function.
+                NSLog("=> ERROR: \(error)")
                 return
             }
             
             switch accountStatus {
             case .available:
                 // TODO: Enable function.
+                NSLog("=> INFO: ACCESS TO iCloud IS ENABLED!")
                 break
             default:
                 Func.AKExecuteInMainThread(mode: .sync, code: {
                     self.showContinueMessage(
-                        message: "CoderToDo needs access to your iCloud account to perform the backup task. Go to \"Settings\" to enable it.",
+                        message: "You need to be signed into iCloud and have *iCloud Drive* set to on. Go to *Settings -> iCloud* to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in

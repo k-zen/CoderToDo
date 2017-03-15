@@ -359,7 +359,7 @@
         <!--Configurations-->
         <scene sceneID="xHs-hQ-w3F">
             <objects>
-                <viewController title="Configurations" id="Us1-in-POh" sceneMemberID="viewController">
+                <viewController title="Configurations" id="Us1-in-POh" customClass="AKConfigurationsViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8lL-7D-LGm"/>
                         <viewControllerLayoutGuide type="bottom" id="vQb-TG-Tsn"/>
@@ -367,11 +367,21 @@
                     <view key="view" contentMode="scaleToFill" id="dEn-Sl-Mod">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kMR-P9-Y7F" userLabel="Configurations_Table">
+                                <rect key="frame" x="16" y="8" width="343" height="538"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Configurations" id="JU2-CC-j8J">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9vy-8M-Lao"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="configurationsTable" destination="kMR-P9-Y7F" id="Q7x-hW-RcF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LzU-lH-otJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -15,22 +15,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u8k-nY-dqh" id="Kk3-mO-zfi" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some text." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtG-vr-Awm" userLabel="Title">
-                        <rect key="frame" x="16" y="0.0" width="304" height="40"/>
+                        <rect key="frame" x="16" y="0.0" width="266" height="40"/>
                         <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                         <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCe-l2-vYg" userLabel="Arrow">
+                        <rect key="frame" x="290" y="0.0" width="30" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="dgK-l0-4Xo"/>
+                            <constraint firstAttribute="width" constant="30" id="jvb-gs-RJu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="22"/>
+                        <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="qtG-vr-Awm" secondAttribute="bottom" id="NN8-uD-q4A"/>
-                    <constraint firstAttribute="trailing" secondItem="qtG-vr-Awm" secondAttribute="trailing" id="UzT-ID-sCz"/>
-                    <constraint firstItem="qtG-vr-Awm" firstAttribute="leading" secondItem="Kk3-mO-zfi" secondAttribute="leading" constant="16" id="pyw-5c-op3"/>
-                    <constraint firstItem="qtG-vr-Awm" firstAttribute="top" secondItem="Kk3-mO-zfi" secondAttribute="top" id="xmx-fb-3cv"/>
+                    <constraint firstItem="qtG-vr-Awm" firstAttribute="top" secondItem="Kk3-mO-zfi" secondAttribute="top" id="0CI-Nk-5kT"/>
+                    <constraint firstItem="ZCe-l2-vYg" firstAttribute="leading" secondItem="qtG-vr-Awm" secondAttribute="trailing" constant="8" id="0wc-49-VGi"/>
+                    <constraint firstItem="ZCe-l2-vYg" firstAttribute="top" secondItem="Kk3-mO-zfi" secondAttribute="top" id="GYP-nz-oR5"/>
+                    <constraint firstAttribute="trailing" secondItem="ZCe-l2-vYg" secondAttribute="trailing" id="GpR-ya-VNL"/>
+                    <constraint firstAttribute="bottom" secondItem="qtG-vr-Awm" secondAttribute="bottom" id="LbV-IR-wIg"/>
+                    <constraint firstAttribute="bottom" secondItem="ZCe-l2-vYg" secondAttribute="bottom" id="Ov5-nq-fx1"/>
+                    <constraint firstItem="qtG-vr-Awm" firstAttribute="leading" secondItem="Kk3-mO-zfi" secondAttribute="leading" constant="16" id="Zaz-Fc-iXj"/>
+                    <constraint firstItem="ZCe-l2-vYg" firstAttribute="leading" secondItem="qtG-vr-Awm" secondAttribute="trailing" constant="8" id="pBj-yY-iRu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
