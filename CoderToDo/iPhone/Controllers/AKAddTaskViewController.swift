@@ -71,17 +71,28 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
         
         // Add the new task.
-        if let mr = Func.AKObtainMasterReference() {
-            let now = NSDate()
-            let task = Task(context: mr.getMOC())
-            task.creationDate = now
-            task.name = taskName.outputData
-            task.state = self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)
+        let newTask = AKTaskInterface(
+            name: taskName.outputData,
+            state: self.initialStateValue.titleForSegment(at: self.initialStateValue.selectedSegmentIndex)!
+        )
+        do {
+            try newTask.validate()
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            return
+        }
+        
+        if let task = AKTaskBuilder.mirror(interface: newTask) {
             if DataInterface.addTask(toProject: self.project, toCategoryNamed: selectedCategory, task: task) {
                 self.dismissView(executeDismissTask: true)
             }
             else {
-                // TODO: Do something!
+                self.showMessage(
+                    message: "Could not add the new task. The error has been reported.",
+                    animate: true,
+                    completionTask: nil
+                )
             }
         }
     }

@@ -36,8 +36,6 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
     }
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)

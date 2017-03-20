@@ -59,8 +59,6 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-        self.getView().layer.borderWidth = CGFloat(GlobalConstants.AKDefaultBorderThickness)
-        self.getView().layer.borderColor = GlobalConstants.AKDefaultViewBorderBg.cgColor
         self.yes.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.no.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

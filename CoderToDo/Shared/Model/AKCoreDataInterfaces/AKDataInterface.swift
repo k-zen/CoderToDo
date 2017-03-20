@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 class AKDataInterface
 {
@@ -11,15 +12,49 @@ class AKDataInterface
     
     static func getUsername() -> String { return DataInterface.getUser()?.username ?? "" }
     
+    static func isEmpty() -> Bool { return DataInterface.getUser()?.project == nil }
+    
+    static func resetData() -> Void { DataInterface.getUser()?.project = nil }
+    
     // ########## PROJECT'S FUNCTIONS ########## //
     static func addProject(project: Project) -> Bool
     {
-        if let user = DataInterface.getUser() {
+        var result = 0
+        if let mr = Func.AKObtainMasterReference(), let user = DataInterface.getUser() {
+            // Add both necessary queues.
+            project.pendingQueue = PendingQueue(context: mr.getMOC())
+            project.dilateQueue = DilateQueue(context: mr.getMOC())
+            
+            // Schedule notifications.
+            if project.notifyClosingTime {
+                let closingTimeContent = UNMutableNotificationContent()
+                closingTimeContent.title = String(format: "Project: %@", project.name!)
+                closingTimeContent.body = String(
+                    format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before this day is marked as closed.",
+                    DataInterface.getUsername(),
+                    project.closingTimeTolerance
+                )
+                closingTimeContent.sound = UNNotificationSound.default()
+                Func.AKGetNotificationCenter().add(
+                    UNNotificationRequest(
+                        identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!),
+                        content: closingTimeContent,
+                        trigger: UNCalendarNotificationTrigger(
+                            dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime as! Date),
+                            repeats: true
+                        )
+                    ),
+                    withCompletionHandler: { (error) in
+                        if let _ = error {
+                            result += 1
+                        } }
+                )
+            }
+            
             user.addToProject(project)
-            return true
         }
         
-        return false
+        return result == 0 ? true : false
     }
     
     ///
@@ -345,48 +380,6 @@ class AKDataInterface
         return DataInterface.getDays(project: project, filterEmpty: filterEmpty, filter: filter).count
     }
     
-    static func getDayTitle(day: Day) -> String
-    {
-        if let date = day.date as? Date {
-            let now = Date()
-            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
-            let d1 = nowDateComponents.day ?? 0
-            let m1 = nowDateComponents.month ?? 0
-            let y1 = nowDateComponents.year ?? 0
-            
-            let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
-            let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
-            let d2 = tomorrowDateComponents.day ?? 0
-            let m2 = tomorrowDateComponents.month ?? 0
-            let y2 = tomorrowDateComponents.year ?? 0
-            
-            let yesterday = Func.AKGetCalendarForLoading().date(byAdding: .day, value: -1, to: now)!
-            let yesterdayDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: yesterday)
-            let d3 = yesterdayDateComponents.day ?? 0
-            let m3 = yesterdayDateComponents.month ?? 0
-            let y3 = yesterdayDateComponents.year ?? 0
-            
-            let d = Func.AKGetCalendarForLoading().dateComponents([.day], from: date).day ?? 0
-            let m = Func.AKGetCalendarForLoading().dateComponents([.month], from: date).month ?? 0
-            let y = Func.AKGetCalendarForLoading().dateComponents([.year], from: date).year ?? 0
-            
-            if d == d1 && m == m1 && y == y1 {
-                return "Today"
-            }
-            else if d == d2 && m == m2 && y == y2 {
-                return "Tomorrow"
-            }
-            else if d == d3 && m == m3 && y == y3 {
-                return "Yesterday"
-            }
-            else {
-                return String(format: "%.2i/%.2i/%.4i", m, d, y)
-            }
-        }
-        
-        return "N\\A"
-    }
-    
     static func getDayStatus(day: Day) -> DayStatus
     {
         let now = Date()
@@ -479,20 +472,6 @@ class AKDataInterface
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
-    static func addCategory(toProject project: Project, categoryName: String) throws
-    {
-        if let mr = Func.AKObtainMasterReference() {
-            if let _ = DataInterface.getProjectCategoryByName(project: project, name: categoryName) {
-                throw Exceptions.categoryAlreadyExists("There is already a category with that name. Please choose another one.")
-            }
-            
-            let projectCategory = ProjectCategory(context: mr.getMOC())
-            projectCategory.name = categoryName
-            
-            project.addToProjectCategories(projectCategory)
-        }
-    }
-    
     static func getCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Category]
     {
         if let categories = day.categories?.allObjects as? [Category] {
@@ -834,6 +813,20 @@ class AKDataInterface
     static func countDilateTasks(project: Project) -> Int { return DataInterface.getDilateTasks(project: project).count }
     // ########## TASK'S FUNCTIONS ########## //
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
+    static func addProjectCategory(toProject project: Project, categoryName: String) throws
+    {
+        if let mr = Func.AKObtainMasterReference() {
+            if let _ = DataInterface.getProjectCategoryByName(project: project, name: categoryName) {
+                throw Exceptions.categoryAlreadyExists("There is already a category with that name. Please choose another one.")
+            }
+            
+            let projectCategory = ProjectCategory(context: mr.getMOC())
+            projectCategory.name = categoryName
+            
+            project.addToProjectCategories(projectCategory)
+        }
+    }
+    
     static func listProjectCategories(project: Project) -> [String]
     {
         if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {

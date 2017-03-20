@@ -174,9 +174,9 @@ struct GlobalConstants
     static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray2
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoWhite3
-    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoWhite2
-    static let AKEnabledButtonFg = GlobalConstants.AKRedForBlackFg
-    static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoWhite2
+    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray1
+    static let AKEnabledButtonFg = GlobalConstants.AKCoderToDoWhite1
+    static let AKDisabledButtonBg = GlobalConstants.AKCoderToDoWhite3
     static let AKDisabledButtonFg = GlobalConstants.AKCoderToDoWhite1
     static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoWhite3
     static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoGray1
@@ -227,6 +227,8 @@ struct GlobalConstants
     // Backup
     // XML
     static let AKBackupXMLMaxNodes: UInt = 100000000
+    // CloudKit
+    static let AKBackupRecordTypeName = "BackupData"
     // Default Values
     static let AKDefaultProjectSortType = ProjectSorting.creationDate
     static let AKDefaultProjectSortOrder = SortingOrder.descending
@@ -333,6 +335,23 @@ struct SearchTerm
         
         return false
     }
+}
+
+struct BackupInfo
+{
+    enum Fields: String {
+        case dateKey = "Date"
+        case md5Key = "MD5"
+        case sizeKey = "Size"
+        case dataKey = "Data"
+        case filenameKey = "Filename"
+    }
+    
+    var date: Date?
+    var md5: String?
+    var size: Int64?
+    var data: Data?
+    var filename: URL?
 }
 
 // MARK: Global Enumerations
@@ -767,6 +786,48 @@ class UtilityFunctions
         }
     }
     
+    func AKGetFormattedDate(date: Date?) -> String
+    {
+        if let date = date {
+            let now = Date()
+            let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
+            let d1 = nowDateComponents.day ?? 0
+            let m1 = nowDateComponents.month ?? 0
+            let y1 = nowDateComponents.year ?? 0
+            
+            let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
+            let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
+            let d2 = tomorrowDateComponents.day ?? 0
+            let m2 = tomorrowDateComponents.month ?? 0
+            let y2 = tomorrowDateComponents.year ?? 0
+            
+            let yesterday = Func.AKGetCalendarForLoading().date(byAdding: .day, value: -1, to: now)!
+            let yesterdayDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: yesterday)
+            let d3 = yesterdayDateComponents.day ?? 0
+            let m3 = yesterdayDateComponents.month ?? 0
+            let y3 = yesterdayDateComponents.year ?? 0
+            
+            let d = Func.AKGetCalendarForLoading().dateComponents([.day], from: date).day ?? 0
+            let m = Func.AKGetCalendarForLoading().dateComponents([.month], from: date).month ?? 0
+            let y = Func.AKGetCalendarForLoading().dateComponents([.year], from: date).year ?? 0
+            
+            if d == d1 && m == m1 && y == y1 {
+                return "Today"
+            }
+            else if d == d2 && m == m2 && y == y2 {
+                return "Tomorrow"
+            }
+            else if d == d3 && m == m3 && y == y3 {
+                return "Yesterday"
+            }
+            else {
+                return String(format: "%.2i/%.2i/%.4i", m, d, y)
+            }
+        }
+        
+        return "N\\A"
+    }
+    
     func AKGetNotificationCenter() -> UNUserNotificationCenter { return Func.AKDelegate().notificationCenter }
     
     ///
@@ -883,7 +944,7 @@ class UtilityFunctions
         NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
     }
     
-    func AKProcessDate(dateAsString: String, format: String) throws -> NSDate
+    func AKProcessDate(dateAsString: String, format: String) -> NSDate?
     {
         let formatter = DateFormatter()
         formatter.dateFormat = format
@@ -892,9 +953,21 @@ class UtilityFunctions
         if let date = formatter.date(from: dateAsString) {
             return date as NSDate
         }
-        else {
-            throw Exceptions.invalidDate("The date to be parsed was invalid.")
+        
+        return nil
+    }
+    
+    func AKProcessGMTDate(dateAsString: String) -> NSDate?
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        formatter.timeZone = TimeZone(identifier: "GMT")!
+        
+        if let date = formatter.date(from: dateAsString) {
+            return date as NSDate
         }
+        
+        return nil
     }
     
     func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>?

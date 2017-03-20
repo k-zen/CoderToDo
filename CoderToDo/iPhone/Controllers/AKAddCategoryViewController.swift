@@ -27,7 +27,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
             try categoryName.validate()
             try categoryName.process()
             
-            try DataInterface.addCategory(
+            try DataInterface.addProjectCategory(
                 toProject: self.project,
                 categoryName: categoryName.outputData
             )

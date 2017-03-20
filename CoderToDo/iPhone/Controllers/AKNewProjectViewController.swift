@@ -1,5 +1,4 @@
 import UIKit
-import UserNotifications
 
 class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
 {
@@ -28,83 +27,49 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     // MARK: Actions
     @IBAction func save(_ sender: Any)
     {
+        // Check name.
+        let name = AKProjectName(inputData: self.projectName.text!)
         do {
-            let notifyClosingTime = self.notifyClosingTime.isOn
-            let projectName = AKProjectName(inputData: self.projectName.text!)
-            let startingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
-            let closingTime = try Func.AKProcessDate(dateAsString: self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)], format: GlobalConstants.AKWorkingDayTimeDateFormat) as NSDate
-            let tolerance = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
-            
-            // Check name.
-            try projectName.validate()
-            try projectName.process()
-            
-            // Check times.
-            // 1. Closing time must be later than starting time.
-            let dateComparison = closingTime.compare(startingTime as Date)
-            if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
-                self.showMessage(
-                    message: "The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".",
-                    animate: true,
-                    completionTask: nil
-                )
-                return
-            }
-            
-            if let mr = Func.AKObtainMasterReference() {
-                let now = NSDate()
-                
-                let project = Project(context: mr.getMOC())
-                project.notifyClosingTime = notifyClosingTime
-                project.name = projectName.outputData
-                project.startingTime = startingTime
-                project.closingTime = closingTime
-                project.closingTimeTolerance = Int16(tolerance)
-                project.creationDate = now
-                project.pendingQueue = PendingQueue(context: mr.getMOC())
-                project.dilateQueue = DilateQueue(context: mr.getMOC())
-                
-                if DataInterface.addProject(project: project) {
-                    // Schedule local notifications.
-                    if notifyClosingTime {
-                        let closingTimeContent = UNMutableNotificationContent()
-                        closingTimeContent.title = String(format: "Project: %@", projectName.outputData)
-                        closingTimeContent.body = String(
-                            format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before this day is marked as closed.",
-                            DataInterface.getUsername(),
-                            tolerance
-                        )
-                        closingTimeContent.sound = UNNotificationSound.default()
-                        Func.AKGetNotificationCenter().add(
-                            UNNotificationRequest(
-                                identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, projectName.outputData),
-                                content: closingTimeContent,
-                                trigger: UNCalendarNotificationTrigger(
-                                    dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: closingTime as Date),
-                                    repeats: true
-                                )
-                            ),
-                            withCompletionHandler: { (error) in
-                                if let _ = error {
-                                    self.showMessage(
-                                        message: "Error setting up closing time notification.",
-                                        animate: true,
-                                        completionTask: nil
-                                    )
-                                } }
-                        )
-                    }
-                    
-                    self.dismissView(executeDismissTask: true)
-                }
-                else {
-                    // TODO: Do something.
-                }
-            }
+            try name.validate()
+            try name.process()
         }
         catch {
             Func.AKPresentMessageFromError(controller: self, message: "\(error)")
             return
+        }
+        
+        // Check other data.
+        let cti = self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)]
+        let ctt = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
+        let nct = self.notifyClosingTime.isOn
+        let sti = self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)]
+        
+        var newProject = AKProjectInterface(name: name.outputData)
+        // Custom Setters.
+        newProject.setClosingTime(cti)
+        newProject.setStartingTime(sti)
+        // Normal Setters.
+        newProject.closingTimeTolerance = Int16(ctt)
+        newProject.notifyClosingTime = nct
+        do {
+            try newProject.validate()
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            return
+        }
+        
+        if let project = AKProjectBuilder.mirror(interface: newProject) {
+            if DataInterface.addProject(project: project) {
+                self.dismissView(executeDismissTask: true)
+            }
+            else {
+                self.showMessage(
+                    message: "Could not add the new project. The error has been reported.",
+                    animate: true,
+                    completionTask: nil
+                )
+            }
         }
     }
     

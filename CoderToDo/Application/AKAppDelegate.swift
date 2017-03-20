@@ -12,15 +12,9 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
     var window: UIWindow?
     
     // MARK: UIApplicationDelegate Implementation
-    func applicationWillTerminate(_ application: UIApplication)
-    {
-        AKMasterReference.saveData(instance: self.masterRef)
-    }
+    func applicationWillTerminate(_ application: UIApplication) { AKMasterReference.saveData(instance: self.masterRef) }
     
-    func applicationWillResignActive(_ application: UIApplication)
-    {
-        AKMasterReference.saveData(instance: self.masterRef)
-    }
+    func applicationWillResignActive(_ application: UIApplication) { AKMasterReference.saveData(instance: self.masterRef) }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {

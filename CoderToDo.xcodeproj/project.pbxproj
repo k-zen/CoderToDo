@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		490670261E6D90CF0046298C /* AKFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490670251E6D90CF0046298C /* AKFilterView.xib */; };
-		490670281E6D91AF0046298C /* AKFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490670271E6D91AF0046298C /* AKFilterView.swift */; };
-		4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */; };
-		490B4E271E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */; };
-		490B4E291E75CFC700378B74 /* libObjectiveCToolbox-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */; };
 		490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490C223D1E65CBBE006A39F8 /* CloudKit.framework */; };
 		49121BAE1E737480000B4D26 /* Icon-1024@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121B891E737480000B4D26 /* Icon-1024@1x.png */; };
 		49121BAF1E737480000B4D26 /* Icon-512@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121B8A1E737480000B4D26 /* Icon-512@1x.png */; };
@@ -53,17 +49,13 @@
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
 		4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */; };
 		4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */; };
-		4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE71E58D2740002C173 /* AKCategoryName.swift */; };
-		494A41BC1E743B6500EEE2A1 /* AKXMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */; };
-		494A41C11E7453F600EEE2A1 /* AKExportXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494A41C01E7453F600EEE2A1 /* AKExportXML.swift */; };
-		49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49576D4B1E6C4F9F0085C517 /* AKSortView.swift */; };
+		49400B5E1E803A9C001C893E /* AKTaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49400B5D1E803A9C001C893E /* AKTaskBuilder.swift */; };
+		49400B601E80532F001C893E /* AKCategoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49400B5F1E80532F001C893E /* AKCategoryBuilder.swift */; };
+		49400B621E805354001C893E /* AKDayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49400B611E805354001C893E /* AKDayBuilder.swift */; };
+		49400B641E80536D001C893E /* AKProjectCategoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49400B631E80536D001C893E /* AKProjectCategoryBuilder.swift */; };
 		496674D51E6F276E00A60B64 /* AKSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496674D41E6F276E00A60B64 /* AKSearchView.xib */; };
-		496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496674D61E6F287B00A60B64 /* AKSearchView.swift */; };
 		49677F791E6476A100E1E675 /* AKTopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49677F781E6476A100E1E675 /* AKTopMenuView.xib */; };
-		49677F7B1E64781200E1E675 /* AKTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49677F7A1E64781200E1E675 /* AKTopMenuView.swift */; };
 		497F9C581E69D19000C78ECD /* AKSelectCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */; };
-		497F9C5A1E69D1C500C78ECD /* AKSelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F9C591E69D1C500C78ECD /* AKSelectCategoryView.swift */; };
-		497F9C5C1E69D95700C78ECD /* AKCustomViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F9C5B1E69D95700C78ECD /* AKCustomViewProtocol.swift */; };
 		49A4A0E31E589E8600CEDA1B /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */; };
 		49A4A0E41E589E8600CEDA1B /* AKLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0991E589E8600CEDA1B /* AKLaunchScreen.storyboard */; };
 		49A4A0E51E589E8600CEDA1B /* AKMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A09A1E589E8600CEDA1B /* AKMain.storyboard */; };
@@ -85,57 +77,58 @@
 		49A4A0F61E589E8600CEDA1B /* AKUsernameInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0AE1E589E8600CEDA1B /* AKUsernameInputView.xib */; };
 		49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B01E589E8600CEDA1B /* Assets.xcassets */; };
 		49A4A10F1E589E8600CEDA1B /* AKNewProjectViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0CA1E589E8600CEDA1B /* AKNewProjectViewController.plist */; };
-		49A4A1101E589E8600CEDA1B /* AKConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0CE1E589E8600CEDA1B /* AKConstants.swift */; };
-		49A4A1111E589E8600CEDA1B /* AKCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D01E589E8600CEDA1B /* AKCustomView.swift */; };
-		49A4A1121E589E8600CEDA1B /* AKCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D11E589E8600CEDA1B /* AKCustomViewController.swift */; };
-		49A4A1131E589E8600CEDA1B /* AKTasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D31E589E8600CEDA1B /* AKTasksTableView.swift */; };
-		49A4A1141E589E8600CEDA1B /* AKDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D51E589E8600CEDA1B /* AKDaysTableViewCell.swift */; };
-		49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D61E589E8600CEDA1B /* AKProjectsTableViewCell.swift */; };
-		49A4A1161E589E8600CEDA1B /* AKTasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D71E589E8600CEDA1B /* AKTasksTableViewCell.swift */; };
-		49A4A1171E589E8600CEDA1B /* AKDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D81E589E8600CEDA1B /* AKDataController.swift */; };
-		49A4A1181E589E8600CEDA1B /* AKDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0D91E589E8600CEDA1B /* AKDataInterface.swift */; };
-		49A4A1191E589E8600CEDA1B /* AKInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DA1E589E8600CEDA1B /* AKInputData.swift */; };
-		49A4A11A1E589E8600CEDA1B /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */; };
-		49A4A11B1E589E8600CEDA1B /* AKProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */; };
-		49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */; };
 		49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */; };
-		49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6A93F1E675AB6007701AC /* AKChecks.swift */; };
-		49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */; };
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
-		49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCE1E5B176200DACF53 /* AKTaskName.swift */; };
 		49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */; };
 		49D93F921E798B9C0093C9D2 /* AKProjectBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F911E798B9C0093C9D2 /* AKProjectBucketViewController.swift */; };
 		49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */; };
 		49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */; };
 		49D93F981E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F971E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift */; };
 		49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */; };
-		49DF7ED21E5DD7720017BEC6 /* AKSelectTaskStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */; };
 		49DF7EDA1E5E1C450017BEC6 /* AKMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */; };
-		49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF7EDB1E5E1D2A0017BEC6 /* AKMessageView.swift */; };
 		49DF7EDE1E5E27450017BEC6 /* AKContinueMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */; };
-		49DF7EE01E5E27ED0017BEC6 /* AKContinueMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF7EDF1E5E27ED0017BEC6 /* AKContinueMessageView.swift */; };
+		49E76DF61E7DCF62000215BC /* AKCloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DC41E7DCF62000215BC /* AKCloudKitController.swift */; };
+		49E76DF71E7DCF62000215BC /* AKXMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DC51E7DCF62000215BC /* AKXMLBuilder.swift */; };
+		49E76DF81E7DCF62000215BC /* AKXMLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DC61E7DCF62000215BC /* AKXMLController.swift */; };
+		49E76DF91E7DCF62000215BC /* AKConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DC71E7DCF62000215BC /* AKConstants.swift */; };
+		49E76DFA1E7DCF62000215BC /* AKDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DC91E7DCF62000215BC /* AKDataController.swift */; };
+		49E76DFB1E7DCF62000215BC /* AKDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DCA1E7DCF62000215BC /* AKDataInterface.swift */; };
+		49E76DFC1E7DCF62000215BC /* AKMasterReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DCB1E7DCF62000215BC /* AKMasterReference.swift */; };
+		49E76DFD1E7DCF62000215BC /* AKProjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DCC1E7DCF62000215BC /* AKProjectBuilder.swift */; };
+		49E76DFE1E7DCF62000215BC /* AKCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DCE1E7DCF62000215BC /* AKCustomView.swift */; };
+		49E76DFF1E7DCF62000215BC /* AKCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DCF1E7DCF62000215BC /* AKCustomViewController.swift */; };
+		49E76E001E7DCF62000215BC /* AKCustomViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD01E7DCF62000215BC /* AKCustomViewProtocol.swift */; };
+		49E76E011E7DCF62000215BC /* AKContinueMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD21E7DCF62000215BC /* AKContinueMessageView.swift */; };
+		49E76E021E7DCF62000215BC /* AKFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD31E7DCF62000215BC /* AKFilterView.swift */; };
+		49E76E031E7DCF62000215BC /* AKMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD41E7DCF62000215BC /* AKMessageView.swift */; };
+		49E76E041E7DCF62000215BC /* AKSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD51E7DCF62000215BC /* AKSearchView.swift */; };
+		49E76E051E7DCF62000215BC /* AKSelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD61E7DCF62000215BC /* AKSelectCategoryView.swift */; };
+		49E76E061E7DCF62000215BC /* AKSelectTaskStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD71E7DCF62000215BC /* AKSelectTaskStateView.swift */; };
+		49E76E071E7DCF62000215BC /* AKSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD81E7DCF62000215BC /* AKSortView.swift */; };
+		49E76E081E7DCF62000215BC /* AKTasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD91E7DCF62000215BC /* AKTasksTableView.swift */; };
+		49E76E091E7DCF62000215BC /* AKTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDA1E7DCF62000215BC /* AKTopMenuView.swift */; };
+		49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */; };
+		49E76E0B1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDE1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift */; };
+		49E76E0C1E7DCF62000215BC /* AKDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDF1E7DCF62000215BC /* AKDaysTableViewCell.swift */; };
+		49E76E0D1E7DCF62000215BC /* AKProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DE01E7DCF62000215BC /* AKProjectsTableViewCell.swift */; };
+		49E76E0E1E7DCF62000215BC /* AKTasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DE11E7DCF62000215BC /* AKTasksTableViewCell.swift */; };
+		49E76E0F1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E76DEA1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a */; };
+		49E76E101E7DCF62000215BC /* AKCategoryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DEC1E7DCF62000215BC /* AKCategoryName.swift */; };
+		49E76E111E7DCF62000215BC /* AKInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DED1E7DCF62000215BC /* AKInputData.swift */; };
+		49E76E121E7DCF62000215BC /* AKProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DEE1E7DCF62000215BC /* AKProjectName.swift */; };
+		49E76E131E7DCF62000215BC /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DEF1E7DCF62000215BC /* AKTaskName.swift */; };
+		49E76E141E7DCF62000215BC /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DF01E7DCF62000215BC /* AKUsername.swift */; };
+		49E76E151E7DCF62000215BC /* AKChecks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DF21E7DCF62000215BC /* AKChecks.swift */; };
+		49E76E161E7DCF62000215BC /* libObjectiveCToolbox-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */; };
 		49FE561E1E68A80B00652187 /* AKProjectConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE561D1E68A80B00652187 /* AKProjectConfigurationsViewController.swift */; };
 		49FE56201E68AC6500652187 /* AKConfigurationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */; };
-		49FE56221E68ACE400652187 /* AKConfigurationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE56211E68ACE400652187 /* AKConfigurationsTableViewCell.swift */; };
 		9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 851AFF731111790123E2943F /* Pods_CoderToDo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C25BC9DB450A698309C1AD7 /* Pods-CoderToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.debug.xcconfig"; sourceTree = "<group>"; };
 		490670251E6D90CF0046298C /* AKFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKFilterView.xib; sourceTree = "<group>"; };
-		490670271E6D91AF0046298C /* AKFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKFilterView.swift; sourceTree = "<group>"; };
-		4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExportCloudKit.swift; sourceTree = "<group>"; };
-		490B4E151E75B70200378B74 /* ESXPDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPDocument.h; sourceTree = "<group>"; };
-		490B4E161E75B70200378B74 /* ESXPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPElement.h; sourceTree = "<group>"; };
-		490B4E171E75B70200378B74 /* ESXPNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPNode.h; sourceTree = "<group>"; };
-		490B4E181E75B70200378B74 /* ESXPProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPProcessor.h; sourceTree = "<group>"; };
-		490B4E191E75B70200378B74 /* ESXPSAX2DOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPSAX2DOM.h; sourceTree = "<group>"; };
-		490B4E1A1E75B70200378B74 /* ESXPStackDOMWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPStackDOMWalker.h; sourceTree = "<group>"; };
-		490B4E1B1E75B70200378B74 /* ESXPText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPText.h; sourceTree = "<group>"; };
-		490B4E1F1E75B70C00378B74 /* AKDataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDataStructures.h; sourceTree = "<group>"; };
-		490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libESXP-ObjectiveC-Universal.a"; sourceTree = "<group>"; };
-		490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libObjectiveCToolbox-Universal.a"; sourceTree = "<group>"; };
 		490C223D1E65CBBE006A39F8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		49121B891E737480000B4D26 /* Icon-1024@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024@1x.png"; sourceTree = "<group>"; };
 		49121B8A1E737480000B4D26 /* Icon-512@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512@1x.png"; sourceTree = "<group>"; };
@@ -177,19 +170,15 @@
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddCategoryView.xib; sourceTree = "<group>"; };
 		4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddCategoryViewController.swift; sourceTree = "<group>"; };
-		4931DAE71E58D2740002C173 /* AKCategoryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryName.swift; sourceTree = "<group>"; };
+		49400B5D1E803A9C001C893E /* AKTaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskBuilder.swift; sourceTree = "<group>"; };
+		49400B5F1E80532F001C893E /* AKCategoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryBuilder.swift; sourceTree = "<group>"; };
+		49400B611E805354001C893E /* AKDayBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDayBuilder.swift; sourceTree = "<group>"; };
+		49400B631E80536D001C893E /* AKProjectCategoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectCategoryBuilder.swift; sourceTree = "<group>"; };
 		494A41B41E743ABB00EEE2A1 /* AKBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKBridgingHeader.h; sourceTree = "<group>"; };
-		494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKXMLBuilder.swift; sourceTree = "<group>"; };
-		494A41C01E7453F600EEE2A1 /* AKExportXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExportXML.swift; sourceTree = "<group>"; };
 		4956B8291E4B697D0032B2F8 /* CoderToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		49576D4B1E6C4F9F0085C517 /* AKSortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortView.swift; sourceTree = "<group>"; };
 		496674D41E6F276E00A60B64 /* AKSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSearchView.xib; sourceTree = "<group>"; };
-		496674D61E6F287B00A60B64 /* AKSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSearchView.swift; sourceTree = "<group>"; };
 		49677F781E6476A100E1E675 /* AKTopMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTopMenuView.xib; sourceTree = "<group>"; };
-		49677F7A1E64781200E1E675 /* AKTopMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTopMenuView.swift; sourceTree = "<group>"; };
 		497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectCategoryView.xib; sourceTree = "<group>"; };
-		497F9C591E69D1C500C78ECD /* AKSelectCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectCategoryView.swift; sourceTree = "<group>"; };
-		497F9C5B1E69D95700C78ECD /* AKCustomViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomViewProtocol.swift; sourceTree = "<group>"; };
 		49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
 		49A4A0991E589E8600CEDA1B /* AKLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKLaunchScreen.storyboard; sourceTree = "<group>"; };
 		49A4A09A1E589E8600CEDA1B /* AKMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AKMain.storyboard; sourceTree = "<group>"; };
@@ -211,41 +200,62 @@
 		49A4A0AE1E589E8600CEDA1B /* AKUsernameInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKUsernameInputView.xib; sourceTree = "<group>"; };
 		49A4A0B01E589E8600CEDA1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49A4A0CB1E589E8600CEDA1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AKNewProjectViewController.plist; sourceTree = "<group>"; };
-		49A4A0CE1E589E8600CEDA1B /* AKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConstants.swift; sourceTree = "<group>"; };
-		49A4A0D01E589E8600CEDA1B /* AKCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomView.swift; sourceTree = "<group>"; };
-		49A4A0D11E589E8600CEDA1B /* AKCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomViewController.swift; sourceTree = "<group>"; };
-		49A4A0D31E589E8600CEDA1B /* AKTasksTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableView.swift; sourceTree = "<group>"; };
-		49A4A0D51E589E8600CEDA1B /* AKDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDaysTableViewCell.swift; sourceTree = "<group>"; };
-		49A4A0D61E589E8600CEDA1B /* AKProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectsTableViewCell.swift; sourceTree = "<group>"; };
-		49A4A0D71E589E8600CEDA1B /* AKTasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableViewCell.swift; sourceTree = "<group>"; };
-		49A4A0D81E589E8600CEDA1B /* AKDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataController.swift; sourceTree = "<group>"; };
-		49A4A0D91E589E8600CEDA1B /* AKDataInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataInterface.swift; sourceTree = "<group>"; };
-		49A4A0DA1E589E8600CEDA1B /* AKInputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKInputData.swift; sourceTree = "<group>"; };
-		49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMasterReference.swift; sourceTree = "<group>"; };
-		49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectName.swift; sourceTree = "<group>"; };
-		49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsername.swift; sourceTree = "<group>"; };
 		49A4A0E01E589E8600CEDA1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
-		49A6A93F1E675AB6007701AC /* AKChecks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKChecks.swift; sourceTree = "<group>"; };
-		49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNotesTextField.swift; sourceTree = "<group>"; };
 		49BE6DF91E65C69300E3F306 /* CoderToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderToDo.entitlements; sourceTree = "<group>"; };
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
-		49D57DCE1E5B176200DACF53 /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
 		49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsViewController.swift; sourceTree = "<group>"; };
 		49D93F911E798B9C0093C9D2 /* AKProjectBucketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectBucketViewController.swift; sourceTree = "<group>"; };
 		49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKBackupViewController.swift; sourceTree = "<group>"; };
 		49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserConfigurationViewController.swift; sourceTree = "<group>"; };
 		49D93F971E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKWorkingHoursAndDaysViewController.swift; sourceTree = "<group>"; };
 		49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectTaskStateView.xib; sourceTree = "<group>"; };
-		49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectTaskStateView.swift; sourceTree = "<group>"; };
 		49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKMessageView.xib; sourceTree = "<group>"; };
-		49DF7EDB1E5E1D2A0017BEC6 /* AKMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMessageView.swift; sourceTree = "<group>"; };
 		49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKContinueMessageView.xib; sourceTree = "<group>"; };
-		49DF7EDF1E5E27ED0017BEC6 /* AKContinueMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKContinueMessageView.swift; sourceTree = "<group>"; };
+		49E76DC41E7DCF62000215BC /* AKCloudKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCloudKitController.swift; sourceTree = "<group>"; };
+		49E76DC51E7DCF62000215BC /* AKXMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKXMLBuilder.swift; sourceTree = "<group>"; };
+		49E76DC61E7DCF62000215BC /* AKXMLController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKXMLController.swift; sourceTree = "<group>"; };
+		49E76DC71E7DCF62000215BC /* AKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConstants.swift; sourceTree = "<group>"; };
+		49E76DC91E7DCF62000215BC /* AKDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataController.swift; sourceTree = "<group>"; };
+		49E76DCA1E7DCF62000215BC /* AKDataInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDataInterface.swift; sourceTree = "<group>"; };
+		49E76DCB1E7DCF62000215BC /* AKMasterReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMasterReference.swift; sourceTree = "<group>"; };
+		49E76DCC1E7DCF62000215BC /* AKProjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectBuilder.swift; sourceTree = "<group>"; };
+		49E76DCE1E7DCF62000215BC /* AKCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomView.swift; sourceTree = "<group>"; };
+		49E76DCF1E7DCF62000215BC /* AKCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomViewController.swift; sourceTree = "<group>"; };
+		49E76DD01E7DCF62000215BC /* AKCustomViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCustomViewProtocol.swift; sourceTree = "<group>"; };
+		49E76DD21E7DCF62000215BC /* AKContinueMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKContinueMessageView.swift; sourceTree = "<group>"; };
+		49E76DD31E7DCF62000215BC /* AKFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKFilterView.swift; sourceTree = "<group>"; };
+		49E76DD41E7DCF62000215BC /* AKMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMessageView.swift; sourceTree = "<group>"; };
+		49E76DD51E7DCF62000215BC /* AKSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSearchView.swift; sourceTree = "<group>"; };
+		49E76DD61E7DCF62000215BC /* AKSelectCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectCategoryView.swift; sourceTree = "<group>"; };
+		49E76DD71E7DCF62000215BC /* AKSelectTaskStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSelectTaskStateView.swift; sourceTree = "<group>"; };
+		49E76DD81E7DCF62000215BC /* AKSortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortView.swift; sourceTree = "<group>"; };
+		49E76DD91E7DCF62000215BC /* AKTasksTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableView.swift; sourceTree = "<group>"; };
+		49E76DDA1E7DCF62000215BC /* AKTopMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTopMenuView.swift; sourceTree = "<group>"; };
+		49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNotesTextField.swift; sourceTree = "<group>"; };
+		49E76DDE1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsTableViewCell.swift; sourceTree = "<group>"; };
+		49E76DDF1E7DCF62000215BC /* AKDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDaysTableViewCell.swift; sourceTree = "<group>"; };
+		49E76DE01E7DCF62000215BC /* AKProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectsTableViewCell.swift; sourceTree = "<group>"; };
+		49E76DE11E7DCF62000215BC /* AKTasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableViewCell.swift; sourceTree = "<group>"; };
+		49E76DE31E7DCF62000215BC /* ESXPDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPDocument.h; sourceTree = "<group>"; };
+		49E76DE41E7DCF62000215BC /* ESXPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPElement.h; sourceTree = "<group>"; };
+		49E76DE51E7DCF62000215BC /* ESXPNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPNode.h; sourceTree = "<group>"; };
+		49E76DE61E7DCF62000215BC /* ESXPProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPProcessor.h; sourceTree = "<group>"; };
+		49E76DE71E7DCF62000215BC /* ESXPSAX2DOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPSAX2DOM.h; sourceTree = "<group>"; };
+		49E76DE81E7DCF62000215BC /* ESXPStackDOMWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPStackDOMWalker.h; sourceTree = "<group>"; };
+		49E76DE91E7DCF62000215BC /* ESXPText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESXPText.h; sourceTree = "<group>"; };
+		49E76DEA1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libESXP-ObjectiveC-Universal.a"; sourceTree = "<group>"; };
+		49E76DEC1E7DCF62000215BC /* AKCategoryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKCategoryName.swift; sourceTree = "<group>"; };
+		49E76DED1E7DCF62000215BC /* AKInputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKInputData.swift; sourceTree = "<group>"; };
+		49E76DEE1E7DCF62000215BC /* AKProjectName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectName.swift; sourceTree = "<group>"; };
+		49E76DEF1E7DCF62000215BC /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
+		49E76DF01E7DCF62000215BC /* AKUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsername.swift; sourceTree = "<group>"; };
+		49E76DF21E7DCF62000215BC /* AKChecks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKChecks.swift; sourceTree = "<group>"; };
+		49E76DF41E7DCF62000215BC /* AKDataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDataStructures.h; sourceTree = "<group>"; };
+		49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libObjectiveCToolbox-Universal.a"; sourceTree = "<group>"; };
 		49FE561D1E68A80B00652187 /* AKProjectConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectConfigurationsViewController.swift; sourceTree = "<group>"; };
 		49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKConfigurationsTableViewCell.xib; sourceTree = "<group>"; };
-		49FE56211E68ACE400652187 /* AKConfigurationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsTableViewCell.swift; sourceTree = "<group>"; };
 		851AFF731111790123E2943F /* Pods_CoderToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A4BA6BF07F6744527AF0B9 /* Pods-CoderToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,9 +265,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E76E0F1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a in Frameworks */,
 				490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */,
-				490B4E271E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a in Frameworks */,
-				490B4E291E75CFC700378B74 /* libObjectiveCToolbox-Universal.a in Frameworks */,
+				49E76E161E7DCF62000215BC /* libObjectiveCToolbox-Universal.a in Frameworks */,
 				9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,30 +282,6 @@
 				C0A4BA6BF07F6744527AF0B9 /* Pods-CoderToDo.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		490B4E131E75B70200378B74 /* AKESXP-ObjectiveC */ = {
-			isa = PBXGroup;
-			children = (
-				490B4E151E75B70200378B74 /* ESXPDocument.h */,
-				490B4E161E75B70200378B74 /* ESXPElement.h */,
-				490B4E171E75B70200378B74 /* ESXPNode.h */,
-				490B4E181E75B70200378B74 /* ESXPProcessor.h */,
-				490B4E191E75B70200378B74 /* ESXPSAX2DOM.h */,
-				490B4E1A1E75B70200378B74 /* ESXPStackDOMWalker.h */,
-				490B4E1B1E75B70200378B74 /* ESXPText.h */,
-				490B4E261E75CFBC00378B74 /* libESXP-ObjectiveC-Universal.a */,
-			);
-			path = "AKESXP-ObjectiveC";
-			sourceTree = "<group>";
-		};
-		490B4E1E1E75B70C00378B74 /* AKObjectiveCToolbox */ = {
-			isa = PBXGroup;
-			children = (
-				490B4E1F1E75B70C00378B74 /* AKDataStructures.h */,
-				490B4E281E75CFC700378B74 /* libObjectiveCToolbox-Universal.a */,
-			);
-			path = AKObjectiveCToolbox;
 			sourceTree = "<group>";
 		};
 		49121B881E737480000B4D26 /* AppIcon */ = {
@@ -486,72 +472,9 @@
 		49A4A0CC1E589E8600CEDA1B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				49A4A0CD1E589E8600CEDA1B /* Model */,
+				49E76DC21E7DCF62000215BC /* Model */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		49A4A0CD1E589E8600CEDA1B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4931DAE71E58D2740002C173 /* AKCategoryName.swift */,
-				49A6A93F1E675AB6007701AC /* AKChecks.swift */,
-				49A4A0CE1E589E8600CEDA1B /* AKConstants.swift */,
-				49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */,
-				49A4A0D81E589E8600CEDA1B /* AKDataController.swift */,
-				49A4A0D91E589E8600CEDA1B /* AKDataInterface.swift */,
-				490B4E131E75B70200378B74 /* AKESXP-ObjectiveC */,
-				4906702B1E6DE1A10046298C /* AKExportCloudKit.swift */,
-				494A41C01E7453F600EEE2A1 /* AKExportXML.swift */,
-				49A4A0DA1E589E8600CEDA1B /* AKInputData.swift */,
-				49A4A0DB1E589E8600CEDA1B /* AKMasterReference.swift */,
-				490B4E1E1E75B70C00378B74 /* AKObjectiveCToolbox */,
-				49A4A0DC1E589E8600CEDA1B /* AKProjectName.swift */,
-				49D57DCE1E5B176200DACF53 /* AKTaskName.swift */,
-				49A4A0DD1E589E8600CEDA1B /* AKUsername.swift */,
-				494A41BB1E743B6500EEE2A1 /* AKXMLBuilder.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		49A4A0CF1E589E8600CEDA1B /* AKCustomComponents */ = {
-			isa = PBXGroup;
-			children = (
-				49A4A0D01E589E8600CEDA1B /* AKCustomView.swift */,
-				49A4A0D11E589E8600CEDA1B /* AKCustomViewController.swift */,
-				497F9C5B1E69D95700C78ECD /* AKCustomViewProtocol.swift */,
-				49A4A0D21E589E8600CEDA1B /* CustomViews */,
-				49A77B3F1E5CCD5D009732A4 /* SmallComponents */,
-				49A4A0D41E589E8600CEDA1B /* TableCells */,
-			);
-			path = AKCustomComponents;
-			sourceTree = "<group>";
-		};
-		49A4A0D21E589E8600CEDA1B /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				49DF7EDF1E5E27ED0017BEC6 /* AKContinueMessageView.swift */,
-				490670271E6D91AF0046298C /* AKFilterView.swift */,
-				49DF7EDB1E5E1D2A0017BEC6 /* AKMessageView.swift */,
-				496674D61E6F287B00A60B64 /* AKSearchView.swift */,
-				497F9C591E69D1C500C78ECD /* AKSelectCategoryView.swift */,
-				49DF7ED11E5DD7720017BEC6 /* AKSelectTaskStateView.swift */,
-				49576D4B1E6C4F9F0085C517 /* AKSortView.swift */,
-				49A4A0D31E589E8600CEDA1B /* AKTasksTableView.swift */,
-				49677F7A1E64781200E1E675 /* AKTopMenuView.swift */,
-			);
-			path = CustomViews;
-			sourceTree = "<group>";
-		};
-		49A4A0D41E589E8600CEDA1B /* TableCells */ = {
-			isa = PBXGroup;
-			children = (
-				49FE56211E68ACE400652187 /* AKConfigurationsTableViewCell.swift */,
-				49A4A0D51E589E8600CEDA1B /* AKDaysTableViewCell.swift */,
-				49A4A0D61E589E8600CEDA1B /* AKProjectsTableViewCell.swift */,
-				49A4A0D71E589E8600CEDA1B /* AKTasksTableViewCell.swift */,
-			);
-			path = TableCells;
 			sourceTree = "<group>";
 		};
 		49A4A0DF1E589E8600CEDA1B /* Supporting Files */ = {
@@ -564,12 +487,136 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		49A77B3F1E5CCD5D009732A4 /* SmallComponents */ = {
+		49E76DC21E7DCF62000215BC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				49A77B401E5CCD82009732A4 /* AKNotesTextField.swift */,
+				49E76DC31E7DCF62000215BC /* AKBackup */,
+				49E76DC71E7DCF62000215BC /* AKConstants.swift */,
+				49E76DC81E7DCF62000215BC /* AKCoreDataInterfaces */,
+				49E76DCD1E7DCF62000215BC /* AKCustomComponents */,
+				49E76DE21E7DCF62000215BC /* AKESXP-ObjectiveC */,
+				49E76DEB1E7DCF62000215BC /* AKInputData */,
+				49E76DF11E7DCF62000215BC /* AKInternalLogic */,
+				49E76DF31E7DCF62000215BC /* AKObjectiveCToolbox */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		49E76DC31E7DCF62000215BC /* AKBackup */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DC41E7DCF62000215BC /* AKCloudKitController.swift */,
+				49E76DC51E7DCF62000215BC /* AKXMLBuilder.swift */,
+				49E76DC61E7DCF62000215BC /* AKXMLController.swift */,
+			);
+			path = AKBackup;
+			sourceTree = "<group>";
+		};
+		49E76DC81E7DCF62000215BC /* AKCoreDataInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				49400B5F1E80532F001C893E /* AKCategoryBuilder.swift */,
+				49E76DC91E7DCF62000215BC /* AKDataController.swift */,
+				49E76DCA1E7DCF62000215BC /* AKDataInterface.swift */,
+				49400B611E805354001C893E /* AKDayBuilder.swift */,
+				49E76DCB1E7DCF62000215BC /* AKMasterReference.swift */,
+				49E76DCC1E7DCF62000215BC /* AKProjectBuilder.swift */,
+				49400B631E80536D001C893E /* AKProjectCategoryBuilder.swift */,
+				49400B5D1E803A9C001C893E /* AKTaskBuilder.swift */,
+			);
+			path = AKCoreDataInterfaces;
+			sourceTree = "<group>";
+		};
+		49E76DCD1E7DCF62000215BC /* AKCustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DCE1E7DCF62000215BC /* AKCustomView.swift */,
+				49E76DCF1E7DCF62000215BC /* AKCustomViewController.swift */,
+				49E76DD01E7DCF62000215BC /* AKCustomViewProtocol.swift */,
+				49E76DD11E7DCF62000215BC /* CustomViews */,
+				49E76DDB1E7DCF62000215BC /* SmallComponents */,
+				49E76DDD1E7DCF62000215BC /* TableCells */,
+			);
+			path = AKCustomComponents;
+			sourceTree = "<group>";
+		};
+		49E76DD11E7DCF62000215BC /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DD21E7DCF62000215BC /* AKContinueMessageView.swift */,
+				49E76DD31E7DCF62000215BC /* AKFilterView.swift */,
+				49E76DD41E7DCF62000215BC /* AKMessageView.swift */,
+				49E76DD51E7DCF62000215BC /* AKSearchView.swift */,
+				49E76DD61E7DCF62000215BC /* AKSelectCategoryView.swift */,
+				49E76DD71E7DCF62000215BC /* AKSelectTaskStateView.swift */,
+				49E76DD81E7DCF62000215BC /* AKSortView.swift */,
+				49E76DD91E7DCF62000215BC /* AKTasksTableView.swift */,
+				49E76DDA1E7DCF62000215BC /* AKTopMenuView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		49E76DDB1E7DCF62000215BC /* SmallComponents */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */,
 			);
 			path = SmallComponents;
+			sourceTree = "<group>";
+		};
+		49E76DDD1E7DCF62000215BC /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DDE1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift */,
+				49E76DDF1E7DCF62000215BC /* AKDaysTableViewCell.swift */,
+				49E76DE01E7DCF62000215BC /* AKProjectsTableViewCell.swift */,
+				49E76DE11E7DCF62000215BC /* AKTasksTableViewCell.swift */,
+			);
+			path = TableCells;
+			sourceTree = "<group>";
+		};
+		49E76DE21E7DCF62000215BC /* AKESXP-ObjectiveC */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DE31E7DCF62000215BC /* ESXPDocument.h */,
+				49E76DE41E7DCF62000215BC /* ESXPElement.h */,
+				49E76DE51E7DCF62000215BC /* ESXPNode.h */,
+				49E76DE61E7DCF62000215BC /* ESXPProcessor.h */,
+				49E76DE71E7DCF62000215BC /* ESXPSAX2DOM.h */,
+				49E76DE81E7DCF62000215BC /* ESXPStackDOMWalker.h */,
+				49E76DE91E7DCF62000215BC /* ESXPText.h */,
+				49E76DEA1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a */,
+			);
+			path = "AKESXP-ObjectiveC";
+			sourceTree = "<group>";
+		};
+		49E76DEB1E7DCF62000215BC /* AKInputData */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DEC1E7DCF62000215BC /* AKCategoryName.swift */,
+				49E76DED1E7DCF62000215BC /* AKInputData.swift */,
+				49E76DEE1E7DCF62000215BC /* AKProjectName.swift */,
+				49E76DEF1E7DCF62000215BC /* AKTaskName.swift */,
+				49E76DF01E7DCF62000215BC /* AKUsername.swift */,
+			);
+			path = AKInputData;
+			sourceTree = "<group>";
+		};
+		49E76DF11E7DCF62000215BC /* AKInternalLogic */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DF21E7DCF62000215BC /* AKChecks.swift */,
+			);
+			path = AKInternalLogic;
+			sourceTree = "<group>";
+		};
+		49E76DF31E7DCF62000215BC /* AKObjectiveCToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				49E76DF41E7DCF62000215BC /* AKDataStructures.h */,
+				49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */,
+			);
+			path = AKObjectiveCToolbox;
 			sourceTree = "<group>";
 		};
 		AFA3CC6BEA5EDB65F5109664 /* Frameworks */ = {
@@ -774,53 +821,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E76E0E1E7DCF62000215BC /* AKTasksTableViewCell.swift in Sources */,
+				49E76E0B1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift in Sources */,
+				49400B621E805354001C893E /* AKDayBuilder.swift in Sources */,
 				49A4A0EB1E589E8600CEDA1B /* AKUsernameInputViewController.swift in Sources */,
-				49A4A1171E589E8600CEDA1B /* AKDataController.swift in Sources */,
+				49400B601E80532F001C893E /* AKCategoryBuilder.swift in Sources */,
+				49E76DFC1E7DCF62000215BC /* AKMasterReference.swift in Sources */,
+				49E76E101E7DCF62000215BC /* AKCategoryName.swift in Sources */,
 				4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */,
+				49E76DF61E7DCF62000215BC /* AKCloudKitController.swift in Sources */,
 				49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */,
-				4931DAE81E58D2740002C173 /* AKCategoryName.swift in Sources */,
-				494A41BC1E743B6500EEE2A1 /* AKXMLBuilder.swift in Sources */,
 				49D93F981E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift in Sources */,
+				49E76DFB1E7DCF62000215BC /* AKDataInterface.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
-				49A4A1141E589E8600CEDA1B /* AKDaysTableViewCell.swift in Sources */,
-				49DF7EE01E5E27ED0017BEC6 /* AKContinueMessageView.swift in Sources */,
-				494A41C11E7453F600EEE2A1 /* AKExportXML.swift in Sources */,
 				49A4A0E61E589E8600CEDA1B /* AKAddViewController.swift in Sources */,
-				49A4A11A1E589E8600CEDA1B /* AKMasterReference.swift in Sources */,
-				496674D71E6F287B00A60B64 /* AKSearchView.swift in Sources */,
-				49A4A1181E589E8600CEDA1B /* AKDataInterface.swift in Sources */,
 				49A4A0EC1E589E8600CEDA1B /* AKViewProjectViewController.swift in Sources */,
+				49E76E041E7DCF62000215BC /* AKSearchView.swift in Sources */,
+				49E76E0C1E7DCF62000215BC /* AKDaysTableViewCell.swift in Sources */,
+				49400B641E80536D001C893E /* AKProjectCategoryBuilder.swift in Sources */,
+				49E76E061E7DCF62000215BC /* AKSelectTaskStateView.swift in Sources */,
 				49A4A0E31E589E8600CEDA1B /* AKAppDelegate.swift in Sources */,
-				49A4A1121E589E8600CEDA1B /* AKCustomViewController.swift in Sources */,
 				49FE561E1E68A80B00652187 /* AKProjectConfigurationsViewController.swift in Sources */,
-				49A4A11B1E589E8600CEDA1B /* AKProjectName.swift in Sources */,
+				49E76DF91E7DCF62000215BC /* AKConstants.swift in Sources */,
+				49E76E141E7DCF62000215BC /* AKUsername.swift in Sources */,
 				49A4A0ED1E589E8600CEDA1B /* AKViewTaskViewController.swift in Sources */,
+				49E76E121E7DCF62000215BC /* AKProjectName.swift in Sources */,
+				49E76E151E7DCF62000215BC /* AKChecks.swift in Sources */,
+				49E76DF71E7DCF62000215BC /* AKXMLBuilder.swift in Sources */,
+				49E76DFA1E7DCF62000215BC /* AKDataController.swift in Sources */,
+				49E76E111E7DCF62000215BC /* AKInputData.swift in Sources */,
+				49E76DFD1E7DCF62000215BC /* AKProjectBuilder.swift in Sources */,
 				49A4A0E81E589E8600CEDA1B /* AKListProjectsViewController.swift in Sources */,
-				49677F7B1E64781200E1E675 /* AKTopMenuView.swift in Sources */,
-				497F9C5A1E69D1C500C78ECD /* AKSelectCategoryView.swift in Sources */,
-				49A4A1161E589E8600CEDA1B /* AKTasksTableViewCell.swift in Sources */,
-				49A4A1191E589E8600CEDA1B /* AKInputData.swift in Sources */,
-				497F9C5C1E69D95700C78ECD /* AKCustomViewProtocol.swift in Sources */,
 				49D93F921E798B9C0093C9D2 /* AKProjectBucketViewController.swift in Sources */,
+				49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */,
 				49A4A0E71E589E8600CEDA1B /* AKIntroductoryViewController.swift in Sources */,
-				49A4A1101E589E8600CEDA1B /* AKConstants.swift in Sources */,
-				49FE56221E68ACE400652187 /* AKConfigurationsTableViewCell.swift in Sources */,
-				49A4A1111E589E8600CEDA1B /* AKCustomView.swift in Sources */,
-				49576D4C1E6C4F9F0085C517 /* AKSortView.swift in Sources */,
+				49E76DFF1E7DCF62000215BC /* AKCustomViewController.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
-				4906702C1E6DE1A10046298C /* AKExportCloudKit.swift in Sources */,
+				49E76E011E7DCF62000215BC /* AKContinueMessageView.swift in Sources */,
+				49E76E071E7DCF62000215BC /* AKSortView.swift in Sources */,
+				49400B5E1E803A9C001C893E /* AKTaskBuilder.swift in Sources */,
+				49E76E031E7DCF62000215BC /* AKMessageView.swift in Sources */,
 				49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */,
-				490670281E6D91AF0046298C /* AKFilterView.swift in Sources */,
-				49DF7EDC1E5E1D2A0017BEC6 /* AKMessageView.swift in Sources */,
+				49E76E051E7DCF62000215BC /* AKSelectCategoryView.swift in Sources */,
+				49E76DF81E7DCF62000215BC /* AKXMLController.swift in Sources */,
+				49E76E081E7DCF62000215BC /* AKTasksTableView.swift in Sources */,
+				49E76DFE1E7DCF62000215BC /* AKCustomView.swift in Sources */,
+				49E76E0D1E7DCF62000215BC /* AKProjectsTableViewCell.swift in Sources */,
+				49E76E091E7DCF62000215BC /* AKTopMenuView.swift in Sources */,
+				49E76E021E7DCF62000215BC /* AKFilterView.swift in Sources */,
+				49E76E001E7DCF62000215BC /* AKCustomViewProtocol.swift in Sources */,
+				49E76E131E7DCF62000215BC /* AKTaskName.swift in Sources */,
 				49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */,
 				49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */,
-				49A6A9401E675AB6007701AC /* AKChecks.swift in Sources */,
-				49A4A11C1E589E8600CEDA1B /* AKUsername.swift in Sources */,
-				49A4A1151E589E8600CEDA1B /* AKProjectsTableViewCell.swift in Sources */,
-				49A4A1131E589E8600CEDA1B /* AKTasksTableView.swift in Sources */,
-				49DF7ED21E5DD7720017BEC6 /* AKSelectTaskStateView.swift in Sources */,
-				49D57DCF1E5B176200DACF53 /* AKTaskName.swift in Sources */,
-				49A77B411E5CCD82009732A4 /* AKNotesTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

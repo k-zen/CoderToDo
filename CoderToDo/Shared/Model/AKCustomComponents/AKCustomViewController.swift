@@ -90,6 +90,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var longPressGesture: UILongPressGestureRecognizer?
     var dismissViewCompletionTask: (Void) -> Void = {}
     var localizableDictionary: NSDictionary?
+    var iCloudAccessErrorAction: (AKCustomViewController) -> Void = { (presenterController) -> Void in }
+    var iCloudAccessAvailableAction: (AKCustomViewController) -> Void = { (presenterController) -> Void in }
     // Overlay Controllers
     let messageOverlay = AKMessageView()
     let continueMessageOverlay = AKContinueMessageView()
@@ -542,19 +544,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func manageGrantToiCloud()
     {
         Func.AKGetCloudKitContainer().accountStatus(completionHandler: { (accountStatus, error) -> Void in
-            guard error == nil else {
-                // TODO: Show error message and disable function.
-                NSLog("=> ERROR: \(error)")
-                return
-            }
-            
-            switch accountStatus {
-            case .available:
-                // TODO: Enable function.
-                NSLog("=> INFO: ACCESS TO iCloud IS ENABLED!")
-                break
-            default:
-                Func.AKExecuteInMainThread(mode: .sync, code: {
+            Func.AKExecuteInMainThread(mode: .async, code: {
+                guard error == nil else {
+                    self.iCloudAccessErrorAction(self)
+                    return
+                }
+                
+                switch accountStatus {
+                case .available:
+                    self.iCloudAccessAvailableAction(self)
+                    break
+                default:
                     self.showContinueMessage(
                         message: "You need to be signed into iCloud and have *iCloud Drive* set to on. Go to *Settings -> iCloud* to enable it.",
                         yesButtonTitle: "Open Settings",
@@ -569,9 +569,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                         animate: true,
                         completionTask: nil
                     )
-                })
-                break
-            }
+                    break
+                }
+            })
         })
     }
     

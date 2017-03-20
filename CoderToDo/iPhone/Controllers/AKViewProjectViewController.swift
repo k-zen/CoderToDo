@@ -181,7 +181,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
         title.textColor = GlobalConstants.AKDefaultFg
-        title.text = DataInterface.getDayTitle(day: day)
+        title.text = Func.AKGetFormattedDate(date: day.date as? Date)
         title.textAlignment = .left
         // ### DEBUG
         // title.layer.borderColor = UIColor.white.cgColor
