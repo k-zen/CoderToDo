@@ -427,10 +427,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-2i-odY" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="0.0" width="300" height="397"/>
+                                <rect key="frame" x="37" y="0.0" width="300" height="348"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg5-mo-J0w" userLabel="Controls_Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="397"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="348"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3K-Fo-cfo" userLabel="Message_Value">
                                                 <rect key="frame" x="8" y="8" width="284" height="110"/>
@@ -490,37 +490,20 @@
                                                     <action selector="backupNow:" destination="572-NZ-klK" eventType="touchUpInside" id="NSW-kc-jwn"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNq-30-Sk6" userLabel="Separator_3">
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-3b-7Ma" userLabel="Separator_3">
                                                 <rect key="frame" x="8" y="258" width="284" height="2"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable automatic backups...?" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7x-0N-YSg" userLabel="Automatic_Backups_Title">
-                                                <rect key="frame" x="8" y="268" width="227" height="31"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
-                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MJe-6w-jLm" userLabel="Automatic_Backups_Value">
-                                                <rect key="frame" x="243" y="268" width="51" height="31"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="onTintColor" red="0.98431372549999996" green="0.28627450980000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </switch>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-3b-7Ma" userLabel="Separator_3">
-                                                <rect key="frame" x="8" y="307" width="284" height="2"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Restore Your Information:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUm-Kp-qs2" userLabel="Title_2">
-                                                <rect key="frame" x="8" y="317" width="284" height="24"/>
+                                                <rect key="frame" x="8" y="268" width="284" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wu0-GQ-xeI" userLabel="Restore_Now">
-                                                <rect key="frame" x="8" y="349" width="284" height="40"/>
+                                                <rect key="frame" x="8" y="300" width="284" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
@@ -533,13 +516,13 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="397" id="Vaf-Tz-XnN"/>
+                                            <constraint firstAttribute="height" constant="348" id="Vaf-Tz-XnN"/>
                                             <constraint firstAttribute="width" constant="300" id="xSj-o1-vpV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="397" id="Crc-Vt-RQU"/>
+                                    <constraint firstAttribute="height" constant="348" id="Crc-Vt-RQU"/>
                                     <constraint firstItem="cg5-mo-J0w" firstAttribute="top" secondItem="s0S-2i-odY" secondAttribute="top" id="KKd-bu-gMX"/>
                                     <constraint firstAttribute="width" constant="300" id="hjw-NS-O9z"/>
                                     <constraint firstAttribute="trailing" secondItem="cg5-mo-J0w" secondAttribute="trailing" id="k04-Wm-Evt"/>
@@ -558,7 +541,6 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="qpO-1V-NUK"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="automaticBackupsValue" destination="MJe-6w-jLm" id="Wpm-Rf-9oo"/>
                         <outlet property="backupNow" destination="fw5-eA-uJm" id="Xlf-yH-lvK"/>
                         <outlet property="lastBackupSizeValue" destination="PF9-OF-gWE" id="B9e-UI-Xqz"/>
                         <outlet property="lastBackupValue" destination="rAD-uJ-qlh" id="zuN-3v-FDJ"/>

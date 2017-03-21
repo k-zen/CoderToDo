@@ -68,16 +68,32 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // If it's the first time the user uses the App.
         // 1. Show Intro view.
         // 2. Cancel all local notifications, that the App might had previously created.
-        if DataInterface.getUser()?.username == nil {
+        // 3. Set default values for Configurations.
+        if DataInterface.firstTime() {
             // 1. Present Intro view.
             self.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
                              taskBeforePresenting: { (presenterController, presentedController) -> Void in },
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                 NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
             )
+            
             // 2. Clear all notifications from previous installs.
             Func.AKGetNotificationCenter().removeAllDeliveredNotifications()
             Func.AKGetNotificationCenter().removeAllPendingNotificationRequests()
+            
+            // 3. Default values for Configurations.
+            let newConfigurations = AKConfigurationsInterface()
+            do {
+                try newConfigurations.validate()
+            }
+            catch {
+                Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+                return
+            }
+            
+            if let configurations = AKConfigurationsBuilder.mirror(interface: newConfigurations) {
+                DataInterface.addConfigurations(configurations: configurations)
+            }
             
             return
         }

@@ -3,6 +3,9 @@ import UserNotifications
 
 class AKDataInterface
 {
+    static func firstTime() -> Bool { return DataInterface.getUser() == nil }
+    
+    // ########## USER'S FUNCTIONS ########## //
     static func addUser(user: User) -> Bool
     {
         if Func.AKObtainMasterReference()?.user == nil {
@@ -22,12 +25,29 @@ class AKDataInterface
     static func getUser() -> User? { return Func.AKObtainMasterReference()?.getUser() }
     
     static func getUsername() -> String { return DataInterface.getUser()?.username ?? "" }
+    // ########## USER'S FUNCTIONS ########## //
+    // ########## CONFIGURATIONS'S FUNCTIONS ########## //
+    static func addConfigurations(configurations: Configurations?) -> Void
+    {
+        if let user = DataInterface.getUser() {
+            user.configurations = configurations
+        }
+    }
     
-    static func isEmpty() -> Bool { return DataInterface.getUser()?.project == nil }
-    
-    static func resetData() -> Void { DataInterface.getUser()?.project = nil }
-    
+    static func getConfigurations() -> Configurations?
+    {
+        if let configurations = DataInterface.getUser()?.configurations {
+            return configurations
+        }
+        
+        return nil
+    }
+    // ########## CONFIGURATIONS'S FUNCTIONS ########## //
     // ########## PROJECT'S FUNCTIONS ########## //
+    static func isProjectEmpty() -> Bool { return DataInterface.getUser()?.project == nil }
+    
+    static func resetProjectData() -> Void { DataInterface.getUser()?.project = nil }
+    
     static func addProject(project: Project) -> Bool
     {
         var result = 0

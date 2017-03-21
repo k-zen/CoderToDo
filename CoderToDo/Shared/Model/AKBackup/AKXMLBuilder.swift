@@ -8,7 +8,14 @@ class AKXMLBuilder
         xml.append(String(format: "<export username=\"%@\">",
                           DataInterface.getUsername().toBase64() // Should be encoded to Base64.
         ))
-        xml.append("<configurations></configurations>")
+        xml.append("<configurations>")
+        if let configurations = DataInterface.getConfigurations() {
+            xml.append(String(format: "<automaticBackups>%@</automaticBackups>", configurations.automaticBackups ? "YES" : "NO"))
+            xml.append(String(format: "<useLocalNotifications>%@</useLocalNotifications>", configurations.useLocalNotifications ? "YES" : "NO"))
+            xml.append(String(format: "<weekFirstDay>%i</weekFirstDay>", configurations.weekFirstDay))
+            xml.append(String(format: "<weekLastDay>%i</weekLastDay>", configurations.weekLastDay))
+        }
+        xml.append("</configurations>")
         xml.append("<projects>")
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             xml.append(
@@ -160,6 +167,13 @@ class AKXMLBuilder
                                                 NSLog("=> INFO: export => username => %@", innerProcessor.getNodeAttributeValue(currentNode, attributeName: "username", strict: false).fromBase64() ?? "")
                                             }
                                             
+                                            // Configurations.
+                                            if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("configurations") == .orderedSame {
+                                                if let configurations = AKXMLBuilder.getConfigurations(processor: innerProcessor, rootNode: currentNode as! ESXPElement) {
+                                                    DataInterface.addConfigurations(configurations: configurations)
+                                                }
+                                            }
+                                            
                                             // Projects.
                                             if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("project") == .orderedSame {
                                                 if let project = AKXMLBuilder.getProject(processor: innerProcessor, rootNode: currentNode as! ESXPElement) {
@@ -254,6 +268,23 @@ class AKXMLBuilder
                 }
             }
         }
+    }
+    
+    static func getConfigurations(processor: ESXPProcessor, rootNode: ESXPElement) -> Configurations?
+    {
+        let automaticBackups = processor.getNodeValue(processor.retrieveSubNode("automaticBackups", node: rootNode), strict: false) ?? ""
+        let useLocalNotifications = processor.getNodeValue(processor.retrieveSubNode("useLocalNotifications", node: rootNode), strict: false) ?? ""
+        let weekFirstDay = processor.getNodeValue(processor.retrieveSubNode("weekFirstDay", node: rootNode), strict: false) ?? ""
+        let weekLastDay = processor.getNodeValue(processor.retrieveSubNode("weekLastDay", node: rootNode), strict: false) ?? ""
+        
+        var newConfigurations = AKConfigurationsInterface()
+        // Custom Setters.
+        newConfigurations.setAutomaticBackups(automaticBackups)
+        newConfigurations.setUseLocalNotifications(useLocalNotifications)
+        newConfigurations.setWeekFirstDay(weekFirstDay)
+        newConfigurations.setWeekLastDay(weekLastDay)
+        
+        return AKConfigurationsBuilder.mirror(interface: newConfigurations)
     }
     
     static func getProject(processor: ESXPProcessor, rootNode: ESXPElement) -> Project?

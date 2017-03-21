@@ -6,7 +6,7 @@ class AKBackupViewController: AKCustomViewController
     @IBOutlet var lastBackupValue: UILabel!
     @IBOutlet var lastBackupSizeValue: UILabel!
     @IBOutlet var backupNow: UIButton!
-    @IBOutlet var automaticBackupsValue: UISwitch!
+    // @IBOutlet var automaticBackupsValue: UISwitch!
     @IBOutlet var restoreNow: UIButton!
     
     // MARK: Actions
@@ -84,11 +84,11 @@ class AKBackupViewController: AKCustomViewController
         self.restoreNow.isEnabled = false
         self.restoreNow.backgroundColor = Cons.AKDisabledButtonBg
         
-        if !DataInterface.isEmpty() {
+        if !DataInterface.isProjectEmpty() {
             self.showContinueMessage(
                 message: "This will wipe out your current local database and restore from this backup. Do you wish to continue...?",
                 yesAction: { (presenterController) -> Void in
-                    DataInterface.resetData()
+                    DataInterface.resetProjectData()
                     
                     if let presenterController = presenterController as? AKBackupViewController {
                         AKCloudKitController.downloadFromPrivate(
@@ -120,11 +120,24 @@ class AKBackupViewController: AKCustomViewController
         }
     }
     
+    // @IBAction func changeAutomaticBackups(_ sender: Any)
+    // {
+    //     let configurationsMO = DataInterface.getConfigurations()
+    //     if var configurations = AKConfigurationsBuilder.from(configurations: configurationsMO) {
+    //         configurations.automaticBackups = self.automaticBackupsValue.isOn
+    //
+    //         DataInterface.addConfigurations(configurations: AKConfigurationsBuilder.to(configurations: configurationsMO, from: configurations))
+    //     }
+    // }
+    
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.customSetup()
+        
+        // Load the data.
+        // self.automaticBackupsValue.isOn = DataInterface.getConfigurations()?.automaticBackups ?? false
     }
     
     override func viewDidAppear(_ animated: Bool)

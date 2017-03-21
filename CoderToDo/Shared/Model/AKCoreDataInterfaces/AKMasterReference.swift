@@ -69,6 +69,12 @@ class AKMasterReference: NSObject
         data.appendFormat("=>   USERNAME: %@\n", DataInterface.getUsername())
         data.appendFormat("=>       CREATION DATE: %@\n", DataInterface.getUser()?.creationDate?.description ?? "")
         data.appendFormat("=>   CONFIGURATIONS:\n")
+        if let configurations = DataInterface.getConfigurations() {
+            data.appendFormat("=>       AUTOMATIC BACKUPS: %@\n", configurations.automaticBackups ? "YES" : "NO")
+            data.appendFormat("=>       USE LOCAL NOTIFICATIONS: %@\n", configurations.useLocalNotifications ? "YES" : "NO")
+            data.appendFormat("=>       WEEK FIRST DAY: %@\n", Func.AKGetDayOfWeekAsName(dayOfWeek: configurations.weekFirstDay) ?? "")
+            data.appendFormat("=>       WEEK LAST DAY: %@\n", Func.AKGetDayOfWeekAsName(dayOfWeek: configurations.weekLastDay) ?? "")
+        }
         data.appendFormat("=>   PROJECTS:\n")
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             data.appendFormat("=>       CLOSING TIME: %@\n", project.closingTime?.description ?? "")

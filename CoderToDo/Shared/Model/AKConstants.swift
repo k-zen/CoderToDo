@@ -13,6 +13,7 @@ typealias JSONObjectStringArray = [String]
 typealias DataController = AKDataController
 typealias DataInterface = AKDataInterface
 typealias User = AKUserMO
+typealias Configurations = AKConfigurationsMO
 typealias Project = AKProjectMO
 typealias ProjectCategory = AKProjectCategoryMO
 typealias Day = AKDayMO
@@ -101,6 +102,18 @@ extension String
     func toBase64() -> String
     {
         return Data(self.utf8).base64EncodedString()
+    }
+    
+    func toBool() -> Bool?
+    {
+        switch self {
+        case "TRUE", "true", "YES", "yes", "1":
+            return true
+        case "FALSE", "false", "NO", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
     
     ///
@@ -511,6 +524,16 @@ enum ExecutionMode {
     case async
 }
 
+enum DaysOfWeek: Int16 {
+    case sunday = 1
+    case monday = 2
+    case tuesday = 3
+    case wednesday = 4
+    case thursday = 5
+    case friday = 6
+    case saturday = 7
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -787,6 +810,28 @@ class UtilityFunctions
         }
     }
     
+    func AKGetDayOfWeekAsName(dayOfWeek: Int16) -> String?
+    {
+        switch dayOfWeek {
+        case DaysOfWeek.sunday.rawValue:
+            return "Sunday"
+        case DaysOfWeek.monday.rawValue:
+            return "Monday"
+        case DaysOfWeek.tuesday.rawValue:
+            return "Tuesday"
+        case DaysOfWeek.wednesday.rawValue:
+            return "Wednesday"
+        case DaysOfWeek.thursday.rawValue:
+            return "Thursday"
+        case DaysOfWeek.friday.rawValue:
+            return "Friday"
+        case DaysOfWeek.saturday.rawValue:
+            return "Saturday"
+        default:
+            return nil
+        }
+    }
+    
     func AKGetFormattedDate(date: Date?) -> String
     {
         if let date = date {
@@ -982,6 +1027,15 @@ class UtilityFunctions
         }
         
         return nil
+    }
+    
+    func AKProcessGMTDayOfWeek(date: NSDate?) -> Int
+    {
+        if let date = date as? Date {
+            return Func.AKGetCalendarForLoading().dateComponents([.weekday], from: date).weekday ?? 0
+        }
+        
+        return 0
     }
     
     func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>?

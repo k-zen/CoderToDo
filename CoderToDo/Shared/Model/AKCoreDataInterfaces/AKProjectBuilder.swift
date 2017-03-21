@@ -128,7 +128,7 @@ struct AKProjectInterface
             self.notifyClosingTime = true
         }
         else {
-            self.notifyClosingTime = Bool(asString) ?? true
+            self.notifyClosingTime = asString.toBool() ?? true
         }
     }
     

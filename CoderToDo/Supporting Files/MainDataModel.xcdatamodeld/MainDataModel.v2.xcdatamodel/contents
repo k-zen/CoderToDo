@@ -5,7 +5,13 @@
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="categories" inverseEntity="Day" syncable="YES"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
     </entity>
-    <entity name="Configurations" representedClassName="AKConfigurationsMO" syncable="YES" codeGenerationType="class"/>
+    <entity name="Configurations" representedClassName="AKConfigurationsMO" syncable="YES" codeGenerationType="class">
+        <attribute name="automaticBackups" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useLocalNotifications" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weekFirstDay" optional="YES" attributeType="Integer 16" defaultValueString="2" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weekLastDay" optional="YES" attributeType="Integer 16" defaultValueString="6" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="configurations" inverseEntity="User" syncable="YES"/>
+    </entity>
     <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -58,6 +64,7 @@
     <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="configurations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Configurations" inverseName="user" inverseEntity="Configurations" syncable="YES"/>
         <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
         <fetchedProperty name="getProjects" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="Project"/>
@@ -71,7 +78,7 @@
         <element name="Project" positionX="-1098" positionY="-747" width="128" height="251"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
         <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
-        <element name="User" positionX="-839" positionY="-495" width="128" height="119"/>
-        <element name="Configurations" positionX="-891" positionY="-909" width="128" height="45"/>
+        <element name="User" positionX="-839" positionY="-495" width="128" height="131"/>
+        <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="118"/>
     </elements>
 </model>
