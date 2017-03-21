@@ -32,15 +32,21 @@ class AKBackupViewController: AKCustomViewController
                                         completionTask: { (presenterController, backupInfo) -> Void in
                                             if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
                                                 // Set the last backup's information.
-                                                presenterController.lastBackupValue.text = Func.AKGetFormattedDate(date: backupInfo.date)
-                                                presenterController.lastBackupSizeValue.text = String(format: "%iKB", (backupInfo.size ?? 0) / 1024)
+                                                presenterController.lastBackupValue.text = String(
+                                                    format: "%@ %@",
+                                                    Func.AKGetFormattedDate(date: backupInfo.date),
+                                                    Func.AKGetFormattedTime(date: backupInfo.date)
+                                                )
+                                                presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
                                                 
                                                 // Enable the restore from backup button, ONLY if there is
                                                 // at least 1 record to restore from.
                                                 presenterController.backupNow.isEnabled = true
                                                 presenterController.backupNow.backgroundColor = Cons.AKEnabledButtonBg
                                             }
-                                    }) },
+                                    })
+                                    
+                                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                                 noAction: { (presenterController) -> Void in
                                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                                 animate: true,
@@ -54,8 +60,12 @@ class AKBackupViewController: AKCustomViewController
                                 completionTask: { (presenterController, backupInfo) -> Void in
                                     if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
                                         // Set the last backup's information.
-                                        presenterController.lastBackupValue.text = Func.AKGetFormattedDate(date: backupInfo.date)
-                                        presenterController.lastBackupSizeValue.text = String(format: "%iKB", (backupInfo.size ?? 0) / 1024)
+                                        presenterController.lastBackupValue.text = String(
+                                            format: "%@ %@",
+                                            Func.AKGetFormattedDate(date: backupInfo.date),
+                                            Func.AKGetFormattedTime(date: backupInfo.date)
+                                        )
+                                        presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
                                         
                                         // Enable the restore from backup button, ONLY if there is
                                         // at least 1 record to restore from.
@@ -76,7 +86,7 @@ class AKBackupViewController: AKCustomViewController
         
         if !DataInterface.isEmpty() {
             self.showContinueMessage(
-                message: "This will overwrite your current database of projects with the one you have in iCloud. Do you wish to continue...?",
+                message: "This will wipe out your current local database and restore from this backup. Do you wish to continue...?",
                 yesAction: { (presenterController) -> Void in
                     DataInterface.resetData()
                     
@@ -94,7 +104,9 @@ class AKBackupViewController: AKCustomViewController
                                         completionTask: nil
                                     )
                                 } })
-                    } },
+                    }
+                    
+                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                 noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                 animate: true,
                 completionTask: nil
@@ -144,8 +156,12 @@ class AKBackupViewController: AKCustomViewController
                     completionTask: { (presenterController, backupInfo) -> Void in
                         if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
                             // Set the last backup's information.
-                            presenterController.lastBackupValue.text = Func.AKGetFormattedDate(date: backupInfo.date)
-                            presenterController.lastBackupSizeValue.text = String(format: "%iKB", (backupInfo.size ?? 0) / 1024)
+                            presenterController.lastBackupValue.text = String(
+                                format: "%@ %@",
+                                Func.AKGetFormattedDate(date: backupInfo.date),
+                                Func.AKGetFormattedTime(date: backupInfo.date)
+                            )
+                            presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
                             
                             // Enable the restore from backup button, ONLY if there is
                             // at least 1 record to restore from.

@@ -23,18 +23,45 @@ class AKProjectBuilder
         
         return nil
     }
+    
+    static func from(project: Project) -> AKProjectInterface
+    {
+        var interface = AKProjectInterface()
+        // Mirror.
+        interface.closingTime = project.closingTime
+        interface.closingTimeTolerance = project.closingTimeTolerance
+        interface.creationDate = project.creationDate
+        interface.name = project.name
+        interface.notifyClosingTime = project.notifyClosingTime
+        interface.osr = project.osr
+        interface.startingTime = project.startingTime
+        
+        return interface
+    }
+    
+    static func to(project: Project, from interface: AKProjectInterface) -> Void
+    {
+        // Mirror.
+        project.closingTime = interface.closingTime
+        project.closingTimeTolerance = interface.closingTimeTolerance
+        project.creationDate = interface.creationDate
+        project.name = interface.name
+        project.notifyClosingTime = interface.notifyClosingTime
+        project.osr = interface.osr
+        project.startingTime = interface.startingTime
+    }
 }
 
 struct AKProjectInterface
 {
     // MARK: Properties
-    var closingTime: NSDate
+    var closingTime: NSDate?
     var closingTimeTolerance: Int16
-    var creationDate: NSDate
-    var name: String
+    var creationDate: NSDate?
+    var name: String?
     var notifyClosingTime: Bool
     var osr: Float
-    var startingTime: NSDate
+    var startingTime: NSDate?
     
     init()
     {
@@ -128,9 +155,11 @@ struct AKProjectInterface
     {
         // Check times.
         // 1. Closing time must be later than starting time.
-        let dateComparison = self.closingTime.compare(self.startingTime as Date)
-        if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
-            throw Exceptions.invalidDate("The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".")
+        if let close = self.closingTime as? Date, let start = self.startingTime as? Date {
+            let dateComparison = close.compare(start)
+            if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
+                throw Exceptions.invalidDate("The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".")
+            }
         }
     }
 }

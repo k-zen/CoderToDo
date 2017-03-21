@@ -828,6 +828,19 @@ class UtilityFunctions
         return "N\\A"
     }
     
+    func AKGetFormattedTime(date: Date?) -> String
+    {
+        if let date = date {
+            let h = Func.AKGetCalendarForLoading().dateComponents([.hour], from: date).hour ?? 0
+            let m = Func.AKGetCalendarForLoading().dateComponents([.minute], from: date).minute ?? 0
+            let s = Func.AKGetCalendarForLoading().dateComponents([.second], from: date).second ?? 0
+            
+            return String(format: "%.2i:%.2i:%.2i", h, m, s)
+        }
+        
+        return "N\\A"
+    }
+    
     func AKGetNotificationCenter() -> UNUserNotificationCenter { return Func.AKDelegate().notificationCenter }
     
     ///
