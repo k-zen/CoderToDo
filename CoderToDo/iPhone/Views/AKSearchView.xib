@@ -20,13 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="340" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Enter your search..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hp4-NF-BgV">
+                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Enter your search..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hp4-NF-BgV">
                     <rect key="frame" x="0.0" y="0.0" width="340" height="44"/>
-                    <color key="barTintColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                 </searchBar>
             </subviews>
-            <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Hp4-NF-BgV" firstAttribute="top" secondItem="bxW-D9-Dn4" secondAttribute="top" id="7LP-lA-pz3"/>
                 <constraint firstAttribute="trailing" secondItem="Hp4-NF-BgV" secondAttribute="trailing" id="NfY-D7-1Hk"/>

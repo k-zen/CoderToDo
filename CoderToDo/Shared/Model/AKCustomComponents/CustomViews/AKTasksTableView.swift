@@ -83,12 +83,12 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-            // Func.AKAddBorderDeco(
-            //     cell.infoContainer,
-            //     color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
-            //     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            //     position: .left
-            // )
+            Func.AKAddBorderDeco(
+                cell.infoContainer,
+                color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
             
             return cell
         }
@@ -123,7 +123,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 height: LocalConstants.AKHeaderHeight)
             )
             title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
-            title.textColor = GlobalConstants.AKCoderToDoGray1
+            title.textColor = GlobalConstants.AKDefaultFg
             title.text = category.name ?? "N\\A"
             title.textAlignment = .left
             // ### DEBUG
@@ -154,8 +154,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 height: badgeSizeHeight)
             )
             tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-            tasksCountBadge.textColor = GlobalConstants.AKCoderToDoWhite2
-            tasksCountBadge.backgroundColor = GlobalConstants.AKCoderToDoGray2
+            tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
+            tasksCountBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
             if let controller = self.controller as? AKViewProjectViewController {
                 tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(category: category, filter: controller.taskFilter).count)
             }

@@ -27,7 +27,7 @@
                         <constraint firstAttribute="width" constant="60" id="ISL-bh-gMI"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
-                    <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM3-L1-WpR" userLabel="Type_Value">
@@ -45,7 +45,7 @@
                     </constraints>
                 </pickerView>
             </subviews>
-            <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1a6-BE-AqV" firstAttribute="centerX" secondItem="VfY-aO-5H5" secondAttribute="centerX" constant="-128" id="CgD-I6-p8V"/>
                 <constraint firstAttribute="bottom" secondItem="sM3-L1-WpR" secondAttribute="bottom" id="EZR-vI-cLC"/>

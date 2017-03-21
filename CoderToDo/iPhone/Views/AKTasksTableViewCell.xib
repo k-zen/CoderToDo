@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hco-tp-AE1" id="YJo-LI-y7A" userLabel="Main_Container">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT1-Ym-jX5" userLabel="Info_Container">
@@ -24,7 +24,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-BJ-sXN" userLabel="Task_Name_Value">
                                 <rect key="frame" x="16" y="0.0" width="144" height="44"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
-                                <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -36,26 +36,26 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGm-s5-C8L" userLabel="State_Container">
-                        <rect key="frame" x="168" y="0.0" width="140" height="44.5"/>
+                        <rect key="frame" x="168" y="0.0" width="140" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVH-t7-7XJ" userLabel="State_Value">
-                                <rect key="frame" x="0.0" y="7.5" width="90" height="28"/>
+                                <rect key="frame" x="0.0" y="7" width="90" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="2jC-PV-JgS"/>
                                     <constraint firstAttribute="height" constant="28" id="QeV-Zf-9qp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
-                                <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjZ-au-JKT" userLabel="CP_Value">
-                                <rect key="frame" x="90" y="7.5" width="50" height="28"/>
+                                <rect key="frame" x="90" y="7" width="50" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="DVj-E2-lXd"/>
                                     <constraint firstAttribute="width" constant="50" id="fDz-WX-Xh4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
-                                <color key="textColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -69,15 +69,15 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" id="OSS-ce-iPR"/>
+                    <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" constant="0.5" id="OSS-ce-iPR"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="trailing" id="PxY-Km-l2i"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" id="QfH-mK-qbA"/>
                     <constraint firstItem="pT1-Ym-jX5" firstAttribute="leading" secondItem="YJo-LI-y7A" secondAttribute="leading" id="aqP-ks-jGK"/>
                     <constraint firstItem="pT1-Ym-jX5" firstAttribute="top" secondItem="YJo-LI-y7A" secondAttribute="top" id="d1t-lB-SUp"/>
                     <constraint firstAttribute="trailing" secondItem="aGm-s5-C8L" secondAttribute="trailing" constant="12" id="f7Q-QG-6ZE"/>
-                    <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" id="fcr-Qp-rKr"/>
+                    <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" constant="0.5" id="fcr-Qp-rKr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

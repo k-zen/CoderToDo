@@ -181,7 +181,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             break
         }
         
-        pickerLabel.backgroundColor = GlobalConstants.AKDefaultBg
+        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
         pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         

@@ -107,7 +107,13 @@ class AKBackupViewController: AKCustomViewController
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
-                noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                noAction: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKBackupViewController {
+                        presenterController.restoreNow.isEnabled = true
+                        presenterController.restoreNow.backgroundColor = Cons.AKEnabledButtonBg
+                    }
+                    
+                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                 animate: true,
                 completionTask: nil
             )

@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * New L&F dark. (2017/03/21)
         * Modifications to the backup view. (2017/03/21)
         * Added support for auto-migrating core data models and some other minor modifications. (2017/03/21)
         * Added support for backups to iCloud in XML format. (2017/03/20)
