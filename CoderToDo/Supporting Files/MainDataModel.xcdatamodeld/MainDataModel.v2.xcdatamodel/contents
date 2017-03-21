@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="AKCategoryMO" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="categories" inverseEntity="Day" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Configurations" representedClassName="AKConfigurationsMO" syncable="YES" codeGenerationType="class"/>
+    <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="day" inverseEntity="Category" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="days" inverseEntity="Project" syncable="YES"/>
+        <fetchedProperty name="getTasks" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Task"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="DilateTaskQueue" representedClassName="AKDilateTaskQueueMO" syncable="YES" codeGenerationType="class">
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="dilateQueue" inverseEntity="Project" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="dilateQueue" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="PendingTasksQueue" representedClassName="AKPendingTasksQueueMO" syncable="YES" codeGenerationType="class">
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="pendingQueue" inverseEntity="Project" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="pendingQueue" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Project" representedClassName="AKProjectMO" syncable="YES" codeGenerationType="class">
+        <attribute name="closingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="closingTimeTolerance" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="notifyClosingTime" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="osr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="startingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="project" inverseEntity="Day" syncable="YES"/>
+        <relationship name="dilateQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DilateTaskQueue" inverseName="project" inverseEntity="DilateTaskQueue" syncable="YES"/>
+        <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="project" inverseEntity="PendingTasksQueue" syncable="YES"/>
+        <relationship name="projectCategories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProjectCategory" inverseName="project" inverseEntity="ProjectCategory" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="project" inverseEntity="User" syncable="YES"/>
+        <fetchedProperty name="getDays" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Day"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="ProjectCategory" representedClassName="AKProjectCategoryMO" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="projectCategories" inverseEntity="Project" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName="AKTaskMO" syncable="YES" codeGenerationType="class">
+        <attribute name="completionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initialCompletionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
+        <relationship name="dilateQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DilateTaskQueue" inverseName="tasks" inverseEntity="DilateTaskQueue" syncable="YES"/>
+        <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="tasks" inverseEntity="PendingTasksQueue" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
+        <fetchedProperty name="getProjects" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Project"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
+        <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
+        <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
+        <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
+        <element name="Project" positionX="-1098" positionY="-747" width="128" height="251"/>
+        <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
+        <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
+        <element name="User" positionX="-839" positionY="-495" width="128" height="119"/>
+        <element name="Configurations" positionX="-891" positionY="-909" width="128" height="45"/>
+    </elements>
+</model>

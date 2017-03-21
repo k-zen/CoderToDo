@@ -21,17 +21,35 @@ class AKDataController: NSObject
         self.managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         self.managedObjectContext.persistentStoreCoordinator = psc
         
+        let appSupportDir: URL?
         do {
-            let appSupportDir = try FileManager().url(for: FileManager.SearchPathDirectory.applicationSupportDirectory,
-                                                      in: FileManager.SearchPathDomainMask.userDomainMask,
-                                                      appropriateFor: nil,
-                                                      create: true
+            appSupportDir = try FileManager().url(for: FileManager.SearchPathDirectory.applicationSupportDirectory,
+                                                  in: FileManager.SearchPathDomainMask.userDomainMask,
+                                                  appropriateFor: nil,
+                                                  create: true
             )
-            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent(GlobalConstants.AKDbaseFileName).relativePath, isDirectory: false)
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
         }
         catch {
             fatalError("=> ERROR: \(error)")
+        }
+        
+        if let appSupportDir = appSupportDir {
+            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent(GlobalConstants.AKDbaseFileName).relativePath, isDirectory: false)
+            
+            do {
+                try psc.addPersistentStore(
+                    ofType: NSSQLiteStoreType,
+                    configurationName: nil,
+                    at: storeURL,
+                    options: [
+                        NSMigratePersistentStoresAutomaticallyOption : NSNumber(value: true),
+                        NSInferMappingModelAutomaticallyOption : NSNumber(value: true)
+                    ]
+                )
+            }
+            catch {
+                fatalError("=> ERROR: \(error)")
+            }
         }
     }
     

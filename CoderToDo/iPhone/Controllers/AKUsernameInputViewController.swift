@@ -30,8 +30,27 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
             return
         }
         
-        DataInterface.getUser()?.username = username.outputData
-        presenterController?.dismissView(executeDismissTask: true)
+        let newUser = AKUserInterface(username: username.outputData)
+        do {
+            try newUser.validate()
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            return
+        }
+        
+        if let user = AKUserBuilder.mirror(interface: newUser) {
+            if DataInterface.addUser(user: user) {
+                self.presenterController?.dismissView(executeDismissTask: true)
+            }
+            else {
+                self.presenterController?.showMessage(
+                    message: "Could not add the new user. The error has been reported.",
+                    animate: true,
+                    completionTask: nil
+                )
+            }
+        }
     }
     
     // MARK: AKCustomViewController Overriding

@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Added support for auto-migrating core data models and some other minor modifications. (2017/03/21)
         * Added support for backups to iCloud in XML format. (2017/03/20)
         * Added base support for the *ConfigurationsView* and some improvements to the iCloud support. (2017/03/15)
         * Minor thread modification. (2017/03/15)

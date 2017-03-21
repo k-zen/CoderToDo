@@ -5,7 +5,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     // MARK: Constants
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 30
-        static let AKRowHeight: CGFloat = 40
+        static let AKRowHeight: CGFloat = 45
         static let AKFooterHeight: CGFloat = 1.0
     }
     
@@ -122,7 +122,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 width: tableWidth - (padding * 2), // Overlap badge!
                 height: LocalConstants.AKHeaderHeight)
             )
-            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 17.0)
+            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
             title.textColor = GlobalConstants.AKCoderToDoGray1
             title.text = category.name ?? "N\\A"
             title.textAlignment = .left

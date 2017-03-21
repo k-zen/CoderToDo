@@ -39,7 +39,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKDefaultFont,
+                    name: GlobalConstants.AKSecondaryFont,
                     size: GlobalConstants.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKTabBarFontSize),
                 NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
             ], for: .normal

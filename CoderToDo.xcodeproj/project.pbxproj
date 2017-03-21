@@ -77,7 +77,8 @@
 		49A4A0F61E589E8600CEDA1B /* AKUsernameInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0AE1E589E8600CEDA1B /* AKUsernameInputView.xib */; };
 		49A4A0F71E589E8600CEDA1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0B01E589E8600CEDA1B /* Assets.xcassets */; };
 		49A4A10F1E589E8600CEDA1B /* AKNewProjectViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49A4A0CA1E589E8600CEDA1B /* AKNewProjectViewController.plist */; };
-		49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */; };
+		49AFFC3D1E81615100FC258C /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49AFFC3B1E81615100FC258C /* MainDataModel.xcdatamodeld */; };
+		49AFFC401E81660200FC258C /* AKUserBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AFFC3F1E81660200FC258C /* AKUserBuilder.swift */; };
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */; };
@@ -201,7 +202,9 @@
 		49A4A0B01E589E8600CEDA1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49A4A0CB1E589E8600CEDA1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AKNewProjectViewController.plist; sourceTree = "<group>"; };
 		49A4A0E01E589E8600CEDA1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
+		49AFFC3C1E81615100FC258C /* MainDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.xcdatamodel; sourceTree = "<group>"; };
+		49AFFC3E1E81653300FC258C /* MainDataModel.v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainDataModel.v2.xcdatamodel; sourceTree = "<group>"; };
+		49AFFC3F1E81660200FC258C /* AKUserBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserBuilder.swift; sourceTree = "<group>"; };
 		49BE6DF91E65C69300E3F306 /* CoderToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderToDo.entitlements; sourceTree = "<group>"; };
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
@@ -482,7 +485,7 @@
 			children = (
 				49BE6DF91E65C69300E3F306 /* CoderToDo.entitlements */,
 				49A4A0E01E589E8600CEDA1B /* Info.plist */,
-				49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */,
+				49AFFC3B1E81615100FC258C /* MainDataModel.xcdatamodeld */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				49E76DCC1E7DCF62000215BC /* AKProjectBuilder.swift */,
 				49400B631E80536D001C893E /* AKProjectCategoryBuilder.swift */,
 				49400B5D1E803A9C001C893E /* AKTaskBuilder.swift */,
+				49AFFC3F1E81660200FC258C /* AKUserBuilder.swift */,
 			);
 			path = AKCoreDataInterfaces;
 			sourceTree = "<group>";
@@ -830,7 +834,6 @@
 				49E76E101E7DCF62000215BC /* AKCategoryName.swift in Sources */,
 				4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */,
 				49E76DF61E7DCF62000215BC /* AKCloudKitController.swift in Sources */,
-				49A4A11F1E589E8600CEDA1B /* MainDataModel.xcdatamodeld in Sources */,
 				49D93F981E798C310093C9D2 /* AKWorkingHoursAndDaysViewController.swift in Sources */,
 				49E76DFB1E7DCF62000215BC /* AKDataInterface.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
@@ -852,6 +855,7 @@
 				49E76E111E7DCF62000215BC /* AKInputData.swift in Sources */,
 				49E76DFD1E7DCF62000215BC /* AKProjectBuilder.swift in Sources */,
 				49A4A0E81E589E8600CEDA1B /* AKListProjectsViewController.swift in Sources */,
+				49AFFC3D1E81615100FC258C /* MainDataModel.xcdatamodeld in Sources */,
 				49D93F921E798B9C0093C9D2 /* AKProjectBucketViewController.swift in Sources */,
 				49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */,
 				49A4A0E71E589E8600CEDA1B /* AKIntroductoryViewController.swift in Sources */,
@@ -859,6 +863,7 @@
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
 				49E76E011E7DCF62000215BC /* AKContinueMessageView.swift in Sources */,
 				49E76E071E7DCF62000215BC /* AKSortView.swift in Sources */,
+				49AFFC401E81660200FC258C /* AKUserBuilder.swift in Sources */,
 				49400B5E1E803A9C001C893E /* AKTaskBuilder.swift in Sources */,
 				49E76E031E7DCF62000215BC /* AKMessageView.swift in Sources */,
 				49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */,
@@ -1051,12 +1056,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		49A4A0E11E589E8600CEDA1B /* MainDataModel.xcdatamodeld */ = {
+		49AFFC3B1E81615100FC258C /* MainDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */,
+				49AFFC3E1E81653300FC258C /* MainDataModel.v2.xcdatamodel */,
+				49AFFC3C1E81615100FC258C /* MainDataModel.xcdatamodel */,
 			);
-			currentVersion = 49A4A0E21E589E8600CEDA1B /* MainDataModel.xcdatamodel */;
+			currentVersion = 49AFFC3E1E81653300FC258C /* MainDataModel.v2.xcdatamodel */;
 			path = MainDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

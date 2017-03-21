@@ -7,7 +7,7 @@ class AKMasterReference: NSObject
     /// The managed object context needed to handle the data.
     private let moc: NSManagedObjectContext
     /// This is the entry point to all data. Everything starts with the user data structure.
-    private var user: User? = nil
+    var user: User? = nil
     
     // MARK: Initializers
     override init()
@@ -63,10 +63,12 @@ class AKMasterReference: NSObject
     ///
     /// - Returns: The self instance. Useful for concatenating calls.
     ///
-    func dump()
+    func dump() -> Void
     {
         let data = NSMutableString()
         data.appendFormat("=>   USERNAME: %@\n", DataInterface.getUsername())
+        data.appendFormat("=>       CREATION DATE: %@\n", DataInterface.getUser()?.creationDate?.description ?? "")
+        data.appendFormat("=>   CONFIGURATIONS:\n")
         data.appendFormat("=>   PROJECTS:\n")
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             data.appendFormat("=>       CLOSING TIME: %@\n", project.closingTime?.description ?? "")

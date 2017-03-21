@@ -179,7 +179,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 20.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = Func.AKGetFormattedDate(date: day.date as? Date)
         title.textAlignment = .left

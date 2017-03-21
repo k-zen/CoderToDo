@@ -90,7 +90,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Custom L&F.
         self.menu.setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(name: GlobalConstants.AKDefaultFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
+                NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
                 NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
             ], for: .normal
         )
@@ -203,7 +203,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-        headerCell.backgroundColor = GlobalConstants.AKTableCellBg
+        headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
         Func.AKAddBorderDeco(
             headerCell,
             color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
@@ -217,7 +217,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
         title.textColor = GlobalConstants.AKDefaultFg
         title.text = project.name ?? "N/A"
         title.textAlignment = .left

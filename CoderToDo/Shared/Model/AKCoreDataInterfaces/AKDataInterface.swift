@@ -3,6 +3,17 @@ import UserNotifications
 
 class AKDataInterface
 {
+    static func addUser(user: User) -> Bool
+    {
+        if Func.AKObtainMasterReference()?.user == nil {
+            Func.AKObtainMasterReference()?.user = user
+            
+            return true
+        }
+        
+        return false
+    }
+    
     ///
     /// Returns the user data structure.
     ///
