@@ -37,7 +37,7 @@ class AKBackupViewController: AKCustomViewController
                                                     Func.AKGetFormattedDate(date: backupInfo.date),
                                                     Func.AKGetFormattedTime(date: backupInfo.date)
                                                 )
-                                                presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
+                                                presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                                                 
                                                 // Enable the restore from backup button, ONLY if there is
                                                 // at least 1 record to restore from.
@@ -65,7 +65,7 @@ class AKBackupViewController: AKCustomViewController
                                             Func.AKGetFormattedDate(date: backupInfo.date),
                                             Func.AKGetFormattedTime(date: backupInfo.date)
                                         )
-                                        presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
+                                        presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                                         
                                         // Enable the restore from backup button, ONLY if there is
                                         // at least 1 record to restore from.
@@ -180,7 +180,7 @@ class AKBackupViewController: AKCustomViewController
                                 Func.AKGetFormattedDate(date: backupInfo.date),
                                 Func.AKGetFormattedTime(date: backupInfo.date)
                             )
-                            presenterController.lastBackupSizeValue.text = String(format: "%i bytes", backupInfo.size ?? 0)
+                            presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                             
                             // Enable the restore from backup button, ONLY if there is
                             // at least 1 record to restore from.

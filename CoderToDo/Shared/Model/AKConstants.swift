@@ -755,6 +755,15 @@ class UtilityFunctions
         }
     }
     
+    func AKFormatNumber(number: NSNumber) -> String
+    {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale.current
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        
+        return numberFormatter.string(from: number) ?? String(format: "%@", number)
+    }
+    
     func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView, isCentered: Bool = true) -> CGFloat
     {
         var height: CGFloat = (UIScreen.main.bounds.height - container.frame.height) / (isCentered ? 2.0 : 1.0)
