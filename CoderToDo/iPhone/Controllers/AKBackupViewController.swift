@@ -191,7 +191,7 @@ class AKBackupViewController: AKCustomViewController
             }
         }
         super.iCloudAccessErrorAction = { (presenterController) -> Void in
-            presenterController.showMessage(
+            presenterController?.showMessage(
                 message: "There had been an error accessing your iCloud account. Please check again later.",
                 animate: true,
                 completionTask: nil

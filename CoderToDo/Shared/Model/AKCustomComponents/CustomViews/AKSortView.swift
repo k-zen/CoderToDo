@@ -16,7 +16,6 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     // MARK: Properties
     private var sortOrderData = [SortingOrder]()
     private var sortFilterData = [String]()
-    var controller: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
@@ -96,8 +95,10 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource

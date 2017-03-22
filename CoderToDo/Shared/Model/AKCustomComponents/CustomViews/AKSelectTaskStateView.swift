@@ -8,9 +8,6 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         static let AKViewHeight: CGFloat = 179.0
     }
     
-    // MARK: Properties
-    var controller: AKCustomViewController?
-    
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     
@@ -138,8 +135,10 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true

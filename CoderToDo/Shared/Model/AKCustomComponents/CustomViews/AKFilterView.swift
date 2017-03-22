@@ -16,7 +16,6 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     // MARK: Properties
     private var filterTypeData = [String]()
     private var filterValueData = [String]()
-    var controller: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
@@ -110,8 +109,10 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource

@@ -8,9 +8,6 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
         static let AKViewHeight: CGFloat = 100.0
     }
     
-    // MARK: Properties
-    var controller: AKCustomViewController?
-    
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     @IBOutlet weak var message: UILabel!
@@ -19,8 +16,11 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.inhibitTapGesture = false
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true

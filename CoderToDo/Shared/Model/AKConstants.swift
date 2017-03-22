@@ -575,7 +575,7 @@ class UtilityFunctions
     ///
     func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition)
     {
-        Func.AKExecuteInMainThread(mode: .async, code: {
+        Func.AKExecuteInMainThread(controller: nil, mode: .async, code: { (_) -> Void in
             let border = CALayer()
             border.backgroundColor = color
             switch position {
@@ -725,14 +725,14 @@ class UtilityFunctions
     /// - Parameter mode: The execution mode.
     /// - Parameter code: The code to be executed in the main thread.
     ///
-    func AKExecuteInMainThread(mode: ExecutionMode, code: @escaping (Void) -> Void)
+    func AKExecuteInMainThread(controller: AKCustomViewController?, mode: ExecutionMode, code: @escaping (AKCustomViewController?) -> Void)
     {
         switch mode {
         case .sync:
-            DispatchQueue.main.sync(execute: { code() })
+            DispatchQueue.main.sync(execute: { code(controller) })
             break
         case .async:
-            DispatchQueue.main.async(execute: { code() })
+            DispatchQueue.main.async(execute: { code(controller) })
             break
         }
     }
@@ -979,8 +979,8 @@ class UtilityFunctions
     
     func AKPresentMessage(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
     {
-        Func.AKExecuteInMainThread(mode: .sync, code: {
-            controller.showMessage(
+        Func.AKExecuteInMainThread(controller: controller, mode: .async, code: { (controller) -> Void in
+            controller?.showMessage(
                 message: message,
                 autoDismiss: autoDismiss,
                 animate: true,

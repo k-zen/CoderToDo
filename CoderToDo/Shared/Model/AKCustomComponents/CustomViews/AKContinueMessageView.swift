@@ -9,7 +9,6 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     }
     
     // MARK: Properties
-    var controller: AKCustomViewController?
     var yesAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: YES HAS BEEN PRESSED!") }
     var noAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: NO HAS BEEN PRESSED!") }
     
@@ -42,8 +41,10 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true

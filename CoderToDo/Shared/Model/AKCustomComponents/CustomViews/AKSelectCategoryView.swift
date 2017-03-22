@@ -15,7 +15,6 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     
     // MARK: Properties
     private var categoryData = [String]()
-    var controller: AKCustomViewController?
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
@@ -91,8 +90,10 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource

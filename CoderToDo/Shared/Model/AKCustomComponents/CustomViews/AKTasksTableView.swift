@@ -10,7 +10,6 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     // MARK: Properties
-    var controller: AKCustomViewController?
     var day: Day?
     
     // MARK: Outlets
@@ -240,8 +239,10 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource

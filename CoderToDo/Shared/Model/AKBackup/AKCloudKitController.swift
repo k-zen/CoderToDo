@@ -28,7 +28,7 @@ class AKCloudKitController: NSObject
                     Func.AKGetCloudKitContainer().privateCloudDatabase.save(
                         backup,
                         completionHandler: { (record, error) -> Void in
-                            Func.AKExecuteInMainThread(mode: .async, code: {
+                            Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                                 guard error == nil else {
                                     // TODO: Show error message and disable function.
                                     NSLog("=> ERROR: \(error)")
@@ -36,7 +36,7 @@ class AKCloudKitController: NSObject
                                 }
                                 
                                 if completionTask != nil {
-                                    completionTask!(presenterController, backupInfo)
+                                    completionTask!(controller, backupInfo)
                                 }
                             }) }
                     )
@@ -88,7 +88,7 @@ class AKCloudKitController: NSObject
             }
         }
         queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
-            Func.AKExecuteInMainThread(mode: .async, code: {
+            Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
                     // TODO: Show error message and disable function.
                     NSLog("=> ERROR: \(error)")
@@ -106,7 +106,7 @@ class AKCloudKitController: NSObject
                     }
                     
                     if completionTask != nil {
-                        completionTask!(presenterController, backupInfo.first)
+                        completionTask!(controller, backupInfo.first)
                     }
                 }
             })
@@ -147,7 +147,7 @@ class AKCloudKitController: NSObject
             backupInfo.append(info)
         }
         queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
-            Func.AKExecuteInMainThread(mode: .async, code: {
+            Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
                     // TODO: Show error message and disable function.
                     NSLog("=> ERROR: \(error)")
@@ -155,7 +155,7 @@ class AKCloudKitController: NSObject
                 }
                 
                 if completionTask != nil && backupInfo.count > 0 {
-                    completionTask!(presenterController, backupInfo.first)
+                    completionTask!(controller, backupInfo.first)
                 }
             })
         }

@@ -9,62 +9,71 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKAddViewController" customModule="CoderToDo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKAddView" customModule="CoderToDo" customModuleProvider="target">
             <connections>
-                <outlet property="addCategory" destination="iyg-M7-jhH" id="syW-v3-ICb"/>
-                <outlet property="addTask" destination="Fec-zA-Oe7" id="J5q-AX-hv3"/>
-                <outlet property="controlsContainer" destination="pwr-A2-Ltf" id="qTL-mE-uZQ"/>
-                <outlet property="view" destination="iN0-l3-epB" id="kAg-e6-Bsv"/>
+                <outlet property="addCategory" destination="Wd1-V5-JFf" id="uAG-Vm-dQ9"/>
+                <outlet property="addTask" destination="Le7-U3-Gwl" id="2LD-ap-srC"/>
+                <outlet property="mainContainer" destination="SGl-Zu-r9w" id="awn-bs-rfd"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Main_Container">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="SGl-Zu-r9w" userLabel="Main_Container">
+            <rect key="frame" x="0.0" y="0.0" width="299" height="41.5"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwr-A2-Ltf" userLabel="Controls_Container">
-                    <rect key="frame" x="118" y="293" width="138" height="81"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwR-t7-eNh" userLabel="Dummy_Container">
+                    <rect key="frame" x="0.0" y="1" width="299" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyg-M7-jhH">
-                            <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
-                            <state key="normal" title="Add Category">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wd1-V5-JFf" userLabel="Add_Category">
+                            <rect key="frame" x="0.0" y="0.0" width="149" height="40"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="149" id="hWu-wE-zID"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                            <state key="normal" title="Add New Category">
                                 <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="addCategory:" destination="-1" eventType="touchUpInside" id="xaO-3V-Bg8"/>
+                                <action selector="addCategory:" destination="-1" eventType="touchUpInside" id="WMa-0E-krQ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-zA-Oe7">
-                            <rect key="frame" x="0.0" y="41" width="138" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
-                            <state key="normal" title="Add Task">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le7-U3-Gwl" userLabel="Add_Task">
+                            <rect key="frame" x="150" y="0.0" width="149" height="40"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                            <state key="normal" title="Add New Task">
                                 <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="addTask:" destination="-1" eventType="touchUpInside" id="jl8-x8-2Kg"/>
+                                <action selector="addTask:" destination="-1" eventType="touchUpInside" id="87d-Av-m2V"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="81" id="kKL-19-dNH"/>
-                        <constraint firstAttribute="width" constant="138" id="ld1-aT-KKR"/>
+                        <constraint firstItem="Wd1-V5-JFf" firstAttribute="top" secondItem="gwR-t7-eNh" secondAttribute="top" id="C5V-0J-oSZ"/>
+                        <constraint firstAttribute="bottom" secondItem="Le7-U3-Gwl" secondAttribute="bottom" id="EYa-5a-YFw"/>
+                        <constraint firstItem="Le7-U3-Gwl" firstAttribute="width" secondItem="Wd1-V5-JFf" secondAttribute="width" id="Jz7-mt-hPJ"/>
+                        <constraint firstAttribute="trailing" secondItem="Le7-U3-Gwl" secondAttribute="trailing" id="L9i-gc-vKl"/>
+                        <constraint firstAttribute="height" constant="40" id="YYh-Tq-Ad4"/>
+                        <constraint firstItem="Le7-U3-Gwl" firstAttribute="leading" secondItem="Wd1-V5-JFf" secondAttribute="trailing" constant="1" id="ZDm-eF-fpx"/>
+                        <constraint firstItem="Wd1-V5-JFf" firstAttribute="leading" secondItem="gwR-t7-eNh" secondAttribute="leading" id="aUK-5Z-a8h"/>
+                        <constraint firstAttribute="bottom" secondItem="Wd1-V5-JFf" secondAttribute="bottom" id="hD6-ig-399"/>
+                        <constraint firstItem="Le7-U3-Gwl" firstAttribute="top" secondItem="gwR-t7-eNh" secondAttribute="top" id="huZ-dX-H4N"/>
                     </constraints>
                 </view>
             </subviews>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="pwr-A2-Ltf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0Ie-kH-Xyp"/>
-                <constraint firstItem="pwr-A2-Ltf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OoR-OB-Qdq"/>
+                <constraint firstItem="gwR-t7-eNh" firstAttribute="leading" secondItem="SGl-Zu-r9w" secondAttribute="leading" id="2tg-kb-k15"/>
+                <constraint firstItem="gwR-t7-eNh" firstAttribute="centerY" secondItem="SGl-Zu-r9w" secondAttribute="centerY" id="N2b-0w-yrY"/>
+                <constraint firstAttribute="trailing" secondItem="gwR-t7-eNh" secondAttribute="trailing" id="ORR-cd-kKZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <point key="canvasLocation" x="33.5" y="54.5"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-3.5" y="367"/>
         </view>
     </objects>
 </document>

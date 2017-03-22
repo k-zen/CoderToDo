@@ -7,9 +7,6 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         static let AKViewHeight: CGFloat = 44.0
     }
     
-    // MARK: Properties
-    var controller: AKCustomViewController?
-    
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet var searchBar: UISearchBar!
@@ -58,8 +55,10 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     }
     
     // MARK: Miscellaneous
-    func setup()
+    override func setup()
     {
+        super.setup()
+        
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource

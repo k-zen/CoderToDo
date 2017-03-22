@@ -90,12 +90,13 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var longPressGesture: UILongPressGestureRecognizer?
     var dismissViewCompletionTask: (Void) -> Void = {}
     var localizableDictionary: NSDictionary?
-    var iCloudAccessErrorAction: (AKCustomViewController) -> Void = { (presenterController) -> Void in }
-    var iCloudAccessAvailableAction: (AKCustomViewController) -> Void = { (presenterController) -> Void in }
+    var iCloudAccessErrorAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
+    var iCloudAccessAvailableAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     // Overlay Controllers
     let messageOverlay = AKMessageView()
     let continueMessageOverlay = AKContinueMessageView()
     let topMenuOverlay = AKTopMenuView()
+    let addMenuItemOverlay = AKAddView()
     let sortMenuItemOverlay = AKSortView()
     let filterMenuItemOverlay = AKFilterView()
     let searchMenuItemOverlay = AKSearchView()
@@ -162,6 +163,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.topMenuOverlay.draw(
             container: self.view,
             coordinates: CGPoint.zero,
+            size: CGSize(width: self.view.frame.width, height: 0.0)
+        )
+        
+        self.addMenuItemOverlay.controller = self
+        self.addMenuItemOverlay.setup()
+        self.addMenuItemOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
             size: CGSize(width: self.view.frame.width, height: 0.0)
         )
         
@@ -358,6 +367,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
+    func showAddMenuItem(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.addMenuItemOverlay.expand(controller: self,
+                                       expandHeight: AKAddView.LocalConstants.AKViewHeight,
+                                       animate: animate,
+                                       completionTask: completionTask
+        )
+    }
+    
     func showSortMenuItem(
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
@@ -420,6 +440,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.topMenuOverlay.collapse(
+            controller: self,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
+    func hideAddMenuItem(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.addMenuItemOverlay.collapse(
             controller: self,
             animate: animate,
             completionTask: completionTask
@@ -514,8 +545,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     {
         Func.AKGetNotificationCenter().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if !granted {
-                Func.AKExecuteInMainThread(mode: .sync, code: {
-                    self.showContinueMessage(
+                Func.AKExecuteInMainThread(controller: self, mode: .sync, code: { (controller) -> Void in
+                    controller?.showContinueMessage(
                         message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to \"Settings\" to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
@@ -544,18 +575,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func manageGrantToiCloud()
     {
         Func.AKGetCloudKitContainer().accountStatus(completionHandler: { (accountStatus, error) -> Void in
-            Func.AKExecuteInMainThread(mode: .async, code: {
+            Func.AKExecuteInMainThread(controller: self, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
-                    self.iCloudAccessErrorAction(self)
+                    controller?.iCloudAccessErrorAction(controller)
                     return
                 }
                 
                 switch accountStatus {
                 case .available:
-                    self.iCloudAccessAvailableAction(self)
+                    controller?.iCloudAccessAvailableAction(controller)
                     break
                 default:
-                    self.showContinueMessage(
+                    controller?.showContinueMessage(
                         message: "You need to be signed into iCloud and have *iCloud Drive* set to on. Go to *Settings -> iCloud* to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
@@ -651,6 +682,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         var newOffset = offset
         if self.isMenuItemVisible {
             switch self.selectedMenuItem {
+            case .add:
+                newOffset += AKAddView.LocalConstants.AKViewHeight
+                self.isMenuItemVisible = false
+                self.hideAddMenuItem(animate: animate, completionTask: completionTask)
+                break
             case .sort:
                 newOffset += AKSortView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
@@ -693,6 +729,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         let direction: Displacement = !self.isMenuItemVisible ? .down : .up
         
         switch menuItem {
+        case .add:
+            self.selectedMenuItem = .add
+            offset += AKAddView.LocalConstants.AKViewHeight
+            if direction == Displacement.down {
+                self.isMenuItemVisible = true
+                self.showAddMenuItem(animate: animate, completionTask: completionTask)
+            }
+            else {
+                self.isMenuItemVisible = false
+                self.hideAddMenuItem(animate: animate, completionTask: completionTask)
+            }
+            break
         case .sort:
             self.selectedMenuItem = .sort
             offset += AKSortView.LocalConstants.AKViewHeight

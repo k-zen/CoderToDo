@@ -285,25 +285,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func customSetup()
     {
         super.inhibitTapGesture = true
-        super.inhibitLongPressGesture = false
-        super.additionalOperationsWhenLongPressed = { (gesture) -> Void in
-            self.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
-                             taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                                if
-                                    let presenterController = presenterController as? AKViewProjectViewController,
-                                    let presentedController = presentedController as? AKAddViewController {
-                                    presentedController.project = presenterController.project
-                                } },
-                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                // Always reload the days table!
-                                if let presenterController = presenterController as? AKViewProjectViewController {
-                                    Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
-                                    for customCell in presenterController.customCellArray {
-                                        Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
-                                    }
-                                } }
-            )
-        }
         super.setup()
         super.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
         
@@ -328,22 +309,21 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         // Custom Actions
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
-            if let presenterController = presenterController {
-                presenterController.presentView(controller: AKAddViewController(nibName: "AKAddView", bundle: nil),
-                                                taskBeforePresenting: { (presenterController, presentedController) -> Void in
-                                                    if
-                                                        let presenterController = presenterController as? AKViewProjectViewController,
-                                                        let presentedController = presentedController as? AKAddViewController {
-                                                        presentedController.project = presenterController.project
-                                                    } },
-                                                dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                                    // Always reload the days table!
-                                                    if let presenterController = presenterController as? AKViewProjectViewController {
-                                                        Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
-                                                        for customCell in presenterController.customCellArray {
-                                                            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
-                                                        }
-                                                    } }
+            if let presenterController = presenterController as? AKViewProjectViewController {
+                if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .add {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.daysTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: false,
+                        completionTask: nil
+                    )
+                }
+                
+                presenterController.toggleMenuItem(
+                    tableView: presenterController.daysTable,
+                    menuItem: .add,
+                    animate: true,
+                    completionTask: nil
                 )
             }
         }
