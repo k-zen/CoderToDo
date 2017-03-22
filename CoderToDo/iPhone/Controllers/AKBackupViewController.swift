@@ -6,6 +6,7 @@ class AKBackupViewController: AKCustomViewController
     @IBOutlet var lastBackupValue: UILabel!
     @IBOutlet var lastBackupSizeValue: UILabel!
     @IBOutlet var backupNow: UIButton!
+    @IBOutlet var dataHashValue: UILabel!
     // @IBOutlet var automaticBackupsValue: UISwitch!
     @IBOutlet var restoreNow: UIButton!
     
@@ -38,6 +39,7 @@ class AKBackupViewController: AKCustomViewController
                                                     Func.AKGetFormattedTime(date: backupInfo.date)
                                                 )
                                                 presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                                                presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                                                 
                                                 // Enable the restore from backup button, ONLY if there is
                                                 // at least 1 record to restore from.
@@ -66,6 +68,7 @@ class AKBackupViewController: AKCustomViewController
                                             Func.AKGetFormattedTime(date: backupInfo.date)
                                         )
                                         presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                                        presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                                         
                                         // Enable the restore from backup button, ONLY if there is
                                         // at least 1 record to restore from.
@@ -181,6 +184,7 @@ class AKBackupViewController: AKCustomViewController
                                 Func.AKGetFormattedTime(date: backupInfo.date)
                             )
                             presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                            presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                             
                             // Enable the restore from backup button, ONLY if there is
                             // at least 1 record to restore from.
