@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Corrected minor bug with editing mode for tasks during FirstDay. (2017/03/23)
         * Corrected a bug where the task's table was not being refreshed after adding a new task. (2017/03/23)
         * Added support to change the state of DILATED tasks which have been migrated for tomorrow and only during the acceptance period of the current project. They can only be changed to PENDING or DILATE. (2017/03/22)
         * Added support for thousand separator. (2017/03/22)

@@ -113,10 +113,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillAppear(animated)
         
         // Checks:
+        let projectStatus = DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!)
         if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
             // Special case when we are allowed to change the status from DILATE to PENDING
             // during the aceptance period for the next day ONLY!
-            if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
+            if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
                 NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
                 self.markTask(mode: .canChangeState)
             }
@@ -126,7 +127,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             }
         }
         else { // If the day is CURRENT but NOT open then always close.
-            if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) != .open {
+            if projectStatus != .open && projectStatus != .firstDay {
                 NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
                 self.markTask(mode: .notEditable)
             }
