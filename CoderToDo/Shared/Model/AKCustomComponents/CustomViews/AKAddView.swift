@@ -46,8 +46,13 @@ class AKAddView: AKCustomView
                                             let presentedController = presentedController as? AKAddTaskViewController {
                                             presentedController.project = presenterController.project
                                         } },
-                                       dismissViewCompletionTask: { (presenterController, presentedController) -> Void in }
-                )
+                                       dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                        if let presenterController = presenterController as? AKViewProjectViewController {
+                                            Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
+                                            for customCell in presenterController.customCellArray {
+                                                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+                                            }
+                                        } })
             }
             catch {
                 Func.AKPresentMessageFromError(controller: controller, message: "\(error)")
