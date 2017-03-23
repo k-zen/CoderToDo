@@ -8,126 +8,169 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         static let AKViewHeight: CGFloat = 179.0
     }
     
+    // MARK: Properties
+    var editMode: TaskMode = .editable
+    
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     
     // MARK: Actions
     @IBAction func done(_ sender: Any)
     {
-        if let controller = controller as? AKViewTaskViewController {
-            controller.showContinueMessage(
-                message: "This action can't be undone. Continue...?",
-                yesAction: { (presenterController) -> Void in
-                    if let presenterController = presenterController as? AKViewTaskViewController {
-                        // Change caller button.
-                        presenterController.statusValue.setTitle(TaskStates.done.rawValue, for: .normal)
-                        presenterController.changeCP.value = 100.0
-                        presenterController.changeCP.isEnabled = false
-                        presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
-                        Func.AKAddBorderDeco(
-                            presenterController.statusValue,
-                            color: Func.AKGetColorForTaskState(taskState: TaskStates.done.rawValue).cgColor,
-                            thickness: GlobalConstants.AKDefaultBorderThickness,
-                            position: .bottom
-                        )
-                        // Toggle to not editable mode.
-                        presenterController.markTask(mode: .notEditable)
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                noAction: { (presenterController) -> Void in
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                animate: true,
-                completionTask: nil
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
+        if self.editMode == .editable {
+            if let controller = self.controller as? AKViewTaskViewController {
+                controller.showContinueMessage(
+                    message: "This action can't be undone. Continue...?",
+                    yesAction: { (presenterController) -> Void in
+                        if let presenterController = presenterController as? AKViewTaskViewController {
+                            // Change caller button.
+                            presenterController.statusValue.setTitle(TaskStates.done.rawValue, for: .normal)
+                            presenterController.changeCP.value = 100.0
+                            presenterController.changeCP.isEnabled = false
+                            presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
+                            Func.AKAddBorderDeco(
+                                presenterController.statusValue,
+                                color: Func.AKGetColorForTaskState(taskState: TaskStates.done.rawValue).cgColor,
+                                thickness: GlobalConstants.AKDefaultBorderThickness,
+                                position: .bottom
+                            )
+                            // Toggle to not editable mode.
+                            presenterController.markTask(mode: .notEditable)
+                        }
+                        
+                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    noAction: { (presenterController) -> Void in
+                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    animate: true,
+                    completionTask: nil
+                )
+                
+                // Collapse this view.
+                controller.tap(nil)
+            }
+        }
+        else {
+            if let controller = self.controller as? AKViewTaskViewController {
+                controller.collapseTaskStateSelector()
+                controller.showMessage(
+                    message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
+                    animate: true,
+                    completionTask: nil
+                )
+            }
         }
     }
     
     @IBAction func notDone(_ sender: Any)
     {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.notDone.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.notDone.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
+        if self.editMode == .editable {
+            if let controller = self.controller as? AKViewTaskViewController {
+                // Change caller button.
+                controller.statusValue.setTitle(TaskStates.notDone.rawValue, for: .normal)
+                Func.AKAddBorderDeco(
+                    controller.statusValue,
+                    color: Func.AKGetColorForTaskState(taskState: TaskStates.notDone.rawValue).cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                
+                // Collapse this view.
+                controller.tap(nil)
+            }
+        }
+        else {
+            if let controller = self.controller as? AKViewTaskViewController {
+                controller.collapseTaskStateSelector()
+                controller.showMessage(
+                    message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
+                    animate: true,
+                    completionTask: nil
+                )
+            }
         }
     }
     
     @IBAction func notApplicable(_ sender: Any)
     {
-        if let controller = controller as? AKViewTaskViewController {
-            controller.showContinueMessage(
-                message: "This action can't be undone. Continue...?",
-                yesAction: { (presenterController) -> Void in
-                    if let presenterController = presenterController as? AKViewTaskViewController {
-                        // Change caller button.
-                        presenterController.statusValue.setTitle(TaskStates.notApplicable.rawValue, for: .normal)
-                        presenterController.changeCP.value = 100.0
-                        presenterController.changeCP.isEnabled = false
-                        presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
-                        Func.AKAddBorderDeco(
-                            presenterController.statusValue,
-                            color: Func.AKGetColorForTaskState(taskState: TaskStates.notApplicable.rawValue).cgColor,
-                            thickness: GlobalConstants.AKDefaultBorderThickness,
-                            position: .bottom
-                        )
-                        // Toggle to not editable mode.
-                        presenterController.markTask(mode: .notEditable)
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                noAction: { (presenterController) -> Void in
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                animate: true,
-                completionTask: nil
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
+        if self.editMode == .editable {
+            if let controller = self.controller as? AKViewTaskViewController {
+                controller.showContinueMessage(
+                    message: "This action can't be undone. Continue...?",
+                    yesAction: { (presenterController) -> Void in
+                        if let presenterController = presenterController as? AKViewTaskViewController {
+                            // Change caller button.
+                            presenterController.statusValue.setTitle(TaskStates.notApplicable.rawValue, for: .normal)
+                            presenterController.changeCP.value = 100.0
+                            presenterController.changeCP.isEnabled = false
+                            presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
+                            Func.AKAddBorderDeco(
+                                presenterController.statusValue,
+                                color: Func.AKGetColorForTaskState(taskState: TaskStates.notApplicable.rawValue).cgColor,
+                                thickness: GlobalConstants.AKDefaultBorderThickness,
+                                position: .bottom
+                            )
+                            // Toggle to not editable mode.
+                            presenterController.markTask(mode: .notEditable)
+                        }
+                        
+                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    noAction: { (presenterController) -> Void in
+                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    animate: true,
+                    completionTask: nil
+                )
+                
+                // Collapse this view.
+                controller.tap(nil)
+            }
+        }
+        else {
+            if let controller = self.controller as? AKViewTaskViewController {
+                controller.collapseTaskStateSelector()
+                controller.showMessage(
+                    message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
+                    animate: true,
+                    completionTask: nil
+                )
+            }
         }
     }
     
     @IBAction func dilate(_ sender: Any)
     {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
+        if self.editMode == .editable || self.editMode == .canChangeState {
+            if let controller = self.controller as? AKViewTaskViewController {
+                // Change caller button.
+                controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
+                Func.AKAddBorderDeco(
+                    controller.statusValue,
+                    color: Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue).cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                
+                // Collapse this view.
+                controller.tap(nil)
+            }
         }
     }
     
     @IBAction func pending(_ sender: Any)
     {
-        if let controller = controller as? AKViewTaskViewController {
-            // Change caller button.
-            controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)
-            Func.AKAddBorderDeco(
-                controller.statusValue,
-                color: Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
-            
-            // Collapse this view.
-            controller.tap(nil)
+        if self.editMode == .editable || self.editMode == .canChangeState {
+            if let controller = self.controller as? AKViewTaskViewController {
+                // Change caller button.
+                controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)
+                Func.AKAddBorderDeco(
+                    controller.statusValue,
+                    color: Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue).cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                
+                // Collapse this view.
+                controller.tap(nil)
+            }
         }
     }
     

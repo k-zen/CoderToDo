@@ -12,11 +12,13 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     let selectTaskStateOverlay = AKSelectTaskStateView()
     let selectCategoryOverlay = AKSelectCategoryView()
     var task: Task!
+    var editMode: TaskMode = .editable
     
     // MARK: Outlets
     @IBOutlet weak var navController: UINavigationItem!
     @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlContainer: UIView!
+    @IBOutlet weak var taskDayValue: UILabel!
     @IBOutlet weak var taskState: UILabel!
     @IBOutlet weak var taskNameValue: UITextView!
     @IBOutlet weak var statusValue: UIButton!
@@ -28,7 +30,19 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var dummyMarker: UILabel!
     
     // MARK: Actions
-    @IBAction func changeStatus(_ sender: Any) { self.expandTaskStateSelector() }
+    @IBAction func changeStatus(_ sender: Any)
+    {
+        switch self.editMode {
+        case .canChangeState:
+            self.selectTaskStateOverlay.editMode = .canChangeState
+            self.expandTaskStateSelector()
+            break
+        default:
+            self.selectTaskStateOverlay.editMode = .editable
+            self.expandTaskStateSelector()
+            break
+        }
+    }
     
     @IBAction func changeCP(_ sender: Any) { self.cpValue.text = String(format: "%.1f%%", self.changeCP.value) }
     
@@ -41,6 +55,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.customSetup()
         
         // Load the task data.
+        self.taskDayValue.text = String(format: "Task set up for: %@", Func.AKGetFormattedDate(date: (self.task.category?.day)!.date as? Date))
         // Task name.
         self.taskNameValue.text = self.task.name ?? "N\\A"
         // Task Status.
@@ -98,22 +113,36 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillAppear(animated)
         
         // Checks:
-        // Close Task if:
-        //  day is not current.
         if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
-            self.markTask(mode: .notEditable)
+            // Special case when we are allowed to change the status from DILATE to PENDING
+            // during the aceptance period for the next day ONLY!
+            if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
+                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
+                self.markTask(mode: .canChangeState)
+            }
+            else {
+                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
+                self.markTask(mode: .notEditable)
+            }
         }
-        //  project not open.
-        if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) != .open {
-            self.markTask(mode: .notEditable)
+        else { // If the day is CURRENT but NOT open then always close.
+            if DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!) != .open {
+                NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
+                self.markTask(mode: .notEditable)
+            }
         }
-        //  task marked as "DONE".
-        if self.task.state == TaskStates.done.rawValue {
+        
+        // Failsafe, tasks with these states will ALWAYS be marked as closed!
+        // + task marked as "DONE"
+        // + task marked as "NOT APPLICABLE".
+        switch self.task.state! {
+        case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
+            NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
             self.markTask(mode: .notEditable)
-        }
-        //  task marked as "NOT APPLICABLE".
-        if self.task.state == TaskStates.notApplicable.rawValue {
-            self.markTask(mode: .notEditable)
+            break
+        default:
+            // Ignore
+            break
         }
     }
     
@@ -237,6 +266,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.changeCP.isEnabled = false
             self.changeCategory.isEnabled = false
             break
+        case .canChangeState:
+            self.taskNameValue.isEditable = false
+            self.statusValue.isEnabled = true
+            self.changeCP.isEnabled = false
+            self.changeCategory.isEnabled = false
+            break
         }
     }
     
@@ -244,6 +279,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     {
         self.taskState.text = mode.rawValue
         self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        
+        self.editMode = mode
         self.toggleEditMode(mode: mode)
     }
     
