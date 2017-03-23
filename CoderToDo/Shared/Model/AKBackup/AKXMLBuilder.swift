@@ -11,6 +11,8 @@ class AKXMLBuilder
         xml.append("<configurations>")
         if let configurations = DataInterface.getConfigurations() {
             xml.append(String(format: "<automaticBackups>%@</automaticBackups>", configurations.automaticBackups ? "YES" : "NO"))
+            xml.append(String(format: "<cleaningMode>%@</cleaningMode>", configurations.cleaningMode ? "YES" : "NO"))
+            xml.append(String(format: "<showLocalNotificationMessage>%@</showLocalNotificationMessage>", configurations.showLocalNotificationMessage ? "YES" : "NO"))
             xml.append(String(format: "<useLocalNotifications>%@</useLocalNotifications>", configurations.useLocalNotifications ? "YES" : "NO"))
             xml.append(String(format: "<weekFirstDay>%i</weekFirstDay>", configurations.weekFirstDay))
             xml.append(String(format: "<weekLastDay>%i</weekLastDay>", configurations.weekLastDay))
@@ -273,6 +275,8 @@ class AKXMLBuilder
     static func getConfigurations(processor: ESXPProcessor, rootNode: ESXPElement) -> Configurations?
     {
         let automaticBackups = processor.getNodeValue(processor.retrieveSubNode("automaticBackups", node: rootNode), strict: false) ?? ""
+        let cleaningMode = processor.getNodeValue(processor.retrieveSubNode("cleaningMode", node: rootNode), strict: false) ?? ""
+        let showLocalNotificationMessage = processor.getNodeValue(processor.retrieveSubNode("showLocalNotificationMessage", node: rootNode), strict: false) ?? ""
         let useLocalNotifications = processor.getNodeValue(processor.retrieveSubNode("useLocalNotifications", node: rootNode), strict: false) ?? ""
         let weekFirstDay = processor.getNodeValue(processor.retrieveSubNode("weekFirstDay", node: rootNode), strict: false) ?? ""
         let weekLastDay = processor.getNodeValue(processor.retrieveSubNode("weekLastDay", node: rootNode), strict: false) ?? ""
@@ -280,6 +284,8 @@ class AKXMLBuilder
         var newConfigurations = AKConfigurationsInterface()
         // Custom Setters.
         newConfigurations.setAutomaticBackups(automaticBackups)
+        newConfigurations.setCleaningMode(cleaningMode)
+        newConfigurations.setShowLocalNotificationMessage(showLocalNotificationMessage)
         newConfigurations.setUseLocalNotifications(useLocalNotifications)
         newConfigurations.setWeekFirstDay(weekFirstDay)
         newConfigurations.setWeekLastDay(weekLastDay)

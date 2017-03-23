@@ -126,7 +126,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
         
         // Checks
-        if !self.inhibitLocalNotificationMessage {
+        if !self.inhibitLocalNotificationMessage && (DataInterface.getConfigurations()?.showLocalNotificationMessage ?? true) {
             self.manageGrantToLocalNotifications()
         }
         if !self.inhibitiCloudMessage {
@@ -555,8 +555,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                                 Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
                             } },
                         noAction: { (presenterController) -> Void in
-                            // TODO: Add to configurations!
-                            presenterController?.inhibitLocalNotificationMessage = true },
+                            let configurationsMO = DataInterface.getConfigurations()
+                            if var configurations = AKConfigurationsBuilder.from(configurations: configurationsMO) {
+                                configurations.showLocalNotificationMessage = false
+                                DataInterface.addConfigurations(configurations: AKConfigurationsBuilder.to(configurations: configurationsMO, from: configurations))
+                            } },
                         animate: true,
                         completionTask: nil
                     )

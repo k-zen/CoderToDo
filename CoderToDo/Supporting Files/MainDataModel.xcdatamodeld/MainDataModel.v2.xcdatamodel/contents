@@ -8,6 +8,7 @@
     <entity name="Configurations" representedClassName="AKConfigurationsMO" syncable="YES" codeGenerationType="class">
         <attribute name="automaticBackups" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="cleaningMode" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showLocalNotificationMessage" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="useLocalNotifications" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weekFirstDay" optional="YES" attributeType="Integer 16" defaultValueString="2" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weekLastDay" optional="YES" attributeType="Integer 16" defaultValueString="6" usesScalarValueType="YES" syncable="YES"/>
@@ -73,7 +74,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
-        <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="135"/>
+        <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="150"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
         <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>

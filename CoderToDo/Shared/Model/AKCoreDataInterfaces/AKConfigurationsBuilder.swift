@@ -9,6 +9,7 @@ class AKConfigurationsBuilder
             // Mirror.
             configurations.automaticBackups = interface.automaticBackups
             configurations.cleaningMode = interface.cleaningMode
+            configurations.showLocalNotificationMessage = interface.showLocalNotificationMessage
             configurations.useLocalNotifications = interface.useLocalNotifications
             configurations.weekFirstDay = interface.weekFirstDay
             configurations.weekLastDay = interface.weekLastDay
@@ -26,6 +27,7 @@ class AKConfigurationsBuilder
             // Mirror.
             interface.automaticBackups = configurations.automaticBackups
             interface.cleaningMode = configurations.cleaningMode
+            interface.showLocalNotificationMessage = configurations.showLocalNotificationMessage
             interface.useLocalNotifications = configurations.useLocalNotifications
             interface.weekFirstDay = configurations.weekFirstDay
             interface.weekLastDay = configurations.weekLastDay
@@ -42,6 +44,7 @@ class AKConfigurationsBuilder
             // Mirror.
             configurations.automaticBackups = interface.automaticBackups
             configurations.cleaningMode = interface.cleaningMode
+            configurations.showLocalNotificationMessage = interface.showLocalNotificationMessage
             configurations.useLocalNotifications = interface.useLocalNotifications
             configurations.weekFirstDay = interface.weekFirstDay
             configurations.weekLastDay = interface.weekLastDay
@@ -58,6 +61,7 @@ struct AKConfigurationsInterface
     // MARK: Properties
     var automaticBackups: Bool
     var cleaningMode: Bool
+    var showLocalNotificationMessage: Bool
     var useLocalNotifications: Bool
     var weekFirstDay: Int16
     var weekLastDay: Int16
@@ -66,6 +70,7 @@ struct AKConfigurationsInterface
     {
         self.automaticBackups = false
         self.cleaningMode = false
+        self.showLocalNotificationMessage = true
         self.useLocalNotifications = true
         self.weekFirstDay = DaysOfWeek.monday.rawValue
         self.weekLastDay = DaysOfWeek.friday.rawValue
@@ -89,6 +94,16 @@ struct AKConfigurationsInterface
         }
         else {
             self.cleaningMode = asString.toBool() ?? false
+        }
+    }
+    
+    mutating func setShowLocalNotificationMessage(_ asString: String)
+    {
+        if asString.isEmpty {
+            self.showLocalNotificationMessage = true
+        }
+        else {
+            self.showLocalNotificationMessage = asString.toBool() ?? true
         }
     }
     
