@@ -206,7 +206,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         firstBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         firstBadge.textColor = GlobalConstants.AKBadgeColorFg
         firstBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
-        firstBadge.text = String(format: "SR: %.2f%%", DataInterface.computeSRForDay(day: day))
+        firstBadge.text = String(format: "SR: %.2f%%", day.sr)
         firstBadge.textAlignment = .center
         firstBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         firstBadge.layer.masksToBounds = true

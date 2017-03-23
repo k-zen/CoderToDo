@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Minor modification to include parcial percentages from tasks into SR for the day. (2017/03/23)
         * Added one new configuration option for showing local notification's messages. (2017/03/23)
         * Added GoodiesView. (2017/03/23)
         * Corrected minor bug with the BackupView. (2017/03/23)

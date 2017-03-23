@@ -166,7 +166,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         catch {
             // Do nothing, just don't save the name.
         }
-        
         // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
         if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.notApplicable.rawValue {
             self.task.state = TaskStates.done.rawValue
@@ -174,9 +173,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         else {
             self.task.state = self.statusValue.titleLabel?.text
         }
+        // Task's Completion Percentage.
         self.task.completionPercentage = Float(self.changeCP.value)
-        
+        // Note.
         self.task.note = self.notesValue.text
+        // Recompute the day's SR.
+        _ = DataInterface.computeSRForDay(day: (self.task.category?.day)!)
     }
     
     // MARK: UITextViewDelegate Implementation

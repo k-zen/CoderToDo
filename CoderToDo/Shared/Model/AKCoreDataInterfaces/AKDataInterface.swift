@@ -371,7 +371,7 @@ class AKDataInterface
         
         if let days = project.days?.allObjects as? [Day] {
             for day in days {
-                osr += (DataInterface.computeSRForDay(day: day) / 100.0)
+                osr += (day.sr / 100.0)
                 counter += 1
             }
         }
@@ -488,8 +488,8 @@ class AKDataInterface
             for category in categories {
                 if let tasks = category.tasks?.allObjects as? [Task] {
                     for task in tasks {
-                        if task.state != TaskStates.dilate.rawValue && task.state != TaskStates.notApplicable.rawValue {
-                            sr += (task.completionPercentage / 100.0)
+                        if task.state == TaskStates.done.rawValue || task.state == TaskStates.pending.rawValue {
+                            sr += (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0)
                             counter += 1
                         }
                     }
