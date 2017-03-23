@@ -536,6 +536,11 @@ enum DaysOfWeek: Int16 {
     case saturday = 7
 }
 
+enum ComponentMode {
+    case enabled
+    case disabled
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -1103,5 +1108,19 @@ class UtilityFunctions
         UIGraphicsEndImageContext()
         
         return image!
+    }
+    
+    func AKToggleButtonMode(button: UIButton, mode: ComponentMode)
+    {
+        switch mode {
+        case .enabled:
+            button.isEnabled = true
+            button.backgroundColor = Cons.AKEnabledButtonBg
+            break
+        case .disabled:
+            button.isEnabled = false
+            button.backgroundColor = Cons.AKDisabledButtonBg
+            break
+        }
     }
 }

@@ -13,8 +13,7 @@ class AKBackupViewController: AKCustomViewController
     // MARK: Actions
     @IBAction func backupNow(_ sender: Any)
     {
-        self.backupNow.isEnabled = false
-        self.backupNow.backgroundColor = Cons.AKDisabledButtonBg
+        Func.AKToggleButtonMode(button: self.backupNow, mode: .disabled)
         
         // Check the size of this device's data. IF its smaller then alert the user.
         // Load last backup info from iCloud.
@@ -41,15 +40,16 @@ class AKBackupViewController: AKCustomViewController
                                                 presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                                                 presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                                                 
-                                                // Enable the restore from backup button, ONLY if there is
-                                                // at least 1 record to restore from.
-                                                presenterController.backupNow.isEnabled = true
-                                                presenterController.backupNow.backgroundColor = Cons.AKEnabledButtonBg
+                                                Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
                                             }
                                     })
                                     
                                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                                 noAction: { (presenterController) -> Void in
+                                    if let presenterController = presenterController as? AKBackupViewController {
+                                        Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
+                                    }
+                                    
                                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                                 animate: true,
                                 completionTask: nil
@@ -70,10 +70,7 @@ class AKBackupViewController: AKCustomViewController
                                         presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                                         presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                                         
-                                        // Enable the restore from backup button, ONLY if there is
-                                        // at least 1 record to restore from.
-                                        presenterController.backupNow.isEnabled = true
-                                        presenterController.backupNow.backgroundColor = Cons.AKEnabledButtonBg
+                                        Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
                                     }
                             })
                         }
@@ -84,8 +81,7 @@ class AKBackupViewController: AKCustomViewController
     
     @IBAction func restoreNow(_ sender: Any)
     {
-        self.restoreNow.isEnabled = false
-        self.restoreNow.backgroundColor = Cons.AKDisabledButtonBg
+        Func.AKToggleButtonMode(button: self.restoreNow, mode: .disabled)
         
         if !DataInterface.isProjectEmpty() {
             self.showContinueMessage(
@@ -98,8 +94,7 @@ class AKBackupViewController: AKCustomViewController
                             presenterController: presenterController,
                             completionTask: { (presenterController, backupInfo) -> Void in
                                 if let presenterController = presenterController as? AKBackupViewController, let _ = backupInfo {
-                                    presenterController.restoreNow.isEnabled = true
-                                    presenterController.restoreNow.backgroundColor = Cons.AKEnabledButtonBg
+                                    Func.AKToggleButtonMode(button: presenterController.restoreNow, mode: .enabled)
                                     
                                     presenterController.showMessage(
                                         message: String(format: "Hooray %@, you have successfully restored your data from iCloud!", DataInterface.getUsername()),
@@ -112,8 +107,7 @@ class AKBackupViewController: AKCustomViewController
                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKBackupViewController {
-                        presenterController.restoreNow.isEnabled = true
-                        presenterController.restoreNow.backgroundColor = Cons.AKEnabledButtonBg
+                        Func.AKToggleButtonMode(button: presenterController.restoreNow, mode: .enabled)
                     }
                     
                     presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
@@ -148,10 +142,8 @@ class AKBackupViewController: AKCustomViewController
         super.viewDidAppear(animated)
         
         // Disable buttons.
-        self.backupNow.isEnabled = false
-        self.backupNow.backgroundColor = Cons.AKDisabledButtonBg
-        self.restoreNow.isEnabled = false
-        self.restoreNow.backgroundColor = Cons.AKDisabledButtonBg
+        Func.AKToggleButtonMode(button: self.backupNow, mode: .disabled)
+        Func.AKToggleButtonMode(button: self.restoreNow, mode: .disabled)
     }
     
     override func viewDidLayoutSubviews()
@@ -169,8 +161,7 @@ class AKBackupViewController: AKCustomViewController
         super.inhibitiCloudMessage = false
         super.iCloudAccessAvailableAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKBackupViewController {
-                presenterController.backupNow.isEnabled = true
-                presenterController.backupNow.backgroundColor = Cons.AKEnabledButtonBg
+                Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
                 
                 // Load last backup info from iCloud.
                 AKCloudKitController.getLastBackupInfo(
@@ -186,10 +177,9 @@ class AKBackupViewController: AKCustomViewController
                             presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
                             presenterController.dataHashValue.text = backupInfo.md5 ?? ""
                             
-                            // Enable the restore from backup button, ONLY if there is
+                            // Enable restore button, ONLY if there is
                             // at least 1 record to restore from.
-                            presenterController.restoreNow.isEnabled = true
-                            presenterController.restoreNow.backgroundColor = Cons.AKEnabledButtonBg
+                            Func.AKToggleButtonMode(button: presenterController.restoreNow, mode: .enabled)
                         } }
                 )
             }
