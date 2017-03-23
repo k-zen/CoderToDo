@@ -233,6 +233,11 @@ struct GlobalConstants
     static let AKViewProjectBucketSegue = "ViewProjectBucketSegue"
     static let AKViewUserConfigurationSegue = "ViewUserConfigurationSegue"
     static let AKViewWorkingHoursAndDaysSegue = "ViewWorkingHoursAndDaysSegue"
+    static let AKViewProjectNameSegue = "ViewProjectNameSegue"
+    static let AKViewProjectTimesSegue = "ViewProjectTimesSegue"
+    static let AKViewProjectNotificationsSegue = "ViewProjectNotificationsSegue"
+    static let AKViewUserDefinedCategoriesSegue = "ViewUserDefinedCategoriesSegue"
+    static let AKViewGoodiesSegue = "ViewGoodiesSegue"
     // Notifications
     static let AKStartingTimeNotificationName = "StartingTimeNotification"
     static let AKClosingTimeNotificationName = "ClosingTimeNotification"

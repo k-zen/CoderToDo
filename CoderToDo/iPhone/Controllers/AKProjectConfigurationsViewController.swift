@@ -10,7 +10,7 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     }
     
     // MARK: Properties
-    var configurationsTableHeaders = ["Name", "Times", "Notifications", "User Defined Categories", "Goodies"]
+    var configurationsTableHeaders = ["Name", "Times", "Notifications", "User Defined Categories"]
     var project: Project!
     
     // MARK: Outlets
@@ -21,6 +21,19 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     {
         super.viewDidLoad()
         self.customSetup()
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
+    {
+        switch identifier {
+        case GlobalConstants.AKViewProjectNameSegue,
+             GlobalConstants.AKViewProjectTimesSegue,
+             GlobalConstants.AKViewProjectNotificationsSegue,
+             GlobalConstants.AKViewUserDefinedCategoriesSegue:
+            return true
+        default:
+            return false
+        }
     }
     
     // MARK: UITableViewDataSource Implementation
@@ -72,7 +85,22 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        // TODO
+        switch (indexPath as NSIndexPath).section {
+        case 0:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNameSegue, sender: self)
+            break
+        case 1:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectTimesSegue, sender: self)
+            break
+        case 2:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNotificationsSegue, sender: self)
+            break
+        case 3:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewUserDefinedCategoriesSegue, sender: self)
+            break
+        default:
+            break
+        }
     }
     
     // MARK: Miscellaneous

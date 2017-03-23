@@ -341,15 +341,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         )
                         
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    } },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                    } },
                 animate: true,
                 completionTask: nil
             )

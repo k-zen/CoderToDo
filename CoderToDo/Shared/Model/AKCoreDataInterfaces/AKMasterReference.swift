@@ -71,6 +71,7 @@ class AKMasterReference: NSObject
         data.appendFormat("=>   CONFIGURATIONS:\n")
         if let configurations = DataInterface.getConfigurations() {
             data.appendFormat("=>       AUTOMATIC BACKUPS: %@\n", configurations.automaticBackups ? "YES" : "NO")
+            data.appendFormat("=>       CLEANING MODE (TRANSIENT): %@\n", configurations.cleaningMode ? "YES" : "NO")
             data.appendFormat("=>       USE LOCAL NOTIFICATIONS: %@\n", configurations.useLocalNotifications ? "YES" : "NO")
             data.appendFormat("=>       WEEK FIRST DAY: %@\n", Func.AKGetDayOfWeekAsName(dayOfWeek: configurations.weekFirstDay) ?? "")
             data.appendFormat("=>       WEEK LAST DAY: %@\n", Func.AKGetDayOfWeekAsName(dayOfWeek: configurations.weekLastDay) ?? "")

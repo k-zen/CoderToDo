@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/03/31)
+        * Added GoodiesView. (2017/03/23)
         * Corrected minor bug with the BackupView. (2017/03/23)
         * Added support for limited editing on a new task. (2017/03/23)
         * Corrected minor bug with editing mode for tasks during FirstDay. (2017/03/23)

@@ -47,8 +47,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                                 // TODO: Do something!
                             }
                         } },
-                    noAction: { (presenterController) -> Void in
-                        presenterController?.dismissView(executeDismissTask: true) },
+                    noAction: { (presenterController) -> Void in presenterController?.dismissView(executeDismissTask: true) },
                     animate: true,
                     completionTask: nil
                 )

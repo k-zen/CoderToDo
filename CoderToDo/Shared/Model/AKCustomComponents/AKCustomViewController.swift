@@ -337,8 +337,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func showContinueMessage(message: String,
                              yesButtonTitle: String = "Yes",
                              noButtonTitle: String = "No",
-                             yesAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
-                             noAction: @escaping (_ presenterController: AKCustomViewController?) -> Void,
+                             yesAction: ((_ presenterController: AKCustomViewController?) -> Void)?,
+                             noAction: ((_ presenterController: AKCustomViewController?) -> Void)?,
                              animate: Bool,
                              completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
@@ -551,16 +551,12 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
-                            presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
-                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                    Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
-                                } }
-                            ) },
+                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                            } },
                         noAction: { (presenterController) -> Void in
-                            presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
-                                // TODO: Make this setting persistent.
-                                presenterController?.inhibitLocalNotificationMessage = true }
-                            ) },
+                            // TODO: Add to configurations!
+                            presenterController?.inhibitLocalNotificationMessage = true },
                         animate: true,
                         completionTask: nil
                     )
@@ -591,12 +587,10 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
-                            presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
-                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                    Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
-                                } }
-                            ) },
-                        noAction: { (presenterController) -> Void in presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                            } },
+                        noAction: nil,
                         animate: true,
                         completionTask: nil
                     )

@@ -42,15 +42,11 @@ class AKBackupViewController: AKCustomViewController
                                                 
                                                 Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
                                             }
-                                    })
-                                    
-                                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                                    }) },
                                 noAction: { (presenterController) -> Void in
                                     if let presenterController = presenterController as? AKBackupViewController {
                                         Func.AKToggleButtonMode(button: presenterController.backupNow, mode: .enabled)
-                                    }
-                                    
-                                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                                    } },
                                 animate: true,
                                 completionTask: nil
                             )
@@ -102,15 +98,11 @@ class AKBackupViewController: AKCustomViewController
                                         completionTask: nil
                                     )
                                 } })
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                    } },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKBackupViewController {
                         Func.AKToggleButtonMode(button: presenterController.restoreNow, mode: .enabled)
-                    }
-                    
-                    presenterController?.hideContinueMessage(animate: true, completionTask: nil) },
+                    } },
                 animate: true,
                 completionTask: nil
             )

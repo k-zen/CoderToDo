@@ -9,8 +9,8 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     }
     
     // MARK: Properties
-    var yesAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: YES HAS BEEN PRESSED!") }
-    var noAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: NO HAS BEEN PRESSED!") }
+    var yesAction: ((AKCustomViewController?) -> Void)? = nil
+    var noAction: ((AKCustomViewController?) -> Void)? = nil
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
@@ -21,20 +21,22 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     // MARK: Actions
     @IBAction func yes(_ sender: Any)
     {
-        self.controller?.hideMessage(
-            animate: true,
-            completionTask: nil
-        )
-        self.yesAction(self.controller)
+        // Default Action!
+        self.controller?.hideContinueMessage(animate: true, completionTask: nil)
+        // Custom Action.
+        if self.yesAction != nil {
+            self.yesAction!(self.controller)
+        }
     }
     
     @IBAction func no(_ sender: Any)
     {
-        self.controller?.hideMessage(
-            animate: true,
-            completionTask: nil
-        )
-        self.noAction(self.controller)
+        // Default Action!
+        self.controller?.hideContinueMessage(animate: true, completionTask: nil)
+        // Custom Action.
+        if self.noAction != nil {
+            self.noAction!(self.controller)
+        }
     }
     
     // MARK: UIView Overriding

@@ -36,11 +36,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                             )
                             // Toggle to not editable mode.
                             presenterController.markTask(mode: .notEditable)
-                        }
-                        
-                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                    noAction: { (presenterController) -> Void in
-                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                        } },
+                    noAction: nil,
                     animate: true,
                     completionTask: nil
                 )
@@ -111,11 +108,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                             )
                             // Toggle to not editable mode.
                             presenterController.markTask(mode: .notEditable)
-                        }
-                        
-                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
-                    noAction: { (presenterController) -> Void in
-                        presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in }) },
+                        } },
+                    noAction: nil,
                     animate: true,
                     completionTask: nil
                 )

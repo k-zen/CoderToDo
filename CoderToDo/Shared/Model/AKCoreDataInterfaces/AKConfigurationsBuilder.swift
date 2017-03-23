@@ -8,6 +8,7 @@ class AKConfigurationsBuilder
             let configurations = Configurations(context: mr.getMOC())
             // Mirror.
             configurations.automaticBackups = interface.automaticBackups
+            configurations.cleaningMode = interface.cleaningMode
             configurations.useLocalNotifications = interface.useLocalNotifications
             configurations.weekFirstDay = interface.weekFirstDay
             configurations.weekLastDay = interface.weekLastDay
@@ -24,6 +25,7 @@ class AKConfigurationsBuilder
             var interface = AKConfigurationsInterface()
             // Mirror.
             interface.automaticBackups = configurations.automaticBackups
+            interface.cleaningMode = configurations.cleaningMode
             interface.useLocalNotifications = configurations.useLocalNotifications
             interface.weekFirstDay = configurations.weekFirstDay
             interface.weekLastDay = configurations.weekLastDay
@@ -39,6 +41,7 @@ class AKConfigurationsBuilder
         if let configurations = configurations {
             // Mirror.
             configurations.automaticBackups = interface.automaticBackups
+            configurations.cleaningMode = interface.cleaningMode
             configurations.useLocalNotifications = interface.useLocalNotifications
             configurations.weekFirstDay = interface.weekFirstDay
             configurations.weekLastDay = interface.weekLastDay
@@ -54,6 +57,7 @@ struct AKConfigurationsInterface
 {
     // MARK: Properties
     var automaticBackups: Bool
+    var cleaningMode: Bool
     var useLocalNotifications: Bool
     var weekFirstDay: Int16
     var weekLastDay: Int16
@@ -61,6 +65,7 @@ struct AKConfigurationsInterface
     init()
     {
         self.automaticBackups = false
+        self.cleaningMode = false
         self.useLocalNotifications = true
         self.weekFirstDay = DaysOfWeek.monday.rawValue
         self.weekLastDay = DaysOfWeek.friday.rawValue
@@ -74,6 +79,16 @@ struct AKConfigurationsInterface
         }
         else {
             self.automaticBackups = asString.toBool() ?? false
+        }
+    }
+    
+    mutating func setCleaningMode(_ asString: String)
+    {
+        if asString.isEmpty {
+            self.cleaningMode = false
+        }
+        else {
+            self.cleaningMode = asString.toBool() ?? false
         }
     }
     

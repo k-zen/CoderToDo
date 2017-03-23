@@ -113,37 +113,42 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         super.viewWillAppear(animated)
         
         // Checks:
-        let projectStatus = DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!)
-        if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
-            // Special case when we are allowed to change the status from DILATE to PENDING
-            // during the aceptance period for the next day ONLY!
-            if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
-                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
-                self.markTask(mode: .limitedEditing)
-            }
-            else {
-                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
-                self.markTask(mode: .notEditable)
-            }
-        }
-        else { // If the day is CURRENT but NOT open then always close.
-            if projectStatus != .open && projectStatus != .firstDay {
-                NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
-                self.markTask(mode: .notEditable)
-            }
-        }
+        var skipChecks = 0
+        skipChecks += (DataInterface.getConfigurations()?.cleaningMode ?? false) ? 1 : 0
         
-        // Failsafe, tasks with these states will ALWAYS be marked as closed!
-        // + task marked as "DONE"
-        // + task marked as "NOT APPLICABLE".
-        switch self.task.state! {
-        case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
-            NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
-            self.markTask(mode: .notEditable)
-            break
-        default:
-            // Ignore
-            break
+        if skipChecks == 0 {
+            let projectStatus = DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!)
+            if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
+                // Special case when we are allowed to change the status from DILATE to PENDING
+                // during the aceptance period for the next day ONLY!
+                if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
+                    NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
+                    self.markTask(mode: .limitedEditing)
+                }
+                else {
+                    NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
+                    self.markTask(mode: .notEditable)
+                }
+            }
+            else { // If the day is CURRENT but NOT open then always close.
+                if projectStatus != .open && projectStatus != .firstDay {
+                    NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
+                    self.markTask(mode: .notEditable)
+                }
+            }
+            
+            // Failsafe, tasks with these states will ALWAYS be marked as closed!
+            // + task marked as "DONE"
+            // + task marked as "NOT APPLICABLE".
+            switch self.task.state! {
+            case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
+                NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
+                self.markTask(mode: .notEditable)
+                break
+            default:
+                // Ignore
+                break
+            }
         }
     }
     

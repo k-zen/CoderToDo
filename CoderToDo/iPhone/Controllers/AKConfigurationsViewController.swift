@@ -10,7 +10,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     }
     
     // MARK: Properties
-    var configurationsTableHeaders = ["User Configuration", "Working Hours & Days", "Backup"]
+    var configurationsTableHeaders = ["User Configuration", "Working Hours & Days", "Backup", "Goodies"]
     
     // MARK: Outlets
     @IBOutlet weak var configurationsTable: UITableView!
@@ -25,11 +25,10 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
         switch identifier {
-        case GlobalConstants.AKViewBackupSegue:
-            return true
-        case GlobalConstants.AKViewUserConfigurationSegue:
-            return true
-        case GlobalConstants.AKViewWorkingHoursAndDaysSegue:
+        case GlobalConstants.AKViewUserConfigurationSegue,
+             GlobalConstants.AKViewWorkingHoursAndDaysSegue,
+             GlobalConstants.AKViewBackupSegue,
+             GlobalConstants.AKViewGoodiesSegue:
             return true
         default:
             return false
@@ -94,6 +93,9 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
             break
         case 2:
             self.performSegue(withIdentifier: GlobalConstants.AKViewBackupSegue, sender: self)
+            break
+        case 3:
+            self.performSegue(withIdentifier: GlobalConstants.AKViewGoodiesSegue, sender: self)
             break
         default:
             break
