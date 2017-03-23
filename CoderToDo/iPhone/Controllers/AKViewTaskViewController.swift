@@ -119,7 +119,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             // during the aceptance period for the next day ONLY!
             if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
                 NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
-                self.markTask(mode: .canChangeState)
+                self.markTask(mode: .limitedEditing)
             }
             else {
                 NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
@@ -273,13 +273,32 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.changeCP.isEnabled = false
             self.changeCategory.isEnabled = false
             break
+        case .limitedEditing:
+            self.taskNameValue.isEditable = true
+            self.statusValue.isEnabled = true
+            self.changeCP.isEnabled = false
+            self.changeCategory.isEnabled = true
+            break
         }
     }
     
     func markTask(mode: TaskMode)
     {
         self.taskState.text = mode.rawValue
-        self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        switch mode {
+        case .editable:
+            self.taskState.backgroundColor = GlobalConstants.AKGreenForWhiteFg
+            break
+        case .notEditable:
+            self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
+            break
+        case .canChangeState:
+            self.taskState.backgroundColor = GlobalConstants.AKYellowForWhiteFg
+            break
+        case .limitedEditing:
+            self.taskState.backgroundColor = GlobalConstants.AKBlueForWhiteFg
+            break
+        }
         
         self.editMode = mode
         self.toggleEditMode(mode: mode)
