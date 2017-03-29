@@ -16,6 +16,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
+    @IBOutlet weak var osrChartContainer: UIView!
     @IBOutlet weak var menu: UIBarButtonItem!
     
     // MARK: Actions
