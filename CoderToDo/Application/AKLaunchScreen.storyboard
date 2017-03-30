@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,21 +53,9 @@
                                     <constraint firstItem="O7c-Ul-Wjd" firstAttribute="top" secondItem="aVA-jO-AB6" secondAttribute="top" constant="8" id="sIP-AU-J3y"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="αϰ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-1L-OCV" userLabel="Message">
-                                <rect key="frame" x="319" y="617" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="5XY-7c-Jxr"/>
-                                    <constraint firstAttribute="height" constant="40" id="oOX-De-qEX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="22"/>
-                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="hW6-1L-OCV" secondAttribute="bottom" constant="10" id="Gay-jz-r6L"/>
-                            <constraint firstItem="hW6-1L-OCV" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="HSx-Yd-1vK"/>
                             <constraint firstItem="aVA-jO-AB6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="POI-3k-q97"/>
                             <constraint firstItem="aVA-jO-AB6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="Y7B-ld-Fq8"/>
                         </constraints>

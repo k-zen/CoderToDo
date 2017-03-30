@@ -48,6 +48,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrow" destination="ZCe-l2-vYg" id="iKo-t9-0yG"/>
                 <outlet property="mainContainer" destination="Kk3-mO-zfi" id="Cm0-nT-GLJ"/>
                 <outlet property="title" destination="qtG-vr-Awm" id="BRp-88-D3u"/>
             </connections>

@@ -23,6 +23,30 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
         self.customSetup()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case GlobalConstants.AKViewProjectNotificationsSegue:
+                if let destination = segue.destination as? AKProjectNotificationsViewController {
+                    if let project = sender as? Project {
+                        destination.project = project
+                    }
+                }
+                break
+            case GlobalConstants.AKViewUserDefinedCategoriesSegue:
+                if let destination = segue.destination as? AKUserDefinedCategoriesViewController {
+                    if let project = sender as? Project {
+                        destination.project = project
+                    }
+                }
+                break
+            default:
+                break
+            }
+        }
+    }
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
         switch identifier {
@@ -87,16 +111,16 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     {
         switch (indexPath as NSIndexPath).section {
         case 0:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNameSegue, sender: self)
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNameSegue, sender: self.project)
             break
         case 1:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectTimesSegue, sender: self)
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectTimesSegue, sender: self.project)
             break
         case 2:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNotificationsSegue, sender: self)
+            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNotificationsSegue, sender: self.project)
             break
         case 3:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewUserDefinedCategoriesSegue, sender: self)
+            self.performSegue(withIdentifier: GlobalConstants.AKViewUserDefinedCategoriesSegue, sender: self.project)
             break
         default:
             break

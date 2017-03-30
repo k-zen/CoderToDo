@@ -5,6 +5,7 @@ class AKConfigurationsTableViewCell: UITableViewCell
     // MARK: Outlets
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var arrow: UILabel!
     
     // MARK: UITableViewCell Overriding
     override func awakeFromNib()
