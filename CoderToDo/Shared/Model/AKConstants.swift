@@ -533,6 +533,7 @@ enum ExecutionMode {
 }
 
 enum DaysOfWeek: Int16 {
+    case invalid = 0
     case sunday = 1
     case monday = 2
     case tuesday = 3

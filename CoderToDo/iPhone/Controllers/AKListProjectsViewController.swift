@@ -19,6 +19,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBOutlet weak var projectsTable: UITableView!
     @IBOutlet weak var titleMsg: UILabel!
     @IBOutlet weak var secondTitleMsg: UILabel!
+    @IBOutlet weak var chartContainer: UIView!
+    @IBOutlet weak var mostProductiveDay: UILabel!
     @IBOutlet weak var osrChartContainer: BarChartView!
     @IBOutlet weak var menu: UIBarButtonItem!
     
@@ -64,7 +66,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         Func.AKReloadTableWithAnimation(tableView: self.projectsTable)
         // Hide the chart if there are not data.
         self.loadChart()
-        self.osrChartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
+        self.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -362,7 +364,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                         // Hide the chart if there are not data.
-                        presenterController.osrChartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
+                        presenterController.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
                     } },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
@@ -526,18 +528,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             let dataEntry = BarChartDataEntry(x: Double(key), y: Double(value))
             dataEntries.append(dataEntry)
         }
+        
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
         chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
         chartDataSet.drawValuesEnabled = false
+        chartDataSet.colors = [GlobalConstants.AKRedForBlackFg]
         
         // Configure the chart.
-        self.osrChartContainer.noDataText = ""
-        self.osrChartContainer.chartDescription?.text = ""
-        chartDataSet.colors = [GlobalConstants.AKCoderToDoGray4]
         self.osrChartContainer.xAxis.labelPosition = .bottom
-        self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
-        
         self.osrChartContainer.xAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         self.osrChartContainer.xAxis.labelTextColor = GlobalConstants.AKDefaultFg
         self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultFg
@@ -565,11 +564,19 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
         self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.isUserInteractionEnabled = false
+        self.osrChartContainer.noDataText = ""
+        self.osrChartContainer.chartDescription?.text = ""
+        self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
         
         // Load chart.
         let chartData = BarChartData(dataSet: chartDataSet)
+        
         self.osrChartContainer.data = chartData
+        
+        self.mostProductiveDay.text = String(
+            format: "%@ is your most productive day!",
+            Func.AKGetDayOfWeekAsName(dayOfWeek: DataInterface.mostProductiveDay().rawValue)!
+        )
     }
 }
 

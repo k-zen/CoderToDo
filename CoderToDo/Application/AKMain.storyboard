@@ -50,19 +50,37 @@
                                     <constraint firstItem="KdT-aq-IQ9" firstAttribute="leading" secondItem="p9P-Uh-mGW" secondAttribute="leading" id="odl-jF-vbr"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-pm-Arm" userLabel="OSR_Chart_Container" customClass="BarChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6s-UY-Ble" userLabel="Chart_Container">
                                 <rect key="frame" x="0.0" y="282" width="375" height="272"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgD-Wr-PEr" userLabel="Most_Productive">
+                                        <rect key="frame" x="8" y="0.0" width="359" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-pm-Arm" userLabel="OSR_Chart_Container" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="8" y="32" width="359" height="232"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="L6s-UY-Ble" secondAttribute="leading" constant="8" id="0lC-xu-wN3"/>
+                                    <constraint firstAttribute="bottom" secondItem="MI2-pm-Arm" secondAttribute="bottom" constant="8" id="c67-j8-Vgl"/>
+                                    <constraint firstItem="MI2-pm-Arm" firstAttribute="top" secondItem="L6s-UY-Ble" secondAttribute="top" constant="32" id="ja8-2r-7hT"/>
+                                    <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" constant="8" id="oC9-EM-jS7"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.11764705882352941" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MI2-pm-Arm" firstAttribute="height" secondItem="p9P-Uh-mGW" secondAttribute="height" id="0x8-Sk-eDI"/>
-                            <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" id="2Wz-Cl-FPL"/>
                             <constraint firstItem="p9P-Uh-mGW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="EkU-FM-rL4"/>
-                            <constraint firstItem="MI2-pm-Arm" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="bottom" constant="10" id="FJp-4r-0P2"/>
-                            <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d6u-aJ-vmD"/>
+                            <constraint firstAttribute="trailing" secondItem="L6s-UY-Ble" secondAttribute="trailing" id="H7O-AM-9Hc"/>
+                            <constraint firstItem="L6s-UY-Ble" firstAttribute="height" secondItem="p9P-Uh-mGW" secondAttribute="height" id="Mwg-p0-JYr"/>
+                            <constraint firstItem="L6s-UY-Ble" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="bottom" constant="10" id="XNr-eG-xK8"/>
+                            <constraint firstItem="L6s-UY-Ble" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fmZ-Nc-enS"/>
                             <constraint firstItem="p9P-Uh-mGW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lHJ-n1-xPE"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MI2-pm-Arm" secondAttribute="bottom" id="nuK-oB-AWe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="L6s-UY-Ble" secondAttribute="bottom" id="rBV-xT-4bF"/>
                             <constraint firstAttribute="trailing" secondItem="p9P-Uh-mGW" secondAttribute="trailing" id="vBq-4z-CC5"/>
                         </constraints>
                     </view>
@@ -76,7 +94,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chartContainer" destination="L6s-UY-Ble" id="NXP-QA-jMa"/>
                         <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
+                        <outlet property="mostProductiveDay" destination="tgD-Wr-PEr" id="zyM-5c-g2z"/>
                         <outlet property="osrChartContainer" destination="MI2-pm-Arm" id="Mdo-rS-ccX"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
                         <outlet property="secondTitleMsg" destination="zC9-d6-LWL" id="acU-Z4-0If"/>
