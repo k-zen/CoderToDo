@@ -567,6 +567,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.osrChartContainer.noDataText = ""
         self.osrChartContainer.chartDescription?.text = ""
         self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
+        self.osrChartContainer.isUserInteractionEnabled = false
         
         // Load chart.
         let chartData = BarChartData(dataSet: chartDataSet)
