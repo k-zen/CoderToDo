@@ -16,6 +16,7 @@
     </entity>
     <entity name="Day" representedClassName="AKDayMO" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="gmtOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="day" inverseEntity="Category" syncable="YES"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="days" inverseEntity="Project" syncable="YES"/>
@@ -75,7 +76,7 @@
     <elements>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="150"/>
-        <element name="Day" positionX="-837" positionY="-756" width="128" height="134"/>
+        <element name="Day" positionX="-837" positionY="-756" width="128" height="149"/>
         <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
         <element name="Project" positionX="-1098" positionY="-747" width="128" height="251"/>
