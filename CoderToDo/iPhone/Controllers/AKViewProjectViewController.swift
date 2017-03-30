@@ -161,8 +161,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let padding = CGFloat(8.0)
         let firstBadgeSizeWidth = CGFloat(70.0)
         let firstBadgeSizeHeight = CGFloat(21.0)
-        let secondBadgeSizeWidth = CGFloat(60.0)
+        let secondBadgeSizeWidth = CGFloat(70.0)
         let secondBadgeSizeHeight = CGFloat(21.0)
+        let thirdBadgeSizeWidth = CGFloat(60.0)
+        let thirdBadgeSizeHeight = CGFloat(21.0)
         let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
@@ -177,7 +179,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let title = UILabel(frame: CGRect(
             x: padding * 2.0,
             y: 0.0,
-            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
+            width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - thirdBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
         title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 20.0)
@@ -189,7 +191,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // title.layer.borderWidth = 1.0
         
         let firstBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
+            x: tableWidth - padding - firstBadgeSizeWidth - secondBadgeSizeWidth - thirdBadgeSizeWidth - (paddingBetweenBadges * 2),
             y: 0.0,
             width: firstBadgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
@@ -218,7 +220,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         firstBadgeContainer.addSubview(firstBadge)
         
         let secondBadgeContainer = UIView(frame: CGRect(
-            x: tableWidth - padding - secondBadgeSizeWidth,
+            x: tableWidth - padding - secondBadgeSizeWidth - thirdBadgeSizeWidth - paddingBetweenBadges,
             y: 0.0,
             width: secondBadgeSizeWidth,
             height: LocalConstants.AKHeaderHeight)
@@ -235,18 +237,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         )
         secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         secondBadge.textColor = GlobalConstants.AKBadgeColorFg
-        if isTomorrow {
-            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .accepting)
-            secondBadge.text = String(format: "%@", ProjectStatus.accepting.rawValue)
-        }
-        else if isToday {
-            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
-            secondBadge.text = String(format: "%@", projectStatus.rawValue)
-        }
-        else {
-            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .closed)
-            secondBadge.text = String(format: "%@", ProjectStatus.closed.rawValue)
-        }
+        secondBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        secondBadge.text = String(format: "Pending: %i", DataInterface.countDayPendingTasks(day: day))
         secondBadge.textAlignment = .center
         secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         secondBadge.layer.masksToBounds = true
@@ -256,9 +248,49 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         secondBadgeContainer.addSubview(secondBadge)
         
+        let thirdBadgeContainer = UIView(frame: CGRect(
+            x: tableWidth - padding - thirdBadgeSizeWidth,
+            y: 0.0,
+            width: thirdBadgeSizeWidth,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        // ### DEBUG
+        // thirdBadgeContainer.layer.borderColor = UIColor.white.cgColor
+        // thirdBadgeContainer.layer.borderWidth = 1.0
+        
+        let thirdBadge = UILabel(frame: CGRect(
+            x: thirdBadgeContainer.frame.width - thirdBadgeSizeWidth,
+            y: (LocalConstants.AKHeaderHeight - thirdBadgeSizeHeight) / 2.0,
+            width: thirdBadgeSizeWidth,
+            height: thirdBadgeSizeHeight)
+        )
+        thirdBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+        thirdBadge.textColor = GlobalConstants.AKBadgeColorFg
+        if isTomorrow {
+            thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .accepting)
+            thirdBadge.text = String(format: "%@", ProjectStatus.accepting.rawValue)
+        }
+        else if isToday {
+            thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
+            thirdBadge.text = String(format: "%@", projectStatus.rawValue)
+        }
+        else {
+            thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .closed)
+            thirdBadge.text = String(format: "%@", ProjectStatus.closed.rawValue)
+        }
+        thirdBadge.textAlignment = .center
+        thirdBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        thirdBadge.layer.masksToBounds = true
+        // ### DEBUG
+        // thirdBadge.layer.borderColor = UIColor.white.cgColor
+        // thirdBadge.layer.borderWidth = 1.0
+        
+        thirdBadgeContainer.addSubview(thirdBadge)
+        
         headerCell.addSubview(title)
         headerCell.addSubview(firstBadgeContainer)
         headerCell.addSubview(secondBadgeContainer)
+        headerCell.addSubview(thirdBadgeContainer)
         
         return headerCell
     }

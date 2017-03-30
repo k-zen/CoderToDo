@@ -602,6 +602,25 @@ class AKDataInterface
         
         return day.sr
     }
+    
+    static func countDayPendingTasks(day: Day) -> Int
+    {
+        var counter = 0
+        
+        if let categories = day.categories?.allObjects as? [Category] {
+            for category in categories { // Foreach day iterate categories.
+                if let tasks = category.tasks?.allObjects as? [Task] {
+                    for task in tasks { // Count pending tasks in each category.
+                        if task.state == TaskStates.pending.rawValue {
+                            counter += 1
+                        }
+                    }
+                }
+            }
+        }
+        
+        return counter
+    }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
     static func getCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Category]
