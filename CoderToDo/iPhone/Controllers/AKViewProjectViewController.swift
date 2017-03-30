@@ -153,6 +153,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[section]
+        let isTomorrow = DataInterface.isDayTomorrow(day: day)
         let isToday = DataInterface.isDayToday(day: day)
         let projectStatus = DataInterface.getProjectStatus(project: day.project!)
         
@@ -234,7 +235,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         )
         secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
         secondBadge.textColor = GlobalConstants.AKBadgeColorFg
-        if isToday {
+        if isTomorrow {
+            secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .accepting)
+            secondBadge.text = String(format: "%@", ProjectStatus.accepting.rawValue)
+        }
+        else if isToday {
             secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
             secondBadge.text = String(format: "%@", projectStatus.rawValue)
         }
