@@ -189,7 +189,7 @@ class AKDataInterface
         return counter
     }
     
-    static func getProjectStatus(project: Project) -> ProjectStatus
+    static func getProjectStatus(project: Project, useToleranceForAccepting: Bool = false) -> ProjectStatus
     {
         if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date, let creationTime = project.creationDate as? Date {
             let now = Date()
@@ -218,7 +218,7 @@ class AKDataInterface
             // ###### FIRST DAY
             
             // ###### NORMAL DAY
-            if nowHour >= closingTimeHour && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
+            if nowHour >= closingTimeHour + (useToleranceForAccepting ? Int(project.closingTimeTolerance) : 0) && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
                 return .accepting
             }
             else if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {

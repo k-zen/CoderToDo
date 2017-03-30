@@ -129,6 +129,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Project Configurations" id="A06-HX-6Sm">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="fMT-LW-uHL"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="configurationsTable" destination="Jrp-nE-8dt" id="VwA-WR-Fo0"/>
                         <segue destination="lcs-U3-K9j" kind="show" identifier="ViewProjectNameSegue" id="Adq-cK-TUa"/>
