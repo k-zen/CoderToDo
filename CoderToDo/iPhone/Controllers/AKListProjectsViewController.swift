@@ -543,6 +543,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultFg
         self.osrChartContainer.xAxis.gridLineCap = .square
         self.osrChartContainer.xAxis.gridLineDashLengths = [2, 2]
+        self.osrChartContainer.xAxis.valueFormatter = formato
         
         self.osrChartContainer.leftAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         self.osrChartContainer.leftAxis.labelTextColor = GlobalConstants.AKDefaultFg
@@ -558,14 +559,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.osrChartContainer.rightAxis.axisMaximum = 100
         self.osrChartContainer.rightAxis.axisMinimum = 0
         
-        self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
-        
         self.osrChartContainer.legend.textColor = GlobalConstants.AKDefaultFg
         self.osrChartContainer.legend.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16)!
         self.osrChartContainer.legend.horizontalAlignment = .center
         
-        self.osrChartContainer.xAxis.valueFormatter = formato
+        self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.isUserInteractionEnabled = false
         
         // Load chart.
         let chartData = BarChartData(dataSet: chartDataSet)
@@ -576,8 +576,5 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
 @objc(BarChartFormatter)
 class BarChartFormatter: NSObject, IAxisValueFormatter
 {
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String
-    {
-        return Func.AKGetDayOfWeekAsName(dayOfWeek: Int16(value), short: true)!
-    }
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String { return Func.AKGetDayOfWeekAsName(dayOfWeek: Int16(value), short: true)! }
 }
