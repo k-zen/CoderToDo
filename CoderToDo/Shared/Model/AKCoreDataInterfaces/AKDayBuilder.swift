@@ -8,6 +8,7 @@ class AKDayBuilder
             let day = Day(context: mr.getMOC())
             // Mirror.
             day.date = interface.date
+            day.gmtOffset = interface.gmtOffset
             day.sr = interface.sr
             
             return day
@@ -21,18 +22,21 @@ struct AKDayInterface
 {
     // MARK: Properties
     var date: NSDate
+    var gmtOffset: Int16
     var sr: Float
     
     init()
     {
         self.date = NSDate()
+        self.gmtOffset = 0
         self.sr = 0.0
     }
     
-    init(date: NSDate)
+    init(date: NSDate, gmtOffset: Int16)
     {
         // Required.
         self.date = date
+        self.gmtOffset = gmtOffset
         
         // Optional.
         self.sr = 0.0
@@ -41,9 +45,18 @@ struct AKDayInterface
     // MARK: Setters
     mutating func setDate(_ asString: String)
     {
-        if let date = Func.AKProcessGMTDate(
-            dateAsString: asString) {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKFullDateFormat,
+            timeZone: TimeZone(identifier: "GMT")!) {
             self.date = date
+        }
+    }
+    
+    mutating func setGMTOffset(_ asString: String)
+    {
+        if let gmtOffset = Int16(asString) {
+            self.gmtOffset = gmtOffset
         }
     }
     

@@ -3,18 +3,13 @@ import UserNotifications
 
 class AKDataInterface
 {
-    static func firstTime() -> Bool { return DataInterface.getUser() == nil }
+    static func firstTime() -> Bool { return DataInterface.getUser()?.username == nil }
     
     // ########## USER'S FUNCTIONS ########## //
-    static func addUser(user: User) -> Bool
+    static func addUser(user: User) -> Void
     {
-        if Func.AKObtainMasterReference()?.user == nil {
-            Func.AKObtainMasterReference()?.user = user
-            
-            return true
-        }
-        
-        return false
+        Func.AKObtainMasterReference()?.getUser()?.creationDate = user.creationDate
+        Func.AKObtainMasterReference()?.getUser()?.username = user.username
     }
     
     ///
@@ -298,6 +293,7 @@ class AKDataInterface
                     
                     let today = Day(context: mr.getMOC())
                     today.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 0, to: now)! as NSDate
+                    today.gmtOffset = Int16(TimeZone.current.secondsFromGMT() / 3600)
                     project.addToDays(today)
                     
                     return today
@@ -309,6 +305,7 @@ class AKDataInterface
                     
                     let tomorrow = Day(context: mr.getMOC())
                     tomorrow.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
+                    tomorrow.gmtOffset = Int16(TimeZone.current.secondsFromGMT() / 3600)
                     project.addToDays(tomorrow)
                     
                     return tomorrow
@@ -376,9 +373,56 @@ class AKDataInterface
             }
         }
         
-        project.osr = counter > 0 ? (osr / counter) * 100 : 0.0
+        project.osr = counter > 0 ? (osr / counter) * 100.0 : 0.0
         
         return project.osr
+    }
+    
+    static func computeAverageSRGroupedByDay() -> [Int16 : Float]
+    {
+        var average = [
+            DaysOfWeek.sunday.rawValue : Float(0.0),
+            DaysOfWeek.monday.rawValue : Float(0.0),
+            DaysOfWeek.tuesday.rawValue : Float(0.0),
+            DaysOfWeek.wednesday.rawValue : Float(0.0),
+            DaysOfWeek.thursday.rawValue : Float(0.0),
+            DaysOfWeek.friday.rawValue : Float(0.0),
+            DaysOfWeek.saturday.rawValue : Float(0.0)
+        ]
+        var counters = [
+            DaysOfWeek.sunday.rawValue : Float(0.0),
+            DaysOfWeek.monday.rawValue : Float(0.0),
+            DaysOfWeek.tuesday.rawValue : Float(0.0),
+            DaysOfWeek.wednesday.rawValue : Float(0.0),
+            DaysOfWeek.thursday.rawValue : Float(0.0),
+            DaysOfWeek.friday.rawValue : Float(0.0),
+            DaysOfWeek.saturday.rawValue : Float(0.0)
+        ]
+        
+        for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
+            for day in DataInterface.getDays(project: project) {
+                let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: -3)) // TODO: Change this when time is right!
+                if let currentValue = average[dayOfWeek], let currentCounter = counters[dayOfWeek] {
+                    average[dayOfWeek] = currentValue + (day.sr / 100.0)
+                    counters[dayOfWeek] = currentCounter + 1
+                }
+            }
+        }
+        
+        // Recompute the value.
+        for (key, _) in average {
+            average[key] = counters[key]! > 0 ? (average[key]! / counters[key]!) * 100.0 : 0.0
+        }
+        
+        // Check if at least one counter is > 0.
+        var returnEmpty = true
+        for (_, value) in counters {
+            if value > 0.0 {
+                returnEmpty = false
+            }
+        }
+        
+        return returnEmpty ? [:] : average
     }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
@@ -497,7 +541,7 @@ class AKDataInterface
             }
         }
         
-        day.sr = counter > 0 ? (sr / counter) * 100 : 0.0
+        day.sr = counter > 0 ? (sr / counter) * 100.0 : 0.0
         
         return day.sr
     }

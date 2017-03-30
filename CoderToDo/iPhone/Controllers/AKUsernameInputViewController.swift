@@ -40,16 +40,8 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         }
         
         if let user = AKUserBuilder.mirror(interface: newUser) {
-            if DataInterface.addUser(user: user) {
-                self.presenterController?.dismissView(executeDismissTask: true)
-            }
-            else {
-                self.presenterController?.showMessage(
-                    message: "Could not add the new user. The error has been reported.",
-                    animate: true,
-                    completionTask: nil
-                )
-            }
+            DataInterface.addUser(user: user)
+            self.presenterController?.dismissView(executeDismissTask: true)
         }
     }
     

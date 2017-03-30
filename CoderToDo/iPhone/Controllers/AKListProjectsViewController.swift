@@ -1,3 +1,4 @@
+import Charts
 import UIKit
 import UserNotifications
 
@@ -16,7 +17,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
-    @IBOutlet weak var osrChartContainer: UIView!
+    @IBOutlet weak var titleMsg: UILabel!
+    @IBOutlet weak var secondTitleMsg: UILabel!
+    @IBOutlet weak var osrChartContainer: BarChartView!
     @IBOutlet weak var menu: UIBarButtonItem!
     
     // MARK: Actions
@@ -59,6 +62,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         super.viewWillAppear(animated)
         
         Func.AKReloadTableWithAnimation(tableView: self.projectsTable)
+        // Hide the chart if there are not data.
+        self.loadChart()
+        self.osrChartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -307,7 +313,20 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.getProjects(filter: self.projectFilter).count }
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        let sections = DataInterface.getProjects(filter: self.projectFilter).count
+        if sections > 0 {
+            self.titleMsg.isHidden = true
+            self.secondTitleMsg.isHidden = true
+        }
+        else {
+            self.titleMsg.isHidden = false
+            self.secondTitleMsg.isHidden = false
+        }
+        
+        return sections
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -342,6 +361,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         )
                         
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
+                        // Hide the chart if there are not data.
+                        presenterController.osrChartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
                     } },
                 noAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
@@ -494,5 +515,69 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         controller.filterMenuItemOverlay.filters.selectRow(0, inComponent: 0, animated: true)
         
         controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
+    }
+    
+    
+    func loadChart() {
+        let formato: BarChartFormatter = BarChartFormatter()
+        
+        var dataEntries: [BarChartDataEntry] = []
+        for (key, value) in DataInterface.computeAverageSRGroupedByDay() {
+            let dataEntry = BarChartDataEntry(x: Double(key), y: Double(value))
+            dataEntries.append(dataEntry)
+        }
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
+        chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
+        chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
+        chartDataSet.drawValuesEnabled = false
+        
+        // Configure the chart.
+        self.osrChartContainer.noDataText = ""
+        self.osrChartContainer.chartDescription?.text = ""
+        chartDataSet.colors = [GlobalConstants.AKCoderToDoGray4]
+        self.osrChartContainer.xAxis.labelPosition = .bottom
+        self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
+        
+        self.osrChartContainer.xAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
+        self.osrChartContainer.xAxis.labelTextColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.xAxis.gridLineCap = .square
+        self.osrChartContainer.xAxis.gridLineDashLengths = [2, 2]
+        
+        self.osrChartContainer.leftAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
+        self.osrChartContainer.leftAxis.labelTextColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.leftAxis.gridLineCap = .square
+        self.osrChartContainer.leftAxis.gridLineDashLengths = [2, 2]
+        self.osrChartContainer.leftAxis.axisMaximum = 100
+        self.osrChartContainer.leftAxis.axisMinimum = 0
+        
+        self.osrChartContainer.rightAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
+        self.osrChartContainer.rightAxis.labelTextColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.rightAxis.gridLineCap = .square
+        self.osrChartContainer.rightAxis.gridLineDashLengths = [2, 2]
+        self.osrChartContainer.rightAxis.axisMaximum = 100
+        self.osrChartContainer.rightAxis.axisMinimum = 0
+        
+        self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
+        
+        self.osrChartContainer.legend.textColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.legend.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16)!
+        self.osrChartContainer.legend.horizontalAlignment = .center
+        
+        self.osrChartContainer.xAxis.valueFormatter = formato
+        
+        // Load chart.
+        let chartData = BarChartData(dataSet: chartDataSet)
+        self.osrChartContainer.data = chartData
+    }
+}
+
+@objc(BarChartFormatter)
+class BarChartFormatter: NSObject, IAxisValueFormatter
+{
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String
+    {
+        return Func.AKGetDayOfWeekAsName(dayOfWeek: Int16(value), short: true)!
     }
 }

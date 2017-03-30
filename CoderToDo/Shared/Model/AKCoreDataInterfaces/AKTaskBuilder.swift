@@ -69,8 +69,10 @@ struct AKTaskInterface
     
     mutating func setCreationDate(_ asString: String)
     {
-        if let date = Func.AKProcessGMTDate(
-            dateAsString: asString) {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKFullDateFormat,
+            timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
         }
     }

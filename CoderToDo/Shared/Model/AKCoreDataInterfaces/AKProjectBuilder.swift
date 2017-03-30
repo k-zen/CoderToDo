@@ -67,7 +67,8 @@ struct AKProjectInterface
     {
         self.closingTime = Func.AKProcessDate(
             dateAsString: "17:00",
-            format: GlobalConstants.AKWorkingDayTimeDateFormat)!
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current)!
         self.closingTimeTolerance = 30
         self.creationDate = NSDate()
         self.name = ""
@@ -75,7 +76,8 @@ struct AKProjectInterface
         self.osr = 0.0
         self.startingTime = Func.AKProcessDate(
             dateAsString: "09:00",
-            format: GlobalConstants.AKWorkingDayTimeDateFormat)!
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current)!
     }
     
     init(name: String)
@@ -86,13 +88,15 @@ struct AKProjectInterface
         // Optional.
         self.closingTime = Func.AKProcessDate(
             dateAsString: "17:00",
-            format: GlobalConstants.AKWorkingDayTimeDateFormat)!
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current)!
         self.closingTimeTolerance = 30
         self.notifyClosingTime = true
         self.osr = 0.0
         self.startingTime = Func.AKProcessDate(
             dateAsString: "09:00",
-            format: GlobalConstants.AKWorkingDayTimeDateFormat)!
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current)!
         
         // Fixed.
         self.creationDate = NSDate()
@@ -101,8 +105,10 @@ struct AKProjectInterface
     // MARK: Setters
     mutating func setClosingTime(_ asString: String)
     {
-        if let date = Func.AKProcessGMTDate(
-            dateAsString: asString) {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current) {
             self.closingTime = date
         }
     }
@@ -116,8 +122,10 @@ struct AKProjectInterface
     
     mutating func setCreationDate(_ asString: String)
     {
-        if let date = Func.AKProcessGMTDate(
-            dateAsString: asString) {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKFullDateFormat,
+            timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
         }
     }
@@ -144,8 +152,10 @@ struct AKProjectInterface
     
     mutating func setStartingTime(_ asString: String)
     {
-        if let date = Func.AKProcessGMTDate(
-            dateAsString: asString) {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKWorkingDayTimeDateFormat,
+            timeZone: TimeZone.current) {
             self.startingTime = date
         }
     }

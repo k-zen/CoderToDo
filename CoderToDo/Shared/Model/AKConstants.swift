@@ -223,6 +223,7 @@ struct GlobalConstants
     static let AKMinTaskNoteLength = 2
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"
+    static let AKFullDateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
     static let AKWorkingDayStartTime = 0 // Military type of time: 00:00Hs.
     static let AKAcceptingTasksDefaultMaxTime = 2359 // Military type of time: 23:59Hs.
     // Segues
@@ -831,23 +832,23 @@ class UtilityFunctions
         }
     }
     
-    func AKGetDayOfWeekAsName(dayOfWeek: Int16) -> String?
+    func AKGetDayOfWeekAsName(dayOfWeek: Int16, short: Bool = false) -> String?
     {
         switch dayOfWeek {
         case DaysOfWeek.sunday.rawValue:
-            return "Sunday"
+            return short ? "Sun" : "Sunday"
         case DaysOfWeek.monday.rawValue:
-            return "Monday"
+            return short ? "Mon" : "Monday"
         case DaysOfWeek.tuesday.rawValue:
-            return "Tuesday"
+            return short ? "Tue" : "Tuesday"
         case DaysOfWeek.wednesday.rawValue:
-            return "Wednesday"
+            return short ? "Wed" : "Wednesday"
         case DaysOfWeek.thursday.rawValue:
-            return "Thursday"
+            return short ? "Thu" : "Thursday"
         case DaysOfWeek.friday.rawValue:
-            return "Friday"
+            return short ? "Fri" : "Friday"
         case DaysOfWeek.saturday.rawValue:
-            return "Saturday"
+            return short ? "Sat" : "Saturday"
         default:
             return nil
         }
@@ -1024,11 +1025,11 @@ class UtilityFunctions
         NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
     }
     
-    func AKProcessDate(dateAsString: String, format: String) -> NSDate?
+    func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> NSDate?
     {
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone.current // The timezone of the date we are processing!!!
+        formatter.timeZone = timeZone
         
         if let date = formatter.date(from: dateAsString) {
             return date as NSDate
@@ -1037,23 +1038,15 @@ class UtilityFunctions
         return nil
     }
     
-    func AKProcessGMTDate(dateAsString: String) -> NSDate?
-    {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-        formatter.timeZone = TimeZone(identifier: "GMT")!
-        
-        if let date = formatter.date(from: dateAsString) {
-            return date as NSDate
-        }
-        
-        return nil
-    }
-    
-    func AKProcessGMTDayOfWeek(date: NSDate?) -> Int
+    func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int
     {
         if let date = date as? Date {
-            return Func.AKGetCalendarForLoading().dateComponents([.weekday], from: date).weekday ?? 0
+            var gmtCalendar = Calendar.current
+            gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
+            
+            let dateWithOffset = gmtCalendar.date(byAdding: .hour, value: gmtOffset, to: date)!
+            
+            return gmtCalendar.dateComponents([.weekday], from: dateWithOffset).weekday ?? 0
         }
         
         return 0

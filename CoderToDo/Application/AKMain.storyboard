@@ -21,26 +21,49 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KdT-aq-IQ9" userLabel="Projects_Table">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="315"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9P-Uh-mGW" userLabel="Table_Container">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KdT-aq-IQ9" userLabel="Projects_Table">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use the Menu button above to start adding coding projects." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-3Q-vb1" userLabel="Title">
+                                        <rect key="frame" x="45" y="118" width="284" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC9-d6-LWL" userLabel="Hello_Title">
+                                        <rect key="frame" x="45" y="58" width="284" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="315" id="auG-LY-tLL"/>
+                                    <constraint firstAttribute="bottom" secondItem="KdT-aq-IQ9" secondAttribute="bottom" id="T89-ZJ-hUX"/>
+                                    <constraint firstAttribute="trailing" secondItem="KdT-aq-IQ9" secondAttribute="trailing" id="gw8-oq-Pwg"/>
+                                    <constraint firstItem="KdT-aq-IQ9" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="top" id="lCf-ge-yNn"/>
+                                    <constraint firstItem="KdT-aq-IQ9" firstAttribute="leading" secondItem="p9P-Uh-mGW" secondAttribute="leading" id="odl-jF-vbr"/>
                                 </constraints>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-pm-Arm" userLabel="OSR_Chart_Container">
-                                <rect key="frame" x="0.0" y="315" width="375" height="239"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-pm-Arm" userLabel="OSR_Chart_Container" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="282" width="375" height="272"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.11764705882352941" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="KdT-aq-IQ9" secondAttribute="trailing" id="IEH-nh-9bn"/>
-                            <constraint firstItem="KdT-aq-IQ9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OlK-vW-EgF"/>
-                            <constraint firstItem="MI2-pm-Arm" firstAttribute="top" secondItem="KdT-aq-IQ9" secondAttribute="bottom" id="ULY-oP-UFY"/>
-                            <constraint firstItem="KdT-aq-IQ9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fzs-Wf-uzz"/>
-                            <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mop-4i-7lA"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MI2-pm-Arm" secondAttribute="bottom" id="pmj-HC-Bct"/>
-                            <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" id="xST-iO-aoj"/>
+                            <constraint firstItem="MI2-pm-Arm" firstAttribute="height" secondItem="p9P-Uh-mGW" secondAttribute="height" id="0x8-Sk-eDI"/>
+                            <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" id="2Wz-Cl-FPL"/>
+                            <constraint firstItem="p9P-Uh-mGW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="EkU-FM-rL4"/>
+                            <constraint firstItem="MI2-pm-Arm" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="bottom" constant="10" id="FJp-4r-0P2"/>
+                            <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d6u-aJ-vmD"/>
+                            <constraint firstItem="p9P-Uh-mGW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lHJ-n1-xPE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MI2-pm-Arm" secondAttribute="bottom" id="nuK-oB-AWe"/>
+                            <constraint firstAttribute="trailing" secondItem="p9P-Uh-mGW" secondAttribute="trailing" id="vBq-4z-CC5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Projects" id="ytb-TK-suW">
@@ -54,8 +77,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
-                        <outlet property="osrChartContainer" destination="MI2-pm-Arm" id="ook-bC-n7l"/>
+                        <outlet property="osrChartContainer" destination="MI2-pm-Arm" id="Mdo-rS-ccX"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
+                        <outlet property="secondTitleMsg" destination="zC9-d6-LWL" id="acU-Z4-0If"/>
+                        <outlet property="titleMsg" destination="Rfd-3Q-vb1" id="FLs-il-RDJ"/>
                         <segue destination="Y2b-YV-saU" kind="show" identifier="ViewProjectSegue" id="90v-Nx-O3K"/>
                         <segue destination="Cbz-Ki-1n5" kind="show" identifier="ViewProjectConfigurationsSegue" id="UU8-RZ-Tlj"/>
                     </connections>
@@ -381,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krn-jr-3Nc" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="0.0" width="300" height="422"/>
+                                <rect key="frame" x="37.5" y="0.0" width="300" height="422"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-Qq-ffl" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="422"/>
@@ -528,7 +553,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX1-kM-fc1" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="0.0" width="300" height="343"/>
+                                <rect key="frame" x="37.5" y="0.0" width="300" height="343"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkF-ru-72H" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="343"/>
@@ -757,7 +782,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-2i-odY" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="0.0" width="300" height="422"/>
+                                <rect key="frame" x="37.5" y="0.0" width="300" height="422"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg5-mo-J0w" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="422"/>

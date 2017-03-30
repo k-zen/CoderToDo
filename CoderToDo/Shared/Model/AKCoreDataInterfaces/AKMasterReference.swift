@@ -113,6 +113,7 @@ class AKMasterReference: NSObject
             data.appendFormat("=>       DAYS: (%i)\n", DataInterface.countDays(project: project))
             for day in DataInterface.getDays(project: project) {
                 data.appendFormat("=>           DATE: %@\n", day.date?.description ?? "")
+                data.appendFormat("=>           GMTOFFSET: %i\n", day.gmtOffset)
                 data.appendFormat("=>           SR: %.2f\n", day.sr)
                 data.appendFormat("=>           CATEGORIES: (%i)\n", DataInterface.countCategories(day: day))
                 for category in DataInterface.getCategories(day: day) {

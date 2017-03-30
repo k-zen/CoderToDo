@@ -62,7 +62,7 @@ class AKXMLBuilder
             xml.append("</projectDilateQueue>")
             xml.append(String(format: "<days count=\"%i\">", DataInterface.countDays(project: project)))
             for day in DataInterface.getDays(project: project) {
-                xml.append(String(format: "<day date=\"%@\" sr=\"%.2f\">", day.date?.description ?? "", day.sr))
+                xml.append(String(format: "<day date=\"%@\" gmtOffset=\"%i\" sr=\"%.2f\">", day.date?.description ?? "", day.gmtOffset, day.sr))
                 xml.append(String(format: "<categories count=\"%i\">", DataInterface.countCategories(day: day)))
                 for category in DataInterface.getCategories(day: day) {
                     var taskFilter = FilterTask()
@@ -219,6 +219,7 @@ class AKXMLBuilder
                                                                                 if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("day") == .orderedSame {
                                                                                     var newDay = AKDayInterface()
                                                                                     newDay.setDate(innerProcessor.getNodeAttributeValue(currentNode, attributeName: "date", strict: false) ?? "")
+                                                                                    newDay.setGMTOffset(innerProcessor.getNodeAttributeValue(currentNode, attributeName: "gmtOffset", strict: false) ?? "")
                                                                                     newDay.setSR(innerProcessor.getNodeAttributeValue(currentNode, attributeName: "sr", strict: false) ?? "")
                                                                                     if let day = AKDayBuilder.mirror(interface: newDay) {
                                                                                         project.addToDays(day)

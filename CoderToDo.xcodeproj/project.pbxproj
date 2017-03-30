@@ -128,7 +128,6 @@
 		49E76E131E7DCF62000215BC /* AKTaskName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DEF1E7DCF62000215BC /* AKTaskName.swift */; };
 		49E76E141E7DCF62000215BC /* AKUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DF01E7DCF62000215BC /* AKUsername.swift */; };
 		49E76E151E7DCF62000215BC /* AKChecks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DF21E7DCF62000215BC /* AKChecks.swift */; };
-		49E76E161E7DCF62000215BC /* libObjectiveCToolbox-Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */; };
 		49FE561E1E68A80B00652187 /* AKProjectConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE561D1E68A80B00652187 /* AKProjectConfigurationsViewController.swift */; };
 		49FE56201E68AC6500652187 /* AKConfigurationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */; };
 		9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 851AFF731111790123E2943F /* Pods_CoderToDo.framework */; };
@@ -187,6 +186,7 @@
 		4956B8291E4B697D0032B2F8 /* CoderToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496674D41E6F276E00A60B64 /* AKSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSearchView.xib; sourceTree = "<group>"; };
 		49677F781E6476A100E1E675 /* AKTopMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKTopMenuView.xib; sourceTree = "<group>"; };
+		4971D7C81E8C3430000A519F /* AKDataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDataStructures.h; sourceTree = "<group>"; };
 		497F9C571E69D19000C78ECD /* AKSelectCategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectCategoryView.xib; sourceTree = "<group>"; };
 		498E178F1E84332B00B3A3A1 /* AKProjectNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectNameViewController.swift; sourceTree = "<group>"; };
 		498E17911E84333A00B3A3A1 /* AKProjectTimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectTimesViewController.swift; sourceTree = "<group>"; };
@@ -269,8 +269,6 @@
 		49E76DEF1E7DCF62000215BC /* AKTaskName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTaskName.swift; sourceTree = "<group>"; };
 		49E76DF01E7DCF62000215BC /* AKUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUsername.swift; sourceTree = "<group>"; };
 		49E76DF21E7DCF62000215BC /* AKChecks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKChecks.swift; sourceTree = "<group>"; };
-		49E76DF41E7DCF62000215BC /* AKDataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDataStructures.h; sourceTree = "<group>"; };
-		49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libObjectiveCToolbox-Universal.a"; sourceTree = "<group>"; };
 		49FE561D1E68A80B00652187 /* AKProjectConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectConfigurationsViewController.swift; sourceTree = "<group>"; };
 		49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKConfigurationsTableViewCell.xib; sourceTree = "<group>"; };
 		851AFF731111790123E2943F /* Pods_CoderToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoderToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,7 +282,6 @@
 			files = (
 				49E76E0F1E7DCF62000215BC /* libESXP-ObjectiveC-Universal.a in Frameworks */,
 				490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */,
-				49E76E161E7DCF62000215BC /* libObjectiveCToolbox-Universal.a in Frameworks */,
 				9DCE956121AC8081495F1DCE /* Pods_CoderToDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +374,14 @@
 				4956B8291E4B697D0032B2F8 /* CoderToDo.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4971D7C71E8C3430000A519F /* AKObjectiveCToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				4971D7C81E8C3430000A519F /* AKDataStructures.h */,
+			);
+			path = AKObjectiveCToolbox;
 			sourceTree = "<group>";
 		};
 		49A4A0961E589E8600CEDA1B /* CoderToDo */ = {
@@ -519,7 +524,7 @@
 				49E76DE21E7DCF62000215BC /* AKESXP-ObjectiveC */,
 				49E76DEB1E7DCF62000215BC /* AKInputData */,
 				49E76DF11E7DCF62000215BC /* AKInternalLogic */,
-				49E76DF31E7DCF62000215BC /* AKObjectiveCToolbox */,
+				4971D7C71E8C3430000A519F /* AKObjectiveCToolbox */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -633,15 +638,6 @@
 				49E76DF21E7DCF62000215BC /* AKChecks.swift */,
 			);
 			path = AKInternalLogic;
-			sourceTree = "<group>";
-		};
-		49E76DF31E7DCF62000215BC /* AKObjectiveCToolbox */ = {
-			isa = PBXGroup;
-			children = (
-				49E76DF41E7DCF62000215BC /* AKDataStructures.h */,
-				49E76DF51E7DCF62000215BC /* libObjectiveCToolbox-Universal.a */,
-			);
-			path = AKObjectiveCToolbox;
 			sourceTree = "<group>";
 		};
 		AFA3CC6BEA5EDB65F5109664 /* Frameworks */ = {
@@ -999,6 +995,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
