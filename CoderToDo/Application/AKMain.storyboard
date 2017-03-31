@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -121,13 +122,18 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-nE-8dt" userLabel="Configurations_Table">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-nE-8dt" userLabel="Configurations_Table">
                                 <rect key="frame" x="16" y="8" width="343" height="538"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jrp-nE-8dt" firstAttribute="top" secondItem="bqj-o7-3px" secondAttribute="bottom" constant="8" id="OmQ-ga-7it"/>
+                            <constraint firstItem="Jrp-nE-8dt" firstAttribute="trailing" secondItem="2SW-Hq-sLE" secondAttribute="trailingMargin" id="bF2-gh-Zwa"/>
+                            <constraint firstItem="fSw-CB-o8w" firstAttribute="top" secondItem="Jrp-nE-8dt" secondAttribute="bottom" constant="8" id="qK9-cQ-Rb5"/>
+                            <constraint firstItem="Jrp-nE-8dt" firstAttribute="leading" secondItem="2SW-Hq-sLE" secondAttribute="leadingMargin" id="vaG-XR-xFs"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Project Configurations" id="A06-HX-6Sm">
                         <barButtonItem key="backBarButtonItem" title="Back" id="fMT-LW-uHL"/>
@@ -410,13 +416,18 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qzF-f9-02w" userLabel="Configurations_Table">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qzF-f9-02w" userLabel="Configurations_Table">
                                 <rect key="frame" x="16" y="8" width="343" height="538"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qzF-f9-02w" firstAttribute="leading" secondItem="LZJ-UE-jl7" secondAttribute="leadingMargin" id="3Gz-sE-3IQ"/>
+                            <constraint firstItem="gWg-Vt-gWA" firstAttribute="top" secondItem="qzF-f9-02w" secondAttribute="bottom" constant="8" id="P67-q2-exf"/>
+                            <constraint firstItem="qzF-f9-02w" firstAttribute="trailing" secondItem="LZJ-UE-jl7" secondAttribute="trailingMargin" id="Yez-8q-bhb"/>
+                            <constraint firstItem="qzF-f9-02w" firstAttribute="top" secondItem="iMD-Km-LFr" secondAttribute="bottom" constant="8" id="clr-Mc-zmH"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="userDefinedCategoriesTable" destination="qzF-f9-02w" id="IbZ-q1-Gos"/>
@@ -710,13 +721,18 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kMR-P9-Y7F" userLabel="Configurations_Table">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kMR-P9-Y7F" userLabel="Configurations_Table">
                                 <rect key="frame" x="16" y="8" width="343" height="538"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kMR-P9-Y7F" firstAttribute="leading" secondItem="dEn-Sl-Mod" secondAttribute="leadingMargin" id="Y0q-n2-hnk"/>
+                            <constraint firstItem="kMR-P9-Y7F" firstAttribute="trailing" secondItem="dEn-Sl-Mod" secondAttribute="trailingMargin" id="ceb-HI-ehy"/>
+                            <constraint firstItem="vQb-TG-Tsn" firstAttribute="top" secondItem="kMR-P9-Y7F" secondAttribute="bottom" constant="8" id="yEb-9Q-Ke8"/>
+                            <constraint firstItem="kMR-P9-Y7F" firstAttribute="top" secondItem="8lL-7D-LGm" secondAttribute="bottom" constant="8" id="zMr-yZ-IEc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Configurations" id="JU2-CC-j8J">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9vy-8M-Lao"/>
