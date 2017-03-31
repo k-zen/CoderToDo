@@ -17,8 +17,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
-    @IBOutlet weak var titleMsg: UILabel!
-    @IBOutlet weak var secondTitleMsg: UILabel!
+    @IBOutlet weak var messageContainer: UIView!
     @IBOutlet weak var chartContainer: UIView!
     @IBOutlet weak var mostProductiveDay: UILabel!
     @IBOutlet weak var osrChartContainer: BarChartView!
@@ -319,12 +318,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let sections = DataInterface.getProjects(filter: self.projectFilter).count
         if sections > 0 {
-            self.titleMsg.isHidden = true
-            self.secondTitleMsg.isHidden = true
+            self.messageContainer.isHidden = true
         }
         else {
-            self.titleMsg.isHidden = false
-            self.secondTitleMsg.isHidden = false
+            self.messageContainer.isHidden = false
         }
         
         return sections

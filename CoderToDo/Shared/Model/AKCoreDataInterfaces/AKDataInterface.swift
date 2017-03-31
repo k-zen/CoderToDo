@@ -50,6 +50,7 @@ class AKDataInterface
             // Add both necessary queues.
             project.pendingQueue = PendingQueue(context: mr.getMOC())
             project.dilateQueue = DilateQueue(context: mr.getMOC())
+            project.bucket = Bucket(context: mr.getMOC())
             
             // Schedule notifications.
             if project.notifyClosingTime {
@@ -1047,4 +1048,57 @@ class AKDataInterface
         }
     }
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
+    // ########## BUCKET'S FUNCTIONS ########## //
+    static func addBucketEntry(toProject project: Project, entry: BucketEntry)
+    {
+        if let bucket = project.bucket {
+            bucket.addToEntries(entry)
+        }
+        else {
+            NSLog("=> WARNING: Bucket not created. Creating one and adding...")
+            if let mr = Func.AKObtainMasterReference() {
+                project.bucket = Bucket(context: mr.getMOC())
+                project.bucket?.addToEntries(entry)
+            }
+        }
+    }
+    
+    static func getBucketEntries(project: Project) -> [BucketEntry]
+    {
+        if let bucket = project.bucket?.entries?.allObjects as? [BucketEntry] {
+            return bucket.sorted {
+                let n1 = $0.name ?? ""
+                let n2 = $1.name ?? ""
+                
+                return n1 < n2
+            }
+        }
+        
+        return []
+    }
+    
+    static func countBucketEntries(project: Project) -> Int { return DataInterface.getBucketEntries(project: project).count }
+    
+    static func removeBucketEntry(project: Project, entry: BucketEntry)
+    {
+        if let bucket = project.bucket {
+            bucket.removeFromEntries(entry)
+        }
+    }
+    
+    static func mostLoadedBucket() -> Project?
+    {
+        var selectedProject: Project?
+        var maxEntries = 0
+        
+        for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
+            if DataInterface.countBucketEntries(project: project) > maxEntries {
+                maxEntries = DataInterface.countBucketEntries(project: project)
+                selectedProject = project
+            }
+        }
+        
+        return maxEntries == 0 ? nil : selectedProject
+    }
+    // ########## BUCKET'S FUNCTIONS ########## //
 }

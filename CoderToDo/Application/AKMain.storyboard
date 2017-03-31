@@ -29,26 +29,37 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use the Menu button above to start adding coding projects." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-3Q-vb1" userLabel="Title">
-                                        <rect key="frame" x="45" y="118" width="284" height="96"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
-                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC9-d6-LWL" userLabel="Hello_Title">
-                                        <rect key="frame" x="45" y="58" width="284" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
-                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byL-a6-udk" userLabel="Message_Container">
+                                        <rect key="frame" x="37.5" y="50" width="300" height="172"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use the Menu button above to start adding coding projects." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-3Q-vb1" userLabel="Title">
+                                                <rect key="frame" x="8" y="68" width="284" height="96"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC9-d6-LWL" userLabel="Hello_Title">
+                                                <rect key="frame" x="8" y="8" width="284" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="I49-qj-2Lc"/>
+                                            <constraint firstAttribute="height" constant="172" id="VMd-t8-cpZ"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="byL-a6-udk" firstAttribute="centerX" secondItem="p9P-Uh-mGW" secondAttribute="centerX" id="NV7-Sb-fP6"/>
                                     <constraint firstAttribute="bottom" secondItem="KdT-aq-IQ9" secondAttribute="bottom" id="T89-ZJ-hUX"/>
                                     <constraint firstAttribute="trailing" secondItem="KdT-aq-IQ9" secondAttribute="trailing" id="gw8-oq-Pwg"/>
                                     <constraint firstItem="KdT-aq-IQ9" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="top" id="lCf-ge-yNn"/>
                                     <constraint firstItem="KdT-aq-IQ9" firstAttribute="leading" secondItem="p9P-Uh-mGW" secondAttribute="leading" id="odl-jF-vbr"/>
+                                    <constraint firstItem="byL-a6-udk" firstAttribute="centerY" secondItem="p9P-Uh-mGW" secondAttribute="centerY" id="wAK-Gi-ili"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6s-UY-Ble" userLabel="Chart_Container">
@@ -97,11 +108,10 @@
                     <connections>
                         <outlet property="chartContainer" destination="L6s-UY-Ble" id="NXP-QA-jMa"/>
                         <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
+                        <outlet property="messageContainer" destination="byL-a6-udk" id="jkg-lQ-Rgu"/>
                         <outlet property="mostProductiveDay" destination="tgD-Wr-PEr" id="zyM-5c-g2z"/>
                         <outlet property="osrChartContainer" destination="MI2-pm-Arm" id="Mdo-rS-ccX"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
-                        <outlet property="secondTitleMsg" destination="zC9-d6-LWL" id="acU-Z4-0If"/>
-                        <outlet property="titleMsg" destination="Rfd-3Q-vb1" id="FLs-il-RDJ"/>
                         <segue destination="Y2b-YV-saU" kind="show" identifier="ViewProjectSegue" id="90v-Nx-O3K"/>
                         <segue destination="Cbz-Ki-1n5" kind="show" identifier="ViewProjectConfigurationsSegue" id="UU8-RZ-Tlj"/>
                     </connections>
@@ -675,39 +685,111 @@
                     <view key="view" contentMode="scaleToFill" id="bs1-nb-pXf" userLabel="Main_Container">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urK-PU-TVJ" userLabel="Project_List_Container">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1sV-Ev-hg4" userLabel="Project_List_Table">
+                                        <rect key="frame" x="8" y="8" width="359" height="142"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="1sV-Ev-hg4" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="top" constant="8" id="06e-dp-rFo"/>
+                                    <constraint firstAttribute="height" constant="150" id="9bh-6h-gFM"/>
+                                    <constraint firstAttribute="trailing" secondItem="1sV-Ev-hg4" secondAttribute="trailing" constant="8" id="V8A-BW-UEj"/>
+                                    <constraint firstAttribute="bottom" secondItem="1sV-Ev-hg4" secondAttribute="bottom" id="XlU-n0-2Gc"/>
+                                    <constraint firstItem="1sV-Ev-hg4" firstAttribute="leading" secondItem="urK-PU-TVJ" secondAttribute="leading" constant="8" id="t7c-0l-1Ji"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9w-7w-9Xd" userLabel="Bucket_Container">
+                                <rect key="frame" x="0.0" y="150" width="375" height="404"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1pS-Hu-LHI" userLabel="Bucket_Table">
+                                        <rect key="frame" x="8" y="46" width="359" height="350"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewp-wt-UtG" userLabel="Add_Tomorrow_Task">
+                                        <rect key="frame" x="297" y="8" width="70" height="30"/>
+                                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="FW4-Zz-rI3"/>
+                                            <constraint firstAttribute="height" constant="30" id="T91-DQ-SrA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="14"/>
+                                        <state key="normal" title="Add Entry">
+                                            <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addEntry:" destination="PAU-eO-LY5" eventType="touchUpInside" id="ulg-Bw-5eh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ewp-wt-UtG" secondAttribute="trailing" constant="8" id="2fT-yQ-nCT"/>
+                                    <constraint firstAttribute="trailing" secondItem="1pS-Hu-LHI" secondAttribute="trailing" constant="8" id="67c-kW-jsE"/>
+                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="46" id="CKw-pX-1fJ"/>
+                                    <constraint firstItem="Ewp-wt-UtG" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="8" id="F0f-4g-Cop"/>
+                                    <constraint firstAttribute="bottom" secondItem="1pS-Hu-LHI" secondAttribute="bottom" constant="8" id="Nml-AE-5Dr"/>
+                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="Ewp-wt-UtG" secondAttribute="bottom" constant="8" id="Por-uy-MIv"/>
+                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="leading" secondItem="d9w-7w-9Xd" secondAttribute="leading" constant="8" id="o5m-9C-Ky6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcy-mi-2dl" userLabel="Message_Container">
+                                <rect key="frame" x="37" y="215" width="300" height="172"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a project to start adding entries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAC-su-UJH" userLabel="Title">
+                                        <rect key="frame" x="8" y="68" width="284" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Bf-C1t" userLabel="Hello_Title">
+                                        <rect key="frame" x="8" y="8" width="284" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="172" id="d0m-Qh-Y2F"/>
+                                    <constraint firstAttribute="width" constant="300" id="dsU-WD-Al7"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="172" id="fph-Mp-yOF"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="g5g-cX-7Rx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="S52-j0-QiV" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="bottom" id="7YM-fh-P9I"/>
+                            <constraint firstAttribute="trailing" secondItem="urK-PU-TVJ" secondAttribute="trailing" id="906-QK-zv4"/>
+                            <constraint firstItem="Lcy-mi-2dl" firstAttribute="centerY" secondItem="bs1-nb-pXf" secondAttribute="centerY" id="Hsn-uy-UFb"/>
+                            <constraint firstAttribute="trailing" secondItem="d9w-7w-9Xd" secondAttribute="trailing" id="TMD-Z6-y7l"/>
+                            <constraint firstItem="urK-PU-TVJ" firstAttribute="top" secondItem="WIN-2g-bVk" secondAttribute="bottom" id="XKn-tC-loU"/>
+                            <constraint firstItem="Lcy-mi-2dl" firstAttribute="centerX" secondItem="bs1-nb-pXf" secondAttribute="centerX" id="bqS-WQ-ujC"/>
+                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="qof-D0-gQw"/>
+                            <constraint firstItem="urK-PU-TVJ" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="w1e-wJ-dEE"/>
+                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="bottom" id="zWd-Kk-uOn"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="BrainStorming Bucket" id="pI1-Ru-4xj">
+                    <navigationItem key="navigationItem" title="Brainstorming Bucket" id="pI1-Ru-4xj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jjG-gs-u2y"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="h85-kF-1OL" kind="show" identifier="ViewProjectBucketSegue" id="bfH-sg-X1I"/>
+                        <outlet property="addEntry" destination="Ewp-wt-UtG" id="f7v-Fi-3cc"/>
+                        <outlet property="bucketContainer" destination="d9w-7w-9Xd" id="e7X-Dl-SZJ"/>
+                        <outlet property="bucketTable" destination="1pS-Hu-LHI" id="YBv-Dm-zBi"/>
+                        <outlet property="mainContainer" destination="bs1-nb-pXf" id="Cfl-0N-eZb"/>
+                        <outlet property="messageContainer" destination="Lcy-mi-2dl" id="G7h-EQ-2Qn"/>
+                        <outlet property="projectListContainer" destination="urK-PU-TVJ" id="kQx-3a-XlL"/>
+                        <outlet property="projectListTable" destination="1sV-Ev-hg4" id="thS-ck-7yo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xi4-Bj-QLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="833"/>
-        </scene>
-        <!--Project Bucket-->
-        <scene sceneID="l6r-i6-uTE">
-            <objects>
-                <viewController title="Project Bucket" id="h85-kF-1OL" customClass="AKProjectBucketViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gAl-ZU-gfg"/>
-                        <viewControllerLayoutGuide type="bottom" id="Q9z-x0-8Sy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dq4-cY-mLH" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Project Bucket" id="LBk-wY-fbX">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="pnF-0L-vdL"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WMU-ht-ZKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3097" y="833"/>
+            <point key="canvasLocation" x="2013.5999999999999" y="832.53373313343332"/>
         </scene>
         <!--Configurations-->
         <scene sceneID="xHs-hQ-w3F">

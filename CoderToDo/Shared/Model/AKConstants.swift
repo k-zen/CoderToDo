@@ -21,6 +21,8 @@ typealias Category = AKCategoryMO
 typealias Task = AKTaskMO
 typealias PendingQueue = AKPendingTasksQueueMO
 typealias DilateQueue = AKDilateTaskQueueMO
+typealias Bucket = AKBucketMO
+typealias BucketEntry = AKBucketEntryMO
 
 // MARK: Aliases
 let Func = UtilityFunctions.instance(Cons.AKDebug)

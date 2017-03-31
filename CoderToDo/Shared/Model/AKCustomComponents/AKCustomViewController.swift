@@ -100,6 +100,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let sortMenuItemOverlay = AKSortView()
     let filterMenuItemOverlay = AKFilterView()
     let searchMenuItemOverlay = AKSearchView()
+    let addBucketEntryOverlay = AKAddBucketEntryView()
     // Menu
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
@@ -196,6 +197,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             container: self.view,
             coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
             size: CGSize(width: self.view.frame.width, height: 0.0)
+        )
+        
+        self.addBucketEntryOverlay.controller = self
+        self.addBucketEntryOverlay.setup()
+        self.addBucketEntryOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize.zero
         )
     }
     
@@ -413,6 +422,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
+    func showAddBucketEntry(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.addBucketEntryOverlay.expand(
+            controller: self,
+            expandHeight: AKAddBucketEntryView.LocalConstants.AKViewHeight,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
     func hideMessage(
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
@@ -484,6 +505,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.searchMenuItemOverlay.collapse(
+            controller: self,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
+    func hideAddBucketEntry(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.addBucketEntryOverlay.collapse(
             controller: self,
             animate: animate,
             completionTask: completionTask
