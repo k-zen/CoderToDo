@@ -670,6 +670,8 @@ class UtilityFunctions
         }
     }
     
+    func AKAppFullVersion() -> String { return String(format: "v%@b%@", Func.AKAppVersion(), Func.AKAppBuild()) }
+    
     ///
     /// Computes the App's version.
     ///

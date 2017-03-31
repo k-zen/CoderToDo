@@ -61,14 +61,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-pm-Arm" userLabel="OSR_Chart_Container" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="8" y="32" width="359" height="232"/>
+                                        <rect key="frame" x="12" y="32" width="351" height="228"/>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="L6s-UY-Ble" secondAttribute="leading" constant="8" id="0lC-xu-wN3"/>
-                                    <constraint firstAttribute="bottom" secondItem="MI2-pm-Arm" secondAttribute="bottom" constant="8" id="c67-j8-Vgl"/>
+                                    <constraint firstItem="MI2-pm-Arm" firstAttribute="leading" secondItem="L6s-UY-Ble" secondAttribute="leading" constant="12" id="0lC-xu-wN3"/>
+                                    <constraint firstAttribute="bottom" secondItem="MI2-pm-Arm" secondAttribute="bottom" constant="12" id="c67-j8-Vgl"/>
                                     <constraint firstItem="MI2-pm-Arm" firstAttribute="top" secondItem="L6s-UY-Ble" secondAttribute="top" constant="32" id="ja8-2r-7hT"/>
-                                    <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" constant="8" id="oC9-EM-jS7"/>
+                                    <constraint firstAttribute="trailing" secondItem="MI2-pm-Arm" secondAttribute="trailing" constant="12" id="oC9-EM-jS7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -646,6 +646,7 @@
                         <segue destination="kQc-mE-7B0" kind="relationship" relationship="viewControllers" id="AIb-TY-rC5"/>
                         <segue destination="nIL-Wq-MXl" kind="relationship" relationship="viewControllers" id="n0H-rg-ONK"/>
                         <segue destination="Y7v-9x-DLT" kind="relationship" relationship="viewControllers" id="mVO-U7-8d6"/>
+                        <segue destination="o2q-Fe-54o" kind="relationship" relationship="viewControllers" id="XMs-2p-qpN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FYu-oa-eTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -931,11 +932,11 @@
             </objects>
             <point key="canvasLocation" x="3097" y="3109"/>
         </scene>
-        <!--BrainStorming Bucket-->
+        <!--Bucket-->
         <scene sceneID="oPO-tY-OSv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nIL-Wq-MXl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="BrainStorming Bucket" id="MdI-RO-sRq">
+                    <tabBarItem key="tabBarItem" tag="2" title="Bucket" id="MdI-RO-sRq">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-12"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -974,6 +975,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpi-Eo-Lin" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1212" y="1623.2383808095954"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="1cZ-TN-7IE">
+            <objects>
+                <viewController title="Help" id="o2q-Fe-54o" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sU5-iV-stJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Qf-Da-mMt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KQO-wN-Zgy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="4" title="Help" id="nMN-Oi-P3r">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-12"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l7V-jU-vVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="2328"/>
         </scene>
     </scenes>
 </document>

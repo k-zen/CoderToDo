@@ -22,42 +22,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVA-jO-AB6" userLabel="Controls_Container">
-                                <rect key="frame" x="37" y="214" width="300" height="159"/>
+                                <rect key="frame" x="37" y="220.5" width="300" height="186"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-Ul-Wjd">
-                                        <rect key="frame" x="108" y="7.5" width="84" height="84"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="84" id="CLk-2f-Oan"/>
-                                            <constraint firstAttribute="width" constant="84" id="ksB-ec-nog"/>
-                                        </constraints>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-Ul-Wjd" userLabel="Logo">
+                                        <rect key="frame" x="108" y="8" width="84" height="84"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoderToDo v1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvd-IF-iAH" userLabel="Hello_Title">
-                                        <rect key="frame" x="8" y="99" width="284" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="284" id="8X2-Ln-vZ4"/>
-                                            <constraint firstAttribute="height" constant="52" id="qel-q7-HgH"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CoderToDo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvd-IF-iAH" userLabel="Name">
+                                        <rect key="frame" x="8" y="100" width="284" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
                                         <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Copyright © 2017 Andreas P. Koenzen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83O-bS-u4j" userLabel="Copyright">
+                                        <rect key="frame" x="8" y="148" width="284" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                        <color key="textColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Gvd-IF-iAH" firstAttribute="top" secondItem="O7c-Ul-Wjd" secondAttribute="bottom" constant="8" id="4hu-Of-Qg5"/>
-                                    <constraint firstAttribute="bottom" secondItem="Gvd-IF-iAH" secondAttribute="bottom" constant="8" id="4tO-Bx-aob"/>
-                                    <constraint firstItem="O7c-Ul-Wjd" firstAttribute="centerX" secondItem="aVA-jO-AB6" secondAttribute="centerX" id="Efj-bM-T7a"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gvd-IF-iAH" secondAttribute="trailing" constant="8" id="FbE-zb-jjP"/>
-                                    <constraint firstItem="Gvd-IF-iAH" firstAttribute="leading" secondItem="aVA-jO-AB6" secondAttribute="leading" constant="8" id="ZAr-Bc-zGo"/>
                                     <constraint firstAttribute="width" constant="300" id="epu-Hr-bXr"/>
-                                    <constraint firstAttribute="height" constant="159" id="nd8-tk-86K"/>
-                                    <constraint firstItem="O7c-Ul-Wjd" firstAttribute="top" secondItem="aVA-jO-AB6" secondAttribute="top" constant="8" id="sIP-AU-J3y"/>
+                                    <constraint firstAttribute="height" constant="186" id="nd8-tk-86K"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aVA-jO-AB6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="POI-3k-q97"/>
-                            <constraint firstItem="aVA-jO-AB6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="Y7B-ld-Fq8"/>
+                            <constraint firstItem="aVA-jO-AB6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-20" id="Y7B-ld-Fq8"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
