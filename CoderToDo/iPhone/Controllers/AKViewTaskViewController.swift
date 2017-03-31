@@ -32,16 +32,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Actions
     @IBAction func changeStatus(_ sender: Any)
     {
-        switch self.editMode {
-        case .canChangeState:
-            self.selectTaskStateOverlay.editMode = .canChangeState
-            self.expandTaskStateSelector()
-            break
-        default:
-            self.selectTaskStateOverlay.editMode = .editable
-            self.expandTaskStateSelector()
-            break
-        }
+        self.selectTaskStateOverlay.editMode = self.editMode
+        self.expandTaskStateSelector()
     }
     
     @IBAction func changeCP(_ sender: Any) { self.cpValue.text = String(format: "%.1f%%", self.changeCP.value) }
@@ -274,12 +266,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.changeCP.isEnabled = false
             self.changeCategory.isEnabled = false
             break
-        case .canChangeState:
-            self.taskNameValue.isEditable = false
-            self.statusValue.isEnabled = true
-            self.changeCP.isEnabled = false
-            self.changeCategory.isEnabled = false
-            break
         case .limitedEditing:
             self.taskNameValue.isEditable = true
             self.statusValue.isEnabled = true
@@ -298,9 +284,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             break
         case .notEditable:
             self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
-            break
-        case .canChangeState:
-            self.taskState.backgroundColor = GlobalConstants.AKYellowForWhiteFg
             break
         case .limitedEditing:
             self.taskState.backgroundColor = GlobalConstants.AKBlueForWhiteFg

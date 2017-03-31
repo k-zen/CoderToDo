@@ -132,7 +132,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     
     @IBAction func dilate(_ sender: Any)
     {
-        if self.editMode == .editable || self.editMode == .canChangeState || self.editMode == .limitedEditing {
+        if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
                 // Change caller button.
                 controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
@@ -151,7 +151,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     
     @IBAction func pending(_ sender: Any)
     {
-        if self.editMode == .editable || self.editMode == .canChangeState || self.editMode == .limitedEditing {
+        if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
                 // Change caller button.
                 controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)

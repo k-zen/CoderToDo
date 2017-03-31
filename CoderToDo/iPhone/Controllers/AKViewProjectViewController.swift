@@ -271,7 +271,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             thirdBadge.text = String(format: "%@", ProjectStatus.accepting.rawValue)
         }
         else if isToday {
-            thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
+            thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus == .accepting ? .closed : projectStatus)
             thirdBadge.text = String(format: "%@", projectStatus.rawValue)
         }
         else {

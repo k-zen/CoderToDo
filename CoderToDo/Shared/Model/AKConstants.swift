@@ -503,7 +503,6 @@ enum TaskMode: String
 {
     case editable = "Editable"
     case notEditable = "Not Editable"
-    case canChangeState = "Can Change State"
     case limitedEditing = "Limited Editing"
 }
 
