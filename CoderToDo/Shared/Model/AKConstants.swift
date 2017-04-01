@@ -549,6 +549,12 @@ enum ComponentMode {
     case disabled
 }
 
+enum Priority: Int16 {
+    case low = 1
+    case medium = 2
+    case high = 3
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -804,6 +810,18 @@ class UtilityFunctions
     
     func AKGetCloudKitContainer() -> CKContainer { return Func.AKDelegate().cloudKitContainer }
     
+    func AKGetColorForPriority(priority: Priority) -> UIColor
+    {
+        switch priority {
+        case .low:
+            return GlobalConstants.AKGreenForWhiteFg
+        case .medium:
+            return GlobalConstants.AKYellowForWhiteFg
+        case .high:
+            return GlobalConstants.AKRedForWhiteFg
+        }
+    }
+    
     func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor
     {
         switch projectStatus {
@@ -914,6 +932,20 @@ class UtilityFunctions
     }
     
     func AKGetNotificationCenter() -> UNUserNotificationCenter { return Func.AKDelegate().notificationCenter }
+    
+    func AKGetPriorityAsName(priority: Int16) -> String?
+    {
+        switch priority {
+        case Priority.low.rawValue:
+            return "Low"
+        case Priority.medium.rawValue:
+            return "Medium"
+        case Priority.high.rawValue:
+            return "High"
+        default:
+            return nil
+        }
+    }
     
     ///
     /// Computes and generates a **UIColor** object based

@@ -35,12 +35,12 @@
                             <constraint firstAttribute="bottom" secondItem="vrh-fG-snJ" secondAttribute="bottom" id="u9W-NG-vQD"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrd-aO-YWm" userLabel="Date_Container">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrd-aO-YWm" userLabel="Priority_Container">
                         <rect key="frame" x="230" y="0.0" width="90" height="44"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00/00/00" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10k-e1-t5O" userLabel="Date_Value">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10k-e1-t5O" userLabel="Priority_Value">
                                 <rect key="frame" x="0.0" y="8" width="90" height="28"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -68,10 +68,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateContainer" destination="xrd-aO-YWm" id="eaz-vg-JY3"/>
-                <outlet property="dateValue" destination="10k-e1-t5O" id="pNo-hF-xe1"/>
                 <outlet property="infoContainer" destination="MIo-o2-Hau" id="BmC-tA-gMc"/>
                 <outlet property="mainContainer" destination="Jwb-PL-dev" id="Bgz-3S-vNR"/>
                 <outlet property="nameValue" destination="vrh-fG-snJ" id="QRA-56-i1R"/>
+                <outlet property="priorityValue" destination="10k-e1-t5O" id="n0R-UH-66D"/>
             </connections>
             <point key="canvasLocation" x="479" y="287.5"/>
         </tableViewCell>

@@ -8,7 +8,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         static let AKProjectListTableRowHeight: CGFloat = 40.0
         static let AKProjectListTableFooterHeight: CGFloat = 2.0
         
-        static let AKBucketTableHeaderHeight: CGFloat = 0.5
+        static let AKBucketTableHeaderHeight: CGFloat = 34
         static let AKBucketTableRowHeight: CGFloat = 45.0
         static let AKBucketTableFooterHeight: CGFloat = 2.0
         
@@ -35,7 +35,11 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBAction func addEntry(_ sender: Any)
     {
         if let _ = self.selectedProject {
-            self.showAddBucketEntry(animate: true, completionTask: nil)
+            self.showAddBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
+                if let presenterController = presenterController as? AKBrainstormingBucketViewController {
+                    presenterController.migrateBucketEntryOverlay.taskNameValue.text = ""
+                }
+            })
         }
         else {
             self.showMessage(
@@ -91,7 +95,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             cell.title.text = project.name
             cell.arrowWidth.constant = 0
             cell.badgeWidth.constant = 70
-            cell.badge.text = String(format: "Count: %i", DataInterface.countBucketEntries(project: project))
+            cell.badge.text = String(format: "Count: %i", DataInterface.countBucketEntries(project: project, forDate: ""))
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -105,11 +109,13 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             return cell
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
-                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
+                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
+                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
                 
                 let cell = self.bucketTable.dequeueReusableCell(withIdentifier: "BucketTableCell") as! AKBucketTableViewCell
                 cell.nameValue.text = bucketEntry.name
-                cell.dateValue.text = Func.AKGetFormattedDate(date: bucketEntry.creationDate as? Date)
+                cell.priorityValue.text = Func.AKGetPriorityAsName(priority: bucketEntry.priority)
+                cell.priorityValue.backgroundColor = bucketEntry.priority == 0 ? UIColor.clear : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!)
                 
                 // Custom L&F.
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -141,9 +147,36 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             
             return headerCell
         case LocalConstants.AKBucketTableTag:
-            if let _ = self.selectedProject {
-                let headerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKBucketTableHeaderHeight))
-                headerCell.backgroundColor = UIColor.clear
+            if let selectedProject = self.selectedProject {
+                let date = DataInterface.getEntryDates(project: selectedProject)[section]
+                
+                let tableWidth = tableView.frame.width
+                let padding = CGFloat(8.0)
+                
+                let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKBucketTableHeaderHeight))
+                headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+                Func.AKAddBorderDeco(
+                    headerCell,
+                    color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    position: .left
+                )
+                
+                let title = UILabel(frame: CGRect(
+                    x: padding * 2.0,
+                    y: 0.0,
+                    width: tableWidth - (padding * 2),
+                    height: LocalConstants.AKBucketTableHeaderHeight)
+                )
+                title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 20.0)
+                title.textColor = GlobalConstants.AKDefaultFg
+                title.text = date
+                title.textAlignment = .left
+                // ### DEBUG
+                // title.layer.borderColor = UIColor.white.cgColor
+                // title.layer.borderWidth = 1.0
+                
+                headerCell.addSubview(title)
                 
                 return headerCell
             }
@@ -188,9 +221,14 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         case LocalConstants.AKProjectListTableTag:
             return DataInterface.getProjects(filter: self.projectFilter).count
         case LocalConstants.AKBucketTableTag:
-            return 1
+            if let selectedProject = self.selectedProject {
+                return DataInterface.getEntryDates(project: selectedProject).count
+            }
+            else {
+                return 0
+            }
         default:
-            return 1
+            return 0
         }
     }
     
@@ -201,7 +239,9 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             return 1
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
-                return DataInterface.countBucketEntries(project: selectedProject)
+                let date = DataInterface.getEntryDates(project: selectedProject)[section]
+                
+                return DataInterface.countBucketEntries(project: selectedProject, forDate: date)
             }
             else {
                 return 0
@@ -229,7 +269,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         // Delete Action
         let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
             if let selectedProject = self.selectedProject {
-                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
+                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
+                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
                 DataInterface.removeBucketEntry(project: selectedProject, entry: bucketEntry)
                 
                 Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
@@ -280,7 +321,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             break
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
-                self.selectedBucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
+                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
+                self.selectedBucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
                 if let _ = self.selectedBucketEntry {
                     do {
                         try AKChecks.canAddTask(project: selectedProject)

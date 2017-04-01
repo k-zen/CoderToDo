@@ -110,8 +110,8 @@ class AKMasterReference: NSObject
                 data.appendFormat("=>           STATE: %@\n", taskInQueue.state ?? "")
                 data.appendFormat("=>           ------\n")
             }
-            data.appendFormat("=>       BUCKET: (%i)\n", DataInterface.countBucketEntries(project: project))
-            for bucketEntry in DataInterface.getBucketEntries(project: project) {
+            data.appendFormat("=>       BUCKET: (%i)\n", DataInterface.countBucketEntries(project: project, forDate: ""))
+            for bucketEntry in DataInterface.getBucketEntries(project: project, forDate: "") {
                 data.appendFormat("=>           CREATION DATE: %@\n", bucketEntry.creationDate?.description ?? "")
                 data.appendFormat("=>           NAME: %@\n", bucketEntry.name ?? "")
                 data.appendFormat("=>           ------\n")

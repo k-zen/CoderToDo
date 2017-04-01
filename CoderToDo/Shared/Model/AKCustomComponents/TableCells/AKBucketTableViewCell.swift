@@ -7,7 +7,7 @@ class AKBucketTableViewCell: UITableViewCell
     @IBOutlet weak var infoContainer: UIView!
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var nameValue: UILabel!
-    @IBOutlet weak var dateValue: UILabel!
+    @IBOutlet weak var priorityValue: UILabel!
     
     // MARK: UITableViewCell Overriding
     override func awakeFromNib()
@@ -15,8 +15,8 @@ class AKBucketTableViewCell: UITableViewCell
         super.awakeFromNib()
         
         // Custom L&F.
-        self.dateValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.dateValue.layer.masksToBounds = true
+        self.priorityValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.priorityValue.layer.masksToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool)

@@ -5,7 +5,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 104.0
+        static let AKViewHeight: CGFloat = 140.0
     }
     
     // MARK: Local Enums
@@ -16,6 +16,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
     @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var priority: UISegmentedControl!
     @IBOutlet weak var save: UIButton!
     @IBOutlet weak var cancel: UIButton!
     
@@ -32,7 +33,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
                 return
             }
             
-            let newEntry = AKBucketEntryInterface(name: name.outputData)
+            let newEntry = AKBucketEntryInterface(name: name.outputData, priority: Int16(self.priority.selectedSegmentIndex + 1))
             do {
                 try newEntry.validate()
             }
@@ -115,6 +116,9 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.priority.subviews[2].tintColor = Func.AKGetColorForPriority(priority: .low)
+        self.priority.subviews[1].tintColor = Func.AKGetColorForPriority(priority: .medium)
+        self.priority.subviews[0].tintColor = Func.AKGetColorForPriority(priority: .high)
         self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.cancel.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

@@ -1063,7 +1063,7 @@ class AKDataInterface
         }
     }
     
-    static func getBucketEntries(project: Project) -> [BucketEntry]
+    static func getBucketEntries(project: Project, forDate: String) -> [BucketEntry]
     {
         if let bucket = project.bucket?.entries?.allObjects as? [BucketEntry] {
             return bucket.sorted {
@@ -1071,13 +1071,46 @@ class AKDataInterface
                 let n2 = $1.name ?? ""
                 
                 return n1 < n2
-            }
+                }.filter({
+                    if forDate == "" {
+                        return true
+                    }
+                    else {
+                        return Func.AKGetFormattedDate(date: $0.creationDate as Date?).caseInsensitiveCompare(forDate) == .orderedSame
+                    }})
         }
         
         return []
     }
     
-    static func countBucketEntries(project: Project) -> Int { return DataInterface.getBucketEntries(project: project).count }
+    static func getEntryDates(project: Project) -> [String]
+    {
+        var notUniqueDates = [String]()
+        var uniqueDates = [String]()
+        
+        if let bucket = project.bucket?.entries?.allObjects as? [BucketEntry] {
+            notUniqueDates = bucket.sorted {
+                let now = Date()
+                let n1 = $0.creationDate as? Date ?? now
+                let n2 = $1.creationDate as? Date ?? now
+                
+                return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
+                }.map({
+                    Func.AKGetFormattedDate(date: $0.creationDate as? Date)
+                })
+            
+            // Now filter out the duplicates.
+            for date in notUniqueDates {
+                if !uniqueDates.contains(date) {
+                    uniqueDates.append(date)
+                }
+            }
+        }
+        
+        return uniqueDates
+    }
+    
+    static func countBucketEntries(project: Project, forDate: String) -> Int { return DataInterface.getBucketEntries(project: project, forDate: forDate).count }
     
     static func removeBucketEntry(project: Project, entry: BucketEntry)
     {
@@ -1092,8 +1125,8 @@ class AKDataInterface
         var maxEntries = 0
         
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
-            if DataInterface.countBucketEntries(project: project) > maxEntries {
-                maxEntries = DataInterface.countBucketEntries(project: project)
+            if DataInterface.countBucketEntries(project: project, forDate: "") > maxEntries {
+                maxEntries = DataInterface.countBucketEntries(project: project, forDate: "")
                 selectedProject = project
             }
         }

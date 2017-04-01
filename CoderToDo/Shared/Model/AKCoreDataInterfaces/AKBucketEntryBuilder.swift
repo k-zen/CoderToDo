@@ -9,6 +9,7 @@ class AKBucketEntryBuilder
             // Mirror.
             entry.name = interface.name
             entry.creationDate = interface.creationDate
+            entry.priority = interface.priority
             
             return entry
         }
@@ -22,17 +23,20 @@ struct AKBucketEntryInterface
     // MARK: Properties
     var name: String
     var creationDate: NSDate
+    var priority: Int16
     
     init()
     {
         self.name = ""
         self.creationDate = NSDate()
+        self.priority = 0
     }
     
-    init(name: String)
+    init(name: String, priority: Int16)
     {
         // Required.
         self.name = name
+        self.priority = priority
         
         // Optional.
         

@@ -5,7 +5,6 @@ workspace 'CoderToDo'
 
 target "CoderToDo" do
     # pod 'Crashlytics'
-    # pod 'DeviceKit'
     # pod 'Fabric'
     
     pod 'Charts/Realm'

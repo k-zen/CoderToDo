@@ -7,6 +7,7 @@
     <entity name="BucketEntry" representedClassName="AKBucketEntryMO" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="bucket" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bucket" inverseName="entries" inverseEntity="Bucket" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName="AKCategoryMO" syncable="YES" codeGenerationType="class">
@@ -84,6 +85,8 @@
         </fetchedProperty>
     </entity>
     <elements>
+        <element name="Bucket" positionX="-1253" positionY="-859" width="128" height="73"/>
+        <element name="BucketEntry" positionX="-1206" positionY="-1026" width="128" height="105"/>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="150"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="149"/>
@@ -93,7 +96,5 @@
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
         <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
         <element name="User" positionX="-839" positionY="-495" width="128" height="131"/>
-        <element name="Bucket" positionX="-1253" positionY="-859" width="128" height="73"/>
-        <element name="BucketEntry" positionX="-1206" positionY="-1026" width="128" height="88"/>
     </elements>
 </model>
