@@ -177,13 +177,15 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     func loadComponents()
     {
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
-            self.categoryData.removeAll()
-            for categoryName in DataInterface.listProjectCategories(project: presenterController.selectedProject!) {
-                self.categoryData.append(categoryName)
+            if let project = presenterController.selectedProject {
+                self.categoryData.removeAll()
+                for categoryName in DataInterface.listProjectCategories(project: project) {
+                    self.categoryData.append(categoryName)
+                }
+                
+                // Set default values.
+                self.categoryValue.selectRow(0, inComponent: 0, animated: true)
             }
-            
-            // Set default values.
-            self.categoryValue.selectRow(0, inComponent: 0, animated: true)
         }
     }
     

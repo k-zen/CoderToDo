@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/XX/XX)
+        * Corrected another bug in the BrainstormingBucket function. (2017/04/01)
         * Corrected minor bug with the BrainstormingBucket function and added missing support to delete the bucket entry after migration. (2017/04/01)
         * Added final support for the BrainstormingBucket function. (2017/04/01)
         * Added support for the BrainstormingBucket function. (2017/03/31)
