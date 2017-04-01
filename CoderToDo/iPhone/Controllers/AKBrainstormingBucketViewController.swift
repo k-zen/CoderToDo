@@ -58,8 +58,6 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     {
         super.viewWillAppear(animated)
         
-        Func.AKReloadTableWithAnimation(tableView: self.projectListTable)
-        
         // Automatic select the most loaded bucket.
         self.selectedProject = DataInterface.mostLoadedBucket()
         // Hide the second table.
@@ -72,6 +70,9 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             self.messageContainer.isHidden = true
             self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
         }
+        
+        Func.AKReloadTableWithAnimation(tableView: self.projectListTable)
+        Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
     }
     
     override func viewDidLayoutSubviews()

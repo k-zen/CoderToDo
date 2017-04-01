@@ -57,10 +57,12 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
                     presenterController.tap(nil)
                     self.controller?.hideMigrateBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKBrainstormingBucketViewController {
-                            // TODO: Remove the bucket entry here!
-                            
-                            Func.AKReloadTableWithAnimation(tableView: presenterController.projectListTable)
-                            Func.AKReloadTableWithAnimation(tableView: presenterController.bucketTable)
+                            if let project = presenterController.selectedProject, let entry = presenterController.selectedBucketEntry {
+                                DataInterface.removeBucketEntry(project: project, entry: entry)
+                                
+                                Func.AKReloadTableWithAnimation(tableView: presenterController.projectListTable)
+                                Func.AKReloadTableWithAnimation(tableView: presenterController.bucketTable)
+                            }
                         }
                     })
                 }
