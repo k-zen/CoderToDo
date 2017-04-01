@@ -705,33 +705,25 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9w-7w-9Xd" userLabel="Bucket_Container">
                                 <rect key="frame" x="0.0" y="150" width="375" height="404"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bucket list for:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnN-WS-6cv" userLabel="Bucket_List_Title">
+                                        <rect key="frame" x="8" y="8" width="359" height="24"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1pS-Hu-LHI" userLabel="Bucket_Table">
-                                        <rect key="frame" x="8" y="46" width="359" height="350"/>
+                                        <rect key="frame" x="8" y="40" width="359" height="356"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewp-wt-UtG" userLabel="Add_Tomorrow_Task">
-                                        <rect key="frame" x="297" y="8" width="70" height="30"/>
-                                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="FW4-Zz-rI3"/>
-                                            <constraint firstAttribute="height" constant="30" id="T91-DQ-SrA"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="14"/>
-                                        <state key="normal" title="Add Entry">
-                                            <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addEntry:" destination="PAU-eO-LY5" eventType="touchUpInside" id="ulg-Bw-5eh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Ewp-wt-UtG" secondAttribute="trailing" constant="8" id="2fT-yQ-nCT"/>
+                                    <constraint firstItem="BnN-WS-6cv" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="8" id="0OW-e6-P0H"/>
                                     <constraint firstAttribute="trailing" secondItem="1pS-Hu-LHI" secondAttribute="trailing" constant="8" id="67c-kW-jsE"/>
-                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="46" id="CKw-pX-1fJ"/>
-                                    <constraint firstItem="Ewp-wt-UtG" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="8" id="F0f-4g-Cop"/>
+                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="40" id="CKw-pX-1fJ"/>
+                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="BnN-WS-6cv" secondAttribute="bottom" constant="8" id="IOk-Aa-xqN"/>
+                                    <constraint firstAttribute="trailing" secondItem="BnN-WS-6cv" secondAttribute="trailing" constant="8" id="LoK-9K-y9n"/>
                                     <constraint firstAttribute="bottom" secondItem="1pS-Hu-LHI" secondAttribute="bottom" constant="8" id="Nml-AE-5Dr"/>
-                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="Ewp-wt-UtG" secondAttribute="bottom" constant="8" id="Por-uy-MIv"/>
+                                    <constraint firstItem="BnN-WS-6cv" firstAttribute="leading" secondItem="d9w-7w-9Xd" secondAttribute="leading" constant="8" id="PNw-18-FRY"/>
                                     <constraint firstItem="1pS-Hu-LHI" firstAttribute="leading" secondItem="d9w-7w-9Xd" secondAttribute="leading" constant="8" id="o5m-9C-Ky6"/>
                                 </constraints>
                             </view>
@@ -776,10 +768,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="Brainstorming Bucket" id="pI1-Ru-4xj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jjG-gs-u2y"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hXN-Q0-eq0">
+                            <color key="tintColor" red="0.98431372549999996" green="0.28627450980000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addEntry:" destination="PAU-eO-LY5" id="EqQ-HW-yWY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addEntry" destination="Ewp-wt-UtG" id="f7v-Fi-3cc"/>
+                        <outlet property="addEntry" destination="hXN-Q0-eq0" id="D3f-BL-xMM"/>
                         <outlet property="bucketContainer" destination="d9w-7w-9Xd" id="e7X-Dl-SZJ"/>
+                        <outlet property="bucketListTitle" destination="BnN-WS-6cv" id="R9b-Mb-QLm"/>
                         <outlet property="bucketTable" destination="1pS-Hu-LHI" id="YBv-Dm-zBi"/>
                         <outlet property="mainContainer" destination="bs1-nb-pXf" id="Cfl-0N-eZb"/>
                         <outlet property="messageContainer" destination="Lcy-mi-2dl" id="G7h-EQ-2Qn"/>

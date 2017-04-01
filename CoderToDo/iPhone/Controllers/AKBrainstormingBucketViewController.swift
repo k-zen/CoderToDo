@@ -4,13 +4,13 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKProjectListTableHeaderHeight: CGFloat = 4
-        static let AKProjectListTableRowHeight: CGFloat = 40
-        static let AKProjectListTableFooterHeight: CGFloat = 4
+        static let AKProjectListTableHeaderHeight: CGFloat = 0.5
+        static let AKProjectListTableRowHeight: CGFloat = 40.0
+        static let AKProjectListTableFooterHeight: CGFloat = 2.0
         
-        static let AKBucketTableHeaderHeight: CGFloat = 4
-        static let AKBucketTableRowHeight: CGFloat = 45
-        static let AKBucketTableFooterHeight: CGFloat = 4
+        static let AKBucketTableHeaderHeight: CGFloat = 0.5
+        static let AKBucketTableRowHeight: CGFloat = 45.0
+        static let AKBucketTableFooterHeight: CGFloat = 2.0
         
         static let AKProjectListTableTag = 1
         static let AKBucketTableTag = 2
@@ -19,6 +19,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     // MARK: Properties
     var projectFilter = Filter(projectFilter: FilterProject())
     var selectedProject: Project?
+    var selectedBucketEntry: BucketEntry?
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
@@ -26,13 +27,24 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBOutlet weak var bucketContainer: UIView!
     @IBOutlet weak var messageContainer: UIView!
     @IBOutlet weak var projectListTable: UITableView!
-    @IBOutlet weak var addEntry: UIButton!
+    @IBOutlet weak var addEntry: UIBarButtonItem!
+    @IBOutlet weak var bucketListTitle: UILabel!
     @IBOutlet weak var bucketTable: UITableView!
     
     // MARK: Actions
     @IBAction func addEntry(_ sender: Any)
     {
-        self.showAddBucketEntry(animate: true, completionTask: nil)
+        if let _ = self.selectedProject {
+            self.showAddBucketEntry(animate: true, completionTask: nil)
+        }
+        else {
+            self.showMessage(
+                message: "Select a project first.",
+                autoDismiss: true,
+                animate: true,
+                completionTask: nil
+            )
+        }
     }
     
     // MARK: AKCustomViewController Overriding
@@ -58,15 +70,13 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         else {
             self.bucketContainer.isHidden = false
             self.messageContainer.isHidden = true
+            self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
         }
     }
     
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.addEntry.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: UITableViewDataSource Implementation
@@ -93,7 +103,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             
             return cell
         case LocalConstants.AKBucketTableTag:
-            if let selectedProject = selectedProject {
+            if let selectedProject = self.selectedProject {
                 let bucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
                 
                 let cell = self.bucketTable.dequeueReusableCell(withIdentifier: "BucketTableCell") as! AKBucketTableViewCell
@@ -104,7 +114,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
                 Func.AKAddBorderDeco(
                     cell.infoContainer,
-                    color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
+                    color: GlobalConstants.AKCoderToDoBlue.cgColor,
                     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
                     position: .left
                 )
@@ -130,7 +140,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             
             return headerCell
         case LocalConstants.AKBucketTableTag:
-            if let _ = selectedProject {
+            if let _ = self.selectedProject {
                 let headerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKBucketTableHeaderHeight))
                 headerCell.backgroundColor = UIColor.clear
                 
@@ -155,7 +165,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             
             return footerCell
         case LocalConstants.AKBucketTableTag:
-            if let _ = selectedProject {
+            if let _ = self.selectedProject {
                 let footerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKBucketTableFooterHeight))
                 footerCell.backgroundColor = UIColor.clear
                 
@@ -189,7 +199,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         case LocalConstants.AKProjectListTableTag:
             return 1
         case LocalConstants.AKBucketTableTag:
-            if let selectedProject = selectedProject {
+            if let selectedProject = self.selectedProject {
                 return DataInterface.countBucketEntries(project: selectedProject)
             }
             else {
@@ -217,10 +227,12 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     {
         // Delete Action
         let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
-            let bucketEntry = DataInterface.getBucketEntries(project: self.selectedProject!)[(indexPath as NSIndexPath).row]
-            DataInterface.removeBucketEntry(project: self.selectedProject!, entry: bucketEntry)
-            
-            Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
+            if let selectedProject = self.selectedProject {
+                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
+                DataInterface.removeBucketEntry(project: selectedProject, entry: bucketEntry)
+                
+                Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
+            }
         })
         delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
         
@@ -261,8 +273,27 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             // Show the second table.
             self.bucketContainer.isHidden = false
             self.messageContainer.isHidden = true
+            self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
             // Load bucket table.
             Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
+            break
+        case LocalConstants.AKBucketTableTag:
+            if let selectedProject = self.selectedProject {
+                self.selectedBucketEntry = DataInterface.getBucketEntries(project: selectedProject)[(indexPath as NSIndexPath).row]
+                if let _ = self.selectedBucketEntry {
+                    do {
+                        try AKChecks.canAddTask(project: selectedProject)
+                        self.showMigrateBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
+                            if let presenterController = presenterController as? AKBrainstormingBucketViewController {
+                                presenterController.migrateBucketEntryOverlay.taskNameValue.text = presenterController.selectedBucketEntry?.name
+                            }
+                        })
+                    }
+                    catch {
+                        Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+                    }
+                }
+            }
             break
         default:
             break

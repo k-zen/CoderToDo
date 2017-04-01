@@ -101,6 +101,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let filterMenuItemOverlay = AKFilterView()
     let searchMenuItemOverlay = AKSearchView()
     let addBucketEntryOverlay = AKAddBucketEntryView()
+    let migrateBucketEntryOverlay = AKMigrateBucketEntryView()
     // Menu
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
@@ -202,6 +203,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.addBucketEntryOverlay.controller = self
         self.addBucketEntryOverlay.setup()
         self.addBucketEntryOverlay.draw(
+            container: self.view,
+            coordinates: CGPoint.zero,
+            size: CGSize.zero
+        )
+        
+        self.migrateBucketEntryOverlay.controller = self
+        self.migrateBucketEntryOverlay.setup()
+        self.migrateBucketEntryOverlay.draw(
             container: self.view,
             coordinates: CGPoint.zero,
             size: CGSize.zero
@@ -434,6 +443,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
+    func showMigrateBucketEntry(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.migrateBucketEntryOverlay.expand(
+            controller: self,
+            expandHeight: AKMigrateBucketEntryView.LocalConstants.AKViewHeight,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
     func hideMessage(
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
@@ -516,6 +537,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.addBucketEntryOverlay.collapse(
+            controller: self,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
+    func hideMigrateBucketEntry(
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.migrateBucketEntryOverlay.collapse(
             controller: self,
             animate: animate,
             completionTask: completionTask

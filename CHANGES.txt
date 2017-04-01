@@ -1,8 +1,9 @@
-=================== Release 1.0 2017-03-31 =====================
+=================== Release 1.0 2017-04-15 =====================
 Description
     * First version of the App.
 Changes
-    * Version 1.0 Build 01 (2017/03/31)
+    * Version 1.0 Build 01 (2017/XX/XX)
+        * Added final support for the BrainstormingBucket function. (2017/04/01)
         * Added support for the BrainstormingBucket function. (2017/03/31)
         * Disabled user interaction with the charts. (2017/03/30)
         * Added support for a chart displaying days SR grouped by week day. (2017/03/30)

@@ -46,6 +46,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
                 presenterController.tap(nil)
                 self.controller?.hideAddBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKBrainstormingBucketViewController {
+                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectListTable)
                         Func.AKReloadTableWithAnimation(tableView: presenterController.bucketTable)
                     }
                 })

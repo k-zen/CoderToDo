@@ -112,7 +112,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func loadComponents()
     {
         self.categoryData.removeAll()
-        if let controller = controller as? AKViewTaskViewController {
+        if let controller = self.controller as? AKViewTaskViewController {
             if let project = controller.task.category?.day?.project {
                 for categoryName in DataInterface.listProjectCategories(project: project) {
                     self.categoryData.append(categoryName)

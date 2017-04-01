@@ -45,6 +45,8 @@
 		49121BCF1E737480000B4D26 /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAC1E737480000B4D26 /* Icon-86@2x.png */; };
 		49121BD01E737480000B4D26 /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAD1E737480000B4D26 /* Icon-98@2x.png */; };
 		49121BD21E73765D000B4D26 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BD11E73765D000B4D26 /* Logo.png */; };
+		4927A5B71E8FF39500707EB0 /* AKMigrateBucketEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4927A5B61E8FF39500707EB0 /* AKMigrateBucketEntryView.xib */; };
+		4927A5B91E8FF54500707EB0 /* AKMigrateBucketEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4927A5B81E8FF54500707EB0 /* AKMigrateBucketEntryView.swift */; };
 		492D5C741E82F53E00F9E470 /* AKAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D5C731E82F53E00F9E470 /* AKAddView.swift */; };
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
@@ -177,6 +179,8 @@
 		49121BAC1E737480000B4D26 /* Icon-86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-86@2x.png"; sourceTree = "<group>"; };
 		49121BAD1E737480000B4D26 /* Icon-98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-98@2x.png"; sourceTree = "<group>"; };
 		49121BD11E73765D000B4D26 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		4927A5B61E8FF39500707EB0 /* AKMigrateBucketEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKMigrateBucketEntryView.xib; sourceTree = "<group>"; };
+		4927A5B81E8FF54500707EB0 /* AKMigrateBucketEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMigrateBucketEntryView.swift; sourceTree = "<group>"; };
 		492D5C731E82F53E00F9E470 /* AKAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddView.swift; sourceTree = "<group>"; };
 		492F28381E4B6C0D0020608B /* CHANGES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		492F28391E4B6C0D0020608B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -464,6 +468,7 @@
 				490670251E6D90CF0046298C /* AKFilterView.xib */,
 				49A4A0A81E589E8600CEDA1B /* AKIntroductoryView.xib */,
 				49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */,
+				4927A5B61E8FF39500707EB0 /* AKMigrateBucketEntryView.xib */,
 				49A4A0A91E589E8600CEDA1B /* AKNewProjectView.xib */,
 				49A4A0AA1E589E8600CEDA1B /* AKProjectsTableViewCell.xib */,
 				496674D41E6F276E00A60B64 /* AKSearchView.xib */,
@@ -587,6 +592,7 @@
 				49E76DD21E7DCF62000215BC /* AKContinueMessageView.swift */,
 				49E76DD31E7DCF62000215BC /* AKFilterView.swift */,
 				49E76DD41E7DCF62000215BC /* AKMessageView.swift */,
+				4927A5B81E8FF54500707EB0 /* AKMigrateBucketEntryView.swift */,
 				49E76DD51E7DCF62000215BC /* AKSearchView.swift */,
 				49E76DD61E7DCF62000215BC /* AKSelectCategoryView.swift */,
 				49E76DD71E7DCF62000215BC /* AKSelectTaskStateView.swift */,
@@ -780,6 +786,7 @@
 				49121BBD1E737480000B4D26 /* Icon-60@3x.png in Resources */,
 				49121BAE1E737480000B4D26 /* Icon-1024@1x.png in Resources */,
 				49A4A0F11E589E8600CEDA1B /* AKNewProjectView.xib in Resources */,
+				4927A5B71E8FF39500707EB0 /* AKMigrateBucketEntryView.xib in Resources */,
 				49121BC31E737480000B4D26 /* Icon-83.5@2x.png in Resources */,
 				49121BC41E737480000B4D26 /* Icon-Small-50@1x.png in Resources */,
 				49A4A0EF1E589E8600CEDA1B /* AKDaysTableViewCell.xib in Resources */,
@@ -909,6 +916,7 @@
 				49E76DF81E7DCF62000215BC /* AKXMLController.swift in Sources */,
 				49E76E081E7DCF62000215BC /* AKTasksTableView.swift in Sources */,
 				49E76DFE1E7DCF62000215BC /* AKCustomView.swift in Sources */,
+				4927A5B91E8FF54500707EB0 /* AKMigrateBucketEntryView.swift in Sources */,
 				49E76E0D1E7DCF62000215BC /* AKProjectsTableViewCell.swift in Sources */,
 				498E17941E84334D00B3A3A1 /* AKProjectNotificationsViewController.swift in Sources */,
 				49E76E091E7DCF62000215BC /* AKTopMenuView.swift in Sources */,
