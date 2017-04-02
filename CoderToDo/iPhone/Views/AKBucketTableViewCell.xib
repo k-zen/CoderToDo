@@ -19,11 +19,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIo-o2-Hau" userLabel="Info_Container">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrh-fG-snJ" userLabel="Name_Value">
-                                <rect key="frame" x="16" y="0.0" width="226" height="44"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
+                                <rect key="frame" x="16" y="0.0" width="236" height="44"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -36,18 +36,21 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrd-aO-YWm" userLabel="Priority_Container">
-                        <rect key="frame" x="250" y="0.0" width="70" height="44"/>
+                        <rect key="frame" x="260" y="0.0" width="60" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10k-e1-t5O" userLabel="Priority_Value">
-                                <rect key="frame" x="0.0" y="11" width="70" height="22"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
+                                <rect key="frame" x="0.0" y="12.5" width="60" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="uVo-4Y-y4j"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="10k-e1-t5O" firstAttribute="leading" secondItem="xrd-aO-YWm" secondAttribute="leading" id="Vfy-yb-qTH"/>
-                            <constraint firstAttribute="width" constant="70" id="l4H-nK-Q9v"/>
+                            <constraint firstAttribute="width" constant="60" id="l4H-nK-Q9v"/>
                             <constraint firstItem="10k-e1-t5O" firstAttribute="centerY" secondItem="xrd-aO-YWm" secondAttribute="centerY" id="mcT-fi-TmM"/>
                             <constraint firstAttribute="trailing" secondItem="10k-e1-t5O" secondAttribute="trailing" id="plZ-NG-hmd"/>
                         </constraints>

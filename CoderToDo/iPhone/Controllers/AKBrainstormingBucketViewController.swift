@@ -121,7 +121,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
                 Func.AKAddBorderDeco(
                     cell.infoContainer,
-                    color: GlobalConstants.AKCoderToDoBlue.cgColor,
+                    color: bucketEntry.priority == 0 ? UIColor.clear.cgColor : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!).cgColor,
                     thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
                     position: .left
                 )
@@ -151,16 +151,12 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let date = DataInterface.getEntryDates(project: selectedProject)[section]
                 
                 let tableWidth = tableView.frame.width
-                let padding = CGFloat(8.0)
+                let padding = CGFloat(0.0)
+                let badgeSizeWidth = CGFloat(60.0)
+                let badgeSizeHeight = CGFloat(21.0)
                 
                 let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKBucketTableHeaderHeight))
-                headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
-                Func.AKAddBorderDeco(
-                    headerCell,
-                    color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-                    position: .left
-                )
+                headerCell.backgroundColor = GlobalConstants.AKDefaultBg
                 
                 let title = UILabel(frame: CGRect(
                     x: padding * 2.0,
@@ -168,7 +164,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                     width: tableWidth - (padding * 2),
                     height: LocalConstants.AKBucketTableHeaderHeight)
                 )
-                title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 20.0)
+                title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
                 title.textColor = GlobalConstants.AKDefaultFg
                 title.text = date
                 title.textAlignment = .left
@@ -176,7 +172,44 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 // title.layer.borderColor = UIColor.white.cgColor
                 // title.layer.borderWidth = 1.0
                 
+                Func.AKAddBorderDeco(
+                    title,
+                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
+                    position: .through
+                )
+                
+                let tasksCountBadgeContainer = UIView(frame: CGRect(
+                    x: tableWidth - padding - (badgeSizeWidth),
+                    y: 0,
+                    width: badgeSizeWidth,
+                    height: LocalConstants.AKBucketTableHeaderHeight)
+                )
+                // ### DEBUG
+                // tasksCountBadgeContainer.layer.borderColor = UIColor.white.cgColor
+                // tasksCountBadgeContainer.layer.borderWidth = 1.0
+                
+                let tasksCountBadge = UILabel(frame: CGRect(
+                    x: tasksCountBadgeContainer.frame.width - (badgeSizeWidth),
+                    y: (LocalConstants.AKBucketTableHeaderHeight - badgeSizeHeight) / 2.0,
+                    width: badgeSizeWidth,
+                    height: badgeSizeHeight)
+                )
+                tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
+                tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
+                tasksCountBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+                tasksCountBadge.text = String(format: "Entries: %i", DataInterface.countBucketEntries(project: selectedProject, forDate: date))
+                tasksCountBadge.textAlignment = .center
+                tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                tasksCountBadge.layer.masksToBounds = true
+                // ### DEBUG
+                // tasksCountBadge.layer.borderColor = UIColor.white.cgColor
+                // tasksCountBadge.layer.borderWidth = 1.0
+                
+                tasksCountBadgeContainer.addSubview(tasksCountBadge)
+                
                 headerCell.addSubview(title)
+                headerCell.addSubview(tasksCountBadgeContainer)
                 
                 return headerCell
             }
