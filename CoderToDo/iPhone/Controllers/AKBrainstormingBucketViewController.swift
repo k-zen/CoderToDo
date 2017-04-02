@@ -273,6 +273,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
                 DataInterface.removeBucketEntry(project: selectedProject, entry: bucketEntry)
                 
+                Func.AKReloadTableWithAnimation(tableView: self.projectListTable)
                 Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
             }
         })

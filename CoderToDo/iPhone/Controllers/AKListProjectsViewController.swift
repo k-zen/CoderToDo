@@ -529,8 +529,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
         chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
-        chartDataSet.drawValuesEnabled = false
-        chartDataSet.colors = [GlobalConstants.AKRedForBlackFg]
+        chartDataSet.drawValuesEnabled = true
+        chartDataSet.setColors([GlobalConstants.AKCoderToDoWhite], alpha: 0.5)
         
         // Configure the chart.
         self.osrChartContainer.xAxis.labelPosition = .bottom
