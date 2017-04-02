@@ -37,7 +37,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         if let _ = self.selectedProject {
             self.showAddBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
                 if let presenterController = presenterController as? AKBrainstormingBucketViewController {
-                    presenterController.migrateBucketEntryOverlay.taskNameValue.text = ""
+                    presenterController.addBucketEntryOverlay.name.text = ""
                 }
             })
         }
