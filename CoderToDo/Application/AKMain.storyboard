@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kca-Sl-9gs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kca-Sl-9gs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -404,15 +404,121 @@
                         <viewControllerLayoutGuide type="top" id="c0L-3j-WGp"/>
                         <viewControllerLayoutGuide type="bottom" id="8pN-cv-3RS"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nA7-bi-BxD">
+                    <view key="view" contentMode="scaleToFill" id="nA7-bi-BxD" userLabel="Main_Container">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBo-Ce-cYe" userLabel="Scroll_Container">
+                                <rect key="frame" x="37" y="0.0" width="300" height="515"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-pd-FmN" userLabel="Controls_Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="515"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Working Day Starting Time:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s50-yd-eTK" userLabel="Title_1">
+                                                <rect key="frame" x="8" y="8" width="284" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Modify your day's starting time for this project." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfS-s1-lWO" userLabel="Starting_Time_Message">
+                                                <rect key="frame" x="8" y="40" width="284" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            </textView>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3H-7z-kL4" userLabel="Starting_Time_Value">
+                                                <rect key="frame" x="8" y="84" width="284" height="75"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </pickerView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0F-IE-Jrz" userLabel="Separator_1">
+                                                <rect key="frame" x="8" y="167" width="284" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Working Day Closing Time:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXy-sw-893" userLabel="Title_2">
+                                                <rect key="frame" x="8" y="177" width="284" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Modify your day's closing time for this project." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrH-ba-JNa" userLabel="Closing_Time_Message">
+                                                <rect key="frame" x="8" y="209" width="284" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            </textView>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbw-fs-gid" userLabel="Closing_Time_Value">
+                                                <rect key="frame" x="8" y="253" width="284" height="75"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </pickerView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s1H-om-GGb" userLabel="Separator_2">
+                                                <rect key="frame" x="8" y="336" width="284" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Closing Time Tolerance:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUb-b6-v0b" userLabel="Title_3">
+                                                <rect key="frame" x="8" y="346" width="284" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Modify the tolerance for your day's closing time." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5PF-tL-wsf" userLabel="Tolerance_Message">
+                                                <rect key="frame" x="8" y="378" width="284" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            </textView>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cB-vi-102" userLabel="Tolerance_Value">
+                                                <rect key="frame" x="8" y="422" width="284" height="75"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </pickerView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNj-dL-ZPi" userLabel="Separator_3">
+                                                <rect key="frame" x="8" y="505" width="284" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="515" id="BKg-DL-S4v"/>
+                                            <constraint firstAttribute="width" constant="300" id="weT-0b-crt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="cPu-pd-FmN" firstAttribute="top" secondItem="DBo-Ce-cYe" secondAttribute="top" id="3cX-GJ-5Zt"/>
+                                    <constraint firstAttribute="trailing" secondItem="cPu-pd-FmN" secondAttribute="trailing" id="BIA-OQ-NAx"/>
+                                    <constraint firstAttribute="bottom" secondItem="cPu-pd-FmN" secondAttribute="bottom" id="YLO-2e-Jgl"/>
+                                    <constraint firstItem="cPu-pd-FmN" firstAttribute="leading" secondItem="DBo-Ce-cYe" secondAttribute="leading" id="kBk-CQ-nS9"/>
+                                    <constraint firstAttribute="width" constant="300" id="kY8-05-LRL"/>
+                                    <constraint firstAttribute="height" constant="515" id="svp-zP-e5V"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DBo-Ce-cYe" firstAttribute="centerX" secondItem="nA7-bi-BxD" secondAttribute="centerX" id="d59-tN-caX"/>
+                            <constraint firstItem="DBo-Ce-cYe" firstAttribute="top" secondItem="c0L-3j-WGp" secondAttribute="bottom" id="deS-ff-vT5"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="closingTime" destination="hbw-fs-gid" id="ei4-tI-aGo"/>
+                        <outlet property="controlsContainer" destination="cPu-pd-FmN" id="Olo-Au-xDV"/>
+                        <outlet property="startingTime" destination="V3H-7z-kL4" id="7mS-7h-EqJ"/>
+                        <outlet property="tolerance" destination="0cB-vi-102" id="JQe-bW-42v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mz-Sb-IaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4924" y="137"/>
+            <point key="canvasLocation" x="4924" y="136.28185907046478"/>
         </scene>
         <!--User Defined Categories-->
         <scene sceneID="R8A-Ii-3w7">
@@ -455,7 +561,7 @@
                         <viewControllerLayoutGuide type="top" id="aeF-E1-Pp3"/>
                         <viewControllerLayoutGuide type="bottom" id="lc5-Gw-ksU"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3t8-NO-dL6">
+                    <view key="view" contentMode="scaleToFill" id="3t8-NO-dL6" userLabel="Main_Container">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

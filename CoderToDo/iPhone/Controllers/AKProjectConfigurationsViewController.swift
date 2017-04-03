@@ -27,6 +27,13 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     {
         if let identifier = segue.identifier {
             switch identifier {
+            case GlobalConstants.AKViewProjectTimesSegue:
+                if let destination = segue.destination as? AKProjectTimesViewController {
+                    if let project = sender as? Project {
+                        destination.project = project
+                    }
+                }
+                break
             case GlobalConstants.AKViewProjectNotificationsSegue:
                 if let destination = segue.destination as? AKProjectNotificationsViewController {
                     if let project = sender as? Project {

@@ -93,6 +93,7 @@
 		49AFFC3D1E81615100FC258C /* MainDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49AFFC3B1E81615100FC258C /* MainDataModel.xcdatamodeld */; };
 		49AFFC401E81660200FC258C /* AKUserBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AFFC3F1E81660200FC258C /* AKUserBuilder.swift */; };
 		49AFFC421E819FEA00FC258C /* AKConfigurationsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AFFC411E819FEA00FC258C /* AKConfigurationsBuilder.swift */; };
+		49C064261E92679300FAE031 /* AKProjectTimesViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49C064241E92679300FAE031 /* AKProjectTimesViewController.plist */; };
 		49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */; };
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */; };
@@ -233,6 +234,7 @@
 		49AFFC3F1E81660200FC258C /* AKUserBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserBuilder.swift; sourceTree = "<group>"; };
 		49AFFC411E819FEA00FC258C /* AKConfigurationsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsBuilder.swift; sourceTree = "<group>"; };
 		49BE6DF91E65C69300E3F306 /* CoderToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderToDo.entitlements; sourceTree = "<group>"; };
+		49C064251E92679300FAE031 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AKProjectTimesViewController.plist; sourceTree = "<group>"; };
 		49D57DCA1E5B15A300DACF53 /* AKAddTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKAddTaskView.xib; sourceTree = "<group>"; };
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
 		49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsViewController.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				49A4A0CA1E589E8600CEDA1B /* AKNewProjectViewController.plist */,
+				49C064241E92679300FAE031 /* AKProjectTimesViewController.plist */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				49121BCB1E737480000B4D26 /* Icon-29@2x.png in Resources */,
 				49121BBF1E737480000B4D26 /* Icon-72@2x.png in Resources */,
 				49A4A0E41E589E8600CEDA1B /* AKLaunchScreen.storyboard in Resources */,
+				49C064261E92679300FAE031 /* AKProjectTimesViewController.plist in Resources */,
 				49A4A0F01E589E8600CEDA1B /* AKIntroductoryView.xib in Resources */,
 				49121BC91E737480000B4D26 /* Icon-24@2x.png in Resources */,
 				49121BC01E737480000B4D26 /* Icon-76@1x.png in Resources */,
@@ -938,6 +942,14 @@
 				49A4A0CB1E589E8600CEDA1B /* Base */,
 			);
 			name = AKNewProjectViewController.plist;
+			sourceTree = "<group>";
+		};
+		49C064241E92679300FAE031 /* AKProjectTimesViewController.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49C064251E92679300FAE031 /* Base */,
+			);
+			name = AKProjectTimesViewController.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

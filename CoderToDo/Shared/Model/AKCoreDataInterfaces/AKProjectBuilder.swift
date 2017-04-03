@@ -103,12 +103,12 @@ struct AKProjectInterface
     }
     
     // MARK: Setters
-    mutating func setClosingTime(_ asString: String)
+    mutating func setClosingTime(_ asString: String, format: String = GlobalConstants.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!)
     {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
-            format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current) {
+            format: format,
+            timeZone: timeZone) {
             self.closingTime = date
         }
     }
@@ -150,12 +150,12 @@ struct AKProjectInterface
         }
     }
     
-    mutating func setStartingTime(_ asString: String)
+    mutating func setStartingTime(_ asString: String, format: String = GlobalConstants.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!)
     {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
-            format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current) {
+            format: format,
+            timeZone: timeZone) {
             self.startingTime = date
         }
     }

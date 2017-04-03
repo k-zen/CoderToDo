@@ -46,8 +46,8 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         
         var newProject = AKProjectInterface(name: name.outputData)
         // Custom Setters.
-        newProject.setClosingTime(cti)
-        newProject.setStartingTime(sti)
+        newProject.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
+        newProject.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
         // Normal Setters.
         newProject.closingTimeTolerance = Int16(ctt)
         newProject.notifyClosingTime = nct

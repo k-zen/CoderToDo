@@ -1076,6 +1076,15 @@ class UtilityFunctions
         return nil
     }
     
+    func AKProcessDateToString(date: Date, format: String, timeZone: TimeZone) -> String
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = timeZone
+        
+        return formatter.string(from: date)
+    }
+    
     func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int
     {
         if let date = date as Date? {

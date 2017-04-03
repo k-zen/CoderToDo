@@ -190,9 +190,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         if let closingTime = project.closingTime as Date? {
             cell.closeValue.text = String(
-                format: "To: %.2i:%.2ih",
+                format: "To: %.2i:%.2ih (%i min)",
                 Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0,
-                Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0
+                Func.AKGetCalendarForLoading().dateComponents([.minute], from: closingTime).minute ?? 0,
+                project.closingTimeTolerance
             )
         }
         else {
