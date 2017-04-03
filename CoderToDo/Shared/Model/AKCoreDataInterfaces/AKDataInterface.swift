@@ -765,6 +765,32 @@ class AKDataInterface
     }
     
     ///
+    /// Computes the list of all tasks in the project skipping filters. No order is defined.
+    ///
+    /// - Parameter project: The project where the tasks are.
+    ///
+    /// - Returns: A list of all tasks.
+    ///
+    static func getAllTasksInProject(project: Project) -> [Task]
+    {
+        var allTasks = [Task]()
+        
+        if let days = project.days?.allObjects as? [Day] {
+            for day in days { // Iterate all days.
+                if let categories = day.categories?.allObjects as? [Category] {
+                    for category in categories { // Foreach day iterate categories.
+                        if let tasks = category.tasks?.allObjects as? [Task] {
+                            allTasks.append(contentsOf: tasks)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return allTasks
+    }
+    
+    ///
     /// Counts all tasks in a given day. It respects the use of filters,
     /// because sometimes we need to count tasks in a day which
     /// had been filtered by the user.

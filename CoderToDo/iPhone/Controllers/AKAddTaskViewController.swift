@@ -26,6 +26,11 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     // MARK: Actions
     @IBAction func add(_ sender: Any)
     {
+        // Sanity Checks
+        for task in DataInterface.getAllTasksInProject(project: self.project) {
+            AKChecks.workingDayCloseSanityChecks(controller: self, task: task)
+        }
+        
         let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
         let taskName = AKTaskName(inputData: self.taskNameValue.text!)
         do {
