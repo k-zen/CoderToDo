@@ -47,7 +47,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.customSetup()
         
         // Load the task data.
-        self.taskDayValue.text = String(format: "Task set up for: %@", Func.AKGetFormattedDate(date: (self.task.category?.day)!.date as? Date))
+        self.taskDayValue.text = String(format: "Task set up for: %@", Func.AKGetFormattedDate(date: (self.task.category?.day)!.date as Date?))
         // Task name.
         self.taskNameValue.text = self.task.name ?? "N\\A"
         // Task Status.

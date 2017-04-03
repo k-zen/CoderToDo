@@ -31,7 +31,7 @@ class AKCloudKitController: NSObject
                             Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                                 guard error == nil else {
                                     // TODO: Show error message and disable function.
-                                    NSLog("=> ERROR: \(error)")
+                                    NSLog("=> ERROR: \(String(describing: error))")
                                     return
                                 }
                                 
@@ -91,7 +91,7 @@ class AKCloudKitController: NSObject
             Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
                     // TODO: Show error message and disable function.
-                    NSLog("=> ERROR: \(error)")
+                    NSLog("=> ERROR: \(String(describing: error))")
                     return
                 }
                 
@@ -150,7 +150,7 @@ class AKCloudKitController: NSObject
             Func.AKExecuteInMainThread(controller: presenterController, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
                     // TODO: Show error message and disable function.
-                    NSLog("=> ERROR: \(error)")
+                    NSLog("=> ERROR: \(String(describing: error))")
                     return
                 }
                 

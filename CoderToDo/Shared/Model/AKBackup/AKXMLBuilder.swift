@@ -126,7 +126,7 @@ class AKXMLBuilder
         outerParser.parse()
         let error = outerParser.parserError
         if error != nil {
-            fatalError("=> ERROR: \(error?.localizedDescription)") // TODO: Improve!!!
+            fatalError("=> ERROR: \(String(describing: error?.localizedDescription))") // TODO: Improve!!!
         }
         
         let outerProcessor = ESXPProcessor.newBuild(GlobalConstants.AKBackupXMLMaxNodes)
@@ -151,7 +151,7 @@ class AKXMLBuilder
                                 innerParser.parse()
                                 let error = innerParser.parserError
                                 if error != nil {
-                                    fatalError("=> ERROR: \(error?.localizedDescription)") // TODO: Improve!!!
+                                    fatalError("=> ERROR: \(String(describing: error?.localizedDescription))") // TODO: Improve!!!
                                 }
                                 
                                 let innerProcessor = ESXPProcessor.newBuild(GlobalConstants.AKBackupXMLMaxNodes)!

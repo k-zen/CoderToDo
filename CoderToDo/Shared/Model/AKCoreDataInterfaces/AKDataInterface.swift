@@ -67,7 +67,7 @@ class AKDataInterface
                         identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!),
                         content: closingTimeContent,
                         trigger: UNCalendarNotificationTrigger(
-                            dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime as! Date),
+                            dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime! as Date),
                             repeats: true
                         )
                     ),
@@ -105,8 +105,8 @@ class AKDataInterface
                 case .closingTime:
                     result = result.sorted {
                         let now = Date()
-                        let n1 = $0.closingTime as? Date ?? now
-                        let n2 = $1.closingTime as? Date ?? now
+                        let n1 = $0.closingTime as Date? ?? now
+                        let n2 = $1.closingTime as Date? ?? now
                         
                         return projectFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
@@ -116,8 +116,8 @@ class AKDataInterface
                 case .creationDate:
                     result = result.sorted {
                         let now = Date()
-                        let n1 = $0.creationDate as? Date ?? now
-                        let n2 = $1.creationDate as? Date ?? now
+                        let n1 = $0.creationDate as Date? ?? now
+                        let n2 = $1.creationDate as Date? ?? now
                         
                         return projectFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
@@ -192,7 +192,7 @@ class AKDataInterface
     
     static func getProjectStatus(project: Project) -> ProjectStatus
     {
-        if let startingTime = project.startingTime as? Date, let closingTime = project.closingTime as? Date, let creationTime = project.creationDate as? Date {
+        if let startingTime = project.startingTime as Date?, let closingTime = project.closingTime as Date?, let creationTime = project.creationDate as Date? {
             let now = Date()
             let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
             let startingTimeHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: startingTime).minute ?? 0)
@@ -236,7 +236,7 @@ class AKDataInterface
     
     static func getProjectRunningDays(project: Project) -> Int
     {
-        if let creationDate = project.creationDate as? Date {
+        if let creationDate = project.creationDate as Date? {
             let now = Date()
             let runningDays = Func.AKGetCalendarForLoading().dateComponents([.day], from: now, to: creationDate).day ?? 0
             
@@ -267,7 +267,7 @@ class AKDataInterface
             var foundDay: Day?
             if let days = project.days?.allObjects as? [Day] {
                 for day in days {
-                    if let date = day.date as? Date {
+                    if let date = day.date as Date? {
                         let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
                         let d2 = dateComponents.day ?? 0
                         let m2 = dateComponents.month ?? 0
@@ -322,7 +322,7 @@ class AKDataInterface
     
     static func updateDay(project: Project, updatedDay: Day) -> Bool
     {
-        if let dayToLook = updatedDay.date as? Date {
+        if let dayToLook = updatedDay.date as Date? {
             let dayToLookDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: dayToLook)
             let d1 = dayToLookDateComponents.day ?? 0
             let m1 = dayToLookDateComponents.month ?? 0
@@ -332,7 +332,7 @@ class AKDataInterface
             var foundDay: Day?
             if let days = project.days?.allObjects as? [Day] {
                 for day in days {
-                    if let date = day.date as? Date {
+                    if let date = day.date as Date? {
                         let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
                         let d2 = dateComponents.day ?? 0
                         let m2 = dateComponents.month ?? 0
@@ -489,8 +489,8 @@ class AKDataInterface
         if let days = project.days?.allObjects as? [Day] {
             return days.sorted {
                 let now = Date()
-                let n1 = $0.date as? Date ?? now
-                let n2 = $1.date as? Date ?? now
+                let n1 = $0.date as Date? ?? now
+                let n2 = $1.date as Date? ?? now
                 
                 return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
                 }.filter({ (day) -> Bool in
@@ -521,7 +521,7 @@ class AKDataInterface
         let m1 = nowDateComponents.month ?? 0
         let y1 = nowDateComponents.year ?? 0
         
-        if let date = day.date as? Date {
+        if let date = day.date as Date? {
             let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
             let d2 = dateComponents.day ?? 0
             let m2 = dateComponents.month ?? 0
@@ -544,7 +544,7 @@ class AKDataInterface
         let m1 = todayDateComponents.month ?? 0
         let y1 = todayDateComponents.year ?? 0
         
-        if let date = day.date as? Date {
+        if let date = day.date as Date? {
             let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
             let d2 = dateComponents.day ?? 0
             let m2 = dateComponents.month ?? 0
@@ -567,7 +567,7 @@ class AKDataInterface
         let m1 = tomorrowDateComponents.month ?? 0
         let y1 = tomorrowDateComponents.year ?? 0
         
-        if let date = day.date as? Date {
+        if let date = day.date as Date? {
             let dateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: date)
             let d2 = dateComponents.day ?? 0
             let m2 = dateComponents.month ?? 0
@@ -715,8 +715,8 @@ class AKDataInterface
                 case .creationDate:
                     result = result.sorted {
                         let now = Date()
-                        let n1 = $0.creationDate as? Date ?? now
-                        let n2 = $1.creationDate as? Date ?? now
+                        let n1 = $0.creationDate as Date? ?? now
+                        let n2 = $1.creationDate as Date? ?? now
                         
                         return taskFilter.sortOrder == SortingOrder.descending ?
                             (n1.compare(n2) == ComparisonResult.orderedDescending ? true : false) :
@@ -1091,12 +1091,12 @@ class AKDataInterface
         if let bucket = project.bucket?.entries?.allObjects as? [BucketEntry] {
             notUniqueDates = bucket.sorted {
                 let now = Date()
-                let n1 = $0.creationDate as? Date ?? now
-                let n2 = $1.creationDate as? Date ?? now
+                let n1 = $0.creationDate as Date? ?? now
+                let n2 = $1.creationDate as Date? ?? now
                 
                 return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
                 }.map({
-                    Func.AKGetFormattedDate(date: $0.creationDate as? Date)
+                    Func.AKGetFormattedDate(date: $0.creationDate as Date?)
                 })
             
             // Now filter out the duplicates.

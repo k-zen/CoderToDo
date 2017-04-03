@@ -165,7 +165,7 @@ struct AKProjectInterface
     {
         // Check times.
         // 1. Closing time must be later than starting time.
-        if let close = self.closingTime as? Date, let start = self.startingTime as? Date {
+        if let close = self.closingTime as Date?, let start = self.startingTime as Date? {
             let dateComparison = close.compare(start)
             if dateComparison == ComparisonResult.orderedAscending || dateComparison == ComparisonResult.orderedSame {
                 throw Exceptions.invalidDate("The \"Working Day Closing Time\" must be later in time than \"Working Day Starting Time\".")

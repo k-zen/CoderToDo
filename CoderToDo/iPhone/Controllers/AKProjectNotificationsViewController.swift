@@ -30,7 +30,7 @@ class AKProjectNotificationsViewController: AKCustomViewController
                     identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, self.project.name!),
                     content: closingTimeContent,
                     trigger: UNCalendarNotificationTrigger(
-                        dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: self.project.closingTime as! Date),
+                        dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: self.project.closingTime! as Date),
                         repeats: true
                     )
                 ),

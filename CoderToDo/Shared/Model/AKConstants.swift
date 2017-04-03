@@ -1076,7 +1076,7 @@ class UtilityFunctions
     
     func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int
     {
-        if let date = date as? Date {
+        if let date = date as Date? {
             var gmtCalendar = Calendar.current
             gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
             

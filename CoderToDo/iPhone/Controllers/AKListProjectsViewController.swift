@@ -178,7 +178,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             cell.addTomorrowTask.isHidden = true
         }
         // Times
-        if let startingTime = project.startingTime as? Date {
+        if let startingTime = project.startingTime as Date? {
             cell.startValue.text = String(
                 format: "From: %.2i:%.2ih",
                 Func.AKGetCalendarForLoading().dateComponents([.hour], from: startingTime).hour ?? 0,
@@ -188,7 +188,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         else {
             cell.startValue.isHidden = true
         }
-        if let closingTime = project.closingTime as? Date {
+        if let closingTime = project.closingTime as Date? {
             cell.closeValue.text = String(
                 format: "To: %.2i:%.2ih",
                 Func.AKGetCalendarForLoading().dateComponents([.hour], from: closingTime).hour ?? 0,
