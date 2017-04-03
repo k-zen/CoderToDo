@@ -104,6 +104,9 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     {
         super.viewWillAppear(animated)
         
+        // By default mark the task as editable and then lower the flag.
+        self.markTask(mode: .editable)
+        
         // Checks:
         var skipChecks = 0
         skipChecks += (DataInterface.getConfigurations()?.cleaningMode ?? false) ? 1 : 0
