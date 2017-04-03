@@ -82,41 +82,7 @@ class AKUserConfigurationViewController: AKCustomViewController, UITextFieldDele
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         
         switch textField.tag {
-        case LocalEnums.username.rawValue:
-            var offset = textField.convert(textField.frame, to: self.scrollContainer).origin
-            offset.x = 0
-            
-            var keyboardHeight = GlobalConstants.AKKeyboardHeight
-            if textField.autocorrectionType == UITextAutocorrectionType.no {
-                keyboardHeight -= GlobalConstants.AKAutoCorrectionToolbarHeight
-            }
-            
-            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlsContainer, component: self.save)
-            if keyboardHeight > height {
-                offset.y = abs(keyboardHeight - height)
-            }
-            else {
-                offset.y = 0
-            }
-            
-            self.scrollContainer.setContentOffset(offset, animated: true)
-            
-            return true
         default:
-            return true
-        }
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
-        switch textField.tag {
-        default:
-            var offset = textField.convert(textField.frame, to: self.scrollContainer).origin
-            offset.x = 0
-            offset.y = 0
-            
-            self.scrollContainer.setContentOffset(offset, animated: true)
-            
             return true
         }
     }

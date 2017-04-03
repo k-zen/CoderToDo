@@ -389,12 +389,80 @@
                     <view key="view" contentMode="scaleToFill" id="ncx-Bk-znS">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-vw-s4Y" userLabel="Scroll_Container">
+                                <rect key="frame" x="37" y="0.0" width="300" height="206"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-e6-A6N" userLabel="Controls_Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="206"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Modify your project's name:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X5-g7-5aN" userLabel="Title_1">
+                                                <rect key="frame" x="8" y="8" width="284" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Modifying your project's name will NOT affect your data. Empty names are not allowed." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JB-hz-Reh" userLabel="Message_Value">
+                                                <rect key="frame" x="8" y="40" width="284" height="62"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9IQ-oK-CN3">
+                                                <rect key="frame" x="8" y="158" width="284" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="save:" destination="uHm-Qk-vXf" eventType="touchUpInside" id="5Vm-yI-KXU"/>
+                                                    <action selector="save:" destination="lcs-U3-K9j" eventType="touchUpInside" id="5sz-gM-mf9"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Your project's name here..." textAlignment="center" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9YB-bA-LWU" userLabel="Project_Name_Value">
+                                                <rect key="frame" x="8" y="110" width="284" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="tV8-00-bJq"/>
+                                            <constraint firstAttribute="height" constant="206" id="ueo-n2-W1c"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1nc-e6-A6N" secondAttribute="bottom" id="LU2-SN-rY5"/>
+                                    <constraint firstAttribute="width" constant="300" id="NxA-MQ-c9g"/>
+                                    <constraint firstItem="1nc-e6-A6N" firstAttribute="leading" secondItem="pku-vw-s4Y" secondAttribute="leading" id="di4-Zm-Cqg"/>
+                                    <constraint firstAttribute="trailing" secondItem="1nc-e6-A6N" secondAttribute="trailing" id="lNV-Gd-2TK"/>
+                                    <constraint firstItem="1nc-e6-A6N" firstAttribute="top" secondItem="pku-vw-s4Y" secondAttribute="top" id="ogo-PF-eeO"/>
+                                    <constraint firstAttribute="height" constant="206" id="qeE-eQ-aWf"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pku-vw-s4Y" firstAttribute="centerX" secondItem="ncx-Bk-znS" secondAttribute="centerX" id="9LY-4m-yal"/>
+                            <constraint firstItem="pku-vw-s4Y" firstAttribute="top" secondItem="QKV-KB-ypi" secondAttribute="bottom" id="HOS-bY-7ye"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="controlsContainer" destination="1nc-e6-A6N" id="OF7-tY-Dk3"/>
+                        <outlet property="projectNameValue" destination="9YB-bA-LWU" id="qyx-Jx-zXT"/>
+                        <outlet property="save" destination="9IQ-oK-CN3" id="z2y-tc-pMm"/>
+                        <outlet property="scrollContainer" destination="pku-vw-s4Y" id="FbN-Vm-pD7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rar-dI-vTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4924" y="-513"/>
+            <point key="canvasLocation" x="4924" y="-513.19340329835086"/>
         </scene>
         <!--Project Times-->
         <scene sceneID="1ZK-Sk-569">
