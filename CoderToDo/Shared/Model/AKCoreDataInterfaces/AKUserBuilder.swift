@@ -40,6 +40,17 @@ struct AKUserInterface
         self.creationDate = NSDate()
     }
     
+    // MARK: Setters
+    mutating func setCreationDate(_ asString: String)
+    {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKFullDateFormat,
+            timeZone: TimeZone(identifier: "GMT")!) {
+            self.creationDate = date
+        }
+    }
+    
     // MARK: Validations
     func validate() throws {}
 }

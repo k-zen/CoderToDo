@@ -5,7 +5,8 @@ class AKXMLBuilder
     static func marshall() -> BackupInfo?
     {
         let xml = NSMutableString()
-        xml.append(String(format: "<export username=\"%@\">",
+        xml.append(String(format: "<export creationDate=\"%@\" username=\"%@\">",
+                          DataInterface.getUser()?.creationDate?.description ?? "",
                           DataInterface.getUsername().toBase64() // Should be encoded to Base64.
         ))
         xml.append("<configurations>")
@@ -177,7 +178,15 @@ class AKXMLBuilder
                                         if let currentNode = secondaryWalker.nextNode() {
                                             // Export.
                                             if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("export") == .orderedSame {
-                                                NSLog("=> INFO: export => username => %@", innerProcessor.getNodeAttributeValue(currentNode, attributeName: "username", strict: false).fromBase64() ?? "")
+                                                let creationDate = innerProcessor.getNodeAttributeValue(currentNode, attributeName: "creationDate", strict: false) ?? ""
+                                                let username = innerProcessor.getNodeAttributeValue(currentNode, attributeName: "username", strict: false).fromBase64() ?? ""
+                                                
+                                                var newUser = AKUserInterface(username: username)
+                                                newUser.setCreationDate(creationDate)
+                                                
+                                                if let user = AKUserBuilder.mirror(interface: newUser) {
+                                                    DataInterface.addUser(user: user)
+                                                }
                                             }
                                             
                                             // Configurations.
