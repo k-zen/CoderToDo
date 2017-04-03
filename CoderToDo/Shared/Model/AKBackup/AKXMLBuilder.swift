@@ -40,8 +40,8 @@ class AKXMLBuilder
             for taskInQueue in DataInterface.getPendingTasks(project: project) {
                 xml.append("<task>")
                 xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", taskInQueue.completionPercentage))
-                xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
                 xml.append(String(format: "<creationDate>%@</creationDate>", taskInQueue.creationDate?.description ?? ""))
+                xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
                 xml.append(String(format: "<name>%@</name>", taskInQueue.name?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<note>%@</note>", taskInQueue.note?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<state>%@</state>", taskInQueue.state ?? ""))
@@ -52,14 +52,25 @@ class AKXMLBuilder
             for taskInQueue in DataInterface.getDilateTasks(project: project) {
                 xml.append("<task>")
                 xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", taskInQueue.completionPercentage))
-                xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
                 xml.append(String(format: "<creationDate>%@</creationDate>", taskInQueue.creationDate?.description ?? ""))
+                xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
                 xml.append(String(format: "<name>%@</name>", taskInQueue.name?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<note>%@</note>", taskInQueue.note?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<state>%@</state>", taskInQueue.state ?? ""))
                 xml.append("</task>")
             }
             xml.append("</projectDilateQueue>")
+            
+            xml.append(String(format: "<bucket count=\"%i\">", DataInterface.countBucketEntries(project: project, forDate: "")))
+            for entry in DataInterface.getBucketEntries(project: project, forDate: "") {
+                xml.append("<entry>")
+                xml.append(String(format: "<creationDate>%@</creationDate>", entry.creationDate?.description ?? ""))
+                xml.append(String(format: "<name>%@</name>", entry.name?.toBase64() ?? "")) // Should be encoded to Base64.
+                xml.append(String(format: "<priority>%i</priority>", entry.priority))
+                xml.append("</entry>")
+            }
+            xml.append("</bucket>")
+            
             xml.append(String(format: "<days count=\"%i\">", DataInterface.countDays(project: project)))
             for day in DataInterface.getDays(project: project) {
                 xml.append(String(format: "<day date=\"%@\" gmtOffset=\"%i\" sr=\"%.2f\">", day.date?.description ?? "", day.gmtOffset, day.sr))
@@ -72,8 +83,8 @@ class AKXMLBuilder
                     for task in DataInterface.getTasks(category: category, filter: Filter(taskFilter: taskFilter)) {
                         xml.append("<task>")
                         xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", task.completionPercentage))
-                        xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", task.initialCompletionPercentage))
                         xml.append(String(format: "<creationDate>%@</creationDate>", task.creationDate?.description ?? ""))
+                        xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", task.initialCompletionPercentage))
                         xml.append(String(format: "<name>%@</name>", task.name?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<note>%@</note>", task.note?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<state>%@</state>", task.state ?? ""))
@@ -204,6 +215,15 @@ class AKXMLBuilder
                                                                 if dilateQueue.hasChildNodes() {
                                                                     for task in AKXMLBuilder.getTasks(processor: innerProcessor, rootNode: dilateQueue) {
                                                                         project.dilateQueue?.addToTasks(task)
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+                                                            // Bucket.
+                                                            if let bucket = innerProcessor.retrieveSubNode("bucket", node: currentNode) as? ESXPElement {
+                                                                if bucket.hasChildNodes() {
+                                                                    for entry in AKXMLBuilder.getBucket(processor: innerProcessor, rootNode: bucket) {
+                                                                        project.bucket?.addToEntries(entry)
                                                                     }
                                                                 }
                                                             }
@@ -372,5 +392,34 @@ class AKXMLBuilder
         }
         
         return tasks
+    }
+    
+    static func getBucket(processor: ESXPProcessor, rootNode: ESXPElement) -> [BucketEntry]
+    {
+        var entries = [BucketEntry]()
+        if let bucketWalker = ESXPStackDOMWalker.newBuild().configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
+            while bucketWalker.hasNext() {
+                if let currentNode = bucketWalker.nextNode() {
+                    if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("entry") == .orderedSame {
+                        let creationDate = processor.getNodeValue(processor.retrieveSubNode("creationDate", node: currentNode), strict: false) ?? ""
+                        let name = processor.getNodeValue(processor.retrieveSubNode("name", node: currentNode), strict: false).fromBase64() ?? ""
+                        let priority = processor.getNodeValue(processor.retrieveSubNode("priority", node: currentNode), strict: false) ?? ""
+                        
+                        var newEntry = AKBucketEntryInterface()
+                        // Custom Setters.
+                        newEntry.setCreationDate(creationDate)
+                        newEntry.setPriority(priority)
+                        // Normal Setters.
+                        newEntry.name = name
+                        
+                        if let entry = AKBucketEntryBuilder.mirror(interface: newEntry) {
+                            entries.append(entry)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return entries
     }
 }

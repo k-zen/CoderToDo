@@ -44,6 +44,24 @@ struct AKBucketEntryInterface
         self.creationDate = NSDate()
     }
     
+    // MARK: Setters
+    mutating func setCreationDate(_ asString: String)
+    {
+        if let date = Func.AKProcessDate(
+            dateAsString: asString,
+            format: GlobalConstants.AKFullDateFormat,
+            timeZone: TimeZone(identifier: "GMT")!) {
+            self.creationDate = date
+        }
+    }
+    
+    mutating func setPriority(_ asString: String)
+    {
+        if let priority = Int16(asString) {
+            self.priority = priority
+        }
+    }
+    
     // MARK: Validations
     func validate() throws {}
 }

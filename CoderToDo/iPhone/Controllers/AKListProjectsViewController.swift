@@ -571,10 +571,16 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         self.osrChartContainer.data = chartData
         
-        self.mostProductiveDay.text = String(
-            format: "%@ is your most productive day!",
-            Func.AKGetDayOfWeekAsName(dayOfWeek: DataInterface.mostProductiveDay().rawValue)!
-        )
+        let mostProductiveDay = DataInterface.mostProductiveDay()
+        if mostProductiveDay != .invalid {
+            self.mostProductiveDay.text = String(
+                format: "%@ is your most productive day!",
+                Func.AKGetDayOfWeekAsName(dayOfWeek: mostProductiveDay.rawValue)!
+            )
+        }
+        else {
+            self.mostProductiveDay.text = ""
+        }
     }
 }
 

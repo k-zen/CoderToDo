@@ -114,6 +114,7 @@ class AKMasterReference: NSObject
             for bucketEntry in DataInterface.getBucketEntries(project: project, forDate: "") {
                 data.appendFormat("=>           CREATION DATE: %@\n", bucketEntry.creationDate?.description ?? "")
                 data.appendFormat("=>           NAME: %@\n", bucketEntry.name ?? "")
+                data.appendFormat("=>           PRIORITY: %i\n", bucketEntry.priority)
                 data.appendFormat("=>           ------\n")
             }
             data.appendFormat("=>       DAYS: (%i)\n", DataInterface.countDays(project: project))

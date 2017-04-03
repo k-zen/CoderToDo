@@ -857,6 +857,8 @@ class UtilityFunctions
     func AKGetDayOfWeekAsName(dayOfWeek: Int16, short: Bool = false) -> String?
     {
         switch dayOfWeek {
+        case DaysOfWeek.invalid.rawValue:
+            return short ? "N\\A" : "N\\A"
         case DaysOfWeek.sunday.rawValue:
             return short ? "Sun" : "Sunday"
         case DaysOfWeek.monday.rawValue:
