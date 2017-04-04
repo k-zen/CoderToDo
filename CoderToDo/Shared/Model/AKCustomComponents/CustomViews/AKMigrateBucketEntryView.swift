@@ -29,6 +29,11 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     @IBAction func migrate(_ sender: Any)
     {
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
+            // Sanity Checks
+            for task in DataInterface.getAllTasksInProject(project: presenterController.selectedProject!) {
+                AKChecks.workingDayCloseSanityChecks(controller: presenterController, task: task)
+            }
+            
             let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
             let taskName = AKTaskName(inputData: self.taskNameValue.text!)
             do {
