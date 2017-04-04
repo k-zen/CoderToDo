@@ -285,7 +285,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Add spinner.
         if self.shouldAddSpinner {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinner)
         }
     }
     
