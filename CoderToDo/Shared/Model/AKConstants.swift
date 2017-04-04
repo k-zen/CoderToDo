@@ -1123,6 +1123,57 @@ class UtilityFunctions
         )
     }
     
+    func AKScheduleLocalNotification(
+        controller: AKCustomViewController?,
+        project: Project,
+        completionTask: ((AKCustomViewController?) -> Void)?) -> Void
+    {
+        let closingTimeContent = UNMutableNotificationContent()
+        closingTimeContent.title = String(format: "Project: %@", project.name!)
+        closingTimeContent.body = String(
+            format: "Hi %@, closing time is due for your project. You have %i minutes for editing tasks before this day is marked as closed.",
+            DataInterface.getUsername(),
+            project.closingTimeTolerance
+        )
+        closingTimeContent.sound = UNNotificationSound.default()
+        Func.AKGetNotificationCenter().add(
+            UNNotificationRequest(
+                identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!),
+                content: closingTimeContent,
+                trigger: UNCalendarNotificationTrigger(
+                    dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime! as Date),
+                    repeats: true
+                )
+            ),
+            withCompletionHandler: { (error) in
+                if let _ = error {
+                    if completionTask != nil {
+                        completionTask!(controller)
+                    }
+                } }
+        )
+    }
+    
+    func AKInvalidateLocalNotification(controller: AKCustomViewController?, project: Project?) -> Void
+    {
+        if let project = project {
+            Func.AKGetNotificationCenter().removeDeliveredNotifications(
+                withIdentifiers: [String(
+                    format: "%@:%@",
+                    GlobalConstants.AKClosingTimeNotificationName,
+                    project.name!)])
+            Func.AKGetNotificationCenter().removePendingNotificationRequests(
+                withIdentifiers: [String(
+                    format: "%@:%@",
+                    GlobalConstants.AKClosingTimeNotificationName,
+                    project.name!)])
+        }
+        else {
+            Func.AKGetNotificationCenter().removeAllDeliveredNotifications()
+            Func.AKGetNotificationCenter().removeAllPendingNotificationRequests()
+        }
+    }
+    
     ///
     /// Create an image with the form of a square.
     ///

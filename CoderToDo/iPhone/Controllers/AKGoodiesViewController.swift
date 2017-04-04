@@ -21,8 +21,7 @@ class AKGoodiesViewController: AKCustomViewController
         self.showContinueMessage(
             message: "This will cancel all notifications and can't be undone. Continue...?",
             yesAction: { (presenterController) -> Void in
-                Func.AKGetNotificationCenter().removeAllDeliveredNotifications()
-                Func.AKGetNotificationCenter().removeAllPendingNotificationRequests()
+                Func.AKInvalidateLocalNotification(controller: self, project: nil)
                 
                 presenterController?.showMessage(
                     message: "All notifications were canceled!",

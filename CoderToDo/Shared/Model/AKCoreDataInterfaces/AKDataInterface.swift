@@ -54,27 +54,11 @@ class AKDataInterface
             
             // Schedule notifications.
             if project.notifyClosingTime {
-                let closingTimeContent = UNMutableNotificationContent()
-                closingTimeContent.title = String(format: "Project: %@", project.name!)
-                closingTimeContent.body = String(
-                    format: "Hi %@, it's me again... closing time is due for your project. You have %i minutes for editing tasks before this day is marked as closed.",
-                    DataInterface.getUsername(),
-                    project.closingTimeTolerance
-                )
-                closingTimeContent.sound = UNNotificationSound.default()
-                Func.AKGetNotificationCenter().add(
-                    UNNotificationRequest(
-                        identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!),
-                        content: closingTimeContent,
-                        trigger: UNCalendarNotificationTrigger(
-                            dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime! as Date),
-                            repeats: true
-                        )
-                    ),
-                    withCompletionHandler: { (error) in
-                        if let _ = error {
-                            result += 1
-                        } }
+                Func.AKScheduleLocalNotification(
+                    controller: nil,
+                    project: project,
+                    completionTask: { (presenterController) -> Void in
+                        result += 1 }
                 )
             }
             
@@ -592,7 +576,7 @@ class AKDataInterface
                     for task in tasks {
                         if task.state == TaskStates.done.rawValue || task.state == TaskStates.pending.rawValue {
                             sr += (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0)
-                            counter += 1
+                            counter += task.state == TaskStates.done.rawValue ? (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0) : 1
                         }
                     }
                 }

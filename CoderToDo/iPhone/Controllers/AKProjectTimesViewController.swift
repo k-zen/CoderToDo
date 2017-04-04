@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSource, UIPickerViewDelegate
 {
@@ -76,6 +77,21 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         // Normal Setters.
         project.closingTimeTolerance = Int16(ctt)
         AKProjectBuilder.to(project: self.project, from: project)
+        
+        // Re-schedule the notifications.
+        // 1. Invalidate the current ones.
+        Func.AKInvalidateLocalNotification(controller: self, project: self.project)
+        // 2. Re-schedule.
+        Func.AKScheduleLocalNotification(
+            controller: self,
+            project: self.project,
+            completionTask: { (presenterController) -> Void in
+                presenterController?.showMessage(
+                    message: "Ooops, there was a problem scheduling the notification.",
+                    animate: true,
+                    completionTask: nil
+                ) }
+        )
     }
     
     override func loadLocalizedText() {

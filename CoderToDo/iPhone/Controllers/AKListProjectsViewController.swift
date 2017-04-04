@@ -86,8 +86,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             )
             
             // 2. Clear all notifications from previous installs.
-            Func.AKGetNotificationCenter().removeAllDeliveredNotifications()
-            Func.AKGetNotificationCenter().removeAllPendingNotificationRequests()
+            Func.AKInvalidateLocalNotification(controller: self, project: nil)
             
             // 3. Default values for Configurations.
             let newConfigurations = AKConfigurationsInterface()
@@ -353,12 +352,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         // Remove data structure.
                         DataInterface.getUser()?.removeFromProject(project)
                         // Invalidate notifications.
-                        Func.AKGetNotificationCenter().removePendingNotificationRequests(withIdentifiers:
-                            [
-                                String(format: "%@:%@", GlobalConstants.AKStartingTimeNotificationName, project.name!),
-                                String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!)
-                            ]
-                        )
+                        Func.AKInvalidateLocalNotification(controller: self, project: project)
                         
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
                         // Hide the chart if there are not data.
