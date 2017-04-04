@@ -555,6 +555,11 @@ enum Priority: Int16 {
     case high = 3
 }
 
+enum ComponentDirection {
+    case enableToDisable
+    case disableToEnable
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -1206,16 +1211,34 @@ class UtilityFunctions
         return image!
     }
     
-    func AKToggleButtonMode(button: UIButton, mode: ComponentMode)
+    func AKToggleButtonMode(controller: AKCustomViewController, button: UIButton, mode: ComponentMode, showSpinner: Bool, direction: ComponentDirection)
     {
         switch mode {
         case .enabled:
             button.isEnabled = true
             button.backgroundColor = Cons.AKEnabledButtonBg
+            
+            if showSpinner {
+                if direction == .enableToDisable {
+                    controller.spinner.startAnimating()
+                }
+                else {
+                    controller.spinner.stopAnimating()
+                }
+            }
             break
         case .disabled:
             button.isEnabled = false
             button.backgroundColor = Cons.AKDisabledButtonBg
+            
+            if showSpinner {
+                if direction == .disableToEnable {
+                    controller.spinner.startAnimating()
+                }
+                else {
+                    controller.spinner.stopAnimating()
+                }
+            }
             break
         }
     }

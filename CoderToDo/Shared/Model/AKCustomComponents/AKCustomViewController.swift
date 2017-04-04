@@ -38,6 +38,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var inhibitiCloudMessage: Bool = true
     /// Flag to add a BlurView in the background.
     var shouldAddBlurView: Bool = false
+    /// Flag to add a Spinner to the left slot of the navigation controller.
+    var shouldAddSpinner: Bool = false
     /// Flag to inhibit only the **Tap** gesture.
     var inhibitTapGesture: Bool = false
     /// Flag to inhibit only the **Pinch** gesture.
@@ -92,6 +94,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var localizableDictionary: NSDictionary?
     var iCloudAccessErrorAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var iCloudAccessAvailableAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
     // Overlay Controllers
     let messageOverlay = AKMessageView()
     let continueMessageOverlay = AKContinueMessageView()
@@ -278,6 +281,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         // Add BlurView.
         if self.shouldAddBlurView {
             Func.AKAddBlurView(view: self.view, effect: UIBlurEffectStyle.dark)
+        }
+        
+        // Add spinner.
+        if self.shouldAddSpinner {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
         }
     }
     

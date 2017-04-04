@@ -3,6 +3,7 @@ Description
     * First version of the App.
 Changes
     * Version 1.0 Build 01 (2017/XX/XX)
+        * Added support for a spinner in controllers. (2017/04/04)
         * Corrected bug where notifications where not being re-scheduled when modifying times. Also corrected a minor bug with the computation of SR. (2017/04/04)
         * Added support to change a project's name. (2017/04/03)
         * Corrected bug where tasks where not migrated if added without doing previous sanity checks. (2017/04/03)
