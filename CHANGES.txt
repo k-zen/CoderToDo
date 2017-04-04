@@ -1,8 +1,10 @@
 =================== Release 1.0 2017-04-15 =====================
 Description
     * First version of the App.
+Functionalities
+    * 
 Changes
-    * Version 1.0 Build 01 (2017/XX/XX)
+    * Version 1.0 Build 01 (2017/04/15)
         * Corrected bug where tasks were not being migrated if added from the bucket list. (2017/04/04)
         * Added support for a spinner in controllers. (2017/04/04)
         * Corrected bug where notifications were not being re-scheduled when modifying times. Also corrected a minor bug with the computation of SR. (2017/04/04)
@@ -47,7 +49,7 @@ Changes
         * Added support for a function to only migrate dilated tasks for the next day. (2017/03/09)
         * Added support to show project state inside the project's view as a badge. Also corrected flicker of tables. (2017/03/09)
         * Added support for animating table changes. (2017/03/08)
-        * Corrected bug where menu items where not collapsing on themselves. (2017/03/08)
+        * Corrected bug where menu items were not collapsing on themselves. (2017/03/08)
         * Corrected bug where menu items overlap each other. (2017/03/08)
         * Corrected bug where when a menu item is closed it should return the view to its initial state. (2017/03/08)
         * Added support for a search menu item. (2017/03/07)
@@ -59,7 +61,7 @@ Changes
         * Added support for more amicable notification messages. (2017/03/03)
         * Added support to remove project categories. (2017/03/03)
         * Removed tolerance from the calculation of FIRST_DAY. (2017/03/03)
-        * Finally corrected bug with both queues, where tasks where not being migrated to the next day. (2017/03/03)
+        * Finally corrected bug with both queues, where tasks were not being migrated to the next day. (2017/03/03)
         * Added support for ProjectConfigurations view and also added support to ask the user before deleting a project. (2017/03/02)
         * Finally corrected bug with pending & dilate queues. Now it migrates tasks correctly to the next day. (2017/03/02)
         * Removed support for overlapping OPEN and ACCEPTING project states. (2017/03/01)
@@ -85,7 +87,7 @@ Changes
         * Removed size limitations to core data. (2017/02/26)
         * Added support for adding local notifications to each project for starting & closing times. (2017/02/25)
         * Added base support for local notifications. (2017/02/25)
-        * Corrected bug where tasks where being marked as NOT DONE before the working day begins. (2017/02/25)
+        * Corrected bug where tasks were being marked as NOT DONE before the working day begins. (2017/02/25)
         * Added support for PendingQueues in each project. Also added support for sanity checks when loading tasks. (2017/02/24)
         * Added support for checking if the day is current or not, and allow editing based on that. (2017/02/23)
         * Added support for smart offset of a textfield which is hidden by the keyboard. (2017/02/23)
