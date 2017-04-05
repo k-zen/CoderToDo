@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Added support to copy/duplicate tasks marked as NOT DONE to next day, but with the state of PENDING. (2017/04/05)
         * Corrected bug where tasks were not being migrated if added from the bucket list. (2017/04/04)
         * Added support for a spinner in controllers. (2017/04/04)
         * Corrected bug where notifications were not being re-scheduled when modifying times. Also corrected a minor bug with the computation of SR. (2017/04/04)

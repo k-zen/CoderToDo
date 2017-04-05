@@ -19,17 +19,42 @@ class AKTaskBuilder
         
         return nil
     }
+    
+    static func from(task: Task) -> AKTaskInterface
+    {
+        var interface = AKTaskInterface()
+        // Mirror.
+        interface.completionPercentage = task.completionPercentage
+        interface.creationDate = task.creationDate
+        interface.initialCompletionPercentage = task.initialCompletionPercentage
+        interface.name = task.name
+        interface.note = task.note
+        interface.state = task.state
+        
+        return interface
+    }
+    
+    static func to(task: Task, from interface: AKTaskInterface) -> Void
+    {
+        // Mirror.
+        task.completionPercentage = interface.completionPercentage
+        task.creationDate = interface.creationDate
+        task.initialCompletionPercentage = interface.initialCompletionPercentage
+        task.name = interface.name
+        task.note = interface.note
+        task.state = interface.state
+    }
 }
 
 struct AKTaskInterface
 {
     // MARK: Properties
     var completionPercentage: Float
-    var creationDate: NSDate
+    var creationDate: NSDate?
     var initialCompletionPercentage: Float
-    var name: String
-    var note: String
-    var state: String
+    var name: String?
+    var note: String?
+    var state: String?
     
     init()
     {

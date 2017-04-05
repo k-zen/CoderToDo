@@ -20,7 +20,13 @@ class AKChecks
     ///  If the project is closed and is NOT today before working day AND
     ///      day is not tomorrow AND
     ///          a. the state is DILATE
+    /// 4. Add tasks marked as NOT_DONE to PendingQueue.
+    ///  If the project is closed and is NOT today before working day AND
+    ///      day is not tomorrow AND
+    ///          a. the state is NOT_DONE
+    ///  DO NOT remove from the original day!
     ///
+    /// - Parameter controller: The controller which called the function.
     /// - Parameter task: The task to process.
     ///
     static func workingDayCloseSanityChecks(controller: AKCustomViewController, task: Task) -> Void
@@ -43,6 +49,18 @@ class AKChecks
                 if task.state == TaskStates.dilate.rawValue {
                     if !DataInterface.addDilateTask(task: task) {
                         NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
+                    }
+                }
+                // Sanity check #4
+                if task.state == TaskStates.notDone.rawValue {
+                    // Duplicate the task.
+                    var duplicate = AKTaskBuilder.from(task: task)
+                    duplicate.setState(TaskStates.pending.rawValue)
+                    
+                    if let newTask = AKTaskBuilder.mirror(interface: duplicate) {
+                        if !DataInterface.addPendingTask(task: newTask) {
+                            NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                        }
                     }
                 }
             }
