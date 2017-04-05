@@ -4,9 +4,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 34
-        static let AKEmptyRowHeight: CGFloat = 40
-        static let AKDisplaceHeight: CGFloat = 40.0
+        static let AKHeaderHeight: CGFloat = 34.0
+        static let AKEmptyRowHeight: CGFloat = 40.0
+        static let AKDisplaceHeight: CGFloat = AKTopMenuView.LocalConstants.AKViewHeight
     }
     
     // MARK: Properties
@@ -422,19 +422,19 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.daysTable?.delegate = self
         
         // Animations
-        self.displaceDownProjectsTable.fromValue = 0.0
-        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
-        self.displaceDownProjectsTable.duration = 1.0
-        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceDownProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        self.displaceDownTable.fromValue = 0.0
+        self.displaceDownTable.toValue = LocalConstants.AKDisplaceHeight
+        self.displaceDownTable.duration = 1.0
+        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownTable.autoreverses = false
+        self.view.layer.add(self.displaceDownTable, forKey: LocalConstants.AKDisplaceDownAnimation)
         
-        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
-        self.displaceUpProjectsTable.toValue = 0.0
-        self.displaceUpProjectsTable.duration = 1.0
-        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceUpProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        self.displaceUpTable.fromValue = LocalConstants.AKDisplaceHeight
+        self.displaceUpTable.toValue = 0.0
+        self.displaceUpTable.duration = 1.0
+        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpTable.autoreverses = false
+        self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
     }
     
     func resetFilters(controller: AKCustomViewController) {

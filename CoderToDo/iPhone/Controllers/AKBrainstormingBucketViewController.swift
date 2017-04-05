@@ -377,7 +377,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 
                 // Show message if the are no projects.
                 if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {
-                    controller.hideInitialMessage(animate: false, completionTask: nil)
+                    controller.hideInitialMessage(animate: true, completionTask: nil)
                 }
                 else {
                     var origin = Func.AKCenterScreenCoordinate(
@@ -391,7 +391,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                         origin: origin,
                         title: "Hello..!",
                         message: "Add a project first in order to start adding entries to the bucket.",
-                        animate: false,
+                        animate: true,
                         completionTask: nil
                     )
                 }

@@ -123,8 +123,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var isMenuItemVisible: Bool = false
     
     // MARK: Animations
-    let displaceDownProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
-    let displaceUpProjectsTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
+    let displaceDownTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
+    let displaceUpTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     
     // MARK: UIViewController Overriding
     override func viewDidLoad()
@@ -803,19 +803,19 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     // MARK: Animations
     func configureAnimations(displacementHeight: CGFloat)
     {
-        self.displaceDownProjectsTable.fromValue = 0.0
-        self.displaceDownProjectsTable.toValue = displacementHeight
-        self.displaceDownProjectsTable.duration = 1.0
-        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceDownProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        self.displaceDownTable.fromValue = 0.0
+        self.displaceDownTable.toValue = displacementHeight
+        self.displaceDownTable.duration = 1.0
+        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownTable.autoreverses = false
+        self.view.layer.add(self.displaceDownTable, forKey: LocalConstants.AKDisplaceDownAnimation)
         
-        self.displaceUpProjectsTable.fromValue = displacementHeight
-        self.displaceUpProjectsTable.toValue = 0.0
-        self.displaceUpProjectsTable.duration = 1.0
-        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceUpProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        self.displaceUpTable.fromValue = displacementHeight
+        self.displaceUpTable.toValue = 0.0
+        self.displaceUpTable.duration = 1.0
+        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpTable.autoreverses = false
+        self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
     }
     
     func displaceDownTable(

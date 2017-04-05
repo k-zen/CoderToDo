@@ -146,17 +146,28 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8Ob-MD-Lba" userLabel="Days_Table">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6A-mN-gFd" userLabel="Table_Container">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableView>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8Ob-MD-Lba" userLabel="Days_Table">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="8Ob-MD-Lba" secondAttribute="bottom" id="AsC-ky-gB1"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Ob-MD-Lba" secondAttribute="trailing" id="MDR-fS-PoU"/>
+                                    <constraint firstItem="8Ob-MD-Lba" firstAttribute="top" secondItem="s6A-mN-gFd" secondAttribute="top" id="uXL-Wa-McH"/>
+                                    <constraint firstItem="8Ob-MD-Lba" firstAttribute="leading" secondItem="s6A-mN-gFd" secondAttribute="leading" id="v46-L6-N7u"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8Ob-MD-Lba" firstAttribute="top" secondItem="4dG-bT-DrE" secondAttribute="bottom" id="Htt-1y-yEP"/>
-                            <constraint firstItem="8Ob-MD-Lba" firstAttribute="leading" secondItem="z1J-mq-Crb" secondAttribute="leading" id="Vlk-xj-4Ad"/>
-                            <constraint firstAttribute="trailing" secondItem="8Ob-MD-Lba" secondAttribute="trailing" id="klC-e2-0P4"/>
-                            <constraint firstItem="ghj-GA-ocL" firstAttribute="top" secondItem="8Ob-MD-Lba" secondAttribute="bottom" id="xTp-kn-jLr"/>
+                            <constraint firstAttribute="trailing" secondItem="s6A-mN-gFd" secondAttribute="trailing" id="F63-gc-a9r"/>
+                            <constraint firstItem="s6A-mN-gFd" firstAttribute="leading" secondItem="z1J-mq-Crb" secondAttribute="leading" id="rdr-TC-2UV"/>
+                            <constraint firstItem="ghj-GA-ocL" firstAttribute="top" secondItem="s6A-mN-gFd" secondAttribute="bottom" id="tAr-9a-olM"/>
+                            <constraint firstItem="s6A-mN-gFd" firstAttribute="top" secondItem="4dG-bT-DrE" secondAttribute="bottom" id="wAX-kf-8R8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="View Project" id="2ag-ze-GqY">
@@ -176,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ca-hT-Cz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3097" y="-676"/>
+            <point key="canvasLocation" x="3096.8000000000002" y="-676.01199400299856"/>
         </scene>
         <!--View Task-->
         <scene sceneID="Vpq-j2-jhE">

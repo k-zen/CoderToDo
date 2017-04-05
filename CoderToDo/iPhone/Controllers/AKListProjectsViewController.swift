@@ -9,7 +9,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 52.0
         static let AKFooterHeight: CGFloat = 1.0
-        static let AKDisplaceHeight: CGFloat = 40.0
+        static let AKDisplaceHeight: CGFloat = AKTopMenuView.LocalConstants.AKViewHeight
     }
     
     // MARK: Properties
@@ -370,7 +370,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 
                 // Show message if the are no projects.
                 if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {
-                    controller.hideInitialMessage(animate: false, completionTask: nil)
+                    controller.hideInitialMessage(animate: true, completionTask: nil)
                 }
                 else {
                     var origin = Func.AKCenterScreenCoordinate(
@@ -384,7 +384,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         origin: origin,
                         title: "Hello..!",
                         message: "Use the menu button above to start adding coding projects.",
-                        animate: false,
+                        animate: true,
                         completionTask: nil
                     )
                 }
