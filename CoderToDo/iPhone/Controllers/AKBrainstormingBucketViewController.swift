@@ -25,7 +25,6 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBOutlet var mainContainer: UIView!
     @IBOutlet weak var projectListContainer: UIView!
     @IBOutlet weak var bucketContainer: UIView!
-    @IBOutlet weak var messageContainer: UIView!
     @IBOutlet weak var projectListTable: UITableView!
     @IBOutlet weak var addEntry: UIBarButtonItem!
     @IBOutlet weak var bucketListTitle: UILabel!
@@ -35,16 +34,19 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBAction func addEntry(_ sender: Any)
     {
         if let _ = self.selectedProject {
-            self.showAddBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
-                if let presenterController = presenterController as? AKBrainstormingBucketViewController {
-                    presenterController.addBucketEntryOverlay.name.text = ""
-                }
-            })
+            self.showAddBucketEntry(
+                origin: CGPoint.zero,
+                animate: true,
+                completionTask: { (presenterController) -> Void in
+                    if let presenterController = presenterController as? AKBrainstormingBucketViewController {
+                        presenterController.addBucketEntryOverlay.name.text = ""
+                    } }
+            )
         }
         else {
             self.showMessage(
+                origin: CGPoint.zero,
                 message: "Select a project first.",
-                autoDismiss: true,
                 animate: true,
                 completionTask: nil
             )
@@ -56,32 +58,6 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     {
         super.viewDidLoad()
         self.customSetup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        // Automatic select the most loaded bucket.
-        self.selectedProject = DataInterface.mostLoadedBucket()
-        // Hide the second table.
-        if self.selectedProject == nil {
-            self.bucketContainer.isHidden = true
-            self.messageContainer.isHidden = false
-        }
-        else {
-            self.bucketContainer.isHidden = false
-            self.messageContainer.isHidden = true
-            self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
-        }
-        
-        Func.AKReloadTableWithAnimation(tableView: self.projectListTable)
-        Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
     }
     
     // MARK: UITableViewDataSource Implementation
@@ -348,7 +324,6 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             self.selectedProject = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
             // Show the second table.
             self.bucketContainer.isHidden = false
-            self.messageContainer.isHidden = true
             self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
             // Load bucket table.
             Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
@@ -360,11 +335,14 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 if let _ = self.selectedBucketEntry {
                     do {
                         try AKChecks.canAddTask(project: selectedProject)
-                        self.showMigrateBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
-                            if let presenterController = presenterController as? AKBrainstormingBucketViewController {
-                                presenterController.migrateBucketEntryOverlay.taskNameValue.text = presenterController.selectedBucketEntry?.name
-                            }
-                        })
+                        self.showMigrateBucketEntry(
+                            origin: CGPoint.zero,
+                            animate: true,
+                            completionTask: { (presenterController) -> Void in
+                                if let presenterController = presenterController as? AKBrainstormingBucketViewController {
+                                    presenterController.migrateBucketEntryOverlay.taskNameValue.text = presenterController.selectedBucketEntry?.name
+                                } }
+                        )
                     }
                     catch {
                         Func.AKPresentMessageFromError(controller: self, message: "\(error)")
@@ -380,8 +358,46 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
-        super.setup()
+        self.inhibitTapGesture = true
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKBrainstormingBucketViewController {
+                // Automatic select the most loaded bucket.
+                controller.selectedProject = DataInterface.mostLoadedBucket()
+                // Hide the second table.
+                if controller.selectedProject == nil {
+                    controller.bucketContainer.isHidden = true
+                }
+                else {
+                    controller.bucketContainer.isHidden = false
+                    controller.bucketListTitle.text = String(format: "Bucket list for: %@", controller.selectedProject?.name ?? "")
+                }
+                
+                Func.AKReloadTableWithAnimation(tableView: controller.projectListTable)
+                Func.AKReloadTableWithAnimation(tableView: controller.bucketTable)
+                
+                // Show message if the are no projects.
+                if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {
+                    controller.hideInitialMessage(animate: false, completionTask: nil)
+                }
+                else {
+                    var origin = Func.AKCenterScreenCoordinate(
+                        container: controller.view,
+                        width: AKInitialMessageView.LocalConstants.AKViewWidth,
+                        height: AKInitialMessageView.LocalConstants.AKViewHeight
+                    )
+                    origin.y -= 60.0
+                    
+                    controller.showInitialMessage(
+                        origin: origin,
+                        title: "Hello..!",
+                        message: "Add a project first in order to start adding entries to the bucket.",
+                        animate: false,
+                        completionTask: nil
+                    )
+                }
+            }
+        }
+        self.setup()
         
         // Custom Components
         self.projectListTable.register(UINib(nibName: "AKConfigurationsTableViewCell", bundle: nil), forCellReuseIdentifier: "ConfigurationsTableCell")

@@ -386,7 +386,7 @@ class AKDataInterface
         
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             for day in DataInterface.getDays(project: project) {
-                let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: -3)) // TODO: Change this when time is right!
+                let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: Int(day.gmtOffset)))
                 if let currentValue = average[dayOfWeek], let currentCounter = counters[dayOfWeek] {
                     average[dayOfWeek] = currentValue + (day.sr / 100.0)
                     counters[dayOfWeek] = currentCounter + 1
@@ -433,7 +433,7 @@ class AKDataInterface
         
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             for day in DataInterface.getDays(project: project) {
-                let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: -3)) // TODO: Change this when time is right!
+                let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: Int(day.gmtOffset)))
                 if let currentValue = average[dayOfWeek], let currentCounter = counters[dayOfWeek] {
                     average[dayOfWeek] = currentValue + (day.sr / 100.0)
                     counters[dayOfWeek] = currentCounter + 1

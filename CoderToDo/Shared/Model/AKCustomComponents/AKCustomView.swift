@@ -27,11 +27,12 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     var inhibitLongPressGesture: Bool = true
     // MARK: Operations (Closures)
     /// Defaults actions when a gesture event is produced. Not modifiable by child classes.
-    let defaultOperationsWhenGesture: (AKCustomViewController?, UIGestureRecognizer?) -> Void = { (controller, gesture) -> Void in
+    let defaultOperationsWhenGesture: (AKCustomView, AKCustomViewController?, UIGestureRecognizer?) -> Void = { (overlay, controller, gesture) -> Void in
         // Always close the keyboard if open.
         controller?.view.endEditing(true)
         // Always collapse the message view.
-        controller?.hideMessage(
+        overlay.collapse(
+            controller: controller,
             animate: true,
             completionTask: nil
         )
@@ -159,49 +160,49 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     @objc internal func tap(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenTaped(gesture)
     }
     
     @objc internal func pinch(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPinched(gesture)
     }
     
     @objc internal func rotate(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenRotated(gesture)
     }
     
     @objc internal func swipe(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenSwiped(gesture)
     }
     
     @objc internal func pan(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPaned(gesture)
     }
     
     @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenScreenEdgePaned(gesture)
     }
     
     @objc internal func longPress(_ gesture: UIGestureRecognizer?)
     {
         NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
-        self.defaultOperationsWhenGesture(self.controller, gesture)
+        self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenLongPressed(gesture)
     }
     
@@ -227,7 +228,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     }
     
     internal func expand(
-        controller: AKCustomViewController,
+        controller: AKCustomViewController?,
         expandHeight: CGFloat,
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
@@ -243,15 +244,18 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
             UIView.commitAnimations()
         }
         else {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             Func.AKChangeComponentHeight(component: self.getView(), newHeight: expandHeight)
             if completionTask != nil {
                 completionTask!(controller)
             }
+            CATransaction.commit()
         }
     }
     
     internal func collapse(
-        controller: AKCustomViewController,
+        controller: AKCustomViewController?,
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
@@ -266,10 +270,13 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
             UIView.commitAnimations()
         }
         else {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
             if completionTask != nil {
                 completionTask!(controller)
             }
+            CATransaction.commit()
         }
     }
 }

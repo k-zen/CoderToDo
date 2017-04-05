@@ -48,16 +48,6 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
         self.customSetup()
     }
     
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-    }
-    
     // MARK: UITextFieldDelegate Implementation
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
@@ -122,7 +112,14 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKAddCategoryViewController {
+                controller.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.categoryValue.delegate = self

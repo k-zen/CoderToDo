@@ -5,6 +5,8 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Mayor modifications to the way overlays are handled. Now they are added to the superview only when shown. And some other minor modifications. (2017/04/05)
+        * Removed support to copy/duplicate tasks marked as NOT DONE to next day. (2017/04/05)
         * Added support to copy/duplicate tasks marked as NOT DONE to next day, but with the state of PENDING. (2017/04/05)
         * Corrected bug where tasks were not being migrated if added from the bucket list. (2017/04/04)
         * Added support for a spinner in controllers. (2017/04/04)

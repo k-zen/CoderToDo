@@ -235,7 +235,6 @@ struct GlobalConstants
     static let AKViewBackupSegue = "ViewBackupSegue"
     static let AKViewProjectBucketSegue = "ViewProjectBucketSegue"
     static let AKViewUserConfigurationSegue = "ViewUserConfigurationSegue"
-    static let AKViewWorkingHoursAndDaysSegue = "ViewWorkingHoursAndDaysSegue"
     static let AKViewProjectNameSegue = "ViewProjectNameSegue"
     static let AKViewProjectTimesSegue = "ViewProjectTimesSegue"
     static let AKViewProjectNotificationsSegue = "ViewProjectNotificationsSegue"
@@ -700,7 +699,7 @@ class UtilityFunctions
         }
     }
     
-    func AKCenterScreenCoordinate(_ container: UIView, _ width: CGFloat, _ height: CGFloat) -> CGPoint
+    func AKCenterScreenCoordinate(container: UIView, width: CGFloat, height: CGFloat) -> CGPoint
     {
         let offsetX: CGFloat = (container.frame.width / 2.0) - (width / 2.0)
         let offsetY: CGFloat = (container.frame.height / 2.0) - (height / 2.0)
@@ -1046,8 +1045,8 @@ class UtilityFunctions
     {
         Func.AKExecuteInMainThread(controller: controller, mode: .async, code: { (controller) -> Void in
             controller?.showMessage(
+                origin: CGPoint.zero,
                 message: message,
-                autoDismiss: autoDismiss,
                 animate: true,
                 completionTask: nil
             )

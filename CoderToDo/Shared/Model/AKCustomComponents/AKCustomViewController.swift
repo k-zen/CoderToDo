@@ -56,6 +56,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var inhibitScreenEdgePanGesture: Bool = true
     /// Flag to inhibit only the **Long Press** gesture.
     var inhibitLongPressGesture: Bool = true
+    
     // MARK: Operations (Closures)
     /// Defaults actions when a gesture event is produced. Not modifiable by child classes.
     let defaultOperationsWhenGesture: (AKCustomViewController, UIGestureRecognizer?) -> Void = { (controller, gesture) -> Void in
@@ -81,8 +82,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var additionalOperationsWhenScreenEdgePaned: (UIGestureRecognizer?) -> Void = { (gesture) -> Void in }
     /// Operations to perform when a **Long Press** gesture is detected.
     var additionalOperationsWhenLongPressed: (UIGestureRecognizer?) -> Void = { (gesture) -> Void in }
+    /// Operations to perform when loading the view.
+    var loadData: (AKCustomViewController) -> Void = { (controller) -> Void in }
+    /// Operations to perform when quiting the view.
+    var saveData: (AKCustomViewController) -> Void = { (controller) -> Void in }
+    /// Operations to perform to configure the L&F.
+    var configureLookAndFeel: (AKCustomViewController) -> Void = { (controller) -> Void in }
+    
     // MARK: Properties
-    var bottomMenu: UIAlertController?
     var tapGesture: UITapGestureRecognizer?
     var pinchGesture: UIPinchGestureRecognizer?
     var rotationGesture: UIRotationGestureRecognizer?
@@ -95,7 +102,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var iCloudAccessErrorAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var iCloudAccessAvailableAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
-    // Overlay Controllers
+    
+    // MARK: Overlays
     let messageOverlay = AKMessageView()
     let continueMessageOverlay = AKContinueMessageView()
     let topMenuOverlay = AKTopMenuView()
@@ -105,7 +113,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let searchMenuItemOverlay = AKSearchView()
     let addBucketEntryOverlay = AKAddBucketEntryView()
     let migrateBucketEntryOverlay = AKMigrateBucketEntryView()
-    // Menu
+    let initialMessageOverlay = AKInitialMessageView()
+    let selectCategoryOverlay = AKSelectCategoryView()
+    let selectTaskStateOverlay = AKSelectTaskStateView()
+    
+    // MARK: Menu
     var selectedMenuItem: MenuItems = .none
     var isMenuVisible: Bool = false
     var isMenuItemVisible: Bool = false
@@ -118,6 +130,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         if GlobalConstants.AKDebug {
             NSLog("=> VIEW DID LOAD ON: \(type(of: self))")
         }
@@ -126,6 +139,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
         if GlobalConstants.AKDebug {
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
         }
@@ -140,84 +154,21 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Persist to disk data each time a view controller appears.
         AKMasterReference.saveData(instance: Func.AKObtainMasterReference())
+        
+        self.loadData(self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.saveData(self)
     }
     
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
         
-        // Setup the overlays.
-        self.messageOverlay.controller = self
-        self.messageOverlay.setup()
-        self.messageOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize.zero
-        )
-        
-        self.continueMessageOverlay.controller = self
-        self.continueMessageOverlay.setup()
-        self.continueMessageOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize.zero
-        )
-        
-        self.topMenuOverlay.controller = self
-        self.topMenuOverlay.setup()
-        self.topMenuOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize(width: self.view.frame.width, height: 0.0)
-        )
-        
-        self.addMenuItemOverlay.controller = self
-        self.addMenuItemOverlay.setup()
-        self.addMenuItemOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
-            size: CGSize(width: self.view.frame.width, height: 0.0)
-        )
-        
-        self.sortMenuItemOverlay.controller = self
-        self.sortMenuItemOverlay.setup()
-        self.sortMenuItemOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
-            size: CGSize(width: self.view.frame.width, height: 0.0)
-        )
-        
-        self.filterMenuItemOverlay.controller = self
-        self.filterMenuItemOverlay.setup()
-        self.filterMenuItemOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
-            size: CGSize(width: self.view.frame.width, height: 0.0)
-        )
-        
-        self.searchMenuItemOverlay.controller = self
-        self.searchMenuItemOverlay.setup()
-        self.searchMenuItemOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight),
-            size: CGSize(width: self.view.frame.width, height: 0.0)
-        )
-        
-        self.addBucketEntryOverlay.controller = self
-        self.addBucketEntryOverlay.setup()
-        self.addBucketEntryOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize.zero
-        )
-        
-        self.migrateBucketEntryOverlay.controller = self
-        self.migrateBucketEntryOverlay.setup()
-        self.migrateBucketEntryOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize.zero
-        )
+        self.configureLookAndFeel(self)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
@@ -302,26 +253,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }()
     }
     
-    func setupBottomMenu(_ title: String!, message: String!, type: UIAlertControllerStyle!)
-    {
-        self.bottomMenu = UIAlertController(title: title, message: message, preferredStyle: type)
-    }
-    
-    func addBottomMenuAction(_ title: String!, style: UIAlertActionStyle, handler: ((UIAlertAction) -> Void)?)
-    {
-        if let menu = self.bottomMenu {
-            menu.addAction(UIAlertAction(title: title, style: style, handler: handler))
-        }
-    }
-    
     // MARK: Presenters
-    func showBottomMenu()
-    {
-        if let menu = self.bottomMenu {
-            self.present(menu, animated: true, completion: nil)
-        }
-    }
-    
     func presentView(controller: AKCustomViewController,
                      taskBeforePresenting: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void,
                      dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
@@ -337,42 +269,60 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     
     // MARK: Floating Views
     func showMessage(
+        origin: CGPoint,
         message: String,
-        autoDismiss: Bool = false,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        var origin = Func.AKCenterScreenCoordinate(
+            container: self.view,
+            width: AKMessageView.LocalConstants.AKViewWidth,
+            height: AKMessageView.LocalConstants.AKViewHeight
+        )
+        origin.y -= 60.0 // Move up 60 points from the center.
+        
+        // Configure the overlay.
+        self.messageOverlay.controller = self
+        self.messageOverlay.setup()
+        self.messageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
         self.messageOverlay.message.text = message
+        
+        // Expand/Show the overlay.
         self.messageOverlay.expand(
             controller: self,
             expandHeight: AKMessageView.LocalConstants.AKViewHeight,
             animate: animate,
             completionTask: completionTask
         )
-        
-        if autoDismiss {
-            Func.AKDelay(GlobalConstants.AKAutoDismissMessageTime, isMain: true, task: {
-                self.hideMessage(
-                    animate: animate,
-                    completionTask: completionTask
-                )
-            })
-        }
     }
     
-    func showContinueMessage(message: String,
+    func showContinueMessage(origin: CGPoint,
+                             message: String,
                              yesButtonTitle: String = "Yes",
                              noButtonTitle: String = "No",
                              yesAction: ((_ presenterController: AKCustomViewController?) -> Void)?,
                              noAction: ((_ presenterController: AKCustomViewController?) -> Void)?,
                              animate: Bool,
-                             completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+                             completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        var origin = Func.AKCenterScreenCoordinate(
+            container: self.view,
+            width: AKContinueMessageView.LocalConstants.AKViewWidth,
+            height: AKContinueMessageView.LocalConstants.AKViewHeight
+        )
+        origin.y -= 60.0 // Move up 60 points from the center.
+        
+        // Configure the overlay.
+        self.continueMessageOverlay.controller = self
+        self.continueMessageOverlay.setup()
+        self.continueMessageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
         self.continueMessageOverlay.message.text = message
         self.continueMessageOverlay.yes.setTitle(yesButtonTitle, for: .normal)
         self.continueMessageOverlay.no.setTitle(noButtonTitle, for: .normal)
         self.continueMessageOverlay.yesAction = yesAction
         self.continueMessageOverlay.noAction = noAction
+        
+        // Expand/Show the overlay.
         self.continueMessageOverlay.expand(
             controller: self,
             expandHeight: AKContinueMessageView.LocalConstants.AKViewHeight,
@@ -382,9 +332,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showTopMenu(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        let origin = CGPoint.zero
+        
+        // Configure the overlay.
+        self.topMenuOverlay.controller = self
+        self.topMenuOverlay.setup()
+        self.topMenuOverlay.draw(container: self.view, coordinates: origin, size: CGSize(width: self.view.frame.width, height: 0.0))
+        
+        // Expand/Show the overlay.
         self.topMenuOverlay.expand(
             controller: self,
             expandHeight: AKTopMenuView.LocalConstants.AKViewHeight,
@@ -394,9 +353,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showAddMenuItem(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        let origin = CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight)
+        
+        // Configure the overlay.
+        self.addMenuItemOverlay.controller = self
+        self.addMenuItemOverlay.setup()
+        self.addMenuItemOverlay.draw(container: self.view, coordinates: origin, size: CGSize(width: self.view.frame.width, height: 0.0))
+        
+        // Expand/Show the overlay.
         self.addMenuItemOverlay.expand(controller: self,
                                        expandHeight: AKAddView.LocalConstants.AKViewHeight,
                                        animate: animate,
@@ -405,9 +373,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showSortMenuItem(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        let origin = CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight)
+        
+        // Configure the overlay.
+        self.sortMenuItemOverlay.controller = self
+        self.sortMenuItemOverlay.setup()
+        self.sortMenuItemOverlay.draw(container: self.view, coordinates: origin, size: CGSize(width: self.view.frame.width, height: 0.0))
+        
+        // Expand/Show the overlay.
         self.sortMenuItemOverlay.expand(controller: self,
                                         expandHeight: AKSortView.LocalConstants.AKViewHeight,
                                         animate: animate,
@@ -416,9 +393,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showFilterMenuItem(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        let origin = CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight)
+        
+        // Configure the overlay.
+        self.filterMenuItemOverlay.controller = self
+        self.filterMenuItemOverlay.setup()
+        self.filterMenuItemOverlay.draw(container: self.view, coordinates: origin, size: CGSize(width: self.view.frame.width, height: 0.0))
+        
+        // Expand/Show the overlay.
         self.filterMenuItemOverlay.expand(
             controller: self,
             expandHeight: AKFilterView.LocalConstants.AKViewHeight,
@@ -428,9 +414,18 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showSearchMenuItem(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        let origin = CGPoint(x: 0.0, y: AKTopMenuView.LocalConstants.AKViewHeight)
+        
+        // Configure the overlay.
+        self.searchMenuItemOverlay.controller = self
+        self.searchMenuItemOverlay.setup()
+        self.searchMenuItemOverlay.draw(container: self.view, coordinates: origin, size: CGSize(width: self.view.frame.width, height: 0.0))
+        
+        // Expand/Show the overlay.
         self.searchMenuItemOverlay.expand(
             controller: self,
             expandHeight: AKSearchView.LocalConstants.AKViewHeight,
@@ -440,9 +435,23 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showAddBucketEntry(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        var origin = Func.AKCenterScreenCoordinate(
+            container: self.view,
+            width: AKAddBucketEntryView.LocalConstants.AKViewWidth,
+            height: AKAddBucketEntryView.LocalConstants.AKViewHeight
+        )
+        origin.y -= 60.0 // Move up 60 points from the center.
+        
+        // Configure the overlay.
+        self.addBucketEntryOverlay.controller = self
+        self.addBucketEntryOverlay.setup()
+        self.addBucketEntryOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        
+        // Expand/Show the overlay.
         self.addBucketEntryOverlay.expand(
             controller: self,
             expandHeight: AKAddBucketEntryView.LocalConstants.AKViewHeight,
@@ -452,9 +461,23 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showMigrateBucketEntry(
+        origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        var origin = Func.AKCenterScreenCoordinate(
+            container: self.view,
+            width: AKMigrateBucketEntryView.LocalConstants.AKViewWidth,
+            height: AKMigrateBucketEntryView.LocalConstants.AKViewHeight
+        )
+        origin.y -= 60.0 // Move up 60 points from the center.
+        
+        // Configure the overlay.
+        self.migrateBucketEntryOverlay.controller = self
+        self.migrateBucketEntryOverlay.setup()
+        self.migrateBucketEntryOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        
+        // Expand/Show the overlay.
         self.migrateBucketEntryOverlay.expand(
             controller: self,
             expandHeight: AKMigrateBucketEntryView.LocalConstants.AKViewHeight,
@@ -463,9 +486,73 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideMessage(
+    func showInitialMessage(
+        origin: CGPoint,
+        title: String,
+        message: String,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // Configure the overlay.
+        self.initialMessageOverlay.controller = self
+        self.initialMessageOverlay.setup()
+        self.initialMessageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        self.initialMessageOverlay.title.text = title
+        self.initialMessageOverlay.message.text = message
+        
+        // Expand/Show the overlay.
+        self.initialMessageOverlay.expand(
+            controller: self,
+            expandHeight: AKInitialMessageView.LocalConstants.AKViewHeight,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
+    func showSelectCategory(
+        origin: CGPoint,
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // The origin never changes so fix it to the controller's view.
+        var origin = Func.AKCenterScreenCoordinate(
+            container: self.view,
+            width: AKSelectCategoryView.LocalConstants.AKViewWidth,
+            height: AKSelectCategoryView.LocalConstants.AKViewHeight
+        )
+        origin.y -= 60.0 // Move up 60 points from the center.
+        
+        // Configure the overlay.
+        self.selectCategoryOverlay.controller = self
+        self.selectCategoryOverlay.setup()
+        self.selectCategoryOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        
+        // Expand/Show the overlay.
+        self.selectCategoryOverlay.expand(
+            controller: self,
+            expandHeight: AKSelectCategoryView.LocalConstants.AKViewHeight,
+            animate: true,
+            completionTask: nil
+        )
+    }
+    
+    func showSelectTaskState(
+        origin: CGPoint,
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        // Configure the overlay.
+        self.selectTaskStateOverlay.controller = self
+        self.selectTaskStateOverlay.setup()
+        self.selectTaskStateOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        
+        // Expand/Show the overlay.
+        self.selectTaskStateOverlay.expand(
+            controller: self,
+            expandHeight: AKSelectTaskStateView.LocalConstants.AKViewHeight,
+            animate: true,
+            completionTask: nil
+        )
+    }
+    
+    func hideMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.messageOverlay.collapse(
             controller: self,
@@ -474,9 +561,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideContinueMessage(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideContinueMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.continueMessageOverlay.collapse(
             controller: self,
@@ -485,9 +570,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideTopMenu(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideTopMenu(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.topMenuOverlay.collapse(
             controller: self,
@@ -496,9 +579,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideAddMenuItem(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideAddMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.addMenuItemOverlay.collapse(
             controller: self,
@@ -507,9 +588,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSortMenuItem(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideSortMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.sortMenuItemOverlay.collapse(
             controller: self,
@@ -518,9 +597,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideFilterMenuItem(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideFilterMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.filterMenuItemOverlay.collapse(
             controller: self,
@@ -529,9 +606,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSearchMenuItem(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideSearchMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.searchMenuItemOverlay.collapse(
             controller: self,
@@ -540,9 +615,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideAddBucketEntry(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideAddBucketEntry(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.addBucketEntryOverlay.collapse(
             controller: self,
@@ -551,14 +624,39 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideMigrateBucketEntry(
-        animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    func hideMigrateBucketEntry(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.migrateBucketEntryOverlay.collapse(
             controller: self,
             animate: animate,
             completionTask: completionTask
+        )
+    }
+    
+    func hideInitialMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.initialMessageOverlay.collapse(
+            controller: self,
+            animate: animate,
+            completionTask: completionTask
+        )
+    }
+    
+    func hideSelectCategory(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.selectCategoryOverlay.collapse(
+            controller: self,
+            animate: true,
+            completionTask: nil
+        )
+    }
+    
+    func hideSelectTaskState(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
+    {
+        self.selectTaskStateOverlay.collapse(
+            controller: self,
+            animate: true,
+            completionTask: nil
         )
     }
     
@@ -619,6 +717,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             if !granted {
                 Func.AKExecuteInMainThread(controller: self, mode: .sync, code: { (controller) -> Void in
                     controller?.showContinueMessage(
+                        origin: CGPoint.zero,
                         message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to \"Settings\" to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
@@ -658,6 +757,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                     break
                 default:
                     controller?.showContinueMessage(
+                        origin: CGPoint.zero,
                         message: "You need to be signed into iCloud and have *iCloud Drive* set to on. Go to *Settings -> iCloud* to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
@@ -725,7 +825,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
     {
         self.isMenuVisible = true
-        self.showTopMenu(animate: animate, completionTask: completionTask)
+        self.showTopMenu(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
         
         if animate {
             UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
@@ -803,7 +903,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             offset += AKAddView.LocalConstants.AKViewHeight
             if direction == Displacement.down {
                 self.isMenuItemVisible = true
-                self.showAddMenuItem(animate: animate, completionTask: completionTask)
+                self.showAddMenuItem(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
             }
             else {
                 self.isMenuItemVisible = false
@@ -815,7 +915,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             offset += AKSortView.LocalConstants.AKViewHeight
             if direction == Displacement.down {
                 self.isMenuItemVisible = true
-                self.showSortMenuItem(animate: animate, completionTask: completionTask)
+                self.showSortMenuItem(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
             }
             else {
                 self.isMenuItemVisible = false
@@ -827,7 +927,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             offset += AKFilterView.LocalConstants.AKViewHeight
             if direction == Displacement.down {
                 self.isMenuItemVisible = true
-                self.showFilterMenuItem(animate: animate, completionTask: completionTask)
+                self.showFilterMenuItem(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
             }
             else {
                 self.isMenuItemVisible = false
@@ -839,7 +939,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             offset += AKSearchView.LocalConstants.AKViewHeight
             if direction == Displacement.down {
                 self.isMenuItemVisible = true
-                self.showSearchMenuItem(animate: animate, completionTask: completionTask)
+                self.showSearchMenuItem(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
             }
             else {
                 self.isMenuItemVisible = false

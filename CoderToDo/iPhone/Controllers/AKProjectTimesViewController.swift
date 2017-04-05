@@ -29,71 +29,6 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         self.loadLocalizedText()
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Set default values.
-        let cttIndex = self.toleranceData.index(of: Int(project.closingTimeTolerance))!
-        let stiIndex = self.workingDayTimeData.index(of: Func.AKProcessDateToString(
-            date: project.startingTime! as Date,
-            format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current
-        ))!
-        let ctiIndex = self.workingDayTimeData.index(of: Func.AKProcessDateToString(
-            date: project.closingTime! as Date,
-            format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current
-        ))!
-        
-        self.tolerance.selectRow(cttIndex, inComponent: 0, animated: true)
-        self.startingTime.selectRow(stiIndex, inComponent: 0, animated: true)
-        self.closingTime.selectRow(ctiIndex, inComponent: 0, animated: true)
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        
-        // Save the modifications.
-        let ctt = self.toleranceData[self.tolerance.selectedRow(inComponent: 0)]
-        let sti = self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)]
-        let cti = self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)]
-        
-        var project = AKProjectBuilder.from(project: self.project)
-        // Custom Setters.
-        project.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
-        project.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
-        // Normal Setters.
-        project.closingTimeTolerance = Int16(ctt)
-        AKProjectBuilder.to(project: self.project, from: project)
-        
-        // Re-schedule the notifications.
-        // 1. Invalidate the current ones.
-        Func.AKInvalidateLocalNotification(controller: self, project: self.project)
-        // 2. Re-schedule.
-        Func.AKScheduleLocalNotification(
-            controller: self,
-            project: self.project,
-            completionTask: { (presenterController) -> Void in
-                presenterController?.showMessage(
-                    message: "Ooops, there was a problem scheduling the notification.",
-                    animate: true,
-                    completionTask: nil
-                ) }
-        )
-    }
-    
     override func loadLocalizedText() {
         super.loadLocalizedText()
         
@@ -167,7 +102,66 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKProjectTimesViewController {
+                // Set default values.
+                let cttIndex = controller.toleranceData.index(of: Int(controller.project.closingTimeTolerance))!
+                let stiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
+                    date: controller.project.startingTime! as Date,
+                    format: GlobalConstants.AKWorkingDayTimeDateFormat,
+                    timeZone: TimeZone.current
+                ))!
+                let ctiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
+                    date: controller.project.closingTime! as Date,
+                    format: GlobalConstants.AKWorkingDayTimeDateFormat,
+                    timeZone: TimeZone.current
+                ))!
+                
+                controller.tolerance.selectRow(cttIndex, inComponent: 0, animated: true)
+                controller.startingTime.selectRow(stiIndex, inComponent: 0, animated: true)
+                controller.closingTime.selectRow(ctiIndex, inComponent: 0, animated: true)
+            }
+        }
+        self.saveData = { (controller) -> Void in
+            if let controller = controller as? AKProjectTimesViewController {
+                // Save the modifications.
+                let ctt = controller.toleranceData[controller.tolerance.selectedRow(inComponent: 0)]
+                let sti = controller.workingDayTimeData[controller.startingTime.selectedRow(inComponent: 0)]
+                let cti = controller.workingDayTimeData[controller.closingTime.selectedRow(inComponent: 0)]
+                
+                var project = AKProjectBuilder.from(project: controller.project)
+                // Custom Setters.
+                project.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
+                project.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
+                // Normal Setters.
+                project.closingTimeTolerance = Int16(ctt)
+                AKProjectBuilder.to(project: controller.project, from: project)
+                
+                // Re-schedule the notifications.
+                // 1. Invalidate the current ones.
+                Func.AKInvalidateLocalNotification(controller: controller, project: controller.project)
+                // 2. Re-schedule.
+                Func.AKScheduleLocalNotification(
+                    controller: controller,
+                    project: controller.project,
+                    completionTask: { (presenterController) -> Void in
+                        presenterController?.showMessage(
+                            origin: CGPoint.zero,
+                            message: "Ooops, there was a problem scheduling the notification.",
+                            animate: true,
+                            completionTask: nil
+                        ) }
+                )
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKProjectTimesViewController {
+                controller.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.tolerance.delegate = self

@@ -7,7 +7,6 @@ class AKBackupViewController: AKCustomViewController
     @IBOutlet var lastBackupSizeValue: UILabel!
     @IBOutlet var backupNow: UIButton!
     @IBOutlet var dataHashValue: UILabel!
-    // @IBOutlet var automaticBackupsValue: UISwitch!
     @IBOutlet var restoreNow: UIButton!
     
     // MARK: Actions
@@ -24,6 +23,7 @@ class AKBackupViewController: AKCustomViewController
                     if let sizeLocal = AKXMLController.getLocalBackupInfo()?.size, let sizeRemote = backupInfo.size {
                         if sizeLocal < sizeRemote {
                             presenterController.showContinueMessage(
+                                origin: CGPoint.zero,
                                 message: "The file you have in iCloud appears to be bigger in size than the one you have on your device. Do you wish to continue...?",
                                 yesAction: { (presenterController) -> Void in
                                     // Make backup here from a background thread.
@@ -81,6 +81,7 @@ class AKBackupViewController: AKCustomViewController
         
         if !DataInterface.isProjectEmpty() {
             self.showContinueMessage(
+                origin: CGPoint.zero,
                 message: "This will wipe out your current local database and restore from this backup. Do you wish to continue...?",
                 yesAction: { (presenterController) -> Void in
                     DataInterface.resetProjectData()
@@ -93,6 +94,7 @@ class AKBackupViewController: AKCustomViewController
                                     Func.AKToggleButtonMode(controller: self, button: presenterController.restoreNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
                                     
                                     presenterController.showMessage(
+                                        origin: CGPoint.zero,
                                         message: String(format: "Hooray %@, you have successfully restored your data from iCloud!", DataInterface.getUsername()),
                                         animate: true,
                                         completionTask: nil
@@ -109,50 +111,19 @@ class AKBackupViewController: AKCustomViewController
         }
     }
     
-    // @IBAction func changeAutomaticBackups(_ sender: Any)
-    // {
-    //     let configurationsMO = DataInterface.getConfigurations()
-    //     if var configurations = AKConfigurationsBuilder.from(configurations: configurationsMO) {
-    //         configurations.automaticBackups = self.automaticBackupsValue.isOn
-    //
-    //         DataInterface.addConfigurations(configurations: AKConfigurationsBuilder.to(configurations: configurationsMO, from: configurations))
-    //     }
-    // }
-    
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the data.
-        // self.automaticBackupsValue.isOn = DataInterface.getConfigurations()?.automaticBackups ?? false
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Disable buttons.
-        Func.AKToggleButtonMode(controller: self, button: self.backupNow, mode: .disabled, showSpinner: false, direction: .disableToEnable)
-        Func.AKToggleButtonMode(controller: self, button: self.restoreNow, mode: .disabled, showSpinner: false, direction: .disableToEnable)
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.backupNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.restoreNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.shouldAddSpinner = true
-        super.inhibitiCloudMessage = false
-        super.iCloudAccessAvailableAction = { (presenterController) -> Void in
+        self.shouldAddSpinner = true
+        self.inhibitiCloudMessage = false
+        self.iCloudAccessAvailableAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKBackupViewController {
                 Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: false, direction: .disableToEnable)
                 
@@ -177,13 +148,27 @@ class AKBackupViewController: AKCustomViewController
                 )
             }
         }
-        super.iCloudAccessErrorAction = { (presenterController) -> Void in
+        self.iCloudAccessErrorAction = { (presenterController) -> Void in
             presenterController?.showMessage(
+                origin: CGPoint.zero,
                 message: "There had been an error accessing your iCloud account. Please check again later.",
                 animate: true,
                 completionTask: nil
             )
         }
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKBackupViewController {
+                // Disable buttons.
+                Func.AKToggleButtonMode(controller: controller, button: controller.backupNow, mode: .disabled, showSpinner: false, direction: .disableToEnable)
+                Func.AKToggleButtonMode(controller: controller, button: controller.restoreNow, mode: .disabled, showSpinner: false, direction: .disableToEnable)
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKBackupViewController {
+                controller.backupNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.restoreNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
     }
 }

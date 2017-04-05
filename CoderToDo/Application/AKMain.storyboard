@@ -29,37 +29,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byL-a6-udk" userLabel="Message_Container">
-                                        <rect key="frame" x="37.5" y="50" width="300" height="172"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use the Menu button above to start adding coding projects." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-3Q-vb1" userLabel="Title">
-                                                <rect key="frame" x="8" y="68" width="284" height="96"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
-                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC9-d6-LWL" userLabel="Hello_Title">
-                                                <rect key="frame" x="8" y="8" width="284" height="52"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
-                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="I49-qj-2Lc"/>
-                                            <constraint firstAttribute="height" constant="172" id="VMd-t8-cpZ"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="byL-a6-udk" firstAttribute="centerX" secondItem="p9P-Uh-mGW" secondAttribute="centerX" id="NV7-Sb-fP6"/>
                                     <constraint firstAttribute="bottom" secondItem="KdT-aq-IQ9" secondAttribute="bottom" id="T89-ZJ-hUX"/>
                                     <constraint firstAttribute="trailing" secondItem="KdT-aq-IQ9" secondAttribute="trailing" id="gw8-oq-Pwg"/>
                                     <constraint firstItem="KdT-aq-IQ9" firstAttribute="top" secondItem="p9P-Uh-mGW" secondAttribute="top" id="lCf-ge-yNn"/>
                                     <constraint firstItem="KdT-aq-IQ9" firstAttribute="leading" secondItem="p9P-Uh-mGW" secondAttribute="leading" id="odl-jF-vbr"/>
-                                    <constraint firstItem="byL-a6-udk" firstAttribute="centerY" secondItem="p9P-Uh-mGW" secondAttribute="centerY" id="wAK-Gi-ili"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6s-UY-Ble" userLabel="Chart_Container">
@@ -108,7 +83,6 @@
                     <connections>
                         <outlet property="chartContainer" destination="L6s-UY-Ble" id="NXP-QA-jMa"/>
                         <outlet property="menu" destination="gNK-dI-7DM" id="ug2-0M-c8b"/>
-                        <outlet property="messageContainer" destination="byL-a6-udk" id="jkg-lQ-Rgu"/>
                         <outlet property="mostProductiveDay" destination="tgD-Wr-PEr" id="zyM-5c-g2z"/>
                         <outlet property="osrChartContainer" destination="MI2-pm-Arm" id="Mdo-rS-ccX"/>
                         <outlet property="projectsTable" destination="KdT-aq-IQ9" id="nmw-DC-lTq"/>
@@ -901,40 +875,13 @@
                                     <constraint firstItem="1pS-Hu-LHI" firstAttribute="leading" secondItem="d9w-7w-9Xd" secondAttribute="leading" constant="8" id="o5m-9C-Ky6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcy-mi-2dl" userLabel="Message_Container">
-                                <rect key="frame" x="37" y="215" width="300" height="172"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a project to start adding entries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAC-su-UJH" userLabel="Title">
-                                        <rect key="frame" x="8" y="68" width="284" height="96"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
-                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Bf-C1t" userLabel="Hello_Title">
-                                        <rect key="frame" x="8" y="8" width="284" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
-                                        <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="172" id="d0m-Qh-Y2F"/>
-                                    <constraint firstAttribute="width" constant="300" id="dsU-WD-Al7"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="172" id="fph-Mp-yOF"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="g5g-cX-7Rx"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="S52-j0-QiV" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="bottom" id="7YM-fh-P9I"/>
                             <constraint firstAttribute="trailing" secondItem="urK-PU-TVJ" secondAttribute="trailing" id="906-QK-zv4"/>
-                            <constraint firstItem="Lcy-mi-2dl" firstAttribute="centerY" secondItem="bs1-nb-pXf" secondAttribute="centerY" id="Hsn-uy-UFb"/>
                             <constraint firstAttribute="trailing" secondItem="d9w-7w-9Xd" secondAttribute="trailing" id="TMD-Z6-y7l"/>
                             <constraint firstItem="urK-PU-TVJ" firstAttribute="top" secondItem="WIN-2g-bVk" secondAttribute="bottom" id="XKn-tC-loU"/>
-                            <constraint firstItem="Lcy-mi-2dl" firstAttribute="centerX" secondItem="bs1-nb-pXf" secondAttribute="centerX" id="bqS-WQ-ujC"/>
                             <constraint firstItem="d9w-7w-9Xd" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="qof-D0-gQw"/>
                             <constraint firstItem="urK-PU-TVJ" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="w1e-wJ-dEE"/>
                             <constraint firstItem="d9w-7w-9Xd" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="bottom" id="zWd-Kk-uOn"/>
@@ -955,7 +902,6 @@
                         <outlet property="bucketListTitle" destination="BnN-WS-6cv" id="R9b-Mb-QLm"/>
                         <outlet property="bucketTable" destination="1pS-Hu-LHI" id="YBv-Dm-zBi"/>
                         <outlet property="mainContainer" destination="bs1-nb-pXf" id="Cfl-0N-eZb"/>
-                        <outlet property="messageContainer" destination="Lcy-mi-2dl" id="G7h-EQ-2Qn"/>
                         <outlet property="projectListContainer" destination="urK-PU-TVJ" id="kQx-3a-XlL"/>
                         <outlet property="projectListTable" destination="1sV-Ev-hg4" id="thS-ck-7yo"/>
                     </connections>
@@ -996,7 +942,6 @@
                         <outlet property="configurationsTable" destination="kMR-P9-Y7F" id="Q7x-hW-RcF"/>
                         <segue destination="572-NZ-klK" kind="show" identifier="ViewBackupSegue" id="CCZ-GR-KmZ"/>
                         <segue destination="uHm-Qk-vXf" kind="show" identifier="ViewUserConfigurationSegue" id="skm-0K-yAu"/>
-                        <segue destination="wOx-58-wxz" kind="show" identifier="ViewWorkingHoursAndDaysSegue" id="f21-SR-iek"/>
                         <segue destination="LCR-1c-D4a" kind="show" identifier="ViewGoodiesSegue" id="vEI-kJ-p9O"/>
                     </connections>
                 </viewController>
@@ -1248,27 +1193,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCo-Rv-PyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3096.8000000000002" y="2377.9610194902552"/>
-        </scene>
-        <!--Working Hours & Days-->
-        <scene sceneID="jNe-OG-HGA">
-            <objects>
-                <viewController title="Working Hours &amp; Days" id="wOx-58-wxz" customClass="AKWorkingHoursAndDaysViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fGR-L7-ipv"/>
-                        <viewControllerLayoutGuide type="bottom" id="0CN-qw-xGh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HbZ-Og-5eF" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Working Hours &amp; Days" id="Iug-Ax-Idh">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="jSI-kZ-5wF"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JsL-TJ-lcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3097" y="3109"/>
         </scene>
         <!--Bucket-->
         <scene sceneID="oPO-tY-OSv">

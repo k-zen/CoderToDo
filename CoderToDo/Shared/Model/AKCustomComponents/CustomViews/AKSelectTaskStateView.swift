@@ -20,6 +20,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
+                    origin: CGPoint.zero,
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
@@ -48,8 +49,9 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
         else {
             if let controller = self.controller as? AKViewTaskViewController {
-                controller.collapseTaskStateSelector()
+                controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
+                    origin: CGPoint.zero,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil
@@ -77,8 +79,9 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
         else {
             if let controller = self.controller as? AKViewTaskViewController {
-                controller.collapseTaskStateSelector()
+                controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
+                    origin: CGPoint.zero,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil
@@ -92,6 +95,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
+                    origin: CGPoint.zero,
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
@@ -120,8 +124,9 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
         else {
             if let controller = self.controller as? AKViewTaskViewController {
-                controller.collapseTaskStateSelector()
+                controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
+                    origin: CGPoint.zero,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil
@@ -192,6 +197,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
             x: coordinates.x,
             y: coordinates.y,
@@ -199,5 +206,6 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
             height: size.height
         )
         container.addSubview(self.getView())
+        CATransaction.commit()
     }
 }

@@ -68,12 +68,15 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
-            x: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).x,
-            y: Func.AKCenterScreenCoordinate(container, LocalConstants.AKViewWidth, LocalConstants.AKViewHeight).y,
+            x: coordinates.x,
+            y: coordinates.y,
             width: LocalConstants.AKViewWidth,
             height: size.height
         )
         container.addSubview(self.getView())
+        CATransaction.commit()
     }
 }

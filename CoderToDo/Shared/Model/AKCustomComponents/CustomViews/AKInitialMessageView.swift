@@ -1,15 +1,16 @@
 import UIKit
 
-class AKMessageView: AKCustomView, AKCustomViewProtocol
+class AKInitialMessageView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 100.0
+        static let AKViewHeight: CGFloat = 196.0
     }
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var message: UILabel!
     
     // MARK: UIView Overriding

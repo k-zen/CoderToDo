@@ -92,8 +92,8 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
-        super.setup()
+        self.inhibitTapGesture = true
+        self.setup()
         
         // Custom Components
         self.userDefinedCategoriesTable.register(UINib(nibName: "AKConfigurationsTableViewCell", bundle: nil), forCellReuseIdentifier: "ConfigurationsTableCell")

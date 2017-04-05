@@ -17,7 +17,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     // MARK: Outlets
     @IBOutlet weak var projectsTable: UITableView!
-    @IBOutlet weak var messageContainer: UIView!
     @IBOutlet weak var chartContainer: UIView!
     @IBOutlet weak var mostProductiveDay: UILabel!
     @IBOutlet weak var osrChartContainer: BarChartView!
@@ -56,67 +55,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         super.viewDidLoad()
         self.customSetup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        Func.AKReloadTableWithAnimation(tableView: self.projectsTable)
-        // Hide the chart if there are not data.
-        self.loadChart()
-        self.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Checks
-        // If it's the first time the user uses the App.
-        // 1. Show Intro view.
-        // 2. Cancel all local notifications, that the App might had previously created.
-        // 3. Set default values for Configurations.
-        if DataInterface.firstTime() {
-            // 1. Present Intro view.
-            self.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
-                             taskBeforePresenting: { (presenterController, presentedController) -> Void in },
-                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
-            )
-            
-            // 2. Clear all notifications from previous installs.
-            Func.AKInvalidateLocalNotification(controller: self, project: nil)
-            
-            // 3. Default values for Configurations.
-            let newConfigurations = AKConfigurationsInterface()
-            do {
-                try newConfigurations.validate()
-            }
-            catch {
-                Func.AKPresentMessageFromError(controller: self, message: "\(error)")
-                return
-            }
-            
-            if let configurations = AKConfigurationsBuilder.mirror(interface: newConfigurations) {
-                DataInterface.addConfigurations(configurations: configurations)
-            }
-            
-            return
-        }
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.menu.setTitleTextAttributes(
-            [
-                NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
-                NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
-            ], for: .normal
-        )
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -314,18 +252,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         return headerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
-        let sections = DataInterface.getProjects(filter: self.projectFilter).count
-        if sections > 0 {
-            self.messageContainer.isHidden = true
-        }
-        else {
-            self.messageContainer.isHidden = false
-        }
-        
-        return sections
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return DataInterface.getProjects(filter: self.projectFilter).count }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
@@ -344,6 +271,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Delete Action
         let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
             self.showContinueMessage(
+                origin: CGPoint.zero,
                 message: "This action can't be undone. Continue...?",
                 yesAction: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKListProjectsViewController {
@@ -388,10 +316,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitLocalNotificationMessage = false
-        super.inhibitTapGesture = true
-        super.inhibitLongPressGesture = false
-        super.additionalOperationsWhenLongPressed = { (gesture) -> Void in
+        self.inhibitLocalNotificationMessage = false
+        self.inhibitTapGesture = true
+        self.inhibitLongPressGesture = false
+        self.additionalOperationsWhenLongPressed = { (gesture) -> Void in
             self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
                              taskBeforePresenting: { _,_ in },
                              dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
@@ -400,17 +328,78 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                 } }
             )
         }
-        super.setup()
-        super.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
-        
-        // Custom Components
-        self.projectsTable.register(UINib(nibName: "AKProjectsTableViewCell", bundle: nil), forCellReuseIdentifier: "ProjectsTableCell")
-        
-        // Delegate & DataSource
-        self.projectsTable?.dataSource = self
-        self.projectsTable?.delegate = self
-        
-        // Custom Actions
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKListProjectsViewController {
+                Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+                // Hide the chart if there are not data.
+                controller.loadChart()
+                controller.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false // TODO: Improve!
+                
+                // Checks
+                // If it's the first time the user uses the App.
+                // 1. Show Intro view.
+                // 2. Cancel all local notifications, that the App might had previously created.
+                // 3. Set default values for Configurations.
+                if DataInterface.firstTime() {
+                    // 1. Present Intro view.
+                    controller.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
+                                           taskBeforePresenting: { (presenterController, presentedController) -> Void in },
+                                           dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
+                    )
+                    
+                    // 2. Clear all notifications from previous installs.
+                    Func.AKInvalidateLocalNotification(controller: controller, project: nil)
+                    
+                    // 3. Default values for Configurations.
+                    let newConfigurations = AKConfigurationsInterface()
+                    do {
+                        try newConfigurations.validate()
+                    }
+                    catch {
+                        Func.AKPresentMessageFromError(controller: controller, message: "\(error)")
+                        return
+                    }
+                    
+                    if let configurations = AKConfigurationsBuilder.mirror(interface: newConfigurations) {
+                        DataInterface.addConfigurations(configurations: configurations)
+                    }
+                    
+                    return
+                }
+                
+                // Show message if the are no projects.
+                if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {
+                    controller.hideInitialMessage(animate: false, completionTask: nil)
+                }
+                else {
+                    var origin = Func.AKCenterScreenCoordinate(
+                        container: controller.view,
+                        width: AKInitialMessageView.LocalConstants.AKViewWidth,
+                        height: AKInitialMessageView.LocalConstants.AKViewHeight
+                    )
+                    origin.y -= 60.0
+                    
+                    controller.showInitialMessage(
+                        origin: origin,
+                        title: "Hello..!",
+                        message: "Use the menu button above to start adding coding projects.",
+                        animate: false,
+                        completionTask: nil
+                    )
+                }
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKListProjectsViewController {
+                controller.menu.setTitleTextAttributes(
+                    [
+                        NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
+                        NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+                    ], for: .normal
+                )
+            }
+        }
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
             if let presenterController = presenterController {
                 presenterController.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
@@ -497,6 +486,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 )
             }
         }
+        self.setup()
+        self.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
+        
+        // Custom Components
+        self.projectsTable.register(UINib(nibName: "AKProjectsTableViewCell", bundle: nil), forCellReuseIdentifier: "ProjectsTableCell")
+        
+        // Delegate & DataSource
+        self.projectsTable?.dataSource = self
+        self.projectsTable?.delegate = self
     }
     
     func resetFilters(controller: AKCustomViewController) {

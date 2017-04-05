@@ -144,8 +144,8 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
-        super.setup()
+        self.inhibitTapGesture = true
+        self.setup()
         
         // Custom Components
         self.configurationsTable.register(UINib(nibName: "AKConfigurationsTableViewCell", bundle: nil), forCellReuseIdentifier: "ConfigurationsTableCell")

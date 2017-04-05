@@ -65,6 +65,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             }
             else {
                 self.showMessage(
+                    origin: CGPoint.zero,
                     message: "Could not add the new project. The error has been reported.",
                     animate: true,
                     completionTask: nil
@@ -81,29 +82,6 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         super.viewDidLoad()
         self.customSetup()
         self.loadLocalizedText()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Set default values.
-        self.tolerance.selectRow(1, inComponent: 0, animated: true)
-        self.startingTime.selectRow(8, inComponent: 0, animated: true)
-        self.closingTime.selectRow(16, inComponent: 0, animated: true)
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     override func loadLocalizedText() {
@@ -206,7 +184,24 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKNewProjectViewController {
+                controller.tolerance.selectRow(1, inComponent: 0, animated: true)
+                controller.startingTime.selectRow(8, inComponent: 0, animated: true)
+                controller.closingTime.selectRow(16, inComponent: 0, animated: true)
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKNewProjectViewController {
+                controller.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.projectName.delegate = self

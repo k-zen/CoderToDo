@@ -40,6 +40,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         catch Exceptions.emptyData {
             if self.migrate.isOn {
                 self.showContinueMessage(
+                    origin: CGPoint.zero,
                     message: "Would you like to \"only\" migrate tasks...?",
                     yesButtonTitle: "Yes",
                     noButtonTitle: "No",
@@ -93,6 +94,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             }
             else {
                 self.showMessage(
+                    origin: CGPoint.zero,
                     message: "Could not add the new task. The error has been reported.",
                     animate: true,
                     completionTask: nil
@@ -109,38 +111,6 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         super.viewDidLoad()
         self.customSetup()
         self.loadLocalizedText()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        // Set default values.
-        self.categoryValue.selectRow(0, inComponent: 0, animated: true)
-        
-        if DataInterface.getProjectStatus(project: self.project) == .firstDay {
-            self.showMessage(
-                message: String(
-                    format: "%@, since this is your first day, we've made an exception to our basic rule, and all tasks you add now up to closing time are going to be added for today.",
-                    DataInterface.getUsername()
-                ),
-                animate: true,
-                completionTask: nil
-            )
-        }
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
-        self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
-        self.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     override func loadLocalizedText() {
@@ -261,7 +231,34 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKAddTaskViewController {
+                controller.categoryValue.selectRow(0, inComponent: 0, animated: true)
+                
+                if DataInterface.getProjectStatus(project: controller.project) == .firstDay {
+                    controller.showMessage(
+                        origin: CGPoint.zero,
+                        message: String(
+                            format: "%@, since this is your first day, we've made an exception to our basic rule, and all tasks you add now up to closing time are going to be added for today.",
+                            DataInterface.getUsername()
+                        ),
+                        animate: true,
+                        completionTask: nil
+                    )
+                }
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKAddTaskViewController {
+                controller.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
+                controller.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
+                controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.taskNameValue.delegate = self

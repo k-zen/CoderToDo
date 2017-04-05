@@ -56,16 +56,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.customSetup()
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        Func.AKReloadTableWithAnimation(tableView: self.daysTable)
-        for customCell in self.customCellArray {
-            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let identifier = segue.identifier {
@@ -321,30 +311,15 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
-        super.setup()
-        super.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
-        
-        // Delegate & DataSource
-        self.daysTable?.dataSource = self
-        self.daysTable?.delegate = self
-        
-        // Animations
-        self.displaceDownProjectsTable.fromValue = 0.0
-        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
-        self.displaceDownProjectsTable.duration = 1.0
-        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceDownProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
-        
-        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
-        self.displaceUpProjectsTable.toValue = 0.0
-        self.displaceUpProjectsTable.duration = 1.0
-        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.displaceUpProjectsTable.autoreverses = false
-        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
-        
-        // Custom Actions
+        self.inhibitTapGesture = true
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKViewProjectViewController {
+                Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
+                for customCell in controller.customCellArray {
+                    Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+                }
+            }
+        }
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
             if let presenterController = presenterController as? AKViewProjectViewController {
                 if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .add {
@@ -439,6 +414,27 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 )
             }
         }
+        self.setup()
+        self.configureAnimations(displacementHeight: LocalConstants.AKDisplaceHeight)
+        
+        // Delegate & DataSource
+        self.daysTable?.dataSource = self
+        self.daysTable?.delegate = self
+        
+        // Animations
+        self.displaceDownProjectsTable.fromValue = 0.0
+        self.displaceDownProjectsTable.toValue = LocalConstants.AKDisplaceHeight
+        self.displaceDownProjectsTable.duration = 1.0
+        self.displaceDownProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceDownProjectsTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        
+        self.displaceUpProjectsTable.fromValue = LocalConstants.AKDisplaceHeight
+        self.displaceUpProjectsTable.toValue = 0.0
+        self.displaceUpProjectsTable.duration = 1.0
+        self.displaceUpProjectsTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpProjectsTable.autoreverses = false
+        self.view.layer.add(self.displaceUpProjectsTable, forKey: LocalConstants.AKDisplaceUpAnimation)
     }
     
     func resetFilters(controller: AKCustomViewController) {

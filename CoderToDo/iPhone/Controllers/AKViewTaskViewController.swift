@@ -9,8 +9,6 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     }
     
     // MARK: Properties
-    let selectTaskStateOverlay = AKSelectTaskStateView()
-    let selectCategoryOverlay = AKSelectCategoryView()
     var task: Task!
     var editMode: TaskMode = .editable
     
@@ -33,147 +31,21 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBAction func changeStatus(_ sender: Any)
     {
         self.selectTaskStateOverlay.editMode = self.editMode
-        self.expandTaskStateSelector()
+        
+        var coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        coordinates.origin.y += self.statusValue.frame.height
+        self.showSelectTaskState(origin: coordinates.origin, animate: true, completionTask: nil)
     }
     
     @IBAction func changeCP(_ sender: Any) { self.cpValue.text = String(format: "%.1f%%", self.changeCP.value) }
     
-    @IBAction func changeCategory(_ sender: Any) { self.expandCategorySelector() }
+    @IBAction func changeCategory(_ sender: Any) { self.showSelectCategory(origin: CGPoint.zero, animate: true, completionTask: nil) }
     
     // MARK: AKCustomViewController Overriding
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the task data.
-        self.taskDayValue.text = String(format: "Task set up for: %@", Func.AKGetFormattedDate(date: (self.task.category?.day)!.date as Date?))
-        // Task name.
-        self.taskNameValue.text = self.task.name ?? "N\\A"
-        // Task Status.
-        self.statusValue.setTitle(self.task.state ?? TaskStates.pending.rawValue, for: .normal)
-        Func.AKAddBorderDeco(
-            self.statusValue,
-            color: Func.AKGetColorForTaskState(taskState: self.task.state ?? "").cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness,
-            position: .bottom
-        )
-        // Completion Percentage.
-        self.changeCP.value = Double(self.task.completionPercentage)
-        self.cpValue.text = String(format: "%.1f%%", self.task.completionPercentage)
-        // Category
-        self.categoryValue.text = self.task.category?.name ?? "N\\A"
-        // Task note.
-        self.notesValue.text = self.task.note ?? ""
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Setup the overlays.
-        var coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
-        coordinates.origin.y += self.statusValue.frame.height
-        self.selectTaskStateOverlay.controller = self
-        self.selectTaskStateOverlay.setup()
-        self.selectTaskStateOverlay.draw(
-            container: self.view,
-            coordinates: coordinates.origin,
-            size: CGSize.zero
-        )
-        
-        self.selectCategoryOverlay.controller = self
-        self.selectCategoryOverlay.setup()
-        self.selectCategoryOverlay.draw(
-            container: self.view,
-            coordinates: CGPoint.zero,
-            size: CGSize.zero
-        )
-        
-        // Custom L&F.
-        self.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        self.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.taskState.layer.masksToBounds = true
-        self.changeCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.notesValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        // By default mark the task as editable and then lower the flag.
-        self.markTask(mode: .editable)
-        
-        // Checks:
-        var skipChecks = 0
-        skipChecks += (DataInterface.getConfigurations()?.cleaningMode ?? false) ? 1 : 0
-        
-        if skipChecks == 0 {
-            let projectStatus = DataInterface.getProjectStatus(project: (self.task.category?.day?.project)!)
-            if DataInterface.getDayStatus(day: (self.task.category?.day)!) != DayStatus.current {
-                // Special case when we are allowed to change the status from DILATE to PENDING
-                // during the aceptance period for the next day ONLY!
-                if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (self.task.category?.day)!) {
-                    NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
-                    self.markTask(mode: .limitedEditing)
-                }
-                else {
-                    NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
-                    self.markTask(mode: .notEditable)
-                }
-            }
-            else { // If the day is CURRENT but NOT open then always close.
-                if projectStatus != .open && projectStatus != .firstDay {
-                    NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
-                    self.markTask(mode: .notEditable)
-                }
-            }
-            
-            // Failsafe, tasks with these states will ALWAYS be marked as closed!
-            // + task marked as "DONE"
-            // + task marked as "NOT APPLICABLE".
-            switch self.task.state! {
-            case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
-                NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
-                self.markTask(mode: .notEditable)
-                break
-            default:
-                // Ignore
-                break
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        
-        // Save the modifications.
-        do {
-            let taskName = AKTaskName(inputData: self.taskNameValue.text!)
-            try taskName.validate()
-            try taskName.process()
-            self.task.name = taskName.outputData
-        }
-        catch {
-            // Do nothing, just don't save the name.
-        }
-        // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
-        if self.changeCP.value >= 100.0 && self.statusValue.titleLabel?.text != TaskStates.notApplicable.rawValue {
-            self.task.state = TaskStates.done.rawValue
-        }
-        else {
-            self.task.state = self.statusValue.titleLabel?.text
-        }
-        // Task's Completion Percentage.
-        self.task.completionPercentage = Float(self.changeCP.value)
-        // Note.
-        self.task.note = self.notesValue.text
-        // Recompute the day's SR.
-        _ = DataInterface.computeSRForDay(day: (self.task.category?.day)!)
     }
     
     // MARK: UITextViewDelegate Implementation
@@ -244,8 +116,110 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.additionalOperationsWhenTaped = { (gesture) -> Void in self.collapseTaskStateSelector(); self.collapseCategorySelector() }
-        super.setup()
+        self.additionalOperationsWhenTaped = { (gesture) -> Void in self.hideSelectTaskState(animate: true, completionTask: nil); self.hideSelectCategory(animate: true, completionTask: nil) }
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKViewTaskViewController {
+                // Load the task data.
+                controller.taskDayValue.text = String(format: "Task set up for: %@", Func.AKGetFormattedDate(date: (controller.task.category?.day)!.date as Date?))
+                // Task name.
+                controller.taskNameValue.text = controller.task.name ?? "N\\A"
+                // Task Status.
+                controller.statusValue.setTitle(controller.task.state ?? TaskStates.pending.rawValue, for: .normal)
+                Func.AKAddBorderDeco(
+                    controller.statusValue,
+                    color: Func.AKGetColorForTaskState(taskState: controller.task.state ?? "").cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness,
+                    position: .bottom
+                )
+                // Completion Percentage.
+                controller.changeCP.value = Double(controller.task.completionPercentage)
+                controller.cpValue.text = String(format: "%.1f%%", controller.task.completionPercentage)
+                // Category
+                controller.categoryValue.text = controller.task.category?.name ?? "N\\A"
+                // Task note.
+                controller.notesValue.text = controller.task.note ?? ""
+                
+                // By default mark the task as editable and then lower the flag.
+                controller.markTask(mode: .editable)
+                
+                // Checks:
+                var skipChecks = 0
+                skipChecks += (DataInterface.getConfigurations()?.cleaningMode ?? false) ? 1 : 0
+                
+                if skipChecks == 0 {
+                    let projectStatus = DataInterface.getProjectStatus(project: (controller.task.category?.day?.project)!)
+                    if DataInterface.getDayStatus(day: (controller.task.category?.day)!) != DayStatus.current {
+                        // Special case when we are allowed to change the status from DILATE to PENDING
+                        // during the aceptance period for the next day ONLY!
+                        if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (controller.task.category?.day)!) {
+                            NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
+                            controller.markTask(mode: .limitedEditing)
+                        }
+                        else {
+                            NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
+                            controller.markTask(mode: .notEditable)
+                        }
+                    }
+                    else { // If the day is CURRENT but NOT open then always close.
+                        if projectStatus != .open && projectStatus != .firstDay {
+                            NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
+                            controller.markTask(mode: .notEditable)
+                        }
+                    }
+                    
+                    // Failsafe, tasks with these states will ALWAYS be marked as closed!
+                    // + task marked as "DONE"
+                    // + task marked as "NOT APPLICABLE".
+                    switch controller.task.state! {
+                    case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
+                        NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
+                        controller.markTask(mode: .notEditable)
+                        break
+                    default:
+                        // Ignore
+                        break
+                    }
+                }
+            }
+        }
+        self.saveData = { (controller) -> Void in
+            if let controller = controller as? AKViewTaskViewController {
+                do {
+                    let taskName = AKTaskName(inputData: controller.taskNameValue.text!)
+                    try taskName.validate()
+                    try taskName.process()
+                    controller.task.name = taskName.outputData
+                }
+                catch {
+                    // Do nothing, just don't save the name.
+                }
+                // If the CP is 100.0% then mark the task as "DONE", only if not marked as "NOT APPLICABLE".
+                if controller.changeCP.value >= 100.0 && controller.statusValue.titleLabel?.text != TaskStates.notApplicable.rawValue {
+                    controller.task.state = TaskStates.done.rawValue
+                }
+                else {
+                    controller.task.state = controller.statusValue.titleLabel?.text
+                }
+                // Task's Completion Percentage.
+                controller.task.completionPercentage = Float(controller.changeCP.value)
+                // Note.
+                controller.task.note = controller.notesValue.text
+                // Recompute the day's SR.
+                _ = DataInterface.computeSRForDay(day: (controller.task.category?.day)!)
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKViewTaskViewController {
+                controller.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.taskNameValue.textContainerInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+                controller.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.taskState.layer.masksToBounds = true
+                controller.changeCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.notesValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.taskNameValue.delegate = self
@@ -295,44 +269,5 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         
         self.editMode = mode
         self.toggleEditMode(mode: mode)
-    }
-    
-    // MARK: Animations
-    func expandTaskStateSelector()
-    {
-        self.selectTaskStateOverlay.expand(
-            controller: self,
-            expandHeight: AKSelectTaskStateView.LocalConstants.AKViewHeight,
-            animate: true,
-            completionTask: nil
-        )
-    }
-    
-    func expandCategorySelector()
-    {
-        self.selectCategoryOverlay.expand(
-            controller: self,
-            expandHeight: AKSelectCategoryView.LocalConstants.AKViewHeight,
-            animate: true,
-            completionTask: nil
-        )
-    }
-    
-    func collapseTaskStateSelector()
-    {
-        self.selectTaskStateOverlay.collapse(
-            controller: self,
-            animate: true,
-            completionTask: nil
-        )
-    }
-    
-    func collapseCategorySelector()
-    {
-        self.selectCategoryOverlay.collapse(
-            controller: self,
-            animate: true,
-            completionTask: nil
-        )
     }
 }

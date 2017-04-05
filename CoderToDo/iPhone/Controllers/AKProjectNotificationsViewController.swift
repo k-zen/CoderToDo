@@ -22,6 +22,7 @@ class AKProjectNotificationsViewController: AKCustomViewController
                 project: self.project,
                 completionTask: { (presenterController) -> Void in
                     presenterController?.showMessage(
+                        origin: CGPoint.zero,
                         message: "Ooops, there was a problem scheduling the notification.",
                         animate: true,
                         completionTask: nil
@@ -38,19 +39,16 @@ class AKProjectNotificationsViewController: AKCustomViewController
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the data.
-        self.enableNotifications.isOn = self.project.notifyClosingTime
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
     }
     
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKProjectNotificationsViewController {
+                controller.enableNotifications.isOn = controller.project.notifyClosingTime
+            }
+        }
+        self.setup()
     }
 }

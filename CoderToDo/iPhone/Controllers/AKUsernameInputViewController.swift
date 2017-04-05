@@ -52,17 +52,6 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         self.customSetup()
     }
     
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
-        self.icon.layer.masksToBounds = true
-        self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-    }
-    
     // MARK: UITextFieldDelegate Implementation
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
@@ -127,7 +116,15 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKUsernameInputViewController {
+                controller.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
+                controller.icon.layer.masksToBounds = true
+                controller.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.usernameValue.delegate = self

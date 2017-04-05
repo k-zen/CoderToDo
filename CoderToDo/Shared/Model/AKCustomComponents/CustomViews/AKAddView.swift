@@ -84,6 +84,8 @@ class AKAddView: AKCustomView
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)
     {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
             x: coordinates.x,
             y: coordinates.y,
@@ -91,5 +93,6 @@ class AKAddView: AKCustomView
             height: size.height
         )
         container.addSubview(self.getView())
+        CATransaction.commit()
     }
 }

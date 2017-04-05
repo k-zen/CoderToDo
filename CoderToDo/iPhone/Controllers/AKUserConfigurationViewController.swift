@@ -46,18 +46,6 @@ class AKUserConfigurationViewController: AKCustomViewController, UITextFieldDele
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the data.
-        self.usernameValue.text = DataInterface.getUsername()
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: UITextFieldDelegate Implementation
@@ -90,7 +78,18 @@ class AKUserConfigurationViewController: AKCustomViewController, UITextFieldDele
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKUserConfigurationViewController {
+                controller.usernameValue.text = DataInterface.getUsername()
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKUserConfigurationViewController {
+                controller.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.usernameValue.delegate = self

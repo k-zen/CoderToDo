@@ -10,7 +10,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     }
     
     // MARK: Properties
-    var configurationsTableHeaders = ["User Configuration", "Working Hours & Days", "Backup", "Goodies"]
+    var configurationsTableHeaders = ["User Configuration", "Backup", "Goodies"]
     
     // MARK: Outlets
     @IBOutlet weak var configurationsTable: UITableView!
@@ -26,7 +26,6 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     {
         switch identifier {
         case GlobalConstants.AKViewUserConfigurationSegue,
-             GlobalConstants.AKViewWorkingHoursAndDaysSegue,
              GlobalConstants.AKViewBackupSegue,
              GlobalConstants.AKViewGoodiesSegue:
             return true
@@ -89,12 +88,9 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
             self.performSegue(withIdentifier: GlobalConstants.AKViewUserConfigurationSegue, sender: self)
             break
         case 1:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewWorkingHoursAndDaysSegue, sender: self)
-            break
-        case 2:
             self.performSegue(withIdentifier: GlobalConstants.AKViewBackupSegue, sender: self)
             break
-        case 3:
+        case 2:
             self.performSegue(withIdentifier: GlobalConstants.AKViewGoodiesSegue, sender: self)
             break
         default:
@@ -105,8 +101,8 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.inhibitTapGesture = true
-        super.setup()
+        self.inhibitTapGesture = true
+        self.setup()
         
         // Custom Components
         self.configurationsTable.register(UINib(nibName: "AKConfigurationsTableViewCell", bundle: nil), forCellReuseIdentifier: "ConfigurationsTableCell")

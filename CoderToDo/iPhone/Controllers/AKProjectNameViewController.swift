@@ -42,18 +42,6 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the data.
-        self.projectNameValue.text = project.name
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.projectNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: UITextFieldDelegate Implementation
@@ -86,7 +74,18 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKProjectNameViewController {
+                controller.projectNameValue.text = controller.project.name
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKProjectNameViewController {
+                controller.projectNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
         
         // Delegate & DataSource
         self.projectNameValue.delegate = self

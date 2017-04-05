@@ -19,11 +19,13 @@ class AKGoodiesViewController: AKCustomViewController
     @IBAction func cancelAllNotifications(_ sender: Any)
     {
         self.showContinueMessage(
+            origin: CGPoint.zero,
             message: "This will cancel all notifications and can't be undone. Continue...?",
             yesAction: { (presenterController) -> Void in
                 Func.AKInvalidateLocalNotification(controller: self, project: nil)
                 
                 presenterController?.showMessage(
+                    origin: CGPoint.zero,
                     message: "All notifications were canceled!",
                     animate: true,
                     completionTask: nil
@@ -39,22 +41,21 @@ class AKGoodiesViewController: AKCustomViewController
     {
         super.viewDidLoad()
         self.customSetup()
-        
-        // Load the data.
-        self.cleaningMode.isOn = DataInterface.getConfigurations()?.cleaningMode ?? false
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        // Custom L&F.
-        self.cancelAllNotifications.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKGoodiesViewController {
+                controller.cleaningMode.isOn = DataInterface.getConfigurations()?.cleaningMode ?? false
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKGoodiesViewController {
+                controller.cancelAllNotifications.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            }
+        }
+        self.setup()
     }
 }

@@ -63,7 +63,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     // MARK: Miscellaneous
     func customSetup()
     {
-        super.setup()
+        self.setup()
         
         let page1 = AKUsernameInputViewController(nibName: "AKUsernameInputView", bundle: nil)
         page1.presenterController = self
