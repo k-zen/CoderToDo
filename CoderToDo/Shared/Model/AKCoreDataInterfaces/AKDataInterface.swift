@@ -574,9 +574,14 @@ class AKDataInterface
             for category in categories {
                 if let tasks = category.tasks?.allObjects as? [Task] {
                     for task in tasks {
-                        if task.state == TaskStates.done.rawValue || task.state == TaskStates.pending.rawValue {
+                        if task.state == TaskStates.done.rawValue || task.state == TaskStates.notDone.rawValue || task.state == TaskStates.pending.rawValue {
                             sr += (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0)
-                            counter += task.state == TaskStates.done.rawValue ? (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0) : 1
+                            if task.state != TaskStates.notDone.rawValue {
+                                counter += task.state == TaskStates.done.rawValue ? (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0) : 1
+                            }
+                            else {
+                                counter += 1
+                            }
                         }
                     }
                 }
