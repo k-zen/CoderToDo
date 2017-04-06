@@ -5,8 +5,9 @@ class AKXMLBuilder
     static func marshall() -> BackupInfo?
     {
         let xml = NSMutableString()
-        xml.append(String(format: "<export creationDate=\"%@\" username=\"%@\">",
+        xml.append(String(format: "<export creationDate=\"%@\" gmtOffset=\"%i\" username=\"%@\">",
                           DataInterface.getUser()?.creationDate?.description ?? "",
+                          DataInterface.getUser()?.gmtOffset ?? 0,
                           DataInterface.getUsername().toBase64() // Should be encoded to Base64.
         ))
         xml.append("<configurations>")
@@ -22,10 +23,11 @@ class AKXMLBuilder
         xml.append("<projects>")
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
             xml.append(
-                String(format: "<project closingTime=\"%@\" closingTimeTolerance=\"%i\" creationDate=\"%@\" name=\"%@\" notifyClosingTime=\"%@\" osr=\"%.2f\" startingTime=\"%@\">",
+                String(format: "<project closingTime=\"%@\" closingTimeTolerance=\"%i\" creationDate=\"%@\" gmtOffset=\"%i\" name=\"%@\" notifyClosingTime=\"%@\" osr=\"%.2f\" startingTime=\"%@\">",
                        project.closingTime?.description ?? "",
                        project.closingTimeTolerance,
                        project.creationDate?.description ?? "",
+                       project.gmtOffset,
                        project.name?.toBase64() ?? "", // Should be encoded to Base64.
                     project.notifyClosingTime ? "YES" : "NO",
                     project.osr,
@@ -66,6 +68,7 @@ class AKXMLBuilder
             for entry in DataInterface.getBucketEntries(project: project, forDate: "") {
                 xml.append("<entry>")
                 xml.append(String(format: "<creationDate>%@</creationDate>", entry.creationDate?.description ?? ""))
+                xml.append(String(format: "<gmtOffset>%i</gmtOffset>", entry.gmtOffset))
                 xml.append(String(format: "<name>%@</name>", entry.name?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<priority>%i</priority>", entry.priority))
                 xml.append("</entry>")
@@ -179,14 +182,14 @@ class AKXMLBuilder
                                             // Export.
                                             if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("export") == .orderedSame {
                                                 let creationDate = innerProcessor.getNodeAttributeValue(currentNode, attributeName: "creationDate", strict: false) ?? ""
+                                                let gmtOffset = innerProcessor.getNodeAttributeValue(currentNode, attributeName: "gmtOffset", strict: false) ?? ""
                                                 let username = innerProcessor.getNodeAttributeValue(currentNode, attributeName: "username", strict: false).fromBase64() ?? ""
                                                 
                                                 var newUser = AKUserInterface(username: username)
                                                 newUser.setCreationDate(creationDate)
+                                                newUser.setGMTOffset(gmtOffset)
                                                 
-                                                if let user = AKUserBuilder.mirror(interface: newUser) {
-                                                    DataInterface.addUser(user: user)
-                                                }
+                                                AKUserBuilder.to(user: DataInterface.getUser()!, from: newUser)
                                             }
                                             
                                             // Configurations.
@@ -328,6 +331,7 @@ class AKXMLBuilder
         let closingTime = processor.getNodeAttributeValue(rootNode, attributeName: "closingTime", strict: false) ?? ""
         let closingTimeTolerance = processor.getNodeAttributeValue(rootNode, attributeName: "closingTimeTolerance", strict: false) ?? ""
         let creationDate = processor.getNodeAttributeValue(rootNode, attributeName: "creationDate", strict: false) ?? ""
+        let gmtOffset = processor.getNodeAttributeValue(rootNode, attributeName: "gmtOffset", strict: false) ?? ""
         let name = processor.getNodeAttributeValue(rootNode, attributeName: "name", strict: false).fromBase64() ?? ""
         let notifyClosingTime = processor.getNodeAttributeValue(rootNode, attributeName: "notifyClosingTime", strict: false) ?? ""
         let osr = processor.getNodeAttributeValue(rootNode, attributeName: "osr", strict: false) ?? ""
@@ -338,6 +342,7 @@ class AKXMLBuilder
         newProject.setClosingTime(closingTime)
         newProject.setClosingTimeTolerance(closingTimeTolerance)
         newProject.setCreationDate(creationDate)
+        newProject.setGMTOffset(gmtOffset)
         newProject.setNotifyClosingTime(notifyClosingTime)
         newProject.setOSR(osr)
         newProject.setStartingTime(startingTime)
@@ -411,12 +416,14 @@ class AKXMLBuilder
                 if let currentNode = bucketWalker.nextNode() {
                     if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("entry") == .orderedSame {
                         let creationDate = processor.getNodeValue(processor.retrieveSubNode("creationDate", node: currentNode), strict: false) ?? ""
+                        let gmtOffset = processor.getNodeValue(processor.retrieveSubNode("gmtOffset", node: currentNode), strict: false) ?? ""
                         let name = processor.getNodeValue(processor.retrieveSubNode("name", node: currentNode), strict: false).fromBase64() ?? ""
                         let priority = processor.getNodeValue(processor.retrieveSubNode("priority", node: currentNode), strict: false) ?? ""
                         
                         var newEntry = AKBucketEntryInterface()
                         // Custom Setters.
                         newEntry.setCreationDate(creationDate)
+                        newEntry.setGMTOffset(gmtOffset)
                         newEntry.setPriority(priority)
                         // Normal Setters.
                         newEntry.name = name

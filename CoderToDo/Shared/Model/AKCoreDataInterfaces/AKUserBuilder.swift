@@ -8,6 +8,7 @@ class AKUserBuilder
             let user = User(context: mr.getMOC())
             // Mirror.
             user.creationDate = interface.creationDate
+            user.gmtOffset = interface.gmtOffset
             user.username = interface.username
             
             return user
@@ -15,17 +16,38 @@ class AKUserBuilder
         
         return nil
     }
+    
+    static func from(user: User) -> AKUserInterface
+    {
+        var interface = AKUserInterface()
+        // Mirror.
+        interface.creationDate = user.creationDate
+        interface.gmtOffset = user.gmtOffset
+        interface.username = user.username
+        
+        return interface
+    }
+    
+    static func to(user: User, from interface: AKUserInterface) -> Void
+    {
+        // Mirror.
+        user.creationDate = interface.creationDate
+        user.gmtOffset = interface.gmtOffset
+        user.username = interface.username
+    }
 }
 
 struct AKUserInterface
 {
     // MARK: Properties
-    var creationDate: NSDate
-    var username: String
+    var creationDate: NSDate?
+    var gmtOffset: Int16
+    var username: String?
     
     init()
     {
         self.creationDate = NSDate()
+        self.gmtOffset = 0
         self.username = ""
     }
     
@@ -35,6 +57,7 @@ struct AKUserInterface
         self.username = username
         
         // Optional.
+        self.gmtOffset = 0
         
         // Fixed.
         self.creationDate = NSDate()
@@ -48,6 +71,13 @@ struct AKUserInterface
             format: GlobalConstants.AKFullDateFormat,
             timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
+        }
+    }
+    
+    mutating func setGMTOffset(_ asString: String)
+    {
+        if let gmtOffset = Int16(asString) {
+            self.gmtOffset = gmtOffset
         }
     }
     

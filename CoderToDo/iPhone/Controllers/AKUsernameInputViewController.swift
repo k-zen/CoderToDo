@@ -30,7 +30,8 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
             return
         }
         
-        let newUser = AKUserInterface(username: username.outputData)
+        var newUser = AKUserInterface(username: username.outputData)
+        newUser.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
         do {
             try newUser.validate()
         }
@@ -39,10 +40,8 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
             return
         }
         
-        if let user = AKUserBuilder.mirror(interface: newUser) {
-            DataInterface.addUser(user: user)
-            self.presenterController?.dismissView(executeDismissTask: true)
-        }
+        AKUserBuilder.to(user: DataInterface.getUser()!, from: newUser)
+        self.presenterController?.dismissView(executeDismissTask: true)
     }
     
     // MARK: AKCustomViewController Overriding

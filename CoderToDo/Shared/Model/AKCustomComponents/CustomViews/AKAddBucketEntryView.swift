@@ -33,7 +33,8 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
                 return
             }
             
-            let newEntry = AKBucketEntryInterface(name: name.outputData, priority: Int16(self.priority.selectedSegmentIndex + 1))
+            var newEntry = AKBucketEntryInterface(name: name.outputData, priority: Int16(self.priority.selectedSegmentIndex + 1))
+            newEntry.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
             do {
                 try newEntry.validate()
             }

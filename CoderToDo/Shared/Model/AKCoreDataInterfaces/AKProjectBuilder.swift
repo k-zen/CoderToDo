@@ -10,6 +10,7 @@ class AKProjectBuilder
             project.closingTime = interface.closingTime
             project.closingTimeTolerance = interface.closingTimeTolerance
             project.creationDate = interface.creationDate
+            project.gmtOffset = interface.gmtOffset
             project.name = interface.name
             project.notifyClosingTime = interface.notifyClosingTime
             project.osr = interface.osr
@@ -31,6 +32,7 @@ class AKProjectBuilder
         interface.closingTime = project.closingTime
         interface.closingTimeTolerance = project.closingTimeTolerance
         interface.creationDate = project.creationDate
+        interface.gmtOffset = project.gmtOffset
         interface.name = project.name
         interface.notifyClosingTime = project.notifyClosingTime
         interface.osr = project.osr
@@ -45,6 +47,7 @@ class AKProjectBuilder
         project.closingTime = interface.closingTime
         project.closingTimeTolerance = interface.closingTimeTolerance
         project.creationDate = interface.creationDate
+        project.gmtOffset = interface.gmtOffset
         project.name = interface.name
         project.notifyClosingTime = interface.notifyClosingTime
         project.osr = interface.osr
@@ -58,6 +61,7 @@ struct AKProjectInterface
     var closingTime: NSDate?
     var closingTimeTolerance: Int16
     var creationDate: NSDate?
+    var gmtOffset: Int16
     var name: String?
     var notifyClosingTime: Bool
     var osr: Float
@@ -71,6 +75,7 @@ struct AKProjectInterface
             timeZone: Func.AKGetCalendarForLoading().timeZone)!
         self.closingTimeTolerance = 30
         self.creationDate = NSDate()
+        self.gmtOffset = 0
         self.name = ""
         self.notifyClosingTime = true
         self.osr = 0.0
@@ -91,6 +96,7 @@ struct AKProjectInterface
             format: GlobalConstants.AKWorkingDayTimeDateFormat,
             timeZone: Func.AKGetCalendarForLoading().timeZone)!
         self.closingTimeTolerance = 30
+        self.gmtOffset = 0
         self.notifyClosingTime = true
         self.osr = 0.0
         self.startingTime = Func.AKProcessDate(
@@ -127,6 +133,13 @@ struct AKProjectInterface
             format: GlobalConstants.AKFullDateFormat,
             timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
+        }
+    }
+    
+    mutating func setGMTOffset(_ asString: String)
+    {
+        if let gmtOffset = Int16(asString) {
+            self.gmtOffset = gmtOffset
         }
     }
     

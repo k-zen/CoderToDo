@@ -6,12 +6,6 @@ class AKDataInterface
     static func firstTime() -> Bool { return DataInterface.getUser()?.username == nil }
     
     // ########## USER'S FUNCTIONS ########## //
-    static func addUser(user: User) -> Void
-    {
-        Func.AKObtainMasterReference()?.getUser()?.creationDate = user.creationDate
-        Func.AKObtainMasterReference()?.getUser()?.username = user.username
-    }
-    
     ///
     /// Returns the user data structure.
     ///

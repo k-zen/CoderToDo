@@ -26,7 +26,8 @@ class AKUserConfigurationViewController: AKCustomViewController, UITextFieldDele
             return
         }
         
-        let newUser = AKUserInterface(username: username.outputData)
+        var newUser = AKUserInterface(username: username.outputData)
+        newUser.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
         do {
             try newUser.validate()
         }
@@ -35,10 +36,8 @@ class AKUserConfigurationViewController: AKCustomViewController, UITextFieldDele
             return
         }
         
-        if let user = AKUserBuilder.mirror(interface: newUser) {
-            DataInterface.addUser(user: user)
-            self.navigationController?.popViewController(animated: true)
-        }
+        AKUserBuilder.to(user: DataInterface.getUser()!, from: newUser)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: AKCustomViewController Overriding

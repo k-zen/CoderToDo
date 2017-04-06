@@ -49,6 +49,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         newProject.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
         newProject.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
         // Normal Setters.
+        newProject.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
         newProject.closingTimeTolerance = Int16(ctt)
         newProject.notifyClosingTime = nct
         do {

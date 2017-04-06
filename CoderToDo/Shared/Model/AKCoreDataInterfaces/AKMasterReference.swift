@@ -68,6 +68,7 @@ class AKMasterReference: NSObject
         let data = NSMutableString()
         data.appendFormat("=>   USERNAME: %@\n", DataInterface.getUsername())
         data.appendFormat("=>       CREATION DATE: %@\n", DataInterface.getUser()?.creationDate?.description ?? "")
+        data.appendFormat("=>       GMTOFFSET: %i\n", DataInterface.getUser()?.gmtOffset ?? 0)
         data.appendFormat("=>   CONFIGURATIONS:\n")
         if let configurations = DataInterface.getConfigurations() {
             data.appendFormat("=>       AUTOMATIC BACKUPS: %@\n", configurations.automaticBackups ? "YES" : "NO")
@@ -82,6 +83,7 @@ class AKMasterReference: NSObject
             data.appendFormat("=>       CLOSING TIME: %@\n", project.closingTime?.description ?? "")
             data.appendFormat("=>       CLOSING TIME TOLERANCE: %i\n", project.closingTimeTolerance)
             data.appendFormat("=>       CREATION DATE: %@\n", project.creationDate?.description ?? "")
+            data.appendFormat("=>       GMTOFFSET: %i\n", project.gmtOffset)
             data.appendFormat("=>       NAME: %@\n", project.name ?? "")
             data.appendFormat("=>       NOTIFY CLOSING TIME: %@\n", project.notifyClosingTime ? "YES" : "NO")
             data.appendFormat("=>       OSR: %.2f\n", project.osr)
@@ -113,6 +115,7 @@ class AKMasterReference: NSObject
             data.appendFormat("=>       BUCKET: (%i)\n", DataInterface.countBucketEntries(project: project, forDate: ""))
             for bucketEntry in DataInterface.getBucketEntries(project: project, forDate: "") {
                 data.appendFormat("=>           CREATION DATE: %@\n", bucketEntry.creationDate?.description ?? "")
+                data.appendFormat("=>           GMTOFFSET: %i\n", bucketEntry.gmtOffset)
                 data.appendFormat("=>           NAME: %@\n", bucketEntry.name ?? "")
                 data.appendFormat("=>           PRIORITY: %i\n", bucketEntry.priority)
                 data.appendFormat("=>           ------\n")

@@ -7,8 +7,9 @@ class AKBucketEntryBuilder
         if let mr = Func.AKObtainMasterReference() {
             let entry = BucketEntry(context: mr.getMOC())
             // Mirror.
-            entry.name = interface.name
             entry.creationDate = interface.creationDate
+            entry.gmtOffset = interface.gmtOffset
+            entry.name = interface.name
             entry.priority = interface.priority
             
             return entry
@@ -21,14 +22,16 @@ class AKBucketEntryBuilder
 struct AKBucketEntryInterface
 {
     // MARK: Properties
-    var name: String
     var creationDate: NSDate
+    var gmtOffset: Int16
+    var name: String
     var priority: Int16
     
     init()
     {
-        self.name = ""
         self.creationDate = NSDate()
+        self.gmtOffset = 0
+        self.name = ""
         self.priority = 0
     }
     
@@ -39,6 +42,7 @@ struct AKBucketEntryInterface
         self.priority = priority
         
         // Optional.
+        self.gmtOffset = 0
         
         // Fixed.
         self.creationDate = NSDate()
@@ -52,6 +56,13 @@ struct AKBucketEntryInterface
             format: GlobalConstants.AKFullDateFormat,
             timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
+        }
+    }
+    
+    mutating func setGMTOffset(_ asString: String)
+    {
+        if let gmtOffset = Int16(asString) {
+            self.gmtOffset = gmtOffset
         }
     }
     

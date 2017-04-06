@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bucket" representedClassName="AKBucketMO" syncable="YES" codeGenerationType="class">
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BucketEntry" inverseName="bucket" inverseEntity="BucketEntry" syncable="YES"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="bucket" inverseEntity="Project" syncable="YES"/>
     </entity>
     <entity name="BucketEntry" representedClassName="AKBucketEntryMO" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="gmtOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="bucket" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bucket" inverseName="entries" inverseEntity="Bucket" syncable="YES"/>
@@ -46,6 +47,7 @@
         <attribute name="closingTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="closingTimeTolerance" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="gmtOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="notifyClosingTime" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="osr" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -77,6 +79,7 @@
     </entity>
     <entity name="User" representedClassName="AKUserMO" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="gmtOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="configurations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Configurations" inverseName="user" inverseEntity="Configurations" syncable="YES"/>
         <relationship name="project" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project" syncable="YES"/>
@@ -86,15 +89,15 @@
     </entity>
     <elements>
         <element name="Bucket" positionX="-1253" positionY="-859" width="128" height="73"/>
-        <element name="BucketEntry" positionX="-1206" positionY="-1026" width="128" height="105"/>
+        <element name="BucketEntry" positionX="-1206" positionY="-1026" width="128" height="120"/>
         <element name="Category" positionX="-623" positionY="-490" width="128" height="90"/>
         <element name="Configurations" positionX="-1143" positionY="-468" width="128" height="150"/>
         <element name="Day" positionX="-837" positionY="-756" width="128" height="149"/>
         <element name="DilateTaskQueue" positionX="-918" positionY="-1063" width="128" height="73"/>
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
-        <element name="Project" positionX="-1098" positionY="-747" width="128" height="266"/>
+        <element name="Project" positionX="-1098" positionY="-747" width="128" height="284"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
         <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
-        <element name="User" positionX="-839" positionY="-495" width="128" height="131"/>
+        <element name="User" positionX="-839" positionY="-495" width="128" height="149"/>
     </elements>
 </model>
