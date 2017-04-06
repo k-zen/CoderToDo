@@ -278,7 +278,7 @@ class AKDataInterface
                     
                     let today = Day(context: mr.getMOC())
                     today.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 0, to: now)! as NSDate
-                    today.gmtOffset = Int16(TimeZone.current.secondsFromGMT() / 3600)
+                    today.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
                     project.addToDays(today)
                     
                     return today
@@ -290,7 +290,7 @@ class AKDataInterface
                     
                     let tomorrow = Day(context: mr.getMOC())
                     tomorrow.date = Func.AKGetCalendarForSaving().date(byAdding: .day, value: 1, to: now)! as NSDate
-                    tomorrow.gmtOffset = Int16(TimeZone.current.secondsFromGMT() / 3600)
+                    tomorrow.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
                     project.addToDays(tomorrow)
                     
                     return tomorrow

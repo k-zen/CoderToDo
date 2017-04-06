@@ -807,10 +807,7 @@ class UtilityFunctions
         return gmtCalendar
     }
     
-    func AKGetCalendarForLoading() -> Calendar
-    {
-        return Calendar.current
-    }
+    func AKGetCalendarForLoading() -> Calendar { return Calendar.current }
     
     func AKGetCloudKitContainer() -> CKContainer { return Func.AKDelegate().cloudKitContainer }
     
@@ -951,6 +948,16 @@ class UtilityFunctions
         default:
             return nil
         }
+    }
+    
+    ///
+    /// Computes the difference in seconds between the local time and GMT.
+    ///
+    /// - Returns: The difference in hours between local time and GMT.
+    ///
+    func AKGetOffsetFromGMT() -> Int
+    {
+        return Func.AKGetCalendarForLoading().timeZone.secondsFromGMT() / 3600
     }
     
     ///

@@ -68,7 +68,7 @@ struct AKProjectInterface
         self.closingTime = Func.AKProcessDate(
             dateAsString: "17:00",
             format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current)!
+            timeZone: Func.AKGetCalendarForLoading().timeZone)!
         self.closingTimeTolerance = 30
         self.creationDate = NSDate()
         self.name = ""
@@ -77,7 +77,7 @@ struct AKProjectInterface
         self.startingTime = Func.AKProcessDate(
             dateAsString: "09:00",
             format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current)!
+            timeZone: Func.AKGetCalendarForLoading().timeZone)!
     }
     
     init(name: String)
@@ -89,14 +89,14 @@ struct AKProjectInterface
         self.closingTime = Func.AKProcessDate(
             dateAsString: "17:00",
             format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current)!
+            timeZone: Func.AKGetCalendarForLoading().timeZone)!
         self.closingTimeTolerance = 30
         self.notifyClosingTime = true
         self.osr = 0.0
         self.startingTime = Func.AKProcessDate(
             dateAsString: "09:00",
             format: GlobalConstants.AKWorkingDayTimeDateFormat,
-            timeZone: TimeZone.current)!
+            timeZone: Func.AKGetCalendarForLoading().timeZone)!
         
         // Fixed.
         self.creationDate = NSDate()

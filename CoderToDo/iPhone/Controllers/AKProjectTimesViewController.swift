@@ -109,12 +109,12 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                 let stiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
                     date: controller.project.startingTime! as Date,
                     format: GlobalConstants.AKWorkingDayTimeDateFormat,
-                    timeZone: TimeZone.current
+                    timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
                 let ctiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
                     date: controller.project.closingTime! as Date,
                     format: GlobalConstants.AKWorkingDayTimeDateFormat,
-                    timeZone: TimeZone.current
+                    timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
                 
                 controller.tolerance.selectRow(cttIndex, inComponent: 0, animated: true)
@@ -131,8 +131,8 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                 
                 var project = AKProjectBuilder.from(project: controller.project)
                 // Custom Setters.
-                project.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
-                project.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: TimeZone.current)
+                project.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+                project.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
                 // Normal Setters.
                 project.closingTimeTolerance = Int16(ctt)
                 AKProjectBuilder.to(project: controller.project, from: project)
