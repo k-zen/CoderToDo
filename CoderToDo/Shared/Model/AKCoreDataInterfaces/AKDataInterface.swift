@@ -345,11 +345,9 @@ class AKDataInterface
         var osr: Float = 0.0
         var counter: Float = 0.0
         
-        if let days = project.days?.allObjects as? [Day] {
-            for day in days {
-                osr += (day.sr / 100.0)
-                counter += 1
-            }
+        for day in DataInterface.getDays(project: project, filterEmpty: false, excludeTomorrow: true) {
+            osr += (day.sr / 100.0)
+            counter += 1
         }
         
         project.osr = counter > 0 ? (osr / counter) * 100.0 : 0.0
@@ -379,7 +377,7 @@ class AKDataInterface
         ]
         
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
-            for day in DataInterface.getDays(project: project) {
+            for day in DataInterface.getDays(project: project, filterEmpty: false, excludeTomorrow: true) {
                 let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: Int(day.gmtOffset)))
                 if let currentValue = average[dayOfWeek], let currentCounter = counters[dayOfWeek] {
                     average[dayOfWeek] = currentValue + (day.sr / 100.0)
@@ -426,7 +424,7 @@ class AKDataInterface
         ]
         
         for project in DataInterface.getProjects(filter: Filter(projectFilter: FilterProject())) {
-            for day in DataInterface.getDays(project: project) {
+            for day in DataInterface.getDays(project: project, filterEmpty: false, excludeTomorrow: true) {
                 let dayOfWeek = Int16(Func.AKProcessDayOfWeek(date: day.date, gmtOffset: Int(day.gmtOffset)))
                 if let currentValue = average[dayOfWeek], let currentCounter = counters[dayOfWeek] {
                     average[dayOfWeek] = currentValue + (day.sr / 100.0)
@@ -462,8 +460,11 @@ class AKDataInterface
     }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
-    static func getDays(project: Project, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Day]
-    {
+    static func getDays(
+        project: Project,
+        filterEmpty: Bool = false,
+        excludeTomorrow: Bool = false,
+        filter: Filter = Filter(taskFilter: FilterTask())) -> [Day] {
         if let days = project.days?.allObjects as? [Day] {
             return days.sorted {
                 let now = Date()
@@ -472,12 +473,17 @@ class AKDataInterface
                 
                 return n1.compare(n2) == ComparisonResult.orderedDescending ? true : false
                 }.filter({ (day) -> Bool in
+                    var shouldInclude = 0
+                    
+                    if excludeTomorrow {
+                        shouldInclude += DataInterface.isDayTomorrow(day: day) ? 1 : 0
+                    }
+                    
                     if filterEmpty {
-                        return DataInterface.countTasksInDay(day: day, filter: filter) > 0
+                        shouldInclude += DataInterface.countTasksInDay(day: day, filter: filter) == 0 ? 1 : 0
                     }
-                    else {
-                        return true
-                    }
+                    
+                    return shouldInclude == 0
                 })
         }
         
