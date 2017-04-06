@@ -318,6 +318,24 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 for customCell in controller.customCellArray {
                     Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
                 }
+                
+                // Show message if the are no tasks.
+                if DataInterface.getAllTasksInProject(project: controller.project).count == 0 {
+                    var origin = Func.AKCenterScreenCoordinate(
+                        container: controller.view,
+                        width: AKInitialMessageView.LocalConstants.AKViewWidth,
+                        height: AKInitialMessageView.LocalConstants.AKViewHeight
+                    )
+                    origin.y -= 60.0
+                    
+                    controller.showInitialMessage(
+                        origin: origin,
+                        title: "Hello..!",
+                        message: "Use the menu button above to start adding tasks to your project.",
+                        animate: true,
+                        completionTask: nil
+                    )
+                }
             }
         }
         self.topMenuOverlay.addAction = { (presenterController) -> Void in

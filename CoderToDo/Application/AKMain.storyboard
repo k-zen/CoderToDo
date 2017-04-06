@@ -846,10 +846,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urK-PU-TVJ" userLabel="Project_List_Container">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                <rect key="frame" x="12" y="12" width="351" height="150"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1sV-Ev-hg4" userLabel="Project_List_Table">
-                                        <rect key="frame" x="8" y="8" width="359" height="142"/>
+                                        <rect key="frame" x="8" y="8" width="335" height="134"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
                                 </subviews>
@@ -857,28 +857,28 @@
                                     <constraint firstItem="1sV-Ev-hg4" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="top" constant="8" id="06e-dp-rFo"/>
                                     <constraint firstAttribute="height" constant="150" id="9bh-6h-gFM"/>
                                     <constraint firstAttribute="trailing" secondItem="1sV-Ev-hg4" secondAttribute="trailing" constant="8" id="V8A-BW-UEj"/>
-                                    <constraint firstAttribute="bottom" secondItem="1sV-Ev-hg4" secondAttribute="bottom" id="XlU-n0-2Gc"/>
+                                    <constraint firstAttribute="bottom" secondItem="1sV-Ev-hg4" secondAttribute="bottom" constant="8" id="XlU-n0-2Gc"/>
                                     <constraint firstItem="1sV-Ev-hg4" firstAttribute="leading" secondItem="urK-PU-TVJ" secondAttribute="leading" constant="8" id="t7c-0l-1Ji"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9w-7w-9Xd" userLabel="Bucket_Container">
-                                <rect key="frame" x="0.0" y="150" width="375" height="404"/>
+                                <rect key="frame" x="12" y="174" width="351" height="368"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bucket list for:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnN-WS-6cv" userLabel="Bucket_List_Title">
-                                        <rect key="frame" x="8" y="8" width="359" height="24"/>
+                                        <rect key="frame" x="8" y="8" width="335" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
                                         <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1pS-Hu-LHI" userLabel="Bucket_Table">
-                                        <rect key="frame" x="8" y="40" width="359" height="356"/>
+                                        <rect key="frame" x="8" y="41" width="335" height="319"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="BnN-WS-6cv" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="8" id="0OW-e6-P0H"/>
                                     <constraint firstAttribute="trailing" secondItem="1pS-Hu-LHI" secondAttribute="trailing" constant="8" id="67c-kW-jsE"/>
-                                    <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="40" id="CKw-pX-1fJ"/>
                                     <constraint firstItem="1pS-Hu-LHI" firstAttribute="top" secondItem="BnN-WS-6cv" secondAttribute="bottom" constant="8" id="IOk-Aa-xqN"/>
                                     <constraint firstAttribute="trailing" secondItem="BnN-WS-6cv" secondAttribute="trailing" constant="8" id="LoK-9K-y9n"/>
                                     <constraint firstAttribute="bottom" secondItem="1pS-Hu-LHI" secondAttribute="bottom" constant="8" id="Nml-AE-5Dr"/>
@@ -889,13 +889,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="S52-j0-QiV" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="bottom" id="7YM-fh-P9I"/>
-                            <constraint firstAttribute="trailing" secondItem="urK-PU-TVJ" secondAttribute="trailing" id="906-QK-zv4"/>
-                            <constraint firstAttribute="trailing" secondItem="d9w-7w-9Xd" secondAttribute="trailing" id="TMD-Z6-y7l"/>
-                            <constraint firstItem="urK-PU-TVJ" firstAttribute="top" secondItem="WIN-2g-bVk" secondAttribute="bottom" id="XKn-tC-loU"/>
-                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="qof-D0-gQw"/>
-                            <constraint firstItem="urK-PU-TVJ" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" id="w1e-wJ-dEE"/>
-                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="bottom" id="zWd-Kk-uOn"/>
+                            <constraint firstItem="S52-j0-QiV" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="bottom" constant="12" id="7YM-fh-P9I"/>
+                            <constraint firstAttribute="trailing" secondItem="urK-PU-TVJ" secondAttribute="trailing" constant="12" id="906-QK-zv4"/>
+                            <constraint firstAttribute="trailing" secondItem="d9w-7w-9Xd" secondAttribute="trailing" constant="12" id="TMD-Z6-y7l"/>
+                            <constraint firstItem="urK-PU-TVJ" firstAttribute="top" secondItem="WIN-2g-bVk" secondAttribute="bottom" constant="12" id="XKn-tC-loU"/>
+                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" constant="12" id="qof-D0-gQw"/>
+                            <constraint firstItem="urK-PU-TVJ" firstAttribute="leading" secondItem="bs1-nb-pXf" secondAttribute="leading" constant="12" id="w1e-wJ-dEE"/>
+                            <constraint firstItem="d9w-7w-9Xd" firstAttribute="top" secondItem="urK-PU-TVJ" secondAttribute="bottom" constant="12" id="zWd-Kk-uOn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Brainstorming Bucket" id="pI1-Ru-4xj">

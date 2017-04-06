@@ -52,6 +52,11 @@ class AKAddView: AKCustomView
                                             for customCell in presenterController.customCellArray {
                                                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
                                             }
+                                            
+                                            // Check that at least one task was added.
+                                            if DataInterface.getAllTasksInProject(project: presenterController.project).count > 0 {
+                                                presenterController.hideInitialMessage(animate: true, completionTask: nil)
+                                            }
                                         } })
             }
             catch {

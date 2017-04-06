@@ -95,6 +95,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 
                 // Custom L&F.
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.mainContainer.backgroundColor = GlobalConstants.AKCoderToDoGray2
                 Func.AKAddBorderDeco(
                     cell.infoContainer,
                     color: bucketEntry.priority == 0 ? UIColor.clear.cgColor : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!).cgColor,
@@ -132,7 +133,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let badgeSizeHeight = CGFloat(21.0)
                 
                 let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKBucketTableHeaderHeight))
-                headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+                headerCell.backgroundColor = GlobalConstants.AKCoderToDoGray2
                 
                 let title = UILabel(frame: CGRect(
                     x: padding * 2.0,
@@ -395,6 +396,12 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                         completionTask: nil
                     )
                 }
+            }
+        }
+        self.configureLookAndFeel = { (controller) -> Void in
+            if let controller = controller as? AKBrainstormingBucketViewController {
+                controller.projectListContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.bucketContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
             }
         }
         self.setup()

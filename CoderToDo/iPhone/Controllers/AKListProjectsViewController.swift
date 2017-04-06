@@ -318,16 +318,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         self.inhibitLocalNotificationMessage = false
         self.inhibitTapGesture = true
-        self.inhibitLongPressGesture = false
-        self.additionalOperationsWhenLongPressed = { (gesture) -> Void in
-            self.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
-                             taskBeforePresenting: { _,_ in },
-                             dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                if let presenterController = presenterController as? AKListProjectsViewController {
-                                    Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
-                                } }
-            )
-        }
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKListProjectsViewController {
                 Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
@@ -367,10 +357,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 }
                 
                 // Show message if the are no projects.
-                if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {
-                    controller.hideInitialMessage(animate: true, completionTask: nil)
-                }
-                else {
+                if DataInterface.getProjects(filter: controller.projectFilter).count == 0 {
                     var origin = Func.AKCenterScreenCoordinate(
                         container: controller.view,
                         width: AKInitialMessageView.LocalConstants.AKViewWidth,
@@ -405,6 +392,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
                                                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
+                                                        
+                                                        // Check that at least one project was added.
+                                                        if DataInterface.getProjects(filter: presenterController.projectFilter).count > 0 {
+                                                            presenterController.hideInitialMessage(animate: true, completionTask: nil)
+                                                        }
                                                     } }
                 )
             }
