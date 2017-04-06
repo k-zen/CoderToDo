@@ -364,8 +364,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     if let configurations = AKConfigurationsBuilder.mirror(interface: newConfigurations) {
                         DataInterface.addConfigurations(configurations: configurations)
                     }
-                    
-                    return
                 }
                 
                 // Show message if the are no projects.
