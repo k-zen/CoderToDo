@@ -107,13 +107,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         // Running Days
         let runningDays = DataInterface.getProjectRunningDays(project: project)
         cell.runningDaysValue.text = String(format: "%i running %@", runningDays, runningDays > 1 ? "days" : "day")
-        // Add Tomorrow Task
-        if DataInterface.getProjectStatus(project: project) == .accepting || DataInterface.getProjectStatus(project: project) == .firstDay {
-            cell.addTomorrowTask.isHidden = false
-        }
-        else {
-            cell.addTomorrowTask.isHidden = true
-        }
         // Times
         if let startingTime = project.startingTime as Date? {
             cell.startValue.text = String(
@@ -136,17 +129,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         else {
             cell.closeValue.isHidden = true
         }
-        
-        // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-        cell.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        Func.AKAddBorderDeco(
-            cell.infoContainer,
-            color: GlobalConstants.AKTableCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
         
         return cell
     }
@@ -256,49 +238,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-    {
-        // Edit Action
-        let edit = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexpath) -> Void in
-            let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectConfigurationsSegue, sender: project)
-        })
-        edit.backgroundColor = GlobalConstants.AKCoderToDoBlue
-        
-        // Delete Action
-        let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
-            self.showContinueMessage(
-                origin: CGPoint.zero,
-                message: "This action can't be undone. Continue...?",
-                yesAction: { (presenterController) -> Void in
-                    if let presenterController = presenterController as? AKListProjectsViewController {
-                        let project = DataInterface.getProjects(filter: presenterController.projectFilter)[(indexPath as NSIndexPath).row]
-                        
-                        // Remove data structure.
-                        DataInterface.getUser()?.removeFromProject(project)
-                        // Invalidate notifications.
-                        Func.AKInvalidateLocalNotification(controller: self, project: project)
-                        
-                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
-                        // Hide the chart if there are not data.
-                        presenterController.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
-                    } },
-                noAction: { (presenterController) -> Void in
-                    if let presenterController = presenterController as? AKListProjectsViewController {
-                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
-                    } },
-                animate: true,
-                completionTask: nil
-            )
-        })
-        delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
-        
-        return [delete, edit];
-    }
-    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return LocalConstants.AKRowHeight }
@@ -372,6 +314,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         animate: true,
                         completionTask: nil
                     )
+                }
+                else {
+                    controller.hideInitialMessage(animate: true, completionTask: nil)
                 }
             }
         }
