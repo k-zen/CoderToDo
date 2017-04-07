@@ -758,7 +758,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 default:
                     controller?.showContinueMessage(
                         origin: CGPoint.zero,
-                        message: "You need to be signed into iCloud and have *iCloud Drive* set to on. Go to *Settings -> iCloud* to enable it.",
+                        message: "You need to be signed into iCloud and have iCloud Drive set to on. Go to Settings to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
