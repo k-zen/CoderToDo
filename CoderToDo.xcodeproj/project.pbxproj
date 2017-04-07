@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4905B4111E981365000E0EA0 /* AKDisplaceableTableMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4905B4101E981365000E0EA0 /* AKDisplaceableTableMenuView.xib */; };
+		4905B4131E98141D000E0EA0 /* AKDisplaceableTableMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905B4121E98141D000E0EA0 /* AKDisplaceableTableMenuView.swift */; };
 		490670261E6D90CF0046298C /* AKFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490670251E6D90CF0046298C /* AKFilterView.xib */; };
 		490C223E1E65CBBE006A39F8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490C223D1E65CBBE006A39F8 /* CloudKit.framework */; };
 		49121BAE1E737480000B4D26 /* Icon-1024@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121B891E737480000B4D26 /* Icon-1024@1x.png */; };
@@ -143,6 +145,8 @@
 
 /* Begin PBXFileReference section */
 		2C25BC9DB450A698309C1AD7 /* Pods-CoderToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoderToDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoderToDo/Pods-CoderToDo.debug.xcconfig"; sourceTree = "<group>"; };
+		4905B4101E981365000E0EA0 /* AKDisplaceableTableMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKDisplaceableTableMenuView.xib; sourceTree = "<group>"; };
+		4905B4121E98141D000E0EA0 /* AKDisplaceableTableMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDisplaceableTableMenuView.swift; sourceTree = "<group>"; };
 		490670251E6D90CF0046298C /* AKFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKFilterView.xib; sourceTree = "<group>"; };
 		490C223D1E65CBBE006A39F8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		49121B891E737480000B4D26 /* Icon-1024@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024@1x.png"; sourceTree = "<group>"; };
@@ -468,6 +472,7 @@
 				49FE561F1E68AC6500652187 /* AKConfigurationsTableViewCell.xib */,
 				49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */,
 				49A4A0A71E589E8600CEDA1B /* AKDaysTableViewCell.xib */,
+				4905B4101E981365000E0EA0 /* AKDisplaceableTableMenuView.xib */,
 				490670251E6D90CF0046298C /* AKFilterView.xib */,
 				499140EA1E953F6600169E14 /* AKInitialMessageView.xib */,
 				49A4A0A81E589E8600CEDA1B /* AKIntroductoryView.xib */,
@@ -595,6 +600,7 @@
 				4971A6291E8EDC3100F2B81E /* AKAddBucketEntryView.swift */,
 				492D5C731E82F53E00F9E470 /* AKAddView.swift */,
 				49E76DD21E7DCF62000215BC /* AKContinueMessageView.swift */,
+				4905B4121E98141D000E0EA0 /* AKDisplaceableTableMenuView.swift */,
 				49E76DD31E7DCF62000215BC /* AKFilterView.swift */,
 				499140EC1E95405A00169E14 /* AKInitialMessageView.swift */,
 				49E76DD41E7DCF62000215BC /* AKMessageView.swift */,
@@ -754,6 +760,7 @@
 				49121BC71E737480000B4D26 /* iTunesArtwork@2x.png in Resources */,
 				49121BAF1E737480000B4D26 /* Icon-512@1x.png in Resources */,
 				49121BB71E737480000B4D26 /* Icon-40@2x.png in Resources */,
+				4905B4111E981365000E0EA0 /* AKDisplaceableTableMenuView.xib in Resources */,
 				49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */,
 				49121BC81E737480000B4D26 /* iTunesArtwork@3x.png in Resources */,
 				4971A62C1E8EF80E00F2B81E /* AKBucketTableViewCell.xib in Resources */,
@@ -882,6 +889,7 @@
 				498E17901E84332B00B3A3A1 /* AKProjectNameViewController.swift in Sources */,
 				49E76DF61E7DCF62000215BC /* AKCloudKitController.swift in Sources */,
 				49E76DFB1E7DCF62000215BC /* AKDataInterface.swift in Sources */,
+				4905B4131E98141D000E0EA0 /* AKDisplaceableTableMenuView.swift in Sources */,
 				498E179A1E8433FA00B3A3A1 /* AKBrainstormingBucketViewController.swift in Sources */,
 				49A4A0E91E589E8600CEDA1B /* AKNewProjectViewController.swift in Sources */,
 				49A4A0EC1E589E8600CEDA1B /* AKViewProjectViewController.swift in Sources */,

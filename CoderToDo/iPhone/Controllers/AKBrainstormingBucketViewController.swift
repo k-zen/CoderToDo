@@ -89,13 +89,12 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
                 
                 let cell = self.bucketTable.dequeueReusableCell(withIdentifier: "BucketTableCell") as! AKBucketTableViewCell
+                cell.controller = self
                 cell.nameValue.text = bucketEntry.name
                 cell.priorityValue.text = Func.AKGetPriorityAsName(priority: bucketEntry.priority)
                 cell.priorityValue.backgroundColor = bucketEntry.priority == 0 ? UIColor.clear : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!)
                 
                 // Custom L&F.
-                cell.selectionStyle = UITableViewCellSelectionStyle.none
-                cell.mainContainer.backgroundColor = GlobalConstants.AKCoderToDoGray2
                 Func.AKAddBorderDeco(
                     cell.infoContainer,
                     color: bucketEntry.priority == 0 ? UIColor.clear.cgColor : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!).cgColor,
@@ -128,7 +127,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let date = DataInterface.getEntryDates(project: selectedProject)[section]
                 
                 let tableWidth = tableView.frame.width
-                let padding = CGFloat(0.0)
+                let padding = CGFloat(8.0)
                 let badgeSizeWidth = CGFloat(60.0)
                 let badgeSizeHeight = CGFloat(21.0)
                 
@@ -136,9 +135,9 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 headerCell.backgroundColor = GlobalConstants.AKCoderToDoGray2
                 
                 let title = UILabel(frame: CGRect(
-                    x: padding * 2.0,
+                    x: 0.0,
                     y: 0.0,
-                    width: tableWidth - (padding * 2),
+                    width: tableWidth - (padding * 2.0) - badgeSizeWidth,
                     height: LocalConstants.AKBucketTableHeaderHeight)
                 )
                 title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
@@ -167,7 +166,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 // tasksCountBadgeContainer.layer.borderWidth = 1.0
                 
                 let tasksCountBadge = UILabel(frame: CGRect(
-                    x: tasksCountBadgeContainer.frame.width - (badgeSizeWidth),
+                    x: tasksCountBadgeContainer.frame.width - badgeSizeWidth,
                     y: (LocalConstants.AKBucketTableHeaderHeight - badgeSizeHeight) / 2.0,
                     width: badgeSizeWidth,
                     height: badgeSizeHeight)
@@ -261,37 +260,9 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-    {
-        switch tableView.tag {
-        case LocalConstants.AKBucketTableTag:
-            return true
-        default:
-            break
-        }
-        
-        return false
-    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-    {
-        // Delete Action
-        let delete = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexpath) -> Void in
-            if let selectedProject = self.selectedProject {
-                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
-                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
-                DataInterface.removeBucketEntry(project: selectedProject, entry: bucketEntry)
-                
-                Func.AKReloadTableWithAnimation(tableView: self.projectListTable)
-                Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
-            }
-        })
-        delete.backgroundColor = GlobalConstants.AKRedForWhiteFg
-        
-        return [delete];
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         switch tableView.tag {

@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Added support for custom table sliding menues. (2017/04/07)
         * Correction to the OSR computation and statistics. (2017/04/06)
         * Added support for GMT offsets wherever there is a date in the DB. (2017/04/06)
         * Mayor modifications to the way overlays are handled. Now they are added to the superview only when shown. And some other minor modifications. (2017/04/05)

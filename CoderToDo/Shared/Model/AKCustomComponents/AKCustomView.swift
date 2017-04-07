@@ -236,7 +236,6 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
         if animate {
             UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
             Func.AKChangeComponentHeight(component: self.getView(), newHeight: expandHeight)
-            self.getView().layoutIfNeeded()
             CATransaction.setCompletionBlock {
                 if completionTask != nil {
                     completionTask!(controller)

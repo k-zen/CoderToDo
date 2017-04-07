@@ -4,8 +4,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 30
-        static let AKRowHeight: CGFloat = 45
+        static let AKHeaderHeight: CGFloat = 30.0
+        static let AKRowHeight: CGFloat = 45.0
         static let AKFooterHeight: CGFloat = 1.0
     }
     

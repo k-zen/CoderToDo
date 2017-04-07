@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIo-o2-Hau" userLabel="Info_Container">
-                        <rect key="frame" x="0.0" y="0.0" width="260" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="254" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some task to be performed in a timely manner..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vrh-fG-snJ" userLabel="Name_Value">
-                                <rect key="frame" x="16" y="0.0" width="236" height="44"/>
+                                <rect key="frame" x="16" y="0.0" width="230" height="44"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="18"/>
                                 <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrd-aO-YWm" userLabel="Priority_Container">
-                        <rect key="frame" x="260" y="0.0" width="60" height="44"/>
+                        <rect key="frame" x="254" y="0.0" width="60" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10k-e1-t5O" userLabel="Priority_Value">
                                 <rect key="frame" x="0.0" y="11.5" width="60" height="21"/>
@@ -56,10 +56,10 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="MIo-o2-Hau" secondAttribute="bottom" constant="0.5" id="0OM-DV-H85"/>
-                    <constraint firstAttribute="trailing" secondItem="xrd-aO-YWm" secondAttribute="trailing" id="ClL-Ge-R74"/>
+                    <constraint firstAttribute="trailing" secondItem="xrd-aO-YWm" secondAttribute="trailing" constant="6" id="ClL-Ge-R74"/>
                     <constraint firstItem="xrd-aO-YWm" firstAttribute="leading" secondItem="MIo-o2-Hau" secondAttribute="trailing" id="CuU-jI-Bwo"/>
                     <constraint firstItem="MIo-o2-Hau" firstAttribute="leading" secondItem="Jwb-PL-dev" secondAttribute="leading" id="G8B-Nv-iki"/>
                     <constraint firstItem="MIo-o2-Hau" firstAttribute="top" secondItem="Jwb-PL-dev" secondAttribute="top" id="H03-YA-hD4"/>
