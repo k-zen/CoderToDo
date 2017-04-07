@@ -831,6 +831,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
+            tableView.layoutIfNeeded()
             UIView.commitAnimations()
         }
         else {
@@ -880,6 +881,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - newOffset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + newOffset)
+            tableView.layoutIfNeeded()
             UIView.commitAnimations()
         }
         else {
@@ -955,12 +957,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
+                tableView.layoutIfNeeded()
                 UIView.commitAnimations()
             }
             else {
                 UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + offset)
+                tableView.layoutIfNeeded()
                 UIView.commitAnimations()
             }
         }
