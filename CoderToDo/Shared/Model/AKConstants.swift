@@ -559,6 +559,11 @@ enum ComponentDirection {
     case disableToEnable
 }
 
+enum DisplaceableMenuStates {
+    case visible
+    case notVisible
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -1126,10 +1131,11 @@ class UtilityFunctions
     {
         UIView.transition(
             with: tableView,
-            duration: 0.75,
+            duration: 1.0,
             options: .transitionCrossDissolve,
             animations: {
-                tableView.reloadData() },
+                tableView.reloadData()
+                tableView.layoutIfNeeded() },
             completion: nil
         )
     }
