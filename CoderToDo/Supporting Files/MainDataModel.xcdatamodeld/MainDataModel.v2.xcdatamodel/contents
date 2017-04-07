@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bucket" representedClassName="AKBucketMO" syncable="YES" codeGenerationType="class">
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BucketEntry" inverseName="bucket" inverseEntity="BucketEntry" syncable="YES"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="bucket" inverseEntity="Project" syncable="YES"/>
@@ -73,6 +73,7 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" attributeType="String" syncable="YES"/>
+        <attribute name="totalCompletion" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
         <relationship name="dilateQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DilateTaskQueue" inverseName="tasks" inverseEntity="DilateTaskQueue" syncable="YES"/>
         <relationship name="pendingQueue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PendingTasksQueue" inverseName="tasks" inverseEntity="PendingTasksQueue" syncable="YES"/>
@@ -97,7 +98,7 @@
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
         <element name="Project" positionX="-1098" positionY="-747" width="128" height="284"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
-        <element name="Task" positionX="-470" positionY="-733" width="128" height="178"/>
+        <element name="Task" positionX="-470" positionY="-733" width="128" height="195"/>
         <element name="User" positionX="-839" positionY="-495" width="128" height="149"/>
     </elements>
 </model>

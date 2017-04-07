@@ -576,12 +576,7 @@ class AKDataInterface
                     for task in tasks {
                         if task.state == TaskStates.done.rawValue || task.state == TaskStates.notDone.rawValue || task.state == TaskStates.pending.rawValue {
                             sr += (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0)
-                            if task.state != TaskStates.notDone.rawValue {
-                                counter += task.state == TaskStates.done.rawValue ? (abs(task.completionPercentage - task.initialCompletionPercentage) / 100.0) : 1
-                            }
-                            else {
-                                counter += 1
-                            }
+                            counter += task.totalCompletion
                         }
                     }
                 }
@@ -858,6 +853,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
+                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
                         }
                         else {
                             let newCategory = Category(context: mr.getMOC())
@@ -870,6 +866,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
+                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
                         }
                     }
                 }
@@ -890,6 +887,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
+                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
                         }
                         else {
                             let newCategory = Category(context: mr.getMOC())
@@ -902,6 +900,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
+                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
                         }
                     }
                 }

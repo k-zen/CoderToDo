@@ -138,6 +138,7 @@ class AKMasterReference: NSObject
                         data.appendFormat("=>                   NAME: %@\n", task.name ?? "")
                         data.appendFormat("=>                   NOTE: %@\n", task.note ?? "")
                         data.appendFormat("=>                   STATE: %@\n", task.state ?? "")
+                        data.appendFormat("=>                   TOTAL COMPLETION: %.2f\n", task.totalCompletion)
                         data.appendFormat("=>                   ------\n")
                     }
                     data.appendFormat("=>               ------\n")

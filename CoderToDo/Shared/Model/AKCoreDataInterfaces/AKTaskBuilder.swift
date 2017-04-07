@@ -13,6 +13,7 @@ class AKTaskBuilder
             task.name = interface.name
             task.note = interface.note
             task.state = interface.state
+            task.totalCompletion = interface.totalCompletion
             
             return task
         }
@@ -30,6 +31,7 @@ class AKTaskBuilder
         interface.name = task.name
         interface.note = task.note
         interface.state = task.state
+        interface.totalCompletion = task.totalCompletion
         
         return interface
     }
@@ -43,6 +45,7 @@ class AKTaskBuilder
         task.name = interface.name
         task.note = interface.note
         task.state = interface.state
+        task.totalCompletion = interface.totalCompletion
     }
 }
 
@@ -55,6 +58,7 @@ struct AKTaskInterface
     var name: String?
     var note: String?
     var state: String?
+    var totalCompletion: Float
     
     init()
     {
@@ -64,6 +68,7 @@ struct AKTaskInterface
         self.name = ""
         self.note = ""
         self.state = TaskStates.pending.rawValue
+        self.totalCompletion = 1.0
     }
     
     init(name: String, state: String)
@@ -76,6 +81,7 @@ struct AKTaskInterface
         self.initialCompletionPercentage = 0.0
         self.note = ""
         self.state = state
+        self.totalCompletion = 1.0
         
         // Fixed.
         self.creationDate = NSDate()
@@ -119,6 +125,16 @@ struct AKTaskInterface
         }
         else {
             self.state = asString
+        }
+    }
+    
+    mutating func setTotalCompletion(_ asString: String)
+    {
+        if asString.isEmpty {
+            self.totalCompletion = 1.0
+        }
+        else {
+            self.totalCompletion = Float(asString) ?? 1.0
         }
     }
     

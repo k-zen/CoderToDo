@@ -92,6 +92,7 @@ class AKXMLBuilder
                         xml.append(String(format: "<name>%@</name>", task.name?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<note>%@</note>", task.note?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<state>%@</state>", task.state ?? ""))
+                        xml.append(String(format: "<totalCompletion>%.2f</totalCompletion>", task.totalCompletion))
                         xml.append("</task>")
                     }
                     xml.append("</tasks>")
@@ -386,6 +387,7 @@ class AKXMLBuilder
                         let name = processor.getNodeValue(processor.retrieveSubNode("name", node: currentNode), strict: false).fromBase64() ?? ""
                         let note = processor.getNodeValue(processor.retrieveSubNode("note", node: currentNode), strict: false).fromBase64() ?? ""
                         let state = processor.getNodeValue(processor.retrieveSubNode("state", node: currentNode), strict: false) ?? ""
+                        let totalCompletion = processor.getNodeValue(processor.retrieveSubNode("totalCompletion", node: currentNode), strict: false) ?? ""
                         
                         var newTask = AKTaskInterface()
                         // Custom Setters.
@@ -393,6 +395,7 @@ class AKXMLBuilder
                         newTask.setCreationDate(creationDate)
                         newTask.setInitialCompletionPercentage(initialCompletionPercentage)
                         newTask.setState(state)
+                        newTask.setTotalCompletion(totalCompletion)
                         // Normal Setters.
                         newTask.name = name
                         newTask.note = note
