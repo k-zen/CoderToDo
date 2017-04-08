@@ -204,8 +204,10 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                 controller.task.completionPercentage = Float(controller.changeCP.value)
                 // Note.
                 controller.task.note = controller.notesValue.text
-                // Recompute the day's SR.
-                _ = DataInterface.computeSRForDay(day: (controller.task.category?.day)!)
+                // Recompute the day's SR, only if day is editable.
+                if self.editMode == .editable {
+                    _ = DataInterface.computeSRForDay(day: (controller.task.category?.day)!)
+                }
             }
         }
         self.configureLookAndFeel = { (controller) -> Void in
