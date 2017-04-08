@@ -505,6 +505,7 @@ enum TaskMode: String
     case editable = "Editable"
     case notEditable = "Not Editable"
     case limitedEditing = "Limited Editing"
+    case cleaningMode = "Cleaning Mode"
 }
 
 enum MenuItems: Int

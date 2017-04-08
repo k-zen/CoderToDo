@@ -192,6 +192,10 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                         break
                     }
                 }
+                else {
+                    // Enable cleaning mode.
+                    controller.markTask(mode: .cleaningMode)
+                }
             }
         }
         self.saveData = { (controller) -> Void in
@@ -263,6 +267,12 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             self.changeCP.isEnabled = false
             self.changeCategory.isEnabled = true
             break
+        case .cleaningMode:
+            self.taskNameValue.isEditable = true
+            self.statusValue.isEnabled = false
+            self.changeCP.isEnabled = false
+            self.changeCategory.isEnabled = true
+            break
         }
     }
     
@@ -278,6 +288,9 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
             break
         case .limitedEditing:
             self.taskState.backgroundColor = GlobalConstants.AKBlueForWhiteFg
+            break
+        case .cleaningMode:
+            self.taskState.backgroundColor = GlobalConstants.AKPurpleForWhiteFg
             break
         }
         
