@@ -63,21 +63,27 @@ class AKChecks
                             var duplicate = AKTaskBuilder.from(task: task)
                             duplicate.setState(TaskStates.pending.rawValue)
                             
-                            // Add the duplicate to the same category as the original.
-                            let newCategory = Category(context: mr.getMOC())
-                            newCategory.name = task.category?.name
-                            
                             // Add the category to the new day.
-                            if let newTask = AKTaskBuilder.mirror(interface: duplicate) {
-                                newCategory.addToTasks(newTask)
-                                newDay.addToCategories(newCategory)
-                                
-                                if !DataInterface.addPendingTask(task: newTask) {
-                                    NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
-                                }
-                                else {
-                                    // Mark the original as migrated to avoid migrate the task twice.
-                                    task.migrated = true
+                            if let categoryName = task.category?.name {
+                                if let newTask = AKTaskBuilder.mirror(interface: duplicate) {
+                                    if let category = DataInterface.getCategoryByName(day: newDay, name: categoryName) {
+                                        category.addToTasks(newTask)
+                                        newDay.addToCategories(category)
+                                    }
+                                    else {
+                                        let newCategory = Category(context: mr.getMOC())
+                                        newCategory.name = categoryName
+                                        newCategory.addToTasks(newTask)
+                                        newDay.addToCategories(newCategory)
+                                    }
+                                    
+                                    if !DataInterface.addPendingTask(task: newTask) {
+                                        NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                                    }
+                                    else {
+                                        // Mark the original as migrated to avoid migrate the task twice.
+                                        task.migrated = true
+                                    }
                                 }
                             }
                         }
