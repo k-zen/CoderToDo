@@ -20,6 +20,11 @@ class AKChecks
     ///  If the project is closed and is NOT today before working day AND
     ///      day is not tomorrow AND
     ///          a. the state is DILATE
+    /// 4. Add tasks marked as NOT_DONE to PendingQueue.
+    ///  If the project is closed and is NOT today before working day AND
+    ///      day is not tomorrow AND
+    ///          a. the state is NOT_DONE
+    ///  DO NOT remove from the original day!
     ///
     /// - Parameter controller: The controller which called the function.
     /// - Parameter task: The task to process.
@@ -44,6 +49,37 @@ class AKChecks
                 if task.state == TaskStates.dilate.rawValue {
                     if !DataInterface.addDilateTask(task: task) {
                         NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
+                    }
+                }
+                // Sanity check #4
+                if task.state == TaskStates.notDone.rawValue && !task.migrated {
+                    // ################################################################################################## //
+                    // # This function WILL ALWAYS return a new next day (tomorrow), because this checks always execute # //
+                    // # at the end of the day, when the working day is over and the state is *Accepting*.              # //
+                    // ################################################################################################## //
+                    if let newDay = DataInterface.addNewWorkingDay(project: (task.category?.day?.project)!) {
+                        if let mr = Func.AKObtainMasterReference() {
+                            // Duplicate the task.
+                            var duplicate = AKTaskBuilder.from(task: task)
+                            duplicate.setState(TaskStates.pending.rawValue)
+                            
+                            // Add the duplicate to the same category as the original.
+                            let newCategory = Category(context: mr.getMOC())
+                            newCategory.name = task.category?.name
+                            duplicate.category = newCategory
+                            
+                            // Add the category to the new day.
+                            newDay.addToCategories(newCategory)
+                            
+                            // Mark the original as migrated to avoid migrate the task twice.
+                            task.migrated = true
+                            
+                            if let newTask = AKTaskBuilder.mirror(interface: duplicate) {
+                                if !DataInterface.addPendingTask(task: newTask) {
+                                    NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                                }
+                            }
+                        }
                     }
                 }
             }

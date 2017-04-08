@@ -6,10 +6,15 @@ class AKTaskBuilder
     {
         if let mr = Func.AKObtainMasterReference() {
             let task = Task(context: mr.getMOC())
+            // Dependencies
+            if let category = interface.category {
+                task.category = category
+            }
             // Mirror.
             task.completionPercentage = interface.completionPercentage
             task.creationDate = interface.creationDate
             task.initialCompletionPercentage = interface.initialCompletionPercentage
+            task.migrated = interface.migrated
             task.name = interface.name
             task.note = interface.note
             task.state = interface.state
@@ -28,6 +33,7 @@ class AKTaskBuilder
         interface.completionPercentage = task.completionPercentage
         interface.creationDate = task.creationDate
         interface.initialCompletionPercentage = task.initialCompletionPercentage
+        interface.migrated = task.migrated
         interface.name = task.name
         interface.note = task.note
         interface.state = task.state
@@ -42,6 +48,7 @@ class AKTaskBuilder
         task.completionPercentage = interface.completionPercentage
         task.creationDate = interface.creationDate
         task.initialCompletionPercentage = interface.initialCompletionPercentage
+        task.migrated = interface.migrated
         task.name = interface.name
         task.note = interface.note
         task.state = interface.state
@@ -51,10 +58,13 @@ class AKTaskBuilder
 
 struct AKTaskInterface
 {
+    // MARK: Dependencies
+    var category: Category?
     // MARK: Properties
     var completionPercentage: Float
     var creationDate: NSDate?
     var initialCompletionPercentage: Float
+    var migrated: Bool
     var name: String?
     var note: String?
     var state: String?
@@ -65,6 +75,7 @@ struct AKTaskInterface
         self.completionPercentage = 0.0
         self.creationDate = NSDate()
         self.initialCompletionPercentage = 0.0
+        self.migrated = false
         self.name = ""
         self.note = ""
         self.state = TaskStates.pending.rawValue
@@ -79,6 +90,7 @@ struct AKTaskInterface
         // Optional.
         self.completionPercentage = 0.0
         self.initialCompletionPercentage = 0.0
+        self.migrated = false
         self.note = ""
         self.state = state
         self.totalCompletion = 1.0
@@ -115,6 +127,16 @@ struct AKTaskInterface
         }
         else {
             self.initialCompletionPercentage = Float(asString) ?? 0.0
+        }
+    }
+    
+    mutating func setMigrated(_ asString: String)
+    {
+        if asString.isEmpty {
+            self.migrated = false
+        }
+        else {
+            self.migrated = asString.toBool() ?? false
         }
     }
     

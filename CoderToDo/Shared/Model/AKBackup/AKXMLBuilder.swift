@@ -45,9 +45,11 @@ class AKXMLBuilder
                 xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", taskInQueue.completionPercentage))
                 xml.append(String(format: "<creationDate>%@</creationDate>", taskInQueue.creationDate?.description ?? ""))
                 xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
+                xml.append(String(format: "<migrated>%@</migrated>", taskInQueue.migrated ? "YES" : "NO"))
                 xml.append(String(format: "<name>%@</name>", taskInQueue.name?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<note>%@</note>", taskInQueue.note?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<state>%@</state>", taskInQueue.state ?? ""))
+                xml.append(String(format: "<totalCompletion>%.2f</totalCompletion>", taskInQueue.totalCompletion))
                 xml.append("</task>")
             }
             xml.append("</projectPendingQueue>")
@@ -57,9 +59,11 @@ class AKXMLBuilder
                 xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", taskInQueue.completionPercentage))
                 xml.append(String(format: "<creationDate>%@</creationDate>", taskInQueue.creationDate?.description ?? ""))
                 xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", taskInQueue.initialCompletionPercentage))
+                xml.append(String(format: "<migrated>%@</migrated>", taskInQueue.migrated ? "YES" : "NO"))
                 xml.append(String(format: "<name>%@</name>", taskInQueue.name?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<note>%@</note>", taskInQueue.note?.toBase64() ?? "")) // Should be encoded to Base64.
                 xml.append(String(format: "<state>%@</state>", taskInQueue.state ?? ""))
+                xml.append(String(format: "<totalCompletion>%.2f</totalCompletion>", taskInQueue.totalCompletion))
                 xml.append("</task>")
             }
             xml.append("</projectDilateQueue>")
@@ -89,6 +93,7 @@ class AKXMLBuilder
                         xml.append(String(format: "<completionPercentage>%.2f</completionPercentage>", task.completionPercentage))
                         xml.append(String(format: "<creationDate>%@</creationDate>", task.creationDate?.description ?? ""))
                         xml.append(String(format: "<initialCompletionPercentage>%.2f</initialCompletionPercentage>", task.initialCompletionPercentage))
+                        xml.append(String(format: "<migrated>%@</migrated>", task.migrated ? "YES" : "NO"))
                         xml.append(String(format: "<name>%@</name>", task.name?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<note>%@</note>", task.note?.toBase64() ?? "")) // Should be encoded to Base64.
                         xml.append(String(format: "<state>%@</state>", task.state ?? ""))
@@ -384,6 +389,7 @@ class AKXMLBuilder
                         let completionPercentage = processor.getNodeValue(processor.retrieveSubNode("completionPercentage", node: currentNode), strict: false) ?? ""
                         let creationDate = processor.getNodeValue(processor.retrieveSubNode("creationDate", node: currentNode), strict: false) ?? ""
                         let initialCompletionPercentage = processor.getNodeValue(processor.retrieveSubNode("initialCompletionPercentage", node: currentNode), strict: false) ?? ""
+                        let migrated = processor.getNodeValue(processor.retrieveSubNode("migrated", node: currentNode), strict: false) ?? ""
                         let name = processor.getNodeValue(processor.retrieveSubNode("name", node: currentNode), strict: false).fromBase64() ?? ""
                         let note = processor.getNodeValue(processor.retrieveSubNode("note", node: currentNode), strict: false).fromBase64() ?? ""
                         let state = processor.getNodeValue(processor.retrieveSubNode("state", node: currentNode), strict: false) ?? ""
@@ -394,6 +400,7 @@ class AKXMLBuilder
                         newTask.setCompletionPercentage(completionPercentage)
                         newTask.setCreationDate(creationDate)
                         newTask.setInitialCompletionPercentage(initialCompletionPercentage)
+                        newTask.setMigrated(migrated)
                         newTask.setState(state)
                         newTask.setTotalCompletion(totalCompletion)
                         // Normal Setters.

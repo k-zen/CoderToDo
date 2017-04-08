@@ -853,7 +853,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
-                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
+                            task.totalCompletion = 1.0 - (task.initialCompletionPercentage / 100.0)
                         }
                         else {
                             let newCategory = Category(context: mr.getMOC())
@@ -866,7 +866,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
-                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
+                            task.totalCompletion = 1.0 - (task.initialCompletionPercentage / 100.0)
                         }
                     }
                 }
@@ -887,7 +887,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
-                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
+                            task.totalCompletion = 1.0 - (task.initialCompletionPercentage / 100.0)
                         }
                         else {
                             let newCategory = Category(context: mr.getMOC())
@@ -900,7 +900,7 @@ class AKDataInterface
                             
                             task.creationDate = currentDay.date
                             task.initialCompletionPercentage = task.completionPercentage
-                            task.totalCompletion = 1.0 - task.initialCompletionPercentage
+                            task.totalCompletion = 1.0 - (task.initialCompletionPercentage / 100.0)
                         }
                     }
                 }
@@ -912,10 +912,16 @@ class AKDataInterface
                     // Count the task in both days.
                     let leftTasks = DataInterface.countTasksInDay(day: day1, filter: Filter(taskFilter: FilterTask())) + DataInterface.countTasksInDay(day: day2, filter: Filter(taskFilter: FilterTask()))
                     if leftTasks == 0 {
-                        project.removeFromDays(day1)
-                        project.removeFromDays(day2)
+                        // project.removeFromDays(day1)
+                        // project.removeFromDays(day2)
+                        
+                        // LEAVE THE DAYS IN ORDER TO COMPUTE THE SR!!!
                     }
                 }
+                
+                // After the migration clear both queues.
+                project.pendingQueue?.removeFromTasks((project.pendingQueue?.tasks)!)
+                project.dilateQueue?.removeFromTasks((project.dilateQueue?.tasks)!)
                 
                 return DataInterface.updateDay(project: project, updatedDay: currentDay)
             }

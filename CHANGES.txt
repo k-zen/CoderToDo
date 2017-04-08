@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Re-added support to copy/duplicate tasks marked as NOT DONE to next day, but with the state of PENDING. (2017/04/07)
         * Corrected bug in SR computation. (2017/04/07)
         * Added support for custom table sliding menues. (2017/04/07)
         * Correction to the OSR computation and statistics. (2017/04/06)

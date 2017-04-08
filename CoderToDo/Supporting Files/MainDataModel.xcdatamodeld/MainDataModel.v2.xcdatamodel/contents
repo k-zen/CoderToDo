@@ -70,6 +70,7 @@
         <attribute name="completionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="initialCompletionPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="migrated" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" attributeType="String" syncable="YES"/>
@@ -98,7 +99,7 @@
         <element name="PendingTasksQueue" positionX="-864" positionY="-955" width="128" height="73"/>
         <element name="Project" positionX="-1098" positionY="-747" width="128" height="284"/>
         <element name="ProjectCategory" positionX="-893" positionY="-856" width="128" height="75"/>
-        <element name="Task" positionX="-470" positionY="-733" width="128" height="195"/>
+        <element name="Task" positionX="-470" positionY="-733" width="128" height="210"/>
         <element name="User" positionX="-839" positionY="-495" width="128" height="149"/>
     </elements>
 </model>
