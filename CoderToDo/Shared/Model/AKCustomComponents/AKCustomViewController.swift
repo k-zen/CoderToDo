@@ -111,7 +111,6 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let sortMenuItemOverlay = AKSortView()
     let filterMenuItemOverlay = AKFilterView()
     let searchMenuItemOverlay = AKSearchView()
-    let addBucketEntryOverlay = AKAddBucketEntryView()
     let migrateBucketEntryOverlay = AKMigrateBucketEntryView()
     let initialMessageOverlay = AKInitialMessageView()
     let selectCategoryOverlay = AKSelectCategoryView()
@@ -270,6 +269,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     // MARK: Floating Views
     func showMessage(
         origin: CGPoint,
+        type: MessageType,
         message: String,
         animate: Bool,
         completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
@@ -285,6 +285,20 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.messageOverlay.controller = self
         self.messageOverlay.setup()
         self.messageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        switch type {
+        case .info:
+            self.messageOverlay.title.text = MessageType.info.rawValue
+            self.messageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .low)
+            break
+        case .warning:
+            self.messageOverlay.title.text = MessageType.warning.rawValue
+            self.messageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .medium)
+            break
+        case .error:
+            self.messageOverlay.title.text = MessageType.error.rawValue
+            self.messageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .high)
+            break
+        }
         self.messageOverlay.message.text = message
         
         // Expand/Show the overlay.
@@ -297,6 +311,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func showContinueMessage(origin: CGPoint,
+                             type: MessageType,
                              message: String,
                              yesButtonTitle: String = "Yes",
                              noButtonTitle: String = "No",
@@ -316,6 +331,20 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.continueMessageOverlay.controller = self
         self.continueMessageOverlay.setup()
         self.continueMessageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        switch type {
+        case .info:
+            self.continueMessageOverlay.title.text = MessageType.info.rawValue
+            self.continueMessageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .low)
+            break
+        case .warning:
+            self.continueMessageOverlay.title.text = MessageType.warning.rawValue
+            self.continueMessageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .medium)
+            break
+        case .error:
+            self.continueMessageOverlay.title.text = MessageType.error.rawValue
+            self.continueMessageOverlay.title.backgroundColor = Func.AKGetColorForPriority(priority: .high)
+            break
+        }
         self.continueMessageOverlay.message.text = message
         self.continueMessageOverlay.yes.setTitle(yesButtonTitle, for: .normal)
         self.continueMessageOverlay.no.setTitle(noButtonTitle, for: .normal)
@@ -437,7 +466,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     func showAddBucketEntry(
         origin: CGPoint,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) -> AKAddBucketEntryView {
         // The origin never changes so fix it to the controller's view.
         var origin = Func.AKCenterScreenCoordinate(
             container: self.view,
@@ -447,17 +476,20 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         origin.y -= 60.0 // Move up 60 points from the center.
         
         // Configure the overlay.
-        self.addBucketEntryOverlay.controller = self
-        self.addBucketEntryOverlay.setup()
-        self.addBucketEntryOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
+        let addBucketEntryOverlay = AKAddBucketEntryView()
+        addBucketEntryOverlay.controller = self
+        addBucketEntryOverlay.setup()
+        addBucketEntryOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
         
         // Expand/Show the overlay.
-        self.addBucketEntryOverlay.expand(
+        addBucketEntryOverlay.expand(
             controller: self,
             expandHeight: AKAddBucketEntryView.LocalConstants.AKViewHeight,
             animate: animate,
             completionTask: completionTask
         )
+        
+        return addBucketEntryOverlay
     }
     
     func showMigrateBucketEntry(
@@ -615,9 +647,11 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideAddBucketEntry(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
-        self.addBucketEntryOverlay.collapse(
+    func hideAddBucketEntry(
+        instance: AKAddBucketEntryView?,
+        animate: Bool,
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
+        instance?.collapse(
             controller: self,
             animate: animate,
             completionTask: completionTask
@@ -718,7 +752,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 Func.AKExecuteInMainThread(controller: self, mode: .sync, code: { (controller) -> Void in
                     controller?.showContinueMessage(
                         origin: CGPoint.zero,
-                        message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to \"Settings\" to enable it.",
+                        type: .info,
+                        message: "CoderToDo needs to be able to send you local notifications in order to alert you about project times. Go to Settings to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
@@ -758,6 +793,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 default:
                     controller?.showContinueMessage(
                         origin: CGPoint.zero,
+                        type: .info,
                         message: "You need to be signed into iCloud and have iCloud Drive set to on. Go to Settings to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
@@ -805,14 +841,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     {
         self.displaceDownTable.fromValue = 0.0
         self.displaceDownTable.toValue = displacementHeight
-        self.displaceDownTable.duration = 1.0
+        self.displaceDownTable.duration = 0.5
         self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceDownTable.autoreverses = false
         self.view.layer.add(self.displaceDownTable, forKey: LocalConstants.AKDisplaceDownAnimation)
         
         self.displaceUpTable.fromValue = displacementHeight
         self.displaceUpTable.toValue = 0.0
-        self.displaceUpTable.duration = 1.0
+        self.displaceUpTable.duration = 0.5
         self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceUpTable.autoreverses = false
         self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)

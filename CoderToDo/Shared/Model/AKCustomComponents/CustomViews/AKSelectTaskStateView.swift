@@ -21,6 +21,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
                     origin: CGPoint.zero,
+                    type: .warning,
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
@@ -52,6 +53,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                 controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
                     origin: CGPoint.zero,
+                    type: .warning,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil
@@ -82,6 +84,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                 controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
                     origin: CGPoint.zero,
+                    type: .warning,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil
@@ -96,6 +99,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
                     origin: CGPoint.zero,
+                    type: .warning,
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
@@ -127,6 +131,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                 controller.hideSelectTaskState(animate: true, completionTask: nil)
                 controller.showMessage(
                     origin: CGPoint.zero,
+                    type: .warning,
                     message: "Tasks set up for tomorrow can only be marked as \"Pending\" or \"Dilate\" in the current day.",
                     animate: true,
                     completionTask: nil

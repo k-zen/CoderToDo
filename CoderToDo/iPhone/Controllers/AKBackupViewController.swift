@@ -24,6 +24,7 @@ class AKBackupViewController: AKCustomViewController
                         if sizeLocal < sizeRemote {
                             presenterController.showContinueMessage(
                                 origin: CGPoint.zero,
+                                type: .warning,
                                 message: "The file you have in iCloud appears to be bigger in size than the one you have on your device. Do you wish to continue...?",
                                 yesAction: { (presenterController) -> Void in
                                     // Make backup here from a background thread.
@@ -82,6 +83,7 @@ class AKBackupViewController: AKCustomViewController
         if !DataInterface.isProjectEmpty() {
             self.showContinueMessage(
                 origin: CGPoint.zero,
+                type: .warning,
                 message: "This will wipe out your current local database and restore from this backup. Do you wish to continue...?",
                 yesAction: { (presenterController) -> Void in
                     DataInterface.resetProjectData()
@@ -95,6 +97,7 @@ class AKBackupViewController: AKCustomViewController
                                     
                                     presenterController.showMessage(
                                         origin: CGPoint.zero,
+                                        type: .info,
                                         message: String(format: "Hooray %@, you have successfully restored your data from iCloud!", DataInterface.getUsername()),
                                         animate: true,
                                         completionTask: nil
@@ -151,6 +154,7 @@ class AKBackupViewController: AKCustomViewController
         self.iCloudAccessErrorAction = { (presenterController) -> Void in
             presenterController?.showMessage(
                 origin: CGPoint.zero,
+                type: .error,
                 message: "There had been an error accessing your iCloud account. Please check again later.",
                 animate: true,
                 completionTask: nil

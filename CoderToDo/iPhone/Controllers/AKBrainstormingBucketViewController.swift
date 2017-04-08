@@ -20,6 +20,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     var projectFilter = Filter(projectFilter: FilterProject())
     var selectedProject: Project?
     var selectedBucketEntry: BucketEntry?
+    var addBucketEntryOverlay: AKAddBucketEntryView?
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
@@ -34,18 +35,19 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBAction func addEntry(_ sender: Any)
     {
         if let _ = self.selectedProject {
-            self.showAddBucketEntry(
+            self.addBucketEntryOverlay = showAddBucketEntry(
                 origin: CGPoint.zero,
                 animate: true,
                 completionTask: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKBrainstormingBucketViewController {
-                        presenterController.addBucketEntryOverlay.name.text = ""
+                        presenterController.addBucketEntryOverlay?.name.text = ""
                     } }
             )
         }
         else {
             self.showMessage(
                 origin: CGPoint.zero,
+                type: .info,
                 message: "Select a project first.",
                 animate: true,
                 completionTask: nil

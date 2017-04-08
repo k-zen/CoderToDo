@@ -214,14 +214,14 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = expandCollapseHeight
-        self.expandHeight.duration = 1.0
+        self.expandHeight.duration = 0.5
         self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.expandHeight.autoreverses = false
         self.getView().layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
         
         self.collapseHeight.fromValue = expandCollapseHeight
         self.collapseHeight.toValue = 0.0
-        self.collapseHeight.duration = 1.0
+        self.collapseHeight.duration = 0.5
         self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)

@@ -147,6 +147,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                     completionTask: { (presenterController) -> Void in
                         presenterController?.showMessage(
                             origin: CGPoint.zero,
+                            type: .error,
                             message: "Ooops, there was a problem scheduling the notification.",
                             animate: true,
                             completionTask: nil

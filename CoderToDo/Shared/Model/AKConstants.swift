@@ -564,6 +564,12 @@ enum DisplaceableMenuStates {
     case notVisible
 }
 
+enum MessageType: String {
+    case info = "Information"
+    case warning = "Warning"
+    case error = "Error"
+}
+
 // MARK: Utility Functions
 class UtilityFunctions
 {
@@ -1058,6 +1064,7 @@ class UtilityFunctions
         Func.AKExecuteInMainThread(controller: controller, mode: .async, code: { (controller) -> Void in
             controller?.showMessage(
                 origin: CGPoint.zero,
+                type: .error,
                 message: message,
                 animate: true,
                 completionTask: nil
@@ -1131,7 +1138,7 @@ class UtilityFunctions
     {
         UIView.transition(
             with: tableView,
-            duration: 1.0,
+            duration: 0.5,
             options: .transitionCrossDissolve,
             animations: {
                 tableView.reloadData()

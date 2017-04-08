@@ -67,6 +67,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             else {
                 self.showMessage(
                     origin: CGPoint.zero,
+                    type: .error,
                     message: "Could not add the new project. The error has been reported.",
                     animate: true,
                     completionTask: nil

@@ -46,7 +46,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
                 DataInterface.addBucketEntry(toProject: presenterController.selectedProject!, entry: entry)
                 // Default Action!
                 presenterController.tap(nil)
-                self.controller?.hideAddBucketEntry(animate: true, completionTask: { (presenterController) -> Void in
+                self.controller?.hideAddBucketEntry(instance: presenterController.addBucketEntryOverlay, animate: true, completionTask: { (presenterController) -> Void in
                     if let presenterController = presenterController as? AKBrainstormingBucketViewController {
                         Func.AKReloadTableWithAnimation(tableView: presenterController.projectListTable)
                         Func.AKReloadTableWithAnimation(tableView: presenterController.bucketTable)
@@ -60,7 +60,9 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     {
         // Default Action!
         self.controller?.tap(nil)
-        self.controller?.hideAddBucketEntry(animate: true, completionTask: nil)
+        if let presenterController = self.controller as? AKBrainstormingBucketViewController {
+            self.controller?.hideAddBucketEntry(instance: presenterController.addBucketEntryOverlay, animate: true, completionTask: nil)
+        }
     }
     
     // MARK: UIView Overriding

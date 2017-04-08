@@ -41,6 +41,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             if self.migrate.isOn {
                 self.showContinueMessage(
                     origin: CGPoint.zero,
+                    type: .info,
                     message: "Would you like to \"only\" migrate tasks...?",
                     yesButtonTitle: "Yes",
                     noButtonTitle: "No",
@@ -95,6 +96,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             else {
                 self.showMessage(
                     origin: CGPoint.zero,
+                    type: .error,
                     message: "Could not add the new task. The error has been reported.",
                     animate: true,
                     completionTask: nil
@@ -238,6 +240,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                 if DataInterface.getProjectStatus(project: controller.project) == .firstDay {
                     controller.showMessage(
                         origin: CGPoint.zero,
+                        type: .info,
                         message: String(
                             format: "%@, since this is your first day, we've made an exception to our basic rule, and all tasks you add now up to closing time are going to be added for today.",
                             DataInterface.getUsername()

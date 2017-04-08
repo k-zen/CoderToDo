@@ -127,6 +127,7 @@ class AKProjectsTableViewCell: UITableViewCell
                     if let cell = overlay.tableCell {
                         controller.showContinueMessage(
                             origin: CGPoint.zero,
+                            type: .warning,
                             message: "WARNING: This action can't be undone. You will lose all of your project's data! Continue...?",
                             yesAction: { (presenterController) -> Void in
                                 if let controller = presenterController as? AKListProjectsViewController {

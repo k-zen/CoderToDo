@@ -5,7 +5,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 128.0
+        static let AKViewHeight: CGFloat = 162.0
     }
     
     // MARK: Properties
@@ -14,6 +14,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var yes: UIButton!
     @IBOutlet weak var no: UIButton!

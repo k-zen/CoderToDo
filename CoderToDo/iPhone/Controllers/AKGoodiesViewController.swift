@@ -20,12 +20,14 @@ class AKGoodiesViewController: AKCustomViewController
     {
         self.showContinueMessage(
             origin: CGPoint.zero,
+            type: .warning,
             message: "This will cancel all notifications and can't be undone. Continue...?",
             yesAction: { (presenterController) -> Void in
                 Func.AKInvalidateLocalNotification(controller: self, project: nil)
                 
                 presenterController?.showMessage(
                     origin: CGPoint.zero,
+                    type: .info,
                     message: "All notifications were canceled!",
                     animate: true,
                     completionTask: nil

@@ -165,6 +165,18 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                             NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
                             controller.markTask(mode: .notEditable)
                         }
+                        else { // If the day is CURRENT and open or first day, then close in some cases.
+                            // Like DILATE tasks, must be not editable during the day, but editable when
+                            // accepting.
+                            switch controller.task.state! {
+                            case TaskStates.dilate.rawValue:
+                                controller.markTask(mode: .notEditable)
+                                break
+                            default:
+                                // Ignore
+                                break
+                            }
+                        }
                     }
                     
                     // Failsafe, tasks with these states will ALWAYS be marked as closed!
@@ -204,8 +216,8 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                 controller.task.completionPercentage = Float(controller.changeCP.value)
                 // Note.
                 controller.task.note = controller.notesValue.text
-                // Recompute the day's SR, only if day is editable.
-                if self.editMode == .editable {
+                // Recompute the day's SR, only if day is open.
+                if DataInterface.getProjectStatus(project: (controller.task.category?.day?.project)!) == .open {
                     _ = DataInterface.computeSRForDay(day: (controller.task.category?.day)!)
                 }
             }
