@@ -6,10 +6,6 @@ class AKTaskBuilder
     {
         if let mr = Func.AKObtainMasterReference() {
             let task = Task(context: mr.getMOC())
-            // Dependencies
-            if let category = interface.category {
-                task.category = category
-            }
             // Mirror.
             task.completionPercentage = interface.completionPercentage
             task.creationDate = interface.creationDate
@@ -58,8 +54,6 @@ class AKTaskBuilder
 
 struct AKTaskInterface
 {
-    // MARK: Dependencies
-    var category: Category?
     // MARK: Properties
     var completionPercentage: Float
     var creationDate: NSDate?

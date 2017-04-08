@@ -66,17 +66,18 @@ class AKChecks
                             // Add the duplicate to the same category as the original.
                             let newCategory = Category(context: mr.getMOC())
                             newCategory.name = task.category?.name
-                            duplicate.category = newCategory
                             
                             // Add the category to the new day.
-                            newDay.addToCategories(newCategory)
-                            
-                            // Mark the original as migrated to avoid migrate the task twice.
-                            task.migrated = true
-                            
                             if let newTask = AKTaskBuilder.mirror(interface: duplicate) {
+                                newCategory.addToTasks(newTask)
+                                newDay.addToCategories(newCategory)
+                                
                                 if !DataInterface.addPendingTask(task: newTask) {
                                     NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                                }
+                                else {
+                                    // Mark the original as migrated to avoid migrate the task twice.
+                                    task.migrated = true
                                 }
                             }
                         }
