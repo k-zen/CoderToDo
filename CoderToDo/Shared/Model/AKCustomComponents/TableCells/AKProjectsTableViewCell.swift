@@ -56,9 +56,6 @@ class AKProjectsTableViewCell: UITableViewCell
         self.swipeRightGesture?.direction = .right
         self.addGestureRecognizer(self.swipeRightGesture!)
         
-        // Initial States.
-        self.toggleAddTaskButton()
-        
         // Custom L&F.
         self.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.selectionStyle = UITableViewCellSelectionStyle.none

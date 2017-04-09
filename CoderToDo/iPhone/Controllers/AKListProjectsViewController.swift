@@ -129,6 +129,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         else {
             cell.closeValue.isHidden = true
         }
+        // Add task button.
+        cell.toggleAddTaskButton()
         
         return cell
     }

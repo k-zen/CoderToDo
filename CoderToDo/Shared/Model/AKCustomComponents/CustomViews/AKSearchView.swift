@@ -54,6 +54,24 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         controller?.tap(nil)
     }
     
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool
+    {
+        self.searchBar.showsScopeBar = true
+        self.searchBar.sizeToFit()
+        
+        self.searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
+    {
+        self.searchBar.showsScopeBar = false
+        self.searchBar.sizeToFit()
+        
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+    
     // MARK: Miscellaneous
     override func setup()
     {
@@ -78,6 +96,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     {
         self.searchBar.keyboardAppearance = .dark
         self.searchBar.autocapitalizationType = .none
+        self.searchBar.showsCancelButton = false
     }
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize)

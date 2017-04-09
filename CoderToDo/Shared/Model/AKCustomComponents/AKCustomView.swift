@@ -257,12 +257,10 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     internal func collapse(
         controller: AKCustomViewController?,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         if animate {
             UIView.beginAnimations(LocalConstants.AKCollapseHeightAnimation, context: nil)
             Func.AKChangeComponentHeight(component: self.getView(), newHeight: 0.0)
-            self.getView().layoutIfNeeded()
             CATransaction.setCompletionBlock {
                 if completionTask != nil {
                     completionTask!(controller)

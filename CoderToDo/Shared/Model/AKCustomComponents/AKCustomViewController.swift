@@ -858,8 +858,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         tableView: UITableView,
         offset: CGFloat,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.isMenuVisible = true
         self.showTopMenu(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
         
@@ -867,7 +866,6 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
-            tableView.layoutIfNeeded()
             UIView.commitAnimations()
         }
         else {
@@ -880,8 +878,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         tableView: UITableView,
         offset: CGFloat,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.isMenuVisible = false
         self.hideTopMenu(animate: animate, completionTask: completionTask)
         
@@ -917,7 +914,6 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - newOffset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + newOffset)
-            tableView.layoutIfNeeded()
             UIView.commitAnimations()
         }
         else {
@@ -930,8 +926,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         tableView: UITableView,
         menuItem: MenuItems,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         var offset: CGFloat = 0.0
         let direction: Displacement = !self.isMenuItemVisible ? .down : .up
         
@@ -993,14 +988,12 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
                 UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
-                tableView.layoutIfNeeded()
                 UIView.commitAnimations()
             }
             else {
                 UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + offset)
-                tableView.layoutIfNeeded()
                 UIView.commitAnimations()
             }
         }

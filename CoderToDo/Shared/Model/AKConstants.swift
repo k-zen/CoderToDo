@@ -612,38 +612,37 @@ class UtilityFunctions
     ///
     func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition)
     {
-        Func.AKExecuteInMainThread(controller: nil, mode: .async, code: { (_) -> Void in
-            let border = CALayer()
-            border.backgroundColor = color
-            switch position {
-            case .top:
-                border.frame = CGRect(x: 0, y: 0, width: component.frame.width, height: CGFloat(thickness))
-                break
-            case .right:
-                border.frame = CGRect(x: (component.frame.width - CGFloat(thickness)), y: 0, width: CGFloat(thickness), height: component.frame.height)
-                break
-            case .bottom:
-                border.frame = CGRect(x: 0, y: (component.frame.height - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
-                break
-            case .left:
-                border.frame = CGRect(x: 0, y: 0, width: CGFloat(thickness), height: component.frame.height)
-                break
-            case .through:
-                var startPositionX: CGFloat = 0.0
-                var startPositionY: CGFloat = component.frame.height / 2.0
-                if component.isKind(of: UILabel.self) {
-                    if let label = component as? UILabel {
-                        startPositionX = label.intrinsicContentSize.width + 4.0
-                        startPositionY = startPositionY + 2.0
-                    }
+        let border = CALayer()
+        border.backgroundColor = color
+        switch position {
+        case .top:
+            border.frame = CGRect(x: 0, y: 0, width: component.frame.width, height: CGFloat(thickness))
+            break
+        case .right:
+            border.frame = CGRect(x: (component.frame.width - CGFloat(thickness)), y: 0, width: CGFloat(thickness), height: component.frame.height)
+            break
+        case .bottom:
+            border.frame = CGRect(x: 0, y: (component.frame.height - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
+            break
+        case .left:
+            border.frame = CGRect(x: 0, y: 0, width: CGFloat(thickness), height: component.frame.height)
+            break
+        case .through:
+            var startPositionX: CGFloat = 0.0
+            var startPositionY: CGFloat = component.frame.height / 2.0
+            if component.isKind(of: UILabel.self) {
+                if let label = component as? UILabel {
+                    startPositionX = label.intrinsicContentSize.width + 4.0
+                    startPositionY = startPositionY + 2.0
                 }
-                
-                border.frame = CGRect(x: startPositionX, y: (startPositionY - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
-                break
             }
             
-            component.layer.addSublayer(border)
-        })
+            border.frame = CGRect(x: startPositionX, y: (startPositionY - CGFloat(thickness)), width: component.frame.width, height: CGFloat(thickness))
+            break
+        }
+        
+        component.layer.addSublayer(border)
+        component.layoutIfNeeded()
     }
     
     ///
@@ -722,16 +721,19 @@ class UtilityFunctions
     func AKChangeComponentWidth(component: UIView, newWidth: CGFloat)
     {
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: newWidth, height: component.frame.height))
+        component.layoutIfNeeded()
     }
     
     func AKChangeComponentHeight(component: UIView, newHeight: CGFloat)
     {
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: component.frame.width, height: newHeight))
+        component.layoutIfNeeded()
     }
     
     func AKChangeComponentYPosition(component: UIView, newY: CGFloat)
     {
         component.frame = CGRect(origin: CGPoint(x: component.frame.origin.x, y: newY), size: CGSize(width: component.frame.width, height: component.frame.height))
+        component.layoutIfNeeded()
     }
     
     ///
@@ -1137,15 +1139,8 @@ class UtilityFunctions
     
     func AKReloadTableWithAnimation(tableView: UITableView)
     {
-        UIView.transition(
-            with: tableView,
-            duration: 0.5,
-            options: .transitionCrossDissolve,
-            animations: {
-                tableView.reloadData()
-                tableView.layoutIfNeeded() },
-            completion: nil
-        )
+        tableView.reloadData()
+        tableView.layoutIfNeeded()
     }
     
     func AKScheduleLocalNotification(
