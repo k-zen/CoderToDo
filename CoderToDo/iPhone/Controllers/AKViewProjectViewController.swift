@@ -352,10 +352,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewProjectViewController {
-                Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
-                for customCell in controller.customCellArray {
-                    Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
-                }
+                // ALWAYS RESET ALL WHEN LOADING VIEW FOR THE FIRST TIME!
+                self.resetFilters(controller: controller)
                 
                 // Show message if the are no tasks.
                 if DataInterface.getAllTasksInProject(project: controller.project).count == 0 {
