@@ -47,6 +47,8 @@
 		49121BCF1E737480000B4D26 /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAC1E737480000B4D26 /* Icon-86@2x.png */; };
 		49121BD01E737480000B4D26 /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BAD1E737480000B4D26 /* Icon-98@2x.png */; };
 		49121BD21E73765D000B4D26 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49121BD11E73765D000B4D26 /* Logo.png */; };
+		4913F76D1E9A911E005E6FCB /* AKTableCachingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913F76C1E9A911E005E6FCB /* AKTableCachingSystem.swift */; };
+		4913F76F1E9A9186005E6FCB /* AKTableCachingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913F76E1E9A9186005E6FCB /* AKTableCachingEntry.swift */; };
 		4927A5B71E8FF39500707EB0 /* AKMigrateBucketEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4927A5B61E8FF39500707EB0 /* AKMigrateBucketEntryView.xib */; };
 		4927A5B91E8FF54500707EB0 /* AKMigrateBucketEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4927A5B81E8FF54500707EB0 /* AKMigrateBucketEntryView.swift */; };
 		492D5C741E82F53E00F9E470 /* AKAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D5C731E82F53E00F9E470 /* AKAddView.swift */; };
@@ -185,6 +187,8 @@
 		49121BAC1E737480000B4D26 /* Icon-86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-86@2x.png"; sourceTree = "<group>"; };
 		49121BAD1E737480000B4D26 /* Icon-98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-98@2x.png"; sourceTree = "<group>"; };
 		49121BD11E73765D000B4D26 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		4913F76C1E9A911E005E6FCB /* AKTableCachingSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTableCachingSystem.swift; sourceTree = "<group>"; };
+		4913F76E1E9A9186005E6FCB /* AKTableCachingEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTableCachingEntry.swift; sourceTree = "<group>"; };
 		4927A5B61E8FF39500707EB0 /* AKMigrateBucketEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKMigrateBucketEntryView.xib; sourceTree = "<group>"; };
 		4927A5B81E8FF54500707EB0 /* AKMigrateBucketEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMigrateBucketEntryView.swift; sourceTree = "<group>"; };
 		492D5C731E82F53E00F9E470 /* AKAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddView.swift; sourceTree = "<group>"; };
@@ -376,6 +380,15 @@
 			path = watchkit;
 			sourceTree = "<group>";
 		};
+		4913F76B1E9A9108005E6FCB /* AKCachingSystem */ = {
+			isa = PBXGroup;
+			children = (
+				4913F76E1E9A9186005E6FCB /* AKTableCachingEntry.swift */,
+				4913F76C1E9A911E005E6FCB /* AKTableCachingSystem.swift */,
+			);
+			path = AKCachingSystem;
+			sourceTree = "<group>";
+		};
 		4956B8201E4B697D0032B2F8 = {
 			isa = PBXGroup;
 			children = (
@@ -542,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				49E76DC31E7DCF62000215BC /* AKBackup */,
+				4913F76B1E9A9108005E6FCB /* AKCachingSystem */,
 				49E76DC71E7DCF62000215BC /* AKConstants.swift */,
 				49E76DC81E7DCF62000215BC /* AKCoreDataInterfaces */,
 				49E76DCD1E7DCF62000215BC /* AKCustomComponents */,
@@ -917,6 +931,7 @@
 				49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */,
 				49A4A0E71E589E8600CEDA1B /* AKIntroductoryViewController.swift in Sources */,
 				492D5C741E82F53E00F9E470 /* AKAddView.swift in Sources */,
+				4913F76F1E9A9186005E6FCB /* AKTableCachingEntry.swift in Sources */,
 				49E76DFF1E7DCF62000215BC /* AKCustomViewController.swift in Sources */,
 				49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */,
 				49E76E011E7DCF62000215BC /* AKContinueMessageView.swift in Sources */,
@@ -937,6 +952,7 @@
 				498E17941E84334D00B3A3A1 /* AKProjectNotificationsViewController.swift in Sources */,
 				49E76E091E7DCF62000215BC /* AKTopMenuView.swift in Sources */,
 				49E76E021E7DCF62000215BC /* AKFilterView.swift in Sources */,
+				4913F76D1E9A911E005E6FCB /* AKTableCachingSystem.swift in Sources */,
 				49E76E001E7DCF62000215BC /* AKCustomViewProtocol.swift in Sources */,
 				49E76E131E7DCF62000215BC /* AKTaskName.swift in Sources */,
 				498E17921E84333A00B3A3A1 /* AKProjectTimesViewController.swift in Sources */,

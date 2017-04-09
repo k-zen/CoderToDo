@@ -23,6 +23,11 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
+            
+            // Trigger caching recomputation, because table has changed.
+            controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
+            
+            // Reload all tables.
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
@@ -38,6 +43,11 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
+            
+            // Trigger caching recomputation, because table has changed.
+            controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
+            
+            // Reload all tables.
             Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
@@ -56,18 +66,12 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool
     {
-        self.searchBar.showsScopeBar = true
-        self.searchBar.sizeToFit()
-        
         self.searchBar.setShowsCancelButton(true, animated: true)
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
     {
-        self.searchBar.showsScopeBar = false
-        self.searchBar.sizeToFit()
-        
         self.searchBar.setShowsCancelButton(false, animated: true)
         return true
     }

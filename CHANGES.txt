@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Added support for a simple caching system for the *ViewProject's* view. (2017/04/09)
         * Re-added support to copy/duplicate tasks marked as NOT DONE to next day, but with the state of PENDING. (2017/04/07)
         * Corrected bug in SR computation. (2017/04/07)
         * Added support for custom table sliding menues. (2017/04/07)

@@ -64,6 +64,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             case GlobalConstants.AKViewProjectSegue:
                 if let destination = segue.destination as? AKViewProjectViewController {
                     if let project = sender as? Project {
+                        destination.cachingSystem = AKTableCachingSystem(projectName: project.name!)
                         destination.project = project
                         destination.navController.title = project.name ?? "View Project"
                     }

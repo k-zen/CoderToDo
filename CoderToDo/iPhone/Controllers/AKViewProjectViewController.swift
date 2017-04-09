@@ -10,6 +10,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     // MARK: Properties
+    // Caching System
+    var cachingSystem: AKTableCachingSystem!
+    // Other
     var customCellArray = [AKTasksTableView]()
     var project: Project!
     var taskFilter = Filter(taskFilter: FilterTask())
@@ -40,10 +43,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKViewProjectViewController {
                         controller.resetFilters(controller: controller)
-                        Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
-                        for customCell in controller.customCellArray {
-                            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
-                        }
+                        
                     } }
             )
         }
@@ -87,33 +87,43 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        let section = indexPath.section
+        
         // First we check which section we are. That means which day we are referencing.
-        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[(indexPath as NSIndexPath).section]
+        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[section]
         
         // If the count of categories is bigger than 0, it means there are tasks. Else show empty day cell.
         if DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter) > 0 {
-            // Calculate cell height.
-            let cellHeight = (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
-            
-            if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
-                let customCell = AKTasksTableView()
-                customCell.controller = self
-                customCell.day = day
-                customCell.setup()
-                customCell.draw(
-                    container: cell.mainContainer,
-                    coordinates: CGPoint.zero,
-                    size: CGSize(width: tableView.frame.width, height: cellHeight)
-                )
-                
-                // Custom L&F.
-                cell.selectionStyle = UITableViewCellSelectionStyle.none
-                cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-                
-                self.customCellArray.insert(customCell, at: (indexPath as NSIndexPath).section)
-                
+            // Caching System.
+            if let cell = self.cachingSystem.getEntry(controller: self, key: day.date!)?.getValue() {
                 return cell
+            }
+            else {
+                if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
+                    // Calculate cell height.
+                    let cellHeight = (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+                        (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                    
+                    let customCell = AKTasksTableView()
+                    customCell.controller = self
+                    customCell.day = day
+                    customCell.setup()
+                    customCell.draw(
+                        container: cell.mainContainer,
+                        coordinates: CGPoint.zero,
+                        size: CGSize(width: tableView.frame.width, height: cellHeight)
+                    )
+                    
+                    // Custom L&F.
+                    cell.selectionStyle = UITableViewCellSelectionStyle.none
+                    cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                    
+                    self.customCellArray.insert(customCell, at: section)
+                    
+                    self.cachingSystem.getEntry(controller: self, key: day.date!)?.setValue(cell: cell)
+                    
+                    return cell
+                }
             }
         }
         else {
@@ -294,13 +304,41 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // MARK: UITableViewDelegate Implementation
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[(indexPath as NSIndexPath).section]
-        if DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter) <= 0 {
-            return LocalConstants.AKEmptyRowHeight
+        let section = indexPath.section
+        
+        let day = DataInterface.getDays(
+            project: self.project,
+            filterEmpty: true,
+            filter: self.taskFilter)[section]
+        
+        // Caching System.
+        if let entry = self.cachingSystem.getEntry(controller: self, key: day.date!) {
+            return entry.getValueHeight()
         }
         else {
-            return (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
+            let newEntry = AKTableCachingEntry(
+                entryKey: day.date!,
+                entryValue: nil
+            )
+            newEntry.setHeightRecomputationRoutine(routine: { (controller) -> CGFloat in
+                if let controller = controller as? AKViewProjectViewController {
+                    if DataInterface.countCategories(day: day, filterEmpty: true, filter: controller.taskFilter) <= 0 {
+                        return LocalConstants.AKEmptyRowHeight
+                    }
+                    else {
+                        return (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: controller.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+                            (CGFloat(DataInterface.countTasksInDay(day: day, filter: controller.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                    }
+                }
+                else {
+                    return 0.0
+                }
+            })
+            newEntry.recomputeHeight(controller: self)
+            
+            self.cachingSystem.addEntry(controller: self, key: day.date!, newEntry: newEntry)
+            
+            return newEntry.getValueHeight()
         }
     }
     
@@ -456,6 +494,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     func resetFilters(controller: AKCustomViewController) {
+        if GlobalConstants.AKDebug {
+            NSLog("=> \(type(of: self)): RESETTING FILTERS")
+        }
+        
         self.taskFilter = Filter(taskFilter: FilterTask())
         
         controller.sortMenuItemOverlay.order.selectRow(1, inComponent: 0, animated: true)
@@ -465,5 +507,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         controller.filterMenuItemOverlay.filters.selectRow(0, inComponent: 0, animated: true)
         
         controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
+        
+        // Trigger caching recomputation, because table has changed.
+        self.cachingSystem.setTriggerHeightRecomputation(controller: controller)
+        
+        // Reload all tables.
+        Func.AKReloadTableWithAnimation(tableView: self.daysTable)
+        for customCell in self.customCellArray {
+            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+        }
     }
 }

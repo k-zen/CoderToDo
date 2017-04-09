@@ -48,6 +48,10 @@ class AKAddView: AKCustomView
                                         } },
                                        dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                         if let presenterController = presenterController as? AKViewProjectViewController {
+                                            // Trigger caching recomputation, because table has changed.
+                                            presenterController.cachingSystem.setTriggerHeightRecomputation(controller: presenterController)
+                                            
+                                            // Reload all tables.
                                             Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
                                             for customCell in presenterController.customCellArray {
                                                 Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
