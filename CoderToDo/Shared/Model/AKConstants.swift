@@ -202,8 +202,8 @@ struct GlobalConstants
     static let AKPickerFontSize: CGFloat = 18.0
     static let AKNavBarFontSize: CGFloat = 18.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
-    static let AKViewCornerRadius: CGFloat = 8.0
-    static let AKButtonCornerRadius: CGFloat = 4.0
+    static let AKViewCornerRadius: CGFloat = 0.0
+    static let AKButtonCornerRadius: CGFloat = 0.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -493,11 +493,11 @@ enum TaskFilterStates: String
 
 enum TaskStateColor: UInt
 {
-    case done = 0xB8BB26
-    case notDone = 0xFB4934
-    case notApplicable = 0x83A598
-    case dilate = 0xFE8019
-    case pending = 0xFABD2F
+    case done = 0xB8BB26 // GreenForBlack
+    case notDone = 0xFB4934 // RedForBlack
+    case notApplicable = 0x83A598 // BlueForBlack
+    case dilate = 0xFE8019 // OrangeForBlack
+    case pending = 0xFABD2F // YellowForBlack
 }
 
 enum TaskMode: String

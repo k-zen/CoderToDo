@@ -40,10 +40,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSX-WE-z79">
                     <rect key="frame" x="8" y="114" width="138" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                     <state key="normal" title="Yes">
-                        <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="yes:" destination="-1" eventType="touchUpInside" id="G3M-hj-j9B"/>
@@ -52,10 +52,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acc-t4-EPY">
                     <rect key="frame" x="154" y="114" width="138" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                     <state key="normal" title="No">
-                        <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="no:" destination="-1" eventType="touchUpInside" id="zsD-wB-Ufq"/>

@@ -34,47 +34,22 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
             switch task.completionPercentage {
             case 1.0 ..< 33.0:
-                Func.AKAddBorderDeco(
-                    cell.taskCompletionPercentageValue,
-                    color: GlobalConstants.AKRedForWhiteFg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness,
-                    position: .bottom
-                )
+                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
                 break
             case 33.0 ..< 66.0:
-                Func.AKAddBorderDeco(
-                    cell.taskCompletionPercentageValue,
-                    color: GlobalConstants.AKYellowForWhiteFg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness,
-                    position: .bottom
-                )
+                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKYellowForWhiteFg
                 break
             case 66.0 ..< 100.1:
-                Func.AKAddBorderDeco(
-                    cell.taskCompletionPercentageValue,
-                    color: GlobalConstants.AKGreenForWhiteFg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness,
-                    position: .bottom
-                )
+                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
                 break
             default:
-                Func.AKAddBorderDeco(
-                    cell.taskCompletionPercentageValue,
-                    color: GlobalConstants.AKRedForWhiteFg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness,
-                    position: .bottom
-                )
+                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
                 break
             }
             
             // Task State
             cell.taskStateValue.text = task.state
-            Func.AKAddBorderDeco(
-                cell.taskStateValue,
-                color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness,
-                position: .bottom
-            )
+            cell.taskStateValue.backgroundColor = Func.AKGetColorForTaskState(taskState: task.state!)
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none

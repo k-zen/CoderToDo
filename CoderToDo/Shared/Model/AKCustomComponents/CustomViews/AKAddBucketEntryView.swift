@@ -98,6 +98,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     // MARK: Miscellaneous
     override func setup()
     {
+        super.shouldAddBlurView = true
         super.setup()
         
         NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")

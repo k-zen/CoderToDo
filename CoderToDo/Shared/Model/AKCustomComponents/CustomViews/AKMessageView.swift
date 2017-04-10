@@ -19,6 +19,7 @@ class AKMessageView: AKCustomView, AKCustomViewProtocol
     // MARK: Miscellaneous
     override func setup()
     {
+        super.shouldAddBlurView = true
         super.inhibitTapGesture = false
         super.setup()
         

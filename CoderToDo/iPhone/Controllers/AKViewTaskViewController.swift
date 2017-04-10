@@ -18,12 +18,14 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var controlContainer: UIView!
     @IBOutlet weak var taskDayValue: UILabel!
     @IBOutlet weak var taskState: UILabel!
+    @IBOutlet weak var taskNameContainer: UIView!
     @IBOutlet weak var taskNameValue: UITextView!
     @IBOutlet weak var statusValue: UIButton!
     @IBOutlet weak var cpValue: UILabel!
     @IBOutlet weak var changeCP: UIStepper!
     @IBOutlet weak var categoryValue: UILabel!
     @IBOutlet weak var changeCategory: UIButton!
+    @IBOutlet weak var notesContainer: UIView!
     @IBOutlet weak var notesValue: UITextView!
     @IBOutlet weak var dummyMarker: UILabel!
     
@@ -33,7 +35,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.selectTaskStateOverlay.editMode = self.editMode
         
         var coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
-        coordinates.origin.y += self.statusValue.frame.height
+        coordinates.origin.y += self.statusValue.frame.height + 4.0
         self.showSelectTaskState(origin: coordinates.origin, animate: true, completionTask: nil)
     }
     
@@ -125,12 +127,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                 controller.taskNameValue.text = controller.task.name ?? "N\\A"
                 // Task Status.
                 controller.statusValue.setTitle(controller.task.state ?? TaskStates.pending.rawValue, for: .normal)
-                Func.AKAddBorderDeco(
-                    controller.statusValue,
-                    color: Func.AKGetColorForTaskState(taskState: controller.task.state ?? "").cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness,
-                    position: .bottom
-                )
+                controller.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: controller.task.state ?? "")
                 // Completion Percentage.
                 controller.changeCP.value = Double(controller.task.completionPercentage)
                 controller.cpValue.text = String(format: "%.1f%%", controller.task.completionPercentage)
@@ -228,13 +225,23 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKViewTaskViewController {
-                controller.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.taskNameValue.textContainerInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+                controller.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
                 controller.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.taskState.layer.masksToBounds = true
                 controller.changeCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.notesValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+                Func.AKAddBorderDeco(
+                    controller.taskNameContainer,
+                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    position: .left
+                )
+                Func.AKAddBorderDeco(
+                    controller.notesContainer,
+                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    position: .left
+                )
             }
         }
         self.setup()

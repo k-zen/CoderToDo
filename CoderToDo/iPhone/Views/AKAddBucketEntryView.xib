@@ -43,10 +43,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Leo-9V-nvA">
                     <rect key="frame" x="8" y="92" width="138" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                     <state key="normal" title="Save">
-                        <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="save:" destination="-1" eventType="touchUpInside" id="8dR-cV-kTb"/>
@@ -55,10 +55,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-YJ-LLd">
                     <rect key="frame" x="154" y="92" width="138" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                     <state key="normal" title="Cancel">
-                        <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="cancel:" destination="-1" eventType="touchUpInside" id="tXw-TJ-Qc1"/>

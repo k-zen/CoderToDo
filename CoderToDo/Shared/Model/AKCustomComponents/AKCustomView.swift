@@ -9,6 +9,8 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     }
     
     // MARK: Flags
+    /// Flag to add a BlurView in the background.
+    var shouldAddBlurView: Bool = false
     /// Flag to inhibit only the **Tap** gesture.
     var inhibitTapGesture: Bool = true
     /// Flag to inhibit only the **Pinch** gesture.
@@ -125,6 +127,11 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
         self.getView().addGestureRecognizer(self.panGesture!)
         self.getView().addGestureRecognizer(self.screenEdgePanGesture!)
         self.getView().addGestureRecognizer(self.longPressGesture!)
+        
+        // Add BlurView.
+        if self.shouldAddBlurView {
+            Func.AKAddBlurView(view: self.getView(), effect: UIBlurEffectStyle.dark)
+        }
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
