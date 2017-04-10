@@ -5,8 +5,7 @@ inhibit_all_warnings!
 workspace 'CoderToDo'
 
 target "CoderToDo" do
-    # pod 'Crashlytics'
-    # pod 'Fabric'
-    
     pod 'Charts/Realm'
+    pod 'Crashlytics'
+    pod 'Fabric'
 end

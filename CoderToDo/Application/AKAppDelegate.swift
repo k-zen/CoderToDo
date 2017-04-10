@@ -1,4 +1,6 @@
 import CloudKit
+import Crashlytics
+import Fabric
 import UIKit
 import UserNotifications
 
@@ -74,6 +76,9 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
         
         // ### Delegates.
         self.notificationCenter.delegate = self
+        
+        // ### Fabric.
+        Fabric.with([Crashlytics.self])
         
         return true
     }
