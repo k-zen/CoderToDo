@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Added support for pre-loading table cells for the *ViewProject's* view. This solves a glitch in the caching system. (2017/04/10)
         * Added support for a simple caching system for the *ViewProject's* view. (2017/04/09)
         * Re-added support to copy/duplicate tasks marked as NOT DONE to next day, but with the state of PENDING. (2017/04/07)
         * Corrected bug in SR computation. (2017/04/07)

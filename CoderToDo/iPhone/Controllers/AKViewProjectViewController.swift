@@ -352,6 +352,21 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewProjectViewController {
+                // ################################ //
+                // # Pre-load the table to cache. # //
+                // ################################ //
+                let days = DataInterface.getDays(
+                    project: self.project,
+                    filterEmpty: true,
+                    filter: self.taskFilter)
+                for section in 0..<days.count {
+                    _ = self.tableView(self.daysTable, cellForRowAt: IndexPath(row: 1, section: section))
+                    
+                    if GlobalConstants.AKDebug {
+                        NSLog("=> \(type(of: self)): PRE-LOADING TABLE CELLS.")
+                    }
+                }
+                
                 // ALWAYS RESET ALL WHEN LOADING VIEW FOR THE FIRST TIME!
                 self.resetFilters(controller: controller)
                 
@@ -510,9 +525,9 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.cachingSystem.setTriggerHeightRecomputation(controller: controller)
         
         // Reload all tables.
-        Func.AKReloadTableWithAnimation(tableView: self.daysTable)
+        Func.AKReloadTable(tableView: self.daysTable)
         for customCell in self.customCellArray {
-            Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+            Func.AKReloadTable(tableView: customCell.tasksTable!)
         }
     }
 }

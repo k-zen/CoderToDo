@@ -44,7 +44,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKListProjectsViewController {
                         controller.resetFilters(controller: controller)
-                        Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+                        Func.AKReloadTable(tableView: controller.projectsTable)
                     } }
             )
         }
@@ -265,7 +265,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKListProjectsViewController {
-                Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+                Func.AKReloadTable(tableView: controller.projectsTable)
                 // Hide the chart if there are not data.
                 controller.loadChart()
                 controller.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false // TODO: Improve!
@@ -339,7 +339,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                 taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
-                                                        Func.AKReloadTableWithAnimation(tableView: presenterController.projectsTable)
+                                                        Func.AKReloadTable(tableView: presenterController.projectsTable)
                                                         
                                                         // Check that at least one project was added.
                                                         if DataInterface.getProjects(filter: presenterController.projectFilter).count > 0 {

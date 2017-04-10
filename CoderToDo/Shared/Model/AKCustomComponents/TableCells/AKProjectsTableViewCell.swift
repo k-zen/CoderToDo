@@ -36,7 +36,7 @@ class AKProjectsTableViewCell: UITableViewCell
                 )
             }
             catch {
-                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)", autoDismiss: true)
+                Func.AKPresentMessageFromError(controller: presenterController, message: "\(error)")
             }
         }
     }
@@ -136,14 +136,14 @@ class AKProjectsTableViewCell: UITableViewCell
                                         // Invalidate notifications.
                                         Func.AKInvalidateLocalNotification(controller: controller, project: project)
                                         
-                                        Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+                                        Func.AKReloadTable(tableView: controller.projectsTable)
                                         // Hide the chart if there are not data.
                                         controller.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
                                     }
                                 } },
                             noAction: { (presenterController) -> Void in
                                 if let controller = presenterController as? AKListProjectsViewController {
-                                    Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+                                    Func.AKReloadTable(tableView: controller.projectsTable)
                                 } },
                             animate: true,
                             completionTask: nil

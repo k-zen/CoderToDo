@@ -300,7 +300,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             self.bucketContainer.isHidden = false
             self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
             // Load bucket table.
-            Func.AKReloadTableWithAnimation(tableView: self.bucketTable)
+            Func.AKReloadTable(tableView: self.bucketTable)
             break
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
@@ -346,8 +346,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                     controller.bucketListTitle.text = String(format: "Bucket list for: %@", controller.selectedProject?.name ?? "")
                 }
                 
-                Func.AKReloadTableWithAnimation(tableView: controller.projectListTable)
-                Func.AKReloadTableWithAnimation(tableView: controller.bucketTable)
+                Func.AKReloadTable(tableView: controller.projectListTable)
+                Func.AKReloadTable(tableView: controller.bucketTable)
                 
                 // Show message if the are no projects.
                 if DataInterface.getProjects(filter: controller.projectFilter).count > 0 {

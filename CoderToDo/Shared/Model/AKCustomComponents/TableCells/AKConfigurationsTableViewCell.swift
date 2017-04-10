@@ -88,10 +88,10 @@ class AKConfigurationsTableViewCell: UITableViewCell
                         if let indexPath = controller.userDefinedCategoriesTable.indexPath(for: cell) {
                             do {
                                 try DataInterface.removeProjectCategory(project: controller.project, name: DataInterface.listProjectCategories(project: controller.project)[indexPath.section])
-                                Func.AKReloadTableWithAnimation(tableView: controller.userDefinedCategoriesTable)
+                                Func.AKReloadTable(tableView: controller.userDefinedCategoriesTable)
                             }
                             catch {
-                                Func.AKPresentMessageFromError(controller: controller, message: "\(error)", autoDismiss: true)
+                                Func.AKPresentMessageFromError(controller: controller, message: "\(error)")
                             }
                         }
                     }

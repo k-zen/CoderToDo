@@ -85,8 +85,8 @@ class AKBucketTableViewCell: UITableViewCell
                                 let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[indexPath.row]
                                 DataInterface.removeBucketEntry(project: selectedProject, entry: bucketEntry)
                                 
-                                Func.AKReloadTableWithAnimation(tableView: controller.projectListTable)
-                                Func.AKReloadTableWithAnimation(tableView: controller.bucketTable)
+                                Func.AKReloadTable(tableView: controller.projectListTable)
+                                Func.AKReloadTable(tableView: controller.bucketTable)
                             }
                         }
                     }

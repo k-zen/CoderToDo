@@ -52,9 +52,9 @@ class AKAddView: AKCustomView
                                             presenterController.cachingSystem.setTriggerHeightRecomputation(controller: presenterController)
                                             
                                             // Reload all tables.
-                                            Func.AKReloadTableWithAnimation(tableView: presenterController.daysTable)
+                                            Func.AKReloadTable(tableView: presenterController.daysTable)
                                             for customCell in presenterController.customCellArray {
-                                                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+                                                Func.AKReloadTable(tableView: customCell.tasksTable!)
                                             }
                                             
                                             // Check that at least one task was added.

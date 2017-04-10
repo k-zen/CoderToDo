@@ -1041,7 +1041,7 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
+    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!)
     {
         do {
             if let input = message {
@@ -1052,7 +1052,7 @@ class UtilityFunctions
                     let range = match.rangeAt(1)
                     if let swiftRange = AKRangeFromNSRange(range, forString: input) {
                         let msg = input.substring(with: swiftRange)
-                        AKPresentMessage(controller: controller, message: msg, autoDismiss: autoDismiss)
+                        AKPresentMessage(controller: controller, message: msg)
                     }
                 }
             }
@@ -1062,7 +1062,7 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessage(controller: AKCustomViewController, message: String!, autoDismiss: Bool = false)
+    func AKPresentMessage(controller: AKCustomViewController, message: String!)
     {
         Func.AKExecuteInMainThread(controller: controller, mode: .async, code: { (controller) -> Void in
             controller?.showMessage(
@@ -1137,7 +1137,7 @@ class UtilityFunctions
         return nil
     }
     
-    func AKReloadTableWithAnimation(tableView: UITableView)
+    func AKReloadTable(tableView: UITableView)
     {
         tableView.reloadData()
         tableView.layoutIfNeeded()

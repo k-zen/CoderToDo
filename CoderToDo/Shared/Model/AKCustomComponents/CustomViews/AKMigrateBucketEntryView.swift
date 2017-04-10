@@ -65,8 +65,8 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
                             if let project = presenterController.selectedProject, let entry = presenterController.selectedBucketEntry {
                                 DataInterface.removeBucketEntry(project: project, entry: entry)
                                 
-                                Func.AKReloadTableWithAnimation(tableView: presenterController.projectListTable)
-                                Func.AKReloadTableWithAnimation(tableView: presenterController.bucketTable)
+                                Func.AKReloadTable(tableView: presenterController.projectListTable)
+                                Func.AKReloadTable(tableView: presenterController.bucketTable)
                             }
                         }
                     })

@@ -19,7 +19,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
-            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+            Func.AKReloadTable(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
@@ -28,9 +28,9 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
             controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
             
             // Reload all tables.
-            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
+            Func.AKReloadTable(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+                Func.AKReloadTable(tableView: customCell.tasksTable!)
             }
         }
     }
@@ -39,7 +39,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
-            Func.AKReloadTableWithAnimation(tableView: controller.projectsTable)
+            Func.AKReloadTable(tableView: controller.projectsTable)
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
@@ -48,9 +48,9 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
             controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
             
             // Reload all tables.
-            Func.AKReloadTableWithAnimation(tableView: controller.daysTable)
+            Func.AKReloadTable(tableView: controller.daysTable)
             for customCell in controller.customCellArray {
-                Func.AKReloadTableWithAnimation(tableView: customCell.tasksTable!)
+                Func.AKReloadTable(tableView: customCell.tasksTable!)
             }
         }
         
