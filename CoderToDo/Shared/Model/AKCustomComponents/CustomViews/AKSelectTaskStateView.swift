@@ -25,8 +25,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
-                            // Change caller button.
                             presenterController.statusValue.setTitle(TaskStates.done.rawValue, for: .normal)
+                            presenterController.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: TaskStates.done.rawValue)
                             presenterController.changeCP.value = 100.0
                             presenterController.changeCP.isEnabled = false
                             presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
@@ -61,8 +61,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
-                // Change caller button.
                 controller.statusValue.setTitle(TaskStates.notDone.rawValue, for: .normal)
+                controller.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: TaskStates.notDone.rawValue)
                 
                 // Collapse this view.
                 controller.tap(nil)
@@ -92,8 +92,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
                     message: "This action can't be undone. Continue...?",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKViewTaskViewController {
-                            // Change caller button.
                             presenterController.statusValue.setTitle(TaskStates.notApplicable.rawValue, for: .normal)
+                            presenterController.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: TaskStates.notApplicable.rawValue)
                             presenterController.changeCP.value = 100.0
                             presenterController.changeCP.isEnabled = false
                             presenterController.cpValue.text = String(format: "%.1f%%", presenterController.changeCP.value)
@@ -128,8 +128,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
-                // Change caller button.
                 controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
+                controller.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
                 
                 // Collapse this view.
                 controller.tap(nil)
@@ -141,8 +141,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     {
         if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
-                // Change caller button.
                 controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)
+                controller.statusValue.backgroundColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
                 
                 // Collapse this view.
                 controller.tap(nil)
