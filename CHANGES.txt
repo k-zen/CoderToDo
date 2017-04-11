@@ -5,6 +5,7 @@ Functionalities
     * 
 Changes
     * Version 1.0 Build 01 (2017/04/15)
+        * Added support for sorting projects by use (Default). (2017/04/11)
         * Added support for Fabric and Crashlytics. (2017/04/10)
         * Added support for pre-loading table cells for the *ViewProject's* view. This solves a glitch in the caching system. (2017/04/10)
         * Added support for a simple caching system for the *ViewProject's* view. (2017/04/09)

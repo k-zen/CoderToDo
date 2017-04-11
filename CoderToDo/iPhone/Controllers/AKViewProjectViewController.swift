@@ -513,11 +513,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         self.taskFilter = Filter(taskFilter: FilterTask())
         
-        controller.sortMenuItemOverlay.order.selectRow(1, inComponent: 0, animated: true)
-        controller.sortMenuItemOverlay.filters.selectRow(1, inComponent: 0, animated: true)
-        
-        controller.filterMenuItemOverlay.type.selectRow(0, inComponent: 0, animated: true)
-        controller.filterMenuItemOverlay.filters.selectRow(0, inComponent: 0, animated: true)
+        controller.sortMenuItemOverlay.resetViewDefaults(controller: self)
+        controller.filterMenuItemOverlay.resetViewDefaults(controller: self)
         
         controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
         

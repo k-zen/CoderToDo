@@ -177,4 +177,32 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController)
+    {
+        if let controller = self.controller as? AKListProjectsViewController {
+            for (index, row) in controller.filterMenuItemOverlay.filterTypeData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectFilterType.rawValue) == .orderedSame {
+                    controller.filterMenuItemOverlay.type.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+            for (index, row) in controller.filterMenuItemOverlay.filterValueData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectFilterValue.rawValue) == .orderedSame {
+                    controller.filterMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+        }
+        else if let controller = self.controller as? AKViewProjectViewController {
+            for (index, row) in controller.filterMenuItemOverlay.filterTypeData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskFilterType.rawValue) == .orderedSame {
+                    controller.filterMenuItemOverlay.type.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+            for (index, row) in controller.filterMenuItemOverlay.filterValueData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskFilterValue.rawValue) == .orderedSame {
+                    controller.filterMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+        }
+    }
 }

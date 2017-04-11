@@ -251,7 +251,7 @@ struct GlobalConstants
     // CloudKit
     static let AKBackupRecordTypeName = "BackupData"
     // Default Values
-    static let AKDefaultProjectSortType = ProjectSorting.creationDate
+    static let AKDefaultProjectSortType = ProjectSorting.use
     static let AKDefaultProjectSortOrder = SortingOrder.descending
     static let AKDefaultProjectFilterType = ProjectFilter.status
     static let AKDefaultProjectFilterValue = ProjectFilterStatus.none
@@ -435,6 +435,7 @@ enum ProjectSorting: String
 {
     case closingTime = "Closing Time"
     case creationDate = "Creation Date"
+    case use = "By Use"
     case name = "Name"
     case osr = "Overall Success Ratio"
 }

@@ -154,4 +154,32 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController)
+    {
+        if let controller = self.controller as? AKListProjectsViewController {
+            for (index, row) in controller.sortMenuItemOverlay.sortOrderData.enumerated() {
+                if row.rawValue.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectSortOrder.rawValue) == .orderedSame {
+                    controller.sortMenuItemOverlay.order.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+            for (index, row) in controller.sortMenuItemOverlay.sortFilterData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectSortType.rawValue) == .orderedSame {
+                    controller.sortMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+        }
+        else if let controller = self.controller as? AKViewProjectViewController {
+            for (index, row) in controller.sortMenuItemOverlay.sortOrderData.enumerated() {
+                if row.rawValue.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskSortOrder.rawValue) == .orderedSame {
+                    controller.sortMenuItemOverlay.order.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+            for (index, row) in controller.sortMenuItemOverlay.sortFilterData.enumerated() {
+                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskSortType.rawValue) == .orderedSame {
+                    controller.sortMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
+                }
+            }
+        }
+    }
 }

@@ -116,4 +116,6 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController) {}
 }

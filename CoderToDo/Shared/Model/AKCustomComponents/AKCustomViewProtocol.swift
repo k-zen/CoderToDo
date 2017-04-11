@@ -8,4 +8,6 @@ protocol AKCustomViewProtocol
     func applyLookAndFeel() -> Void
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize) -> Void
+    
+    func resetViewDefaults(controller: AKCustomViewController) -> Void
 }

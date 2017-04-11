@@ -118,6 +118,14 @@ class AKDataInterface
                         return projectFilter.sortOrder == SortingOrder.descending ? (n1 > n2) : (n1 < n2)
                     }
                     break
+                case .use:
+                    result = result.sorted {
+                        let taskCount1 = DataInterface.getAllTasksInProject(project: $0).count
+                        let taskCount2 = DataInterface.getAllTasksInProject(project: $1).count
+                        
+                        return projectFilter.sortOrder == SortingOrder.descending ? (taskCount1 > taskCount2) : (taskCount1 < taskCount2)
+                    }
+                    break
                 }
                 
                 // Filter projects.

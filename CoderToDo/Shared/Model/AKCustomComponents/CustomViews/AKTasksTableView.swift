@@ -249,4 +249,6 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController) {}
 }

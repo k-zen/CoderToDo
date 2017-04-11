@@ -185,4 +185,6 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController) {}
 }

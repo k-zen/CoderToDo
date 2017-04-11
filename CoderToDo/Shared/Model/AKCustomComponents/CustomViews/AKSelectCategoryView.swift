@@ -144,4 +144,6 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController) {}
 }

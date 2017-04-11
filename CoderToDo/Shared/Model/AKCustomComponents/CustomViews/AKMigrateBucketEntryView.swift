@@ -217,4 +217,6 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         container.addSubview(self.getView())
         CATransaction.commit()
     }
+    
+    func resetViewDefaults(controller: AKCustomViewController) {}
 }
