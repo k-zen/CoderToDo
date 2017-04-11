@@ -458,7 +458,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
         chartDataSet.drawValuesEnabled = true
-        chartDataSet.setColors([GlobalConstants.AKBlueForBlackFg], alpha: 0.75)
+        chartDataSet.setColors([GlobalConstants.AKCoderToDoGray4], alpha: 0.75)
         
         // Configure the chart.
         self.osrChartContainer.xAxis.labelPosition = .bottom
