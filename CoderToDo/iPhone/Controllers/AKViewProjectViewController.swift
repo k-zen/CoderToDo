@@ -13,7 +13,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     // Caching System
     var cachingSystem: AKTableCachingSystem!
     // Other
-    var customCellArray = [AKTasksTableView]()
     var project: Project!
     var taskFilter = Filter(taskFilter: FilterTask())
     
@@ -95,40 +94,55 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         // If the count of categories is bigger than 0, it means there are tasks. Else show empty day cell.
         if DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter) > 0 {
             // Caching System.
-            if let cell = self.cachingSystem.getEntry(controller: self, key: day.date!)?.getValue() {
+            let entry = self.cachingSystem.getEntry(controller: self, key: day.date!)
+            
+            if let entry = entry, let cell = entry.getParentCell() {
+                if let view = entry.getChildView() {
+                    // Re-draw the child's view.
+                    Func.AKChangeComponentHeight(component: view.getView(), newHeight: entry.getChildViewHeight())
+                }
+                
                 return cell
             }
             else {
                 if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
-                    // Calculate cell height.
-                    let cellHeight = (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: self.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
-                        (CGFloat(DataInterface.countTasksInDay(day: day, filter: self.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
-                    
-                    let customCell = AKTasksTableView()
-                    customCell.controller = self
-                    customCell.day = day
-                    customCell.setup()
-                    customCell.draw(
-                        container: cell.mainContainer,
-                        coordinates: CGPoint.zero,
-                        size: CGSize(width: tableView.frame.width, height: cellHeight)
-                    )
-                    
-                    // Custom L&F.
-                    cell.selectionStyle = UITableViewCellSelectionStyle.none
-                    cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
-                    
-                    self.customCellArray.insert(customCell, at: section)
-                    
-                    self.cachingSystem.getEntry(controller: self, key: day.date!)?.setValue(cell: cell)
-                    
-                    return cell
+                    if let entry = self.cachingSystem.getEntry(controller: self, key: day.date!) {
+                        entry.setChildViewHeightRecomputationRoutine(routine: { (controller) -> CGFloat in
+                            if let controller = controller as? AKViewProjectViewController {
+                                return
+                                    (CGFloat(DataInterface.countCategories(day: day, filterEmpty: true, filter: controller.taskFilter)) * (AKTasksTableView.LocalConstants.AKHeaderHeight + AKTasksTableView.LocalConstants.AKFooterHeight)) +
+                                        (CGFloat(DataInterface.countTasksInDay(day: day, filter: controller.taskFilter)) * AKTasksTableView.LocalConstants.AKRowHeight)
+                            }
+                            else {
+                                return 0.0
+                            }
+                        })
+                        entry.recomputeChildViewHeight(controller: self)
+                        
+                        let customView = AKTasksTableView()
+                        customView.controller = self
+                        customView.day = day
+                        customView.setup()
+                        customView.draw(
+                            container: cell.mainContainer,
+                            coordinates: CGPoint.zero,
+                            size: CGSize(width: tableView.frame.width, height: entry.getChildViewHeight())
+                        )
+                        
+                        // Custom L&F.
+                        cell.selectionStyle = UITableViewCellSelectionStyle.none
+                        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                        
+                        entry.setParentCell(cell: cell)
+                        entry.setChildView(view: customView)
+                        
+                        return cell
+                    }
                 }
             }
         }
         else {
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
-                
                 // Custom L&F.
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
                 cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
@@ -313,14 +327,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         // Caching System.
         if let entry = self.cachingSystem.getEntry(controller: self, key: day.date!) {
-            return entry.getValueHeight()
+            return entry.getParentCellHeight()
         }
         else {
-            let newEntry = AKTableCachingEntry(
-                entryKey: day.date!,
-                entryValue: nil
-            )
-            newEntry.setHeightRecomputationRoutine(routine: { (controller) -> CGFloat in
+            let newEntry = AKTableCachingEntry(key: day.date!, parentCell: nil, childView: nil)
+            newEntry.setParentCellHeightRecomputationRoutine(routine: { (controller) -> CGFloat in
                 if let controller = controller as? AKViewProjectViewController {
                     if DataInterface.countCategories(day: day, filterEmpty: true, filter: controller.taskFilter) <= 0 {
                         return LocalConstants.AKEmptyRowHeight
@@ -334,11 +345,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     return 0.0
                 }
             })
-            newEntry.recomputeHeight(controller: self)
+            newEntry.recomputeParentCellHeight(controller: self)
             
             self.cachingSystem.addEntry(controller: self, key: day.date!, newEntry: newEntry)
             
-            return newEntry.getValueHeight()
+            return newEntry.getParentCellHeight()
         }
     }
     
@@ -352,21 +363,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewProjectViewController {
-                // ################################ //
-                // # Pre-load the table to cache. # //
-                // ################################ //
-                let days = DataInterface.getDays(
-                    project: self.project,
-                    filterEmpty: true,
-                    filter: self.taskFilter)
-                for section in 0..<days.count {
-                    _ = self.tableView(self.daysTable, cellForRowAt: IndexPath(row: 1, section: section))
-                    
-                    if GlobalConstants.AKDebug {
-                        NSLog("=> \(type(of: self)): PRE-LOADING TABLE CELLS.")
-                    }
-                }
-                
                 // ALWAYS RESET ALL WHEN LOADING VIEW FOR THE FIRST TIME!
                 self.resetFilters(controller: controller)
                 
@@ -506,7 +502,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
     }
     
-    func resetFilters(controller: AKCustomViewController) {
+    func resetFilters(controller: AKCustomViewController)
+    {
         if GlobalConstants.AKDebug {
             NSLog("=> \(type(of: self)): RESETTING FILTERS")
         }
@@ -518,13 +515,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
         
-        // Trigger caching recomputation, because table has changed.
-        self.cachingSystem.setTriggerHeightRecomputation(controller: controller)
-        
-        // Reload all tables.
+        // Trigger caching recomputation, and reloading.
+        self.cachingSystem.triggerHeightRecomputation(controller: controller)
+        self.completeReload()
+    }
+    
+    func completeReload() -> Void
+    {
+        self.cachingSystem.triggerChildViewsReload(controller: self)
         Func.AKReloadTable(tableView: self.daysTable)
-        for customCell in self.customCellArray {
-            Func.AKReloadTable(tableView: customCell.tasksTable!)
-        }
     }
 }

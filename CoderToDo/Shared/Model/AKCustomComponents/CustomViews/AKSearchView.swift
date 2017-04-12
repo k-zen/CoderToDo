@@ -24,14 +24,9 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
             
-            // Trigger caching recomputation, because table has changed.
-            controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
-            
-            // Reload all tables.
-            Func.AKReloadTable(tableView: controller.daysTable)
-            for customCell in controller.customCellArray {
-                Func.AKReloadTable(tableView: customCell.tasksTable!)
-            }
+            // Trigger caching recomputation, and reloading.
+            controller.cachingSystem.triggerHeightRecomputation(controller: controller)
+            controller.completeReload()
         }
     }
     
@@ -44,14 +39,9 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         else if let controller = self.controller as? AKViewProjectViewController {
             controller.taskFilter.taskFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
             
-            // Trigger caching recomputation, because table has changed.
-            controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
-            
-            // Reload all tables.
-            Func.AKReloadTable(tableView: controller.daysTable)
-            for customCell in controller.customCellArray {
-                Func.AKReloadTable(tableView: customCell.tasksTable!)
-            }
+            // Trigger caching recomputation, and reloading.
+            controller.cachingSystem.triggerHeightRecomputation(controller: controller)
+            controller.completeReload()
         }
         
         // Always execute this.

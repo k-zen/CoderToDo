@@ -48,14 +48,9 @@ class AKAddView: AKCustomView
                                         } },
                                        dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                         if let presenterController = presenterController as? AKViewProjectViewController {
-                                            // Trigger caching recomputation, because table has changed.
-                                            presenterController.cachingSystem.setTriggerHeightRecomputation(controller: presenterController)
-                                            
-                                            // Reload all tables.
-                                            Func.AKReloadTable(tableView: presenterController.daysTable)
-                                            for customCell in presenterController.customCellArray {
-                                                Func.AKReloadTable(tableView: customCell.tasksTable!)
-                                            }
+                                            // Trigger caching recomputation, and reloading.
+                                            presenterController.cachingSystem.triggerHeightRecomputation(controller: presenterController)
+                                            presenterController.completeReload()
                                             
                                             // Check that at least one task was added.
                                             if DataInterface.getAllTasksInProject(project: presenterController.project).count > 0 {

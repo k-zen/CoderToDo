@@ -3,63 +3,92 @@ import UIKit
 class AKTableCachingEntry
 {
     // MARK: Properties
-    private var entryKey: NSDate
-    private var entryValue: UITableViewCell?
+    private var key: NSDate
+    private var parentCell: AKDaysTableViewCell?
+    private var childView: AKTasksTableView?
     // Caching System.
-    private var entryValueHeight: CGFloat = 0.0
-    private var heightRecomputationRoutine: ((AKCustomViewController) -> CGFloat)?
+    private var parentCellHeight: CGFloat = 0.0
+    private var parentCellHeightRecomputationRoutine: ((AKCustomViewController) -> CGFloat)?
+    private var childViewHeight: CGFloat = 0.0
+    private var childViewHeightRecomputationRoutine: ((AKCustomViewController) -> CGFloat)?
     
     // MARK: Initializers
-    init(entryKey: NSDate, entryValue: UITableViewCell?) {
-        self.entryKey = entryKey
-        self.entryValue = entryValue
+    init(key: NSDate, parentCell: AKDaysTableViewCell?, childView: AKTasksTableView?) {
+        self.key = key
+        self.parentCell = parentCell
+        self.childView = childView
     }
     
     // MARK: Accessors
-    func getKey() -> NSDate { return self.entryKey }
+    func getKey() -> NSDate { return self.key }
     
-    func getValue() -> UITableViewCell?
+    func getParentCell() -> AKDaysTableViewCell?
     {
         if GlobalConstants.AKDebug {
-            NSLog("=> CACHING: SERVING TABLE CELL FROM CACHE FOR KEY(%@)", self.entryKey.description)
+            NSLog("=> CACHING: SERVING TABLE CELL FROM CACHE FOR KEY(%@)", self.key.description)
         }
         
-        return self.entryValue
+        return self.parentCell
     }
     
-    func getValueHeight() -> CGFloat { return self.entryValueHeight }
+    func getChildView() -> AKTasksTableView?
+    {
+        if GlobalConstants.AKDebug {
+            NSLog("=> CACHING: SERVING TABLE VIEW FROM CACHE FOR KEY(%@)", self.key.description)
+        }
+        
+        return self.childView
+    }
+    
+    func getParentCellHeight() -> CGFloat { return self.parentCellHeight }
+    
+    func getChildViewHeight() -> CGFloat { return self.childViewHeight }
     
     func setKey(date: NSDate?) -> Void
     {
         if let date = date {
-            self.entryKey = date
+            self.key = date
         }
     }
     
-    func setValue(cell: UITableViewCell?) -> Void
+    func setParentCell(cell: AKDaysTableViewCell?) -> Void
     {
         if let cell = cell {
             if GlobalConstants.AKDebug {
-                NSLog("=> CACHING: ADDING TABLE CELL TO CACHE FOR KEY(%@)", self.entryKey.description)
+                NSLog("=> CACHING: ADDING TABLE CELL TO CACHE FOR KEY(%@)", self.key.description)
             }
             
-            self.entryValue = cell
+            self.parentCell = cell
         }
     }
     
-    func setHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void
+    func setChildView(view: AKTasksTableView?) -> Void
     {
-        self.heightRecomputationRoutine = routine
+        if let view = view {
+            if GlobalConstants.AKDebug {
+                NSLog("=> CACHING: ADDING TABLE VIEW TO CACHE FOR KEY(%@)", self.key.description)
+            }
+            
+            self.childView = view
+        }
+    }
+    
+    func setParentCellHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void
+    {
+        self.parentCellHeightRecomputationRoutine = routine
+    }
+    
+    func setChildViewHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void
+    {
+        self.childViewHeightRecomputationRoutine = routine
     }
     
     // MARK: Caching Functions
-    func recomputeHeight(controller: AKCustomViewController) -> Void
-    {
-        self.entryValueHeight = self.heightRecomputationRoutine != nil ? self.heightRecomputationRoutine!(controller) : 0.0
-    }
+    func recomputeParentCellHeight(controller: AKCustomViewController) -> Void { self.parentCellHeight = self.parentCellHeightRecomputationRoutine != nil ? self.parentCellHeightRecomputationRoutine!(controller) : 0.0 }
     
-    func refetchData(dataFetch: () -> UITableViewCell) -> Void
-    {
-        self.entryValue = dataFetch()
-    }
+    func recomputeChildViewHeight(controller: AKCustomViewController) -> Void { self.childViewHeight = self.childViewHeightRecomputationRoutine != nil ? self.childViewHeightRecomputationRoutine!(controller) : 0.0 }
+    
+    func refetchParentCell(dataFetch: () -> AKDaysTableViewCell) -> Void { self.parentCell = dataFetch() }
+    
+    func refetchChildView(dataFetch: () -> AKTasksTableView) -> Void { self.childView = dataFetch() }
 }

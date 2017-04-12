@@ -87,14 +87,9 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
                 break
             }
             
-            // Trigger caching recomputation, because table has changed.
-            controller.cachingSystem.setTriggerHeightRecomputation(controller: controller)
-            
-            // Reload all tables.
-            Func.AKReloadTable(tableView: controller.daysTable)
-            for customCell in controller.customCellArray {
-                Func.AKReloadTable(tableView: customCell.tasksTable!)
-            }
+            // Trigger caching recomputation, and reloading.
+            controller.cachingSystem.triggerHeightRecomputation(controller: controller)
+            controller.completeReload()
         }
     }
     

@@ -6,7 +6,7 @@ class AKTableCachingSystem
     private let projectName: String
     private var cachingEntries = [String : [NSDate : AKTableCachingEntry]]()
     
-    
+    // MARK: Initializers
     init(projectName: String) {
         self.projectName = projectName
         self.cachingEntries[projectName] = [NSDate : AKTableCachingEntry]()
@@ -37,7 +37,7 @@ class AKTableCachingSystem
         return nil
     }
     
-    func setTriggerHeightRecomputation(controller: AKCustomViewController) -> Void
+    func triggerHeightRecomputation(controller: AKCustomViewController) -> Void
     {
         if self.cachingEntries[self.projectName] != nil {
             for (key, value) in self.cachingEntries[self.projectName]! {
@@ -45,7 +45,23 @@ class AKTableCachingSystem
                     NSLog("=> CACHING: RECOMPUTING HEIGHT FOR KEY(%@)", key.description)
                 }
                 
-                value.recomputeHeight(controller: controller)
+                value.recomputeParentCellHeight(controller: controller)
+                value.recomputeChildViewHeight(controller: controller)
+            }
+        }
+    }
+    
+    func triggerChildViewsReload(controller: AKCustomViewController) -> Void
+    {
+        if self.cachingEntries[self.projectName] != nil {
+            for (key, value) in self.cachingEntries[self.projectName]! {
+                if let view = value.getChildView() {
+                    if GlobalConstants.AKDebug {
+                        NSLog("=> CACHING: RELOADING CHILD TABLE VIEW FOR KEY(%@)", key.description)
+                    }
+                    
+                    Func.AKReloadTable(tableView: view.tasksTable)
+                }
             }
         }
     }
