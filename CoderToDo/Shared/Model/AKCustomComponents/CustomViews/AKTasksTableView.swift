@@ -22,8 +22,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         if let controller = self.controller as? AKViewProjectViewController {
-            let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[(indexPath as NSIndexPath).section]
-            let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[(indexPath as NSIndexPath).row]
+            let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[indexPath.section]
+            let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[indexPath.row]
             
             let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
             
@@ -204,8 +204,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
-            let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[(indexPath as NSIndexPath).section]
-            let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[(indexPath as NSIndexPath).row]
+            let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[indexPath.section]
+            let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[indexPath.row]
             controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
         }
     }

@@ -27,7 +27,7 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
     {
         let cell = self.userDefinedCategoriesTable.dequeueReusableCell(withIdentifier: "ConfigurationsTableCell") as! AKConfigurationsTableViewCell
         cell.controller = self
-        cell.title.text = DataInterface.listProjectCategories(project: self.project)[(indexPath as NSIndexPath).section]
+        cell.title.text = DataInterface.listProjectCategories(project: self.project)[indexPath.section]
         cell.arrowWidth.constant = 0
         
         // Custom L&F.

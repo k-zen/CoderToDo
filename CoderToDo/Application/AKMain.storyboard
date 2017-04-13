@@ -889,7 +889,6 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="BnN-WS-6cv" firstAttribute="top" secondItem="d9w-7w-9Xd" secondAttribute="top" constant="8" id="0OW-e6-P0H"/>
                                     <constraint firstAttribute="trailing" secondItem="1pS-Hu-LHI" secondAttribute="trailing" constant="8" id="67c-kW-jsE"/>

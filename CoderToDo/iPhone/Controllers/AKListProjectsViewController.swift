@@ -98,7 +98,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
         cell.controller = self
@@ -131,13 +131,20 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             cell.closeValue.isHidden = true
         }
         // New day state.
-        if DataInterface.isTomorrowSetUp(project: project) {
-            cell.newDayStateValue.text = "Tomorrow is set."
-            cell.newDayStateValue.textColor = GlobalConstants.AKGreenForBlackFg
+        if DataInterface.getProjectStatus(project: project) == .accepting {
+            if DataInterface.isTomorrowSetUp(project: project) {
+                cell.newDayStateValue.text = "Tomorrow is set."
+                cell.newDayStateValue.textColor = GlobalConstants.AKGreenForBlackFg
+            }
+            else {
+                cell.newDayStateValue.text = "Tomorrow is not set."
+                cell.newDayStateValue.textColor = GlobalConstants.AKRedForBlackFg
+            }
         }
         else {
-            cell.newDayStateValue.text = "Tomorrow is not set."
-            cell.newDayStateValue.textColor = GlobalConstants.AKRedForBlackFg
+            cell.newDayStateValue.text = "N\\A"
+            cell.newDayStateValue.textColor = GlobalConstants.AKTableCellBg
+            cell.newDayStateValueHeight.constant = 0.0
         }
         // Add task button.
         cell.toggleAddTaskButton()
@@ -255,7 +262,17 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDelegate Implementation
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return LocalConstants.AKRowHeight }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
+        
+        var cellHeight = LocalConstants.AKRowHeight
+        if DataInterface.getProjectStatus(project: project) != .accepting {
+            cellHeight -= 23.5
+        }
+        
+        return cellHeight
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return LocalConstants.AKHeaderHeight }
     
@@ -263,7 +280,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     

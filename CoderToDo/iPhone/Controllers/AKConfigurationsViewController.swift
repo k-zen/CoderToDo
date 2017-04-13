@@ -38,7 +38,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = self.configurationsTable.dequeueReusableCell(withIdentifier: "ConfigurationsTableCell") as! AKConfigurationsTableViewCell
-        cell.title.text = self.configurationsTableHeaders[(indexPath as NSIndexPath).section]
+        cell.title.text = self.configurationsTableHeaders[indexPath.section]
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -83,7 +83,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0:
             self.performSegue(withIdentifier: GlobalConstants.AKViewUserConfigurationSegue, sender: self)
             break

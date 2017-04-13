@@ -65,7 +65,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     // MARK: UITableViewDataSource Implementation
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let project = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
+        let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
@@ -87,8 +87,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             return cell
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
-                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
-                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
+                let date = DataInterface.getEntryDates(project: selectedProject)[indexPath.section]
+                let bucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[indexPath.row]
                 
                 let cell = self.bucketTable.dequeueReusableCell(withIdentifier: "BucketTableCell") as! AKBucketTableViewCell
                 cell.controller = self
@@ -134,7 +134,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let badgeSizeHeight = CGFloat(21.0)
                 
                 let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKBucketTableHeaderHeight))
-                headerCell.backgroundColor = GlobalConstants.AKCoderToDoGray2
+                headerCell.backgroundColor = GlobalConstants.AKTableCellBg
                 
                 let title = UILabel(frame: CGRect(
                     x: 0.0,
@@ -295,7 +295,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
-            self.selectedProject = DataInterface.getProjects(filter: self.projectFilter)[(indexPath as NSIndexPath).section]
+            self.selectedProject = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
             // Show the second table.
             self.bucketContainer.isHidden = false
             self.bucketListTitle.text = String(format: "Bucket list for: %@", self.selectedProject?.name ?? "")
@@ -304,8 +304,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             break
         case LocalConstants.AKBucketTableTag:
             if let selectedProject = self.selectedProject {
-                let date = DataInterface.getEntryDates(project: selectedProject)[(indexPath as NSIndexPath).section]
-                self.selectedBucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[(indexPath as NSIndexPath).row]
+                let date = DataInterface.getEntryDates(project: selectedProject)[indexPath.section]
+                self.selectedBucketEntry = DataInterface.getBucketEntries(project: selectedProject, forDate: date)[indexPath.row]
                 if let _ = self.selectedBucketEntry {
                     do {
                         try AKChecks.canAddTask(project: selectedProject)

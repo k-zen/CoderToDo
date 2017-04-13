@@ -19,6 +19,9 @@ class AKProjectsTableViewCell: UITableViewCell
     @IBOutlet weak var newDayStateValue: UILabel!
     @IBOutlet weak var addTomorrowTask: UIButton!
     
+    // MARK: Constraints
+    @IBOutlet weak var newDayStateValueHeight: NSLayoutConstraint!
+    
     // MARK: Actions
     @IBAction func addTomorrowTask(_ sender: Any)
     {
