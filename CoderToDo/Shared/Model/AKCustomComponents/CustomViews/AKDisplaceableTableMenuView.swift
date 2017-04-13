@@ -72,11 +72,11 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
     {
         if !self.showEditButton {
             self.editButtonWidth.constant = 0.0
-            self.deleteButtonWidth.constant = 108.0
+            self.deleteButtonWidth.constant = 104.0
             self.deleteButtonX.constant = 0.0
         }
         if !self.showDeleteButton {
-            self.editButtonWidth.constant = 108.0
+            self.editButtonWidth.constant = 104.0
             self.editButtonX.constant = 0.0
             self.deleteButtonWidth.constant = 0.0
         }

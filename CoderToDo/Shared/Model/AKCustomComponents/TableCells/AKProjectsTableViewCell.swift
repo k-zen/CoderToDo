@@ -159,7 +159,7 @@ class AKProjectsTableViewCell: UITableViewCell
             // Expand/Show the overlay.
             self.displaceableMenuOverlay.expand(
                 controller: self.controller,
-                expandHeight: AKDisplaceableTableMenuView.LocalConstants.AKViewHeight,
+                expandHeight: self.frame.height,
                 animate: true,
                 completionTask: nil
             )

@@ -25,11 +25,10 @@
             <rect key="frame" x="0.0" y="0.0" width="120" height="72"/>
             <subviews>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gt-u9-fkA" userLabel="Edit_Action">
-                    <rect key="frame" x="6" y="8" width="50" height="56"/>
+                    <rect key="frame" x="8" y="8" width="50" height="56"/>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.36470588240000001" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="MTz-13-KPK"/>
-                        <constraint firstAttribute="height" constant="56" id="Z6j-Bz-Ld0"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
                     <state key="normal" title="Edit">
@@ -40,11 +39,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snn-ZW-Tcw" userLabel="Delete_Action">
-                    <rect key="frame" x="64" y="8" width="50" height="56"/>
+                    <rect key="frame" x="62" y="8" width="50" height="56"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.14117647059999999" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="fIW-pL-zAa"/>
-                        <constraint firstAttribute="height" constant="56" id="ii2-pH-8SW"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
                     <state key="normal" title="Delete!">
@@ -57,11 +55,13 @@
             </subviews>
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="snn-ZW-Tcw" firstAttribute="centerX" secondItem="wsR-lK-ls3" secondAttribute="centerX" constant="29" id="1fn-lH-tCh"/>
-                <constraint firstItem="7gt-u9-fkA" firstAttribute="centerY" secondItem="wsR-lK-ls3" secondAttribute="centerY" id="YoY-D4-I7q"/>
-                <constraint firstItem="7gt-u9-fkA" firstAttribute="centerX" secondItem="wsR-lK-ls3" secondAttribute="centerX" constant="-29" id="bJ1-F7-o9H"/>
+                <constraint firstItem="snn-ZW-Tcw" firstAttribute="centerX" secondItem="wsR-lK-ls3" secondAttribute="centerX" constant="27" id="1fn-lH-tCh"/>
+                <constraint firstAttribute="bottom" secondItem="7gt-u9-fkA" secondAttribute="bottom" constant="8" id="6dI-px-N51"/>
+                <constraint firstAttribute="bottom" secondItem="snn-ZW-Tcw" secondAttribute="bottom" constant="8" id="DVU-rg-utO"/>
+                <constraint firstItem="snn-ZW-Tcw" firstAttribute="top" secondItem="wsR-lK-ls3" secondAttribute="top" constant="8" id="YPb-js-K4M"/>
+                <constraint firstItem="7gt-u9-fkA" firstAttribute="centerX" secondItem="wsR-lK-ls3" secondAttribute="centerX" constant="-27" id="bJ1-F7-o9H"/>
+                <constraint firstItem="7gt-u9-fkA" firstAttribute="top" secondItem="wsR-lK-ls3" secondAttribute="top" constant="8" id="bXz-7x-Dfa"/>
                 <constraint firstAttribute="width" constant="120" id="bd1-qj-hQu"/>
-                <constraint firstItem="snn-ZW-Tcw" firstAttribute="centerY" secondItem="wsR-lK-ls3" secondAttribute="centerY" id="qH7-z9-PUp"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

@@ -73,7 +73,6 @@ class AKBucketTableViewCell: UITableViewCell
             self.displaceableMenuOverlay.tableCell = self
             self.displaceableMenuOverlay.showEditButton = false
             self.displaceableMenuOverlay.customHeight = 45.0
-            self.displaceableMenuOverlay.mainContainer.backgroundColor = GlobalConstants.AKCoderToDoGray2
             self.displaceableMenuOverlay.setup()
             self.displaceableMenuOverlay.draw(container: self, coordinates: origin, size: CGSize.zero)
             self.displaceableMenuOverlay.deleteAction = { (overlay, controller) -> Void in
