@@ -1,10 +1,10 @@
-=================== Release 1.0 2017-04-15 =====================
+=================== Release 1.0 2017-04-30 =====================
 Description
     * First version of the App.
 Functionalities
     * 
 Changes
-    * Version 1.0 Build 01 (2017/04/15)
+    * Version 1.0 Build 01 (2017/04/30)
         * Added support for showing if tomorrow is set or not in the project's table. (2017/04/12)
         * Improved support for the table caching system. (2017/04/12)
         * Added support for sorting projects by use (Default). (2017/04/11)
