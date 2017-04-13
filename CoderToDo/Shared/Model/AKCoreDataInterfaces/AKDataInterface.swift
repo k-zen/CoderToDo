@@ -466,6 +466,17 @@ class AKDataInterface
         
         return returnEmpty ? .invalid : DaysOfWeek(rawValue: Int16(maxKey))!
     }
+    
+    static func isTomorrowSetUp(project: Project) -> Bool
+    {
+        for day in DataInterface.getDays(project: project) {
+            if DataInterface.isDayTomorrow(day: day) {
+                return true
+            }
+        }
+        
+        return false
+    }
     // ########## PROJECT'S FUNCTIONS ########## //
     // ########## DAY'S FUNCTIONS ########## //
     static func getDays(

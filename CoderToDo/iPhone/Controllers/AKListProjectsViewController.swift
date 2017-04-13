@@ -7,7 +7,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: Constants
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
-        static let AKRowHeight: CGFloat = 52.0
+        static let AKRowHeight: CGFloat = 72.0
         static let AKFooterHeight: CGFloat = 1.0
         static let AKDisplaceHeight: CGFloat = AKTopMenuView.LocalConstants.AKViewHeight
     }
@@ -129,6 +129,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
         else {
             cell.closeValue.isHidden = true
+        }
+        // New day state.
+        if DataInterface.isTomorrowSetUp(project: project) {
+            cell.newDayStateValue.text = "Tomorrow is set."
+            cell.newDayStateValue.textColor = GlobalConstants.AKGreenForBlackFg
+        }
+        else {
+            cell.newDayStateValue.text = "Tomorrow is not set."
+            cell.newDayStateValue.textColor = GlobalConstants.AKRedForBlackFg
         }
         // Add task button.
         cell.toggleAddTaskButton()
@@ -458,30 +467,37 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
         chartDataSet.drawValuesEnabled = true
-        chartDataSet.setColors([GlobalConstants.AKCoderToDoGray4], alpha: 0.75)
+        chartDataSet.setColors([GlobalConstants.AKCoderToDoWhite], alpha: 0.75)
         
         // Configure the chart.
         self.osrChartContainer.xAxis.labelPosition = .bottom
         self.osrChartContainer.xAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         self.osrChartContainer.xAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultBg
         self.osrChartContainer.xAxis.gridLineCap = .square
         self.osrChartContainer.xAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.xAxis.valueFormatter = formato
+        self.osrChartContainer.xAxis.drawAxisLineEnabled = false
         
         self.osrChartContainer.leftAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         self.osrChartContainer.leftAxis.labelTextColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.leftAxis.gridColor = GlobalConstants.AKDefaultBg
         self.osrChartContainer.leftAxis.gridLineCap = .square
         self.osrChartContainer.leftAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.leftAxis.axisMaximum = 100
         self.osrChartContainer.leftAxis.axisMinimum = 0
+        self.osrChartContainer.leftAxis.drawAxisLineEnabled = false
+        self.osrChartContainer.leftAxis.drawLabelsEnabled = false
         
         self.osrChartContainer.rightAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
         self.osrChartContainer.rightAxis.labelTextColor = GlobalConstants.AKDefaultFg
+        self.osrChartContainer.rightAxis.gridColor = GlobalConstants.AKDefaultBg
         self.osrChartContainer.rightAxis.gridLineCap = .square
         self.osrChartContainer.rightAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.rightAxis.axisMaximum = 100
         self.osrChartContainer.rightAxis.axisMinimum = 0
+        self.osrChartContainer.rightAxis.drawAxisLineEnabled = false
+        self.osrChartContainer.rightAxis.drawLabelsEnabled = false
         
         self.osrChartContainer.legend.textColor = GlobalConstants.AKDefaultFg
         self.osrChartContainer.legend.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16)!
