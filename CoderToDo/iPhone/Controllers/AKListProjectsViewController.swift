@@ -135,10 +135,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             if DataInterface.isTomorrowSetUp(project: project) {
                 cell.newDayStateValue.text = "Tomorrow is set."
                 cell.newDayStateValue.textColor = GlobalConstants.AKGreenForBlackFg
+                cell.newDayStateValueHeight.constant = 20.0
             }
             else {
                 cell.newDayStateValue.text = "Tomorrow is not set."
                 cell.newDayStateValue.textColor = GlobalConstants.AKRedForBlackFg
+                cell.newDayStateValueHeight.constant = 20.0
             }
         }
         else {
