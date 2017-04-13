@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9P-Uh-mGW" userLabel="Table_Container">
@@ -103,7 +103,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fSw-CB-o8w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2SW-Hq-sLE" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-nE-8dt" userLabel="Configurations_Table">
@@ -143,7 +143,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ghj-GA-ocL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="z1J-mq-Crb" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6A-mN-gFd" userLabel="Table_Container">
@@ -198,7 +198,7 @@
                         <viewControllerLayoutGuide type="bottom" id="MHa-Ts-qCv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fYK-zf-GVk" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-sk-Egb" userLabel="Scroll_Container">
@@ -386,7 +386,7 @@
                         <viewControllerLayoutGuide type="bottom" id="94K-63-nlZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ncx-Bk-znS">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-vw-s4Y" userLabel="Scroll_Container">
@@ -472,7 +472,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8pN-cv-3RS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nA7-bi-BxD" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBo-Ce-cYe" userLabel="Scroll_Container">
@@ -596,7 +596,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gWg-Vt-gWA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LZJ-UE-jl7">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qzF-f9-02w" userLabel="Configurations_Table">
@@ -629,7 +629,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lc5-Gw-ksU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3t8-NO-dL6" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krn-jr-3Nc" userLabel="Scroll_Container">
@@ -706,7 +706,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Jcm-EI-PX1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UXn-WW-2I5">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX1-kM-fc1" userLabel="Scroll_Container">
@@ -830,7 +830,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="kca-Sl-9gs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="hKk-6z-sA9">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="hKk-6z-sA9">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -856,7 +856,7 @@
                         <viewControllerLayoutGuide type="bottom" id="S52-j0-QiV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bs1-nb-pXf" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urK-PU-TVJ" userLabel="Project_List_Container">
@@ -944,7 +944,7 @@
                         <viewControllerLayoutGuide type="bottom" id="vQb-TG-Tsn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dEn-Sl-Mod" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kMR-P9-Y7F" userLabel="Configurations_Table">
@@ -983,7 +983,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jDy-F6-FNC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1av-YW-XWx" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-2i-odY" userLabel="Scroll_Container">
@@ -1140,7 +1140,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Q68-od-XJ3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ygu-4t-aWW" userLabel="Main_Container">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMi-mS-mu4" userLabel="Scroll_Container">
@@ -1272,7 +1272,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9Qf-Da-mMt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KQO-wN-Zgy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

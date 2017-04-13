@@ -5,7 +5,7 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 120.0
-        static let AKViewHeight: CGFloat = 52.0
+        static let AKViewHeight: CGFloat = 72.0
     }
     
     // MARK: Properties
