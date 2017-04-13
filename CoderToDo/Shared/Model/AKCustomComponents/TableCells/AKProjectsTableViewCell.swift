@@ -34,7 +34,9 @@ class AKProjectsTableViewCell: UITableViewCell
                                                         presentedController.project = project
                                                     } },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                                    NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...")
+                                                    if let presenterController = presenterController as? AKListProjectsViewController {
+                                                        Func.AKReloadTable(tableView: presenterController.projectsTable) // Reload the table to update the *New Day State* label.
+                                                    }
                                                     
                                                     presenterController.dismissView(executeDismissTask: true) }
                 )

@@ -305,8 +305,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     // 1. Present Intro view.
                     controller.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
                                            taskBeforePresenting: { (presenterController, presentedController) -> Void in },
-                                           dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
-                                            NSLog("=> INFO: \(type(of: presentedController)) MODAL PRESENTATION HAS BEEN DISMISSED...") }
+                                           dismissViewCompletionTask: { (presenterController, presentedController) -> Void in }
                     )
                     
                     // 2. Clear all notifications from previous installs.
