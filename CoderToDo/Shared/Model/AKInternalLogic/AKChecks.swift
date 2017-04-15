@@ -34,23 +34,22 @@ class AKChecks
         if DataInterface.getProjectStatus(project: (task.category?.day?.project)!) == .accepting {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
-                if task.state == TaskStates.pending.rawValue {
-                    if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
-                        task.state = TaskStates.notDone.rawValue
-                    }
-                }
+                AKChecks.sanityChecks_1(controller: controller, task: task)
+                
                 // Sanity check #2
                 if task.state == TaskStates.pending.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                     if !DataInterface.addPendingTask(task: task) {
                         NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
                     }
                 }
+                
                 // Sanity check #3
                 if task.state == TaskStates.dilate.rawValue {
                     if !DataInterface.addDilateTask(task: task) {
                         NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
                     }
                 }
+                
                 // Sanity check #4
                 if task.state == TaskStates.notDone.rawValue && !task.migrated {
                     // ################################################################################################## //
@@ -89,6 +88,15 @@ class AKChecks
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    static func sanityChecks_1(controller: AKCustomViewController, task: Task) -> Void
+    {
+        if task.state == TaskStates.pending.rawValue {
+            if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
+                task.state = TaskStates.notDone.rawValue
             }
         }
     }
