@@ -138,21 +138,23 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                 AKProjectBuilder.to(project: controller.project, from: project)
                 
                 // Re-schedule the notifications.
-                // 1. Invalidate the current ones.
-                Func.AKInvalidateLocalNotification(controller: controller, project: controller.project)
-                // 2. Re-schedule.
-                Func.AKScheduleLocalNotification(
-                    controller: controller,
-                    project: controller.project,
-                    completionTask: { (presenterController) -> Void in
-                        presenterController?.showMessage(
-                            origin: CGPoint.zero,
-                            type: .error,
-                            message: "Ooops, there was a problem scheduling the notification.",
-                            animate: true,
-                            completionTask: nil
-                        ) }
-                )
+                if controller.project.notifyClosingTime {
+                    // 1. Invalidate the current ones.
+                    Func.AKInvalidateLocalNotification(controller: controller, project: controller.project)
+                    // 2. Re-schedule.
+                    Func.AKScheduleLocalNotification(
+                        controller: controller,
+                        project: controller.project,
+                        completionTask: { (presenterController) -> Void in
+                            presenterController?.showMessage(
+                                origin: CGPoint.zero,
+                                type: .error,
+                                message: "Ooops, there was a problem scheduling the notification.",
+                                animate: true,
+                                completionTask: nil
+                            ) }
+                    )
+                }
             }
         }
         self.configureLookAndFeel = { (controller) -> Void in

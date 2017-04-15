@@ -1147,8 +1147,7 @@ class UtilityFunctions
     func AKScheduleLocalNotification(
         controller: AKCustomViewController?,
         project: Project,
-        completionTask: ((AKCustomViewController?) -> Void)?) -> Void
-    {
+        completionTask: ((AKCustomViewController?) -> Void)?) -> Void {
         let closingTimeContent = UNMutableNotificationContent()
         closingTimeContent.title = String(format: "Project: %@", project.name!)
         closingTimeContent.body = String(
