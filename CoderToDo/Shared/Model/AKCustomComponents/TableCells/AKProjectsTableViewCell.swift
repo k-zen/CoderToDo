@@ -135,7 +135,7 @@ class AKProjectsTableViewCell: UITableViewCell
                             yesAction: { (presenterController) -> Void in
                                 if let controller = presenterController as? AKListProjectsViewController {
                                     if let indexPath = controller.projectsTable.indexPath(for: cell) {
-                                        let project = DataInterface.getProjects(filter: controller.projectFilter)[indexPath.row]
+                                        let project = DataInterface.getProjects(filter: controller.projectFilter)[indexPath.section]
                                         
                                         // Remove data structure.
                                         DataInterface.getUser()?.removeFromProject(project)
