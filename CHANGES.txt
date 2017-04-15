@@ -2,7 +2,7 @@
 Description
     * First version of the App.
 Functionalities
-    * 
+    * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/04/30)
         * Corrected minor bug with the task's table. (2017/04/15)
