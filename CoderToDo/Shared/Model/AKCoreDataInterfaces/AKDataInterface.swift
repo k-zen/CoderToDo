@@ -399,15 +399,7 @@ class AKDataInterface
             average[key] = counters[key]! > 0 ? (average[key]! / counters[key]!) * 100.0 : 0.0
         }
         
-        // Check if at least one counter is > 0.
-        var returnEmpty = true
-        for (_, value) in counters {
-            if value > 0.0 {
-                returnEmpty = false
-            }
-        }
-        
-        return returnEmpty ? [:] : average
+        return average
     }
     
     static func mostProductiveDay() -> DaysOfWeek

@@ -143,8 +143,6 @@ class AKProjectsTableViewCell: UITableViewCell
                                         Func.AKInvalidateLocalNotification(controller: controller, project: project)
                                         
                                         Func.AKReloadTable(tableView: controller.projectsTable)
-                                        // Hide the chart if there are not data.
-                                        controller.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false
                                     }
                                 } },
                             noAction: { (presenterController) -> Void in

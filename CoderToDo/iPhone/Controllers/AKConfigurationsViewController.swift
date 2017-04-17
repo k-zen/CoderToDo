@@ -4,13 +4,13 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 4.0
+        static let AKHeaderHeight: CGFloat = 0.5
         static let AKRowHeight: CGFloat = 40.0
-        static let AKFooterHeight: CGFloat = 4.0
+        static let AKFooterHeight: CGFloat = CGFloat.leastNormalMagnitude
     }
     
     // MARK: Properties
-    var configurationsTableHeaders = ["User Configuration", "Backup", "Goodies"]
+    var configurationsTableHeaders = ["Backup", "Goodies"]
     
     // MARK: Outlets
     @IBOutlet weak var configurationsTable: UITableView!
@@ -25,8 +25,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
         switch identifier {
-        case GlobalConstants.AKViewUserConfigurationSegue,
-             GlobalConstants.AKViewBackupSegue,
+        case GlobalConstants.AKViewBackupSegue,
              GlobalConstants.AKViewGoodiesSegue:
             return true
         default:
@@ -85,12 +84,9 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     {
         switch indexPath.section {
         case 0:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewUserConfigurationSegue, sender: self)
-            break
-        case 1:
             self.performSegue(withIdentifier: GlobalConstants.AKViewBackupSegue, sender: self)
             break
-        case 2:
+        case 1:
             self.performSegue(withIdentifier: GlobalConstants.AKViewGoodiesSegue, sender: self)
             break
         default:

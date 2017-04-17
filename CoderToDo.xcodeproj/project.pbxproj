@@ -104,7 +104,7 @@
 		49D57DCD1E5B15CB00DACF53 /* AKAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */; };
 		49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */; };
 		49D93F941E798BCE0093C9D2 /* AKBackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */; };
-		49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */; };
+		49D93F961E798BFF0093C9D2 /* AKUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D93F951E798BFF0093C9D2 /* AKUserViewController.swift */; };
 		49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */; };
 		49DF7EDA1E5E1C450017BEC6 /* AKMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */; };
 		49DF7EDE1E5E27450017BEC6 /* AKContinueMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */; };
@@ -250,7 +250,7 @@
 		49D57DCC1E5B15CB00DACF53 /* AKAddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAddTaskViewController.swift; sourceTree = "<group>"; };
 		49D93F8F1E7986CA0093C9D2 /* AKConfigurationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsViewController.swift; sourceTree = "<group>"; };
 		49D93F931E798BCE0093C9D2 /* AKBackupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKBackupViewController.swift; sourceTree = "<group>"; };
-		49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserConfigurationViewController.swift; sourceTree = "<group>"; };
+		49D93F951E798BFF0093C9D2 /* AKUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserViewController.swift; sourceTree = "<group>"; };
 		49DF7ECF1E5DD49C0017BEC6 /* AKSelectTaskStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKSelectTaskStateView.xib; sourceTree = "<group>"; };
 		49DF7ED91E5E1C450017BEC6 /* AKMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKMessageView.xib; sourceTree = "<group>"; };
 		49DF7EDD1E5E27450017BEC6 /* AKContinueMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKContinueMessageView.xib; sourceTree = "<group>"; };
@@ -465,9 +465,9 @@
 				498E178F1E84332B00B3A3A1 /* AKProjectNameViewController.swift */,
 				498E17931E84334D00B3A3A1 /* AKProjectNotificationsViewController.swift */,
 				498E17911E84333A00B3A3A1 /* AKProjectTimesViewController.swift */,
-				49D93F951E798BFF0093C9D2 /* AKUserConfigurationViewController.swift */,
 				498E17951E84335E00B3A3A1 /* AKUserDefinedCategoriesViewController.swift */,
 				49A4A0A21E589E8600CEDA1B /* AKUsernameInputViewController.swift */,
+				49D93F951E798BFF0093C9D2 /* AKUserViewController.swift */,
 				49A4A0A31E589E8600CEDA1B /* AKViewProjectViewController.swift */,
 				49A4A0A41E589E8600CEDA1B /* AKViewTaskViewController.swift */,
 			);
@@ -971,7 +971,7 @@
 				49E76E131E7DCF62000215BC /* AKTaskName.swift in Sources */,
 				498E17921E84333A00B3A3A1 /* AKProjectTimesViewController.swift in Sources */,
 				49D93F901E7986CA0093C9D2 /* AKConfigurationsViewController.swift in Sources */,
-				49D93F961E798BFF0093C9D2 /* AKUserConfigurationViewController.swift in Sources */,
+				49D93F961E798BFF0093C9D2 /* AKUserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

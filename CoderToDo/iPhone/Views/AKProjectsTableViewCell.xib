@@ -85,14 +85,15 @@
                                     <action selector="addTomorrowTask:" destination="LQ1-JN-uqn" eventType="touchUpInside" id="WGb-AR-HGx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tomorrow is not set up." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeZ-rz-o5g" userLabel="New_Day_State_Value">
-                                <rect key="frame" x="16" y="48" width="228" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tomorrow is not set." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeZ-rz-o5g" userLabel="New_Day_State_Value">
+                                <rect key="frame" x="16" y="48" width="110" height="20"/>
+                                <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="ANC-H0-qDz"/>
-                                    <constraint firstAttribute="width" constant="228" id="wTt-cc-S4m"/>
+                                    <constraint firstAttribute="width" constant="110" id="wTt-cc-S4m"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
-                                <color key="textColor" red="0.98431372549999996" green="0.28627450980000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

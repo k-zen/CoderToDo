@@ -4,9 +4,9 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 4.0
+        static let AKHeaderHeight: CGFloat = 0.5
         static let AKRowHeight: CGFloat = 40.0
-        static let AKFooterHeight: CGFloat = 4.0
+        static let AKFooterHeight: CGFloat = CGFloat.leastNormalMagnitude
     }
     
     // MARK: Properties

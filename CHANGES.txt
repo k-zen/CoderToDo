@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/04/30)
+        * Migrated the statistical graph to the user's view. (2017/04/16)
         * Corrected minor bug with the task's table. (2017/04/15)
         * Corrected a minor bug with the notification system. (2017/04/15)
         * Added support for showing if tomorrow is set or not in the project's table. (2017/04/12)

@@ -189,7 +189,7 @@ struct GlobalConstants
     static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray3
+    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray2
     static let AKEnabledButtonFg = GlobalConstants.AKCoderToDoWhite
     static let AKDisabledButtonBg = Func.AKHexColor(0xA9A9A6) // Exception!!!
     static let AKDisabledButtonFg = GlobalConstants.AKCoderToDoWhite
@@ -202,8 +202,8 @@ struct GlobalConstants
     static let AKPickerFontSize: CGFloat = 18.0
     static let AKNavBarFontSize: CGFloat = 18.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
-    static let AKViewCornerRadius: CGFloat = 0.0
-    static let AKButtonCornerRadius: CGFloat = 0.0
+    static let AKViewCornerRadius: CGFloat = 4.0
+    static let AKButtonCornerRadius: CGFloat = 2.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -213,7 +213,7 @@ struct GlobalConstants
     static let AKAutoCorrectionToolbarHeight: CGFloat = 42
     static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
-    static let AKMaxUsernameLength = 40
+    static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 2
     static let AKMaxProjectNameLength = 40
     static let AKMinProjectNameLength = 2
@@ -234,7 +234,7 @@ struct GlobalConstants
     static let AKViewProjectConfigurationsSegue = "ViewProjectConfigurationsSegue"
     static let AKViewBackupSegue = "ViewBackupSegue"
     static let AKViewProjectBucketSegue = "ViewProjectBucketSegue"
-    static let AKViewUserConfigurationSegue = "ViewUserConfigurationSegue"
+    static let AKViewUserSegue = "ViewUserSegue"
     static let AKViewProjectNameSegue = "ViewProjectNameSegue"
     static let AKViewProjectTimesSegue = "ViewProjectTimesSegue"
     static let AKViewProjectNotificationsSegue = "ViewProjectNotificationsSegue"

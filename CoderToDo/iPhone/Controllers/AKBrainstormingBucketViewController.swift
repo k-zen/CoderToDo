@@ -6,11 +6,11 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     private struct LocalConstants {
         static let AKProjectListTableHeaderHeight: CGFloat = 0.5
         static let AKProjectListTableRowHeight: CGFloat = 40.0
-        static let AKProjectListTableFooterHeight: CGFloat = 2.0
+        static let AKProjectListTableFooterHeight: CGFloat = CGFloat.leastNormalMagnitude
         
         static let AKBucketTableHeaderHeight: CGFloat = 34
         static let AKBucketTableRowHeight: CGFloat = 45.0
-        static let AKBucketTableFooterHeight: CGFloat = 2.0
+        static let AKBucketTableFooterHeight: CGFloat = CGFloat.leastNormalMagnitude
         
         static let AKProjectListTableTag = 1
         static let AKBucketTableTag = 2
@@ -273,7 +273,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         case LocalConstants.AKBucketTableTag:
             return LocalConstants.AKBucketTableRowHeight
         default:
-            return 0
+            return 0.0
         }
     }
     
@@ -285,11 +285,21 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         case LocalConstants.AKBucketTableTag:
             return LocalConstants.AKBucketTableHeaderHeight
         default:
-            return 0
+            return 0.0
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        switch tableView.tag {
+        case LocalConstants.AKProjectListTableTag:
+            return LocalConstants.AKProjectListTableFooterHeight
+        case LocalConstants.AKBucketTableTag:
+            return LocalConstants.AKBucketTableFooterHeight
+        default:
+            return 0.0
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

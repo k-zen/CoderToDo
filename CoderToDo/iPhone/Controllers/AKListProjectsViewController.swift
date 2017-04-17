@@ -1,4 +1,3 @@
-import Charts
 import UIKit
 import UserNotifications
 
@@ -16,10 +15,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     var projectFilter = Filter(projectFilter: FilterProject())
     
     // MARK: Outlets
+    @IBOutlet weak var navController: UINavigationItem!
     @IBOutlet weak var projectsTable: UITableView!
-    @IBOutlet weak var chartContainer: UIView!
-    @IBOutlet weak var mostProductiveDay: UILabel!
-    @IBOutlet weak var osrChartContainer: BarChartView!
     @IBOutlet weak var menu: UIBarButtonItem!
     
     // MARK: Actions
@@ -61,6 +58,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         if let identifier = segue.identifier {
             switch identifier {
+            case GlobalConstants.AKViewUserSegue:
+                if let destination = segue.destination as? AKUserViewController {
+                    destination.navController.title = DataInterface.getUsername()
+                }
+                break
             case GlobalConstants.AKViewProjectSegue:
                 if let destination = segue.destination as? AKViewProjectViewController {
                     if let project = sender as? Project {
@@ -86,6 +88,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
         switch identifier {
+        case GlobalConstants.AKViewUserSegue:
+            return true
         case GlobalConstants.AKViewProjectSegue:
             return true
         case GlobalConstants.AKViewProjectConfigurationsSegue:
@@ -134,12 +138,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         if DataInterface.getProjectStatus(project: project) == .accepting {
             if DataInterface.isTomorrowSetUp(project: project) {
                 cell.newDayStateValue.text = "Tomorrow is set."
-                cell.newDayStateValue.textColor = GlobalConstants.AKGreenForBlackFg
+                cell.newDayStateValue.textColor = GlobalConstants.AKCoderToDoWhite
+                cell.newDayStateValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
+                cell.newDayStateValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                cell.newDayStateValue.layer.masksToBounds = true
                 cell.newDayStateValueHeight.constant = 20.0
             }
             else {
                 cell.newDayStateValue.text = "Tomorrow is not set."
-                cell.newDayStateValue.textColor = GlobalConstants.AKRedForBlackFg
+                cell.newDayStateValue.textColor = GlobalConstants.AKCoderToDoWhite
+                cell.newDayStateValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
+                cell.newDayStateValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                cell.newDayStateValue.layer.masksToBounds = true
                 cell.newDayStateValueHeight.constant = 20.0
             }
         }
@@ -294,9 +304,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKListProjectsViewController {
                 Func.AKReloadTable(tableView: controller.projectsTable)
-                // Hide the chart if there are not data.
-                controller.loadChart()
-                controller.chartContainer.isHidden = DataInterface.computeAverageSRGroupedByDay().isEmpty ? true : false // TODO: Improve!
                 
                 // Checks
                 // If it's the first time the user uses the App.
@@ -348,6 +355,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 else {
                     controller.hideInitialMessage(animate: true, completionTask: nil)
                 }
+                
+                // Set the name of the user in the menu item.
+                let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 80.0, height: 28.0)))
+                userAvatar.setTitle(DataInterface.getUsername(), for: .normal)
+                userAvatar.setTitleColor(GlobalConstants.AKEnabledButtonFg, for: .normal)
+                userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+                userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
+                userAvatar.backgroundColor = GlobalConstants.AKEnabledButtonBg
+                userAvatar.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
+                
+                controller.navController.setLeftBarButton(UIBarButtonItem(customView: userAvatar), animated: false)
             }
         }
         self.configureLookAndFeel = { (controller) -> Void in
@@ -471,83 +490,5 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
     }
     
-    
-    func loadChart() {
-        let formato: BarChartFormatter = BarChartFormatter()
-        
-        var dataEntries: [BarChartDataEntry] = []
-        for (key, value) in DataInterface.computeAverageSRGroupedByDay() {
-            let dataEntry = BarChartDataEntry(x: Double(key), y: Double(value))
-            dataEntries.append(dataEntry)
-        }
-        
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
-        chartDataSet.valueFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        chartDataSet.valueTextColor = GlobalConstants.AKDefaultFg
-        chartDataSet.drawValuesEnabled = true
-        chartDataSet.setColors([GlobalConstants.AKCoderToDoWhite], alpha: 0.75)
-        
-        // Configure the chart.
-        self.osrChartContainer.xAxis.labelPosition = .bottom
-        self.osrChartContainer.xAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.xAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.xAxis.gridLineCap = .square
-        self.osrChartContainer.xAxis.gridLineDashLengths = [2, 2]
-        self.osrChartContainer.xAxis.valueFormatter = formato
-        self.osrChartContainer.xAxis.drawAxisLineEnabled = false
-        
-        self.osrChartContainer.leftAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.leftAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.leftAxis.gridColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.leftAxis.gridLineCap = .square
-        self.osrChartContainer.leftAxis.gridLineDashLengths = [2, 2]
-        self.osrChartContainer.leftAxis.axisMaximum = 100
-        self.osrChartContainer.leftAxis.axisMinimum = 0
-        self.osrChartContainer.leftAxis.drawAxisLineEnabled = false
-        self.osrChartContainer.leftAxis.drawLabelsEnabled = false
-        
-        self.osrChartContainer.rightAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.rightAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.rightAxis.gridColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.rightAxis.gridLineCap = .square
-        self.osrChartContainer.rightAxis.gridLineDashLengths = [2, 2]
-        self.osrChartContainer.rightAxis.axisMaximum = 100
-        self.osrChartContainer.rightAxis.axisMinimum = 0
-        self.osrChartContainer.rightAxis.drawAxisLineEnabled = false
-        self.osrChartContainer.rightAxis.drawLabelsEnabled = false
-        
-        self.osrChartContainer.legend.textColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.legend.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16)!
-        self.osrChartContainer.legend.horizontalAlignment = .center
-        
-        self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.noDataText = ""
-        self.osrChartContainer.chartDescription?.text = ""
-        self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
-        self.osrChartContainer.isUserInteractionEnabled = false
-        
-        // Load chart.
-        let chartData = BarChartData(dataSet: chartDataSet)
-        
-        self.osrChartContainer.data = chartData
-        
-        let mostProductiveDay = DataInterface.mostProductiveDay()
-        if mostProductiveDay != .invalid {
-            self.mostProductiveDay.text = String(
-                format: "%@ is your most productive day!",
-                Func.AKGetDayOfWeekAsName(dayOfWeek: mostProductiveDay.rawValue)!
-            )
-        }
-        else {
-            self.mostProductiveDay.text = ""
-        }
-    }
-}
-
-@objc(BarChartFormatter)
-class BarChartFormatter: NSObject, IAxisValueFormatter
-{
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String { return Func.AKGetDayOfWeekAsName(dayOfWeek: Int16(value), short: true)! }
+    func toggleUser() { self.performSegue(withIdentifier: GlobalConstants.AKViewUserSegue, sender: self) }
 }
