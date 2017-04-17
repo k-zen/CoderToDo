@@ -4,9 +4,9 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKProjectListTableHeaderHeight: CGFloat = 0.5
+        static let AKProjectListTableHeaderHeight: CGFloat = 1.0
         static let AKProjectListTableRowHeight: CGFloat = 40.0
-        static let AKProjectListTableFooterHeight: CGFloat = CGFloat.leastNormalMagnitude
+        static let AKProjectListTableFooterHeight: CGFloat = 1.0
         
         static let AKBucketTableHeaderHeight: CGFloat = 34
         static let AKBucketTableRowHeight: CGFloat = 45.0
