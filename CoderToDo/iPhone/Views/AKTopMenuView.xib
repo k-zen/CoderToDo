@@ -20,7 +20,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Main_Container">
-            <rect key="frame" x="0.0" y="0.0" width="299" height="41.5"/>
+            <rect key="frame" x="0.0" y="0.0" width="299" height="42"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVl-zQ-TiC" userLabel="Dummy_Container">
@@ -30,7 +30,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="74" height="40"/>
                             <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="XJo-wR-H64"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="74" id="XJo-wR-H64"/>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="ZJO-X9-oLA"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
@@ -79,7 +79,7 @@
                         <constraint firstItem="hbI-5v-MXh" firstAttribute="leading" secondItem="4ev-sV-KI7" secondAttribute="trailing" constant="1" id="3S0-EO-OuH"/>
                         <constraint firstItem="1dh-ca-TVw" firstAttribute="leading" secondItem="hbI-5v-MXh" secondAttribute="trailing" constant="1" id="4dg-Ur-6uC"/>
                         <constraint firstItem="JAs-X3-Hxd" firstAttribute="baseline" secondItem="4ev-sV-KI7" secondAttribute="baseline" id="4el-ms-ad7"/>
-                        <constraint firstItem="1dh-ca-TVw" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" id="5xt-5o-qNb"/>
+                        <constraint firstItem="1dh-ca-TVw" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" priority="750" id="5xt-5o-qNb"/>
                         <constraint firstAttribute="bottom" secondItem="4ev-sV-KI7" secondAttribute="bottom" id="61Y-7Y-9KL"/>
                         <constraint firstItem="JAs-X3-Hxd" firstAttribute="leading" secondItem="1dh-ca-TVw" secondAttribute="trailing" constant="1" id="Fef-hH-LUN"/>
                         <constraint firstItem="JAs-X3-Hxd" firstAttribute="height" secondItem="4ev-sV-KI7" secondAttribute="height" id="GIX-2F-nHY"/>
@@ -88,10 +88,9 @@
                         <constraint firstItem="1dh-ca-TVw" firstAttribute="height" secondItem="4ev-sV-KI7" secondAttribute="height" id="MG4-nV-hmv"/>
                         <constraint firstItem="4ev-sV-KI7" firstAttribute="leading" secondItem="DVl-zQ-TiC" secondAttribute="leading" id="SOQ-0n-dEG"/>
                         <constraint firstAttribute="trailing" secondItem="JAs-X3-Hxd" secondAttribute="trailing" id="ZPi-Uc-sif"/>
-                        <constraint firstItem="1dh-ca-TVw" firstAttribute="leading" secondItem="hbI-5v-MXh" secondAttribute="trailing" constant="1" id="aME-jG-qdK"/>
-                        <constraint firstItem="JAs-X3-Hxd" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" id="bbL-5U-31J"/>
+                        <constraint firstItem="JAs-X3-Hxd" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" priority="750" id="bbL-5U-31J"/>
                         <constraint firstItem="JAs-X3-Hxd" firstAttribute="baseline" secondItem="1dh-ca-TVw" secondAttribute="baseline" id="cYg-wc-cIf"/>
-                        <constraint firstItem="hbI-5v-MXh" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" id="o8N-1j-Q3p"/>
+                        <constraint firstItem="hbI-5v-MXh" firstAttribute="width" secondItem="4ev-sV-KI7" secondAttribute="width" priority="750" id="o8N-1j-Q3p"/>
                         <constraint firstAttribute="height" constant="40" id="wbV-sD-E1Z"/>
                         <constraint firstItem="4ev-sV-KI7" firstAttribute="top" secondItem="DVl-zQ-TiC" secondAttribute="top" id="yLy-Tn-wnJ"/>
                     </constraints>

@@ -4,7 +4,7 @@ class AKAddView: AKCustomView
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKViewHeight: CGFloat = 41.5
+        static let AKViewHeight: CGFloat = 41.0
     }
     
     // MARK: Outlets

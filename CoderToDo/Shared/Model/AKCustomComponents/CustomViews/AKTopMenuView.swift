@@ -4,7 +4,7 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
 {
     // MARK: Constants
     struct LocalConstants {
-        static let AKViewHeight: CGFloat = 41.5
+        static let AKViewHeight: CGFloat = 42.0
     }
     
     // MARK: Properties
