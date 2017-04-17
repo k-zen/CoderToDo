@@ -96,7 +96,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 width: tableWidth - (padding * 2), // Overlap badge!
                 height: LocalConstants.AKHeaderHeight)
             )
-            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
+            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
             title.textColor = GlobalConstants.AKDefaultFg
             title.text = category.name ?? "N\\A"
             title.textAlignment = .left
