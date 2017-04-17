@@ -94,9 +94,14 @@ class AKChecks
     
     static func sanityChecks_1(controller: AKCustomViewController, task: Task) -> Void
     {
-        if task.state == TaskStates.pending.rawValue {
-            if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
-                task.state = TaskStates.notDone.rawValue
+        // ENFORCE CONTROLS!!!
+        if DataInterface.getProjectStatus(project: (task.category?.day?.project)!) == .accepting {
+            if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
+                if task.state == TaskStates.pending.rawValue {
+                    if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
+                        task.state = TaskStates.notDone.rawValue
+                    }
+                }
             }
         }
     }

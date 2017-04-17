@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/04/30)
+        * Corrected a bug in sanity checks #1. (2017/04/16)
         * Migrated the statistical graph to the user's view. (2017/04/16)
         * Corrected minor bug with the task's table. (2017/04/15)
         * Corrected a minor bug with the notification system. (2017/04/15)
