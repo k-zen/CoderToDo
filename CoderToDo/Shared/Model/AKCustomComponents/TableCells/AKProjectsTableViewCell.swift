@@ -163,8 +163,18 @@ class AKProjectsTableViewCell: UITableViewCell
                 animate: true,
                 completionTask: nil
             )
+            
+            self.displaceableMenuOverlay.editButtonTop.constant = 8.0
+            self.displaceableMenuOverlay.editButtonBottom.constant = 8.0
+            self.displaceableMenuOverlay.deleteButtonTop.constant = 8.0
+            self.displaceableMenuOverlay.deleteButtonBottom.constant = 8.0
             break
         case .notVisible:
+            self.displaceableMenuOverlay.editButtonTop.constant = 0.0
+            self.displaceableMenuOverlay.editButtonBottom.constant = 0.0
+            self.displaceableMenuOverlay.deleteButtonTop.constant = 0.0
+            self.displaceableMenuOverlay.deleteButtonBottom.constant = 0.0
+            
             self.displaceableMenuOverlay.collapse(
                 controller: self.controller,
                 animate: true,

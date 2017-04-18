@@ -75,6 +75,7 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="5vQ-Wb-6lU"/>
                                 <constraint firstAttribute="height" constant="420" id="fCp-8O-Ye9"/>

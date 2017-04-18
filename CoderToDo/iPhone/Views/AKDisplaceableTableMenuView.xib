@@ -12,9 +12,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKDisplaceableTableMenuView" customModule="CoderToDo" customModuleProvider="target">
             <connections>
                 <outlet property="deleteButton" destination="snn-ZW-Tcw" id="qsG-4u-dr8"/>
+                <outlet property="deleteButtonBottom" destination="DVU-rg-utO" id="qkw-Dy-08b"/>
+                <outlet property="deleteButtonTop" destination="YPb-js-K4M" id="Hp7-Wy-ij3"/>
                 <outlet property="deleteButtonWidth" destination="fIW-pL-zAa" id="k4f-FC-ehr"/>
                 <outlet property="deleteButtonX" destination="1fn-lH-tCh" id="Oj0-jX-Wsm"/>
                 <outlet property="editButton" destination="7gt-u9-fkA" id="mr1-fV-tht"/>
+                <outlet property="editButtonBottom" destination="6dI-px-N51" id="dzm-sA-yvu"/>
+                <outlet property="editButtonTop" destination="bXz-7x-Dfa" id="Y7A-Zt-N9b"/>
                 <outlet property="editButtonWidth" destination="MTz-13-KPK" id="TFh-UI-ese"/>
                 <outlet property="editButtonX" destination="bJ1-F7-o9H" id="CGm-zp-xmt"/>
                 <outlet property="mainContainer" destination="wsR-lK-ls3" id="A1C-lc-qAZ"/>

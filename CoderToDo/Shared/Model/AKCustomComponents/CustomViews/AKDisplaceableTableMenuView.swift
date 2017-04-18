@@ -28,6 +28,10 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
     @IBOutlet weak var editButtonX: NSLayoutConstraint!
     @IBOutlet weak var deleteButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var deleteButtonX: NSLayoutConstraint!
+    @IBOutlet weak var editButtonTop: NSLayoutConstraint!
+    @IBOutlet weak var editButtonBottom: NSLayoutConstraint!
+    @IBOutlet weak var deleteButtonTop: NSLayoutConstraint!
+    @IBOutlet weak var deleteButtonBottom: NSLayoutConstraint!
     
     // MARK: Actions
     @IBAction func action(_ sender: Any)

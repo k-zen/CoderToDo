@@ -221,7 +221,7 @@ struct GlobalConstants
     static let AKMinCategoryNameLength = 2
     static let AKMaxTaskNameLength = 140
     static let AKMinTaskNameLength = 2
-    static let AKMaxTaskNoteLength = 1000
+    static let AKMaxTaskNoteLength = 500
     static let AKMinTaskNoteLength = 2
     // Dates
     static let AKWorkingDayTimeDateFormat = "HH:mm"

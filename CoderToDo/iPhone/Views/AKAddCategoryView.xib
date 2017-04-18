@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTR-p7-stM" userLabel="Scroll_Container">
-                    <rect key="frame" x="38" y="179.5" width="300" height="308"/>
+                    <rect key="frame" x="38" y="60" width="300" height="308"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ma-GL-Slu" userLabel="Controls_Container">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="308"/>
@@ -111,6 +111,7 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="308" id="YLM-Pa-dPE"/>
                                 <constraint firstAttribute="width" constant="300" id="s2I-pw-uyy"/>
@@ -130,7 +131,7 @@
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yTR-p7-stM" firstAttribute="centerX" secondItem="eQE-g5-Cl0" secondAttribute="centerX" id="GWv-mu-wRl"/>
-                <constraint firstItem="yTR-p7-stM" firstAttribute="centerY" secondItem="eQE-g5-Cl0" secondAttribute="centerY" id="Xfm-2i-Tjw"/>
+                <constraint firstItem="yTR-p7-stM" firstAttribute="top" secondItem="eQE-g5-Cl0" secondAttribute="top" constant="60" id="OYs-Sy-Hnm"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
