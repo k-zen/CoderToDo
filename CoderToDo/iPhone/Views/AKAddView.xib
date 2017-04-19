@@ -51,11 +51,11 @@
                         </button>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3ti-5D-8ST"/>
                         <constraint firstItem="Wd1-V5-JFf" firstAttribute="top" secondItem="gwR-t7-eNh" secondAttribute="top" id="C5V-0J-oSZ"/>
                         <constraint firstAttribute="bottom" secondItem="Le7-U3-Gwl" secondAttribute="bottom" id="EYa-5a-YFw"/>
                         <constraint firstItem="Le7-U3-Gwl" firstAttribute="width" secondItem="Wd1-V5-JFf" secondAttribute="width" priority="750" id="Jz7-mt-hPJ"/>
                         <constraint firstAttribute="trailing" secondItem="Le7-U3-Gwl" secondAttribute="trailing" id="L9i-gc-vKl"/>
-                        <constraint firstAttribute="height" constant="40" id="YYh-Tq-Ad4"/>
                         <constraint firstItem="Le7-U3-Gwl" firstAttribute="leading" secondItem="Wd1-V5-JFf" secondAttribute="trailing" constant="1" id="ZDm-eF-fpx"/>
                         <constraint firstItem="Wd1-V5-JFf" firstAttribute="leading" secondItem="gwR-t7-eNh" secondAttribute="leading" id="aUK-5Z-a8h"/>
                         <constraint firstAttribute="bottom" secondItem="Wd1-V5-JFf" secondAttribute="bottom" id="hD6-ig-399"/>
@@ -66,9 +66,8 @@
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="gwR-t7-eNh" firstAttribute="leading" secondItem="SGl-Zu-r9w" secondAttribute="leading" id="2tg-kb-k15"/>
-                <constraint firstAttribute="bottom" secondItem="gwR-t7-eNh" secondAttribute="bottom" constant="1" id="Lk4-6c-VAq"/>
+                <constraint firstItem="gwR-t7-eNh" firstAttribute="top" secondItem="SGl-Zu-r9w" secondAttribute="top" id="FWr-CI-AHS"/>
                 <constraint firstAttribute="trailing" secondItem="gwR-t7-eNh" secondAttribute="trailing" id="ORR-cd-kKZ"/>
-                <constraint firstItem="gwR-t7-eNh" firstAttribute="top" secondItem="SGl-Zu-r9w" secondAttribute="top" id="aQG-v3-Ifg"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
