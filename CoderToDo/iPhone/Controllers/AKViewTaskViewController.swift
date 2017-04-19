@@ -15,7 +15,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     // MARK: Outlets
     @IBOutlet weak var navController: UINavigationItem!
     @IBOutlet weak var scrollContainer: UIScrollView!
-    @IBOutlet weak var controlContainer: UIView!
+    @IBOutlet weak var controlsContainer: UIView!
     @IBOutlet weak var taskDayValue: UILabel!
     @IBOutlet weak var taskState: UILabel!
     @IBOutlet weak var taskNameContainer: UIView!
@@ -34,7 +34,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     {
         self.selectTaskStateOverlay.editMode = self.editMode
         
-        var coordinates = self.view.convert(self.statusValue.frame, from: self.controlContainer)
+        var coordinates = self.view.convert(self.statusValue.frame, from: self.controlsContainer)
         coordinates.origin.y += self.statusValue.frame.height + 4.0
         self.showSelectTaskState(origin: coordinates.origin, animate: true, completionTask: nil)
     }
@@ -72,47 +72,14 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
     {
         Func.AKAddDoneButtonKeyboard(textView, controller: self)
-        
-        switch textView.tag {
-        case LocalEnums.taskName.rawValue:
-            return true
-        case LocalEnums.notes.rawValue:
-            var offset = textView.convert(textView.frame, to: self.scrollContainer).origin
-            offset.x = 0
-            
-            var keyboardHeight = GlobalConstants.AKKeyboardHeight
-            if textView.autocorrectionType == UITextAutocorrectionType.yes || textView.autocorrectionType == UITextAutocorrectionType.default {
-                keyboardHeight += GlobalConstants.AKAutoCorrectionToolbarHeight
-            }
-            
-            let height = Func.AKGetComponentAbsoluteHeightPosition(container: self.controlContainer, component: self.dummyMarker, isCentered: false)
-            if keyboardHeight > height {
-                offset.y = abs(keyboardHeight - height)
-            }
-            else {
-                offset.y = 0
-            }
-            
-            self.scrollContainer.setContentOffset(offset, animated: true)
-            
-            return true
-        default:
-            return true
-        }
+        self.currentEditableComponent = textView
+        return true
     }
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool
     {
-        switch textView.tag {
-        default:
-            var offset = textView.convert(textView.frame, to: self.scrollContainer).origin
-            offset.x = 0
-            offset.y = 0
-            
-            self.scrollContainer.setContentOffset(offset, animated: true)
-            
-            return true
-        }
+        self.currentEditableComponent = nil
+        return true
     }
     
     // MARK: Miscellaneous
@@ -244,6 +211,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
                 )
             }
         }
+        self.currentScrollContainer = self.scrollContainer
         self.setup()
         
         // Delegate & DataSource

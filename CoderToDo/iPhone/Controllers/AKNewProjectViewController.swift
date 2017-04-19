@@ -15,6 +15,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     var workingDayTimeData = [String]()
     
     // MARK: Outlets
+    @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlsContainer: UIView!
     @IBOutlet weak var notifyClosingTime: UISwitch!
     @IBOutlet weak var projectName: UITextField!
@@ -124,11 +125,14 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
-        
-        switch textField.tag {
-        default:
-            return true
-        }
+        self.currentEditableComponent = textField
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.currentEditableComponent = nil
+        return true
     }
     
     // MARK: UIPickerViewDelegate Implementation
@@ -203,6 +207,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
             }
         }
+        self.currentScrollContainer = self.scrollContainer
         self.setup()
         
         // Delegate & DataSource

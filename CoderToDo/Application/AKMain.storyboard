@@ -186,8 +186,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-sk-Egb" userLabel="Scroll_Container">
-                                <rect key="frame" x="38" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-sk-Egb" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jy-dd-8Nx" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="411"/>
@@ -345,7 +345,7 @@
                         <outlet property="categoryValue" destination="8SL-5T-4JK" id="hmR-Je-Y6i"/>
                         <outlet property="changeCP" destination="iz5-N2-XYj" id="ajw-Yo-uzT"/>
                         <outlet property="changeCategory" destination="QaZ-jJ-xD0" id="DEe-ZH-iPx"/>
-                        <outlet property="controlContainer" destination="6Jy-dd-8Nx" id="Rc2-fe-2S2"/>
+                        <outlet property="controlsContainer" destination="6Jy-dd-8Nx" id="eCx-Uy-7Fw"/>
                         <outlet property="cpValue" destination="7Nl-db-bC9" id="gVn-8y-cZg"/>
                         <outlet property="dummyMarker" destination="gCF-UZ-5w1" id="bBI-0Z-g5d"/>
                         <outlet property="navController" destination="BlV-PQ-9wz" id="Ba6-Sw-rns"/>
@@ -375,8 +375,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-vw-s4Y" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="pku-vw-s4Y" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-e6-A6N" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="206"/>
@@ -461,8 +461,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBo-Ce-cYe" userLabel="Scroll_Container">
-                                <rect key="frame" x="37" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="DBo-Ce-cYe" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-pd-FmN" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="515"/>
@@ -619,8 +619,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krn-jr-3Nc" userLabel="Scroll_Container">
-                                <rect key="frame" x="38" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="krn-jr-3Nc" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-Qq-ffl" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="149"/>
@@ -697,8 +697,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX1-kM-fc1" userLabel="Scroll_Container">
-                                <rect key="frame" x="38" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="EX1-kM-fc1" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkF-ru-72H" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="343"/>
@@ -984,8 +984,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-2i-odY" userLabel="Scroll_Container">
-                                <rect key="frame" x="38" y="8" width="300" height="538"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-2i-odY" userLabel="Scroll_Container">
+                                <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg5-mo-J0w" userLabel="Controls_Container">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="422"/>
@@ -1142,14 +1142,14 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="YMi-mS-mu4" userLabel="Scroll_Container">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="YMi-mS-mu4" userLabel="Scroll_Container">
                                 <rect key="frame" x="37.5" y="8" width="300" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Id-UH-9WI" userLabel="Controls_Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="464"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="424"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sp-Vq-T5G" userLabel="Chart_Container">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcG-Hh-Fp1" userLabel="Most_Productive">
                                                         <rect key="frame" x="0.0" y="8" width="300" height="26"/>
@@ -1161,7 +1161,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZg-Z3-SmD" userLabel="OSR_Chart_Container" customClass="BarChartView" customModule="Charts">
-                                                        <rect key="frame" x="0.0" y="42" width="300" height="190"/>
+                                                        <rect key="frame" x="0.0" y="42" width="300" height="150"/>
                                                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                 </subviews>
@@ -1169,7 +1169,7 @@
                                                     <constraint firstItem="UZg-Z3-SmD" firstAttribute="leading" secondItem="7Sp-Vq-T5G" secondAttribute="leading" id="2or-6J-8RX"/>
                                                     <constraint firstAttribute="bottom" secondItem="UZg-Z3-SmD" secondAttribute="bottom" constant="8" id="Aet-Yi-QIn"/>
                                                     <constraint firstItem="rcG-Hh-Fp1" firstAttribute="top" secondItem="7Sp-Vq-T5G" secondAttribute="top" constant="8" id="BK6-S0-Ny1"/>
-                                                    <constraint firstAttribute="height" constant="240" id="GrV-ct-Gpn"/>
+                                                    <constraint firstAttribute="height" constant="200" id="GrV-ct-Gpn"/>
                                                     <constraint firstItem="rcG-Hh-Fp1" firstAttribute="leading" secondItem="7Sp-Vq-T5G" secondAttribute="leading" id="WCK-nQ-7vg"/>
                                                     <constraint firstItem="UZg-Z3-SmD" firstAttribute="top" secondItem="rcG-Hh-Fp1" secondAttribute="bottom" constant="8" id="aAG-XD-U5Q"/>
                                                     <constraint firstAttribute="trailing" secondItem="UZg-Z3-SmD" secondAttribute="trailing" id="qbh-hB-OAy"/>
@@ -1177,14 +1177,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gd6-cG-QVP" userLabel="Separator_1">
-                                                <rect key="frame" x="8" y="248" width="284" height="2"/>
+                                                <rect key="frame" x="8" y="208" width="284" height="2"/>
                                                 <color key="backgroundColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="wio-jP-dit"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPy-7M-Epb" userLabel="User_Info_Container">
-                                                <rect key="frame" x="0.0" y="258" width="300" height="206"/>
+                                                <rect key="frame" x="0.0" y="218" width="300" height="206"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Modify your username:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLG-vv-BV3" userLabel="Title_1">
                                                         <rect key="frame" x="8" y="8" width="284" height="24"/>
@@ -1235,7 +1235,7 @@
                                             <constraint firstItem="zPy-7M-Epb" firstAttribute="leading" secondItem="9Id-UH-9WI" secondAttribute="leading" id="m2G-87-eaz"/>
                                             <constraint firstItem="7Sp-Vq-T5G" firstAttribute="top" secondItem="9Id-UH-9WI" secondAttribute="top" id="w77-bc-6yK"/>
                                             <constraint firstAttribute="width" constant="300" id="wBY-Ou-wyt"/>
-                                            <constraint firstAttribute="height" constant="464" id="wfc-5C-sxf"/>
+                                            <constraint firstAttribute="height" constant="424" id="wfc-5C-sxf"/>
                                             <constraint firstItem="Gd6-cG-QVP" firstAttribute="leading" secondItem="9Id-UH-9WI" secondAttribute="leading" constant="8" id="yty-ox-fCY"/>
                                         </constraints>
                                     </view>

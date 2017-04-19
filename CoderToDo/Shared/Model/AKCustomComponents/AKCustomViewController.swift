@@ -102,6 +102,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     var iCloudAccessErrorAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var iCloudAccessAvailableAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+    var currentEditableComponent: UIView?
+    var currentScrollContainer: UIScrollView?
     
     // MARK: Overlays
     let messageOverlay = AKMessageView()
@@ -237,6 +239,20 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         if self.shouldAddSpinner {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinner)
         }
+        
+        // Observers.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(AKCustomViewController.keyboardWasShow(notification:)),
+            name: NSNotification.Name.UIKeyboardDidShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(AKCustomViewController.keyboardWillBeHidden(notification:)),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     func loadLocalizedText()
@@ -1008,4 +1024,40 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             }
         }
     }
+    
+    // MARK: Observers
+    func keyboardWasShow(notification: NSNotification)
+    {
+        if let info = notification.userInfo, let editableComponent = self.currentEditableComponent {
+            if let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
+                var viewRect = self.view.frame
+                viewRect.size.height += (UIScreen.main.bounds.height - viewRect.size.height)
+                
+                var visibleRect = CGRect(x: 0.0, y: 0.0, width: viewRect.size.width, height: viewRect.size.height)
+                visibleRect.size.height -= (kbSize.height + GlobalConstants.AKCloseKeyboardToolbarHeight)
+                
+                var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.view)
+                absoluteComponent.origin.y += self.navigationController?.topViewController == self ? 49.0 : 0.0
+                
+                if GlobalConstants.AKDebug {
+                    NSLog("=> ### COMPONENT REPOSITION INFO ###")
+                    NSLog("=> COMPONENT: X:%f,Y:%f", absoluteComponent.origin.x, absoluteComponent.origin.y)
+                    NSLog("=> VIEW: W:%f,H:%f", self.view.frame.width, self.view.frame.height)
+                    NSLog("=> VISIBLE RECT: W:%f,H:%f", visibleRect.width, visibleRect.height)
+                    NSLog("=> KEYBOARD: W:%f,H:%f", kbSize.width, kbSize.height)
+                    NSLog("=> SCREEN: W:%f,H:%f", UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+                    NSLog("=> ### COMPONENT REPOSITION INFO ###")
+                }
+                
+                if !visibleRect.contains(absoluteComponent) {
+                    var newPosition = CGPoint(x: 0.0, y: absoluteComponent.origin.y + editableComponent.frame.height)
+                    newPosition.y -= visibleRect.size.height
+                    
+                    self.currentScrollContainer?.setContentOffset(newPosition, animated: true)
+                }
+            }
+        }
+    }
+    
+    func keyboardWillBeHidden(notification: NSNotification) { self.currentScrollContainer?.setContentOffset(CGPoint.zero, animated: true) }
 }

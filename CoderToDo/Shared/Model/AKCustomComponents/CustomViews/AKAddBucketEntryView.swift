@@ -88,11 +88,14 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
         Func.AKAddDoneButtonKeyboard(textField, controller: self.controller!)
-        
-        switch textField.tag {
-        default:
-            return true
-        }
+        self.controller?.currentEditableComponent = textField
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.controller?.currentEditableComponent = nil
+        return true
     }
     
     // MARK: Miscellaneous

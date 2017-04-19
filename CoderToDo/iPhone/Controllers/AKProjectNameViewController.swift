@@ -64,11 +64,14 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
-        
-        switch textField.tag {
-        default:
-            return true
-        }
+        self.currentEditableComponent = textField
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.currentEditableComponent = nil
+        return true
     }
     
     // MARK: Miscellaneous
@@ -85,6 +88,7 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
                 controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
             }
         }
+        self.currentScrollContainer = self.scrollContainer
         self.setup()
         
         // Delegate & DataSource
