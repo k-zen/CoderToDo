@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/04/30)
+        * Added base support for XCUITest. (2017/04/19)
         * Mayor corrections. (2017/04/19)
         * Corrected a bug in sanity checks #1. (2017/04/16)
         * Migrated the statistical graph to the user's view. (2017/04/16)
