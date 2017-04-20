@@ -42,7 +42,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKViewProjectViewController {
                         controller.resetFilters(controller: controller)
-                        
                     } }
             )
         }
