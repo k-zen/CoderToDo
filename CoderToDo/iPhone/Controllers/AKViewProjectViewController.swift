@@ -362,9 +362,6 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewProjectViewController {
-                // ALWAYS RESET ALL WHEN LOADING VIEW FOR THE FIRST TIME!
-                self.resetFilters(controller: controller)
-                
                 // Show message if the are no tasks.
                 if DataInterface.getAllTasksInProject(project: controller.project).count == 0 {
                     var origin = Func.AKCenterScreenCoordinate(
