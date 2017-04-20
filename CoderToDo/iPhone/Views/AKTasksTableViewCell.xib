@@ -81,6 +81,7 @@
                     <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" constant="0.5" id="fcr-Qp-rKr"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="infoContainer" destination="pT1-Ym-jX5" id="97J-cW-oK4"/>
                 <outlet property="mainContainer" destination="YJo-LI-y7A" id="e2U-Ug-h44"/>

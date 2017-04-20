@@ -1154,8 +1154,10 @@ class UtilityFunctions
     
     func AKReloadTable(tableView: UITableView)
     {
-        tableView.reloadData()
-        tableView.layoutIfNeeded()
+        Func.AKPrintTimeElapsedWhenRunningCode(title: "Table Reloading", operation: {
+            tableView.reloadData()
+            tableView.layoutIfNeeded()
+        })
     }
     
     func AKScheduleLocalNotification(
