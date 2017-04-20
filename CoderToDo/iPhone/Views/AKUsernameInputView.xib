@@ -25,45 +25,45 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="o6C-2c-IBt" userLabel="Scroll_Container">
-                    <rect key="frame" x="37.5" y="8" width="300" height="420"/>
+                    <rect key="frame" x="38" y="155.5" width="300" height="356"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-BN-v9o" userLabel="Controls_Container">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="420"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="356"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-Gm-I9g">
-                                    <rect key="frame" x="108" y="7.5" width="84" height="84"/>
+                                    <rect key="frame" x="108" y="8" width="84" height="84"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to CoderToDo... The Productivity App for Coders." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSe-kz-uMe" userLabel="Title">
-                                    <rect key="frame" x="8" y="100" width="284" height="96"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A Productivity App for Coders." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSe-kz-uMe" userLabel="Title">
+                                    <rect key="frame" x="8" y="100" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="24"/>
-                                    <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="22"/>
+                                    <color key="textColor" red="0.72156862745098038" green="0.73333333333333328" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello Coder..!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQN-4l-iNb" userLabel="Hello_Title">
-                                    <rect key="frame" x="8" y="204" width="284" height="52"/>
+                                    <rect key="frame" x="8" y="148" width="284" height="52"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="32"/>
                                     <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How should I call you...?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c88-rU-4Qa" userLabel="Message">
-                                    <rect key="frame" x="8" y="272" width="284" height="44"/>
+                                    <rect key="frame" x="8" y="208" width="284" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="22"/>
                                     <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Your name here..." textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uKB-Xh-KEi" userLabel="Username_Value">
-                                    <rect key="frame" x="8" y="324" width="284" height="40"/>
+                                    <rect key="frame" x="8" y="260" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="18"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EW4-0K-qtR">
-                                    <rect key="frame" x="8" y="372" width="284" height="40"/>
+                                    <rect key="frame" x="8" y="308" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
@@ -78,24 +78,24 @@
                             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="5vQ-Wb-6lU"/>
-                                <constraint firstAttribute="height" constant="420" id="fCp-8O-Ye9"/>
+                                <constraint firstAttribute="height" constant="356" id="fCp-8O-Ye9"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="pOu-BN-v9o" secondAttribute="bottom" id="6WP-rF-ULW"/>
+                        <constraint firstAttribute="height" constant="356" id="B0B-X8-npa"/>
                         <constraint firstItem="pOu-BN-v9o" firstAttribute="leading" secondItem="o6C-2c-IBt" secondAttribute="leading" id="Gf6-kv-gFO"/>
-                        <constraint firstItem="pOu-BN-v9o" firstAttribute="top" secondItem="o6C-2c-IBt" secondAttribute="top" id="P5L-2H-lq0"/>
                         <constraint firstAttribute="width" constant="300" id="PQF-qE-5FB"/>
-                        <constraint firstAttribute="height" constant="420" id="TqR-zg-eWU"/>
                         <constraint firstAttribute="trailing" secondItem="pOu-BN-v9o" secondAttribute="trailing" id="U7R-cw-dnc"/>
+                        <constraint firstItem="pOu-BN-v9o" firstAttribute="top" secondItem="o6C-2c-IBt" secondAttribute="top" id="pG2-2h-5aL"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="o6C-2c-IBt" firstAttribute="top" secondItem="1ZA-QT-LR0" secondAttribute="top" constant="8" id="c2K-fp-1sb"/>
                 <constraint firstItem="o6C-2c-IBt" firstAttribute="centerX" secondItem="1ZA-QT-LR0" secondAttribute="centerX" id="geE-It-Ms6"/>
+                <constraint firstItem="o6C-2c-IBt" firstAttribute="centerY" secondItem="1ZA-QT-LR0" secondAttribute="centerY" id="qPg-VQ-eqs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

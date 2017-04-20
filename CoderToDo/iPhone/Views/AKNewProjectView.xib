@@ -29,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="eh2-za-FDF" userLabel="Scroll_Container">
-                    <rect key="frame" x="37.5" y="8" width="300" height="552"/>
+                    <rect key="frame" x="38" y="4" width="300" height="560"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ea8-7d-eed" userLabel="Controls_Container">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="560"/>
@@ -127,6 +127,7 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="FDB-VO-qW6"/>
                                 <constraint firstAttribute="height" constant="560" id="vlv-pS-qbT"/>
@@ -136,17 +137,17 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Ea8-7d-eed" secondAttribute="trailing" id="7GL-Ib-oyh"/>
                         <constraint firstItem="Ea8-7d-eed" firstAttribute="leading" secondItem="eh2-za-FDF" secondAttribute="leading" id="8l6-Qs-VSj"/>
-                        <constraint firstItem="Ea8-7d-eed" firstAttribute="top" secondItem="eh2-za-FDF" secondAttribute="top" id="JfT-DS-Skd"/>
+                        <constraint firstAttribute="height" constant="560" id="YZ1-nQ-mrs"/>
                         <constraint firstAttribute="bottom" secondItem="Ea8-7d-eed" secondAttribute="bottom" id="bfb-ml-vfI"/>
                         <constraint firstAttribute="width" constant="300" id="okH-r7-kTb"/>
+                        <constraint firstItem="Ea8-7d-eed" firstAttribute="top" secondItem="eh2-za-FDF" secondAttribute="top" id="uHV-Nz-dPQ"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="eh2-za-FDF" firstAttribute="top" secondItem="N5Q-8B-bxa" secondAttribute="top" constant="8" id="C70-Pk-Cki"/>
+                <constraint firstItem="eh2-za-FDF" firstAttribute="centerY" secondItem="N5Q-8B-bxa" secondAttribute="centerY" id="E79-49-MKi"/>
                 <constraint firstItem="eh2-za-FDF" firstAttribute="centerX" secondItem="N5Q-8B-bxa" secondAttribute="centerX" id="JYL-K1-Vfb"/>
-                <constraint firstAttribute="bottom" secondItem="eh2-za-FDF" secondAttribute="bottom" constant="8" id="ghT-29-PG1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

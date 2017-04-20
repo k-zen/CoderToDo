@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="yTR-p7-stM" userLabel="Scroll_Container">
-                    <rect key="frame" x="38" y="8" width="300" height="651"/>
+                    <rect key="frame" x="38" y="179.5" width="300" height="308"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ma-GL-Slu" userLabel="Controls_Container">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="308"/>
@@ -46,7 +46,7 @@
                                             <rect key="frame" x="8" y="0.0" width="268" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="16"/>
-                                            <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.72156862749999995" green="0.73333333329999995" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A few examples:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reo-cU-Yj6" userLabel="Text_2">
@@ -119,8 +119,9 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="9Ma-GL-Slu" firstAttribute="top" secondItem="yTR-p7-stM" secondAttribute="top" id="4A0-Ku-Rre"/>
+                        <constraint firstItem="9Ma-GL-Slu" firstAttribute="top" secondItem="yTR-p7-stM" secondAttribute="top" id="2KW-BF-tQA"/>
                         <constraint firstAttribute="trailing" secondItem="9Ma-GL-Slu" secondAttribute="trailing" id="VqV-0e-o6f"/>
+                        <constraint firstAttribute="height" constant="308" id="gi7-rc-ViU"/>
                         <constraint firstItem="9Ma-GL-Slu" firstAttribute="leading" secondItem="yTR-p7-stM" secondAttribute="leading" id="mNJ-FD-FPu"/>
                         <constraint firstAttribute="bottom" secondItem="9Ma-GL-Slu" secondAttribute="bottom" id="udq-In-a2A"/>
                         <constraint firstAttribute="width" constant="300" id="zaL-fm-otW"/>
@@ -129,9 +130,8 @@
             </subviews>
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="yTR-p7-stM" firstAttribute="centerY" secondItem="eQE-g5-Cl0" secondAttribute="centerY" id="FIn-r4-ClT"/>
                 <constraint firstItem="yTR-p7-stM" firstAttribute="centerX" secondItem="eQE-g5-Cl0" secondAttribute="centerX" id="GWv-mu-wRl"/>
-                <constraint firstItem="yTR-p7-stM" firstAttribute="top" secondItem="eQE-g5-Cl0" secondAttribute="top" constant="8" id="OYs-Sy-Hnm"/>
-                <constraint firstAttribute="bottom" secondItem="yTR-p7-stM" secondAttribute="bottom" constant="8" id="pjO-zx-LaH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
