@@ -30,9 +30,32 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
             return
         }
         
+        // Re-schedule the notifications. PART 1
+        if self.project.notifyClosingTime {
+            // 1. Invalidate the current ones.
+            Func.AKInvalidateLocalNotification(controller: self, project: self.project)
+        }
+        
         var project = AKProjectBuilder.from(project: self.project)
         project.name = projectName.outputData
         AKProjectBuilder.to(project: self.project, from: project)
+        
+        // Re-schedule the notifications. PART 2
+        if self.project.notifyClosingTime {
+            // 2. Re-schedule.
+            Func.AKScheduleLocalNotification(
+                controller: self,
+                project: self.project,
+                completionTask: { (presenterController) -> Void in
+                    presenterController?.showMessage(
+                        origin: CGPoint.zero,
+                        type: .error,
+                        message: "Ooops, there was a problem scheduling the notification.",
+                        animate: true,
+                        completionTask: nil
+                    ) }
+            )
+        }
         
         self.navigationController?.popViewController(animated: true)
     }
