@@ -107,5 +107,10 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         CATransaction.commit()
     }
     
-    func resetViewDefaults(controller: AKCustomViewController) {}
+    func resetViewDefaults(controller: AKCustomViewController)
+    {
+        // Always execute this.
+        controller.tap(nil)
+        self.searchBar.text = ""
+    }
 }

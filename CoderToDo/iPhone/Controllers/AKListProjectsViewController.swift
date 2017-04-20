@@ -395,7 +395,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
+                        animate: true,
                         completionTask: { (controller) -> Void in
                             if let controller = controller as? AKListProjectsViewController {
                                 controller.resetFilters(controller: controller)
@@ -420,7 +420,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
+                        animate: true,
                         completionTask: { (controller) -> Void in
                             if let controller = controller as? AKListProjectsViewController {
                                 controller.resetFilters(controller: controller)
@@ -445,7 +445,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     presenterController.toggleMenuItem(
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
+                        animate: true,
                         completionTask: { (controller) -> Void in
                             if let controller = controller as? AKListProjectsViewController {
                                 controller.resetFilters(controller: controller)

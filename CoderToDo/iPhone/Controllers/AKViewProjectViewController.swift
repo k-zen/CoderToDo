@@ -28,10 +28,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                 tableView: self.daysTable,
                 offset: LocalConstants.AKDisplaceHeight,
                 animate: true,
-                completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKViewProjectViewController {
-                        controller.resetFilters(controller: controller)
-                    } }
+                completionTask: nil
             )
         }
         else {
@@ -387,7 +384,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     presenterController.toggleMenuItem(
                         tableView: presenterController.daysTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
+                        animate: true,
                         completionTask: nil
                     )
                 }
@@ -396,7 +393,10 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     tableView: presenterController.daysTable,
                     menuItem: .add,
                     animate: true,
-                    completionTask: nil
+                    completionTask: { (controller) -> Void in
+                        if let controller = controller as? AKViewProjectViewController {
+                            controller.resetFilters(controller: controller)
+                        } }
                 )
             }
         }
@@ -406,11 +406,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     presenterController.toggleMenuItem(
                         tableView: presenterController.daysTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKViewProjectViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        animate: true,
+                        completionTask: nil
                     )
                 }
                 
@@ -431,11 +428,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     presenterController.toggleMenuItem(
                         tableView: presenterController.daysTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKViewProjectViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        animate: true,
+                        completionTask: nil
                     )
                 }
                 
@@ -456,11 +450,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                     presenterController.toggleMenuItem(
                         tableView: presenterController.daysTable,
                         menuItem: presenterController.selectedMenuItem,
-                        animate: false,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKViewProjectViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        animate: true,
+                        completionTask: nil
                     )
                 }
                 
@@ -508,8 +499,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         controller.sortMenuItemOverlay.resetViewDefaults(controller: self)
         controller.filterMenuItemOverlay.resetViewDefaults(controller: self)
-        
-        controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
+        controller.searchMenuItemOverlay.resetViewDefaults(controller: self)
         
         // Trigger caching recomputation, and reloading.
         self.cachingSystem.triggerHeightRecomputation(controller: controller)

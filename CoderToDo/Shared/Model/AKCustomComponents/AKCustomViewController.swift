@@ -904,22 +904,22 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             case .add:
                 newOffset += AKAddView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
-                self.hideAddMenuItem(animate: animate, completionTask: completionTask)
+                self.hideAddMenuItem(animate: animate, completionTask: nil)
                 break
             case .sort:
                 newOffset += AKSortView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
-                self.hideSortMenuItem(animate: animate, completionTask: completionTask)
+                self.hideSortMenuItem(animate: animate, completionTask: nil)
                 break
             case .filter:
                 newOffset += AKFilterView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
-                self.hideFilterMenuItem(animate: animate, completionTask: completionTask)
+                self.hideFilterMenuItem(animate: animate, completionTask: nil)
                 break
             case .search:
                 newOffset += AKSearchView.LocalConstants.AKViewHeight
                 self.isMenuItemVisible = false
-                self.hideSearchMenuItem(animate: animate, completionTask: completionTask)
+                self.hideSearchMenuItem(animate: animate, completionTask: nil)
                 break
             default:
                 break
