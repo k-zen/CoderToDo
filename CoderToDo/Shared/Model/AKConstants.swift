@@ -652,22 +652,36 @@ class UtilityFunctions
     /// - Parameter textControl: The control where to add the keyboard.
     /// - Parameter controller: The view controller that owns the control.
     ///
-    func AKAddDoneButtonKeyboard(_ textControl: AnyObject, controller: AKCustomViewController)
+    func AKAddDoneButtonKeyboard(_ textControl: UIView, controller: AKCustomViewController)
     {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
-        keyboardToolbar.barTintColor = UIColor.black
+        keyboardToolbar.barStyle = .blackTranslucent
+        keyboardToolbar.isTranslucent = true
+        keyboardToolbar.sizeToFit()
+        keyboardToolbar.clipsToBounds = true
+        keyboardToolbar.alpha = 0.75
         
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(title: "Close Keyboard", style: .done, target: controller, action: #selector(AKCustomViewController.tap(_:)))
-        doneBarButton.setTitleTextAttributes(
-            [
-                NSFontAttributeName : UIFont(name: GlobalConstants.AKDefaultFont, size: 16.0)!,
-                NSForegroundColorAttributeName: UIColor.white
-            ], for: UIControlState.normal
-        )
+        let container = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: GlobalConstants.AKCloseKeyboardToolbarHeight))
+        // ### DEBUG
+        // container.layer.borderColor = UIColor.white.cgColor
+        // container.layer.borderWidth = 1.0
         
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: GlobalConstants.AKCloseKeyboardToolbarHeight))
+        button.setTitle("Close Keyboard", for: .normal)
+        button.setTitleColor(GlobalConstants.AKTabBarTintSelected, for: .normal)
+        button.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.backgroundColor = UIColor.clear
+        button.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        button.addTarget(controller, action: #selector(AKCustomViewController.tap(_:)), for: .touchUpInside)
+        // ### DEBUG
+        // button.layer.borderColor = UIColor.white.cgColor
+        // button.layer.borderWidth = 1.0
+        
+        container.addSubview(button)
+        
+        keyboardToolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: container)]
         
         if textControl is UITextField {
             let textControlTmp = textControl as! UITextField

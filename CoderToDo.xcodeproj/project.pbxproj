@@ -55,7 +55,6 @@
 		492F283A1E4B6C0D0020608B /* CHANGES.txt in Resources */ = {isa = PBXBuildFile; fileRef = 492F28381E4B6C0D0020608B /* CHANGES.txt */; };
 		492F283B1E4B6C0D0020608B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 492F28391E4B6C0D0020608B /* Podfile */; };
 		4931C6DB1EA7DF12002B321F /* CoderToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931C6D81EA7DF12002B321F /* CoderToDoUITests.swift */; };
-		4931C6DC1EA7DF12002B321F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4931C6DA1EA7DF12002B321F /* Info.plist */; };
 		4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4931DAE31E58C1520002C173 /* AKAddCategoryView.xib */; };
 		4931DAE61E58CC0F0002C173 /* AKAddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DAE51E58CC0F0002C173 /* AKAddCategoryViewController.swift */; };
 		49400B5E1E803A9C001C893E /* AKTaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49400B5D1E803A9C001C893E /* AKTaskBuilder.swift */; };
@@ -791,7 +790,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = APKC.net;
 				TargetAttributes = {
 					4931C6CC1EA7DE75002B321F = {
@@ -842,7 +841,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4931C6DC1EA7DF12002B321F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1272,7 @@
 				4931C6D51EA7DE75002B321F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4956B8241E4B697D0032B2F8 /* Build configuration list for PBXProject "CoderToDo" */ = {
 			isa = XCConfigurationList;
