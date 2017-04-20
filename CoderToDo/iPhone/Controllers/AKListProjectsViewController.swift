@@ -314,7 +314,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     // 1. Present Intro view.
                     controller.presentView(controller: AKIntroductoryViewController(nibName: "AKIntroductoryView", bundle: nil),
                                            taskBeforePresenting: { (presenterController, presentedController) -> Void in },
-                                           dismissViewCompletionTask: { (presenterController, presentedController) -> Void in }
+                                           dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
+                                            if let controller = presenterController as? AKListProjectsViewController {
+                                                controller.setUserBadge(controller: controller)
+                                            } }
                     )
                     
                     // 2. Clear all notifications from previous installs.
@@ -356,17 +359,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     controller.hideInitialMessage(animate: true, completionTask: nil)
                 }
                 
-                // Set the name of the user in the menu item.
-                let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 80.0, height: 28.0)))
-                userAvatar.setTitle(DataInterface.getUsername(), for: .normal)
-                userAvatar.setTitleColor(GlobalConstants.AKEnabledButtonFg, for: .normal)
-                userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
-                userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
-                userAvatar.backgroundColor = GlobalConstants.AKEnabledButtonBg
-                userAvatar.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
-                
-                controller.navController.setLeftBarButton(UIBarButtonItem(customView: userAvatar), animated: false)
+                // Set the user's badge.
+                controller.setUserBadge(controller: controller)
             }
         }
         self.configureLookAndFeel = { (controller) -> Void in
@@ -491,4 +485,18 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     }
     
     func toggleUser() { self.performSegue(withIdentifier: GlobalConstants.AKViewUserSegue, sender: self) }
+    
+    func setUserBadge(controller: AKListProjectsViewController)
+    {
+        let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 80.0, height: 28.0)))
+        userAvatar.setTitle(DataInterface.getUsername(), for: .normal)
+        userAvatar.setTitleColor(GlobalConstants.AKEnabledButtonFg, for: .normal)
+        userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
+        userAvatar.backgroundColor = GlobalConstants.AKEnabledButtonBg
+        userAvatar.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
+        
+        controller.navController.setLeftBarButton(UIBarButtonItem(customView: userAvatar), animated: false)
+    }
 }
