@@ -371,7 +371,16 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             }
         }
         self.topMenuOverlay.addAction = { (presenterController) -> Void in
-            if let presenterController = presenterController {
+            if let presenterController = presenterController as? AKListProjectsViewController {
+                if presenterController.isMenuItemVisible && presenterController.selectedMenuItem != .add {
+                    presenterController.toggleMenuItem(
+                        tableView: presenterController.projectsTable,
+                        menuItem: presenterController.selectedMenuItem,
+                        animate: true,
+                        completionTask: nil
+                    )
+                }
+                
                 presenterController.presentView(controller: AKNewProjectViewController(nibName: "AKNewProjectView", bundle: nil),
                                                 taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
