@@ -27,10 +27,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 tableView: self.projectsTable,
                 offset: LocalConstants.AKDisplaceHeight,
                 animate: true,
-                completionTask: { (controller) -> Void in
-                    if let controller = controller as? AKListProjectsViewController {
-                        controller.resetFilters(controller: controller)
-                    } }
+                completionTask: nil
             )
         }
         else {
@@ -41,7 +38,6 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                 completionTask: { (controller) -> Void in
                     if let controller = controller as? AKListProjectsViewController {
                         controller.resetFilters(controller: controller)
-                        Func.AKReloadTable(tableView: controller.projectsTable)
                     } }
             )
         }
@@ -303,7 +299,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKListProjectsViewController {
-                Func.AKReloadTable(tableView: controller.projectsTable)
+                // ALWAYS RESET ALL WHEN LOADING VIEW FOR THE FIRST TIME!
+                self.resetFilters(controller: controller)
                 
                 // Checks
                 // If it's the first time the user uses the App.
@@ -379,7 +376,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                                                 taskBeforePresenting: { _,_ in },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
-                                                        Func.AKReloadTable(tableView: presenterController.projectsTable)
+                                                        presenterController.resetFilters(controller: presenterController)
                                                         
                                                         // Check that at least one project was added.
                                                         if DataInterface.getProjects(filter: presenterController.projectFilter).count > 0 {
@@ -396,10 +393,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
                         animate: true,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKListProjectsViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        completionTask: nil
                     )
                 }
                 
@@ -421,10 +415,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
                         animate: true,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKListProjectsViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        completionTask: nil
                     )
                 }
                 
@@ -446,10 +437,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         tableView: presenterController.projectsTable,
                         menuItem: presenterController.selectedMenuItem,
                         animate: true,
-                        completionTask: { (controller) -> Void in
-                            if let controller = controller as? AKListProjectsViewController {
-                                controller.resetFilters(controller: controller)
-                            } }
+                        completionTask: nil
                     )
                 }
                 
@@ -480,8 +468,9 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         
         controller.sortMenuItemOverlay.resetViewDefaults(controller: self)
         controller.filterMenuItemOverlay.resetViewDefaults(controller: self)
+        controller.searchMenuItemOverlay.resetViewDefaults(controller: self)
         
-        controller.searchMenuItemOverlay.searchBarCancelButtonClicked(controller.searchMenuItemOverlay.searchBar)
+        Func.AKReloadTable(tableView: self.projectsTable)
     }
     
     func toggleUser() { self.performSegue(withIdentifier: GlobalConstants.AKViewUserSegue, sender: self) }

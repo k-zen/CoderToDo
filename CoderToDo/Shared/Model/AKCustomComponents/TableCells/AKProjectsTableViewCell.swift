@@ -35,7 +35,7 @@ class AKProjectsTableViewCell: UITableViewCell
                                                     } },
                                                 dismissViewCompletionTask: { (presenterController, presentedController) -> Void in
                                                     if let presenterController = presenterController as? AKListProjectsViewController {
-                                                        Func.AKReloadTable(tableView: presenterController.projectsTable) // Reload the table to update the *New Day State* label.
+                                                        presenterController.resetFilters(controller: presenterController) // Reload the table to update the *New Day State* label.
                                                     }
                                                     
                                                     presenterController.dismissView(executeDismissTask: true) }
@@ -142,12 +142,12 @@ class AKProjectsTableViewCell: UITableViewCell
                                         // Invalidate notifications.
                                         Func.AKInvalidateLocalNotification(controller: controller, project: project)
                                         
-                                        Func.AKReloadTable(tableView: controller.projectsTable)
+                                        controller.resetFilters(controller: controller)
                                     }
                                 } },
                             noAction: { (presenterController) -> Void in
                                 if let controller = presenterController as? AKListProjectsViewController {
-                                    Func.AKReloadTable(tableView: controller.projectsTable)
+                                    controller.resetFilters(controller: controller)
                                 } },
                             animate: true,
                             completionTask: nil
