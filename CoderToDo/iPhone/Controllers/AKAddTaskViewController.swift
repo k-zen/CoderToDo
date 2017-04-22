@@ -15,6 +15,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     // MARK: Outlets
     @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlsContainer: UIView!
+    @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var taskNameValue: UITextField!
     @IBOutlet weak var categoryValue: UIPickerView!
@@ -204,6 +205,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKAddTaskViewController {
+                controller.projectName.text = controller.project.name
                 controller.categoryValue.selectRow(0, inComponent: 0, animated: true)
                 
                 if DataInterface.getProjectStatus(project: controller.project) == .firstDay {
@@ -228,6 +230,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                 controller.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
                 controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
             }
         }
         self.currentScrollContainer = self.scrollContainer

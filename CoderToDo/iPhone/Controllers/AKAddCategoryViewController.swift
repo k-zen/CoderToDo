@@ -13,6 +13,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Outlets
     @IBOutlet weak var scrollContainer: UIScrollView!
     @IBOutlet weak var controlsContainer: UIView!
+    @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var categoryValue: UITextField!
     @IBOutlet weak var add: UIButton!
@@ -81,11 +82,17 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
     // MARK: Miscellaneous
     func customSetup()
     {
+        self.loadData = { (controller) -> Void in
+            if let controller = controller as? AKAddCategoryViewController {
+                controller.projectName.text = controller.project.name
+            }
+        }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKAddCategoryViewController {
                 controller.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
             }
         }
         self.currentScrollContainer = self.scrollContainer
