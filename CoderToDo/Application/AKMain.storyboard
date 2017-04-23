@@ -448,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rar-dI-vTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4924" y="-513.19340329835086"/>
+            <point key="canvasLocation" x="3886" y="136"/>
         </scene>
         <!--Project Times-->
         <scene sceneID="1ZK-Sk-569">
@@ -552,7 +552,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mz-Sb-IaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4924" y="136.28185907046478"/>
+            <point key="canvasLocation" x="3886" y="786"/>
         </scene>
         <!--User Defined Categories-->
         <scene sceneID="R8A-Ii-3w7">
@@ -585,7 +585,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8a-Q5-i8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5868" y="-186"/>
+            <point key="canvasLocation" x="4714" y="136"/>
         </scene>
         <!--Project Notifications-->
         <scene sceneID="e8g-nM-2uI">
@@ -663,7 +663,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GmC-ZP-n35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4924" y="793.8530734632684"/>
+            <point key="canvasLocation" x="4714" y="786"/>
         </scene>
         <!--Goodies-->
         <scene sceneID="pd5-mR-JyE">
@@ -1121,7 +1121,20 @@
                     <view key="view" contentMode="scaleToFill" id="J3n-5J-jgq" userLabel="Main_Container">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNb-C6-IX9">
+                                <rect key="frame" x="16" y="8" width="343" height="538"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="SNb-C6-IX9" firstAttribute="trailing" secondItem="J3n-5J-jgq" secondAttribute="trailingMargin" id="0Sb-2N-JWc"/>
+                            <constraint firstItem="SNb-C6-IX9" firstAttribute="leading" secondItem="J3n-5J-jgq" secondAttribute="leadingMargin" id="MX3-TJ-K1z"/>
+                            <constraint firstItem="SNb-C6-IX9" firstAttribute="top" secondItem="aZb-of-3eL" secondAttribute="bottom" constant="8" id="TaN-Hh-Ztx"/>
+                            <constraint firstItem="0hx-Rs-C7F" firstAttribute="top" secondItem="SNb-C6-IX9" secondAttribute="bottom" constant="8" id="XgI-SW-n4k"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Rules" id="pba-tv-9gX">
                         <barButtonItem key="backBarButtonItem" title="Back" id="iW2-cd-Xje"/>
@@ -1129,7 +1142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOQ-Qu-Kvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3097" y="2328"/>
+            <point key="canvasLocation" x="3096.8000000000002" y="2327.5862068965521"/>
         </scene>
         <!--User-->
         <scene sceneID="gBB-lQ-uMn">
@@ -1322,26 +1335,134 @@
         <!--About-->
         <scene sceneID="1cZ-TN-7IE">
             <objects>
-                <viewController title="About" id="o2q-Fe-54o" sceneMemberID="viewController">
+                <viewController title="About" id="o2q-Fe-54o" customClass="AKAboutViewController" customModule="CoderToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sU5-iV-stJ"/>
                         <viewControllerLayoutGuide type="bottom" id="9Qf-Da-mMt"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KQO-wN-Zgy">
+                    <view key="view" contentMode="scaleToFill" id="KQO-wN-Zgy" userLabel="Main_Container">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-iA-gVa" userLabel="Scroll_Container">
+                                <rect key="frame" x="37" y="8" width="300" height="538"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-h5-DwC" userLabel="Controls_Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="538"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="SYu-YZ-Dif" userLabel="Logo">
+                                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CoderToDo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bva-qa-1V7" userLabel="Name">
+                                                <rect key="frame" x="100" y="15" width="192" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="22"/>
+                                                <color key="textColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Version 0.0 Build 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UT-D1-fAE" userLabel="Version">
+                                                <rect key="frame" x="100" y="45" width="192" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="16"/>
+                                                <color key="textColor" red="0.72156862749999995" green="0.73333333329999995" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Copyright © 2017 Andreas Koenzen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUj-BI-2EM" userLabel="Copyright">
+                                                <rect key="frame" x="100" y="65" width="192" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
+                                                <color key="textColor" red="0.25490196079999999" green="0.2784313725" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bX-h8-qaU" userLabel="Message">
+                                                <rect key="frame" x="8" y="100" width="284" height="148"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <string key="text">This App implements the "day-ahead" productivity method which I created while doing my undergraduate thesis in Computer Science. This productivity method is based on a list of rules which allows the user to approach a project in a more structured way. I hope you like it.</string>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goals of the method:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IH5-kX-1H5" userLabel="Goals_Title">
+                                                <rect key="frame" x="8" y="248" width="284" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
+                                                <color key="textColor" red="0.98431372549999996" green="0.28627450980000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. Allows the user to set a very structured work schedule, with the ability to plan just one day ahead." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Wg-By-CuH" userLabel="Goal_1">
+                                                <rect key="frame" x="8" y="272" width="284" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Allows the user to do exactly what was planned and not deviate from the plan." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sy2-ru-6JC" userLabel="Goal_2">
+                                                <rect key="frame" x="8" y="314" width="284" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. Improves the user’s ability to plan tasks." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv8-qm-5Ay" userLabel="Goal_3">
+                                                <rect key="frame" x="8" y="356" width="284" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4. Improves the user’s ability to measure task’s times." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnY-Gj-gLm" userLabel="Goal_4">
+                                                <rect key="frame" x="8" y="377" width="284" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="aor-1u-KUn" userLabel="Pages_Table">
+                                                <rect key="frame" x="8" y="406" width="284" height="124"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="Plv-W2-aht"/>
+                                            <constraint firstAttribute="height" constant="538" id="pVl-bo-frp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="lc9-h5-DwC" firstAttribute="top" secondItem="p0b-iA-gVa" secondAttribute="top" id="0Fd-VN-dOG"/>
+                                    <constraint firstItem="lc9-h5-DwC" firstAttribute="leading" secondItem="p0b-iA-gVa" secondAttribute="leading" id="6DR-7D-qVz"/>
+                                    <constraint firstAttribute="bottom" secondItem="lc9-h5-DwC" secondAttribute="bottom" id="7PS-0u-Sad"/>
+                                    <constraint firstAttribute="width" constant="300" id="Adt-6s-C45"/>
+                                    <constraint firstAttribute="trailing" secondItem="lc9-h5-DwC" secondAttribute="trailing" id="Ebk-ic-Bgb"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="p0b-iA-gVa" firstAttribute="top" secondItem="sU5-iV-stJ" secondAttribute="bottom" constant="8" id="kEG-3D-F5W"/>
+                            <constraint firstItem="9Qf-Da-mMt" firstAttribute="top" secondItem="p0b-iA-gVa" secondAttribute="bottom" constant="8" id="uQi-Td-DK2"/>
+                            <constraint firstItem="p0b-iA-gVa" firstAttribute="centerX" secondItem="KQO-wN-Zgy" secondAttribute="centerX" id="ueU-9M-d5i"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="8lQ-HI-YYy">
                         <barButtonItem key="backBarButtonItem" title="Back" id="A4r-ir-nWD"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="controlsContainer" destination="lc9-h5-DwC" id="UZW-qe-oqW"/>
+                        <outlet property="mainContainer" destination="KQO-wN-Zgy" id="ndI-83-CW3"/>
+                        <outlet property="pagesTable" destination="aor-1u-KUn" id="8sE-z9-I4L"/>
+                        <outlet property="scrollContainer" destination="p0b-iA-gVa" id="0Zt-ZW-nU1"/>
+                        <outlet property="versionValue" destination="5UT-D1-fAE" id="dMj-Ok-2H5"/>
                         <segue destination="PyW-ZZ-3QE" kind="show" identifier="ViewRulesSegue" id="LTy-kw-WaF"/>
+                        <segue destination="334-ke-3RB" kind="show" identifier="ViewChangesSegue" id="8wW-Hc-z1P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l7V-jU-vVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="2328"/>
+            <point key="canvasLocation" x="2013.5999999999999" y="2327.5862068965521"/>
         </scene>
         <!--About-->
         <scene sceneID="ctv-UV-NgA">
@@ -1365,5 +1486,42 @@
             </objects>
             <point key="canvasLocation" x="1212" y="2328"/>
         </scene>
+        <!--Changes-->
+        <scene sceneID="8wb-rQ-JU1">
+            <objects>
+                <viewController title="Changes" id="334-ke-3RB" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2yo-Pu-pHo"/>
+                        <viewControllerLayoutGuide type="bottom" id="k35-gw-pVy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NZI-wQ-MyO" userLabel="Main_Container">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I8E-DT-BUq">
+                                <rect key="frame" x="16" y="8" width="343" height="538"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="I8E-DT-BUq" firstAttribute="leading" secondItem="NZI-wQ-MyO" secondAttribute="leadingMargin" id="1Tk-lz-oKs"/>
+                            <constraint firstItem="I8E-DT-BUq" firstAttribute="top" secondItem="2yo-Pu-pHo" secondAttribute="bottom" constant="8" id="Oja-wF-aqH"/>
+                            <constraint firstItem="I8E-DT-BUq" firstAttribute="trailing" secondItem="NZI-wQ-MyO" secondAttribute="trailingMargin" id="dNl-DX-wyS"/>
+                            <constraint firstItem="k35-gw-pVy" firstAttribute="top" secondItem="I8E-DT-BUq" secondAttribute="bottom" constant="8" id="kOQ-cE-SCf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Changes" id="UAb-pp-G55">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Vxu-Bu-bZO"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n6G-Ym-zLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3886" y="2328"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Logo.png" width="167" height="167"/>
+    </resources>
 </document>

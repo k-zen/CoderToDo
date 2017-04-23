@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/04/30)
+        * Added support for *About* view. (2017/04/23)
         * Performance upgrade to the task's table. Removed unnecessary reloads. (2017/04/20)
         * Improved the custom keyboard toolbar. (2017/04/19)
         * Added base support for XCUITest. (2017/04/19)
