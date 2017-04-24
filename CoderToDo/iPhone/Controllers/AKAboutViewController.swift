@@ -10,7 +10,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     }
     
     // MARK: Properties
-    var pagesTableHeaders = ["Rules", "Changes"]
+    var pagesTableHeaders = ["Rules", "Contact Us", "Changes"]
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
@@ -91,6 +91,17 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
             self.performSegue(withIdentifier: GlobalConstants.AKViewRulesSegue, sender: self)
             break
         case 1:
+            let subject = "Support"
+            let body = ""
+            let coded = "mailto:support@codertodo.com?subject=\(subject)&body=\(body)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            
+            if let url = URL(string: coded!) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            break
+        case 2:
             self.performSegue(withIdentifier: GlobalConstants.AKViewChangesSegue, sender: self)
             break
         default:

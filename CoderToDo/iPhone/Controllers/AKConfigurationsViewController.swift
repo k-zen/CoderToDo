@@ -4,9 +4,9 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 1.0
+        static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 40.0
-        static let AKFooterHeight: CGFloat = 1.0
+        static let AKFooterHeight: CGFloat = 10.0
     }
     
     // MARK: Properties
@@ -53,8 +53,33 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
+        let headerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = UIColor.clear
+        
+        let title = UILabel(frame: CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: tableView.frame.width,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        title.textColor = GlobalConstants.AKDefaultFg
+        switch section {
+        case 0:
+            title.text = "Information Backup & Restore"
+            break
+        case 1:
+            title.text = "Miscellaneous"
+            break
+        default:
+            break
+        }
+        title.textAlignment = .left
+        // ### DEBUG
+        // title.layer.borderColor = UIColor.white.cgColor
+        // title.layer.borderWidth = 1.0
+        
+        headerCell.addSubview(title)
         
         return headerCell
     }

@@ -4,9 +4,9 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
 {
     // MARK: Constants
     private struct LocalConstants {
-        static let AKHeaderHeight: CGFloat = 1.0
+        static let AKHeaderHeight: CGFloat = 34.0
         static let AKRowHeight: CGFloat = 40.0
-        static let AKFooterHeight: CGFloat = 1.0
+        static let AKFooterHeight: CGFloat = 10.0
     }
     
     // MARK: Properties
@@ -94,15 +94,46 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
+        let headerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = UIColor.clear
+        
+        let title = UILabel(frame: CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: tableView.frame.width,
+            height: LocalConstants.AKHeaderHeight)
+        )
+        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        title.textColor = GlobalConstants.AKDefaultFg
+        switch section {
+        case 0:
+            title.text = "Project Name"
+            break
+        case 1:
+            title.text = "Working Day Times"
+            break
+        case 2:
+            title.text = "Local Notification System"
+            break
+        case 3:
+            title.text = "Your Categories"
+            break
+        default:
+            break
+        }
+        title.textAlignment = .left
+        // ### DEBUG
+        // title.layer.borderColor = UIColor.white.cgColor
+        // title.layer.borderWidth = 1.0
+        
+        headerCell.addSubview(title)
         
         return headerCell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
     {
-        let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
+        let footerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
         footerCell.backgroundColor = UIColor.clear
         
         return footerCell
