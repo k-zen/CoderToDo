@@ -1,7 +1,6 @@
 import UIKit
 
-class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate
-{
+class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
@@ -26,8 +25,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     @IBOutlet weak var cancel: UIButton!
     
     // MARK: Actions
-    @IBAction func migrate(_ sender: Any)
-    {
+    @IBAction func migrate(_ sender: Any) {
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
             // Sanity Checks
             for task in DataInterface.getAllTasksInProject(project: presenterController.selectedProject!) {
@@ -75,8 +73,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         }
     }
     
-    @IBAction func cancel(_ sender: Any)
-    {
+    @IBAction func cancel(_ sender: Any) {
         // Default Action!
         self.controller?.tap(nil)
         self.controller?.hideMigrateBucketEntry(animate: true, completionTask: nil)
@@ -86,8 +83,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData[row]
@@ -96,8 +92,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -118,8 +113,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData.count
@@ -131,8 +125,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: UITextViewDelegate Implementation
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-    {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if range.length + range.location > (textView.text?.characters.count)! {
             return false
         }
@@ -147,8 +140,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         }
     }
     
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
-    {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         Func.AKAddDoneButtonKeyboard(textView, controller: self.controller!)
         
         switch textView.tag {
@@ -158,8 +150,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.shouldAddBlurView = true
         super.setup()
         
@@ -180,8 +171,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         self.addAnimations(expandCollapseHeight: LocalConstants.AKViewHeight)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
             if let project = presenterController.selectedProject {
                 self.categoryData.removeAll()
@@ -195,17 +185,23 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         }
     }
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.masksToBounds = true
+        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        Func.AKAddBorderDeco(
+            self.taskNameValue,
+            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
         self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
         self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
         self.migrate.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.cancel.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

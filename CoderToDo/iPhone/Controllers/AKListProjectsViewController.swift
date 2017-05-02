@@ -486,13 +486,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func setUserBadge(controller: AKListProjectsViewController)
     {
-        let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 80.0, height: 28.0)))
-        userAvatar.setTitle(DataInterface.getUsername(), for: .normal)
+        let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))
+        userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().characters.first?.description ?? "").uppercased(), for: .normal)
         userAvatar.setTitleColor(GlobalConstants.AKEnabledButtonFg, for: .normal)
         userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
         userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
-        userAvatar.backgroundColor = GlobalConstants.AKEnabledButtonBg
-        userAvatar.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        userAvatar.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        userAvatar.layer.cornerRadius = userAvatar.frame.width / 2.0
         userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
         
         controller.navController.setLeftBarButton(UIBarButtonItem(customView: userAvatar), animated: false)

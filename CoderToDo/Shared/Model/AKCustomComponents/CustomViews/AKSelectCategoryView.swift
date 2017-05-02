@@ -128,6 +128,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.masksToBounds = true
         self.change.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     

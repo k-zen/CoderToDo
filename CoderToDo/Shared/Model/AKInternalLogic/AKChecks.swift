@@ -1,7 +1,6 @@
 import Foundation
 
-class AKChecks
-{
+class AKChecks {
     ///
     /// Sanity checks: IF ALL CODE IS CORRECT, THE SANITY CHECKS SHOULD ONLY EXECUTE AT THE END OF THE CURRENT DAY
     /// AND PERFORMS CLOSING OF TASKS (SANITY CHECKS IN GENERAL).
@@ -29,9 +28,10 @@ class AKChecks
     /// - Parameter controller: The controller which called the function.
     /// - Parameter task: The task to process.
     ///
-    static func workingDayCloseSanityChecks(controller: AKCustomViewController, task: Task) -> Void
-    {
-        if DataInterface.getProjectStatus(project: (task.category?.day?.project)!) == .accepting {
+    static func workingDayCloseSanityChecks(controller: AKCustomViewController, task: Task) -> Void {
+        let projectStatus = DataInterface.getProjectStatus(project: (task.category?.day?.project)!)
+        
+        if projectStatus == .accepting || projectStatus == .closed {
             if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
                 // Sanity check #1
                 AKChecks.sanityChecks_1(controller: controller, task: task)
@@ -92,22 +92,18 @@ class AKChecks
         }
     }
     
-    static func sanityChecks_1(controller: AKCustomViewController, task: Task) -> Void
-    {
+    static func sanityChecks_1(controller: AKCustomViewController, task: Task) -> Void {
         // ENFORCE CONTROLS!!!
-        if DataInterface.getProjectStatus(project: (task.category?.day?.project)!) == .accepting {
-            if !DataInterface.isDayTomorrow(day: (task.category?.day)!) {
-                if task.state == TaskStates.pending.rawValue {
-                    if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
-                        task.state = TaskStates.notDone.rawValue
-                    }
+        if !DataInterface.isDayTomorrow(day: (task.category?.day)!) && !DataInterface.isDayToday(day: (task.category?.day)!) {
+            if task.state == TaskStates.pending.rawValue {
+                if task.completionPercentage == 0.0 || task.completionPercentage == task.initialCompletionPercentage {
+                    task.state = TaskStates.notDone.rawValue
                 }
             }
         }
     }
     
-    static func canAddTask(project: Project) throws -> Void
-    {
+    static func canAddTask(project: Project) throws -> Void {
         // Check if it's outside Working Day or First Day.
         let projectStatus = DataInterface.getProjectStatus(project: project)
         if projectStatus != .accepting && projectStatus != .firstDay {

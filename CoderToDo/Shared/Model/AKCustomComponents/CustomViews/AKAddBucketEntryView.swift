@@ -123,6 +123,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.masksToBounds = true
         self.priority.subviews[2].tintColor = Func.AKGetColorForPriority(priority: .low)
         self.priority.subviews[1].tintColor = Func.AKGetColorForPriority(priority: .medium)
         self.priority.subviews[0].tintColor = Func.AKGetColorForPriority(priority: .high)

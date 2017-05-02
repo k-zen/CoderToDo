@@ -64,6 +64,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     func applyLookAndFeel()
     {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.masksToBounds = true
         self.yes.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.no.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }

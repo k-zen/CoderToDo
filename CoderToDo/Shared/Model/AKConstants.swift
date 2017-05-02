@@ -175,7 +175,7 @@ struct GlobalConstants
     static let AKCoderToDoGray2 = Func.AKHexColor(0x292D2F)
     static let AKCoderToDoGray3 = Func.AKHexColor(0x353A3C)
     static let AKCoderToDoGray4 = Func.AKHexColor(0x41474A)
-    static let AKCoderToDoWhite = Func.AKHexColor(0xD9D9D6)
+    static let AKCoderToDoWhite = Func.AKHexColor(0xFFFFFF)
     // ### Custom Color Palette:
     static let AKDefaultFont = "AvenirNextCondensed-Regular"
     static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
@@ -200,7 +200,7 @@ struct GlobalConstants
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
     static let AKPickerViewBg = GlobalConstants.AKCoderToDoGray4
     static let AKPickerFontSize: CGFloat = 18.0
-    static let AKNavBarFontSize: CGFloat = 18.0
+    static let AKNavBarFontSize: CGFloat = 20.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
     static let AKViewCornerRadius: CGFloat = 4.0
     static let AKButtonCornerRadius: CGFloat = 2.0
