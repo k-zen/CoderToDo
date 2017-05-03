@@ -37,6 +37,8 @@ class AKConfigurationsTableViewCell: UITableViewCell
         // Custom L&F.
         self.badge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.badge.layer.masksToBounds = true
+        self.arrow.layer.cornerRadius = self.arrow.frame.width / 2.0
+        self.arrow.layer.masksToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool)

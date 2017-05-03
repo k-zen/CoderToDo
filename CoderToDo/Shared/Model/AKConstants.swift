@@ -28,10 +28,8 @@ typealias BucketEntry = AKBucketEntryMO
 let Func = UtilityFunctions.instance(Cons.AKDebug)
 
 // MARK: Extensions
-extension Int
-{
-    func modulo(_ divisor: Int) -> Int
-    {
+extension Int {
+    func modulo(_ divisor: Int) -> Int {
         var result = self % divisor
         if (result < 0) {
             result += divisor
@@ -41,10 +39,8 @@ extension Int
     }
 }
 
-extension UIImage
-{
-    static func fromColor(color: UIColor, frame: CGRect) -> UIImage
-    {
+extension UIImage {
+    static func fromColor(color: UIColor, frame: CGRect) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
         
         let context = UIGraphicsGetCurrentContext()
@@ -60,15 +56,13 @@ extension UIImage
     }
 }
 
-extension String
-{
+extension String {
     ///
     /// This function computes the MD5 hash of the string.
     ///
     /// - Returns: The MD5 hash of the string.
     ///
-    func computeMD5() -> String?
-    {
+    func computeMD5() -> String? {
         let length = Int(CC_MD5_DIGEST_LENGTH)
         var digest = [UInt8](repeating: 0, count: length)
         if let d = self.data(using: String.Encoding.utf8) {
@@ -87,8 +81,7 @@ extension String
     ///
     /// - Returns: The original string.
     ///
-    func fromBase64() -> String?
-    {
+    func fromBase64() -> String? {
         guard let data = Data(base64Encoded: self) else {
             return nil
         }
@@ -101,13 +94,11 @@ extension String
     ///
     /// - Returns: A Base64 encoded string.
     ///
-    func toBase64() -> String
-    {
+    func toBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }
     
-    func toBool() -> Bool?
-    {
+    func toBool() -> Bool? {
         switch self {
         case "TRUE", "true", "YES", "yes", "1":
             return true
@@ -123,16 +114,13 @@ extension String
     ///
     /// - Returns: An array of string lines.
     ///
-    func splitOnNewLine() -> [String]
-    {
+    func splitOnNewLine() -> [String] {
         return self.components(separatedBy: CharacterSet.newlines)
     }
 }
 
-extension UIView
-{
-    func loopViewHierarchy(block : ViewBlock?)
-    {
+extension UIView {
+    func loopViewHierarchy(block : ViewBlock?) {
         if block?(self) ?? true {
             for subview in self.subviews {
                 subview.loopViewHierarchy(block: block)
@@ -142,8 +130,7 @@ extension UIView
 }
 
 // MARK: Structures
-struct GlobalConstants
-{
+struct GlobalConstants {
     static let AKDebug = true
     // CoreData
     static let AKDataModelName = "MainDataModel"
@@ -181,7 +168,7 @@ struct GlobalConstants
     static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
     static let AKSecondaryItalicFont = "AvenirNextCondensed-DemiBoldItalic"
     static let AKTertiaryFont = "AvenirNextCondensed-Bold"
-    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
+    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray2
     static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite
     static let AKTabBarBg = GlobalConstants.AKCoderToDoGray1
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
@@ -189,16 +176,14 @@ struct GlobalConstants
     static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
     static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKEnabledButtonBg = GlobalConstants.AKCoderToDoGray2
-    static let AKEnabledButtonFg = GlobalConstants.AKCoderToDoWhite
-    static let AKDisabledButtonBg = Func.AKHexColor(0xA9A9A6) // Exception!!!
-    static let AKDisabledButtonFg = GlobalConstants.AKCoderToDoWhite
-    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray2
+    static let AKButtonBg = GlobalConstants.AKCoderToDoGray3
+    static let AKButtonFg = GlobalConstants.AKYellowForWhiteFg
+    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray3
     static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKTableCellBg = GlobalConstants.AKDefaultBg
-    static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoGray2
+    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray2
+    static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
-    static let AKPickerViewBg = GlobalConstants.AKCoderToDoGray4
+    static let AKPickerViewBg = GlobalConstants.AKRedForWhiteFg
     static let AKPickerFontSize: CGFloat = 18.0
     static let AKNavBarFontSize: CGFloat = 20.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
@@ -265,34 +250,29 @@ struct GlobalConstants
     static let AKDefaultTaskSearchTerm = SearchTerm(term: Search.showAll.rawValue)
 }
 
-struct Filter
-{
+struct Filter {
     var projectFilter: FilterProject?
     var taskFilter: FilterTask?
     
-    init(projectFilter: FilterProject?)
-    {
+    init(projectFilter: FilterProject?) {
         self.projectFilter = projectFilter
         self.taskFilter = nil
     }
     
-    init(taskFilter: FilterTask?)
-    {
+    init(taskFilter: FilterTask?) {
         self.projectFilter = nil
         self.taskFilter = taskFilter
     }
 }
 
-struct FilterProject
-{
+struct FilterProject {
     var sortType: ProjectSorting
     var sortOrder: SortingOrder
     var filterType: ProjectFilter
     var filterValue: ProjectFilterStatus
     var searchTerm: SearchTerm
     
-    init()
-    {
+    init() {
         self.sortType = Cons.AKDefaultProjectSortType
         self.sortOrder = Cons.AKDefaultProjectSortOrder
         self.filterType = Cons.AKDefaultProjectFilterType
@@ -300,8 +280,7 @@ struct FilterProject
         self.searchTerm = Cons.AKDefaultProjectSearchTerm
     }
     
-    init(sortType: ProjectSorting, sortOrder: SortingOrder, filterType: ProjectFilter, filterValue: ProjectFilterStatus, searchTerm: SearchTerm)
-    {
+    init(sortType: ProjectSorting, sortOrder: SortingOrder, filterType: ProjectFilter, filterValue: ProjectFilterStatus, searchTerm: SearchTerm) {
         self.sortType = sortType
         self.sortOrder = sortOrder
         self.filterType = filterType
@@ -310,16 +289,14 @@ struct FilterProject
     }
 }
 
-struct FilterTask
-{
+struct FilterTask {
     var sortType: TaskSorting
     var sortOrder: SortingOrder
     var filterType: TaskFilter
     var filterValue: TaskFilterStates
     var searchTerm: SearchTerm
     
-    init()
-    {
+    init() {
         self.sortType = Cons.AKDefaultTaskSortType
         self.sortOrder = Cons.AKDefaultTaskSortOrder
         self.filterType = Cons.AKDefaultTaskFilterType
@@ -327,8 +304,7 @@ struct FilterTask
         self.searchTerm = Cons.AKDefaultTaskSearchTerm
     }
     
-    init(sortType: TaskSorting, sortOrder: SortingOrder, filterType: TaskFilter, filterValue: TaskFilterStates, searchTerm: SearchTerm)
-    {
+    init(sortType: TaskSorting, sortOrder: SortingOrder, filterType: TaskFilter, filterValue: TaskFilterStates, searchTerm: SearchTerm) {
         self.sortType = sortType
         self.sortOrder = sortOrder
         self.filterType = filterType
@@ -337,14 +313,12 @@ struct FilterTask
     }
 }
 
-struct SearchTerm
-{
+struct SearchTerm {
     let term: String
     
     init(term: String) { self.term = term }
     
-    func match(otherTerms: [String?]) -> Bool
-    {
+    func match(otherTerms: [String?]) -> Bool {
         for otherTerm in otherTerms {
             if let otherTerm = otherTerm {
                 if term.caseInsensitiveCompare(Search.showAll.rawValue) == .orderedSame {
@@ -360,8 +334,7 @@ struct SearchTerm
     }
 }
 
-struct BackupInfo
-{
+struct BackupInfo {
     enum Fields: String {
         case dateKey = "Date"
         case md5Key = "MD5"
@@ -378,15 +351,13 @@ struct BackupInfo
 }
 
 // MARK: Global Enumerations
-enum ErrorCodes: Int
-{
+enum ErrorCodes: Int {
     case ConnectionToBackEndError = -1000
     case InvalidMIMEType = -1001
     case JSONProcessingError = -1002
 }
 
-enum Exceptions: Error
-{
+enum Exceptions: Error {
     case notInitialized(String)
     case emptyData(String)
     case invalidLength(String)
@@ -403,15 +374,13 @@ enum Exceptions: Error
     case invalidFilter(String)
 }
 
-enum UnitOfTime: Int
-{
+enum UnitOfTime: Int {
     case second = 1
     case minute = 2
     case hour = 3
 }
 
-enum CustomBorderDecorationPosition: Int
-{
+enum CustomBorderDecorationPosition: Int {
     case top = 0
     case right = 1
     case bottom = 2
@@ -419,22 +388,19 @@ enum CustomBorderDecorationPosition: Int
     case through = 4
 }
 
-enum SortingOrder: String
-{
+enum SortingOrder: String {
     case ascending = "↑"
     case descending = "↓"
 }
 
-enum ProjectStatus: String
-{
+enum ProjectStatus: String {
     case open = "Open"
     case accepting = "Accepting"
     case closed = "Closed"
     case firstDay = "First Day"
 }
 
-enum ProjectSorting: String
-{
+enum ProjectSorting: String {
     case closingTime = "Closing Time"
     case creationDate = "Creation Date"
     case use = "By Use"
@@ -442,13 +408,11 @@ enum ProjectSorting: String
     case osr = "Overall Success Ratio"
 }
 
-enum ProjectFilter: String
-{
+enum ProjectFilter: String {
     case status = "Status"
 }
 
-enum ProjectFilterStatus: String
-{
+enum ProjectFilterStatus: String {
     case none = "None"
     case open = "Open"
     case acceptingTasks = "Accepting"
@@ -456,14 +420,12 @@ enum ProjectFilterStatus: String
     case firstDay = "First Day"
 }
 
-enum DayStatus: String
-{
+enum DayStatus: String {
     case current = "Current"
     case notCurrent = "Not Current"
 }
 
-enum TaskStates: String
-{
+enum TaskStates: String {
     case done = "Done"
     case notDone = "Not Done"
     case notApplicable = "Not Applicable"
@@ -471,21 +433,18 @@ enum TaskStates: String
     case pending = "Pending"
 }
 
-enum TaskSorting: String
-{
+enum TaskSorting: String {
     case completionPercentage = "Completion Percentage"
     case creationDate = "Creation Date"
     case name = "Name"
     case state = "State"
 }
 
-enum TaskFilter: String
-{
+enum TaskFilter: String {
     case state = "State"
 }
 
-enum TaskFilterStates: String
-{
+enum TaskFilterStates: String {
     case none = "None"
     case done = "Done"
     case notDone = "Not Done"
@@ -494,8 +453,7 @@ enum TaskFilterStates: String
     case pending = "Pending"
 }
 
-enum TaskStateColor: UInt
-{
+enum TaskStateColor: UInt {
     case done = 0xB8BB26 // GreenForBlack
     case notDone = 0xFB4934 // RedForBlack
     case notApplicable = 0x83A598 // BlueForBlack
@@ -503,16 +461,14 @@ enum TaskStateColor: UInt
     case pending = 0xFABD2F // YellowForBlack
 }
 
-enum TaskMode: String
-{
+enum TaskMode: String {
     case editable = "Editable"
     case notEditable = "Not Editable"
     case limitedEditing = "Limited Editing"
     case cleaningMode = "Cleaning Mode"
 }
 
-enum MenuItems: Int
-{
+enum MenuItems: Int {
     case add
     case sort
     case filter
@@ -520,14 +476,12 @@ enum MenuItems: Int
     case none
 }
 
-enum Displacement: Int
-{
+enum Displacement: Int {
     case up
     case down
 }
 
-enum Search: String
-{
+enum Search: String {
     case showAll = "*"
 }
 
@@ -575,24 +529,21 @@ enum MessageType: String {
 }
 
 // MARK: Utility Functions
-class UtilityFunctions
-{
+class UtilityFunctions {
     private var showDebugInformation = false
     
     ///
     /// Creates and configures a new instance of the class. Use this method for
     /// calling all other functions.
     ///
-    static func instance(_ showDebugInformation: Bool) -> UtilityFunctions
-    {
+    static func instance(_ showDebugInformation: Bool) -> UtilityFunctions {
         let instance = UtilityFunctions()
         instance.showDebugInformation = showDebugInformation
         
         return instance
     }
     
-    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false)
-    {
+    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effect))
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.translatesAutoresizingMaskIntoConstraints = true
@@ -613,8 +564,7 @@ class UtilityFunctions
     /// - Parameter thickness: The thickness of the border.
     /// - Parameter position: It can be 4 types: top, bottom, left, right.
     ///
-    func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition)
-    {
+    func AKAddBorderDeco(_ component: UIView, color: CGColor, thickness: Double, position: CustomBorderDecorationPosition) {
         let border = CALayer()
         border.backgroundColor = color
         switch position {
@@ -654,8 +604,7 @@ class UtilityFunctions
     /// - Parameter textControl: The control where to add the keyboard.
     /// - Parameter controller: The view controller that owns the control.
     ///
-    func AKAddDoneButtonKeyboard(_ textControl: UIView, controller: AKCustomViewController)
-    {
+    func AKAddDoneButtonKeyboard(_ textControl: UIView, controller: AKCustomViewController) {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
         keyboardToolbar.barStyle = .blackTranslucent
@@ -700,8 +649,7 @@ class UtilityFunctions
     ///
     /// - Returns: The App's build version.
     ///
-    func AKAppBuild() -> String
-    {
+    func AKAppBuild() -> String {
         if let b = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             return b
         }
@@ -717,8 +665,7 @@ class UtilityFunctions
     ///
     /// - Returns: The App's version.
     ///
-    func AKAppVersion() -> String
-    {
+    func AKAppVersion() -> String {
         if let v = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             return v
         }
@@ -727,28 +674,24 @@ class UtilityFunctions
         }
     }
     
-    func AKCenterScreenCoordinate(container: UIView, width: CGFloat, height: CGFloat) -> CGPoint
-    {
+    func AKCenterScreenCoordinate(container: UIView, width: CGFloat, height: CGFloat) -> CGPoint {
         let offsetX: CGFloat = (container.frame.width / 2.0) - (width / 2.0)
         let offsetY: CGFloat = (container.frame.height / 2.0) - (height / 2.0)
         
         return container.convert(CGPoint(x: offsetX, y: offsetY), to: container)
     }
     
-    func AKChangeComponentWidth(component: UIView, newWidth: CGFloat)
-    {
+    func AKChangeComponentWidth(component: UIView, newWidth: CGFloat) {
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: newWidth, height: component.frame.height))
         component.layoutIfNeeded()
     }
     
-    func AKChangeComponentHeight(component: UIView, newHeight: CGFloat)
-    {
+    func AKChangeComponentHeight(component: UIView, newHeight: CGFloat) {
         component.frame = CGRect(origin: component.frame.origin, size: CGSize(width: component.frame.width, height: newHeight))
         component.layoutIfNeeded()
     }
     
-    func AKChangeComponentYPosition(component: UIView, newY: CGFloat)
-    {
+    func AKChangeComponentYPosition(component: UIView, newY: CGFloat) {
         component.frame = CGRect(origin: CGPoint(x: component.frame.origin.x, y: newY), size: CGSize(width: component.frame.width, height: component.frame.height))
         component.layoutIfNeeded()
     }
@@ -760,8 +703,7 @@ class UtilityFunctions
     /// - Parameter isMain: Should we launch the task in the main thread...?
     /// - Parameter task:  The function to execute.
     ///
-    func AKDelay(_ delay: Double, isMain: Bool = true, task: @escaping (Void) -> Void)
-    {
+    func AKDelay(_ delay: Double, isMain: Bool = true, task: @escaping (Void) -> Void) {
         if isMain {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: task)
         }
@@ -783,8 +725,7 @@ class UtilityFunctions
     /// - Parameter mode: The execution mode.
     /// - Parameter code: The code to be executed in the main thread.
     ///
-    func AKExecuteInMainThread(controller: AKCustomViewController?, mode: ExecutionMode, code: @escaping (AKCustomViewController?) -> Void)
-    {
+    func AKExecuteInMainThread(controller: AKCustomViewController?, mode: ExecutionMode, code: @escaping (AKCustomViewController?) -> Void) {
         switch mode {
         case .sync:
             DispatchQueue.main.sync(execute: { code(controller) })
@@ -801,8 +742,7 @@ class UtilityFunctions
     /// - Parameter mode: The execution mode.
     /// - Parameter code: The code to be executed in a background thread.
     ///
-    func AKExecuteInBackgroundThread(mode: ExecutionMode, code: @escaping (Void) -> Void)
-    {
+    func AKExecuteInBackgroundThread(mode: ExecutionMode, code: @escaping (Void) -> Void) {
         switch mode {
         case .sync:
             DispatchQueue.global(qos: .background).sync(execute: { code() })
@@ -813,8 +753,7 @@ class UtilityFunctions
         }
     }
     
-    func AKFormatNumber(number: NSNumber) -> String
-    {
+    func AKFormatNumber(number: NSNumber) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale.current
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
@@ -822,16 +761,14 @@ class UtilityFunctions
         return numberFormatter.string(from: number) ?? String(format: "%@", number)
     }
     
-    func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView, isCentered: Bool = true) -> CGFloat
-    {
+    func AKGetComponentAbsoluteHeightPosition(container: UIView, component: UIView, isCentered: Bool = true) -> CGFloat {
         var height: CGFloat = (UIScreen.main.bounds.height - container.frame.height) / (isCentered ? 2.0 : 1.0)
         height += component.frame.height
         
         return abs(height)
     }
     
-    func AKGetCalendarForSaving() -> Calendar
-    {
+    func AKGetCalendarForSaving() -> Calendar {
         var gmtCalendar = Calendar.current
         gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
         
@@ -842,8 +779,7 @@ class UtilityFunctions
     
     func AKGetCloudKitContainer() -> CKContainer { return Func.AKDelegate().cloudKitContainer }
     
-    func AKGetColorForPriority(priority: Priority) -> UIColor
-    {
+    func AKGetColorForPriority(priority: Priority) -> UIColor {
         switch priority {
         case .low:
             return GlobalConstants.AKGreenForWhiteFg
@@ -854,8 +790,7 @@ class UtilityFunctions
         }
     }
     
-    func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor
-    {
+    func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor {
         switch projectStatus {
         case .accepting:
             return GlobalConstants.AKBlueForWhiteFg
@@ -868,8 +803,7 @@ class UtilityFunctions
         }
     }
     
-    func AKGetColorForTaskState(taskState: String) -> UIColor
-    {
+    func AKGetColorForTaskState(taskState: String) -> UIColor {
         switch taskState {
         case TaskStates.dilate.rawValue:
             return Func.AKHexColor(TaskStateColor.dilate.rawValue)
@@ -886,8 +820,7 @@ class UtilityFunctions
         }
     }
     
-    func AKGetDayOfWeekAsName(dayOfWeek: Int16, short: Bool = false) -> String?
-    {
+    func AKGetDayOfWeekAsName(dayOfWeek: Int16, short: Bool = false) -> String? {
         switch dayOfWeek {
         case DaysOfWeek.invalid.rawValue:
             return short ? "N\\A" : "N\\A"
@@ -910,8 +843,7 @@ class UtilityFunctions
         }
     }
     
-    func AKGetFormattedDate(date: Date?) -> String
-    {
+    func AKGetFormattedDate(date: Date?) -> String {
         if let date = date {
             let now = Date()
             let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
@@ -952,8 +884,7 @@ class UtilityFunctions
         return "N\\A"
     }
     
-    func AKGetFormattedTime(date: Date?) -> String
-    {
+    func AKGetFormattedTime(date: Date?) -> String {
         if let date = date {
             let h = Func.AKGetCalendarForLoading().dateComponents([.hour], from: date).hour ?? 0
             let m = Func.AKGetCalendarForLoading().dateComponents([.minute], from: date).minute ?? 0
@@ -967,8 +898,7 @@ class UtilityFunctions
     
     func AKGetNotificationCenter() -> UNUserNotificationCenter { return Func.AKDelegate().notificationCenter }
     
-    func AKGetPriorityAsName(priority: Int16) -> String?
-    {
+    func AKGetPriorityAsName(priority: Int16) -> String? {
         switch priority {
         case Priority.low.rawValue:
             return "Low"
@@ -986,8 +916,7 @@ class UtilityFunctions
     ///
     /// - Returns: The difference in hours between local time and GMT.
     ///
-    func AKGetOffsetFromGMT() -> Int
-    {
+    func AKGetOffsetFromGMT() -> Int {
         return Func.AKGetCalendarForLoading().timeZone.secondsFromGMT() / 3600
     }
     
@@ -999,8 +928,7 @@ class UtilityFunctions
     ///
     /// - Returns: A **UIColor** object.
     ///
-    func AKHexColor(_ hex: UInt) -> UIColor
-    {
+    func AKHexColor(_ hex: UInt) -> UIColor {
         let red = CGFloat((hex >> 16) & 0xFF) / 255.0
         let green = CGFloat((hex >> 8) & 0xFF) / 255.0
         let blue = CGFloat((hex) & 0xFF) / 255.0
@@ -1008,8 +936,7 @@ class UtilityFunctions
         return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
     }
     
-    func AKIterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T>
-    {
+    func AKIterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
         var i = 0
         return AnyIterator {
             let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
@@ -1035,8 +962,7 @@ class UtilityFunctions
     ///
     /// - Returns: The URL of the file archive.
     ///
-    func AKOpenFileArchive(fileName: String, location: FileManager.SearchPathDirectory, shouldCreate: Bool) throws -> URL?
-    {
+    func AKOpenFileArchive(fileName: String, location: FileManager.SearchPathDirectory, shouldCreate: Bool) throws -> URL? {
         let fm = FileManager()
         let directory = try fm.url(for: location, in: FileManager.SearchPathDomainMask.userDomainMask, appropriateFor: nil, create: true)
         
@@ -1058,8 +984,7 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!)
-    {
+    func AKPresentMessageFromError(controller: AKCustomViewController, message: String!) {
         do {
             if let input = message {
                 let regex = try NSRegularExpression(pattern: ".*\"(.*)\"", options: NSRegularExpression.Options.caseInsensitive)
@@ -1079,8 +1004,7 @@ class UtilityFunctions
         }
     }
     
-    func AKPresentMessage(controller: AKCustomViewController, message: String!)
-    {
+    func AKPresentMessage(controller: AKCustomViewController, message: String!) {
         Func.AKExecuteInMainThread(controller: controller, mode: .async, code: { (controller) -> Void in
             controller?.showMessage(
                 origin: CGPoint.zero,
@@ -1098,16 +1022,14 @@ class UtilityFunctions
     /// - Parameter title: The title of the operation.
     /// - Parameter operation: The code to be executed in a closure.
     ///
-    func AKPrintTimeElapsedWhenRunningCode(title: String, operation: () -> ())
-    {
+    func AKPrintTimeElapsedWhenRunningCode(title: String, operation: () -> ()) {
         let startTime = CFAbsoluteTimeGetCurrent()
         operation()
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
         NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
     }
     
-    func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> NSDate?
-    {
+    func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> NSDate? {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timeZone
@@ -1119,8 +1041,7 @@ class UtilityFunctions
         return nil
     }
     
-    func AKProcessDateToString(date: Date, format: String, timeZone: TimeZone) -> String
-    {
+    func AKProcessDateToString(date: Date, format: String, timeZone: TimeZone) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timeZone
@@ -1128,8 +1049,7 @@ class UtilityFunctions
         return formatter.string(from: date)
     }
     
-    func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int
-    {
+    func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int {
         if let date = date as Date? {
             var gmtCalendar = Calendar.current
             gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
@@ -1142,8 +1062,7 @@ class UtilityFunctions
         return 0
     }
     
-    func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>?
-    {
+    func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>? {
         let fromUTF16 = str.utf16.startIndex.advanced(by: nsRange.location)
         let toUTF16 = fromUTF16.advanced(by: nsRange.length)
         
@@ -1154,8 +1073,7 @@ class UtilityFunctions
         return nil
     }
     
-    func AKReloadTable(tableView: UITableView)
-    {
+    func AKReloadTable(tableView: UITableView) {
         Func.AKPrintTimeElapsedWhenRunningCode(title: "Table Reloading", operation: {
             tableView.reloadData()
             tableView.layoutIfNeeded()
@@ -1192,8 +1110,7 @@ class UtilityFunctions
         )
     }
     
-    func AKInvalidateLocalNotification(controller: AKCustomViewController?, project: Project?) -> Void
-    {
+    func AKInvalidateLocalNotification(controller: AKCustomViewController?, project: Project?) -> Void {
         if let project = project {
             Func.AKGetNotificationCenter().removeDeliveredNotifications(
                 withIdentifiers: [String(
@@ -1223,8 +1140,7 @@ class UtilityFunctions
     ///
     /// - Returns: An image object in the form of a square.
     ///
-    func AKSquareImage(_ sideLength: Double, strokeColor: UIColor, strokeAlpha: Float, fillColor: UIColor, fillAlpha: Float) -> UIImage
-    {
+    func AKSquareImage(_ sideLength: Double, strokeColor: UIColor, strokeAlpha: Float, fillColor: UIColor, fillAlpha: Float) -> UIImage {
         let buffer = 2.0
         let rect = CGRect(x: 0, y: 0, width: sideLength * 2.0 + buffer, height: sideLength * 2.0 + buffer)
         
@@ -1244,12 +1160,11 @@ class UtilityFunctions
         return image!
     }
     
-    func AKToggleButtonMode(controller: AKCustomViewController, button: UIButton, mode: ComponentMode, showSpinner: Bool, direction: ComponentDirection)
-    {
+    func AKToggleButtonMode(controller: AKCustomViewController, button: UIButton, mode: ComponentMode, showSpinner: Bool, direction: ComponentDirection) {
         switch mode {
         case .enabled:
             button.isEnabled = true
-            button.backgroundColor = Cons.AKEnabledButtonBg
+            button.titleLabel?.attributedText = nil
             
             if showSpinner {
                 if direction == .enableToDisable {
@@ -1262,7 +1177,9 @@ class UtilityFunctions
             break
         case .disabled:
             button.isEnabled = false
-            button.backgroundColor = Cons.AKDisabledButtonBg
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: button.titleLabel?.text ?? "")
+            attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+            button.titleLabel?.attributedText = attributeString
             
             if showSpinner {
                 if direction == .disableToEnable {

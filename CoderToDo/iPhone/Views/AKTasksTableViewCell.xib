@@ -70,7 +70,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="aGm-s5-C8L" secondAttribute="bottom" constant="0.5" id="OSS-ce-iPR"/>
                     <constraint firstItem="aGm-s5-C8L" firstAttribute="leading" secondItem="pT1-Ym-jX5" secondAttribute="trailing" id="PxY-Km-l2i"/>
@@ -81,7 +81,7 @@
                     <constraint firstAttribute="bottom" secondItem="pT1-Ym-jX5" secondAttribute="bottom" constant="0.5" id="fcr-Qp-rKr"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="infoContainer" destination="pT1-Ym-jX5" id="97J-cW-oK4"/>
                 <outlet property="mainContainer" destination="YJo-LI-y7A" id="e2U-Ug-h44"/>

@@ -56,7 +56,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="MIo-o2-Hau" secondAttribute="bottom" constant="0.5" id="0OM-DV-H85"/>
                     <constraint firstAttribute="trailing" secondItem="xrd-aO-YWm" secondAttribute="trailing" constant="8" id="ClL-Ge-R74"/>

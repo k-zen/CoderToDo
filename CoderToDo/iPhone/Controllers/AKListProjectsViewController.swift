@@ -177,7 +177,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
         Func.AKAddBorderDeco(
             headerCell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
+            color: Func.AKGetColorForProjectStatus(projectStatus: projectStatus).cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )
@@ -488,10 +488,10 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     {
         let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))
         userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().characters.first?.description ?? "").uppercased(), for: .normal)
-        userAvatar.setTitleColor(GlobalConstants.AKEnabledButtonFg, for: .normal)
+        userAvatar.setTitleColor(GlobalConstants.AKButtonFg, for: .normal)
         userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
         userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
-        userAvatar.backgroundColor = GlobalConstants.AKRedForWhiteFg
+        userAvatar.backgroundColor = GlobalConstants.AKButtonBg
         userAvatar.layer.cornerRadius = userAvatar.frame.width / 2.0
         userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
         

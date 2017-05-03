@@ -93,6 +93,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate
                 controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.controlsContainer.layer.masksToBounds = true
             }
         }
         self.currentScrollContainer = self.scrollContainer

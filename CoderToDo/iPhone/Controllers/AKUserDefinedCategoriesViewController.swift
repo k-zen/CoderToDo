@@ -35,7 +35,7 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
         cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKTableCellBorderBg.cgColor,
+            color: GlobalConstants.AKOrangeForBlackFg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )

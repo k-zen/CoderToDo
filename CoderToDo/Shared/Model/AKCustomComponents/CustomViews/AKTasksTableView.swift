@@ -88,7 +88,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let badgeSizeHeight = CGFloat(21.0)
             
             let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-            headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+            headerCell.backgroundColor = GlobalConstants.AKTableCellBg
             
             let title = UILabel(frame: CGRect(
                 x: padding * 2,

@@ -179,12 +179,30 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
-        Func.AKAddBorderDeco(
-            headerCell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
+        if isTomorrow {
+            Func.AKAddBorderDeco(
+                headerCell,
+                color: Func.AKGetColorForProjectStatus(projectStatus: .accepting).cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
+        }
+        else if isToday {
+            Func.AKAddBorderDeco(
+                headerCell,
+                color: Func.AKGetColorForProjectStatus(projectStatus: projectStatus == .accepting ? .closed : projectStatus).cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
+        }
+        else {
+            Func.AKAddBorderDeco(
+                headerCell,
+                color: Func.AKGetColorForProjectStatus(projectStatus: .closed).cgColor,
+                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                position: .left
+            )
+        }
         
         let title = UILabel(frame: CGRect(
             x: padding * 2.0,
