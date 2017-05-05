@@ -40,7 +40,8 @@ class AKChecks {
         case .closed:
             result += DataInterface.isDayToday(day: (task.category?.day)!) ? 1 : 0
             break
-        default:
+        default: // All other states should exclude filters.
+            result += 1
             break
         }
         
@@ -115,7 +116,8 @@ class AKChecks {
         case .closed:
             result += DataInterface.isDayToday(day: (task.category?.day)!) ? 1 : 0
             break
-        default:
+        default: // All other states should exclude filters.
+            result += 1
             break
         }
         
