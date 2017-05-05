@@ -1,7 +1,6 @@
 import UIKit
 
-class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
-{
+class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case projectName = 1
@@ -17,8 +16,7 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
     @IBOutlet weak var save: UIButton!
     
     // MARK: Actions
-    @IBAction func save(_ sender: Any)
-    {
+    @IBAction func save(_ sender: Any) {
         // Check name.
         let projectName = AKProjectName(inputData: self.projectNameValue.text!)
         do {
@@ -61,15 +59,13 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -84,22 +80,19 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         self.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKProjectNameViewController {
                 controller.projectNameValue.text = controller.project.name
@@ -107,8 +100,8 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKProjectNameViewController {
-                controller.projectNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKStyleTextField(textField: controller.projectNameValue)
+                Func.AKStyleButton(button: controller.save)
             }
         }
         self.currentScrollContainer = self.scrollContainer

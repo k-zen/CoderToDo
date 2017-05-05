@@ -1,7 +1,6 @@
 import UIKit
 
-class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
@@ -22,8 +21,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     @IBOutlet weak var change: UIButton!
     
     // MARK: Actions
-    @IBAction func change(_ sender: Any)
-    {
+    @IBAction func change(_ sender: Any) {
         if let controller = controller as? AKViewTaskViewController {
             let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
             
@@ -45,8 +43,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData[row]
@@ -55,8 +52,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -77,8 +73,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData.count
@@ -90,12 +85,8 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
-        super.shouldAddBlurView = true
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.categoryValue.delegate = self
@@ -110,8 +101,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         self.addAnimations(expandCollapseHeight: LocalConstants.AKViewHeight)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         self.categoryData.removeAll()
         if let controller = self.controller as? AKViewTaskViewController {
             if let project = controller.task.category?.day?.project {
@@ -125,15 +115,19 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
         self.categoryValue.selectRow(0, inComponent: 0, animated: true)
     }
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
-        self.change.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderWidth = 2.0
+        self.mainContainer.backgroundColor = UIColor.clear
+        
+        Func.AKStylePicker(picker: self.categoryValue)
+        
+        Func.AKStyleButton(button: self.change)
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

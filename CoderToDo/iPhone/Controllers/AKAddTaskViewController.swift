@@ -1,7 +1,6 @@
 import UIKit
 
-class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case taskName = 1
@@ -25,8 +24,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     @IBOutlet weak var close: UIButton!
     
     // MARK: Actions
-    @IBAction func add(_ sender: Any)
-    {
+    @IBAction func add(_ sender: Any) {
         // Sanity Checks
         for task in DataInterface.getAllTasksInProject(project: self.project) {
             AKChecks.workingDayCloseSanityChecks(controller: self, task: task)
@@ -109,8 +107,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     @IBAction func close(_ sender: Any) { self.dismissView(executeDismissTask: true) }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
         self.loadLocalizedText()
@@ -126,8 +123,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -142,22 +138,19 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         self.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData[row]
@@ -166,8 +159,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -188,8 +180,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
             return self.categoryData.count
@@ -201,8 +192,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKAddTaskViewController {
                 controller.projectName.text = controller.project.name
@@ -224,14 +214,20 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKAddTaskViewController {
-                controller.taskNameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.categoryValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
-                controller.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
-                controller.add.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKAddBlurView(view: controller.controlsContainer, effect: .dark, addClearColorBgToView: true)
                 controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
                 controller.controlsContainer.layer.masksToBounds = true
+                controller.controlsContainer.layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+                controller.controlsContainer.layer.borderWidth = 2.0
+                
+                Func.AKStyleTextField(textField: controller.taskNameValue)
+                Func.AKStylePicker(picker: controller.categoryValue)
+                
+                controller.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
+                controller.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
+                
+                Func.AKStyleButton(button: controller.add)
+                Func.AKStyleButton(button: controller.close)
             }
         }
         self.currentScrollContainer = self.scrollContainer

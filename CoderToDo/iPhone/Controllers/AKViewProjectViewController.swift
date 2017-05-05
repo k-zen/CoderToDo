@@ -1,7 +1,6 @@
 import UIKit
 
-class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
-{
+class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
@@ -21,8 +20,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     @IBOutlet weak var daysTable: UITableView!
     
     // MARK: Actions
-    @IBAction func toggleMenu(_ sender: Any)
-    {
+    @IBAction func toggleMenu(_ sender: Any) {
         if !self.isMenuVisible {
             self.displaceDownTable(
                 tableView: self.daysTable,
@@ -45,14 +43,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
             case GlobalConstants.AKViewTaskSegue:
@@ -69,8 +65,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
-    {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
         case GlobalConstants.AKViewTaskSegue:
             return true
@@ -80,8 +75,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         
         // First we check which section we are. That means which day we are referencing.
@@ -160,8 +154,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         return defaultCell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let day = DataInterface.getDays(project: self.project, filterEmpty: true, filter: self.taskFilter)[section]
         let isTomorrow = DataInterface.isDayTomorrow(day: day)
         let isToday = DataInterface.isDayToday(day: day)
@@ -330,8 +323,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         
         let day = DataInterface.getDays(
@@ -372,8 +364,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return CGFloat.leastNormalMagnitude }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewProjectViewController {
@@ -393,7 +384,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                         origin: origin,
                         title: "Hello..!",
                         message: "Use the menu button above to start adding tasks to your project.",
-                        animate: true,
+                        animate: false,
                         completionTask: nil
                     )
                 }
@@ -510,8 +501,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
     }
     
-    func resetFilters(controller: AKCustomViewController)
-    {
+    func resetFilters(controller: AKCustomViewController) {
         if GlobalConstants.AKDebug {
             NSLog("=> \(type(of: self)): RESETTING FILTERS")
         }
@@ -527,8 +517,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.completeReload()
     }
     
-    func completeReload() -> Void
-    {
+    func completeReload() -> Void {
         self.cachingSystem.triggerChildViewsReload(controller: self)
         Func.AKReloadTable(tableView: self.daysTable)
     }

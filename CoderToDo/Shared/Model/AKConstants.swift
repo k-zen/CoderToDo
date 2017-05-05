@@ -168,23 +168,23 @@ struct GlobalConstants {
     static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
     static let AKSecondaryItalicFont = "AvenirNextCondensed-DemiBoldItalic"
     static let AKTertiaryFont = "AvenirNextCondensed-Bold"
-    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray2
+    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
     static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite
     static let AKTabBarBg = GlobalConstants.AKCoderToDoGray1
     static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
     static let AKTabBarTintSelected = GlobalConstants.AKRedForBlackFg
     static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
     static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray4
+    static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKButtonBg = GlobalConstants.AKCoderToDoGray3
-    static let AKButtonFg = GlobalConstants.AKYellowForWhiteFg
-    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray3
+    static let AKButtonFg = GlobalConstants.AKCoderToDoWhite
+    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray2
     static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray2
+    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray1
     static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoGray3
     static let AKPickerViewFg = GlobalConstants.AKDefaultFg
-    static let AKPickerViewBg = GlobalConstants.AKRedForWhiteFg
-    static let AKPickerFontSize: CGFloat = 18.0
+    static let AKPickerViewBg = GlobalConstants.AKCoderToDoGray3
+    static let AKPickerFontSize: CGFloat = 14.0
     static let AKNavBarFontSize: CGFloat = 20.0
     static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
     static let AKViewCornerRadius: CGFloat = 4.0
@@ -196,7 +196,6 @@ struct GlobalConstants {
     static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
     static let AKAutoCorrectionToolbarHeight: CGFloat = 42
-    static let AKKeyboardHeight: CGFloat = 258 + GlobalConstants.AKCloseKeyboardToolbarHeight
     // Validations
     static let AKMaxUsernameLength = 12
     static let AKMinUsernameLength = 2
@@ -543,7 +542,7 @@ class UtilityFunctions {
         return instance
     }
     
-    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false) {
+    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false, onTop: Bool = false) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effect))
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.translatesAutoresizingMaskIntoConstraints = true
@@ -553,7 +552,14 @@ class UtilityFunctions {
             view.backgroundColor = UIColor.clear
         }
         
-        view.insertSubview(blurView, at: 0)
+        if !onTop {
+            view.insertSubview(blurView, at: 0)
+            view.layoutIfNeeded()
+        }
+        else {
+            view.addSubview(blurView)
+            view.layoutIfNeeded()
+        }
     }
     
     ///
@@ -1191,5 +1197,40 @@ class UtilityFunctions {
             }
             break
         }
+    }
+    
+    // MARK: L&F Functions
+    func AKStyleButton(button: UIButton) {
+        button.backgroundColor = GlobalConstants.AKCoderToDoGray2
+        button.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+    }
+    
+    func AKStylePicker(picker: UIPickerView) {
+        picker.backgroundColor = GlobalConstants.AKCoderToDoGray2
+        picker.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+    }
+    
+    func AKStyleTextField(textField: UITextField) {
+        Func.AKAddBorderDeco(
+            textField,
+            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
+        textField.backgroundColor = GlobalConstants.AKCoderToDoGray2
+        textField.textColor = GlobalConstants.AKCoderToDoWhite
+        textField.contentVerticalAlignment = .center
+    }
+    
+    func AKStyleTextView(textView: UITextView) {
+        Func.AKAddBorderDeco(
+            textView,
+            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
+            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            position: .left
+        )
+        textView.backgroundColor = GlobalConstants.AKCoderToDoGray2
+        textView.textColor = GlobalConstants.AKCoderToDoWhite
+        textView.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     }
 }

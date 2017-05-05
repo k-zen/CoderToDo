@@ -1,7 +1,6 @@
 import UIKit
 
-class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
-{
+class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 104.0
@@ -15,8 +14,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     @IBOutlet var mainContainer: UIView!
     
     // MARK: Actions
-    @IBAction func done(_ sender: Any)
-    {
+    @IBAction func done(_ sender: Any) {
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
@@ -57,8 +55,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    @IBAction func notDone(_ sender: Any)
-    {
+    @IBAction func notDone(_ sender: Any) {
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.statusValue.setTitle(TaskStates.notDone.rawValue, for: .normal)
@@ -82,8 +79,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    @IBAction func notApplicable(_ sender: Any)
-    {
+    @IBAction func notApplicable(_ sender: Any) {
         if self.editMode == .editable {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.showContinueMessage(
@@ -124,8 +120,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    @IBAction func dilate(_ sender: Any)
-    {
+    @IBAction func dilate(_ sender: Any) {
         if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.statusValue.setTitle(TaskStates.dilate.rawValue, for: .normal)
@@ -137,8 +132,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    @IBAction func pending(_ sender: Any)
-    {
+    @IBAction func pending(_ sender: Any) {
         if self.editMode == .editable || self.editMode == .limitedEditing {
             if let controller = self.controller as? AKViewTaskViewController {
                 controller.statusValue.setTitle(TaskStates.pending.rawValue, for: .normal)
@@ -154,11 +148,8 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -172,8 +163,7 @@ class AKSelectTaskStateView: AKCustomView, AKCustomViewProtocol
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

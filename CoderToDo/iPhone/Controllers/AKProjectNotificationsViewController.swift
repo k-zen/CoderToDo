@@ -1,8 +1,7 @@
 import UIKit
 import UserNotifications
 
-class AKProjectNotificationsViewController: AKCustomViewController
-{
+class AKProjectNotificationsViewController: AKCustomViewController {
     // MARK: Properties
     var project: Project!
     
@@ -10,8 +9,7 @@ class AKProjectNotificationsViewController: AKCustomViewController
     @IBOutlet weak var enableNotifications: UISwitch!
     
     // MARK: Actions
-    @IBAction func enableNotifications(_ sender: Any)
-    {
+    @IBAction func enableNotifications(_ sender: Any) {
         var project = AKProjectBuilder.from(project: self.project)
         project.notifyClosingTime = self.enableNotifications.isOn
         AKProjectBuilder.to(project: self.project, from: project)
@@ -36,15 +34,13 @@ class AKProjectNotificationsViewController: AKCustomViewController
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKProjectNotificationsViewController {
                 controller.enableNotifications.isOn = controller.project.notifyClosingTime

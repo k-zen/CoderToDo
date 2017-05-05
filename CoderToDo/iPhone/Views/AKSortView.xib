@@ -18,43 +18,30 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxh-dk-0eJ" userLabel="Main_Container">
-            <rect key="frame" x="0.0" y="0.0" width="340" height="70"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6au-lr-Gaa" userLabel="Title">
-                    <rect key="frame" x="25" y="0.0" width="60" height="70"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="a2t-kH-yiM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="18"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-aO-vdB" userLabel="Order_Value">
-                    <rect key="frame" x="93" y="0.0" width="44" height="70"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="59"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="a6e-O5-0hg"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="159.5" id="gV4-em-rm7"/>
                     </constraints>
                 </pickerView>
                 <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7By-Os-b7j" userLabel="Filters_Value">
-                    <rect key="frame" x="145" y="0.0" width="170" height="70"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="170" id="gzQ-pl-Y7v"/>
-                    </constraints>
+                    <rect key="frame" x="160.5" y="0.0" width="159.5" height="59"/>
+                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </pickerView>
             </subviews>
             <color key="backgroundColor" red="0.1058823529" green="0.1176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="0qf-2h-y08"/>
-                <constraint firstItem="6au-lr-Gaa" firstAttribute="centerX" secondItem="Hxh-dk-0eJ" secondAttribute="centerX" constant="-115" id="850-2Y-HDm"/>
-                <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="QML-ix-d9K"/>
-                <constraint firstItem="6au-lr-Gaa" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="Xdw-CX-J0z"/>
-                <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="6au-lr-Gaa" secondAttribute="trailing" constant="8" id="dLg-xL-lqx"/>
-                <constraint firstAttribute="bottom" secondItem="cyz-aO-vdB" secondAttribute="bottom" id="f7M-hn-XSf"/>
-                <constraint firstAttribute="bottom" secondItem="7By-Os-b7j" secondAttribute="bottom" id="pdr-Pv-eBD"/>
-                <constraint firstItem="7By-Os-b7j" firstAttribute="leading" secondItem="cyz-aO-vdB" secondAttribute="trailing" constant="8" id="sQh-qw-mdM"/>
-                <constraint firstAttribute="bottom" secondItem="6au-lr-Gaa" secondAttribute="bottom" id="tex-JU-lCJ"/>
+                <constraint firstItem="7By-Os-b7j" firstAttribute="leading" secondItem="cyz-aO-vdB" secondAttribute="trailing" constant="1" id="6Aj-rm-mWs"/>
+                <constraint firstItem="cyz-aO-vdB" firstAttribute="leading" secondItem="Hxh-dk-0eJ" secondAttribute="leading" id="6hR-dC-DEq"/>
+                <constraint firstItem="cyz-aO-vdB" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="J1j-fC-J5v"/>
+                <constraint firstAttribute="bottom" secondItem="7By-Os-b7j" secondAttribute="bottom" constant="1" id="ULa-It-VUx"/>
+                <constraint firstAttribute="trailing" secondItem="7By-Os-b7j" secondAttribute="trailing" id="a9E-Iq-8Jn"/>
+                <constraint firstAttribute="bottom" secondItem="cyz-aO-vdB" secondAttribute="bottom" constant="1" id="jhC-Lk-6Jc"/>
+                <constraint firstItem="7By-Os-b7j" firstAttribute="top" secondItem="Hxh-dk-0eJ" secondAttribute="top" id="nob-sT-7B8"/>
+                <constraint firstItem="7By-Os-b7j" firstAttribute="width" secondItem="cyz-aO-vdB" secondAttribute="width" id="xwd-Ye-V5x"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

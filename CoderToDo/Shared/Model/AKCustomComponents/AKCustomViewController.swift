@@ -21,8 +21,7 @@ import UIKit
 /// - Author: Andreas P. Koenzen <akc@apkc.net>
 /// - Copyright: 2017 APKC.net
 /// - Date: Jan 5, 2017
-class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
-{
+class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKDisplaceDownAnimation = "displaceDown"
@@ -128,8 +127,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     let displaceUpTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
     
     // MARK: UIViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         if GlobalConstants.AKDebug {
@@ -137,8 +135,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if GlobalConstants.AKDebug {
@@ -165,16 +162,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         self.saveData(self)
     }
     
-    override func viewDidLayoutSubviews()
-    {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.configureLookAndFeel(self)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
-    {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.self) {
             return !self.inhibitTapGesture
         }
@@ -202,8 +197,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Initialization
-    func setup()
-    {
+    func setup() {
         // Manage gestures.
         self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(AKCustomViewController.tap(_:)))
         self.tapGesture?.delegate = self
@@ -255,8 +249,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func loadLocalizedText()
-    {
+    func loadLocalizedText() {
         self.localizableDictionary = {
             if let path = Bundle.main.path(forResource: "\(type(of: self))", ofType: "plist") {
                 NSLog("=> INFO: READING LOCALIZATION FILE *\(type(of: self)).plist*...")
@@ -271,15 +264,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     // MARK: Presenters
     func presentView(controller: AKCustomViewController,
                      taskBeforePresenting: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void,
-                     dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void)
-    {
+                     dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void) {
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
         controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
         controller.modalPresentationStyle = .overFullScreen
         
         taskBeforePresenting(self, controller)
         
-        self.present(controller, animated: true, completion: nil)
+        self.present(controller, animated: false, completion: nil)
     }
     
     // MARK: Floating Views
@@ -295,7 +287,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKMessageView.LocalConstants.AKViewWidth,
             height: AKMessageView.LocalConstants.AKViewHeight
         )
-        origin.y -= 60.0 // Move up 60 points from the center.
+        origin.y -= 0.0 // Move up Y points from the center.
         
         // Configure the overlay.
         self.messageOverlay.controller = self
@@ -341,7 +333,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKContinueMessageView.LocalConstants.AKViewWidth,
             height: AKContinueMessageView.LocalConstants.AKViewHeight
         )
-        origin.y -= 60.0 // Move up 60 points from the center.
+        origin.y -= 0.0 // Move up Y points from the center.
         
         // Configure the overlay.
         self.continueMessageOverlay.controller = self
@@ -489,7 +481,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKAddBucketEntryView.LocalConstants.AKViewWidth,
             height: AKAddBucketEntryView.LocalConstants.AKViewHeight
         )
-        origin.y -= 60.0 // Move up 60 points from the center.
+        origin.y -= 0.0 // Move up Y points from the center.
         
         // Configure the overlay.
         let addBucketEntryOverlay = AKAddBucketEntryView()
@@ -518,7 +510,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKMigrateBucketEntryView.LocalConstants.AKViewWidth,
             height: AKMigrateBucketEntryView.LocalConstants.AKViewHeight
         )
-        origin.y -= 60.0 // Move up 60 points from the center.
+        origin.y -= 0.0 // Move up Y points from the center.
         
         // Configure the overlay.
         self.migrateBucketEntryOverlay.controller = self
@@ -566,7 +558,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
             width: AKSelectCategoryView.LocalConstants.AKViewWidth,
             height: AKSelectCategoryView.LocalConstants.AKViewHeight
         )
-        origin.y -= 60.0 // Move up 60 points from the center.
+        origin.y -= 0.0 // Move up Y points from the center.
         
         // Configure the overlay.
         self.selectCategoryOverlay.controller = self
@@ -600,8 +592,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.messageOverlay.collapse(
             controller: self,
             animate: animate,
@@ -609,8 +600,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideContinueMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideContinueMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.continueMessageOverlay.collapse(
             controller: self,
             animate: animate,
@@ -618,8 +608,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideTopMenu(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideTopMenu(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.topMenuOverlay.collapse(
             controller: self,
             animate: animate,
@@ -627,8 +616,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideAddMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideAddMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.addMenuItemOverlay.collapse(
             controller: self,
             animate: animate,
@@ -636,8 +624,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSortMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideSortMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.sortMenuItemOverlay.collapse(
             controller: self,
             animate: animate,
@@ -645,8 +632,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideFilterMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideFilterMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.filterMenuItemOverlay.collapse(
             controller: self,
             animate: animate,
@@ -654,8 +640,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSearchMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideSearchMenuItem(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.searchMenuItemOverlay.collapse(
             controller: self,
             animate: animate,
@@ -674,8 +659,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideMigrateBucketEntry(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideMigrateBucketEntry(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.migrateBucketEntryOverlay.collapse(
             controller: self,
             animate: animate,
@@ -683,8 +667,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideInitialMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideInitialMessage(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.initialMessageOverlay.collapse(
             controller: self,
             animate: animate,
@@ -692,8 +675,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSelectCategory(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideSelectCategory(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.selectCategoryOverlay.collapse(
             controller: self,
             animate: true,
@@ -701,8 +683,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         )
     }
     
-    func hideSelectTaskState(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+    func hideSelectTaskState(animate: Bool, completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         self.selectTaskStateOverlay.collapse(
             controller: self,
             animate: true,
@@ -711,58 +692,50 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Gesture Handling
-    @objc internal func tap(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func tap(_ gesture: UIGestureRecognizer?) {
         NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenTaped(gesture)
     }
     
-    @objc internal func pinch(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func pinch(_ gesture: UIGestureRecognizer?) {
         NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenPinched(gesture)
     }
     
-    @objc internal func rotate(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func rotate(_ gesture: UIGestureRecognizer?) {
         NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenRotated(gesture)
     }
     
-    @objc internal func swipe(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func swipe(_ gesture: UIGestureRecognizer?) {
         NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenSwiped(gesture)
     }
     
-    @objc internal func pan(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func pan(_ gesture: UIGestureRecognizer?) {
         NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenPaned(gesture)
     }
     
-    @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?) {
         NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenScreenEdgePaned(gesture)
     }
     
-    @objc internal func longPress(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func longPress(_ gesture: UIGestureRecognizer?) {
         NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenLongPressed(gesture)
     }
     
     // MARK: Utility functions
-    func manageGrantToLocalNotifications()
-    {
+    func manageGrantToLocalNotifications() {
         Func.AKGetNotificationCenter().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if !granted {
                 Func.AKExecuteInMainThread(controller: self, mode: .sync, code: { (controller) -> Void in
@@ -793,8 +766,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
     }
     
-    func manageGrantToiCloud()
-    {
+    func manageGrantToiCloud() {
         Func.AKGetCloudKitContainer().accountStatus(completionHandler: { (accountStatus, error) -> Void in
             Func.AKExecuteInMainThread(controller: self, mode: .async, code: { (controller) -> Void in
                 guard error == nil else {
@@ -827,8 +799,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         })
     }
     
-    func dismissView(executeDismissTask: Bool)
-    {
+    func dismissView(executeDismissTask: Bool) {
         OperationQueue.main.addOperation {
             if executeDismissTask {
                 self.dismiss(animated: true, completion: self.dismissViewCompletionTask)
@@ -839,8 +810,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
         }
     }
     
-    func localize(key: String) -> Any?
-    {
+    func localize(key: String) -> Any? {
         var response: Any?
         if let val = self.localizableDictionary?.value(forKey: key) {
             response = val
@@ -853,8 +823,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Animations
-    func configureAnimations(displacementHeight: CGFloat)
-    {
+    func configureAnimations(displacementHeight: CGFloat) {
         self.displaceDownTable.fromValue = 0.0
         self.displaceDownTable.toValue = displacementHeight
         self.displaceDownTable.duration = 0.5
@@ -1026,8 +995,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Observers
-    func keyboardWasShow(notification: NSNotification)
-    {
+    func keyboardWasShow(notification: NSNotification) {
         if let info = notification.userInfo, let editableComponent = self.currentEditableComponent {
             if let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
                 var viewRect = self.view.frame

@@ -1,7 +1,6 @@
 import UIKit
 
-class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case projectName = 1
@@ -26,8 +25,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     @IBOutlet weak var close: UIButton!
     
     // MARK: Actions
-    @IBAction func save(_ sender: Any)
-    {
+    @IBAction func save(_ sender: Any) {
         // Check name.
         let name = AKProjectName(inputData: self.projectName.text!)
         do {
@@ -80,8 +78,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     @IBAction func close(_ sender: Any) { self.dismissView(executeDismissTask: true) }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
         self.loadLocalizedText()
@@ -106,8 +103,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -122,22 +118,19 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         self.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return String(format: "%i minutes", self.toleranceData[row])
@@ -148,8 +141,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -173,8 +165,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return self.toleranceData.count
@@ -188,8 +179,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKNewProjectViewController {
                 controller.tolerance.selectRow(1, inComponent: 0, animated: true)
@@ -199,12 +189,16 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKNewProjectViewController {
-                controller.projectName.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.close.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKAddBlurView(view: controller.controlsContainer, effect: .dark, addClearColorBgToView: true)
+                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.controlsContainer.layer.masksToBounds = true
+                controller.controlsContainer.layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+                controller.controlsContainer.layer.borderWidth = 2.0
+                
+                Func.AKStyleTextField(textField: controller.projectName)
+                
+                Func.AKStyleButton(button: controller.save)
+                Func.AKStyleButton(button: controller.close)
             }
         }
         self.currentScrollContainer = self.scrollContainer

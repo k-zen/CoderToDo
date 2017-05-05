@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/05/15)
+        * L&F modifications. (2017/05/05)
         * Minor modifications. (2017/05/03)
         * Minor modifications. (2017/05/02)
         * Added support for *About* view. (2017/04/23)

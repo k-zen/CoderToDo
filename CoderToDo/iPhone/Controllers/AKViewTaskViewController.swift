@@ -1,7 +1,6 @@
 import UIKit
 
-class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
-{
+class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case taskName = 1
@@ -30,8 +29,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBOutlet weak var dummyMarker: UILabel!
     
     // MARK: Actions
-    @IBAction func changeStatus(_ sender: Any)
-    {
+    @IBAction func changeStatus(_ sender: Any) {
         self.selectTaskStateOverlay.editMode = self.editMode
         
         var coordinates = self.view.convert(self.statusValue.frame, from: self.controlsContainer)
@@ -44,15 +42,13 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
     @IBAction func changeCategory(_ sender: Any) { self.showSelectCategory(origin: CGPoint.zero, animate: true, completionTask: nil) }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITextViewDelegate Implementation
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-    {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if range.length + range.location > (textView.text?.characters.count)! {
             return false
         }
@@ -69,22 +65,19 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
     }
     
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
-    {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         Func.AKAddDoneButtonKeyboard(textView, controller: self)
         self.currentEditableComponent = textView
         return true
     }
     
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool
-    {
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.additionalOperationsWhenTaped = { (gesture) -> Void in self.hideSelectTaskState(animate: true, completionTask: nil); self.hideSelectCategory(animate: true, completionTask: nil) }
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKViewTaskViewController {
@@ -192,23 +185,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKViewTaskViewController {
-                controller.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
                 controller.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
                 controller.taskState.layer.masksToBounds = true
-                controller.changeCategory.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.notesValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-                Func.AKAddBorderDeco(
-                    controller.taskNameContainer,
-                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-                    position: .left
-                )
-                Func.AKAddBorderDeco(
-                    controller.notesContainer,
-                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-                    position: .left
-                )
+                Func.AKStyleButton(button: controller.changeCategory)
+                Func.AKStyleTextView(textView: controller.taskNameValue)
+                Func.AKStyleTextView(textView: controller.notesValue)
             }
         }
         self.currentScrollContainer = self.scrollContainer
@@ -221,8 +202,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         self.notesValue.tag = LocalEnums.notes.rawValue
     }
     
-    private func toggleEditMode(mode: TaskMode)
-    {
+    private func toggleEditMode(mode: TaskMode) {
         switch mode {
         case .editable:
             self.taskNameValue.isEditable = true
@@ -251,8 +231,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate
         }
     }
     
-    func markTask(mode: TaskMode)
-    {
+    func markTask(mode: TaskMode) {
         self.taskState.text = mode.rawValue
         switch mode {
         case .editable:

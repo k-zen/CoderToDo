@@ -1,7 +1,6 @@
 import UIKit
 
-class AKCustomView: UIView, UIGestureRecognizerDelegate
-{
+class AKCustomView: UIView, UIGestureRecognizerDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKExpandHeightAnimation = "expandHeight"
@@ -68,8 +67,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     var controller: AKCustomViewController?
     
     // MARK: UIView Overriding
-    override init(frame: CGRect)
-    {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         // Load NIB file.
@@ -85,8 +83,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
         }
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         // Load NIB file.
@@ -103,8 +100,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     }
     
     // MARK: Miscellaneous
-    func setup()
-    {
+    func setup() {
         // Manage gestures.
         self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(AKCustomView.tap(_:)))
         self.tapGesture?.delegate = self
@@ -135,8 +131,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
-    {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.self) {
             return !self.inhibitTapGesture
         }
@@ -164,50 +159,43 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     }
     
     // MARK: Gesture Handling
-    @objc internal func tap(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func tap(_ gesture: UIGestureRecognizer?) {
         NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenTaped(gesture)
     }
     
-    @objc internal func pinch(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func pinch(_ gesture: UIGestureRecognizer?) {
         NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPinched(gesture)
     }
     
-    @objc internal func rotate(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func rotate(_ gesture: UIGestureRecognizer?) {
         NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenRotated(gesture)
     }
     
-    @objc internal func swipe(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func swipe(_ gesture: UIGestureRecognizer?) {
         NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenSwiped(gesture)
     }
     
-    @objc internal func pan(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func pan(_ gesture: UIGestureRecognizer?) {
         NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPaned(gesture)
     }
     
-    @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?) {
         NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenScreenEdgePaned(gesture)
     }
     
-    @objc internal func longPress(_ gesture: UIGestureRecognizer?)
-    {
+    @objc internal func longPress(_ gesture: UIGestureRecognizer?) {
         NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenLongPressed(gesture)
@@ -217,19 +205,18 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
     internal func getView() -> UIView { return self.customView }
     
     // MARK: Animations
-    internal func addAnimations(expandCollapseHeight: CGFloat)
-    {
+    internal func addAnimations(expandCollapseHeight: CGFloat) {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = expandCollapseHeight
         self.expandHeight.duration = 0.5
-        self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
         self.expandHeight.autoreverses = false
         self.getView().layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
         
         self.collapseHeight.fromValue = expandCollapseHeight
         self.collapseHeight.toValue = 0.0
         self.collapseHeight.duration = 0.5
-        self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
     }
@@ -238,8 +225,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate
         controller: AKCustomViewController?,
         expandHeight: CGFloat,
         animate: Bool,
-        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?) -> Void)?) {
         if animate {
             UIView.beginAnimations(LocalConstants.AKExpandHeightAnimation, context: nil)
             Func.AKChangeComponentHeight(component: self.getView(), newHeight: expandHeight)

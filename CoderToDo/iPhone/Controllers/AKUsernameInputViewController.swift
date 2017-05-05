@@ -1,7 +1,6 @@
 import UIKit
 
-class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
-{
+class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case username = 1
@@ -18,8 +17,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     @IBOutlet weak var done: UIButton!
     
     // MARK: Actions
-    @IBAction func done(_ sender: Any)
-    {
+    @IBAction func done(_ sender: Any) {
         let username = AKUsername(inputData: self.usernameValue.text!)
         do {
             try username.validate()
@@ -45,15 +43,13 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -68,28 +64,30 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         self.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
+        self.shouldAddBlurView = true
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKUsernameInputViewController {
+                controller.controlsContainer.backgroundColor = UIColor.clear
+                
                 controller.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
                 controller.icon.layer.masksToBounds = true
-                controller.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.done.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                
+                Func.AKStyleTextField(textField: controller.usernameValue)
+                
+                Func.AKStyleButton(button: controller.done)
             }
         }
         self.currentScrollContainer = self.scrollContainer

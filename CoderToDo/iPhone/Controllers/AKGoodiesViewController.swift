@@ -1,14 +1,12 @@
 import UIKit
 
-class AKGoodiesViewController: AKCustomViewController
-{
+class AKGoodiesViewController: AKCustomViewController {
     // MARK: Outlets
     @IBOutlet weak var cleaningMode: UISwitch!
     @IBOutlet weak var cancelAllNotifications: UIButton!
     
     // MARK: Actions
-    @IBAction func cleaningMode(_ sender: Any)
-    {
+    @IBAction func cleaningMode(_ sender: Any) {
         let configurationsMO = DataInterface.getConfigurations()
         if var configurations = AKConfigurationsBuilder.from(configurations: configurationsMO) {
             configurations.cleaningMode = self.cleaningMode.isOn
@@ -16,8 +14,7 @@ class AKGoodiesViewController: AKCustomViewController
         }
     }
     
-    @IBAction func cancelAllNotifications(_ sender: Any)
-    {
+    @IBAction func cancelAllNotifications(_ sender: Any) {
         self.showContinueMessage(
             origin: CGPoint.zero,
             type: .warning,
@@ -39,15 +36,13 @@ class AKGoodiesViewController: AKCustomViewController
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKGoodiesViewController {
                 controller.cleaningMode.isOn = DataInterface.getConfigurations()?.cleaningMode ?? false
@@ -55,7 +50,7 @@ class AKGoodiesViewController: AKCustomViewController
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKGoodiesViewController {
-                controller.cancelAllNotifications.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKStyleButton(button: controller.cancelAllNotifications)
             }
         }
         self.setup()

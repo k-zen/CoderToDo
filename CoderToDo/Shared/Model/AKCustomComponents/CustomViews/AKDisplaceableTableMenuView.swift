@@ -1,7 +1,6 @@
 import UIKit
 
-class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
-{
+class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 120.0
@@ -34,8 +33,7 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
     @IBOutlet weak var deleteButtonBottom: NSLayoutConstraint!
     
     // MARK: Actions
-    @IBAction func action(_ sender: Any)
-    {
+    @IBAction func action(_ sender: Any) {
         if let button = sender as? UIButton {
             switch button.tag {
             case 1:
@@ -58,11 +56,8 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -72,8 +67,7 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
         self.addAnimations(expandCollapseHeight: self.customHeight == 0.0 ? LocalConstants.AKViewHeight : self.customHeight)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         if !self.showEditButton {
             self.editButtonWidth.constant = 0.0
             self.deleteButtonWidth.constant = 104.0
@@ -86,14 +80,12 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.editButton.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
         self.deleteButton.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

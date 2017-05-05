@@ -1,7 +1,6 @@
 import UIKit
 
-class AKConfigurationsTableViewCell: UITableViewCell
-{
+class AKConfigurationsTableViewCell: UITableViewCell {
     // MARK: Properties
     let displaceableMenuOverlay = AKDisplaceableTableMenuView()
     var swipeLeftGesture: UISwipeGestureRecognizer?
@@ -17,8 +16,7 @@ class AKConfigurationsTableViewCell: UITableViewCell
     @IBOutlet weak var badgeWidth: NSLayoutConstraint!
     
     // MARK: UITableViewCell Overriding
-    override func awakeFromNib()
-    {
+    override func awakeFromNib() {
         super.awakeFromNib()
         
         // Manage gestures.
@@ -41,16 +39,14 @@ class AKConfigurationsTableViewCell: UITableViewCell
         self.arrow.layer.masksToBounds = true
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         self.toggleDisplaceableMenu(state: .notVisible)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
-    {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if gestureRecognizer.isKind(of: UISwipeGestureRecognizer.self) {
             return true
         }
@@ -65,8 +61,7 @@ class AKConfigurationsTableViewCell: UITableViewCell
     @objc internal func swipeRight(_ gesture: UIGestureRecognizer?) { self.toggleDisplaceableMenu(state: .notVisible) }
     
     // MARK: Menu Handling
-    func toggleDisplaceableMenu(state: DisplaceableMenuStates)
-    {
+    func toggleDisplaceableMenu(state: DisplaceableMenuStates) {
         if self.controller == nil || !(self.controller?.isKind(of: AKUserDefinedCategoriesViewController.self))! {
             return // Disable editing for all except UserDefinedCategoriesViewController. TODO: Improve.
         }

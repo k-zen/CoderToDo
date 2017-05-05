@@ -1,8 +1,7 @@
 import UIKit
 import UserNotifications
 
-class AKListProjectsViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
-{
+class AKListProjectsViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 34.0
@@ -20,8 +19,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     @IBOutlet weak var menu: UIBarButtonItem!
     
     // MARK: Actions
-    @IBAction func toggleMenu(_ sender: Any)
-    {
+    @IBAction func toggleMenu(_ sender: Any) {
         if !self.isMenuVisible {
             self.displaceDownTable(
                 tableView: self.projectsTable,
@@ -44,14 +42,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
             case GlobalConstants.AKViewUserSegue:
@@ -81,8 +77,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         }
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
-    {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
         case GlobalConstants.AKViewUserSegue:
             return true
@@ -96,8 +91,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         
         let cell = self.projectsTable.dequeueReusableCell(withIdentifier: "ProjectsTableCell") as! AKProjectsTableViewCell
@@ -160,8 +154,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let project = DataInterface.getProjects(filter: self.projectFilter)[section]
         let projectStatus = DataInterface.getProjectStatus(project: project)
         
@@ -270,8 +263,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     // MARK: UITableViewDelegate Implementation
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         
         var cellHeight = LocalConstants.AKRowHeight
@@ -286,15 +278,13 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.inhibitLocalNotificationMessage = false
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
@@ -348,7 +338,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                         origin: origin,
                         title: "Hello..!",
                         message: "Use the menu button above to start adding coding projects.",
-                        animate: true,
+                        animate: false,
                         completionTask: nil
                     )
                 }
@@ -484,8 +474,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func toggleUser() { self.performSegue(withIdentifier: GlobalConstants.AKViewUserSegue, sender: self) }
     
-    func setUserBadge(controller: AKListProjectsViewController)
-    {
+    func setUserBadge(controller: AKListProjectsViewController) {
         let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))
         userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().characters.first?.description ?? "").uppercased(), for: .normal)
         userAvatar.setTitleColor(GlobalConstants.AKButtonFg, for: .normal)

@@ -131,7 +131,7 @@
 		49E76E071E7DCF62000215BC /* AKSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD81E7DCF62000215BC /* AKSortView.swift */; };
 		49E76E081E7DCF62000215BC /* AKTasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DD91E7DCF62000215BC /* AKTasksTableView.swift */; };
 		49E76E091E7DCF62000215BC /* AKTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDA1E7DCF62000215BC /* AKTopMenuView.swift */; };
-		49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */; };
+		49E76E0A1E7DCF62000215BC /* AKTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDC1E7DCF62000215BC /* AKTextField.swift */; };
 		49E76E0B1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDE1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift */; };
 		49E76E0C1E7DCF62000215BC /* AKDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DDF1E7DCF62000215BC /* AKDaysTableViewCell.swift */; };
 		49E76E0D1E7DCF62000215BC /* AKProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E76DE01E7DCF62000215BC /* AKProjectsTableViewCell.swift */; };
@@ -292,7 +292,7 @@
 		49E76DD81E7DCF62000215BC /* AKSortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSortView.swift; sourceTree = "<group>"; };
 		49E76DD91E7DCF62000215BC /* AKTasksTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTasksTableView.swift; sourceTree = "<group>"; };
 		49E76DDA1E7DCF62000215BC /* AKTopMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTopMenuView.swift; sourceTree = "<group>"; };
-		49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNotesTextField.swift; sourceTree = "<group>"; };
+		49E76DDC1E7DCF62000215BC /* AKTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKTextField.swift; sourceTree = "<group>"; };
 		49E76DDE1E7DCF62000215BC /* AKConfigurationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKConfigurationsTableViewCell.swift; sourceTree = "<group>"; };
 		49E76DDF1E7DCF62000215BC /* AKDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKDaysTableViewCell.swift; sourceTree = "<group>"; };
 		49E76DE01E7DCF62000215BC /* AKProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKProjectsTableViewCell.swift; sourceTree = "<group>"; };
@@ -694,7 +694,7 @@
 		49E76DDB1E7DCF62000215BC /* SmallComponents */ = {
 			isa = PBXGroup;
 			children = (
-				49E76DDC1E7DCF62000215BC /* AKNotesTextField.swift */,
+				49E76DDC1E7DCF62000215BC /* AKTextField.swift */,
 			);
 			path = SmallComponents;
 			sourceTree = "<group>";
@@ -1045,7 +1045,7 @@
 				49E76DFD1E7DCF62000215BC /* AKProjectBuilder.swift in Sources */,
 				49A4A0E81E589E8600CEDA1B /* AKListProjectsViewController.swift in Sources */,
 				49AFFC3D1E81615100FC258C /* MainDataModel.xcdatamodeld in Sources */,
-				49E76E0A1E7DCF62000215BC /* AKNotesTextField.swift in Sources */,
+				49E76E0A1E7DCF62000215BC /* AKTextField.swift in Sources */,
 				49A4A0E71E589E8600CEDA1B /* AKIntroductoryViewController.swift in Sources */,
 				492D5C741E82F53E00F9E470 /* AKAddView.swift in Sources */,
 				4913F76F1E9A9186005E6FCB /* AKTableCachingEntry.swift in Sources */,

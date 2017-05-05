@@ -1,7 +1,6 @@
 import UIKit
 
-class AKProjectsTableViewCell: UITableViewCell
-{
+class AKProjectsTableViewCell: UITableViewCell {
     // MARK: Properties
     let displaceableMenuOverlay = AKDisplaceableTableMenuView()
     var swipeLeftGesture: UISwipeGestureRecognizer?
@@ -23,8 +22,7 @@ class AKProjectsTableViewCell: UITableViewCell
     @IBOutlet weak var newDayStateValueHeight: NSLayoutConstraint!
     
     // MARK: Actions
-    @IBAction func addTomorrowTask(_ sender: Any)
-    {
+    @IBAction func addTomorrowTask(_ sender: Any) {
         if let project = self.project, let presenterController = self.controller as? AKListProjectsViewController {
             do {
                 try AKChecks.canAddTask(project: project)
@@ -48,8 +46,7 @@ class AKProjectsTableViewCell: UITableViewCell
     }
     
     // MARK: UITableViewCell Overriding
-    override func awakeFromNib()
-    {
+    override func awakeFromNib() {
         super.awakeFromNib()
         
         // Manage gestures.
@@ -63,7 +60,7 @@ class AKProjectsTableViewCell: UITableViewCell
         self.addGestureRecognizer(self.swipeRightGesture!)
         
         // Custom L&F.
-        self.addTomorrowTask.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        Func.AKStyleButton(button: self.addTomorrowTask)
         self.selectionStyle = UITableViewCellSelectionStyle.none
         self.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
         Func.AKAddBorderDeco(
@@ -74,16 +71,14 @@ class AKProjectsTableViewCell: UITableViewCell
         )
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         self.toggleDisplaceableMenu(state: .notVisible)
     }
     
     // MARK: UIGestureRecognizerDelegate Implementation
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
-    {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if gestureRecognizer.isKind(of: UISwipeGestureRecognizer.self) {
             return true
         }
@@ -98,8 +93,7 @@ class AKProjectsTableViewCell: UITableViewCell
     @objc internal func swipeRight(_ gesture: UIGestureRecognizer?) { self.toggleDisplaceableMenu(state: .notVisible) }
     
     // MARK: Menu Handling
-    func toggleDisplaceableMenu(state: DisplaceableMenuStates)
-    {
+    func toggleDisplaceableMenu(state: DisplaceableMenuStates) {
         switch state {
         case .visible:
             // The origin never changes so fix it to the controller's view.
@@ -184,8 +178,7 @@ class AKProjectsTableViewCell: UITableViewCell
         }
     }
     
-    func toggleAddTaskButton()
-    {
+    func toggleAddTaskButton() {
         if let project = self.project {
             if DataInterface.getProjectStatus(project: project) == .accepting || DataInterface.getProjectStatus(project: project) == .firstDay {
                 self.addTomorrowTask.isHidden = false

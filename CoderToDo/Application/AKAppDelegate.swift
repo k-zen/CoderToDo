@@ -5,8 +5,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate
-{
+class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     // MARK: Properties
     let notificationCenter = UNUserNotificationCenter.current()
     let cloudKitContainer = CKContainer(identifier: "iCloud.net.apkc.projects.ios.CoderToDo")
@@ -18,9 +17,9 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
     
     func applicationWillResignActive(_ application: UIApplication) { AKMasterReference.saveData(instance: self.masterRef) }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
-    {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // ### Customize the App.
+        // ### TabBar
         UITabBarItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
@@ -38,6 +37,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
             ], for: .selected
         )
         UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
+        // ### BarButton
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
@@ -46,6 +46,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
                 NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
             ], for: .normal
         )
+        // ### NavBar
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont(
                 name: GlobalConstants.AKSecondaryFont,
@@ -53,6 +54,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
             NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
         ]
         UINavigationBar.appearance().tintColor = GlobalConstants.AKTabBarTintSelected
+        // ### SegmentedControl
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
@@ -69,6 +71,9 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
                 NSForegroundColorAttributeName: UIColor.black
             ], for: .selected
         )
+        // ### Misc
+        UIPickerView.appearance().backgroundColor = GlobalConstants.AKCoderToDoGray2
+        UITextView.appearance().backgroundColor = GlobalConstants.AKCoderToDoGray2
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()
@@ -87,8 +92,7 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
-    {
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert,.sound])
     }
 }

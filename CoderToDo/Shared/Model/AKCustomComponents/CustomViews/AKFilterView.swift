@@ -1,7 +1,6 @@
 import UIKit
 
-class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 70.0
@@ -26,8 +25,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.filterType.rawValue:
             return self.filterTypeData[row]
@@ -38,8 +36,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -62,8 +59,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         return pickerLabel
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let controller = self.controller as? AKListProjectsViewController {
             let filterType = self.filterTypeData[self.type.selectedRow(inComponent: 0)]
             let filterValue = self.filterValueData[self.filters.selectedRow(inComponent: 0)]
@@ -94,8 +90,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.filterType.rawValue:
             return self.filterTypeData.count
@@ -109,11 +104,8 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.type.delegate = self
@@ -131,8 +123,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         self.addAnimations(expandCollapseHeight: LocalConstants.AKViewHeight)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         self.filterTypeData.removeAll()
         self.filterValueData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
@@ -159,8 +150,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
@@ -173,8 +163,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         CATransaction.commit()
     }
     
-    func resetViewDefaults(controller: AKCustomViewController)
-    {
+    func resetViewDefaults(controller: AKCustomViewController) {
         if let controller = self.controller as? AKListProjectsViewController {
             for (index, row) in controller.filterMenuItemOverlay.filterTypeData.enumerated() {
                 if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectFilterType.rawValue) == .orderedSame {

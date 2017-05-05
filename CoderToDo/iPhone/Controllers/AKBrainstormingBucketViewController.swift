@@ -1,7 +1,6 @@
 import UIKit
 
-class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
-{
+class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKProjectListTableHeaderHeight: CGFloat = 1.0
@@ -32,8 +31,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     @IBOutlet weak var bucketTable: UITableView!
     
     // MARK: Actions
-    @IBAction func addEntry(_ sender: Any)
-    {
+    @IBAction func addEntry(_ sender: Any) {
         if let _ = self.selectedProject {
             self.addBucketEntryOverlay = showAddBucketEntry(
                 origin: CGPoint.zero,
@@ -56,15 +54,13 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
         
         switch tableView.tag {
@@ -116,8 +112,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         return defaultCell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             let headerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKProjectListTableHeaderHeight))
@@ -201,8 +196,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         return headerCell
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             let footerCell = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: LocalConstants.AKProjectListTableFooterHeight))
@@ -226,8 +220,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         return footerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             return DataInterface.getProjects(filter: self.projectFilter).count
@@ -243,8 +236,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             return 1
@@ -265,8 +257,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             return LocalConstants.AKProjectListTableRowHeight
@@ -277,8 +268,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             return LocalConstants.AKProjectListTableHeaderHeight
@@ -289,8 +279,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             return LocalConstants.AKProjectListTableFooterHeight
@@ -301,8 +290,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView.tag {
         case LocalConstants.AKProjectListTableTag:
             self.selectedProject = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
@@ -340,8 +328,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKBrainstormingBucketViewController {
@@ -375,16 +362,10 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                         origin: origin,
                         title: "Hello..!",
                         message: "Add a project first in order to start adding entries to the bucket.",
-                        animate: true,
+                        animate: false,
                         completionTask: nil
                     )
                 }
-            }
-        }
-        self.configureLookAndFeel = { (controller) -> Void in
-            if let controller = controller as? AKBrainstormingBucketViewController {
-                controller.projectListContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
-                controller.bucketContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
             }
         }
         self.setup()

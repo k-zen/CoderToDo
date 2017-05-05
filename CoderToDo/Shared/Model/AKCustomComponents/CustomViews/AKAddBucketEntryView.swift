@@ -1,7 +1,6 @@
 import UIKit
 
-class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDelegate
-{
+class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
@@ -21,8 +20,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     @IBOutlet weak var cancel: UIButton!
     
     // MARK: Actions
-    @IBAction func save(_ sender: Any)
-    {
+    @IBAction func save(_ sender: Any) {
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
             let name = AKTaskName(inputData: self.name.text!)
             do {
@@ -56,8 +54,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
         }
     }
     
-    @IBAction func cancel(_ sender: Any)
-    {
+    @IBAction func cancel(_ sender: Any) {
         // Default Action!
         self.controller?.tap(nil)
         if let presenterController = self.controller as? AKBrainstormingBucketViewController {
@@ -69,8 +66,7 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -85,26 +81,21 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self.controller!)
         self.controller?.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.controller?.currentEditableComponent = nil
         return true
     }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.shouldAddBlurView = true
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.name.delegate = self
@@ -120,19 +111,24 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     
     func loadComponents() {}
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
+        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderWidth = 2.0
+        self.mainContainer.backgroundColor = UIColor.clear
+        
+        Func.AKStyleTextField(textField: self.name)
+        
         self.priority.subviews[2].tintColor = Func.AKGetColorForPriority(priority: .low)
         self.priority.subviews[1].tintColor = Func.AKGetColorForPriority(priority: .medium)
         self.priority.subviews[0].tintColor = Func.AKGetColorForPriority(priority: .high)
-        self.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.cancel.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        
+        Func.AKStyleButton(button: self.save)
+        Func.AKStyleButton(button: self.cancel)
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

@@ -1,7 +1,6 @@
 import UIKit
 
-class AKBackupViewController: AKCustomViewController
-{
+class AKBackupViewController: AKCustomViewController {
     // MARK: Outlets
     @IBOutlet var lastBackupValue: UILabel!
     @IBOutlet var lastBackupSizeValue: UILabel!
@@ -10,8 +9,7 @@ class AKBackupViewController: AKCustomViewController
     @IBOutlet var restoreNow: UIButton!
     
     // MARK: Actions
-    @IBAction func backupNow(_ sender: Any)
-    {
+    @IBAction func backupNow(_ sender: Any) {
         Func.AKToggleButtonMode(controller: self, button: self.backupNow, mode: .disabled, showSpinner: true, direction: .disableToEnable)
         
         // Check the size of this device's data. IF its smaller then alert the user.
@@ -76,8 +74,7 @@ class AKBackupViewController: AKCustomViewController
         })
     }
     
-    @IBAction func restoreNow(_ sender: Any)
-    {
+    @IBAction func restoreNow(_ sender: Any) {
         Func.AKToggleButtonMode(controller: self, button: self.restoreNow, mode: .disabled, showSpinner: true, direction: .disableToEnable)
         
         if !DataInterface.isProjectEmpty() {
@@ -115,15 +112,13 @@ class AKBackupViewController: AKCustomViewController
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.shouldAddSpinner = true
         self.inhibitiCloudMessage = false
         self.iCloudAccessAvailableAction = { (presenterController) -> Void in
@@ -169,8 +164,8 @@ class AKBackupViewController: AKCustomViewController
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKBackupViewController {
-                controller.backupNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.restoreNow.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKStyleButton(button: controller.backupNow)
+                Func.AKStyleButton(button: controller.restoreNow)
             }
         }
         self.setup()

@@ -1,7 +1,6 @@
 import UIKit
 
-class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSource, UITableViewDelegate
-{
+class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 30.0
@@ -19,8 +18,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[indexPath.section]
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[indexPath.row]
@@ -77,8 +75,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: self.day!, filterEmpty: true, filter: controller.taskFilter)[section]
             
@@ -160,16 +157,14 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
         footerCell.backgroundColor = UIColor.clear
         
         return footerCell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if let day = self.day {
             if let controller = self.controller as? AKViewProjectViewController {
                 return DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter).count
@@ -183,8 +178,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[section]
             
@@ -204,8 +198,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[indexPath.section]
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[indexPath.row]
@@ -214,11 +207,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
     }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.tasksTable?.dataSource = self
@@ -232,15 +222,13 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         self.addAnimations(expandCollapseHeight: 0.0)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         self.tasksTable.register(UINib(nibName: "AKTasksTableViewCell", bundle: nil), forCellReuseIdentifier: "TasksTableCell")
     }
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

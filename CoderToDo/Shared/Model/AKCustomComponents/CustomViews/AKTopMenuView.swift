@@ -1,7 +1,6 @@
 import UIKit
 
-class AKTopMenuView: AKCustomView, AKCustomViewProtocol
-{
+class AKTopMenuView: AKCustomView, AKCustomViewProtocol {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 42.0
@@ -33,11 +32,8 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -51,8 +47,7 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

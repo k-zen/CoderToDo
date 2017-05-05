@@ -1,8 +1,7 @@
 import Charts
 import UIKit
 
-class AKUserViewController: AKCustomViewController, UITextFieldDelegate
-{
+class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case username = 1
@@ -19,8 +18,7 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate
     @IBOutlet weak var save: UIButton!
     
     // MARK: Actions
-    @IBAction func save(_ sender: Any)
-    {
+    @IBAction func save(_ sender: Any) {
         let username = AKUsername(inputData: self.usernameValue.text!)
         do {
             try username.validate()
@@ -46,15 +44,13 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate
     }
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITextFieldDelegate Implementation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > (textField.text?.characters.count)! {
             return false
         }
@@ -69,22 +65,19 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         Func.AKAddDoneButtonKeyboard(textField, controller: self)
         self.currentEditableComponent = textField
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.currentEditableComponent = nil
         return true
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKUserViewController {
                 // Hide the chart if there are not data.
@@ -96,8 +89,8 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKUserViewController {
-                controller.usernameValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.save.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKStyleTextField(textField: controller.usernameValue)
+                Func.AKStyleButton(button: controller.save)
             }
         }
         self.currentScrollContainer = self.scrollContainer
@@ -184,7 +177,6 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate
 }
 
 @objc(BarChartFormatter)
-class BarChartFormatter: NSObject, IAxisValueFormatter
-{
+class BarChartFormatter: NSObject, IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String { return Func.AKGetDayOfWeekAsName(dayOfWeek: Int16(value), short: true)! }
 }

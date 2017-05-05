@@ -1,8 +1,7 @@
 import UIKit
 import UserNotifications
 
-class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Local Enums
     private enum LocalEnums: Int {
         case tolerance = 1
@@ -22,8 +21,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     @IBOutlet weak var tolerance: UIPickerView!
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
         self.loadLocalizedText()
@@ -48,8 +46,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return String(format: "%i minutes", self.toleranceData[row])
@@ -60,8 +57,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -85,8 +81,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
             return self.toleranceData.count
@@ -100,8 +95,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKProjectTimesViewController {
                 // Set default values.
@@ -159,9 +153,9 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKProjectTimesViewController {
-                controller.startingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.closingTime.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-                controller.tolerance.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                Func.AKStylePicker(picker: controller.tolerance)
+                Func.AKStylePicker(picker: controller.startingTime)
+                Func.AKStylePicker(picker: controller.closingTime)
             }
         }
         self.setup()

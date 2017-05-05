@@ -1,7 +1,6 @@
 import UIKit
 
-class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
-{
+class AKContinueMessageView: AKCustomView, AKCustomViewProtocol {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
@@ -20,8 +19,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     @IBOutlet weak var no: UIButton!
     
     // MARK: Actions
-    @IBAction func yes(_ sender: Any)
-    {
+    @IBAction func yes(_ sender: Any) {
         // Default Action!
         self.controller?.hideContinueMessage(animate: true, completionTask: nil)
         // Custom Action.
@@ -30,8 +28,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
         }
     }
     
-    @IBAction func no(_ sender: Any)
-    {
+    @IBAction func no(_ sender: Any) {
         // Default Action!
         self.controller?.hideContinueMessage(animate: true, completionTask: nil)
         // Custom Action.
@@ -44,12 +41,9 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.shouldAddBlurView = true
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -61,16 +55,18 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol
     
     func loadComponents() {}
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
-        self.yes.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.no.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderWidth = 2.0
+        self.mainContainer.backgroundColor = UIColor.clear
+        
+        Func.AKStyleButton(button: self.yes)
+        Func.AKStyleButton(button: self.no)
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

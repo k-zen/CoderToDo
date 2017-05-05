@@ -1,7 +1,6 @@
 import UIKit
 
-class AKInitialMessageView: AKCustomView, AKCustomViewProtocol
-{
+class AKInitialMessageView: AKCustomView, AKCustomViewProtocol {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
@@ -17,12 +16,8 @@ class AKInitialMessageView: AKCustomView, AKCustomViewProtocol
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
-        super.inhibitTapGesture = false
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -34,14 +29,12 @@ class AKInitialMessageView: AKCustomView, AKCustomViewProtocol
     
     func loadComponents() {}
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(

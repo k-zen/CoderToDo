@@ -1,7 +1,6 @@
 import UIKit
 
-class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate
-{
+class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 70.0
@@ -26,8 +25,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UIPickerViewDelegate Implementation
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
             return self.sortFilterData[row]
@@ -38,8 +36,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = GlobalConstants.AKPickerViewFg
         
@@ -62,8 +59,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         return pickerLabel
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.projectFilter.projectFilter?.sortType = ProjectSorting(rawValue: self.sortFilterData[self.filters.selectedRow(inComponent: 0)])!
             controller.projectFilter.projectFilter?.sortOrder = self.sortOrderData[self.order.selectedRow(inComponent: 0)]
@@ -79,8 +75,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     }
     
     // MARK: UIPickerViewDataSource Implementation
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case LocalEnums.filters.rawValue:
             return self.sortFilterData.count
@@ -94,11 +89,8 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.filters.delegate = self
@@ -116,8 +108,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         self.addAnimations(expandCollapseHeight: LocalConstants.AKViewHeight)
     }
     
-    func loadComponents()
-    {
+    func loadComponents() {
         self.sortFilterData.removeAll()
         self.sortOrderData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
@@ -140,8 +131,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
@@ -154,8 +144,7 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         CATransaction.commit()
     }
     
-    func resetViewDefaults(controller: AKCustomViewController)
-    {
+    func resetViewDefaults(controller: AKCustomViewController) {
         if let controller = self.controller as? AKListProjectsViewController {
             for (index, row) in controller.sortMenuItemOverlay.sortOrderData.enumerated() {
                 if row.rawValue.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectSortOrder.rawValue) == .orderedSame {

@@ -1,7 +1,6 @@
 import UIKit
 
-class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
-{
+class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 1.0
@@ -16,15 +15,13 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
     @IBOutlet weak var userDefinedCategoriesTable: UITableView!
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.userDefinedCategoriesTable.dequeueReusableCell(withIdentifier: "ConfigurationsTableCell") as! AKConfigurationsTableViewCell
         cell.controller = self
         cell.title.text = DataInterface.listProjectCategories(project: self.project)[indexPath.section]
@@ -43,16 +40,14 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = UIColor.clear
         
         return headerCell
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
         footerCell.backgroundColor = UIColor.clear
         
@@ -73,8 +68,7 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.inhibitTapGesture = true
         self.setup()
         

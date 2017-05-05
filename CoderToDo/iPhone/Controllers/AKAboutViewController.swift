@@ -1,7 +1,6 @@
 import UIKit
 
-class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate
-{
+class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Constants
     private struct LocalConstants {
         static let AKHeaderHeight: CGFloat = 1.0
@@ -20,14 +19,12 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     @IBOutlet weak var pagesTable: UITableView!
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
-    {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
         case GlobalConstants.AKViewRulesSegue,
              GlobalConstants.AKViewChangesSegue:
@@ -38,8 +35,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     }
     
     // MARK: UITableViewDataSource Implementation
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.pagesTable.dequeueReusableCell(withIdentifier: "ConfigurationsTableCell") as! AKConfigurationsTableViewCell
         cell.title.text = self.pagesTableHeaders[indexPath.section]
         
@@ -55,16 +51,14 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKHeaderHeight))
         headerCell.backgroundColor = UIColor.clear
         
         return headerCell
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: LocalConstants.AKFooterHeight))
         footerCell.backgroundColor = UIColor.clear
         
@@ -84,8 +78,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { return LocalConstants.AKFooterHeight }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             self.performSegue(withIdentifier: GlobalConstants.AKViewRulesSegue, sender: self)
@@ -110,17 +103,11 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.inhibitTapGesture = true
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKAboutViewController {
                 controller.versionValue.text = String(format: "Version %@ Build %@", Func.AKAppVersion(), Func.AKAppBuild())
-            }
-        }
-        self.configureLookAndFeel = { (controller) -> Void in
-            if let controller = controller as? AKAboutViewController {
-                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
             }
         }
         self.setup()

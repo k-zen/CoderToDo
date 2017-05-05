@@ -154,8 +154,6 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
         super.shouldAddBlurView = true
         super.setup()
         
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
-        
         // Delegate & DataSource
         self.taskNameValue.delegate = self
         self.taskNameValue.tag = LocalEnums.taskName.rawValue
@@ -188,17 +186,17 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     func applyLookAndFeel() {
         self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
-        self.taskNameValue.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        Func.AKAddBorderDeco(
-            self.taskNameValue,
-            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
+        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderWidth = 2.0
+        self.mainContainer.backgroundColor = UIColor.clear
+        
+        Func.AKStyleTextView(textView: self.taskNameValue)
+        
         self.initialStateValue.subviews[1].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.pending.rawValue)
         self.initialStateValue.subviews[0].tintColor = Func.AKGetColorForTaskState(taskState: TaskStates.dilate.rawValue)
-        self.migrate.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.cancel.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        
+        Func.AKStyleButton(button: self.migrate)
+        Func.AKStyleButton(button: self.cancel)
     }
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize) {

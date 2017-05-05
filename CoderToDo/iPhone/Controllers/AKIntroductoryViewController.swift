@@ -1,7 +1,6 @@
 import UIKit
 
-class AKIntroductoryViewController: AKCustomViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate
-{
+class AKIntroductoryViewController: AKCustomViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     // MARK: Properties
     var pageContainer: UIPageViewController!
     var pages = [UIViewController]()
@@ -12,15 +11,13 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     @IBOutlet weak var control: UIPageControl!
     
     // MARK: AKCustomViewController Overriding
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.customSetup()
     }
     
     // MARK: UIPageViewControllerDataSource Implementation
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
-    {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let currentIndex = self.pages.index(of: viewController)!
         if currentIndex == 0 {
             return nil
@@ -30,8 +27,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
         return self.pages[previousIndex]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
-    {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let currentIndex = self.pages.index(of: viewController)!
         if currentIndex == self.pages.count-1 {
             return nil
@@ -42,16 +38,14 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     }
     
     // MARK: UIPageViewControllerDelegate Implementation
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController])
-    {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         self.pendingIndex = self.pages.index(of: pendingViewControllers.first!)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool)
-    {
+                            transitionCompleted completed: Bool) {
         if completed {
             self.currentIndex = self.pendingIndex
             if let index = self.currentIndex {
@@ -61,8 +55,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     }
     
     // MARK: Miscellaneous
-    func customSetup()
-    {
+    func customSetup() {
         self.setup()
         
         let page1 = AKUsernameInputViewController(nibName: "AKUsernameInputView", bundle: nil)

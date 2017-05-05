@@ -1,7 +1,6 @@
 import UIKit
 
-class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
-{
+class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 44.0
@@ -15,8 +14,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: UISearchBarDelegate Implementation
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
-    {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: searchText.compare("") == .orderedSame ? Search.showAll.rawValue : searchText)
             Func.AKReloadTable(tableView: controller.projectsTable)
@@ -30,8 +28,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         if let controller = self.controller as? AKListProjectsViewController {
             controller.projectFilter.projectFilter?.searchTerm = SearchTerm(term: Search.showAll.rawValue)
             Func.AKReloadTable(tableView: controller.projectsTable)
@@ -49,29 +46,23 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         self.searchBar.text = ""
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         controller?.tap(nil)
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool
-    {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         self.searchBar.setShowsCancelButton(true, animated: true)
         return true
     }
     
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
-    {
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         self.searchBar.setShowsCancelButton(false, animated: true)
         return true
     }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         // Delegate & DataSource
         self.searchBar.delegate = self
@@ -86,15 +77,13 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
     
     func loadComponents() {}
     
-    func applyLookAndFeel()
-    {
+    func applyLookAndFeel() {
         self.searchBar.keyboardAppearance = .dark
         self.searchBar.autocapitalizationType = .none
         self.searchBar.showsCancelButton = false
     }
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
@@ -107,8 +96,7 @@ class AKSearchView: AKCustomView, AKCustomViewProtocol, UISearchBarDelegate
         CATransaction.commit()
     }
     
-    func resetViewDefaults(controller: AKCustomViewController)
-    {
+    func resetViewDefaults(controller: AKCustomViewController) {
         // Always execute this.
         controller.tap(nil)
         self.searchBar.text = ""

@@ -1,7 +1,6 @@
 import UIKit
 
-class AKAddView: AKCustomView
-{
+class AKAddView: AKCustomView {
     // MARK: Constants
     struct LocalConstants {
         static let AKViewHeight: CGFloat = 41.0
@@ -13,8 +12,7 @@ class AKAddView: AKCustomView
     @IBOutlet weak var addTask: UIButton!
     
     // MARK: Actions
-    @IBAction func addCategory(_ sender: Any)
-    {
+    @IBAction func addCategory(_ sender: Any) {
         if let _ = self.controller as? AKListProjectsViewController {
             // Ignore...
         }
@@ -31,8 +29,7 @@ class AKAddView: AKCustomView
         }
     }
     
-    @IBAction func addTask(_ sender: Any)
-    {
+    @IBAction func addTask(_ sender: Any) {
         if let _ = self.controller as? AKListProjectsViewController {
             // Ignore...
         }
@@ -68,11 +65,8 @@ class AKAddView: AKCustomView
     convenience init() { self.init(frame: CGRect.zero) }
     
     // MARK: Miscellaneous
-    override func setup()
-    {
+    override func setup() {
         super.setup()
-        
-        NSLog("=> ENTERING SETUP ON FRAME: \(type(of:self))")
         
         self.getView().translatesAutoresizingMaskIntoConstraints = true
         self.getView().clipsToBounds = true
@@ -86,8 +80,7 @@ class AKAddView: AKCustomView
     
     func applyLookAndFeel() {}
     
-    func draw(container: UIView, coordinates: CGPoint, size: CGSize)
-    {
+    func draw(container: UIView, coordinates: CGPoint, size: CGSize) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.getView().frame = CGRect(
