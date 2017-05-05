@@ -1220,17 +1220,15 @@ class UtilityFunctions {
         textField.backgroundColor = GlobalConstants.AKCoderToDoGray2
         textField.textColor = GlobalConstants.AKCoderToDoWhite
         textField.contentVerticalAlignment = .center
+        textField.textAlignment = .left
+        textField.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
     }
     
     func AKStyleTextView(textView: UITextView) {
-        Func.AKAddBorderDeco(
-            textView,
-            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
-            position: .left
-        )
         textView.backgroundColor = GlobalConstants.AKCoderToDoGray2
         textView.textColor = GlobalConstants.AKCoderToDoWhite
         textView.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        textView.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
+        textView.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
     }
 }
