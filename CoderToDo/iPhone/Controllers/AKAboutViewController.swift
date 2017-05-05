@@ -9,7 +9,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     }
     
     // MARK: Properties
-    var pagesTableHeaders = ["Rules", "Contact Us", "Changes"]
+    var pagesTableHeaders = ["Rules", "Contact Us"]
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!
