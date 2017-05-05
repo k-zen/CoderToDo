@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 01 (2017/05/15)
+        * Added support for the Rules' view. (2017/05/05)
         * Disabled Changes' view. (2017/05/05)
         * L&F modifications. (2017/05/05)
         * Minor modifications. (2017/05/03)
