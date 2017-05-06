@@ -1,8 +1,7 @@
 import Foundation
 import UserNotifications
 
-class AKDataInterface
-{
+class AKDataInterface {
     static func firstTime() -> Bool { return DataInterface.getUser()?.username == nil }
     
     // ########## USER'S FUNCTIONS ########## //
@@ -16,15 +15,13 @@ class AKDataInterface
     static func getUsername() -> String { return DataInterface.getUser()?.username ?? "" }
     // ########## USER'S FUNCTIONS ########## //
     // ########## CONFIGURATIONS'S FUNCTIONS ########## //
-    static func addConfigurations(configurations: Configurations?) -> Void
-    {
+    static func addConfigurations(configurations: Configurations?) -> Void {
         if let user = DataInterface.getUser() {
             user.configurations = configurations
         }
     }
     
-    static func getConfigurations() -> Configurations?
-    {
+    static func getConfigurations() -> Configurations? {
         if let configurations = DataInterface.getUser()?.configurations {
             return configurations
         }
@@ -37,8 +34,7 @@ class AKDataInterface
     
     static func resetProjectData() -> Void { DataInterface.getUser()?.project = nil }
     
-    static func addProject(project: Project) -> Bool
-    {
+    static func addProject(project: Project) -> Bool {
         var result = 0
         if let mr = Func.AKObtainMasterReference(), let user = DataInterface.getUser() {
             // Add both necessary queues.
@@ -70,8 +66,7 @@ class AKDataInterface
     ///
     /// - Returns: A list of projects.
     ///
-    static func getProjects(filter: Filter) -> [Project]
-    {
+    static func getProjects(filter: Filter) -> [Project] {
         // Check the filter.
         if let projectFilter = filter.projectFilter {
             if let projects = DataInterface.getUser()?.project?.allObjects as? [Project] {
@@ -153,8 +148,7 @@ class AKDataInterface
         return []
     }
     
-    static func countProjectPendingTasks(project: Project) -> Int
-    {
+    static func countProjectPendingTasks(project: Project) -> Int {
         var counter = 0
         
         if let days = project.days?.allObjects as? [Day] {
@@ -176,8 +170,7 @@ class AKDataInterface
         return counter
     }
     
-    static func getProjectStatus(project: Project) -> ProjectStatus
-    {
+    static func getProjectStatus(project: Project) -> ProjectStatus {
         if let startingTime = project.startingTime as Date?, let closingTime = project.closingTime as Date?, let creationTime = project.creationDate as Date? {
             let now = Date()
             let nowHour = 100 * (Func.AKGetCalendarForLoading().dateComponents([.hour], from: now).hour ?? 0) + (Func.AKGetCalendarForLoading().dateComponents([.minute], from: now).minute ?? 0)
@@ -220,8 +213,7 @@ class AKDataInterface
         return .closed
     }
     
-    static func getProjectRunningDays(project: Project) -> Int
-    {
+    static func getProjectRunningDays(project: Project) -> Int {
         if let creationDate = project.creationDate as Date? {
             let now = Date()
             let runningDays = Func.AKGetCalendarForLoading().dateComponents([.day], from: now, to: creationDate).day ?? 0
@@ -232,8 +224,7 @@ class AKDataInterface
         return 0
     }
     
-    static func addNewWorkingDay(project: Project) -> Day?
-    {
+    static func addNewWorkingDay(project: Project) -> Day? {
         if let mr = Func.AKObtainMasterReference() {
             let now = Date()
             let tomorrow: Date!
@@ -306,8 +297,7 @@ class AKDataInterface
         return nil
     }
     
-    static func updateDay(project: Project, updatedDay: Day) -> Bool
-    {
+    static func updateDay(project: Project, updatedDay: Day) -> Bool {
         if let dayToLook = updatedDay.date as Date? {
             let dayToLookDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: dayToLook)
             let d1 = dayToLookDateComponents.day ?? 0
@@ -348,8 +338,7 @@ class AKDataInterface
         return false
     }
     
-    static func computeOSR(project: Project) -> Float
-    {
+    static func computeOSR(project: Project) -> Float {
         var osr: Float = 0.0
         var counter: Float = 0.0
         
@@ -363,8 +352,7 @@ class AKDataInterface
         return project.osr
     }
     
-    static func computeAverageSRGroupedByDay() -> [Int16 : Float]
-    {
+    static func computeAverageSRGroupedByDay() -> [Int16 : Float] {
         var average = [
             DaysOfWeek.sunday.rawValue : Float(0.0),
             DaysOfWeek.monday.rawValue : Float(0.0),
@@ -402,8 +390,7 @@ class AKDataInterface
         return average
     }
     
-    static func mostProductiveDay() -> DaysOfWeek
-    {
+    static func mostProductiveDay() -> DaysOfWeek {
         var average = [
             DaysOfWeek.sunday.rawValue : Float(0.0),
             DaysOfWeek.monday.rawValue : Float(0.0),
@@ -459,8 +446,7 @@ class AKDataInterface
         return returnEmpty ? .invalid : DaysOfWeek(rawValue: Int16(maxKey))!
     }
     
-    static func isTomorrowSetUp(project: Project) -> Bool
-    {
+    static func isTomorrowSetUp(project: Project) -> Bool {
         for day in DataInterface.getDays(project: project) {
             if DataInterface.isDayTomorrow(day: day) {
                 return true
@@ -503,13 +489,11 @@ class AKDataInterface
     
     static func getDayOfTask(task: Task?) -> Day? { return task?.category?.day ?? nil }
     
-    static func countDays(project: Project, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int
-    {
+    static func countDays(project: Project, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int {
         return DataInterface.getDays(project: project, filterEmpty: filterEmpty, filter: filter).count
     }
     
-    static func getDayStatus(day: Day) -> DayStatus
-    {
+    static func getDayStatus(day: Day) -> DayStatus {
         let now = Date()
         let nowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: now)
         let d1 = nowDateComponents.day ?? 0
@@ -530,8 +514,7 @@ class AKDataInterface
         return .notCurrent
     }
     
-    static func isDayToday(day: Day) -> Bool
-    {
+    static func isDayToday(day: Day) -> Bool {
         let now = Date()
         let today = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 0, to: now)!
         let todayDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: today)
@@ -553,8 +536,7 @@ class AKDataInterface
         return false
     }
     
-    static func isDayTomorrow(day: Day) -> Bool
-    {
+    static func isDayTomorrow(day: Day) -> Bool {
         let now = Date()
         let tomorrow = Func.AKGetCalendarForLoading().date(byAdding: .day, value: 1, to: now)!
         let tomorrowDateComponents = Func.AKGetCalendarForLoading().dateComponents([.day, .month, .year], from: tomorrow)
@@ -576,8 +558,7 @@ class AKDataInterface
         return false
     }
     
-    static func computeSRForDay(day: Day) -> Float
-    {
+    static func computeSRForDay(day: Day) -> Float {
         var sr: Float = 0.0
         var counter: Float = 0.0
         
@@ -599,8 +580,7 @@ class AKDataInterface
         return day.sr
     }
     
-    static func countDayPendingTasks(day: Day) -> Int
-    {
+    static func countDayPendingTasks(day: Day) -> Int {
         var counter = 0
         
         if let categories = day.categories?.allObjects as? [Category] {
@@ -619,8 +599,7 @@ class AKDataInterface
     }
     // ########## DAY'S FUNCTIONS ########## //
     // ########## CATEGORY'S FUNCTIONS ########## //
-    static func getCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Category]
-    {
+    static func getCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> [Category] {
         if let categories = day.categories?.allObjects as? [Category] {
             return categories.sorted {
                 let n1 = $0.name ?? ""
@@ -640,8 +619,7 @@ class AKDataInterface
         return []
     }
     
-    static func getCategoryByName(day: Day, name: String) -> Category?
-    {
+    static func getCategoryByName(day: Day, name: String) -> Category? {
         if let categories = day.categories?.allObjects as? [Category] {
             for category in categories {
                 if name.caseInsensitiveCompare(category.name!) == ComparisonResult.orderedSame {
@@ -653,14 +631,12 @@ class AKDataInterface
         return nil
     }
     
-    static func countCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int
-    {
+    static func countCategories(day: Day, filterEmpty: Bool = false, filter: Filter = Filter(taskFilter: FilterTask())) -> Int {
         return DataInterface.getCategories(day: day, filterEmpty: filterEmpty, filter: filter).count
     }
     // ########## CATEGORY'S FUNCTIONS ########## //
     // ########## TASK'S FUNCTIONS ########## //
-    static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) -> Bool
-    {
+    static func addTask(toProject project: Project, toCategoryNamed categoryName: String, task: Task) -> Bool {
         if let mr = Func.AKObtainMasterReference() {
             // Allways add today to the table if not present, if present return the last day.
             if let currentDay = DataInterface.addNewWorkingDay(project: project) {
@@ -690,8 +666,7 @@ class AKDataInterface
     ///
     /// - Returns: A list of tasks.
     ///
-    static func getTasks(category: Category, filter: Filter) -> [Task]
-    {
+    static func getTasks(category: Category, filter: Filter) -> [Task] {
         // Check the filter.
         if let taskFilter = filter.taskFilter {
             if let tasks = category.tasks?.allObjects as? [Task] {
@@ -766,8 +741,7 @@ class AKDataInterface
     ///
     /// - Returns: A list of all tasks.
     ///
-    static func getAllTasksInProject(project: Project) -> [Task]
-    {
+    static func getAllTasksInProject(project: Project) -> [Task] {
         var allTasks = [Task]()
         
         if let days = project.days?.allObjects as? [Day] {
@@ -795,8 +769,7 @@ class AKDataInterface
     ///
     /// - Returns: The task's count.
     ///
-    static func countTasksInDay(day: Day, filter: Filter) -> Int
-    {
+    static func countTasksInDay(day: Day, filter: Filter) -> Int {
         var counter = 0
         if let categories = day.categories?.allObjects as? [Category] {
             for category in categories {
@@ -819,8 +792,7 @@ class AKDataInterface
     ///
     static func countTasksInCategory(category: Category, filter: Filter) -> Int { return DataInterface.getTasks(category: category, filter: filter).count }
     
-    static func migrateTaskToCategory(toCategoryNamed categoryName: String, task: Task) -> Bool
-    {
+    static func migrateTaskToCategory(toCategoryNamed categoryName: String, task: Task) -> Bool {
         if let day = task.category?.day {
             if let category = DataInterface.getCategoryByName(day: day, name: categoryName) {
                 category.addToTasks(task)
@@ -840,8 +812,7 @@ class AKDataInterface
         return false
     }
     
-    static func migrateTasksFromQueues(toProject project: Project) -> Bool
-    {
+    static func migrateTasksFromQueues(toProject project: Project) -> Bool {
         if let mr = Func.AKObtainMasterReference() {
             // Allways add today to the table if not present, if present return the last day.
             if let currentDay = DataInterface.addNewWorkingDay(project: project) {
@@ -941,8 +912,7 @@ class AKDataInterface
         return false
     }
     
-    static func addPendingTask(task: Task) -> Bool
-    {
+    static func addPendingTask(task: Task) -> Bool {
         if let pendingQueue = task.category?.day?.project?.pendingQueue {
             pendingQueue.addToTasks(task)
             
@@ -952,8 +922,7 @@ class AKDataInterface
         return false
     }
     
-    static func getPendingTasks(project: Project) -> [Task]
-    {
+    static func getPendingTasks(project: Project) -> [Task] {
         if let tasks = project.pendingQueue?.tasks?.allObjects as? [Task] {
             return tasks.sorted {
                 let n1 = $0.name ?? ""
@@ -968,8 +937,7 @@ class AKDataInterface
     
     static func countPendingTasks(project: Project) -> Int { return DataInterface.getPendingTasks(project: project).count }
     
-    static func addDilateTask(task: Task) -> Bool
-    {
+    static func addDilateTask(task: Task) -> Bool {
         if let dilateQueue = task.category?.day?.project?.dilateQueue {
             dilateQueue.addToTasks(task)
             
@@ -979,8 +947,7 @@ class AKDataInterface
         return false
     }
     
-    static func getDilateTasks(project: Project) -> [Task]
-    {
+    static func getDilateTasks(project: Project) -> [Task] {
         if let tasks = project.dilateQueue?.tasks?.allObjects as? [Task] {
             return tasks.sorted {
                 let n1 = $0.name ?? ""
@@ -996,8 +963,7 @@ class AKDataInterface
     static func countDilateTasks(project: Project) -> Int { return DataInterface.getDilateTasks(project: project).count }
     // ########## TASK'S FUNCTIONS ########## //
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
-    static func addProjectCategory(toProject project: Project, categoryName: String) throws
-    {
+    static func addProjectCategory(toProject project: Project, categoryName: String) throws {
         if let mr = Func.AKObtainMasterReference() {
             if let _ = DataInterface.getProjectCategoryByName(project: project, name: categoryName) {
                 throw Exceptions.categoryAlreadyExists("There is already a category with that name. Please choose another one.")
@@ -1010,8 +976,7 @@ class AKDataInterface
         }
     }
     
-    static func listProjectCategories(project: Project) -> [String]
-    {
+    static func listProjectCategories(project: Project) -> [String] {
         if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
             return projectCategories.sorted {
                 let n1 = $0.name ?? ""
@@ -1035,8 +1000,7 @@ class AKDataInterface
     ///
     /// - Returns: The project category or NIL if not found.
     ///
-    static func getProjectCategoryByName(project: Project, name: String) -> ProjectCategory?
-    {
+    static func getProjectCategoryByName(project: Project, name: String) -> ProjectCategory? {
         if let projectCategories = project.projectCategories?.allObjects as? [ProjectCategory] {
             for projectCategory in projectCategories {
                 if name.caseInsensitiveCompare(projectCategory.name!) == ComparisonResult.orderedSame {
@@ -1057,8 +1021,7 @@ class AKDataInterface
     ///
     /// - Throws: categoryHasTasks exception if we cannot remove the category because it has tasks.
     ///
-    static func removeProjectCategory(project: Project, name: String) throws
-    {
+    static func removeProjectCategory(project: Project, name: String) throws {
         var hasTasks: Bool = false
         for day in DataInterface.getDays(project: project) {
             if let category = DataInterface.getCategoryByName(day: day, name: name) {
@@ -1080,8 +1043,7 @@ class AKDataInterface
     }
     // ########## PROJECTCATEGORIES' FUNCTIONS ########## //
     // ########## BUCKET'S FUNCTIONS ########## //
-    static func addBucketEntry(toProject project: Project, entry: BucketEntry)
-    {
+    static func addBucketEntry(toProject project: Project, entry: BucketEntry) {
         if let bucket = project.bucket {
             bucket.addToEntries(entry)
         }
@@ -1097,8 +1059,7 @@ class AKDataInterface
         }
     }
     
-    static func getBucketEntries(project: Project, forDate: String) -> [BucketEntry]
-    {
+    static func getBucketEntries(project: Project, forDate: String) -> [BucketEntry] {
         if let bucket = project.bucket?.entries?.allObjects as? [BucketEntry] {
             return bucket.sorted {
                 let n1 = $0.name ?? ""
@@ -1117,8 +1078,7 @@ class AKDataInterface
         return []
     }
     
-    static func getEntryDates(project: Project) -> [String]
-    {
+    static func getEntryDates(project: Project) -> [String] {
         var notUniqueDates = [String]()
         var uniqueDates = [String]()
         
@@ -1146,15 +1106,13 @@ class AKDataInterface
     
     static func countBucketEntries(project: Project, forDate: String) -> Int { return DataInterface.getBucketEntries(project: project, forDate: forDate).count }
     
-    static func removeBucketEntry(project: Project, entry: BucketEntry)
-    {
+    static func removeBucketEntry(project: Project, entry: BucketEntry) {
         if let bucket = project.bucket {
             bucket.removeFromEntries(entry)
         }
     }
     
-    static func mostLoadedBucket() -> Project?
-    {
+    static func mostLoadedBucket() -> Project? {
         var selectedProject: Project?
         var maxEntries = 0
         

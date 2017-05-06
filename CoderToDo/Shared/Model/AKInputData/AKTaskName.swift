@@ -1,9 +1,7 @@
 import Foundation
 
-class AKTaskName: AKInputData
-{
-    override func validate() throws
-    {
+class AKTaskName: AKInputData {
+    override func validate() throws {
         do {
             try isReady()
         }

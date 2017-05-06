@@ -1,9 +1,7 @@
 import Foundation
 
-class AKProjectCategoryBuilder
-{
-    static func mirror(interface: AKProjectCategoryInterface) -> ProjectCategory?
-    {
+class AKProjectCategoryBuilder {
+    static func mirror(interface: AKProjectCategoryInterface) -> ProjectCategory? {
         if let mr = Func.AKObtainMasterReference() {
             let projectCategory = ProjectCategory(context: mr.getMOC())
             // Mirror.
@@ -16,18 +14,15 @@ class AKProjectCategoryBuilder
     }
 }
 
-struct AKProjectCategoryInterface
-{
+struct AKProjectCategoryInterface {
     // MARK: Properties
     var name: String
     
-    init()
-    {
+    init() {
         self.name = ""
     }
     
-    init(name: String)
-    {
+    init(name: String) {
         // Required.
         self.name = name
     }

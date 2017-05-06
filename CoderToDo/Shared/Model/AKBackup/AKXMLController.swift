@@ -1,9 +1,7 @@
 import Foundation
 
-class AKXMLController: NSObject
-{
-    static func writeToFile() throws -> BackupInfo?
-    {
+class AKXMLController: NSObject {
+    static func writeToFile() throws -> BackupInfo? {
         if let fileName = try Func.AKOpenFileArchive(fileName: "DataExport.xml", location: .documentDirectory, shouldCreate: true) {
             var backupInfo = AKXMLBuilder.marshall()
             
@@ -20,8 +18,7 @@ class AKXMLController: NSObject
         return nil
     }
     
-    static func readFromFile() throws
-    {
+    static func readFromFile() throws {
         if let fileName = try Func.AKOpenFileArchive(fileName: "DataExport.xml", location: .documentDirectory, shouldCreate: false) {
             try AKXMLBuilder.unmarshall(data: try Data(contentsOf: fileName))
         }

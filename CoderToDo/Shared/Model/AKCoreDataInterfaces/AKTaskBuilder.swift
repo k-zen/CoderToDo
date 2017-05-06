@@ -1,9 +1,7 @@
 import Foundation
 
-class AKTaskBuilder
-{
-    static func mirror(interface: AKTaskInterface) -> Task?
-    {
+class AKTaskBuilder {
+    static func mirror(interface: AKTaskInterface) -> Task? {
         if let mr = Func.AKObtainMasterReference() {
             let task = Task(context: mr.getMOC())
             // Mirror.
@@ -22,8 +20,7 @@ class AKTaskBuilder
         return nil
     }
     
-    static func from(task: Task) -> AKTaskInterface
-    {
+    static func from(task: Task) -> AKTaskInterface {
         var interface = AKTaskInterface()
         // Mirror.
         interface.completionPercentage = task.completionPercentage
@@ -38,8 +35,7 @@ class AKTaskBuilder
         return interface
     }
     
-    static func to(task: Task, from interface: AKTaskInterface) -> Void
-    {
+    static func to(task: Task, from interface: AKTaskInterface) -> Void {
         // Mirror.
         task.completionPercentage = interface.completionPercentage
         task.creationDate = interface.creationDate
@@ -52,8 +48,7 @@ class AKTaskBuilder
     }
 }
 
-struct AKTaskInterface
-{
+struct AKTaskInterface {
     // MARK: Properties
     var completionPercentage: Float
     var creationDate: NSDate?
@@ -64,8 +59,7 @@ struct AKTaskInterface
     var state: String?
     var totalCompletion: Float
     
-    init()
-    {
+    init() {
         self.completionPercentage = 0.0
         self.creationDate = NSDate()
         self.initialCompletionPercentage = 0.0
@@ -76,8 +70,7 @@ struct AKTaskInterface
         self.totalCompletion = 1.0
     }
     
-    init(name: String, state: String)
-    {
+    init(name: String, state: String) {
         // Required.
         self.name = name
         
@@ -94,8 +87,7 @@ struct AKTaskInterface
     }
     
     // MARK: Setters
-    mutating func setCompletionPercentage(_ asString: String)
-    {
+    mutating func setCompletionPercentage(_ asString: String) {
         if asString.isEmpty {
             self.completionPercentage = 0.0
         }
@@ -104,8 +96,7 @@ struct AKTaskInterface
         }
     }
     
-    mutating func setCreationDate(_ asString: String)
-    {
+    mutating func setCreationDate(_ asString: String) {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
             format: Cons.AKFullDateFormat,
@@ -114,8 +105,7 @@ struct AKTaskInterface
         }
     }
     
-    mutating func setInitialCompletionPercentage(_ asString: String)
-    {
+    mutating func setInitialCompletionPercentage(_ asString: String) {
         if asString.isEmpty {
             self.initialCompletionPercentage = 0.0
         }
@@ -124,8 +114,7 @@ struct AKTaskInterface
         }
     }
     
-    mutating func setMigrated(_ asString: String)
-    {
+    mutating func setMigrated(_ asString: String) {
         if asString.isEmpty {
             self.migrated = false
         }
@@ -134,8 +123,7 @@ struct AKTaskInterface
         }
     }
     
-    mutating func setState(_ asString: String)
-    {
+    mutating func setState(_ asString: String) {
         if asString.isEmpty {
             self.state = TaskStates.pending.rawValue
         }
@@ -144,8 +132,7 @@ struct AKTaskInterface
         }
     }
     
-    mutating func setTotalCompletion(_ asString: String)
-    {
+    mutating func setTotalCompletion(_ asString: String) {
         if asString.isEmpty {
             self.totalCompletion = 1.0
         }

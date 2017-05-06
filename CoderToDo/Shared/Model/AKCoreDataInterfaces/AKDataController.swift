@@ -1,14 +1,12 @@
 import CoreData
 import Foundation
 
-class AKDataController: NSObject
-{
+class AKDataController: NSObject {
     // MARK: Properties
     private let managedObjectContext: NSManagedObjectContext
     
     // MARK: Initializers
-    override init()
-    {
+    override init() {
         guard let modelURL = Bundle.main.url(forResource: Cons.AKDataModelName, withExtension:"momd") else {
             fatalError("=> ERROR: LOADING COREDATA MODEL FROM BUNDLE!")
         }

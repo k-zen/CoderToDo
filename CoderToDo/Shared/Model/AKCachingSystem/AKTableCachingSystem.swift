@@ -1,7 +1,6 @@
 import UIKit
 
-class AKTableCachingSystem
-{
+class AKTableCachingSystem {
     // MARK: Properties
     private let projectName: String
     private var cachingEntries = [String : [NSDate : AKTableCachingEntry]]()
@@ -13,8 +12,7 @@ class AKTableCachingSystem
     }
     
     // MARK: Caching Functions
-    func addEntry(controller: AKCustomViewController, key: NSDate, newEntry: AKTableCachingEntry) -> Void
-    {
+    func addEntry(controller: AKCustomViewController, key: NSDate, newEntry: AKTableCachingEntry) -> Void {
         if self.cachingEntries[self.projectName] != nil {
             if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING ENTRY TO CACHE FOR KEY(%@)", key.description)
@@ -24,8 +22,7 @@ class AKTableCachingSystem
         }
     }
     
-    func getEntry(controller: AKCustomViewController, key: NSDate) -> AKTableCachingEntry?
-    {
+    func getEntry(controller: AKCustomViewController, key: NSDate) -> AKTableCachingEntry? {
         if self.cachingEntries[self.projectName] != nil {
             if Cons.AKDebug {
                 NSLog("=> CACHING: SERVING ENTRY FROM CACHE FOR KEY(%@)", key.description)
@@ -37,8 +34,7 @@ class AKTableCachingSystem
         return nil
     }
     
-    func triggerHeightRecomputation(controller: AKCustomViewController) -> Void
-    {
+    func triggerHeightRecomputation(controller: AKCustomViewController) -> Void {
         if self.cachingEntries[self.projectName] != nil {
             for (key, value) in self.cachingEntries[self.projectName]! {
                 if Cons.AKDebug {
@@ -51,8 +47,7 @@ class AKTableCachingSystem
         }
     }
     
-    func triggerChildViewsReload(controller: AKCustomViewController) -> Void
-    {
+    func triggerChildViewsReload(controller: AKCustomViewController) -> Void {
         if self.cachingEntries[self.projectName] != nil {
             for (key, value) in self.cachingEntries[self.projectName]! {
                 if let view = value.getChildView() {

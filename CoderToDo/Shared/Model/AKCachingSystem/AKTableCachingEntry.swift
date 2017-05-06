@@ -1,7 +1,6 @@
 import UIKit
 
-class AKTableCachingEntry
-{
+class AKTableCachingEntry {
     // MARK: Properties
     private var key: NSDate
     private var parentCell: AKDaysTableViewCell?
@@ -22,8 +21,7 @@ class AKTableCachingEntry
     // MARK: Accessors
     func getKey() -> NSDate { return self.key }
     
-    func getParentCell() -> AKDaysTableViewCell?
-    {
+    func getParentCell() -> AKDaysTableViewCell? {
         if Cons.AKDebug {
             NSLog("=> CACHING: SERVING TABLE CELL FROM CACHE FOR KEY(%@)", self.key.description)
         }
@@ -31,8 +29,7 @@ class AKTableCachingEntry
         return self.parentCell
     }
     
-    func getChildView() -> AKTasksTableView?
-    {
+    func getChildView() -> AKTasksTableView? {
         if Cons.AKDebug {
             NSLog("=> CACHING: SERVING TABLE VIEW FROM CACHE FOR KEY(%@)", self.key.description)
         }
@@ -44,15 +41,13 @@ class AKTableCachingEntry
     
     func getChildViewHeight() -> CGFloat { return self.childViewHeight }
     
-    func setKey(date: NSDate?) -> Void
-    {
+    func setKey(date: NSDate?) -> Void {
         if let date = date {
             self.key = date
         }
     }
     
-    func setParentCell(cell: AKDaysTableViewCell?) -> Void
-    {
+    func setParentCell(cell: AKDaysTableViewCell?) -> Void {
         if let cell = cell {
             if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING TABLE CELL TO CACHE FOR KEY(%@)", self.key.description)
@@ -62,8 +57,7 @@ class AKTableCachingEntry
         }
     }
     
-    func setChildView(view: AKTasksTableView?) -> Void
-    {
+    func setChildView(view: AKTasksTableView?) -> Void {
         if let view = view {
             if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING TABLE VIEW TO CACHE FOR KEY(%@)", self.key.description)
@@ -73,13 +67,11 @@ class AKTableCachingEntry
         }
     }
     
-    func setParentCellHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void
-    {
+    func setParentCellHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void {
         self.parentCellHeightRecomputationRoutine = routine
     }
     
-    func setChildViewHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void
-    {
+    func setChildViewHeightRecomputationRoutine(routine: @escaping (AKCustomViewController) -> CGFloat) -> Void {
         self.childViewHeightRecomputationRoutine = routine
     }
     

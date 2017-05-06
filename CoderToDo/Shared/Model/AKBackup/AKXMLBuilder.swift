@@ -1,9 +1,7 @@
 import Foundation
 
-class AKXMLBuilder
-{
-    static func marshall() -> BackupInfo?
-    {
+class AKXMLBuilder {
+    static func marshall() -> BackupInfo? {
         let xml = NSMutableString()
         xml.append(String(format: "<export creationDate=\"%@\" gmtOffset=\"%i\" username=\"%@\">",
                           DataInterface.getUser()?.creationDate?.description ?? "",
@@ -138,8 +136,7 @@ class AKXMLBuilder
         return backupInfo
     }
     
-    static func unmarshall(data: Data) throws -> Void
-    {
+    static func unmarshall(data: Data) throws -> Void {
         let outerParser = XMLParser(data: data)
         let outerParserDelegate = ESXPSAX2DOM.newBuild(Cons.AKBackupXMLMaxNodes)
         outerParser.delegate = outerParserDelegate
@@ -314,8 +311,7 @@ class AKXMLBuilder
         }
     }
     
-    static func getConfigurations(processor: ESXPProcessor, rootNode: ESXPElement) -> Configurations?
-    {
+    static func getConfigurations(processor: ESXPProcessor, rootNode: ESXPElement) -> Configurations? {
         let automaticBackups = processor.getNodeValue(processor.retrieveSubNode("automaticBackups", node: rootNode), strict: false) ?? ""
         let cleaningMode = processor.getNodeValue(processor.retrieveSubNode("cleaningMode", node: rootNode), strict: false) ?? ""
         let showLocalNotificationMessage = processor.getNodeValue(processor.retrieveSubNode("showLocalNotificationMessage", node: rootNode), strict: false) ?? ""
@@ -335,8 +331,7 @@ class AKXMLBuilder
         return AKConfigurationsBuilder.mirror(interface: newConfigurations)
     }
     
-    static func getProject(processor: ESXPProcessor, rootNode: ESXPElement) -> Project?
-    {
+    static func getProject(processor: ESXPProcessor, rootNode: ESXPElement) -> Project? {
         let closingTime = processor.getNodeAttributeValue(rootNode, attributeName: "closingTime", strict: false) ?? ""
         let closingTimeTolerance = processor.getNodeAttributeValue(rootNode, attributeName: "closingTimeTolerance", strict: false) ?? ""
         let creationDate = processor.getNodeAttributeValue(rootNode, attributeName: "creationDate", strict: false) ?? ""
@@ -361,8 +356,7 @@ class AKXMLBuilder
         return AKProjectBuilder.mirror(interface: newProject)
     }
     
-    static func getProjectCategories(processor: ESXPProcessor, rootNode: ESXPElement) -> [ProjectCategory]
-    {
+    static func getProjectCategories(processor: ESXPProcessor, rootNode: ESXPElement) -> [ProjectCategory] {
         var projectCategories = [ProjectCategory]()
         if let projectCategoriesWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while projectCategoriesWalker.hasNext() {
@@ -382,8 +376,7 @@ class AKXMLBuilder
         return projectCategories
     }
     
-    static func getTasks(processor: ESXPProcessor, rootNode: ESXPElement) -> [Task]
-    {
+    static func getTasks(processor: ESXPProcessor, rootNode: ESXPElement) -> [Task] {
         var tasks = [Task]()
         if let taskWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while taskWalker.hasNext() {
@@ -421,8 +414,7 @@ class AKXMLBuilder
         return tasks
     }
     
-    static func getBucket(processor: ESXPProcessor, rootNode: ESXPElement) -> [BucketEntry]
-    {
+    static func getBucket(processor: ESXPProcessor, rootNode: ESXPElement) -> [BucketEntry] {
         var entries = [BucketEntry]()
         if let bucketWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while bucketWalker.hasNext() {

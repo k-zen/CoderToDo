@@ -1,9 +1,7 @@
 import Foundation
 
-class AKConfigurationsBuilder
-{
-    static func mirror(interface: AKConfigurationsInterface) -> Configurations?
-    {
+class AKConfigurationsBuilder {
+    static func mirror(interface: AKConfigurationsInterface) -> Configurations? {
         if let mr = Func.AKObtainMasterReference() {
             let configurations = Configurations(context: mr.getMOC())
             // Mirror.
@@ -20,8 +18,7 @@ class AKConfigurationsBuilder
         return nil
     }
     
-    static func from(configurations: Configurations?) -> AKConfigurationsInterface?
-    {
+    static func from(configurations: Configurations?) -> AKConfigurationsInterface? {
         if let configurations = configurations {
             var interface = AKConfigurationsInterface()
             // Mirror.
@@ -38,8 +35,7 @@ class AKConfigurationsBuilder
         return nil
     }
     
-    static func to(configurations: Configurations?, from interface: AKConfigurationsInterface) -> Configurations?
-    {
+    static func to(configurations: Configurations?, from interface: AKConfigurationsInterface) -> Configurations? {
         if let configurations = configurations {
             // Mirror.
             configurations.automaticBackups = interface.automaticBackups
@@ -56,8 +52,7 @@ class AKConfigurationsBuilder
     }
 }
 
-struct AKConfigurationsInterface
-{
+struct AKConfigurationsInterface {
     // MARK: Properties
     var automaticBackups: Bool
     var cleaningMode: Bool
@@ -66,8 +61,7 @@ struct AKConfigurationsInterface
     var weekFirstDay: Int16
     var weekLastDay: Int16
     
-    init()
-    {
+    init() {
         self.automaticBackups = false
         self.cleaningMode = false
         self.showLocalNotificationMessage = true
@@ -77,8 +71,7 @@ struct AKConfigurationsInterface
     }
     
     // MARK: Setters
-    mutating func setAutomaticBackups(_ asString: String)
-    {
+    mutating func setAutomaticBackups(_ asString: String) {
         if asString.isEmpty {
             self.automaticBackups = false
         }
@@ -87,8 +80,7 @@ struct AKConfigurationsInterface
         }
     }
     
-    mutating func setCleaningMode(_ asString: String)
-    {
+    mutating func setCleaningMode(_ asString: String) {
         if asString.isEmpty {
             self.cleaningMode = false
         }
@@ -97,8 +89,7 @@ struct AKConfigurationsInterface
         }
     }
     
-    mutating func setShowLocalNotificationMessage(_ asString: String)
-    {
+    mutating func setShowLocalNotificationMessage(_ asString: String) {
         if asString.isEmpty {
             self.showLocalNotificationMessage = true
         }
@@ -107,8 +98,7 @@ struct AKConfigurationsInterface
         }
     }
     
-    mutating func setUseLocalNotifications(_ asString: String)
-    {
+    mutating func setUseLocalNotifications(_ asString: String) {
         if asString.isEmpty {
             self.useLocalNotifications = true
         }
@@ -117,15 +107,13 @@ struct AKConfigurationsInterface
         }
     }
     
-    mutating func setWeekFirstDay(_ asString: String)
-    {
+    mutating func setWeekFirstDay(_ asString: String) {
         if let day = Int16(asString) {
             self.weekFirstDay = day
         }
     }
     
-    mutating func setWeekLastDay(_ asString: String)
-    {
+    mutating func setWeekLastDay(_ asString: String) {
         if let day = Int16(asString) {
             self.weekLastDay = day
         }

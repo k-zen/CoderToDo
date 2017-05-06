@@ -1,9 +1,7 @@
 import Foundation
 
-class AKDayBuilder
-{
-    static func mirror(interface: AKDayInterface) -> Day?
-    {
+class AKDayBuilder {
+    static func mirror(interface: AKDayInterface) -> Day? {
         if let mr = Func.AKObtainMasterReference() {
             let day = Day(context: mr.getMOC())
             // Mirror.
@@ -18,22 +16,19 @@ class AKDayBuilder
     }
 }
 
-struct AKDayInterface
-{
+struct AKDayInterface {
     // MARK: Properties
     var date: NSDate
     var gmtOffset: Int16
     var sr: Float
     
-    init()
-    {
+    init() {
         self.date = NSDate()
         self.gmtOffset = 0
         self.sr = 0.0
     }
     
-    init(date: NSDate, gmtOffset: Int16)
-    {
+    init(date: NSDate, gmtOffset: Int16) {
         // Required.
         self.date = date
         self.gmtOffset = gmtOffset
@@ -43,8 +38,7 @@ struct AKDayInterface
     }
     
     // MARK: Setters
-    mutating func setDate(_ asString: String)
-    {
+    mutating func setDate(_ asString: String) {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
             format: Cons.AKFullDateFormat,
@@ -53,15 +47,13 @@ struct AKDayInterface
         }
     }
     
-    mutating func setGMTOffset(_ asString: String)
-    {
+    mutating func setGMTOffset(_ asString: String) {
         if let gmtOffset = Int16(asString) {
             self.gmtOffset = gmtOffset
         }
     }
     
-    mutating func setSR(_ asString: String)
-    {
+    mutating func setSR(_ asString: String) {
         if asString.isEmpty {
             self.sr = 0.0
         }

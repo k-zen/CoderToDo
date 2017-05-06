@@ -1,12 +1,10 @@
 import CloudKit
 import Foundation
 
-class AKCloudKitController: NSObject
-{
+class AKCloudKitController: NSObject {
     static func uploadToPrivate(
         presenterController: AKCustomViewController,
-        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?) {
         do {
             if let backupInfo = try AKXMLController.writeToFile() {
                 if let date = backupInfo.date, let md5 = backupInfo.md5, let size = backupInfo.size, let filename = backupInfo.filename {
@@ -50,8 +48,7 @@ class AKCloudKitController: NSObject
     
     static func downloadFromPrivate(
         presenterController: AKCustomViewController,
-        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?) {
         var backupInfo = [BackupInfo]()
         
         let predicate = NSPredicate(value: true)
@@ -117,8 +114,7 @@ class AKCloudKitController: NSObject
     
     static func getLastBackupInfo(
         presenterController: AKCustomViewController,
-        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?)
-    {
+        completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?) {
         var backupInfo = [BackupInfo]()
         
         let predicate = NSPredicate(value: true)

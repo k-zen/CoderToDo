@@ -1,8 +1,7 @@
 import CoreData
 import Foundation
 
-class AKMasterReference: NSObject
-{
+class AKMasterReference: NSObject {
     // MARK: Properties
     /// The managed object context needed to handle the data.
     private let moc: NSManagedObjectContext
@@ -10,8 +9,7 @@ class AKMasterReference: NSObject
     var user: User? = nil
     
     // MARK: Initializers
-    override init()
-    {
+    override init() {
         self.moc = DataController().getMOC()
         super.init()
         do {
@@ -42,8 +40,7 @@ class AKMasterReference: NSObject
     ///
     /// - Parameter instance: The instance containing the data.
     ///
-    static func saveData(instance: AKMasterReference?)
-    {
+    static func saveData(instance: AKMasterReference?) {
         do {
             if (instance?.moc.hasChanges)! {
                 try instance?.moc.save()
@@ -67,8 +64,7 @@ class AKMasterReference: NSObject
     ///
     /// - Returns: The self instance. Useful for concatenating calls.
     ///
-    func dump() -> Void
-    {
+    func dump() -> Void {
         let data = NSMutableString()
         data.appendFormat("=>   USERNAME: %@\n", DataInterface.getUsername())
         data.appendFormat("=>       CREATION DATE: %@\n", DataInterface.getUser()?.creationDate?.description ?? "")

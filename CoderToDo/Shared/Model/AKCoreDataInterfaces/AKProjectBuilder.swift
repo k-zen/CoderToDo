@@ -1,9 +1,7 @@
 import Foundation
 
-class AKProjectBuilder
-{
-    static func mirror(interface: AKProjectInterface) -> Project?
-    {
+class AKProjectBuilder {
+    static func mirror(interface: AKProjectInterface) -> Project? {
         if let mr = Func.AKObtainMasterReference() {
             let project = Project(context: mr.getMOC())
             // Mirror.
@@ -25,8 +23,7 @@ class AKProjectBuilder
         return nil
     }
     
-    static func from(project: Project) -> AKProjectInterface
-    {
+    static func from(project: Project) -> AKProjectInterface {
         var interface = AKProjectInterface()
         // Mirror.
         interface.closingTime = project.closingTime
@@ -41,8 +38,7 @@ class AKProjectBuilder
         return interface
     }
     
-    static func to(project: Project, from interface: AKProjectInterface) -> Void
-    {
+    static func to(project: Project, from interface: AKProjectInterface) -> Void {
         // Mirror.
         project.closingTime = interface.closingTime
         project.closingTimeTolerance = interface.closingTimeTolerance
@@ -55,8 +51,7 @@ class AKProjectBuilder
     }
 }
 
-struct AKProjectInterface
-{
+struct AKProjectInterface {
     // MARK: Properties
     var closingTime: NSDate?
     var closingTimeTolerance: Int16
@@ -67,8 +62,7 @@ struct AKProjectInterface
     var osr: Float
     var startingTime: NSDate?
     
-    init()
-    {
+    init() {
         self.closingTime = Func.AKProcessDate(
             dateAsString: "17:00",
             format: Cons.AKWorkingDayTimeDateFormat,
@@ -85,8 +79,7 @@ struct AKProjectInterface
             timeZone: Func.AKGetCalendarForLoading().timeZone)!
     }
     
-    init(name: String)
-    {
+    init(name: String) {
         // Required.
         self.name = name
         
@@ -109,8 +102,7 @@ struct AKProjectInterface
     }
     
     // MARK: Setters
-    mutating func setClosingTime(_ asString: String, format: String = Cons.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!)
-    {
+    mutating func setClosingTime(_ asString: String, format: String = Cons.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!) {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
             format: format,
@@ -119,15 +111,13 @@ struct AKProjectInterface
         }
     }
     
-    mutating func setClosingTimeTolerance(_ asString: String)
-    {
+    mutating func setClosingTimeTolerance(_ asString: String) {
         if let tolerance = Int16(asString) {
             self.closingTimeTolerance = tolerance
         }
     }
     
-    mutating func setCreationDate(_ asString: String)
-    {
+    mutating func setCreationDate(_ asString: String) {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
             format: Cons.AKFullDateFormat,
@@ -136,15 +126,13 @@ struct AKProjectInterface
         }
     }
     
-    mutating func setGMTOffset(_ asString: String)
-    {
+    mutating func setGMTOffset(_ asString: String) {
         if let gmtOffset = Int16(asString) {
             self.gmtOffset = gmtOffset
         }
     }
     
-    mutating func setNotifyClosingTime(_ asString: String)
-    {
+    mutating func setNotifyClosingTime(_ asString: String) {
         if asString.isEmpty {
             self.notifyClosingTime = true
         }
@@ -153,8 +141,7 @@ struct AKProjectInterface
         }
     }
     
-    mutating func setOSR(_ asString: String)
-    {
+    mutating func setOSR(_ asString: String) {
         if asString.isEmpty {
             self.osr = 0.0
         }
@@ -163,8 +150,7 @@ struct AKProjectInterface
         }
     }
     
-    mutating func setStartingTime(_ asString: String, format: String = Cons.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!)
-    {
+    mutating func setStartingTime(_ asString: String, format: String = Cons.AKFullDateFormat, timeZone: TimeZone = TimeZone(identifier: "GMT")!) {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
             format: format,
@@ -174,8 +160,7 @@ struct AKProjectInterface
     }
     
     // MARK: Validations
-    func validate() throws
-    {
+    func validate() throws {
         // Check times.
         // 1. Closing time must be later than starting time.
         if let close = self.closingTime as Date?, let start = self.startingTime as Date? {
