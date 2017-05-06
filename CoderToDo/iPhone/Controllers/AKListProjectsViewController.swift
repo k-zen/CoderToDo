@@ -170,7 +170,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
         Func.AKAddBorderDeco(
             headerCell,
-            color: Func.AKGetColorForProjectStatus(projectStatus: projectStatus).cgColor,
+            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
             thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
             position: .left
         )
