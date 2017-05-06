@@ -29,11 +29,11 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
         
         // Custom L&F.
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+        cell.mainContainer.backgroundColor = Cons.AKTableCellBg
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKOrangeForBlackFg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKOrangeForBlackFg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
         

@@ -9,7 +9,7 @@ class AKDataController: NSObject
     // MARK: Initializers
     override init()
     {
-        guard let modelURL = Bundle.main.url(forResource: GlobalConstants.AKDataModelName, withExtension:"momd") else {
+        guard let modelURL = Bundle.main.url(forResource: Cons.AKDataModelName, withExtension:"momd") else {
             fatalError("=> ERROR: LOADING COREDATA MODEL FROM BUNDLE!")
         }
         
@@ -34,7 +34,7 @@ class AKDataController: NSObject
         }
         
         if let appSupportDir = appSupportDir {
-            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent(GlobalConstants.AKDbaseFileName).relativePath, isDirectory: false)
+            let storeURL = URL(fileURLWithPath: appSupportDir.appendingPathComponent(Cons.AKDbaseFileName).relativePath, isDirectory: false)
             
             do {
                 try psc.addPersistentStore(

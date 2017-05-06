@@ -35,16 +35,16 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             cell.taskCompletionPercentageValue.text = String(format: "%.1f%%", task.completionPercentage)
             switch task.completionPercentage {
             case 1.0 ..< 33.0:
-                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
+                cell.taskCompletionPercentageValue.backgroundColor = Cons.AKRedForWhiteFg
                 break
             case 33.0 ..< 66.0:
-                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKYellowForWhiteFg
+                cell.taskCompletionPercentageValue.backgroundColor = Cons.AKYellowForWhiteFg
                 break
             case 66.0 ..< 100.1:
-                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
+                cell.taskCompletionPercentageValue.backgroundColor = Cons.AKGreenForWhiteFg
                 break
             default:
-                cell.taskCompletionPercentageValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
+                cell.taskCompletionPercentageValue.backgroundColor = Cons.AKRedForWhiteFg
                 break
             }
             
@@ -54,11 +54,11 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            cell.mainContainer.backgroundColor = Cons.AKTableCellBg
             Func.AKAddBorderDeco(
                 cell.infoContainer,
                 color: Func.AKGetColorForTaskState(taskState: task.state!).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                thickness: Cons.AKDefaultBorderThickness * 4.0,
                 position: .left
             )
             
@@ -69,7 +69,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             
             // Custom L&F.
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+            cell.mainContainer.backgroundColor = Cons.AKTableCellBg
             
             return cell
         }
@@ -85,7 +85,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let badgeSizeHeight = CGFloat(21.0)
             
             let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-            headerCell.backgroundColor = GlobalConstants.AKTableCellBg
+            headerCell.backgroundColor = Cons.AKTableCellBg
             
             let title = UILabel(frame: CGRect(
                 x: padding * 2,
@@ -93,8 +93,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 width: tableWidth - (padding * 2), // Overlap badge!
                 height: LocalConstants.AKHeaderHeight)
             )
-            title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 18.0)
-            title.textColor = GlobalConstants.AKDefaultFg
+            title.font = UIFont(name: Cons.AKSecondaryFont, size: 18.0)
+            title.textColor = Cons.AKDefaultFg
             title.text = category.name ?? "N\\A"
             title.textAlignment = .left
             // ### DEBUG
@@ -103,8 +103,8 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             
             Func.AKAddBorderDeco(
                 title,
-                color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
+                color: Cons.AKDefaultViewBorderBg.cgColor,
+                thickness: Cons.AKDefaultBorderThickness / 1.5,
                 position: .through
             )
             
@@ -124,9 +124,9 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 width: badgeSizeWidth,
                 height: badgeSizeHeight)
             )
-            tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-            tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
-            tasksCountBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+            tasksCountBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+            tasksCountBadge.textColor = Cons.AKBadgeColorFg
+            tasksCountBadge.backgroundColor = Cons.AKBadgeColorBg
             if let controller = self.controller as? AKViewProjectViewController {
                 tasksCountBadge.text = String(format: "Tasks: %i", DataInterface.getTasks(category: category, filter: controller.taskFilter).count)
             }
@@ -134,7 +134,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
                 tasksCountBadge.text = String(format: "Tasks: %i", 0)
             }
             tasksCountBadge.textAlignment = .center
-            tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+            tasksCountBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
             tasksCountBadge.layer.masksToBounds = true
             // ### DEBUG
             // tasksCountBadge.layer.borderColor = UIColor.white.cgColor
@@ -151,7 +151,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let tableWidth = tableView.frame.width
             
             let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-            headerCell.backgroundColor = GlobalConstants.AKDefaultBg
+            headerCell.backgroundColor = Cons.AKDefaultBg
             
             return headerCell
         }
@@ -202,7 +202,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
         if let day = self.day, let controller = self.controller as? AKViewProjectViewController {
             let category = DataInterface.getCategories(day: day, filterEmpty: true, filter: controller.taskFilter)[indexPath.section]
             let task = DataInterface.getTasks(category: category, filter: controller.taskFilter)[indexPath.row]
-            controller.performSegue(withIdentifier: GlobalConstants.AKViewTaskSegue, sender: task)
+            controller.performSegue(withIdentifier: Cons.AKViewTaskSegue, sender: task)
         }
     }
     

@@ -24,28 +24,28 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case GlobalConstants.AKViewProjectNameSegue:
+            case Cons.AKViewProjectNameSegue:
                 if let destination = segue.destination as? AKProjectNameViewController {
                     if let project = sender as? Project {
                         destination.project = project
                     }
                 }
                 break
-            case GlobalConstants.AKViewProjectTimesSegue:
+            case Cons.AKViewProjectTimesSegue:
                 if let destination = segue.destination as? AKProjectTimesViewController {
                     if let project = sender as? Project {
                         destination.project = project
                     }
                 }
                 break
-            case GlobalConstants.AKViewProjectNotificationsSegue:
+            case Cons.AKViewProjectNotificationsSegue:
                 if let destination = segue.destination as? AKProjectNotificationsViewController {
                     if let project = sender as? Project {
                         destination.project = project
                     }
                 }
                 break
-            case GlobalConstants.AKViewUserDefinedCategoriesSegue:
+            case Cons.AKViewUserDefinedCategoriesSegue:
                 if let destination = segue.destination as? AKUserDefinedCategoriesViewController {
                     if let project = sender as? Project {
                         destination.project = project
@@ -60,10 +60,10 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case GlobalConstants.AKViewProjectNameSegue,
-             GlobalConstants.AKViewProjectTimesSegue,
-             GlobalConstants.AKViewProjectNotificationsSegue,
-             GlobalConstants.AKViewUserDefinedCategoriesSegue:
+        case Cons.AKViewProjectNameSegue,
+             Cons.AKViewProjectTimesSegue,
+             Cons.AKViewProjectNotificationsSegue,
+             Cons.AKViewUserDefinedCategoriesSegue:
             return true
         default:
             return false
@@ -79,8 +79,8 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKTableHeaderCellBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
         
@@ -97,8 +97,8 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
             width: tableView.frame.width,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
-        title.textColor = GlobalConstants.AKDefaultFg
+        title.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0)
+        title.textColor = Cons.AKDefaultFg
         switch section {
         case 0:
             title.text = "Project Name"
@@ -148,16 +148,16 @@ class AKProjectConfigurationsViewController: AKCustomViewController, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNameSegue, sender: self.project)
+            self.performSegue(withIdentifier: Cons.AKViewProjectNameSegue, sender: self.project)
             break
         case 1:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectTimesSegue, sender: self.project)
+            self.performSegue(withIdentifier: Cons.AKViewProjectTimesSegue, sender: self.project)
             break
         case 2:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewProjectNotificationsSegue, sender: self.project)
+            self.performSegue(withIdentifier: Cons.AKViewProjectNotificationsSegue, sender: self.project)
             break
         case 3:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewUserDefinedCategoriesSegue, sender: self.project)
+            self.performSegue(withIdentifier: Cons.AKViewUserDefinedCategoriesSegue, sender: self.project)
             break
         default:
             break

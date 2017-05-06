@@ -59,7 +59,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = GlobalConstants.AKPickerViewFg
+        pickerLabel.textColor = Cons.AKPickerViewFg
         
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
@@ -73,8 +73,8 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
             break
         }
         
-        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
+        pickerLabel.backgroundColor = Cons.AKPickerViewBg
+        pickerLabel.font = UIFont(name: Cons.AKSecondaryFont, size: Cons.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
@@ -102,12 +102,12 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                 let cttIndex = controller.toleranceData.index(of: Int(controller.project.closingTimeTolerance))!
                 let stiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
                     date: controller.project.startingTime! as Date,
-                    format: GlobalConstants.AKWorkingDayTimeDateFormat,
+                    format: Cons.AKWorkingDayTimeDateFormat,
                     timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
                 let ctiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
                     date: controller.project.closingTime! as Date,
-                    format: GlobalConstants.AKWorkingDayTimeDateFormat,
+                    format: Cons.AKWorkingDayTimeDateFormat,
                     timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
                 
@@ -125,8 +125,8 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                 
                 var project = AKProjectBuilder.from(project: controller.project)
                 // Custom Setters.
-                project.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
-                project.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+                project.setClosingTime(cti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+                project.setStartingTime(sti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
                 // Normal Setters.
                 project.closingTimeTolerance = Int16(ctt)
                 AKProjectBuilder.to(project: controller.project, from: project)

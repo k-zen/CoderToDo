@@ -29,7 +29,7 @@ class AKBucketTableViewCell: UITableViewCell {
         self.addGestureRecognizer(self.swipeRightGesture!)
         
         // Custom L&F.
-        self.priorityValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.priorityValue.layer.cornerRadius = Cons.AKButtonCornerRadius
         self.priorityValue.layer.masksToBounds = true
         self.selectionStyle = UITableViewCellSelectionStyle.none
     }

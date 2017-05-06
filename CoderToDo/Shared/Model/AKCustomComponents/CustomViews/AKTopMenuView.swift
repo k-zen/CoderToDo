@@ -7,10 +7,26 @@ class AKTopMenuView: AKCustomView, AKCustomViewProtocol {
     }
     
     // MARK: Properties
-    var addAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: ADD HAS BEEN PRESSED!") }
-    var sortAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: SORT HAS BEEN PRESSED!") }
-    var filterAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: FILTER HAS BEEN PRESSED!") }
-    var searchAction: (AKCustomViewController?) -> Void = { _ in NSLog("=> INFO: SEARCH HAS BEEN PRESSED!") }
+    var addAction: (AKCustomViewController?) -> Void = { _ in
+        if Cons.AKDebug {
+            NSLog("=> INFO: ADD HAS BEEN PRESSED!")
+        }
+    }
+    var sortAction: (AKCustomViewController?) -> Void = { _ in
+        if Cons.AKDebug {
+            NSLog("=> INFO: SORT HAS BEEN PRESSED!")
+        }
+    }
+    var filterAction: (AKCustomViewController?) -> Void = { _ in
+        if Cons.AKDebug {
+            NSLog("=> INFO: FILTER HAS BEEN PRESSED!")
+        }
+    }
+    var searchAction: (AKCustomViewController?) -> Void = { _ in
+        if Cons.AKDebug {
+            NSLog("=> INFO: SEARCH HAS BEEN PRESSED!")
+        }
+    }
     
     // MARK: Outlets
     @IBOutlet var mainContainer: UIView!

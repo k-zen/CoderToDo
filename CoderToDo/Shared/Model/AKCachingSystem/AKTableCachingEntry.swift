@@ -24,7 +24,7 @@ class AKTableCachingEntry
     
     func getParentCell() -> AKDaysTableViewCell?
     {
-        if GlobalConstants.AKDebug {
+        if Cons.AKDebug {
             NSLog("=> CACHING: SERVING TABLE CELL FROM CACHE FOR KEY(%@)", self.key.description)
         }
         
@@ -33,7 +33,7 @@ class AKTableCachingEntry
     
     func getChildView() -> AKTasksTableView?
     {
-        if GlobalConstants.AKDebug {
+        if Cons.AKDebug {
             NSLog("=> CACHING: SERVING TABLE VIEW FROM CACHE FOR KEY(%@)", self.key.description)
         }
         
@@ -54,7 +54,7 @@ class AKTableCachingEntry
     func setParentCell(cell: AKDaysTableViewCell?) -> Void
     {
         if let cell = cell {
-            if GlobalConstants.AKDebug {
+            if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING TABLE CELL TO CACHE FOR KEY(%@)", self.key.description)
             }
             
@@ -65,7 +65,7 @@ class AKTableCachingEntry
     func setChildView(view: AKTasksTableView?) -> Void
     {
         if let view = view {
-            if GlobalConstants.AKDebug {
+            if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING TABLE VIEW TO CACHE FOR KEY(%@)", self.key.description)
             }
             

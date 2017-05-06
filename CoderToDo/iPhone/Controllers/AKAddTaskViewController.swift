@@ -132,9 +132,9 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         
         switch textField.tag {
         case LocalEnums.taskName.rawValue:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         }
     }
     
@@ -161,7 +161,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = GlobalConstants.AKPickerViewFg
+        pickerLabel.textColor = Cons.AKPickerViewFg
         
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
@@ -172,8 +172,8 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
             break
         }
         
-        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
+        pickerLabel.backgroundColor = Cons.AKPickerViewBg
+        pickerLabel.font = UIFont(name: Cons.AKSecondaryFont, size: Cons.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
@@ -215,9 +215,9 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKAddTaskViewController {
                 Func.AKAddBlurView(view: controller.controlsContainer, effect: .dark, addClearColorBgToView: true)
-                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.controlsContainer.layer.cornerRadius = Cons.AKViewCornerRadius
                 controller.controlsContainer.layer.masksToBounds = true
-                controller.controlsContainer.layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+                controller.controlsContainer.layer.borderColor = Cons.AKCoderToDoGray3.cgColor
                 controller.controlsContainer.layer.borderWidth = 2.0
                 
                 Func.AKStyleTextField(textField: controller.taskNameValue)

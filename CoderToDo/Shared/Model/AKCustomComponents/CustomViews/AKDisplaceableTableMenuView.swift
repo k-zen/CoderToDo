@@ -81,8 +81,8 @@ class AKDisplaceableTableMenuView: AKCustomView, AKCustomViewProtocol {
     }
     
     func applyLookAndFeel() {
-        self.editButton.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
-        self.deleteButton.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.editButton.layer.cornerRadius = Cons.AKButtonCornerRadius
+        self.deleteButton.layer.cornerRadius = Cons.AKButtonCornerRadius
     }
     
     func draw(container: UIView, coordinates: CGPoint, size: CGSize) {

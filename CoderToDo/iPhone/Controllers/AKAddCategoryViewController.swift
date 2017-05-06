@@ -56,9 +56,9 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate {
         
         switch textField.tag {
         case LocalEnums.category.rawValue:
-            return newLen > GlobalConstants.AKMaxCategoryNameLength ? false : true
+            return newLen > Cons.AKMaxCategoryNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxCategoryNameLength ? false : true
+            return newLen > Cons.AKMaxCategoryNameLength ? false : true
         }
     }
     
@@ -83,9 +83,9 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate {
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKAddCategoryViewController {
                 Func.AKAddBlurView(view: controller.controlsContainer, effect: .dark, addClearColorBgToView: true)
-                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.controlsContainer.layer.cornerRadius = Cons.AKViewCornerRadius
                 controller.controlsContainer.layer.masksToBounds = true
-                controller.controlsContainer.layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+                controller.controlsContainer.layer.borderColor = Cons.AKCoderToDoGray3.cgColor
                 controller.controlsContainer.layer.borderWidth = 2.0
                 
                 Func.AKStyleTextField(textField: controller.categoryValue)

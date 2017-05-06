@@ -76,10 +76,14 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate {
             self.customView.isUserInteractionEnabled = true
             self.addSubview(self.customView)
             
-            NSLog("=> INFO: INITIALIZING CUSTOM CLASS *\(type(of: self))* VIA init(frame:)...")
+            if Cons.AKDebug {
+                NSLog("=> INFO: INITIALIZING CUSTOM CLASS *\(type(of: self))* VIA init(frame:)...")
+            }
         }
         else {
-            NSLog("=> ERROR: FAILED TO INITIALIZE CUSTOM CLASS *\(type(of: self))* VIA init(frame:)...")
+            if Cons.AKDebug {
+                NSLog("=> ERROR: FAILED TO INITIALIZE CUSTOM CLASS *\(type(of: self))* VIA init(frame:)...")
+            }
         }
     }
     
@@ -92,10 +96,14 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate {
             self.customView.isUserInteractionEnabled = true
             self.addSubview(self.customView)
             
-            NSLog("=> INFO: INITIALIZING CUSTOM CLASS *\(type(of: self))* VIA init(coder:)...")
+            if Cons.AKDebug {
+                NSLog("=> INFO: INITIALIZING CUSTOM CLASS *\(type(of: self))* VIA init(coder:)...")
+            }
         }
         else {
-            NSLog("=> ERROR: FAILED TO INITIALIZE CUSTOM CLASS *\(type(of: self))* VIA init(coder:)...")
+            if Cons.AKDebug {
+                NSLog("=> ERROR: FAILED TO INITIALIZE CUSTOM CLASS *\(type(of: self))* VIA init(coder:)...")
+            }
         }
     }
     
@@ -160,43 +168,64 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate {
     
     // MARK: Gesture Handling
     @objc internal func tap(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenTaped(gesture)
     }
     
     @objc internal func pinch(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPinched(gesture)
     }
     
     @objc internal func rotate(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenRotated(gesture)
     }
     
     @objc internal func swipe(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenSwiped(gesture)
     }
     
     @objc internal func pan(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenPaned(gesture)
     }
     
     @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenScreenEdgePaned(gesture)
     }
     
     @objc internal func longPress(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, self.controller, gesture)
         self.additionalOperationsWhenLongPressed(gesture)
     }

@@ -75,9 +75,9 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
         
         switch textField.tag {
         case LocalEnums.name.rawValue:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         }
     }
     
@@ -112,9 +112,9 @@ class AKAddBucketEntryView: AKCustomView, AKCustomViewProtocol, UITextFieldDeleg
     func loadComponents() {}
     
     func applyLookAndFeel() {
-        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.cornerRadius = Cons.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
-        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderColor = Cons.AKCoderToDoGray3.cgColor
         self.getView().layer.borderWidth = 2.0
         self.mainContainer.backgroundColor = UIColor.clear
         

@@ -15,7 +15,7 @@ class AKMasterReference: NSObject
         self.moc = DataController().getMOC()
         super.init()
         do {
-            if let users = try self.moc.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: GlobalConstants.AKUserMOEntityName)) as? [User] {
+            if let users = try self.moc.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: Cons.AKUserMOEntityName)) as? [User] {
                 self.user = users.count > 0 ? users.first! : User(context: self.moc)
             }
         }
@@ -47,10 +47,14 @@ class AKMasterReference: NSObject
         do {
             if (instance?.moc.hasChanges)! {
                 try instance?.moc.save()
-                NSLog("=> INFO: SAVED CORE DATA.")
+                if Cons.AKDebug {
+                    NSLog("=> INFO: SAVED CORE DATA.")
+                }
             }
             else {
-                NSLog("=> INFO: THERE ARE NO CHANGES TO SAVE!")
+                if Cons.AKDebug {
+                    NSLog("=> INFO: THERE ARE NO CHANGES TO SAVE!")
+                }
             }
         }
         catch {
@@ -153,9 +157,11 @@ class AKMasterReference: NSObject
             data.appendFormat("=>       ------\n")
         }
         
-        NSLog("=> COREDATA DUMP ######")
-        NSLog("=> DATA HASH: %@", data.description.computeMD5() ?? "")
-        print(data.description)
-        NSLog("=> COREDATA DUMP ######")
+        if Cons.AKDebug {
+            NSLog("=> COREDATA DUMP ######")
+            NSLog("=> DATA HASH: %@", data.description.computeMD5() ?? "")
+            print(data.description)
+            NSLog("=> COREDATA DUMP ######")
+        }
     }
 }

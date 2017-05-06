@@ -58,9 +58,9 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
         
         switch textField.tag {
         case LocalEnums.username.rawValue:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+            return newLen > Cons.AKMaxUsernameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+            return newLen > Cons.AKMaxUsernameLength ? false : true
         }
     }
     
@@ -82,7 +82,7 @@ class AKUsernameInputViewController: AKCustomViewController, UITextFieldDelegate
             if let controller = controller as? AKUsernameInputViewController {
                 controller.controlsContainer.backgroundColor = UIColor.clear
                 
-                controller.icon.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius * 2.0
+                controller.icon.layer.cornerRadius = Cons.AKButtonCornerRadius * 2.0
                 controller.icon.layer.masksToBounds = true
                 
                 Func.AKStyleTextField(textField: controller.usernameValue)

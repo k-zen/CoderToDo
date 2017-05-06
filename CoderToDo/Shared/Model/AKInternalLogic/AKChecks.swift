@@ -52,14 +52,18 @@ class AKChecks {
             // Sanity check #2
             if task.state == TaskStates.pending.rawValue && task.completionPercentage != task.initialCompletionPercentage {
                 if !DataInterface.addPendingTask(task: task) {
-                    NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                    if Cons.AKDebug {
+                        NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                    }
                 }
             }
             
             // Sanity check #3
             if task.state == TaskStates.dilate.rawValue {
                 if !DataInterface.addDilateTask(task: task) {
-                    NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
+                    if Cons.AKDebug {
+                        NSLog("=> ERROR: ERROR ADDING TASK TO DILATE QUEUE!")
+                    }
                 }
             }
             
@@ -90,7 +94,9 @@ class AKChecks {
                                 }
                                 
                                 if !DataInterface.addPendingTask(task: newTask) {
-                                    NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                                    if Cons.AKDebug {
+                                        NSLog("=> ERROR: ERROR ADDING TASK TO PENDING QUEUE!")
+                                    }
                                 }
                                 else {
                                     // Mark the original as migrated to avoid migrate the task twice.

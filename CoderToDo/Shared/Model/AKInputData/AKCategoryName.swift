@@ -11,8 +11,8 @@ class AKCategoryName: AKInputData
             throw Exceptions.emptyData(msg)
         }
         
-        guard inputData.characters.count >= GlobalConstants.AKMinCategoryNameLength else {
-            throw Exceptions.invalidLength(String(format: "The category's name must be at least %i characters.", GlobalConstants.AKMinCategoryNameLength))
+        guard inputData.characters.count >= Cons.AKMinCategoryNameLength else {
+            throw Exceptions.invalidLength(String(format: "The category's name must be at least %i characters.", Cons.AKMinCategoryNameLength))
         }
     }
 }

@@ -57,11 +57,11 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
         
         switch textView.tag {
         case LocalEnums.taskName.rawValue:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         case LocalEnums.notes.rawValue:
-            return newLen > GlobalConstants.AKMaxTaskNoteLength ? false : true
+            return newLen > Cons.AKMaxTaskNoteLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxTaskNameLength ? false : true
+            return newLen > Cons.AKMaxTaskNameLength ? false : true
         }
     }
     
@@ -109,17 +109,26 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
                         // Special case when we are allowed to change the status from DILATE to PENDING
                         // during the aceptance period for the next day ONLY!
                         if projectStatus == .accepting && DataInterface.isDayTomorrow(day: (controller.task.category?.day)!) {
-                            NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
+                            if Cons.AKDebug {
+                                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT BUT PROJECT IS ACCEPTING AND IS TOMORROW.")
+                            }
+                            
                             controller.markTask(mode: .limitedEditing)
                         }
                         else {
-                            NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
+                            if Cons.AKDebug {
+                                NSLog("=> INFO: TASK CHECKS: DAY IS NOT CURRENT AND PROJECT IS NOT ACCEPTING OR IS NOT TOMORROW.")
+                            }
+                            
                             controller.markTask(mode: .notEditable)
                         }
                     }
                     else { // If the day is CURRENT but NOT open then always close.
                         if projectStatus != .open && projectStatus != .firstDay {
-                            NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
+                            if Cons.AKDebug {
+                                NSLog("=> INFO: TASK CHECKS: DAY IS CURRENT BUT PROJECT IS NOT OPEN.")
+                            }
+                            
                             controller.markTask(mode: .notEditable)
                         }
                         else { // If the day is CURRENT and open or first day, then close in some cases.
@@ -141,7 +150,10 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
                     // + task marked as "NOT APPLICABLE".
                     switch controller.task.state! {
                     case TaskStates.done.rawValue, TaskStates.notApplicable.rawValue:
-                        NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
+                        if Cons.AKDebug {
+                            NSLog("=> INFO: TASK CHECKS: TASK MARKED AS DONE OR NOT APPLICABLE.")
+                        }
+                        
                         controller.markTask(mode: .notEditable)
                         break
                     default:
@@ -185,7 +197,7 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
         }
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKViewTaskViewController {
-                controller.taskState.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                controller.taskState.layer.cornerRadius = Cons.AKButtonCornerRadius
                 controller.taskState.layer.masksToBounds = true
                 Func.AKStyleButton(button: controller.changeCategory)
                 Func.AKStyleTextView(textView: controller.taskNameValue)
@@ -235,16 +247,16 @@ class AKViewTaskViewController: AKCustomViewController, UITextViewDelegate {
         self.taskState.text = mode.rawValue
         switch mode {
         case .editable:
-            self.taskState.backgroundColor = GlobalConstants.AKGreenForWhiteFg
+            self.taskState.backgroundColor = Cons.AKGreenForWhiteFg
             break
         case .notEditable:
-            self.taskState.backgroundColor = GlobalConstants.AKRedForWhiteFg
+            self.taskState.backgroundColor = Cons.AKRedForWhiteFg
             break
         case .limitedEditing:
-            self.taskState.backgroundColor = GlobalConstants.AKBlueForWhiteFg
+            self.taskState.backgroundColor = Cons.AKBlueForWhiteFg
             break
         case .cleaningMode:
-            self.taskState.backgroundColor = GlobalConstants.AKPurpleForWhiteFg
+            self.taskState.backgroundColor = Cons.AKPurpleForWhiteFg
             break
         }
         

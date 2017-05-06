@@ -75,8 +75,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             Func.AKAddBorderDeco(
                 cell,
-                color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                color: Cons.AKTableHeaderCellBorderBg.cgColor,
+                thickness: Cons.AKDefaultBorderThickness * 4.0,
                 position: .left
             )
             
@@ -96,7 +96,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 Func.AKAddBorderDeco(
                     cell.infoContainer,
                     color: bucketEntry.priority == 0 ? UIColor.clear.cgColor : Func.AKGetColorForPriority(priority: Priority(rawValue: bucketEntry.priority)!).cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    thickness: Cons.AKDefaultBorderThickness * 4.0,
                     position: .left
                 )
                 
@@ -129,7 +129,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 let badgeSizeHeight = CGFloat(21.0)
                 
                 let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKBucketTableHeaderHeight))
-                headerCell.backgroundColor = GlobalConstants.AKTableCellBg
+                headerCell.backgroundColor = Cons.AKTableCellBg
                 
                 let title = UILabel(frame: CGRect(
                     x: 0.0,
@@ -137,8 +137,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                     width: tableWidth - (padding * 2.0) - badgeSizeWidth,
                     height: LocalConstants.AKBucketTableHeaderHeight)
                 )
-                title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
-                title.textColor = GlobalConstants.AKDefaultFg
+                title.font = UIFont(name: Cons.AKSecondaryFont, size: 19.0)
+                title.textColor = Cons.AKDefaultFg
                 title.text = date
                 title.textAlignment = .left
                 // ### DEBUG
@@ -147,8 +147,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                 
                 Func.AKAddBorderDeco(
                     title,
-                    color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness / 1.5,
+                    color: Cons.AKDefaultViewBorderBg.cgColor,
+                    thickness: Cons.AKDefaultBorderThickness / 1.5,
                     position: .through
                 )
                 
@@ -168,12 +168,12 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
                     width: badgeSizeWidth,
                     height: badgeSizeHeight)
                 )
-                tasksCountBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-                tasksCountBadge.textColor = GlobalConstants.AKBadgeColorFg
-                tasksCountBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+                tasksCountBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+                tasksCountBadge.textColor = Cons.AKBadgeColorFg
+                tasksCountBadge.backgroundColor = Cons.AKBadgeColorBg
                 tasksCountBadge.text = String(format: "Entries: %i", DataInterface.countBucketEntries(project: selectedProject, forDate: date))
                 tasksCountBadge.textAlignment = .center
-                tasksCountBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                tasksCountBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
                 tasksCountBadge.layer.masksToBounds = true
                 // ### DEBUG
                 // tasksCountBadge.layer.borderColor = UIColor.white.cgColor

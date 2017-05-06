@@ -50,12 +50,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case GlobalConstants.AKViewUserSegue:
+            case Cons.AKViewUserSegue:
                 if let destination = segue.destination as? AKUserViewController {
                     destination.navController.title = DataInterface.getUsername()
                 }
                 break
-            case GlobalConstants.AKViewProjectSegue:
+            case Cons.AKViewProjectSegue:
                 if let destination = segue.destination as? AKViewProjectViewController {
                     if let project = sender as? Project {
                         destination.cachingSystem = AKTableCachingSystem(projectName: project.name!)
@@ -64,7 +64,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
                     }
                 }
                 break
-            case GlobalConstants.AKViewProjectConfigurationsSegue:
+            case Cons.AKViewProjectConfigurationsSegue:
                 if let destination = segue.destination as? AKProjectConfigurationsViewController {
                     if let project = sender as? Project {
                         destination.project = project
@@ -79,11 +79,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case GlobalConstants.AKViewUserSegue:
+        case Cons.AKViewUserSegue:
             return true
-        case GlobalConstants.AKViewProjectSegue:
+        case Cons.AKViewProjectSegue:
             return true
-        case GlobalConstants.AKViewProjectConfigurationsSegue:
+        case Cons.AKViewProjectConfigurationsSegue:
             return true
         default:
             return false
@@ -128,24 +128,24 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         if DataInterface.getProjectStatus(project: project) == .accepting {
             if DataInterface.isTomorrowSetUp(project: project) {
                 cell.newDayStateValue.text = "Tomorrow is set."
-                cell.newDayStateValue.textColor = GlobalConstants.AKCoderToDoWhite
-                cell.newDayStateValue.backgroundColor = GlobalConstants.AKGreenForWhiteFg
-                cell.newDayStateValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                cell.newDayStateValue.textColor = Cons.AKCoderToDoWhite
+                cell.newDayStateValue.backgroundColor = Cons.AKGreenForWhiteFg
+                cell.newDayStateValue.layer.cornerRadius = Cons.AKButtonCornerRadius
                 cell.newDayStateValue.layer.masksToBounds = true
                 cell.newDayStateValueHeight.constant = 20.0
             }
             else {
                 cell.newDayStateValue.text = "Tomorrow is not set."
-                cell.newDayStateValue.textColor = GlobalConstants.AKCoderToDoWhite
-                cell.newDayStateValue.backgroundColor = GlobalConstants.AKRedForWhiteFg
-                cell.newDayStateValue.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+                cell.newDayStateValue.textColor = Cons.AKCoderToDoWhite
+                cell.newDayStateValue.backgroundColor = Cons.AKRedForWhiteFg
+                cell.newDayStateValue.layer.cornerRadius = Cons.AKButtonCornerRadius
                 cell.newDayStateValue.layer.masksToBounds = true
                 cell.newDayStateValueHeight.constant = 20.0
             }
         }
         else {
             cell.newDayStateValue.text = "N\\A"
-            cell.newDayStateValue.textColor = GlobalConstants.AKTableCellBg
+            cell.newDayStateValue.textColor = Cons.AKTableCellBg
             cell.newDayStateValueHeight.constant = 0.0
         }
         // Add task button.
@@ -167,11 +167,11 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-        headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+        headerCell.backgroundColor = Cons.AKTableHeaderCellBg
         Func.AKAddBorderDeco(
             headerCell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKTableHeaderCellBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
         
@@ -181,8 +181,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
-        title.textColor = GlobalConstants.AKDefaultFg
+        title.font = UIFont(name: Cons.AKSecondaryFont, size: 19.0)
+        title.textColor = Cons.AKDefaultFg
         title.text = project.name ?? "N/A"
         title.textAlignment = .left
         // ### DEBUG
@@ -205,12 +205,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: firstBadgeSizeWidth,
             height: firstBadgeSizeHeight)
         )
-        firstBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 14.0)
-        firstBadge.textColor = GlobalConstants.AKBadgeColorFg
-        firstBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        firstBadge.font = UIFont(name: Cons.AKDefaultFont, size: 14.0)
+        firstBadge.textColor = Cons.AKBadgeColorFg
+        firstBadge.backgroundColor = Cons.AKBadgeColorBg
         firstBadge.text = String(format: "Pending Tasks: %i", DataInterface.countProjectPendingTasks(project: project))
         firstBadge.textAlignment = .center
-        firstBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        firstBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
         firstBadge.layer.masksToBounds = true
         // ### DEBUG
         // firstBadge.layer.borderColor = UIColor.white.cgColor
@@ -234,12 +234,12 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             width: secondBadgeSizeWidth,
             height: secondBadgeSizeHeight)
         )
-        secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        secondBadge.textColor = GlobalConstants.AKBadgeColorFg
+        secondBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+        secondBadge.textColor = Cons.AKBadgeColorFg
         secondBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: projectStatus)
         secondBadge.text = String(format: "%@", projectStatus.rawValue)
         secondBadge.textAlignment = .center
-        secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        secondBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
         secondBadge.layer.masksToBounds = true
         // ### DEBUG
         // secondBadge.layer.borderColor = UIColor.white.cgColor
@@ -280,7 +280,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
-        self.performSegue(withIdentifier: GlobalConstants.AKViewProjectSegue, sender: project)
+        self.performSegue(withIdentifier: Cons.AKViewProjectSegue, sender: project)
     }
     
     // MARK: Miscellaneous
@@ -354,8 +354,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             if let controller = controller as? AKListProjectsViewController {
                 controller.menu.setTitleTextAttributes(
                     [
-                        NSFontAttributeName: UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
-                        NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+                        NSFontAttributeName: UIFont(name: Cons.AKSecondaryFont, size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
+                        NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
                     ], for: .normal
                 )
             }
@@ -472,15 +472,15 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         Func.AKReloadTable(tableView: self.projectsTable)
     }
     
-    func toggleUser() { self.performSegue(withIdentifier: GlobalConstants.AKViewUserSegue, sender: self) }
+    func toggleUser() { self.performSegue(withIdentifier: Cons.AKViewUserSegue, sender: self) }
     
     func setUserBadge(controller: AKListProjectsViewController) {
         let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))
         userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().characters.first?.description ?? "").uppercased(), for: .normal)
-        userAvatar.setTitleColor(GlobalConstants.AKButtonFg, for: .normal)
-        userAvatar.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        userAvatar.setTitleColor(Cons.AKButtonFg, for: .normal)
+        userAvatar.titleLabel?.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0)
         userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true
-        userAvatar.backgroundColor = GlobalConstants.AKButtonBg
+        userAvatar.backgroundColor = Cons.AKButtonBg
         userAvatar.layer.cornerRadius = userAvatar.frame.width / 2.0
         userAvatar.addTarget(self, action: #selector(AKListProjectsViewController.toggleUser), for: .touchUpInside)
         

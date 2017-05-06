@@ -38,7 +38,7 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = GlobalConstants.AKPickerViewFg
+        pickerLabel.textColor = Cons.AKPickerViewFg
         
         switch pickerView.tag {
         case LocalEnums.filterType.rawValue:
@@ -53,8 +53,8 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         }
         
         pickerLabel.textAlignment = .center
-        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
+        pickerLabel.backgroundColor = Cons.AKPickerViewBg
+        pickerLabel.font = UIFont(name: Cons.AKSecondaryFont, size: Cons.AKPickerFontSize)
         
         return pickerLabel
     }
@@ -166,24 +166,24 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
     func resetViewDefaults(controller: AKCustomViewController) {
         if let controller = self.controller as? AKListProjectsViewController {
             for (index, row) in controller.filterMenuItemOverlay.filterTypeData.enumerated() {
-                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectFilterType.rawValue) == .orderedSame {
+                if row.caseInsensitiveCompare(Cons.AKDefaultProjectFilterType.rawValue) == .orderedSame {
                     controller.filterMenuItemOverlay.type.selectRow(index, inComponent: 0, animated: true)
                 }
             }
             for (index, row) in controller.filterMenuItemOverlay.filterValueData.enumerated() {
-                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultProjectFilterValue.rawValue) == .orderedSame {
+                if row.caseInsensitiveCompare(Cons.AKDefaultProjectFilterValue.rawValue) == .orderedSame {
                     controller.filterMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
                 }
             }
         }
         else if let controller = self.controller as? AKViewProjectViewController {
             for (index, row) in controller.filterMenuItemOverlay.filterTypeData.enumerated() {
-                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskFilterType.rawValue) == .orderedSame {
+                if row.caseInsensitiveCompare(Cons.AKDefaultTaskFilterType.rawValue) == .orderedSame {
                     controller.filterMenuItemOverlay.type.selectRow(index, inComponent: 0, animated: true)
                 }
             }
             for (index, row) in controller.filterMenuItemOverlay.filterValueData.enumerated() {
-                if row.caseInsensitiveCompare(GlobalConstants.AKDefaultTaskFilterValue.rawValue) == .orderedSame {
+                if row.caseInsensitiveCompare(Cons.AKDefaultTaskFilterValue.rawValue) == .orderedSame {
                     controller.filterMenuItemOverlay.filters.selectRow(index, inComponent: 0, animated: true)
                 }
             }

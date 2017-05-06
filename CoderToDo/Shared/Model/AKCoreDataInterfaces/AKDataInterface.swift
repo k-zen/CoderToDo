@@ -199,7 +199,7 @@ class AKDataInterface
             let m2 = creationDateComponents.month ?? 0
             let y2 = creationDateComponents.year ?? 0
             
-            if nowHour >= GlobalConstants.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
+            if nowHour >= Cons.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
                 return .firstDay
             }
             // ###### FIRST DAY
@@ -208,7 +208,7 @@ class AKDataInterface
             if nowHour >= startingTimeHour && nowHour <= closingTimeHour + Int(project.closingTimeTolerance) {
                 return .open
             }
-            else if nowHour >= closingTimeHour && nowHour <= GlobalConstants.AKAcceptingTasksDefaultMaxTime {
+            else if nowHour >= closingTimeHour && nowHour <= Cons.AKAcceptingTasksDefaultMaxTime {
                 return .accepting
             }
             else {
@@ -259,7 +259,7 @@ class AKDataInterface
                         let m2 = dateComponents.month ?? 0
                         let y2 = dateComponents.year ?? 0
                         
-                        if GlobalConstants.AKDebug {
+                        if Cons.AKDebug {
                             NSLog("=> INFO: NOW (%@), TOMORROW (%@), DATE (%@)", now.description, tomorrow.description, date.description)
                         }
                         
@@ -274,7 +274,7 @@ class AKDataInterface
             
             if !alreadyContainsDate {
                 if DataInterface.getProjectStatus(project: project) == .firstDay {
-                    if GlobalConstants.AKDebug {
+                    if Cons.AKDebug {
                         NSLog("=> INFO: WORKING DAY IS FIRST DAY. ADDING TODAY!")
                     }
                     
@@ -286,7 +286,7 @@ class AKDataInterface
                     return today
                 }
                 else if DataInterface.getProjectStatus(project: project) == .accepting {
-                    if GlobalConstants.AKDebug {
+                    if Cons.AKDebug {
                         NSLog("=> INFO: WORKING DAY ALREADY FINISHED. ADDING TOMORROW!")
                     }
                     
@@ -324,7 +324,7 @@ class AKDataInterface
                         let m2 = dateComponents.month ?? 0
                         let y2 = dateComponents.year ?? 0
                         
-                        if GlobalConstants.AKDebug {
+                        if Cons.AKDebug {
                             NSLog("=> INFO: DAYTOLOOK (%@), DATE (%@)", dayToLook.description, date.description)
                         }
                         
@@ -1086,7 +1086,10 @@ class AKDataInterface
             bucket.addToEntries(entry)
         }
         else {
-            NSLog("=> WARNING: Bucket not created. Creating one and adding...")
+            if Cons.AKDebug {
+                NSLog("=> WARNING: BUCKET NOT CREATED. CREATING ONE AND ADDING...")
+            }
+            
             if let mr = Func.AKObtainMasterReference() {
                 project.bucket = Bucket(context: mr.getMOC())
                 project.bucket?.addToEntries(entry)

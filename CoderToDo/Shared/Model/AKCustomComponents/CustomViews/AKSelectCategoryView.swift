@@ -54,7 +54,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = GlobalConstants.AKPickerViewFg
+        pickerLabel.textColor = Cons.AKPickerViewFg
         
         switch pickerView.tag {
         case LocalEnums.category.rawValue:
@@ -65,8 +65,8 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
             break
         }
         
-        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
+        pickerLabel.backgroundColor = Cons.AKPickerViewBg
+        pickerLabel.font = UIFont(name: Cons.AKSecondaryFont, size: Cons.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
@@ -117,9 +117,9 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     }
     
     func applyLookAndFeel() {
-        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.cornerRadius = Cons.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
-        self.getView().layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+        self.getView().layer.borderColor = Cons.AKCoderToDoGray3.cgColor
         self.getView().layer.borderWidth = 2.0
         self.mainContainer.backgroundColor = UIColor.clear
         

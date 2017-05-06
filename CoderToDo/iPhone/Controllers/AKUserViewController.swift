@@ -59,9 +59,9 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
         
         switch textField.tag {
         case LocalEnums.username.rawValue:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+            return newLen > Cons.AKMaxUsernameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxUsernameLength ? false : true
+            return newLen > Cons.AKMaxUsernameLength ? false : true
         }
     }
     
@@ -111,24 +111,24 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
         }
         
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
-        chartDataSet.valueFont = UIFont(name: GlobalConstants.AKSecondaryFont, size: 12)!
-        chartDataSet.valueTextColor = GlobalConstants.AKRedForBlackFg
+        chartDataSet.valueFont = UIFont(name: Cons.AKSecondaryFont, size: 12)!
+        chartDataSet.valueTextColor = Cons.AKRedForBlackFg
         chartDataSet.drawValuesEnabled = true
-        chartDataSet.setColors([GlobalConstants.AKCoderToDoWhite], alpha: 0.75)
+        chartDataSet.setColors([Cons.AKCoderToDoWhite], alpha: 0.75)
         
         // Configure the chart.
         self.osrChartContainer.xAxis.labelPosition = .bottom
-        self.osrChartContainer.xAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.xAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.xAxis.gridColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.xAxis.labelFont = UIFont(name: Cons.AKDefaultFont, size: 12)!
+        self.osrChartContainer.xAxis.labelTextColor = Cons.AKDefaultFg
+        self.osrChartContainer.xAxis.gridColor = Cons.AKDefaultBg
         self.osrChartContainer.xAxis.gridLineCap = .square
         self.osrChartContainer.xAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.xAxis.valueFormatter = formato
         self.osrChartContainer.xAxis.drawAxisLineEnabled = false
         
-        self.osrChartContainer.leftAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.leftAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.leftAxis.gridColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.leftAxis.labelFont = UIFont(name: Cons.AKDefaultFont, size: 12)!
+        self.osrChartContainer.leftAxis.labelTextColor = Cons.AKDefaultFg
+        self.osrChartContainer.leftAxis.gridColor = Cons.AKDefaultBg
         self.osrChartContainer.leftAxis.gridLineCap = .square
         self.osrChartContainer.leftAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.leftAxis.axisMaximum = 115.0
@@ -136,9 +136,9 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
         self.osrChartContainer.leftAxis.drawAxisLineEnabled = false
         self.osrChartContainer.leftAxis.drawLabelsEnabled = false
         
-        self.osrChartContainer.rightAxis.labelFont = UIFont(name: GlobalConstants.AKDefaultFont, size: 12)!
-        self.osrChartContainer.rightAxis.labelTextColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.rightAxis.gridColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.rightAxis.labelFont = UIFont(name: Cons.AKDefaultFont, size: 12)!
+        self.osrChartContainer.rightAxis.labelTextColor = Cons.AKDefaultFg
+        self.osrChartContainer.rightAxis.gridColor = Cons.AKDefaultBg
         self.osrChartContainer.rightAxis.gridLineCap = .square
         self.osrChartContainer.rightAxis.gridLineDashLengths = [2, 2]
         self.osrChartContainer.rightAxis.axisMaximum = 115.0
@@ -146,15 +146,15 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
         self.osrChartContainer.rightAxis.drawAxisLineEnabled = false
         self.osrChartContainer.rightAxis.drawLabelsEnabled = false
         
-        self.osrChartContainer.legend.textColor = GlobalConstants.AKDefaultFg
-        self.osrChartContainer.legend.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 16)!
+        self.osrChartContainer.legend.textColor = Cons.AKDefaultFg
+        self.osrChartContainer.legend.font = UIFont(name: Cons.AKDefaultFont, size: 16)!
         self.osrChartContainer.legend.horizontalAlignment = .center
         
-        self.osrChartContainer.backgroundColor = GlobalConstants.AKDefaultBg
-        self.osrChartContainer.gridBackgroundColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.backgroundColor = Cons.AKDefaultBg
+        self.osrChartContainer.gridBackgroundColor = Cons.AKDefaultBg
         self.osrChartContainer.noDataText = ""
         self.osrChartContainer.chartDescription?.text = ""
-        self.osrChartContainer.noDataTextColor = GlobalConstants.AKDefaultBg
+        self.osrChartContainer.noDataTextColor = Cons.AKDefaultBg
         self.osrChartContainer.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .linear)
         self.osrChartContainer.isUserInteractionEnabled = false
         

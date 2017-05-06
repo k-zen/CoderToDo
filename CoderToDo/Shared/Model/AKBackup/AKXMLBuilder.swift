@@ -141,7 +141,7 @@ class AKXMLBuilder
     static func unmarshall(data: Data) throws -> Void
     {
         let outerParser = XMLParser(data: data)
-        let outerParserDelegate = ESXPSAX2DOM.newBuild(GlobalConstants.AKBackupXMLMaxNodes)
+        let outerParserDelegate = ESXPSAX2DOM.newBuild(Cons.AKBackupXMLMaxNodes)
         outerParser.delegate = outerParserDelegate
         
         outerParser.parse()
@@ -150,23 +150,26 @@ class AKXMLBuilder
             fatalError("=> ERROR: \(String(describing: error?.localizedDescription))") // TODO: Improve!!!
         }
         
-        let outerProcessor = ESXPProcessor.newBuild(GlobalConstants.AKBackupXMLMaxNodes)
+        let outerProcessor = ESXPProcessor.newBuild(Cons.AKBackupXMLMaxNodes)
         if let mainWalker = ESXPStackDOMWalker
             .newBuild()
             .configure(
-                GlobalConstants.AKBackupXMLMaxNodes,
+                Cons.AKBackupXMLMaxNodes,
                 rootNode: outerParserDelegate?.getDOM().getRootNode(),
                 nodesToProcess: ELEMENT_NODE.rawValue
             ) {
             while mainWalker.hasNext() {
                 if let dataNode = mainWalker.nextNode() {
                     if dataNode.getType() == ELEMENT_NODE.rawValue && dataNode.getName().caseInsensitiveCompare("data") == .orderedSame {
-                        NSLog("=> INFO: data => date => %@", outerProcessor?.getNodeAttributeValue(dataNode, attributeName: "date", strict: false) ?? "")
-                        NSLog("=> INFO: data => md5 => %@", outerProcessor?.getNodeAttributeValue(dataNode, attributeName: "md5", strict: false) ?? "")
+                        if Cons.AKDebug {
+                            NSLog("=> INFO: data => date => %@", outerProcessor?.getNodeAttributeValue(dataNode, attributeName: "date", strict: false) ?? "")
+                            NSLog("=> INFO: data => md5 => %@", outerProcessor?.getNodeAttributeValue(dataNode, attributeName: "md5", strict: false) ?? "")
+                        }
+                        
                         if let dataValue = outerProcessor?.getNodeValue(dataNode, strict: false).fromBase64() {
                             if let innerData = dataValue.data(using: .utf8) {
                                 let innerParser = XMLParser(data: innerData)
-                                let innerParserDelegate = ESXPSAX2DOM.newBuild(GlobalConstants.AKBackupXMLMaxNodes)
+                                let innerParserDelegate = ESXPSAX2DOM.newBuild(Cons.AKBackupXMLMaxNodes)
                                 innerParser.delegate = innerParserDelegate
                                 
                                 innerParser.parse()
@@ -175,11 +178,11 @@ class AKXMLBuilder
                                     fatalError("=> ERROR: \(String(describing: error?.localizedDescription))") // TODO: Improve!!!
                                 }
                                 
-                                let innerProcessor = ESXPProcessor.newBuild(GlobalConstants.AKBackupXMLMaxNodes)!
+                                let innerProcessor = ESXPProcessor.newBuild(Cons.AKBackupXMLMaxNodes)!
                                 if let secondaryWalker = ESXPStackDOMWalker
                                     .newBuild()
                                     .configure(
-                                        GlobalConstants.AKBackupXMLMaxNodes,
+                                        Cons.AKBackupXMLMaxNodes,
                                         rootNode: innerParserDelegate?.getDOM().getRootNode(),
                                         nodesToProcess: ELEMENT_NODE.rawValue
                                     ) {
@@ -251,7 +254,7 @@ class AKXMLBuilder
                                                                 if days.hasChildNodes() {
                                                                     if let daysWalker = ESXPStackDOMWalker
                                                                         .newBuild()
-                                                                        .configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: days, nodesToProcess: ELEMENT_NODE.rawValue) {
+                                                                        .configure(Cons.AKBackupXMLMaxNodes, rootNode: days, nodesToProcess: ELEMENT_NODE.rawValue) {
                                                                         while daysWalker.hasNext() {
                                                                             if let currentNode = daysWalker.nextNode() {
                                                                                 if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("day") == .orderedSame {
@@ -267,7 +270,7 @@ class AKXMLBuilder
                                                                                                 if categories.hasChildNodes() {
                                                                                                     if let categoriesWalker = ESXPStackDOMWalker
                                                                                                         .newBuild()
-                                                                                                        .configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: categories, nodesToProcess: ELEMENT_NODE.rawValue) {
+                                                                                                        .configure(Cons.AKBackupXMLMaxNodes, rootNode: categories, nodesToProcess: ELEMENT_NODE.rawValue) {
                                                                                                         while categoriesWalker.hasNext() {
                                                                                                             if let currentNode = categoriesWalker.nextNode() {
                                                                                                                 if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("category") == .orderedSame {
@@ -361,7 +364,7 @@ class AKXMLBuilder
     static func getProjectCategories(processor: ESXPProcessor, rootNode: ESXPElement) -> [ProjectCategory]
     {
         var projectCategories = [ProjectCategory]()
-        if let projectCategoriesWalker = ESXPStackDOMWalker.newBuild().configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
+        if let projectCategoriesWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while projectCategoriesWalker.hasNext() {
                 if let currentNode = projectCategoriesWalker.nextNode() {
                     if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("name") == .orderedSame {
@@ -382,7 +385,7 @@ class AKXMLBuilder
     static func getTasks(processor: ESXPProcessor, rootNode: ESXPElement) -> [Task]
     {
         var tasks = [Task]()
-        if let taskWalker = ESXPStackDOMWalker.newBuild().configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
+        if let taskWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while taskWalker.hasNext() {
                 if let currentNode = taskWalker.nextNode() {
                     if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("task") == .orderedSame {
@@ -421,7 +424,7 @@ class AKXMLBuilder
     static func getBucket(processor: ESXPProcessor, rootNode: ESXPElement) -> [BucketEntry]
     {
         var entries = [BucketEntry]()
-        if let bucketWalker = ESXPStackDOMWalker.newBuild().configure(GlobalConstants.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
+        if let bucketWalker = ESXPStackDOMWalker.newBuild().configure(Cons.AKBackupXMLMaxNodes, rootNode: rootNode, nodesToProcess: ELEMENT_NODE.rawValue) {
             while bucketWalker.hasNext() {
                 if let currentNode = bucketWalker.nextNode() {
                     if currentNode.getType() == ELEMENT_NODE.rawValue && currentNode.getName().caseInsensitiveCompare("entry") == .orderedSame {

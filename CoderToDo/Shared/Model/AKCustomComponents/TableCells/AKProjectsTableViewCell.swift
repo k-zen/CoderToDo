@@ -62,11 +62,11 @@ class AKProjectsTableViewCell: UITableViewCell {
         // Custom L&F.
         Func.AKStyleButton(button: self.addTomorrowTask)
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+        self.mainContainer.backgroundColor = Cons.AKTableCellBg
         Func.AKAddBorderDeco(
             self.infoContainer,
-            color: GlobalConstants.AKTableCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKTableCellBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
     }
@@ -112,7 +112,7 @@ class AKProjectsTableViewCell: UITableViewCell {
                             let project = DataInterface.getProjects(filter: controller.projectFilter)[indexPath.section]
                             
                             controller.performSegue(
-                                withIdentifier: GlobalConstants.AKViewProjectConfigurationsSegue,
+                                withIdentifier: Cons.AKViewProjectConfigurationsSegue,
                                 sender: project
                             )
                         }

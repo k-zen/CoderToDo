@@ -22,8 +22,8 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case GlobalConstants.AKViewBackupSegue,
-             GlobalConstants.AKViewGoodiesSegue:
+        case Cons.AKViewBackupSegue,
+             Cons.AKViewGoodiesSegue:
             return true
         default:
             return false
@@ -39,8 +39,8 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKTableHeaderCellBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
         
@@ -57,8 +57,8 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
             width: tableView.frame.width,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
-        title.textColor = GlobalConstants.AKDefaultFg
+        title.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0)
+        title.textColor = Cons.AKDefaultFg
         switch section {
         case 0:
             title.text = "Information Backup & Restore"
@@ -102,10 +102,10 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewBackupSegue, sender: self)
+            self.performSegue(withIdentifier: Cons.AKViewBackupSegue, sender: self)
             break
         case 1:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewGoodiesSegue, sender: self)
+            self.performSegue(withIdentifier: Cons.AKViewGoodiesSegue, sender: self)
             break
         default:
             break

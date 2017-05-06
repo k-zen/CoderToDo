@@ -33,7 +33,7 @@ class AKConfigurationsTableViewCell: UITableViewCell {
         self.badgeWidth.constant = 0
         
         // Custom L&F.
-        self.badge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        self.badge.layer.cornerRadius = Cons.AKButtonCornerRadius
         self.badge.layer.masksToBounds = true
         self.arrow.layer.cornerRadius = self.arrow.frame.width / 2.0
         self.arrow.layer.masksToBounds = true

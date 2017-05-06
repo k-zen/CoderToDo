@@ -23,57 +23,57 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
         UITabBarItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKDefaultFont,
-                    size: GlobalConstants.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKTabBarFontSize),
-                NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintNormal
+                    name: Cons.AKDefaultFont,
+                    size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
+                NSForegroundColorAttributeName: Cons.AKTabBarTintNormal
             ], for: .normal
         )
         UITabBarItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKDefaultFont,
-                    size: GlobalConstants.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKTabBarFontSize),
-                NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+                    name: Cons.AKDefaultFont,
+                    size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
+                NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
             ], for: .selected
         )
-        UITabBar.appearance().barTintColor = GlobalConstants.AKTabBarBg
+        UITabBar.appearance().barTintColor = Cons.AKTabBarBg
         // ### BarButton
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKSecondaryFont,
-                    size: GlobalConstants.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKTabBarFontSize),
-                NSForegroundColorAttributeName: GlobalConstants.AKTabBarTintSelected
+                    name: Cons.AKSecondaryFont,
+                    size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
+                NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
             ], for: .normal
         )
         // ### NavBar
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont(
-                name: GlobalConstants.AKSecondaryFont,
-                size: GlobalConstants.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: GlobalConstants.AKNavBarFontSize),
-            NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+                name: Cons.AKSecondaryFont,
+                size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
+            NSForegroundColorAttributeName: Cons.AKDefaultFg
         ]
-        UINavigationBar.appearance().tintColor = GlobalConstants.AKTabBarTintSelected
+        UINavigationBar.appearance().tintColor = Cons.AKTabBarTintSelected
         // ### SegmentedControl
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKSecondaryFont,
+                    name: Cons.AKSecondaryFont,
                     size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
-                NSForegroundColorAttributeName: GlobalConstants.AKDefaultFg
+                NSForegroundColorAttributeName: Cons.AKDefaultFg
             ], for: .normal
         )
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSFontAttributeName: UIFont(
-                    name: GlobalConstants.AKSecondaryFont,
+                    name: Cons.AKSecondaryFont,
                     size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
                 NSForegroundColorAttributeName: UIColor.black
             ], for: .selected
         )
         // ### Misc
-        UIPickerView.appearance().backgroundColor = GlobalConstants.AKCoderToDoGray2
-        UITextView.appearance().backgroundColor = GlobalConstants.AKCoderToDoGray2
+        UIPickerView.appearance().backgroundColor = Cons.AKCoderToDoGray2
+        UITextView.appearance().backgroundColor = Cons.AKCoderToDoGray2
         
         // ### Read persisted data.
         self.masterRef = AKMasterReference.loadData()

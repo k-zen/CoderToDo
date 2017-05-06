@@ -51,7 +51,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case GlobalConstants.AKViewTaskSegue:
+            case Cons.AKViewTaskSegue:
                 if let destination = segue.destination as? AKViewTaskViewController {
                     if let task = sender as? Task {
                         destination.task = task
@@ -67,7 +67,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case GlobalConstants.AKViewTaskSegue:
+        case Cons.AKViewTaskSegue:
             return true
         default:
             return false
@@ -121,7 +121,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                         
                         // Custom L&F.
                         cell.selectionStyle = UITableViewCellSelectionStyle.none
-                        cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                        cell.mainContainer.backgroundColor = Cons.AKTableCellBg
                         
                         entry.setParentCell(cell: cell)
                         entry.setChildView(view: customView)
@@ -135,11 +135,11 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
                 // Custom L&F.
                 cell.selectionStyle = UITableViewCellSelectionStyle.none
-                cell.mainContainer.backgroundColor = GlobalConstants.AKTableCellBg
+                cell.mainContainer.backgroundColor = Cons.AKTableCellBg
                 Func.AKAddBorderDeco(
                     cell.mainContainer,
-                    color: GlobalConstants.AKTableCellBorderBg.cgColor,
-                    thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                    color: Cons.AKTableCellBorderBg.cgColor,
+                    thickness: Cons.AKDefaultBorderThickness * 4.0,
                     position: .left
                 )
                 
@@ -171,12 +171,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         let paddingBetweenBadges = CGFloat(4.0)
         
         let headerCell = UIView(frame: CGRect(x: 0, y: 0, width: tableWidth, height: LocalConstants.AKHeaderHeight))
-        headerCell.backgroundColor = GlobalConstants.AKTableHeaderCellBg
+        headerCell.backgroundColor = Cons.AKTableHeaderCellBg
         if isTomorrow {
             Func.AKAddBorderDeco(
                 headerCell,
                 color: Func.AKGetColorForProjectStatus(projectStatus: .accepting).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                thickness: Cons.AKDefaultBorderThickness * 4.0,
                 position: .left
             )
         }
@@ -184,7 +184,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             Func.AKAddBorderDeco(
                 headerCell,
                 color: Func.AKGetColorForProjectStatus(projectStatus: projectStatus == .accepting ? .closed : projectStatus).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                thickness: Cons.AKDefaultBorderThickness * 4.0,
                 position: .left
             )
         }
@@ -192,7 +192,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             Func.AKAddBorderDeco(
                 headerCell,
                 color: Func.AKGetColorForProjectStatus(projectStatus: .closed).cgColor,
-                thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+                thickness: Cons.AKDefaultBorderThickness * 4.0,
                 position: .left
             )
         }
@@ -203,8 +203,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: tableWidth - (padding * 3) - firstBadgeSizeWidth - secondBadgeSizeWidth - thirdBadgeSizeWidth - paddingBetweenBadges,
             height: LocalConstants.AKHeaderHeight)
         )
-        title.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 19.0)
-        title.textColor = GlobalConstants.AKDefaultFg
+        title.font = UIFont(name: Cons.AKSecondaryFont, size: 19.0)
+        title.textColor = Cons.AKDefaultFg
         title.text = Func.AKGetFormattedDate(date: day.date as Date?)
         title.textAlignment = .left
         // ### DEBUG
@@ -227,12 +227,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: firstBadgeSizeWidth,
             height: firstBadgeSizeHeight)
         )
-        firstBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        firstBadge.textColor = GlobalConstants.AKBadgeColorFg
-        firstBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        firstBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+        firstBadge.textColor = Cons.AKBadgeColorFg
+        firstBadge.backgroundColor = Cons.AKBadgeColorBg
         firstBadge.text = String(format: "SR: %.2f%%", day.sr)
         firstBadge.textAlignment = .center
-        firstBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        firstBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
         firstBadge.layer.masksToBounds = true
         // ### DEBUG
         // firstBadge.layer.borderColor = UIColor.white.cgColor
@@ -256,12 +256,12 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: secondBadgeSizeWidth,
             height: secondBadgeSizeHeight)
         )
-        secondBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        secondBadge.textColor = GlobalConstants.AKBadgeColorFg
-        secondBadge.backgroundColor = GlobalConstants.AKBadgeColorBg
+        secondBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+        secondBadge.textColor = Cons.AKBadgeColorFg
+        secondBadge.backgroundColor = Cons.AKBadgeColorBg
         secondBadge.text = String(format: "Pending: %i", DataInterface.countDayPendingTasks(day: day))
         secondBadge.textAlignment = .center
-        secondBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        secondBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
         secondBadge.layer.masksToBounds = true
         // ### DEBUG
         // secondBadge.layer.borderColor = UIColor.white.cgColor
@@ -285,8 +285,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             width: thirdBadgeSizeWidth,
             height: thirdBadgeSizeHeight)
         )
-        thirdBadge.font = UIFont(name: GlobalConstants.AKDefaultFont, size: 12.0)
-        thirdBadge.textColor = GlobalConstants.AKBadgeColorFg
+        thirdBadge.font = UIFont(name: Cons.AKDefaultFont, size: 12.0)
+        thirdBadge.textColor = Cons.AKBadgeColorFg
         if isTomorrow {
             thirdBadge.backgroundColor = Func.AKGetColorForProjectStatus(projectStatus: .accepting)
             thirdBadge.text = String(format: "%@", ProjectStatus.accepting.rawValue)
@@ -300,7 +300,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
             thirdBadge.text = String(format: "%@", ProjectStatus.closed.rawValue)
         }
         thirdBadge.textAlignment = .center
-        thirdBadge.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        thirdBadge.layer.cornerRadius = Cons.AKButtonCornerRadius
         thirdBadge.layer.masksToBounds = true
         // ### DEBUG
         // thirdBadge.layer.borderColor = UIColor.white.cgColor
@@ -502,7 +502,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
     }
     
     func resetFilters(controller: AKCustomViewController) {
-        if GlobalConstants.AKDebug {
+        if Cons.AKDebug {
             NSLog("=> \(type(of: self)): RESETTING FILTERS")
         }
         

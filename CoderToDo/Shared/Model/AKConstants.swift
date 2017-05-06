@@ -131,7 +131,7 @@ extension UIView {
 
 // MARK: Structures
 struct GlobalConstants {
-    static let AKDebug = true
+    static let AKDebug = false
     // CoreData
     static let AKDataModelName = "MainDataModel"
     static let AKDbaseFileName = "MainDataModel.sqlite"
@@ -168,32 +168,32 @@ struct GlobalConstants {
     static let AKSecondaryFont = "AvenirNextCondensed-DemiBold"
     static let AKSecondaryItalicFont = "AvenirNextCondensed-DemiBoldItalic"
     static let AKTertiaryFont = "AvenirNextCondensed-Bold"
-    static let AKDefaultBg = GlobalConstants.AKCoderToDoGray1
-    static let AKDefaultFg = GlobalConstants.AKCoderToDoWhite
-    static let AKTabBarBg = GlobalConstants.AKCoderToDoGray1
-    static let AKTabBarTintNormal = GlobalConstants.AKDefaultFg
-    static let AKTabBarTintSelected = GlobalConstants.AKRedForBlackFg
-    static let AKDefaultTextfieldBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKOverlaysBg = GlobalConstants.AKDefaultBg
-    static let AKDefaultViewBorderBg = GlobalConstants.AKCoderToDoGray3
-    static let AKButtonBg = GlobalConstants.AKCoderToDoGray3
-    static let AKButtonFg = GlobalConstants.AKCoderToDoWhite
-    static let AKTableHeaderCellBg = GlobalConstants.AKCoderToDoGray2
-    static let AKTableHeaderCellBorderBg = GlobalConstants.AKCoderToDoGray4
-    static let AKTableCellBg = GlobalConstants.AKCoderToDoGray1
-    static let AKTableCellBorderBg = GlobalConstants.AKCoderToDoGray3
-    static let AKPickerViewFg = GlobalConstants.AKDefaultFg
-    static let AKPickerViewBg = GlobalConstants.AKCoderToDoGray3
+    static let AKDefaultBg = Cons.AKCoderToDoGray1
+    static let AKDefaultFg = Cons.AKCoderToDoWhite
+    static let AKTabBarBg = Cons.AKCoderToDoGray1
+    static let AKTabBarTintNormal = Cons.AKDefaultFg
+    static let AKTabBarTintSelected = Cons.AKRedForBlackFg
+    static let AKDefaultTextfieldBorderBg = Cons.AKCoderToDoGray4
+    static let AKOverlaysBg = Cons.AKDefaultBg
+    static let AKDefaultViewBorderBg = Cons.AKCoderToDoGray3
+    static let AKButtonBg = Cons.AKCoderToDoGray3
+    static let AKButtonFg = Cons.AKCoderToDoWhite
+    static let AKTableHeaderCellBg = Cons.AKCoderToDoGray2
+    static let AKTableHeaderCellBorderBg = Cons.AKCoderToDoGray4
+    static let AKTableCellBg = Cons.AKCoderToDoGray1
+    static let AKTableCellBorderBg = Cons.AKCoderToDoGray3
+    static let AKPickerViewFg = Cons.AKDefaultFg
+    static let AKPickerViewBg = Cons.AKCoderToDoGray3
     static let AKPickerFontSize: CGFloat = 14.0
     static let AKNavBarFontSize: CGFloat = 20.0
-    static let AKTabBarFontSize: CGFloat = GlobalConstants.AKNavBarFontSize
+    static let AKTabBarFontSize: CGFloat = Cons.AKNavBarFontSize
     static let AKViewCornerRadius: CGFloat = 4.0
     static let AKButtonCornerRadius: CGFloat = 2.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0
     static let AKDefaultTransitionStyle = UIModalTransitionStyle.crossDissolve
-    static let AKBadgeColorBg = GlobalConstants.AKDefaultViewBorderBg
-    static let AKBadgeColorFg = GlobalConstants.AKCoderToDoWhite
+    static let AKBadgeColorBg = Cons.AKDefaultViewBorderBg
+    static let AKBadgeColorFg = Cons.AKCoderToDoWhite
     static let AKCloseKeyboardToolbarHeight: CGFloat = 30
     static let AKAutoCorrectionToolbarHeight: CGFloat = 42
     // Validations
@@ -612,25 +612,25 @@ class UtilityFunctions {
     ///
     func AKAddDoneButtonKeyboard(_ textControl: UIView, controller: AKCustomViewController) {
         let keyboardToolbar = UIToolbar()
-        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: GlobalConstants.AKCloseKeyboardToolbarHeight)
+        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: textControl.frame.width, height: Cons.AKCloseKeyboardToolbarHeight)
         keyboardToolbar.barStyle = .blackTranslucent
         keyboardToolbar.isTranslucent = true
         keyboardToolbar.sizeToFit()
         keyboardToolbar.clipsToBounds = true
         keyboardToolbar.alpha = 0.75
         
-        let container = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: GlobalConstants.AKCloseKeyboardToolbarHeight))
+        let container = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: Cons.AKCloseKeyboardToolbarHeight))
         // ### DEBUG
         // container.layer.borderColor = UIColor.white.cgColor
         // container.layer.borderWidth = 1.0
         
-        let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: GlobalConstants.AKCloseKeyboardToolbarHeight))
+        let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: Cons.AKCloseKeyboardToolbarHeight))
         button.setTitle("Close Keyboard", for: .normal)
-        button.setTitleColor(GlobalConstants.AKTabBarTintSelected, for: .normal)
-        button.titleLabel?.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0)
+        button.setTitleColor(Cons.AKTabBarTintSelected, for: .normal)
+        button.titleLabel?.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.backgroundColor = UIColor.clear
-        button.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        button.layer.cornerRadius = Cons.AKButtonCornerRadius
         button.addTarget(controller, action: #selector(AKCustomViewController.tap(_:)), for: .touchUpInside)
         // ### DEBUG
         // button.layer.borderColor = UIColor.white.cgColor
@@ -788,24 +788,24 @@ class UtilityFunctions {
     func AKGetColorForPriority(priority: Priority) -> UIColor {
         switch priority {
         case .low:
-            return GlobalConstants.AKGreenForWhiteFg
+            return Cons.AKGreenForWhiteFg
         case .medium:
-            return GlobalConstants.AKYellowForWhiteFg
+            return Cons.AKYellowForWhiteFg
         case .high:
-            return GlobalConstants.AKRedForWhiteFg
+            return Cons.AKRedForWhiteFg
         }
     }
     
     func AKGetColorForProjectStatus(projectStatus: ProjectStatus) -> UIColor {
         switch projectStatus {
         case .accepting:
-            return GlobalConstants.AKBlueForWhiteFg
+            return Cons.AKBlueForWhiteFg
         case .open:
-            return GlobalConstants.AKGreenForWhiteFg
+            return Cons.AKGreenForWhiteFg
         case .closed:
-            return GlobalConstants.AKRedForWhiteFg
+            return Cons.AKRedForWhiteFg
         case .firstDay:
-            return GlobalConstants.AKOrangeForWhiteFg
+            return Cons.AKOrangeForWhiteFg
         }
     }
     
@@ -977,7 +977,7 @@ class UtilityFunctions {
         }
         else {
             if shouldCreate {
-                if GlobalConstants.AKDebug { NSLog("=> FILE *%@* DOES NOT EXISTS! CREATING...", fileName) }
+                if Cons.AKDebug { NSLog("=> FILE *%@* DOES NOT EXISTS! CREATING...", fileName) }
                 guard fm.createFile(atPath: directory.appendingPathComponent(fileName).path, contents: nil, attributes: nil) else {
                     throw Exceptions.fileCreationError("File cannot be created.")
                 }
@@ -1006,7 +1006,9 @@ class UtilityFunctions {
             }
         }
         catch {
-            NSLog("=> ERROR: \(error)")
+            if Cons.AKDebug {
+                NSLog("=> ERROR: \(error)")
+            }
         }
     }
     
@@ -1032,7 +1034,10 @@ class UtilityFunctions {
         let startTime = CFAbsoluteTimeGetCurrent()
         operation()
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-        NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
+        
+        if self.showDebugInformation {
+            NSLog("=> INFO: TIME ELAPSED FOR \(title): %.4f seconds.", timeElapsed)
+        }
     }
     
     func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> NSDate? {
@@ -1100,7 +1105,7 @@ class UtilityFunctions {
         closingTimeContent.sound = UNNotificationSound.default()
         Func.AKGetNotificationCenter().add(
             UNNotificationRequest(
-                identifier: String(format: "%@:%@", GlobalConstants.AKClosingTimeNotificationName, project.name!),
+                identifier: String(format: "%@:%@", Cons.AKClosingTimeNotificationName, project.name!),
                 content: closingTimeContent,
                 trigger: UNCalendarNotificationTrigger(
                     dateMatching: Func.AKGetCalendarForLoading().dateComponents([.hour,.minute,.second,], from: project.closingTime! as Date),
@@ -1121,12 +1126,12 @@ class UtilityFunctions {
             Func.AKGetNotificationCenter().removeDeliveredNotifications(
                 withIdentifiers: [String(
                     format: "%@:%@",
-                    GlobalConstants.AKClosingTimeNotificationName,
+                    Cons.AKClosingTimeNotificationName,
                     project.name!)])
             Func.AKGetNotificationCenter().removePendingNotificationRequests(
                 withIdentifiers: [String(
                     format: "%@:%@",
-                    GlobalConstants.AKClosingTimeNotificationName,
+                    Cons.AKClosingTimeNotificationName,
                     project.name!)])
         }
         else {
@@ -1201,34 +1206,34 @@ class UtilityFunctions {
     
     // MARK: L&F Functions
     func AKStyleButton(button: UIButton) {
-        button.backgroundColor = GlobalConstants.AKCoderToDoGray2
-        button.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        button.backgroundColor = Cons.AKCoderToDoGray2
+        button.layer.cornerRadius = Cons.AKButtonCornerRadius
     }
     
     func AKStylePicker(picker: UIPickerView) {
-        picker.backgroundColor = GlobalConstants.AKCoderToDoGray2
-        picker.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        picker.backgroundColor = Cons.AKCoderToDoGray2
+        picker.layer.cornerRadius = Cons.AKButtonCornerRadius
     }
     
     func AKStyleTextField(textField: UITextField) {
         Func.AKAddBorderDeco(
             textField,
-            color: GlobalConstants.AKDefaultViewBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKDefaultViewBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
-        textField.backgroundColor = GlobalConstants.AKCoderToDoGray2
-        textField.textColor = GlobalConstants.AKCoderToDoWhite
+        textField.backgroundColor = Cons.AKCoderToDoGray2
+        textField.textColor = Cons.AKCoderToDoWhite
         textField.contentVerticalAlignment = .center
         textField.textAlignment = .left
-        textField.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
+        textField.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
     }
     
     func AKStyleTextView(textView: UITextView) {
-        textView.backgroundColor = GlobalConstants.AKCoderToDoGray2
-        textView.textColor = GlobalConstants.AKCoderToDoWhite
+        textView.backgroundColor = Cons.AKCoderToDoGray2
+        textView.textColor = Cons.AKCoderToDoWhite
         textView.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        textView.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
-        textView.layer.cornerRadius = GlobalConstants.AKButtonCornerRadius
+        textView.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
+        textView.layer.cornerRadius = Cons.AKButtonCornerRadius
     }
 }

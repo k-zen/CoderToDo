@@ -74,9 +74,9 @@ class AKProjectNameViewController: AKCustomViewController, UITextFieldDelegate {
         
         switch textField.tag {
         case LocalEnums.projectName.rawValue:
-            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
+            return newLen > Cons.AKMaxProjectNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
+            return newLen > Cons.AKMaxProjectNameLength ? false : true
         }
     }
     

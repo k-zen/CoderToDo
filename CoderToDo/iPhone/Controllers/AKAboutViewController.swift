@@ -26,8 +26,8 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case GlobalConstants.AKViewRulesSegue,
-             GlobalConstants.AKViewChangesSegue:
+        case Cons.AKViewRulesSegue,
+             Cons.AKViewChangesSegue:
             return true
         default:
             return false
@@ -43,8 +43,8 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
-            color: GlobalConstants.AKTableHeaderCellBorderBg.cgColor,
-            thickness: GlobalConstants.AKDefaultBorderThickness * 4.0,
+            color: Cons.AKTableHeaderCellBorderBg.cgColor,
+            thickness: Cons.AKDefaultBorderThickness * 4.0,
             position: .left
         )
         
@@ -81,7 +81,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewRulesSegue, sender: self)
+            self.performSegue(withIdentifier: Cons.AKViewRulesSegue, sender: self)
             break
         case 1:
             let subject = "Support"
@@ -95,7 +95,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
             }
             break
         case 2:
-            self.performSegue(withIdentifier: GlobalConstants.AKViewChangesSegue, sender: self)
+            self.performSegue(withIdentifier: Cons.AKViewChangesSegue, sender: self)
             break
         default:
             break

@@ -45,8 +45,8 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         
         var newProject = AKProjectInterface(name: name.outputData)
         // Custom Setters.
-        newProject.setClosingTime(cti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
-        newProject.setStartingTime(sti, format: GlobalConstants.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+        newProject.setClosingTime(cti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+        newProject.setStartingTime(sti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
         // Normal Setters.
         newProject.gmtOffset = Int16(Func.AKGetOffsetFromGMT())
         newProject.closingTimeTolerance = Int16(ctt)
@@ -112,9 +112,9 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         
         switch textField.tag {
         case LocalEnums.projectName.rawValue:
-            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
+            return newLen > Cons.AKMaxProjectNameLength ? false : true
         default:
-            return newLen > GlobalConstants.AKMaxProjectNameLength ? false : true
+            return newLen > Cons.AKMaxProjectNameLength ? false : true
         }
     }
     
@@ -143,7 +143,7 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = GlobalConstants.AKPickerViewFg
+        pickerLabel.textColor = Cons.AKPickerViewFg
         
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
@@ -157,8 +157,8 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
             break
         }
         
-        pickerLabel.backgroundColor = GlobalConstants.AKPickerViewBg
-        pickerLabel.font = UIFont(name: GlobalConstants.AKSecondaryFont, size: GlobalConstants.AKPickerFontSize)
+        pickerLabel.backgroundColor = Cons.AKPickerViewBg
+        pickerLabel.font = UIFont(name: Cons.AKSecondaryFont, size: Cons.AKPickerFontSize)
         pickerLabel.textAlignment = NSTextAlignment.center
         
         return pickerLabel
@@ -190,9 +190,9 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
         self.configureLookAndFeel = { (controller) -> Void in
             if let controller = controller as? AKNewProjectViewController {
                 Func.AKAddBlurView(view: controller.controlsContainer, effect: .dark, addClearColorBgToView: true)
-                controller.controlsContainer.layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+                controller.controlsContainer.layer.cornerRadius = Cons.AKViewCornerRadius
                 controller.controlsContainer.layer.masksToBounds = true
-                controller.controlsContainer.layer.borderColor = GlobalConstants.AKCoderToDoGray3.cgColor
+                controller.controlsContainer.layer.borderColor = Cons.AKCoderToDoGray3.cgColor
                 controller.controlsContainer.layer.borderWidth = 2.0
                 
                 Func.AKStyleTextField(textField: controller.projectName)

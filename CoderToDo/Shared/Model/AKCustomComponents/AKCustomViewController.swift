@@ -130,7 +130,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if GlobalConstants.AKDebug {
+        if Cons.AKDebug {
             NSLog("=> VIEW DID LOAD ON: \(type(of: self))")
         }
     }
@@ -138,7 +138,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if GlobalConstants.AKDebug {
+        if Cons.AKDebug {
             NSLog("=> VIEW DID APPEAR ON: \(type(of: self))")
         }
         
@@ -252,7 +252,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     func loadLocalizedText() {
         self.localizableDictionary = {
             if let path = Bundle.main.path(forResource: "\(type(of: self))", ofType: "plist") {
-                NSLog("=> INFO: READING LOCALIZATION FILE *\(type(of: self)).plist*...")
+                if Cons.AKDebug {
+                    NSLog("=> INFO: READING LOCALIZATION FILE *\(type(of: self)).plist*...")
+                }
                 
                 return NSDictionary(contentsOfFile: path)
             }
@@ -266,7 +268,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                      taskBeforePresenting: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void,
                      dismissViewCompletionTask: @escaping (_ presenterController: AKCustomViewController, _ presentedController: AKCustomViewController) -> Void) {
         controller.dismissViewCompletionTask = { dismissViewCompletionTask(self, controller) }
-        controller.modalTransitionStyle = GlobalConstants.AKDefaultTransitionStyle
+        controller.modalTransitionStyle = Cons.AKDefaultTransitionStyle
         controller.modalPresentationStyle = .overFullScreen
         
         taskBeforePresenting(self, controller)
@@ -693,43 +695,64 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: Gesture Handling
     @objc internal func tap(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> TAP GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenTaped(gesture)
     }
     
     @objc internal func pinch(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> PINCH GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenPinched(gesture)
     }
     
     @objc internal func rotate(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> ROTATION GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenRotated(gesture)
     }
     
     @objc internal func swipe(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> SWIPE GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenSwiped(gesture)
     }
     
     @objc internal func pan(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> PAN GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenPaned(gesture)
     }
     
     @objc internal func screenEdgePan(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> SCREEN EDGE PAN GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenScreenEdgePaned(gesture)
     }
     
     @objc internal func longPress(_ gesture: UIGestureRecognizer?) {
-        NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
+        if Cons.AKDebug {
+            NSLog("=> LONG PRESS GESTURE DETECTED... DOING SOMETHING...")
+        }
+        
         self.defaultOperationsWhenGesture(self, gesture)
         self.additionalOperationsWhenLongPressed(gesture)
     }
@@ -761,7 +784,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                 })
             }
             else {
-                NSLog("=> INFO: USER HAS AUTHORIZED LOCAL NOTIFICATIONS.")
+                if Cons.AKDebug {
+                    NSLog("=> INFO: USER HAS AUTHORIZED LOCAL NOTIFICATIONS.")
+                }
             }
         }
     }
@@ -1002,12 +1027,12 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                 viewRect.size.height += (UIScreen.main.bounds.height - viewRect.size.height)
                 
                 var visibleRect = CGRect(x: 0.0, y: 0.0, width: viewRect.size.width, height: viewRect.size.height)
-                visibleRect.size.height -= (kbSize.height + GlobalConstants.AKCloseKeyboardToolbarHeight)
+                visibleRect.size.height -= (kbSize.height + Cons.AKCloseKeyboardToolbarHeight)
                 
                 var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.view)
                 absoluteComponent.origin.y += self.navigationController?.topViewController == self ? 49.0 : 0.0
                 
-                if GlobalConstants.AKDebug {
+                if Cons.AKDebug {
                     NSLog("=> ### COMPONENT REPOSITION INFO ###")
                     NSLog("=> COMPONENT: X:%f,Y:%f", absoluteComponent.origin.x, absoluteComponent.origin.y)
                     NSLog("=> VIEW: W:%f,H:%f", self.view.frame.width, self.view.frame.height)

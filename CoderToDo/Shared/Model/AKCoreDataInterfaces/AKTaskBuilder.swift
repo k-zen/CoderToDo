@@ -108,7 +108,7 @@ struct AKTaskInterface
     {
         if let date = Func.AKProcessDate(
             dateAsString: asString,
-            format: GlobalConstants.AKFullDateFormat,
+            format: Cons.AKFullDateFormat,
             timeZone: TimeZone(identifier: "GMT")!) {
             self.creationDate = date
         }

@@ -30,7 +30,7 @@ class AKInitialMessageView: AKCustomView, AKCustomViewProtocol {
     func loadComponents() {}
     
     func applyLookAndFeel() {
-        self.getView().layer.cornerRadius = GlobalConstants.AKViewCornerRadius
+        self.getView().layer.cornerRadius = Cons.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
     }
     

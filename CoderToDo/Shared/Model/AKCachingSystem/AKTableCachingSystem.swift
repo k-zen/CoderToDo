@@ -16,7 +16,7 @@ class AKTableCachingSystem
     func addEntry(controller: AKCustomViewController, key: NSDate, newEntry: AKTableCachingEntry) -> Void
     {
         if self.cachingEntries[self.projectName] != nil {
-            if GlobalConstants.AKDebug {
+            if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING ENTRY TO CACHE FOR KEY(%@)", key.description)
             }
             
@@ -27,7 +27,7 @@ class AKTableCachingSystem
     func getEntry(controller: AKCustomViewController, key: NSDate) -> AKTableCachingEntry?
     {
         if self.cachingEntries[self.projectName] != nil {
-            if GlobalConstants.AKDebug {
+            if Cons.AKDebug {
                 NSLog("=> CACHING: SERVING ENTRY FROM CACHE FOR KEY(%@)", key.description)
             }
             
@@ -41,7 +41,7 @@ class AKTableCachingSystem
     {
         if self.cachingEntries[self.projectName] != nil {
             for (key, value) in self.cachingEntries[self.projectName]! {
-                if GlobalConstants.AKDebug {
+                if Cons.AKDebug {
                     NSLog("=> CACHING: RECOMPUTING HEIGHT FOR KEY(%@)", key.description)
                 }
                 
@@ -56,7 +56,7 @@ class AKTableCachingSystem
         if self.cachingEntries[self.projectName] != nil {
             for (key, value) in self.cachingEntries[self.projectName]! {
                 if let view = value.getChildView() {
-                    if GlobalConstants.AKDebug {
+                    if Cons.AKDebug {
                         NSLog("=> CACHING: RELOADING CHILD TABLE VIEW FOR KEY(%@)", key.description)
                     }
                     
