@@ -1,10 +1,10 @@
-=================== Release 1.0 2017-05-15 =====================
+=================== Release 1.0 2017-05-07 =====================
 Description
     * First version of the App.
 Functionalities
     * All declared in the rules of the method.
 Changes
-    * Version 1.0 Build 01 (2017/05/15)
+    * Version 1.0 Build 01 (2017/05/07)
         * Added support for the Rules' view. (2017/05/05)
         * Disabled Changes' view. (2017/05/05)
         * L&F modifications. (2017/05/05)
