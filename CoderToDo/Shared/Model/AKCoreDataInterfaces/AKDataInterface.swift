@@ -192,7 +192,7 @@ class AKDataInterface {
             let m2 = creationDateComponents.month ?? 0
             let y2 = creationDateComponents.year ?? 0
             
-            if nowHour >= Cons.AKWorkingDayStartTime && nowHour < closingTimeHour && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
+            if nowHour >= Cons.AKWorkingDayStartTime && nowHour <= Cons.AKAcceptingTasksDefaultMaxTime && ((d1 == d2) && (m1 == m2) && (y1 == y2)) {
                 return .firstDay
             }
             // ###### FIRST DAY
