@@ -86,6 +86,7 @@ class AKSelectCategoryView: AKCustomView, AKCustomViewProtocol, UIPickerViewData
     
     // MARK: Miscellaneous
     override func setup() {
+        super.shouldAddBlurView = true
         super.setup()
         
         // Delegate & DataSource
