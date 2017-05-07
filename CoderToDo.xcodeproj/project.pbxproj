@@ -1130,6 +1130,7 @@
 				CODE_SIGN_ENTITLEMENTS = "CoderToDo/Supporting Files/CoderToDo.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8JQ7MFA6Q2;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/CoderToDo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1155,6 +1156,7 @@
 				CODE_SIGN_ENTITLEMENTS = "CoderToDo/Supporting Files/CoderToDo.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 8JQ7MFA6Q2;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/CoderToDo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1164,7 +1166,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.apkc.projects.ios.CoderToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4878388d-741b-484b-b53c-b0327e8be995";
+				PROVISIONING_PROFILE = "f97a5828-13d7-4e7e-95cb-449eb5efdaa7";
 				PROVISIONING_PROFILE_SPECIFIER = CoderToDo;
 				SWIFT_OBJC_BRIDGING_HEADER = CoderToDo/Application/AKBridgingHeader.h;
 				SWIFT_VERSION = 3.0;
