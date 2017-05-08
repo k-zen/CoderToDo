@@ -25,11 +25,6 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     
     // MARK: Actions
     @IBAction func add(_ sender: Any) {
-        // Sanity Checks
-        for task in DataInterface.getAllTasksInProject(project: self.project) {
-            AKChecks.workingDayCloseSanityChecks(controller: self, task: task)
-        }
-        
         let selectedCategory = self.categoryData[self.categoryValue.selectedRow(inComponent: 0)]
         let taskName = AKTaskName(inputData: self.taskNameValue.text!)
         do {
@@ -46,6 +41,11 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
                     noButtonTitle: "No",
                     yesAction: { (presenterController) -> Void in
                         if let presenterController = presenterController as? AKAddTaskViewController {
+                            // Sanity Checks
+                            for task in DataInterface.getAllTasksInProject(project: presenterController.project) {
+                                AKChecks.workingDayCloseSanityChecks(controller: presenterController, task: task)
+                            }
+                            
                             if DataInterface.migrateTasksFromQueues(toProject: presenterController.project) {
                                 presenterController.dismissView(executeDismissTask: true)
                             }
@@ -64,6 +64,11 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
         catch {
             Func.AKPresentMessageFromError(controller: self, message: "\(error)")
             return
+        }
+        
+        // Sanity Checks
+        for task in DataInterface.getAllTasksInProject(project: self.project) {
+            AKChecks.workingDayCloseSanityChecks(controller: self, task: task)
         }
         
         if self.migrate.isOn {
