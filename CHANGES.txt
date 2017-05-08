@@ -4,6 +4,8 @@ Description
 Functionalities
     * All declared in the rules of the method.
 Changes
+    * Version 1.0 Build 03 (2017/05/07)
+        * Dummy version. No changes. (2017/05/07)
     * Version 1.0 Build 02 (2017/05/07)
         * Corrected bug in the task's migration system. And some Auto-Layout corrections with some menu items. (2017/05/07)
         * Undoed last correction with the *FirstDay* status. (2017/05/07)
