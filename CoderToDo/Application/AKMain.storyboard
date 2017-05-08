@@ -1153,11 +1153,50 @@
                                                 <color key="textColor" red="0.72156862749999995" green="0.73333333329999995" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDM-6W-MR0" userLabel="Rule_1">
-                                                <rect key="frame" x="8" y="124" width="284" height="42"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ula-gU-76h" userLabel="Rule_20">
+                                                <rect key="frame" x="8" y="132" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="1.">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-DemiBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" Only tasks marked as ">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="PENDING">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="NSColor" red="0.98039215686274506" green="0.74117647058823533" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-DemiBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" can be modified during the working day.">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDM-6W-MR0" userLabel="Rule_1">
+                                                <rect key="frame" x="8" y="174" width="284" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="2.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1177,10 +1216,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-NT-Wy6" userLabel="Rule_2">
-                                                <rect key="frame" x="8" y="166" width="284" height="63"/>
+                                                <rect key="frame" x="8" y="216" width="284" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="2.">
+                                                    <fragment content="3.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1201,10 +1240,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jux-n2-tkv" userLabel="Rule_3">
-                                                <rect key="frame" x="8" y="229" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="279" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="3.">
+                                                    <fragment content="4.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1224,10 +1263,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2N-Ox-mFu" userLabel="Rule_4">
-                                                <rect key="frame" x="8" y="271" width="284" height="63"/>
+                                                <rect key="frame" x="8" y="321" width="284" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="4.">
+                                                    <fragment content="5.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1248,10 +1287,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZg-o3-K1b" userLabel="Rule_5">
-                                                <rect key="frame" x="8" y="334" width="284" height="63"/>
+                                                <rect key="frame" x="8" y="384" width="284" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="5.">
+                                                    <fragment content="6.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1335,10 +1374,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOa-bg-6lT" userLabel="Rule_6">
-                                                <rect key="frame" x="8" y="397" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="447" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="6.">
+                                                    <fragment content="7.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1358,10 +1397,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSx-is-gEF" userLabel="Rule_7">
-                                                <rect key="frame" x="8" y="439" width="284" height="21"/>
+                                                <rect key="frame" x="8" y="489" width="284" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="7.">
+                                                    <fragment content="8.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1381,10 +1420,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lrl-cz-bfm" userLabel="Rule_8">
-                                                <rect key="frame" x="8" y="460" width="284" height="21"/>
+                                                <rect key="frame" x="8" y="510" width="284" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="8.">
+                                                    <fragment content="9.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1404,10 +1443,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jy-mr-s0G" userLabel="Rule_9">
-                                                <rect key="frame" x="8" y="481" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="531" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="9.">
+                                                    <fragment content="10.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1443,10 +1482,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rca-RS-WeB" userLabel="Rule_10">
-                                                <rect key="frame" x="8" y="523" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="573" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="10.">
+                                                    <fragment content="11.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1466,10 +1505,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bh-Pu-8Ql" userLabel="Rule_11">
-                                                <rect key="frame" x="8" y="565" width="284" height="84"/>
+                                                <rect key="frame" x="8" y="615" width="284" height="84"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="11.">
+                                                    <fragment content="12.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1506,10 +1545,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FX-jz-Umd" userLabel="Rule_12">
-                                                <rect key="frame" x="8" y="649" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="699" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="12.">
+                                                    <fragment content="13.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1561,10 +1600,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZL-mp-zo4" userLabel="Rule_13">
-                                                <rect key="frame" x="8" y="691" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="741" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="13.">
+                                                    <fragment content="14.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1584,10 +1623,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgx-Ri-1bQ" userLabel="Rule_14">
-                                                <rect key="frame" x="8" y="733" width="284" height="84"/>
+                                                <rect key="frame" x="8" y="783" width="284" height="84"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="14.">
+                                                    <fragment content="15.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1639,10 +1678,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-V1-i04" userLabel="Rule_15">
-                                                <rect key="frame" x="8" y="817" width="284" height="84"/>
+                                                <rect key="frame" x="8" y="867" width="284" height="84"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="15.">
+                                                    <fragment content="16.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1710,10 +1749,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-PH-fTR" userLabel="Rule_16">
-                                                <rect key="frame" x="8" y="901" width="284" height="63"/>
+                                                <rect key="frame" x="8" y="951" width="284" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="16.">
+                                                    <fragment content="17.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1749,10 +1788,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mK-Ob-1cb" userLabel="Rule_17">
-                                                <rect key="frame" x="8" y="964" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="1014" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="17.">
+                                                    <fragment content="18.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1772,10 +1811,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIN-zk-5Jr" userLabel="Rule_18">
-                                                <rect key="frame" x="8" y="1006" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="1056" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="18.">
+                                                    <fragment content="19.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1795,10 +1834,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUX-1m-mE3" userLabel="Rule_19">
-                                                <rect key="frame" x="8" y="1048" width="284" height="42"/>
+                                                <rect key="frame" x="8" y="1098" width="284" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="19.">
+                                                    <fragment content="20.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1823,45 +1862,6 @@
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" do not count for the success ratio.">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-Regular"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXl-ZJ-tgJ" userLabel="Rule_20">
-                                                <rect key="frame" x="8" y="1090" width="284" height="42"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="20.">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-DemiBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" Tasks marked as ">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-Regular"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="DILATE">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="NSColor" red="0.99607843137254903" green="0.50196078431372548" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="15" name="AvenirNextCondensed-DemiBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" cannot be modified during the working day.">
                                                         <attributes>
                                                             <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
