@@ -5,6 +5,7 @@ Functionalities
     * All declared in the rules of the method.
 Changes
     * Version 1.0 Build 06 (2017/05/09)
+        * Added iPad compliance for *BackupView*. (2017/05/09)
         * Added iPad compliance for *AddBucketEntryView* and *MigrateBucketEntryView*. (2017/05/09)
         * Added iPad compliance for *AddTaskView*. (2017/05/09)
         * Added iPad compliance for *AddCategoryView*. (2017/05/09)
