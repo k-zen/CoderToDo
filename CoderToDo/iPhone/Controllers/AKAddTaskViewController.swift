@@ -198,6 +198,7 @@ class AKAddTaskViewController: AKCustomViewController, UITextFieldDelegate, UIPi
     
     // MARK: Miscellaneous
     func customSetup() {
+        self.shouldUseScrollViewAsReference = false
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKAddTaskViewController {
                 controller.projectName.text = controller.project.name
