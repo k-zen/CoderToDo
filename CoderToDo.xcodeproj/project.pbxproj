@@ -40,6 +40,13 @@
 		498E17961E84335E00B3A3A1 /* AKUserDefinedCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E17951E84335E00B3A3A1 /* AKUserDefinedCategoriesViewController.swift */; };
 		498E17981E84336B00B3A3A1 /* AKGoodiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E17971E84336B00B3A3A1 /* AKGoodiesViewController.swift */; };
 		498E179A1E8433FA00B3A3A1 /* AKBrainstormingBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E17991E8433FA00B3A3A1 /* AKBrainstormingBucketViewController.swift */; };
+		4990D9B31EC236F1003F839C /* 20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9AC1EC236F1003F839C /* 20@1x.png */; };
+		4990D9B41EC236F1003F839C /* 50@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9AD1EC236F1003F839C /* 50@1x.png */; };
+		4990D9B51EC236F1003F839C /* 50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9AE1EC236F1003F839C /* 50@2x.png */; };
+		4990D9B61EC236F1003F839C /* 72@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9AF1EC236F1003F839C /* 72@1x.png */; };
+		4990D9B71EC236F1003F839C /* 72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9B01EC236F1003F839C /* 72@2x.png */; };
+		4990D9B81EC236F1003F839C /* 76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9B11EC236F1003F839C /* 76@1x.png */; };
+		4990D9B91EC236F1003F839C /* 76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4990D9B21EC236F1003F839C /* 76@2x.png */; };
 		499140EB1E953F6600169E14 /* AKInitialMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 499140EA1E953F6600169E14 /* AKInitialMessageView.xib */; };
 		499140ED1E95405A00169E14 /* AKInitialMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499140EC1E95405A00169E14 /* AKInitialMessageView.swift */; };
 		49A4A0E31E589E8600CEDA1B /* AKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */; };
@@ -178,6 +185,13 @@
 		498E17951E84335E00B3A3A1 /* AKUserDefinedCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUserDefinedCategoriesViewController.swift; sourceTree = "<group>"; };
 		498E17971E84336B00B3A3A1 /* AKGoodiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKGoodiesViewController.swift; sourceTree = "<group>"; };
 		498E17991E8433FA00B3A3A1 /* AKBrainstormingBucketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKBrainstormingBucketViewController.swift; sourceTree = "<group>"; };
+		4990D9AC1EC236F1003F839C /* 20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20@1x.png"; sourceTree = "<group>"; };
+		4990D9AD1EC236F1003F839C /* 50@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "50@1x.png"; sourceTree = "<group>"; };
+		4990D9AE1EC236F1003F839C /* 50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "50@2x.png"; sourceTree = "<group>"; };
+		4990D9AF1EC236F1003F839C /* 72@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "72@1x.png"; sourceTree = "<group>"; };
+		4990D9B01EC236F1003F839C /* 72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "72@2x.png"; sourceTree = "<group>"; };
+		4990D9B11EC236F1003F839C /* 76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "76@1x.png"; sourceTree = "<group>"; };
+		4990D9B21EC236F1003F839C /* 76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "76@2x.png"; sourceTree = "<group>"; };
 		499140EA1E953F6600169E14 /* AKInitialMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKInitialMessageView.xib; sourceTree = "<group>"; };
 		499140EC1E95405A00169E14 /* AKInitialMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKInitialMessageView.swift; sourceTree = "<group>"; };
 		49A4A0981E589E8600CEDA1B /* AKAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAppDelegate.swift; sourceTree = "<group>"; };
@@ -475,6 +489,7 @@
 		49A4A0B11E589E8600CEDA1B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4990D9AC1EC236F1003F839C /* 20@1x.png */,
 				49CF8FB71EBF8BD800CBF2E3 /* 20@2x.png */,
 				49CF8FB81EBF8BD800CBF2E3 /* 20@3x.png */,
 				49CF8FCD1EBF8C8100CBF2E3 /* 29@1x.png */,
@@ -482,10 +497,16 @@
 				49CF8FBA1EBF8BD800CBF2E3 /* 29@3x.png */,
 				49CF8FBB1EBF8BD800CBF2E3 /* 40@2x.png */,
 				49CF8FBC1EBF8BD800CBF2E3 /* 40@3x.png */,
+				4990D9AD1EC236F1003F839C /* 50@1x.png */,
+				4990D9AE1EC236F1003F839C /* 50@2x.png */,
 				49CF8FCE1EBF8C8100CBF2E3 /* 57@1x.png */,
 				49CF8FCF1EBF8C8100CBF2E3 /* 57@2x.png */,
 				49CF8FBD1EBF8BD800CBF2E3 /* 60@2x.png */,
 				49CF8FBE1EBF8BD800CBF2E3 /* 60@3x.png */,
+				4990D9AF1EC236F1003F839C /* 72@1x.png */,
+				4990D9B01EC236F1003F839C /* 72@2x.png */,
+				4990D9B11EC236F1003F839C /* 76@1x.png */,
+				4990D9B21EC236F1003F839C /* 76@2x.png */,
 				49CF8FBF1EBF8BD800CBF2E3 /* 83.5@2x.png */,
 				49CF8FC01EBF8BD800CBF2E3 /* 1024@1x.png */,
 				49121BD11E73765D000B4D26 /* Logo.png */,
@@ -775,11 +796,14 @@
 				492F283B1E4B6C0D0020608B /* Podfile in Resources */,
 				4905B4111E981365000E0EA0 /* AKDisplaceableTableMenuView.xib in Resources */,
 				49D57DCB1E5B15A300DACF53 /* AKAddTaskView.xib in Resources */,
+				4990D9B71EC236F1003F839C /* 72@2x.png in Resources */,
+				4990D9B81EC236F1003F839C /* 76@1x.png in Resources */,
 				4971A62C1E8EF80E00F2B81E /* AKBucketTableViewCell.xib in Resources */,
 				497F9C581E69D19000C78ECD /* AKSelectCategoryView.xib in Resources */,
 				49A4A0F41E589E8600CEDA1B /* AKTasksTableView.xib in Resources */,
 				4971A6281E8EDA9E00F2B81E /* AKAddBucketEntryView.xib in Resources */,
 				49CF8FCC1EBF8BD800CBF2E3 /* Original.png in Resources */,
+				4990D9B41EC236F1003F839C /* 50@1x.png in Resources */,
 				49A4A0F51E589E8600CEDA1B /* AKTasksTableViewCell.xib in Resources */,
 				49DF7ED01E5DD49C0017BEC6 /* AKSelectTaskStateView.xib in Resources */,
 				49CF8FD01EBF8C8100CBF2E3 /* 29@1x.png in Resources */,
@@ -791,7 +815,9 @@
 				49CF8FC31EBF8BD800CBF2E3 /* 20@3x.png in Resources */,
 				49A4A0EE1E589E8600CEDA1B /* AKAddView.xib in Resources */,
 				49CF8FC61EBF8BD800CBF2E3 /* 40@2x.png in Resources */,
+				4990D9B51EC236F1003F839C /* 50@2x.png in Resources */,
 				4931DAE41E58C1520002C173 /* AKAddCategoryView.xib in Resources */,
+				4990D9B91EC236F1003F839C /* 76@2x.png in Resources */,
 				49CF8FC81EBF8BD800CBF2E3 /* 60@2x.png in Resources */,
 				49CF8FC91EBF8BD800CBF2E3 /* 60@3x.png in Resources */,
 				49CF8FC41EBF8BD800CBF2E3 /* 29@2x.png in Resources */,
@@ -800,10 +826,12 @@
 				49A4A0F01E589E8600CEDA1B /* AKIntroductoryView.xib in Resources */,
 				49CF8FC51EBF8BD800CBF2E3 /* 29@3x.png in Resources */,
 				49FE56201E68AC6500652187 /* AKConfigurationsTableViewCell.xib in Resources */,
+				4990D9B61EC236F1003F839C /* 72@1x.png in Resources */,
 				496674D51E6F276E00A60B64 /* AKSearchView.xib in Resources */,
 				49A4A0F61E589E8600CEDA1B /* AKUsernameInputView.xib in Resources */,
 				499140EB1E953F6600169E14 /* AKInitialMessageView.xib in Resources */,
 				49A4A0F11E589E8600CEDA1B /* AKNewProjectView.xib in Resources */,
+				4990D9B31EC236F1003F839C /* 20@1x.png in Resources */,
 				49CF8FD11EBF8C8100CBF2E3 /* 57@1x.png in Resources */,
 				4927A5B71E8FF39500707EB0 /* AKMigrateBucketEntryView.xib in Resources */,
 				49A4A0EF1E589E8600CEDA1B /* AKDaysTableViewCell.xib in Resources */,
@@ -1142,7 +1170,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "CoderToDo (Development)";
 				SWIFT_OBJC_BRIDGING_HEADER = CoderToDo/Application/AKBridgingHeader.h;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1168,7 +1196,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = CoderToDo;
 				SWIFT_OBJC_BRIDGING_HEADER = CoderToDo/Application/AKBridgingHeader.h;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

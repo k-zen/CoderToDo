@@ -4,7 +4,9 @@ Description
 Functionalities
     * All declared in the rules of the method.
 Changes
-    * Version 1.0 Build 04 (2017/05/XX)
+    * Version 1.0 Build 05 (2017/05/09)
+        * Made the App universal. (2017/05/09)
+    * Version 1.0 Build 04 (2017/05/08)
         * Modifications to the rules. (2017/05/08)
     * Version 1.0 Build 03 (2017/05/07)
         * Dummy version. No changes. (2017/05/07)
