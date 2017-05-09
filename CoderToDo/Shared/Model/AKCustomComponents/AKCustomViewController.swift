@@ -538,7 +538,6 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         self.initialMessageOverlay.controller = self
         self.initialMessageOverlay.setup()
         self.initialMessageOverlay.draw(container: self.view, coordinates: origin, size: CGSize.zero)
-        self.initialMessageOverlay.title.text = title
         self.initialMessageOverlay.message.text = message
         
         // Expand/Show the overlay.

@@ -378,7 +378,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                         width: AKInitialMessageView.LocalConstants.AKViewWidth,
                         height: AKInitialMessageView.LocalConstants.AKViewHeight
                     )
-                    origin.y -= 60.0
+                    origin.y -= 0.0
                     
                     controller.showInitialMessage(
                         origin: origin,
