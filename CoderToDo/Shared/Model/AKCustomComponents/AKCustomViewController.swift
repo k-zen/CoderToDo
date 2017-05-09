@@ -807,13 +807,17 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                     controller?.showContinueMessage(
                         origin: CGPoint.zero,
                         type: .info,
-                        message: "You need to be signed into iCloud and have iCloud Drive set to on. Go to Settings to enable it.",
+                        message: "You need to be signed in to your iCloud account and have iCloud Drive set to on. Go to Settings to enable it.",
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
-                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
-                            } },
+                            presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
+                                presenterController?.navigationController?.popViewController(animated: true)
+                                
+                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                    Func.AKDelay(1.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                                }
+                            }) },
                         noAction: nil,
                         animate: true,
                         completionTask: nil
