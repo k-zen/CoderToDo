@@ -55,6 +55,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     var inhibitScreenEdgePanGesture: Bool = true
     /// Flag to inhibit only the **Long Press** gesture.
     var inhibitLongPressGesture: Bool = true
+    /// Flag to select the correct view for keyboard offset.
+    var shouldUseScrollViewAsReference: Bool = true
     
     // MARK: Operations (Closures)
     /// Defaults actions when a gesture event is produced. Not modifiable by child classes.
@@ -1032,7 +1034,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                 var visibleRect = CGRect(x: 0.0, y: 0.0, width: viewRect.size.width, height: viewRect.size.height)
                 visibleRect.size.height -= (kbSize.height + Cons.AKCloseKeyboardToolbarHeight)
                 
-                var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.currentScrollContainer)
+                var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.shouldUseScrollViewAsReference ? self.currentScrollContainer : self.view)
                 absoluteComponent.origin.y += self.navigationController?.topViewController == self ? 49.0 : 0.0
                 
                 if Cons.AKDebug {

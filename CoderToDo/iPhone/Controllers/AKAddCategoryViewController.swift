@@ -75,6 +75,7 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate {
     
     // MARK: Miscellaneous
     func customSetup() {
+        self.shouldUseScrollViewAsReference = false
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKAddCategoryViewController {
                 controller.projectName.text = controller.project.name
