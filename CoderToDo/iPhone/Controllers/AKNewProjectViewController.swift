@@ -193,9 +193,13 @@ class AKNewProjectViewController: AKCustomViewController, UITextFieldDelegate, U
                 controller.controlsContainer.layer.cornerRadius = Cons.AKViewCornerRadius
                 controller.controlsContainer.layer.masksToBounds = true
                 controller.controlsContainer.layer.borderColor = Cons.AKCoderToDoGray3.cgColor
-                controller.controlsContainer.layer.borderWidth = 2.0
+                controller.controlsContainer.layer.borderWidth = Cons.AKViewBorderWidth
                 
                 Func.AKStyleTextField(textField: controller.projectName)
+                
+                Func.AKStylePicker(picker: controller.tolerance)
+                Func.AKStylePicker(picker: controller.startingTime)
+                Func.AKStylePicker(picker: controller.closingTime)
                 
                 Func.AKStyleButton(button: controller.save)
                 Func.AKStyleButton(button: controller.close)

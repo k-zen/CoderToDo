@@ -187,7 +187,8 @@ struct GlobalConstants {
     static let AKPickerFontSize: CGFloat = 14.0
     static let AKNavBarFontSize: CGFloat = 20.0
     static let AKTabBarFontSize: CGFloat = Cons.AKNavBarFontSize
-    static let AKViewCornerRadius: CGFloat = 4.0
+    static let AKViewCornerRadius: CGFloat = 6.0
+    static let AKViewBorderWidth: CGFloat = 0.0
     static let AKButtonCornerRadius: CGFloat = 2.0
     static let AKDefaultBorderThickness = 2.0
     static let AKDefaultTextfieldBorderThickness = 2.0

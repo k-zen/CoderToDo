@@ -59,7 +59,7 @@ class AKContinueMessageView: AKCustomView, AKCustomViewProtocol {
         self.getView().layer.cornerRadius = Cons.AKViewCornerRadius
         self.getView().layer.masksToBounds = true
         self.getView().layer.borderColor = Cons.AKCoderToDoGray3.cgColor
-        self.getView().layer.borderWidth = 2.0
+        self.getView().layer.borderWidth = Cons.AKViewBorderWidth
         self.mainContainer.backgroundColor = UIColor.clear
         
         Func.AKStyleButton(button: self.yes)
