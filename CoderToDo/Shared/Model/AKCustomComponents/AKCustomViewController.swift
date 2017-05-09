@@ -1032,7 +1032,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                 var visibleRect = CGRect(x: 0.0, y: 0.0, width: viewRect.size.width, height: viewRect.size.height)
                 visibleRect.size.height -= (kbSize.height + Cons.AKCloseKeyboardToolbarHeight)
                 
-                var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.view)
+                var absoluteComponent = editableComponent.convert(editableComponent.bounds, to: self.currentScrollContainer)
                 absoluteComponent.origin.y += self.navigationController?.topViewController == self ? 49.0 : 0.0
                 
                 if Cons.AKDebug {
