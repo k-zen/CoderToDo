@@ -4,7 +4,7 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     // MARK: Constants
     struct LocalConstants {
         static let AKViewWidth: CGFloat = 300.0
-        static let AKViewHeight: CGFloat = 392.0
+        static let AKViewHeight: CGFloat = 359.0
     }
     
     // MARK: Local Enums

@@ -485,7 +485,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
             width: AKAddBucketEntryView.LocalConstants.AKViewWidth,
             height: AKAddBucketEntryView.LocalConstants.AKViewHeight
         )
-        origin.y -= 0.0 // Move up Y points from the center.
+        origin.y -= 60.0 // Move up Y points from the center.
         
         // Configure the overlay.
         let addBucketEntryOverlay = AKAddBucketEntryView()
