@@ -4,6 +4,9 @@ Description
 Functionalities
     * All declared in the rules of the method.
 Changes
+    * Version 1.0 Build 07 (2017/05/XX)
+        * Corrected bug with the project's times. Checks were not in place in *ProjectTimesView* and also the error message when validating
+          dates contained double quotation marks which broke down the regular expression used to extract the error message. (2017/05/10)
     * Version 1.0 Build 06 (2017/05/09)
         * Added iPad compliance for *BackupView*. (2017/05/09)
         * Added iPad compliance for *AddBucketEntryView* and *MigrateBucketEntryView*. (2017/05/09)

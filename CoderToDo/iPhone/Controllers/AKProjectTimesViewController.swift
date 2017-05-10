@@ -13,6 +13,8 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     var toleranceData = [Int]()
     var workingDayTimeData = [String]()
     var project: Project!
+    var lastSelectedRowClosingTime: Int = -1
+    var lastSelectedRowStartingTime: Int = -1
     
     // MARK: Outlets
     @IBOutlet weak var controlsContainer: UIView!
@@ -46,6 +48,60 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
     }
     
     // MARK: UIPickerViewDelegate Implementation
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var cti: String = ""
+        var sti: String = ""
+        
+        switch pickerView.tag {
+        case LocalEnums.closingTime.rawValue:
+            cti = self.workingDayTimeData[row]
+            sti = self.workingDayTimeData[self.startingTime.selectedRow(inComponent: 0)]
+            break
+        case LocalEnums.startingTime.rawValue:
+            cti = self.workingDayTimeData[self.closingTime.selectedRow(inComponent: 0)]
+            sti = self.workingDayTimeData[row]
+            break
+        default:
+            break
+        }
+        
+        var newProject = AKProjectInterface(name: "Dummy Project")
+        // Custom Setters.
+        newProject.setClosingTime(cti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+        newProject.setStartingTime(sti, format: Cons.AKWorkingDayTimeDateFormat, timeZone: Func.AKGetCalendarForLoading().timeZone)
+        do {
+            try newProject.validate()
+        }
+        catch {
+            Func.AKPresentMessageFromError(controller: self, message: "\(error)")
+            
+            // Undo last selection.
+            switch pickerView.tag {
+            case LocalEnums.closingTime.rawValue:
+                self.closingTime.selectRow(self.lastSelectedRowClosingTime, inComponent: 0, animated: true)
+                break
+            case LocalEnums.startingTime.rawValue:
+                self.startingTime.selectRow(self.lastSelectedRowStartingTime, inComponent: 0, animated: true)
+                break
+            default:
+                break
+            }
+            
+            return
+        }
+        
+        switch pickerView.tag {
+        case LocalEnums.closingTime.rawValue:
+            self.lastSelectedRowClosingTime = row
+            break
+        case LocalEnums.startingTime.rawValue:
+            self.lastSelectedRowStartingTime = row
+            break
+        default:
+            break
+        }
+    }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case LocalEnums.tolerance.rawValue:
@@ -110,6 +166,9 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
                     format: Cons.AKWorkingDayTimeDateFormat,
                     timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
+                
+                controller.lastSelectedRowStartingTime = stiIndex
+                controller.lastSelectedRowClosingTime = ctiIndex
                 
                 controller.tolerance.selectRow(cttIndex, inComponent: 0, animated: true)
                 controller.startingTime.selectRow(stiIndex, inComponent: 0, animated: true)
