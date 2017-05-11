@@ -1,3 +1,12 @@
+=================== Release 1.2 2017-XX-XX =====================
+Description
+    *
+Functionalities
+    *
+Changes
+    * Version 1.2 Build 01 (2017/XX/XX)
+        *
+
 =================== Release 1.1 2017-05-11 =====================
 Description
     * Bug corrections.
