@@ -545,9 +545,9 @@
 		49E76DC21E7DCF62000215BC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49E76DC71E7DCF62000215BC /* AKConstants.swift */,
 				49E76DC31E7DCF62000215BC /* AKBackup */,
 				4913F76B1E9A9108005E6FCB /* AKCachingSystem */,
-				49E76DC71E7DCF62000215BC /* AKConstants.swift */,
 				49E76DC81E7DCF62000215BC /* AKCoreDataInterfaces */,
 				49E76DCD1E7DCF62000215BC /* AKCustomComponents */,
 				49E76DE21E7DCF62000215BC /* AKESXP-ObjectiveC */,

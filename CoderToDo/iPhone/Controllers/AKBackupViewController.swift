@@ -16,59 +16,81 @@ class AKBackupViewController: AKCustomViewController {
         // Load last backup info from iCloud.
         AKCloudKitController.getLastBackupInfo(
             presenterController: self,
+            forceCompletionTask: true,
             completionTask: { (presenterController, backupInfo) -> Void in
-                if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
-                    if let sizeLocal = AKXMLController.getLocalBackupInfo()?.size, let sizeRemote = backupInfo.size {
-                        if sizeLocal < sizeRemote {
-                            presenterController.showContinueMessage(
-                                origin: CGPoint.zero,
-                                type: .warning,
-                                message: "The file you have in iCloud appears to be bigger in size than the one you have on your device. Do you wish to continue...?",
-                                yesAction: { (presenterController) -> Void in
-                                    // Make backup here from a background thread.
-                                    AKCloudKitController.uploadToPrivate(
-                                        presenterController: self,
-                                        completionTask: { (presenterController, backupInfo) -> Void in
-                                            if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
-                                                // Set the last backup's information.
-                                                presenterController.lastBackupValue.text = String(
-                                                    format: "%@ %@",
-                                                    Func.AKGetFormattedDate(date: backupInfo.date),
-                                                    Func.AKGetFormattedTime(date: backupInfo.date)
-                                                )
-                                                presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
-                                                presenterController.dataHashValue.text = backupInfo.md5 ?? ""
-                                                
-                                                Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
-                                            }
-                                    }) },
-                                noAction: { (presenterController) -> Void in
-                                    if let presenterController = presenterController as? AKBackupViewController {
-                                        Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
-                                    } },
-                                animate: true,
-                                completionTask: nil
-                            )
+                if let presenterController = presenterController as? AKBackupViewController {
+                    if let backupInfo = backupInfo {
+                        if let sizeLocal = AKXMLController.getLocalBackupInfo()?.size, let sizeRemote = backupInfo.size {
+                            if sizeLocal < sizeRemote {
+                                presenterController.showContinueMessage(
+                                    origin: CGPoint.zero,
+                                    type: .warning,
+                                    message: "The file you have in iCloud appears to be bigger in size than the one you have on your device. Do you wish to continue...?",
+                                    yesAction: { (presenterController) -> Void in
+                                        // Make backup here from a background thread.
+                                        AKCloudKitController.uploadToPrivate(
+                                            presenterController: self,
+                                            completionTask: { (presenterController, backupInfo) -> Void in
+                                                if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
+                                                    // Set the last backup's information.
+                                                    presenterController.lastBackupValue.text = String(
+                                                        format: "%@ %@",
+                                                        Func.AKGetFormattedDate(date: backupInfo.date),
+                                                        Func.AKGetFormattedTime(date: backupInfo.date)
+                                                    )
+                                                    presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                                                    presenterController.dataHashValue.text = backupInfo.md5 ?? ""
+                                                    
+                                                    Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
+                                                }
+                                        }) },
+                                    noAction: { (presenterController) -> Void in
+                                        if let presenterController = presenterController as? AKBackupViewController {
+                                            Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
+                                        } },
+                                    animate: true,
+                                    completionTask: nil
+                                )
+                            }
+                            else {
+                                // Make backup here from a background thread.
+                                AKCloudKitController.uploadToPrivate(
+                                    presenterController: self,
+                                    completionTask: { (presenterController, backupInfo) -> Void in
+                                        if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
+                                            // Set the last backup's information.
+                                            presenterController.lastBackupValue.text = String(
+                                                format: "%@ %@",
+                                                Func.AKGetFormattedDate(date: backupInfo.date),
+                                                Func.AKGetFormattedTime(date: backupInfo.date)
+                                            )
+                                            presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                                            presenterController.dataHashValue.text = backupInfo.md5 ?? ""
+                                            
+                                            Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
+                                        }
+                                })
+                            }
                         }
-                        else {
-                            // Make backup here from a background thread.
-                            AKCloudKitController.uploadToPrivate(
-                                presenterController: self,
-                                completionTask: { (presenterController, backupInfo) -> Void in
-                                    if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
-                                        // Set the last backup's information.
-                                        presenterController.lastBackupValue.text = String(
-                                            format: "%@ %@",
-                                            Func.AKGetFormattedDate(date: backupInfo.date),
-                                            Func.AKGetFormattedTime(date: backupInfo.date)
-                                        )
-                                        presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
-                                        presenterController.dataHashValue.text = backupInfo.md5 ?? ""
-                                        
-                                        Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
-                                    }
-                            })
-                        }
+                    }
+                    else {
+                        // Make backup here from a background thread.
+                        AKCloudKitController.uploadToPrivate(
+                            presenterController: self,
+                            completionTask: { (presenterController, backupInfo) -> Void in
+                                if let presenterController = presenterController as? AKBackupViewController, let backupInfo = backupInfo {
+                                    // Set the last backup's information.
+                                    presenterController.lastBackupValue.text = String(
+                                        format: "%@ %@",
+                                        Func.AKGetFormattedDate(date: backupInfo.date),
+                                        Func.AKGetFormattedTime(date: backupInfo.date)
+                                    )
+                                    presenterController.lastBackupSizeValue.text = String(format: "%@ bytes", Func.AKFormatNumber(number: NSNumber(value: backupInfo.size ?? 0)))
+                                    presenterController.dataHashValue.text = backupInfo.md5 ?? ""
+                                    
+                                    Func.AKToggleButtonMode(controller: self, button: presenterController.backupNow, mode: .enabled, showSpinner: true, direction: .disableToEnable)
+                                }
+                        })
                     }
                 }
         })

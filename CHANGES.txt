@@ -1,11 +1,13 @@
-=================== Release 1.2 2017-XX-XX =====================
+=================== Release 1.2 2017-07-XX =====================
 Description
-    *
+    * Bug corrections.
+    * Some minor L&F changes.
 Functionalities
-    *
+    * Same as version 1.1.
 Changes
-    * Version 1.2 Build 01 (2017/XX/XX)
-        *
+    * Version 1.2 Build 01 (2017/07/11)
+        * Corrected bug in backup function. If the backup was the first one, it returned 0 results in *LastInfo*'s function and
+          that caused the completion task to not be executed. (2017/07/11)
 
 =================== Release 1.1 2017-05-11 =====================
 Description

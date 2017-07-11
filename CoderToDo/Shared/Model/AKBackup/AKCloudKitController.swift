@@ -114,6 +114,7 @@ class AKCloudKitController: NSObject {
     
     static func getLastBackupInfo(
         presenterController: AKCustomViewController,
+        forceCompletionTask: Bool = false,
         completionTask: ((_ presenterController: AKCustomViewController?, _ backupInfo: BackupInfo?) -> Void)?) {
         var backupInfo = [BackupInfo]()
         
@@ -150,8 +151,13 @@ class AKCloudKitController: NSObject {
                     return
                 }
                 
-                if completionTask != nil && backupInfo.count > 0 {
-                    completionTask!(controller, backupInfo.first)
+                if completionTask != nil {
+                    if backupInfo.count > 0 {
+                        completionTask!(controller, backupInfo.first)
+                    }
+                    else if backupInfo.count == 0 && forceCompletionTask {
+                        completionTask!(controller, nil)
+                    }
                 }
             })
         }
