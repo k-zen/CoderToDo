@@ -22,53 +22,53 @@ class AKAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCente
         // ### TabBar
         UITabBarItem.appearance().setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(
+                NSAttributedStringKey.font: UIFont(
                     name: Cons.AKDefaultFont,
                     size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
-                NSForegroundColorAttributeName: Cons.AKTabBarTintNormal
+                NSAttributedStringKey.foregroundColor: Cons.AKTabBarTintNormal
             ], for: .normal
         )
         UITabBarItem.appearance().setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(
+                NSAttributedStringKey.font: UIFont(
                     name: Cons.AKDefaultFont,
                     size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
-                NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
+                NSAttributedStringKey.foregroundColor: Cons.AKTabBarTintSelected
             ], for: .selected
         )
         UITabBar.appearance().barTintColor = Cons.AKTabBarBg
         // ### BarButton
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(
+                NSAttributedStringKey.font: UIFont(
                     name: Cons.AKSecondaryFont,
                     size: Cons.AKTabBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKTabBarFontSize),
-                NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
+                NSAttributedStringKey.foregroundColor: Cons.AKTabBarTintSelected
             ], for: .normal
         )
         // ### NavBar
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont(
+            NSAttributedStringKey.font: UIFont(
                 name: Cons.AKSecondaryFont,
                 size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
-            NSForegroundColorAttributeName: Cons.AKDefaultFg
+            NSAttributedStringKey.foregroundColor: Cons.AKDefaultFg
         ]
         UINavigationBar.appearance().tintColor = Cons.AKTabBarTintSelected
         // ### SegmentedControl
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(
+                NSAttributedStringKey.font: UIFont(
                     name: Cons.AKSecondaryFont,
                     size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
-                NSForegroundColorAttributeName: Cons.AKDefaultFg
+                NSAttributedStringKey.foregroundColor: Cons.AKDefaultFg
             ], for: .normal
         )
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
-                NSFontAttributeName: UIFont(
+                NSAttributedStringKey.font: UIFont(
                     name: Cons.AKSecondaryFont,
                     size: 14.0) ?? UIFont.systemFont(ofSize: 14.0),
-                NSForegroundColorAttributeName: UIColor.black
+                NSAttributedStringKey.foregroundColor: UIColor.black
             ], for: .selected
         )
         // ### Misc

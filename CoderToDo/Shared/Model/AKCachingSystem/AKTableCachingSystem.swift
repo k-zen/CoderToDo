@@ -3,16 +3,16 @@ import UIKit
 class AKTableCachingSystem {
     // MARK: Properties
     private let projectName: String
-    private var cachingEntries = [String : [NSDate : AKTableCachingEntry]]()
+    private var cachingEntries = [String : [Date : AKTableCachingEntry]]()
     
     // MARK: Initializers
     init(projectName: String) {
         self.projectName = projectName
-        self.cachingEntries[projectName] = [NSDate : AKTableCachingEntry]()
+        self.cachingEntries[projectName] = [Date : AKTableCachingEntry]()
     }
     
     // MARK: Caching Functions
-    func addEntry(controller: AKCustomViewController, key: NSDate, newEntry: AKTableCachingEntry) -> Void {
+    func addEntry(controller: AKCustomViewController, key: Date, newEntry: AKTableCachingEntry) -> Void {
         if self.cachingEntries[self.projectName] != nil {
             if Cons.AKDebug {
                 NSLog("=> CACHING: ADDING ENTRY TO CACHE FOR KEY(%@)", key.description)
@@ -22,7 +22,7 @@ class AKTableCachingSystem {
         }
     }
     
-    func getEntry(controller: AKCustomViewController, key: NSDate) -> AKTableCachingEntry? {
+    func getEntry(controller: AKCustomViewController, key: Date) -> AKTableCachingEntry? {
         if self.cachingEntries[self.projectName] != nil {
             if Cons.AKDebug {
                 NSLog("=> CACHING: SERVING ENTRY FROM CACHE FOR KEY(%@)", key.description)

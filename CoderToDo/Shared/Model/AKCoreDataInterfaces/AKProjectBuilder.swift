@@ -53,14 +53,14 @@ class AKProjectBuilder {
 
 struct AKProjectInterface {
     // MARK: Properties
-    var closingTime: NSDate?
+    var closingTime: Date?
     var closingTimeTolerance: Int16
-    var creationDate: NSDate?
+    var creationDate: Date?
     var gmtOffset: Int16
     var name: String?
     var notifyClosingTime: Bool
     var osr: Float
-    var startingTime: NSDate?
+    var startingTime: Date?
     
     init() {
         self.closingTime = Func.AKProcessDate(
@@ -68,7 +68,7 @@ struct AKProjectInterface {
             format: Cons.AKWorkingDayTimeDateFormat,
             timeZone: Func.AKGetCalendarForLoading().timeZone)!
         self.closingTimeTolerance = 30
-        self.creationDate = NSDate()
+        self.creationDate = Date()
         self.gmtOffset = 0
         self.name = ""
         self.notifyClosingTime = true
@@ -98,7 +98,7 @@ struct AKProjectInterface {
             timeZone: Func.AKGetCalendarForLoading().timeZone)!
         
         // Fixed.
-        self.creationDate = NSDate()
+        self.creationDate = Date()
     }
     
     // MARK: Setters

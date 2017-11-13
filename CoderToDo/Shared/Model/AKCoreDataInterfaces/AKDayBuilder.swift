@@ -5,7 +5,7 @@ class AKDayBuilder {
         if let mr = Func.AKObtainMasterReference() {
             let day = Day(context: mr.getMOC())
             // Mirror.
-            day.date = interface.date
+            day.date = interface.date as Date
             day.gmtOffset = interface.gmtOffset
             day.sr = interface.sr
             
@@ -18,17 +18,17 @@ class AKDayBuilder {
 
 struct AKDayInterface {
     // MARK: Properties
-    var date: NSDate
+    var date: Date
     var gmtOffset: Int16
     var sr: Float
     
     init() {
-        self.date = NSDate()
+        self.date = Date()
         self.gmtOffset = 0
         self.sr = 0.0
     }
     
-    init(date: NSDate, gmtOffset: Int16) {
+    init(date: Date, gmtOffset: Int16) {
         // Required.
         self.date = date
         self.gmtOffset = gmtOffset

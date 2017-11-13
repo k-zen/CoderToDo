@@ -117,6 +117,12 @@ extension String {
     func splitOnNewLine() -> [String] {
         return self.components(separatedBy: CharacterSet.newlines)
     }
+    
+    func substring(with nsrange: NSRange) -> String? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        
+        return String(self[range])
+    }
 }
 
 extension UIView {
@@ -710,7 +716,7 @@ class UtilityFunctions {
     /// - Parameter isMain: Should we launch the task in the main thread...?
     /// - Parameter task:  The function to execute.
     ///
-    func AKDelay(_ delay: Double, isMain: Bool = true, task: @escaping (Void) -> Void) {
+    func AKDelay(_ delay: Double, isMain: Bool = true, task: @escaping () -> ()) {
         if isMain {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: task)
         }
@@ -749,7 +755,7 @@ class UtilityFunctions {
     /// - Parameter mode: The execution mode.
     /// - Parameter code: The code to be executed in a background thread.
     ///
-    func AKExecuteInBackgroundThread(mode: ExecutionMode, code: @escaping (Void) -> Void) {
+    func AKExecuteInBackgroundThread(mode: ExecutionMode, code: @escaping () -> Void) {
         switch mode {
         case .sync:
             DispatchQueue.global(qos: .background).sync(execute: { code() })
@@ -998,9 +1004,8 @@ class UtilityFunctions {
                 let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
                 
                 if let match = matches.first {
-                    let range = match.rangeAt(1)
-                    if let swiftRange = AKRangeFromNSRange(range, forString: input) {
-                        let msg = input.substring(with: swiftRange)
+                    let range = match.range(at: 1)
+                    if let msg = input.substring(with: range) {
                         AKPresentMessage(controller: controller, message: msg)
                     }
                 }
@@ -1041,13 +1046,13 @@ class UtilityFunctions {
         }
     }
     
-    func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> NSDate? {
+    func AKProcessDate(dateAsString: String, format: String, timeZone: TimeZone) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timeZone
         
         if let date = formatter.date(from: dateAsString) {
-            return date as NSDate
+            return date
         }
         
         return nil
@@ -1061,8 +1066,8 @@ class UtilityFunctions {
         return formatter.string(from: date)
     }
     
-    func AKProcessDayOfWeek(date: NSDate?, gmtOffset: Int) -> Int {
-        if let date = date as Date? {
+    func AKProcessDayOfWeek(date: Date?, gmtOffset: Int) -> Int {
+        if let date = date {
             var gmtCalendar = Calendar.current
             gmtCalendar.timeZone = TimeZone(identifier: "GMT")!
             
@@ -1072,17 +1077,6 @@ class UtilityFunctions {
         }
         
         return 0
-    }
-    
-    func AKRangeFromNSRange(_ nsRange: NSRange, forString str: String) -> Range<String.Index>? {
-        let fromUTF16 = str.utf16.startIndex.advanced(by: nsRange.location)
-        let toUTF16 = fromUTF16.advanced(by: nsRange.length)
-        
-        if let from = String.Index(fromUTF16, within: str), let to = String.Index(toUTF16, within: str) {
-            return from ..< to
-        }
-        
-        return nil
     }
     
     func AKReloadTable(tableView: UITableView) {
@@ -1190,7 +1184,7 @@ class UtilityFunctions {
         case .disabled:
             button.isEnabled = false
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: button.titleLabel?.text ?? "")
-            attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+            attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             button.titleLabel?.attributedText = attributeString
             
             if showSpinner {

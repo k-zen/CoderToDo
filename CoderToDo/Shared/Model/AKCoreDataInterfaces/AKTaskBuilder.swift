@@ -51,7 +51,7 @@ class AKTaskBuilder {
 struct AKTaskInterface {
     // MARK: Properties
     var completionPercentage: Float
-    var creationDate: NSDate?
+    var creationDate: Date?
     var initialCompletionPercentage: Float
     var migrated: Bool
     var name: String?
@@ -61,7 +61,7 @@ struct AKTaskInterface {
     
     init() {
         self.completionPercentage = 0.0
-        self.creationDate = NSDate()
+        self.creationDate = Date()
         self.initialCompletionPercentage = 0.0
         self.migrated = false
         self.name = ""
@@ -83,7 +83,7 @@ struct AKTaskInterface {
         self.totalCompletion = 1.0
         
         // Fixed.
-        self.creationDate = NSDate()
+        self.creationDate = Date()
     }
     
     // MARK: Setters

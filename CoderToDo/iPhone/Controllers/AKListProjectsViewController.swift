@@ -354,8 +354,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             if let controller = controller as? AKListProjectsViewController {
                 controller.menu.setTitleTextAttributes(
                     [
-                        NSFontAttributeName: UIFont(name: Cons.AKSecondaryFont, size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
-                        NSForegroundColorAttributeName: Cons.AKTabBarTintSelected
+                        NSAttributedStringKey.font: UIFont(name: Cons.AKSecondaryFont, size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
+                        NSAttributedStringKey.foregroundColor: Cons.AKTabBarTintSelected
                     ], for: .normal
                 )
             }
@@ -472,7 +472,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
         Func.AKReloadTable(tableView: self.projectsTable)
     }
     
-    func toggleUser() { self.performSegue(withIdentifier: Cons.AKViewUserSegue, sender: self) }
+    @objc func toggleUser() { self.performSegue(withIdentifier: Cons.AKViewUserSegue, sender: self) }
     
     func setUserBadge(controller: AKListProjectsViewController) {
         let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))

@@ -2,7 +2,7 @@ import UIKit
 
 class AKTableCachingEntry {
     // MARK: Properties
-    private var key: NSDate
+    private var key: Date
     private var parentCell: AKDaysTableViewCell?
     private var childView: AKTasksTableView?
     // Caching System.
@@ -12,14 +12,14 @@ class AKTableCachingEntry {
     private var childViewHeightRecomputationRoutine: ((AKCustomViewController) -> CGFloat)?
     
     // MARK: Initializers
-    init(key: NSDate, parentCell: AKDaysTableViewCell?, childView: AKTasksTableView?) {
+    init(key: Date, parentCell: AKDaysTableViewCell?, childView: AKTasksTableView?) {
         self.key = key
         self.parentCell = parentCell
         self.childView = childView
     }
     
     // MARK: Accessors
-    func getKey() -> NSDate { return self.key }
+    func getKey() -> Date { return self.key }
     
     func getParentCell() -> AKDaysTableViewCell? {
         if Cons.AKDebug {
@@ -41,7 +41,7 @@ class AKTableCachingEntry {
     
     func getChildViewHeight() -> CGFloat { return self.childViewHeight }
     
-    func setKey(date: NSDate?) -> Void {
+    func setKey(date: Date?) -> Void {
         if let date = date {
             self.key = date
         }

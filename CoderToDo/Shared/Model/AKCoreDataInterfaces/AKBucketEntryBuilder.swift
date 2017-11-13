@@ -19,13 +19,13 @@ class AKBucketEntryBuilder {
 
 struct AKBucketEntryInterface {
     // MARK: Properties
-    var creationDate: NSDate
+    var creationDate: Date
     var gmtOffset: Int16
     var name: String
     var priority: Int16
     
     init() {
-        self.creationDate = NSDate()
+        self.creationDate = Date()
         self.gmtOffset = 0
         self.name = ""
         self.priority = 0
@@ -40,7 +40,7 @@ struct AKBucketEntryInterface {
         self.gmtOffset = 0
         
         // Fixed.
-        self.creationDate = NSDate()
+        self.creationDate = Date()
     }
     
     // MARK: Setters

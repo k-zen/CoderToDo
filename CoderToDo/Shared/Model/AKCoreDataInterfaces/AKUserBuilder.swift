@@ -35,12 +35,12 @@ class AKUserBuilder {
 
 struct AKUserInterface {
     // MARK: Properties
-    var creationDate: NSDate?
+    var creationDate: Date?
     var gmtOffset: Int16
     var username: String?
     
     init() {
-        self.creationDate = NSDate()
+        self.creationDate = Date()
         self.gmtOffset = 0
         self.username = ""
     }
@@ -53,7 +53,7 @@ struct AKUserInterface {
         self.gmtOffset = 0
         
         // Fixed.
-        self.creationDate = NSDate()
+        self.creationDate = Date()
     }
     
     // MARK: Setters

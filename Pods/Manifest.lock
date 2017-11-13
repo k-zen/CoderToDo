@@ -1,29 +1,49 @@
 PODS:
-  - Charts/Core (3.0.1)
-  - Charts/Realm (3.0.1):
-    - Charts/Core
-    - RealmSwift (~> 1.1)
-  - Crashlytics (3.8.4):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.11)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
+  - ChartsRealm (3.0.4):
+    - Charts (= 3.0.4)
+    - RealmSwift (~> 2.10)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
+  - Realm (2.10.2):
+    - Realm/Headers (= 2.10.2)
+  - Realm/Headers (2.10.2)
+  - RealmSwift (2.10.2):
+    - Realm (= 2.10.2)
 
 DEPENDENCIES:
-  - Charts/Realm
+  - Charts (from `https://github.com/danielgindi/Charts.git`, branch `master`)
+  - ChartsRealm (from `https://github.com/danielgindi/ChartsRealm.git`, branch `master`)
   - Crashlytics
   - Fabric
 
+EXTERNAL SOURCES:
+  Charts:
+    :branch: master
+    :git: https://github.com/danielgindi/Charts.git
+  ChartsRealm:
+    :branch: master
+    :git: https://github.com/danielgindi/ChartsRealm.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: 98552bb44b47c2e80bb482ea97fa0552a996bff7
+    :git: https://github.com/danielgindi/Charts.git
+  ChartsRealm:
+    :commit: df28714eb1565a81bd301b7b292e0ef6520474a3
+    :git: https://github.com/danielgindi/ChartsRealm.git
+
 SPEC CHECKSUMS:
-  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
-  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Charts: c5f4491efc3a24de9213fe3e68484bfdff881cfb
+  ChartsRealm: 63ccd5dc49ed5997abd86f5790cafe247b1d2771
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
+  RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
 
-PODFILE CHECKSUM: f98e8c1d1c48d60b3d7a309c4fd0e4b57f9062b4
+PODFILE CHECKSUM: 9daee2755e4e325ab7eeba222b96a19d1b06d357
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.3.1
