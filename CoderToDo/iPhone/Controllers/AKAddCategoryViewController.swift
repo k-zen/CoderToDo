@@ -48,11 +48,11 @@ class AKAddCategoryViewController: AKCustomViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate Implementation
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if range.length + range.location > (textField.text?.characters.count)! {
+        if range.length + range.location > (textField.text?.count)! {
             return false
         }
         
-        let newLen = (textField.text?.characters.count)! + string.characters.count - range.length
+        let newLen = (textField.text?.count)! + string.count - range.length
         
         switch textField.tag {
         case LocalEnums.category.rawValue:

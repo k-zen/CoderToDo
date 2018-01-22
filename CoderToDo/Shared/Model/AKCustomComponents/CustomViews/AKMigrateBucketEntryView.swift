@@ -126,11 +126,11 @@ class AKMigrateBucketEntryView: AKCustomView, AKCustomViewProtocol, UIPickerView
     
     // MARK: UITextViewDelegate Implementation
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if range.length + range.location > (textView.text?.characters.count)! {
+        if range.length + range.location > (textView.text?.count)! {
             return false
         }
         
-        let newLen = (textView.text?.characters.count)! + text.characters.count - range.length
+        let newLen = (textView.text?.count)! + text.count - range.length
         
         switch textView.tag {
         case LocalEnums.taskName.rawValue:

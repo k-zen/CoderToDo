@@ -9,7 +9,7 @@ class AKTaskName: AKInputData {
             throw Exceptions.emptyData(msg)
         }
         
-        guard inputData.characters.count >= Cons.AKMinTaskNameLength else {
+        guard inputData.count >= Cons.AKMinTaskNameLength else {
             throw Exceptions.invalidLength(String(format: "The task's name must be at least %i characters.", Cons.AKMinTaskNameLength))
         }
     }

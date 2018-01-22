@@ -1027,7 +1027,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: Observers
     @objc func keyboardWasShow(notification: NSNotification) {
         if let info = notification.userInfo, let editableComponent = self.currentEditableComponent {
-            if let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
+            if let kbSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
                 var viewRect = self.view.frame
                 viewRect.size.height += (UIScreen.main.bounds.height - viewRect.size.height)
                 

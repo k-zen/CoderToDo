@@ -476,7 +476,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     
     func setUserBadge(controller: AKListProjectsViewController) {
         let userAvatar = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30.0, height: 30.0)))
-        userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().characters.first?.description ?? "").uppercased(), for: .normal)
+        userAvatar.setTitle(String(format: "%@", DataInterface.getUsername().first?.description ?? "").uppercased(), for: .normal)
         userAvatar.setTitleColor(Cons.AKButtonFg, for: .normal)
         userAvatar.titleLabel?.font = UIFont(name: Cons.AKSecondaryFont, size: 16.0)
         userAvatar.titleLabel?.adjustsFontSizeToFitWidth = true

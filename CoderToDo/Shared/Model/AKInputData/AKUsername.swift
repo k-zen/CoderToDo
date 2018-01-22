@@ -9,7 +9,7 @@ class AKUsername: AKInputData {
             throw Exceptions.emptyData(msg)
         }
         
-        guard inputData.characters.count >= Cons.AKMinUsernameLength else {
+        guard inputData.count >= Cons.AKMinUsernameLength else {
             throw Exceptions.invalidLength(String(format: "The username must be at least %i characters.", Cons.AKMinUsernameLength))
         }
     }

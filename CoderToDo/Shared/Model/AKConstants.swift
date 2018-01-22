@@ -1001,7 +1001,7 @@ class UtilityFunctions {
         do {
             if let input = message {
                 let regex = try NSRegularExpression(pattern: ".*\"(.*)\"", options: NSRegularExpression.Options.caseInsensitive)
-                let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
+                let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.count))
                 
                 if let match = matches.first {
                     let range = match.range(at: 1)

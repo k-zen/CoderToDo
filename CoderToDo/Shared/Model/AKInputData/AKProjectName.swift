@@ -9,7 +9,7 @@ class AKProjectName: AKInputData {
             throw Exceptions.emptyData(msg)
         }
         
-        guard inputData.characters.count >= Cons.AKMinProjectNameLength else {
+        guard inputData.count >= Cons.AKMinProjectNameLength else {
             throw Exceptions.invalidLength(String(format: "The project's name must be at least %i characters.", Cons.AKMinProjectNameLength))
         }
     }
