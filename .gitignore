@@ -1,5 +1,6 @@
 *.xcodeproj
 *.xcworkspace
 Pods*
+Podfile.lock
 CoderToDoUITests*
 Fabric*
