@@ -4,7 +4,7 @@
 The code in this repo belongs to a App that I have in Apple's AppStore. Since the App is free, there is no point on not making this code public. So here it is. If you used parts of the code or all, please let me know.
 
 ## Screenshots
-<img src="http://www.apkc.net/img/images/Screen_1.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_2.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_3.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_4.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_5.jpg" alt="" width="170"/>
+<img src="http://www.apkc.net/img/images/Screen_1.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_2.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_3.jpg" alt="" width="170"/> <img src="http://www.apkc.net/img/images/Screen_4.jpg" alt="" width="170"/> 
 
 ## License
 > Copyright (c) 2016, Andreas P. Koenzen <akc at apkc.net>
