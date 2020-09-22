@@ -1,6 +1,23 @@
 <img src="http://www.apkc.net/img/images/CoderToDo-Logo.png" alt="" width="50"/>
 
 # CoderToDo
+.:: CoderToDo / A Productivity App for Indie/Solo Coders ::.
+
+Add structure to your "Working Day"..! Very handy and complete App for managing your personal projects. This App implements the "day-ahead" productivity method which I devised while doing my undergraduate thesis in Computer Science. This productivity method is based on a list of rules which allows the user to approach a project in a more structured way. I hope you like it.
+
+:: Functionalities:
+- Create projects and bind them to a time schedule.
+- Add tasks to those projects, with the option to mark those tasks with a predefined state and completion percentage.
+- Brainstorming Bucket, where you can add your temporary ideas.
+- Synchronise your information to your iCloud account and share them with your other devices. Your information is always secure and with you.
+
+:: The goals of the method are to:
+- Allow the user to set a very structured work schedule, with the ability to plan just one day ahead.
+- Allow the user to do exactly what was planned and not deviate from the plan.
+- Improve the user’s ability to plan tasks.
+- Improve the user’s ability to measure task’s times.
+
+## Notice
 The code in this repo belongs to a App that I have in Apple's AppStore. Since the App is free, there is no point on not making this code public. So here it is. If you used parts of the code or all, please let me know.
 
 ## Screenshots
