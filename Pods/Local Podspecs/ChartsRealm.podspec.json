@@ -1,6 +1,6 @@
 {
   "name": "ChartsRealm",
-  "version": "3.0.4",
+  "version": "3.4.0",
   "summary": "A Realm.io module for Charts",
   "homepage": "https://github.com/danielgindi/ChartsRealm",
   "license": {
@@ -18,15 +18,18 @@
   },
   "source": {
     "git": "https://github.com/danielgindi/ChartsRealm.git",
-    "tag": "v3.0.4"
+    "tag": "v3.4.0"
   },
-  "source_files": "ChartsRealm/Classes/**/*.swift",
+  "source_files": [
+    "ChartsRealm/Classes/**/*.swift",
+    "ChartsRealm/Supporting Files/RLMSupport.swift"
+  ],
   "dependencies": {
     "Charts": [
-      "3.0.4"
+      "~> 3.4.0"
     ],
     "RealmSwift": [
-      "~> 2.10"
+      "~> 5.0.3"
     ]
   }
 }

@@ -41,7 +41,7 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         
         if let data = self.localize(key: "WorkingDayTime") as? [Date] {
             for element in data {
-                var components = Func.AKGetCalendarForLoading().dateComponents([.hour, .minute], from: element)
+                let components = Func.AKGetCalendarForLoading().dateComponents([.hour, .minute], from: element)
                 self.workingDayTimeData.append(String(format: "%.2i:%.2i", components.hour ?? 0, components.minute ?? 0))
             }
         }

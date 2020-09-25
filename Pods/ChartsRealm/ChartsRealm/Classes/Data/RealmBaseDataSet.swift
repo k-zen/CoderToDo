@@ -73,7 +73,7 @@ open class RealmBaseDataSet: ChartBaseDataSet
         
         if results != nil
         {
-            converted = ObjectiveCSupport.convert(object: results!)
+            converted = ObjectiveCSupport.convert(object: results!) as? RLMResults<RLMObject>
         }
         
         self.init(results: converted, xValueField: xValueField, yValueField: yValueField, label: label)
@@ -90,7 +90,7 @@ open class RealmBaseDataSet: ChartBaseDataSet
         
         if results != nil
         {
-            converted = ObjectiveCSupport.convert(object: results!)
+            converted = ObjectiveCSupport.convert(object: results!) as? RLMResults<RLMObject>
         }
         
         self.init(results: converted, yValueField: yValueField, label: label)
@@ -107,7 +107,7 @@ open class RealmBaseDataSet: ChartBaseDataSet
         
         if results != nil
         {
-            converted = ObjectiveCSupport.convert(object: results!)
+            converted = ObjectiveCSupport.convert(object: results!) as? RLMResults<RLMObject>
         }
         
         self.init(results: converted, xValueField: xValueField, yValueField: yValueField)
@@ -115,7 +115,7 @@ open class RealmBaseDataSet: ChartBaseDataSet
     
     @objc public convenience init(results: RLMResults<RLMObject>?, yValueField: String)
     {
-        self.init(results: results, yValueField: yValueField)
+        self.init(results: results, xValueField: nil, yValueField: yValueField)
     }
     
     public convenience init(results: Results<Object>?, yValueField: String)
@@ -124,7 +124,7 @@ open class RealmBaseDataSet: ChartBaseDataSet
         
         if results != nil
         {
-            converted = ObjectiveCSupport.convert(object: results!)
+            converted = ObjectiveCSupport.convert(object: results!) as? RLMResults<RLMObject>
         }
         
         self.init(results: converted, yValueField: yValueField)
@@ -624,10 +624,9 @@ open class RealmBaseDataSet: ChartBaseDataSet
     }
     
     // MARK: - NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
+    open override func copy(with zone: NSZone? = nil) -> Any
     {
-        let copy = super.copyWithZone(zone) as! RealmBaseDataSet
+        let copy = super.copy(with: zone) as! RealmBaseDataSet
         
         copy._results = _results
         copy._yValueField = _yValueField

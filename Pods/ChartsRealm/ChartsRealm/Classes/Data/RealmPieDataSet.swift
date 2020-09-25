@@ -18,6 +18,8 @@ import Realm.Dynamic
 
 open class RealmPieDataSet: RealmBaseDataSet, IPieChartDataSet
 {
+    open var useValueColorForLine = false
+
     open override func initialize()
     {
         self.valueTextColor = NSUIColor.white
@@ -42,7 +44,7 @@ open class RealmPieDataSet: RealmBaseDataSet, IPieChartDataSet
         
         if results != nil
         {
-            converted = ObjectiveCSupport.convert(object: results!)
+            converted = ObjectiveCSupport.convert(object: results!) as? RLMResults<RLMObject>
         }
         
         self.init(results: converted, yValueField: yValueField, labelField: labelField)
@@ -124,12 +126,15 @@ open class RealmPieDataSet: RealmBaseDataSet, IPieChartDataSet
     
     /// the color for the slice-text labels
     open var entryLabelColor: NSUIColor? = nil
+
+    /// the color for the highlighted sector
+    open var highlightColor: NSUIColor? = nil
     
     // MARK: - NSCopying
     
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
+    open override func copy(with zone: NSZone? = nil) -> Any
     {
-        let copy = super.copyWithZone(zone) as! RealmPieDataSet
+        let copy = super.copy(with: zone) as! RealmPieDataSet
         copy._sliceSpace = _sliceSpace
         copy.selectionShift = selectionShift
         return copy

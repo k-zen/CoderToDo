@@ -491,14 +491,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.displaceDownTable.duration = 0.5
         self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceDownTable.autoreverses = false
-        self.view.layer.add(self.displaceDownTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        self.view.layer.add(self.displaceDownTable, forKey: ParentLocalConstants.AKDisplaceDownAnimation)
         
         self.displaceUpTable.fromValue = LocalConstants.AKDisplaceHeight
         self.displaceUpTable.toValue = 0.0
         self.displaceUpTable.duration = 0.5
         self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceUpTable.autoreverses = false
-        self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        self.view.layer.add(self.displaceUpTable, forKey: ParentLocalConstants.AKDisplaceUpAnimation)
     }
     
     func resetFilters(controller: AKCustomViewController) {

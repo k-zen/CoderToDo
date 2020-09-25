@@ -23,7 +23,7 @@ import UIKit
 /// - Date: Jan 5, 2017
 class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: Constants
-    struct LocalConstants {
+    struct ParentLocalConstants {
         static let AKDisplaceDownAnimation = "displaceDown"
         static let AKDisplaceUpAnimation = "displaceUp"
     }
@@ -125,8 +125,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     var isMenuItemVisible: Bool = false
     
     // MARK: Animations
-    let displaceDownTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceDownAnimation)
-    let displaceUpTable = CABasicAnimation(keyPath: LocalConstants.AKDisplaceUpAnimation)
+    let displaceDownTable = CABasicAnimation(keyPath: ParentLocalConstants.AKDisplaceDownAnimation)
+    let displaceUpTable = CABasicAnimation(keyPath: ParentLocalConstants.AKDisplaceUpAnimation)
     
     // MARK: UIViewController Overriding
     override func viewDidLoad() {
@@ -859,14 +859,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         self.displaceDownTable.duration = 0.5
         self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceDownTable.autoreverses = false
-        self.view.layer.add(self.displaceDownTable, forKey: LocalConstants.AKDisplaceDownAnimation)
+        self.view.layer.add(self.displaceDownTable, forKey: ParentLocalConstants.AKDisplaceDownAnimation)
         
         self.displaceUpTable.fromValue = displacementHeight
         self.displaceUpTable.toValue = 0.0
         self.displaceUpTable.duration = 0.5
         self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.displaceUpTable.autoreverses = false
-        self.view.layer.add(self.displaceUpTable, forKey: LocalConstants.AKDisplaceUpAnimation)
+        self.view.layer.add(self.displaceUpTable, forKey: ParentLocalConstants.AKDisplaceUpAnimation)
     }
     
     func displaceDownTable(
@@ -878,7 +878,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         self.showTopMenu(origin: CGPoint.zero, animate: animate, completionTask: completionTask)
         
         if animate {
-            UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+            UIView.beginAnimations(ParentLocalConstants.AKDisplaceDownAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
             UIView.commitAnimations()
@@ -926,7 +926,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if animate {
-            UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+            UIView.beginAnimations(ParentLocalConstants.AKDisplaceUpAnimation, context: nil)
             Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - newOffset)
             Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + newOffset)
             UIView.commitAnimations()
@@ -1000,13 +1000,13 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if animate {
             if direction == Displacement.down {
-                UIView.beginAnimations(LocalConstants.AKDisplaceDownAnimation, context: nil)
+                UIView.beginAnimations(ParentLocalConstants.AKDisplaceDownAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y + offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height - offset)
                 UIView.commitAnimations()
             }
             else {
-                UIView.beginAnimations(LocalConstants.AKDisplaceUpAnimation, context: nil)
+                UIView.beginAnimations(ParentLocalConstants.AKDisplaceUpAnimation, context: nil)
                 Func.AKChangeComponentYPosition(component: tableView, newY: tableView.frame.origin.y - offset)
                 Func.AKChangeComponentHeight(component: tableView, newHeight: tableView.frame.height + offset)
                 UIView.commitAnimations()
