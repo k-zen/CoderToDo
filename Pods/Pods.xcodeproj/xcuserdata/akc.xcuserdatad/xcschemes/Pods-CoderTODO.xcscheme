@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7737C3D8FF2DF792239CF7B1A8EA2C54"
+               BlueprintIdentifier = "A5535FF372031FE6C9DDD82A6EEEDE87"
                BuildableName = "Pods_CoderToDo.framework"
                BlueprintName = "Pods-CoderToDo"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -40,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7737C3D8FF2DF792239CF7B1A8EA2C54"
-            BuildableName = "Pods_CoderToDo.framework"
-            BlueprintName = "Pods-CoderToDo"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

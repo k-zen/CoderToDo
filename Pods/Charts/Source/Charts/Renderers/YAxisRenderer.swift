@@ -125,7 +125,7 @@ open class YAxisRenderer: AxisRendererBase
     }
     
     /// draws the y-labels on the specified x-position
-    open func drawYLabels(
+    internal func drawYLabels(
         context: CGContext,
         fixedPosition: CGFloat,
         positions: [CGPoint],
@@ -142,8 +142,6 @@ open class YAxisRenderer: AxisRendererBase
         let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
         let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
         
-        let xOffset = yAxis.labelXOffset
-        
         for i in stride(from: from, to: to, by: 1)
         {
             let text = yAxis.getFormattedLabel(i)
@@ -151,7 +149,7 @@ open class YAxisRenderer: AxisRendererBase
             ChartUtils.drawText(
                 context: context,
                 text: text,
-                point: CGPoint(x: fixedPosition + xOffset, y: positions[i].y + offset),
+                point: CGPoint(x: fixedPosition, y: positions[i].y + offset),
                 align: textAlign,
                 attributes: [.font: labelFont, .foregroundColor: labelTextColor]
             )
@@ -287,7 +285,7 @@ open class YAxisRenderer: AxisRendererBase
             let transformer = self.transformer
             else { return }
         
-        let limitLines = yAxis.limitLines
+        var limitLines = yAxis.limitLines
         
         if limitLines.count == 0
         {

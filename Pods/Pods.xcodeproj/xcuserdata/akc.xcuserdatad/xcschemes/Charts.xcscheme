@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F307B842FF76B2DE6C55DB67C0885325"
+               BlueprintIdentifier = "BF03B0B2B8B052092CB5F90CC5FB3757"
                BuildableName = "Charts.framework"
                BlueprintName = "Charts"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -40,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F307B842FF76B2DE6C55DB67C0885325"
-            BuildableName = "Charts.framework"
-            BlueprintName = "Charts"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

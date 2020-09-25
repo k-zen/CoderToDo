@@ -110,7 +110,7 @@ class AKUserViewController: AKCustomViewController, UITextFieldDelegate {
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Success Ratio Grouped by Day (%)")
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Success Ratio Grouped by Day (%)")
         chartDataSet.valueFont = UIFont(name: Cons.AKSecondaryFont, size: 12)!
         chartDataSet.valueTextColor = Cons.AKRedForBlackFg
         chartDataSet.drawValuesEnabled = true

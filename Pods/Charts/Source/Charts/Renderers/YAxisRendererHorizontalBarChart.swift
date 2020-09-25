@@ -155,8 +155,6 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
         let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
         let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
         
-        let xOffset = yAxis.labelXOffset
-        
         for i in stride(from: from, to: to, by: 1)
         {
             let text = yAxis.getFormattedLabel(i)
@@ -164,10 +162,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
             ChartUtils.drawText(
                 context: context,
                 text: text,
-                point: CGPoint(
-                    x: positions[i].x, y:
-                    fixedPosition - offset + xOffset
-                ),
+                point: CGPoint(x: positions[i].x, y: fixedPosition - offset),
                 align: .center,
                 attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor])
         }
@@ -259,7 +254,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
             let transformer = self.transformer
             else { return }
         
-        let limitLines = yAxis.limitLines
+        var limitLines = yAxis.limitLines
 
         if limitLines.count <= 0
         {
