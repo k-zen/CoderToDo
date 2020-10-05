@@ -394,7 +394,7 @@ enum CustomBorderDecorationPosition: Int {
     case through = 4
 }
 
-enum SortingOrder: String {
+enum SortingOrder: String, CaseIterable {
     case ascending = "↑"
     case descending = "↓"
 }
@@ -406,7 +406,7 @@ enum ProjectStatus: String {
     case firstDay = "First Day"
 }
 
-enum ProjectSorting: String {
+enum ProjectSorting: String, CaseIterable {
     case closingTime = "Closing Time"
     case creationDate = "Creation Date"
     case use = "By Use"
@@ -414,11 +414,11 @@ enum ProjectSorting: String {
     case osr = "Overall Success Ratio"
 }
 
-enum ProjectFilter: String {
+enum ProjectFilter: String, CaseIterable {
     case status = "Status"
 }
 
-enum ProjectFilterStatus: String {
+enum ProjectFilterStatus: String, CaseIterable {
     case none = "None"
     case open = "Open"
     case acceptingTasks = "Accepting"
@@ -439,18 +439,18 @@ enum TaskStates: String {
     case pending = "Pending"
 }
 
-enum TaskSorting: String {
+enum TaskSorting: String, CaseIterable {
     case completionPercentage = "Completion Percentage"
     case creationDate = "Creation Date"
     case name = "Name"
     case state = "State"
 }
 
-enum TaskFilter: String {
+enum TaskFilter: String, CaseIterable {
     case state = "State"
 }
 
-enum TaskFilterStates: String {
+enum TaskFilterStates: String, CaseIterable {
     case none = "None"
     case done = "Done"
     case notDone = "Not Done"
@@ -947,16 +947,6 @@ class UtilityFunctions {
         let blue = CGFloat((hex) & 0xFF) / 255.0
         
         return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
-    }
-    
-    func AKIterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
-        var i = 0
-        return AnyIterator {
-            let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
-            if next.hashValue != i { return nil }
-            i += 1
-            return next
-        }
     }
     
     ///

@@ -112,18 +112,18 @@ class AKSortView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, UI
         self.sortFilterData.removeAll()
         self.sortOrderData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
-            for filter in Func.AKIterateEnum(ProjectSorting.self) {
+            for filter in ProjectSorting.allCases {
                 self.sortFilterData.append(filter.rawValue)
             }
-            for order in Func.AKIterateEnum(SortingOrder.self) {
+            for order in SortingOrder.allCases {
                 self.sortOrderData.append(order)
             }
         }
         else if let _ = self.controller as? AKViewProjectViewController {
-            for filter in Func.AKIterateEnum(TaskSorting.self) {
+            for filter in TaskSorting.allCases {
                 self.sortFilterData.append(filter.rawValue)
             }
-            for order in Func.AKIterateEnum(SortingOrder.self) {
+            for order in SortingOrder.allCases {
                 self.sortOrderData.append(order)
             }
         }

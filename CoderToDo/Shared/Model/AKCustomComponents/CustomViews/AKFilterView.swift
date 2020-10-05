@@ -127,20 +127,20 @@ class AKFilterView: AKCustomView, AKCustomViewProtocol, UIPickerViewDataSource, 
         self.filterTypeData.removeAll()
         self.filterValueData.removeAll()
         if let _ = self.controller as? AKListProjectsViewController {
-            for type in Func.AKIterateEnum(ProjectFilter.self) {
+            for type in ProjectFilter.allCases {
                 self.filterTypeData.append(type.rawValue)
                 if type == ProjectFilter.status {
-                    for filter in Func.AKIterateEnum(ProjectFilterStatus.self) {
+                    for filter in ProjectFilterStatus.allCases {
                         self.filterValueData.append(filter.rawValue)
                     }
                 }
             }
         }
         else if let _ = self.controller as? AKViewProjectViewController {
-            for type in Func.AKIterateEnum(TaskFilter.self) {
+            for type in TaskFilter.allCases {
                 self.filterTypeData.append(type.rawValue)
                 if type == TaskFilter.state {
-                    for filter in Func.AKIterateEnum(TaskFilterStates.self) {
+                    for filter in TaskFilterStates.allCases {
                         self.filterValueData.append(filter.rawValue)
                     }
                 }
