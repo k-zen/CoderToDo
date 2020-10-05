@@ -36,7 +36,7 @@ class AKConfigurationsViewController: AKCustomViewController, UITableViewDataSou
         cell.title.text = self.configurationsTableHeaders[indexPath.section]
         
         // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
             color: Cons.AKTableHeaderCellBorderBg.cgColor,

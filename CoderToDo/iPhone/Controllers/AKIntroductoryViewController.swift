@@ -18,7 +18,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     
     // MARK: UIPageViewControllerDataSource Implementation
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let currentIndex = self.pages.index(of: viewController)!
+        let currentIndex = self.pages.firstIndex(of: viewController)!
         if currentIndex == 0 {
             return nil
         }
@@ -28,7 +28,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let currentIndex = self.pages.index(of: viewController)!
+        let currentIndex = self.pages.firstIndex(of: viewController)!
         if currentIndex == self.pages.count-1 {
             return nil
         }
@@ -39,7 +39,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
     
     // MARK: UIPageViewControllerDelegate Implementation
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        self.pendingIndex = self.pages.index(of: pendingViewControllers.first!)
+        self.pendingIndex = self.pages.firstIndex(of: pendingViewControllers.first!)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -71,7 +71,7 @@ class AKIntroductoryViewController: AKCustomViewController, UIPageViewController
         self.view.addSubview(self.pageContainer.view)
         
         // Configure our custom pageControl
-        self.view.bringSubview(toFront: self.control)
+        self.view.bringSubviewToFront(self.control)
         self.control.numberOfPages = pages.count
         self.control.currentPage = 0
     }

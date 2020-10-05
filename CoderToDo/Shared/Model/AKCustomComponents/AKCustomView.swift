@@ -134,7 +134,7 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate {
         
         // Add BlurView.
         if self.shouldAddBlurView {
-            Func.AKAddBlurView(view: self.getView(), effect: UIBlurEffectStyle.dark)
+            Func.AKAddBlurView(view: self.getView(), effect: UIBlurEffect.Style.dark)
         }
     }
     
@@ -238,14 +238,14 @@ class AKCustomView: UIView, UIGestureRecognizerDelegate {
         self.expandHeight.fromValue = 0.0
         self.expandHeight.toValue = expandCollapseHeight
         self.expandHeight.duration = 0.5
-        self.expandHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        self.expandHeight.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
         self.expandHeight.autoreverses = false
         self.getView().layer.add(self.expandHeight, forKey: LocalConstants.AKExpandHeightAnimation)
         
         self.collapseHeight.fromValue = expandCollapseHeight
         self.collapseHeight.toValue = 0.0
         self.collapseHeight.duration = 0.5
-        self.collapseHeight.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        self.collapseHeight.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
         self.collapseHeight.autoreverses = false
         self.getView().layer.add(self.collapseHeight, forKey: LocalConstants.AKCollapseHeightAnimation)
     }

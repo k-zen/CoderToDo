@@ -16,7 +16,7 @@ class AKCloudKitController: NSObject {
                         NSLog("=> INFO: SIZE => %d", size)
                     }
                     
-                    let backup = CKRecord(recordType: Cons.AKBackupRecordTypeName, recordID: CKRecordID(recordName: Date().description))
+                    let backup = CKRecord(recordType: Cons.AKBackupRecordTypeName, recordID: CKRecord.ID(recordName: Date().description))
                     backup.setValue("Entry", forKey: "Name")
                     backup.setValue(date, forKey: BackupInfo.Fields.dateKey.rawValue)
                     backup.setValue(md5, forKey: BackupInfo.Fields.md5Key.rawValue)
@@ -75,7 +75,7 @@ class AKCloudKitController: NSObject {
                     info.date = d
                     info.md5 = m
                     info.size = s
-                    info.data = try Data(contentsOf: a.fileURL)
+                    info.data = try Data(contentsOf: a.fileURL!)
                     
                     backupInfo.append(info)
                 }

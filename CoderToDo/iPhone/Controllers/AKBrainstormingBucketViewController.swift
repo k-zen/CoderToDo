@@ -72,7 +72,7 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             cell.badge.text = String(format: "Count: %i", DataInterface.countBucketEntries(project: project, forDate: ""))
             
             // Custom L&F.
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             Func.AKAddBorderDeco(
                 cell,
                 color: Cons.AKTableHeaderCellBorderBg.cgColor,
@@ -106,8 +106,8 @@ class AKBrainstormingBucketViewController: AKCustomViewController, UITableViewDa
             break
         }
         
-        let defaultCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        defaultCell.selectionStyle = UITableViewCellSelectionStyle.none
+        let defaultCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
+        defaultCell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         return defaultCell
     }

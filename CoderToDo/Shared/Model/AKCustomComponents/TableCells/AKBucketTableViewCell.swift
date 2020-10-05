@@ -31,7 +31,7 @@ class AKBucketTableViewCell: UITableViewCell {
         // Custom L&F.
         self.priorityValue.layer.cornerRadius = Cons.AKButtonCornerRadius
         self.priorityValue.layer.masksToBounds = true
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

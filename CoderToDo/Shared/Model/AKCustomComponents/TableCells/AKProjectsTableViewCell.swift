@@ -61,7 +61,7 @@ class AKProjectsTableViewCell: UITableViewCell {
         
         // Custom L&F.
         Func.AKStyleButton(button: self.addTomorrowTask)
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
         self.mainContainer.backgroundColor = Cons.AKTableCellBg
         Func.AKAddBorderDeco(
             self.infoContainer,

@@ -549,7 +549,7 @@ class UtilityFunctions {
         return instance
     }
     
-    func AKAddBlurView(view: UIView, effect: UIBlurEffectStyle, addClearColorBgToView: Bool = false, onTop: Bool = false) {
+    func AKAddBlurView(view: UIView, effect: UIBlurEffect.Style, addClearColorBgToView: Bool = false, onTop: Bool = false) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effect))
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.translatesAutoresizingMaskIntoConstraints = true
@@ -1097,7 +1097,7 @@ class UtilityFunctions {
             DataInterface.getUsername(),
             project.closingTimeTolerance
         )
-        closingTimeContent.sound = UNNotificationSound.default()
+        closingTimeContent.sound = UNNotificationSound.default
         Func.AKGetNotificationCenter().add(
             UNNotificationRequest(
                 identifier: String(format: "%@:%@", Cons.AKClosingTimeNotificationName, project.name!),
@@ -1184,7 +1184,7 @@ class UtilityFunctions {
         case .disabled:
             button.isEnabled = false
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: button.titleLabel?.text ?? "")
-            attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             button.titleLabel?.attributedText = attributeString
             
             if showSpinner {

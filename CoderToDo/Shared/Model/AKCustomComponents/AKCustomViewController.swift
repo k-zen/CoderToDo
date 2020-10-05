@@ -102,7 +102,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     var localizableDictionary: NSDictionary?
     var iCloudAccessErrorAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
     var iCloudAccessAvailableAction: (AKCustomViewController?) -> Void = { (presenterController) -> Void in }
-    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
     var currentEditableComponent: UIView?
     var currentScrollContainer: UIScrollView?
     
@@ -228,7 +228,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Add BlurView.
         if self.shouldAddBlurView {
-            Func.AKAddBlurView(view: self.view, effect: UIBlurEffectStyle.dark)
+            Func.AKAddBlurView(view: self.view, effect: UIBlurEffect.Style.dark)
         }
         
         // Add spinner.
@@ -240,13 +240,13 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(AKCustomViewController.keyboardWasShow(notification:)),
-            name: NSNotification.Name.UIKeyboardDidShow,
+            name: UIResponder.keyboardDidShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(AKCustomViewController.keyboardWillBeHidden(notification:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -770,8 +770,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                         yesButtonTitle: "Open Settings",
                         noButtonTitle: "No",
                         yesAction: { (presenterController) -> Void in
-                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                Func.AKDelay(0.0, task: { () in UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil) })
                             } },
                         noAction: { (presenterController) -> Void in
                             let configurationsMO = DataInterface.getConfigurations()
@@ -815,8 +815,8 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
                             presenterController?.hideContinueMessage(animate: true, completionTask: { (presenterController) -> Void in
                                 presenterController?.navigationController?.popViewController(animated: true)
                                 
-                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                    Func.AKDelay(1.0, task: { () in UIApplication.shared.open(url, options: [:], completionHandler: nil) })
+                                if let url = URL(string: UIApplication.openSettingsURLString) {
+                                    Func.AKDelay(1.0, task: { () in UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil) })
                                 }
                             }) },
                         noAction: nil,
@@ -857,14 +857,14 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
         self.displaceDownTable.fromValue = 0.0
         self.displaceDownTable.toValue = displacementHeight
         self.displaceDownTable.duration = 0.5
-        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.displaceDownTable.autoreverses = false
         self.view.layer.add(self.displaceDownTable, forKey: ParentLocalConstants.AKDisplaceDownAnimation)
         
         self.displaceUpTable.fromValue = displacementHeight
         self.displaceUpTable.toValue = 0.0
         self.displaceUpTable.duration = 0.5
-        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.displaceUpTable.autoreverses = false
         self.view.layer.add(self.displaceUpTable, forKey: ParentLocalConstants.AKDisplaceUpAnimation)
     }
@@ -1027,7 +1027,7 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: Observers
     @objc func keyboardWasShow(notification: NSNotification) {
         if let info = notification.userInfo, let editableComponent = self.currentEditableComponent {
-            if let kbSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
+            if let kbSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
                 var viewRect = self.view.frame
                 viewRect.size.height += (UIScreen.main.bounds.height - viewRect.size.height)
                 
@@ -1058,4 +1058,9 @@ class AKCustomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func keyboardWillBeHidden(notification: NSNotification) { self.currentScrollContainer?.setContentOffset(CGPoint.zero, animated: true) }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

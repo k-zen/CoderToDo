@@ -155,13 +155,13 @@ class AKProjectTimesViewController: AKCustomViewController, UIPickerViewDataSour
         self.loadData = { (controller) -> Void in
             if let controller = controller as? AKProjectTimesViewController {
                 // Set default values.
-                let cttIndex = controller.toleranceData.index(of: Int(controller.project.closingTimeTolerance))!
-                let stiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
+                let cttIndex = controller.toleranceData.firstIndex(of: Int(controller.project.closingTimeTolerance))!
+                let stiIndex = controller.workingDayTimeData.firstIndex(of: Func.AKProcessDateToString(
                     date: controller.project.startingTime! as Date,
                     format: Cons.AKWorkingDayTimeDateFormat,
                     timeZone: Func.AKGetCalendarForLoading().timeZone
                 ))!
-                let ctiIndex = controller.workingDayTimeData.index(of: Func.AKProcessDateToString(
+                let ctiIndex = controller.workingDayTimeData.firstIndex(of: Func.AKProcessDateToString(
                     date: controller.project.closingTime! as Date,
                     format: Cons.AKWorkingDayTimeDateFormat,
                     timeZone: Func.AKGetCalendarForLoading().timeZone

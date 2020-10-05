@@ -261,7 +261,7 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
     
     // MARK: UITableViewDelegate Implementation
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle { return UITableViewCellEditingStyle.delete }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle { return UITableViewCell.EditingStyle.delete }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let project = DataInterface.getProjects(filter: self.projectFilter)[indexPath.section]
@@ -354,8 +354,8 @@ class AKListProjectsViewController: AKCustomViewController, UITableViewDataSourc
             if let controller = controller as? AKListProjectsViewController {
                 controller.menu.setTitleTextAttributes(
                     [
-                        NSAttributedStringKey.font: UIFont(name: Cons.AKSecondaryFont, size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
-                        NSAttributedStringKey.foregroundColor: Cons.AKTabBarTintSelected
+                        NSAttributedString.Key.font: UIFont(name: Cons.AKSecondaryFont, size: Cons.AKNavBarFontSize) ?? UIFont.systemFont(ofSize: Cons.AKNavBarFontSize),
+                        NSAttributedString.Key.foregroundColor: Cons.AKTabBarTintSelected
                     ], for: .normal
                 )
             }

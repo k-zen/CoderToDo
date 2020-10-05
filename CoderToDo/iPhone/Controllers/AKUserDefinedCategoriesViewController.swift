@@ -28,7 +28,7 @@ class AKUserDefinedCategoriesViewController: AKCustomViewController, UITableView
         cell.arrowWidth.constant = 0
         
         // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.mainContainer.backgroundColor = Cons.AKTableCellBg
         Func.AKAddBorderDeco(
             cell,

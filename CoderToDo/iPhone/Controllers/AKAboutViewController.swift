@@ -40,7 +40,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
         cell.title.text = self.pagesTableHeaders[indexPath.section]
         
         // Custom L&F.
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         Func.AKAddBorderDeco(
             cell,
             color: Cons.AKTableHeaderCellBorderBg.cgColor,
@@ -90,7 +90,7 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
             
             if let url = URL(string: coded!) {
                 if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                 }
             }
             break
@@ -119,4 +119,9 @@ class AKAboutViewController: AKCustomViewController, UITableViewDataSource, UITa
         self.pagesTable?.dataSource = self
         self.pagesTable?.delegate = self
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

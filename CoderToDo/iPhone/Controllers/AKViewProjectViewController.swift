@@ -120,7 +120,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
                         )
                         
                         // Custom L&F.
-                        cell.selectionStyle = UITableViewCellSelectionStyle.none
+                        cell.selectionStyle = UITableViewCell.SelectionStyle.none
                         cell.mainContainer.backgroundColor = Cons.AKTableCellBg
                         
                         entry.setParentCell(cell: cell)
@@ -134,7 +134,7 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         else {
             if let cell = UINib(nibName: "AKDaysTableViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? AKDaysTableViewCell {
                 // Custom L&F.
-                cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 cell.mainContainer.backgroundColor = Cons.AKTableCellBg
                 Func.AKAddBorderDeco(
                     cell.mainContainer,
@@ -148,8 +148,8 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         }
         
         // For all else return empty cell.
-        let defaultCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        defaultCell.selectionStyle = UITableViewCellSelectionStyle.none
+        let defaultCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
+        defaultCell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         return defaultCell
     }
@@ -489,14 +489,14 @@ class AKViewProjectViewController: AKCustomViewController, UITableViewDataSource
         self.displaceDownTable.fromValue = 0.0
         self.displaceDownTable.toValue = LocalConstants.AKDisplaceHeight
         self.displaceDownTable.duration = 0.5
-        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceDownTable.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.displaceDownTable.autoreverses = false
         self.view.layer.add(self.displaceDownTable, forKey: ParentLocalConstants.AKDisplaceDownAnimation)
         
         self.displaceUpTable.fromValue = LocalConstants.AKDisplaceHeight
         self.displaceUpTable.toValue = 0.0
         self.displaceUpTable.duration = 0.5
-        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.displaceUpTable.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.displaceUpTable.autoreverses = false
         self.view.layer.add(self.displaceUpTable, forKey: ParentLocalConstants.AKDisplaceUpAnimation)
     }

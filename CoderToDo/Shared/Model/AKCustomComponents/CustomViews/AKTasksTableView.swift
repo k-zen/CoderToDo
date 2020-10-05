@@ -53,7 +53,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             cell.taskStateValue.backgroundColor = Func.AKGetColorForTaskState(taskState: task.state!)
             
             // Custom L&F.
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.mainContainer.backgroundColor = Cons.AKTableCellBg
             Func.AKAddBorderDeco(
                 cell.infoContainer,
@@ -68,7 +68,7 @@ class AKTasksTableView: AKCustomView, AKCustomViewProtocol, UITableViewDataSourc
             let cell = self.tasksTable.dequeueReusableCell(withIdentifier: "TasksTableCell") as! AKTasksTableViewCell
             
             // Custom L&F.
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.mainContainer.backgroundColor = Cons.AKTableCellBg
             
             return cell
